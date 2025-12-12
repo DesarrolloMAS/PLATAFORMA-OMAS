@@ -1,0 +1,114 @@
+/* Fondo general */
+body {
+    font-family: "Big Shoulders", sans-serif;
+    background-image: url(../img/fondo14.png);
+    background-repeat: no-repeat;             /* Que no se repita */
+    background-attachment: fixed;             /* Que se quede fija al hacer scroll */
+    background-size: cover;                   /* Que cubra toda la pantalla */
+    background-position: center; 
+    color: #ebf6ff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-top: 48px;
+    margin-bottom: 18px;
+    color: #ebf6ff;
+    font-size: 2.5rem;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px #ebf6ff;
+}
+
+/* Descripción */
+p {
+    color: #b3eaff;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 32px;
+    max-width: 600px;
+    letter-spacing: 0.5px;
+}
+
+/* Menú grid */
+.menu-revisiones-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+    margin-top: 24px;
+}
+
+@media (max-width: 700px) {
+    .menu-revisiones-links {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+/* Botón estilo neón */
+.menu-revisiones-links a {
+    background-color: #10142a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: clamp(220px, 22vw, 400px);
+    min-height: clamp(120px, 18vw, 260px);
+    border: 2.5px solid #ebf6ff;
+    border-radius: 18px;
+    color: #ebf6ff;
+    font-size: 1.35rem;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    box-shadow: 0 0 18px #00f6ff55, 0 0 2px #ebf6ff;
+    transition: 
+        box-shadow 0.2s,
+        background 0.2s,
+        color 0.2s,
+        transform 0.18s;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    text-align: center;
+}
+
+.menu-revisiones-links a:hover {
+    background: rgba(0,246,255,0.08);
+    color: #fff;
+    box-shadow: 0 0 32px #ebf6ff, 0 0 8px #ebf6ff;
+    transform: scale(1.04);
+    border-color: #fff;
+}
+
+/* Opcional: iconos SVG */
+.menu-revisiones-links a .icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #ebf6ff;
+    filter: drop-shadow(0 0 6px #ebf6ff);
+    pointer-events: none;
+    width: clamp(48px, 7vw, 96px);
+    height: clamp(48px, 7vw, 96px);
+}
+
+/* Responsive: reduce tamaño en móvil */
+@media (max-width: 500px) {
+    .menu-revisiones-links a {
+        min-width: 120px;
+        min-height: 80px;
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+}

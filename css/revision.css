@@ -1,0 +1,213 @@
+.file-card {
+    position: relative;
+    background-color: #020659;
+    color: white;
+    border: 1px solid #ddd;
+    margin: 15px auto;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+    flex: 1 1 calc(33.33% - 30px); 
+    max-width: calc(33.33% - 30px); 
+    min-width: 200px; 
+    box-sizing: border-box;
+    white-space: normal;
+}
+
+.file-card:hover {
+    background-color: white;
+    color: #020659;
+}
+.file-card.opened {
+    background-color: white;
+    color: #020659;
+}
+
+.file-card h3 {
+    margin: 0;
+    font-family: "Oswald", serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+    white-space: normal;
+    overflow: visible; 
+    text-overflow: ellipsis; 
+    opacity: 1;
+    height: auto;
+    line-height: normal;
+    word-wrap: break-word;
+}
+
+.file-card:hover h3 {
+    opacity: 0;
+}
+
+.file-card a {
+    display: block;
+    margin: 0 auto; 
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #020659;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 20px; 
+    line-height: 20px; 
+    white-space: normal;
+}
+
+.file-card:hover a {
+    opacity: 1;
+}
+
+.file-card a:hover {
+    background-color: #031d96;
+    transform: scale(1.05);
+}
+
+.menu {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #555;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+    justify-content: center; 
+    max-width: 90%; 
+    overflow-y: auto; 
+    max-height: 80vh; 
+}
+
+.body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.411), 
+            rgba(255, 255, 255, 0.288)
+        ),
+        url(../img/fondo1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+
+.titulo_principal {
+    font-family: "Oswald", serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    color: white;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    background: #020659;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 15px 0;
+    margin: 0;
+}
+
+.titulo_principal a {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    color: #020659;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 5px 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.titulo_principal a:hover {
+    background-color: #031d96;
+    color: white;
+    transform: scale(1.05);
+}
+
+.boton {
+    background-color: #020659;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+.file-card.active {
+    background-color: white;
+    color: #020659;
+}
+
+.file-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.file-card a,
+.file-card .download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    margin: 0;
+    position: static;
+    opacity: 1;
+    height: auto;
+    background-color: #020659;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.08);
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+}
+
+.file-card a:hover,
+.file-card .download-btn:hover {
+    background-color: #031d96;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.download-btn {
+    padding: 8px 10px;
+    background-color: #0a8d2c;
+    color: #fff;
+    margin-left: 4px;
+    border-radius: 4px;
+    border: none;
+    min-width: 40px;
+}
+
+.download-btn svg {
+    vertical-align: middle;
+    margin: 0;
+}

@@ -1,0 +1,190 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: "Big Shoulders", sans-serif;
+    background-color: #1a1a2e;
+    background-image: url(../img/fondo11.png);
+    background-repeat: no-repeat;             /* Que no se repita */
+    background-attachment: fixed;             /* Que se quede fija al hacer scroll */
+    background-size: cover;                   /* Que cubra toda la pantalla */
+    background-position: center;    
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 2rem;
+    animation: fadeIn 1s ease-in-out;
+}
+.volver {
+    display: block; /* Asegura que el botón sea un bloque */
+    background-color: #007bff; /* Azul para el botón */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    text-align: center;
+    width: 100%; /* Botón ocupa todo el ancho */
+    margin-bottom: 20px; /* Espaciado inferior */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+.volver:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
+}
+/* Contenedor del formulario */
+form {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    width: 90%;
+    max-width: 1200px;
+    animation: slideUp 2s ease-in-out;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+/* Contenedores principales */
+.contenedor-harina, .contenedor-subproductos {
+    background-color: #2b2b36;
+    border-radius: 14px;
+    padding: 28px 24px 24px 24px;
+    width: 48%;
+    min-width: 320px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    flex: 1 1 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contenedor-harina:hover, .contenedor-subproductos:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+
+.contenedor-harina h2, .contenedor-subproductos h2 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    letter-spacing: 1px;
+}
+
+/* Grupos de inputs */
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #0f3460;
+    border-radius: 6px;
+    background-color: #1a1a2e;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px #007bff;
+}
+
+/* Subsecciones de subproductos */
+.subproducto-block {
+    background: #23233a;
+    border-radius: 8px;
+    padding: 12px 10px 10px 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subproducto-block h3 {
+    color: #6ec6ff;
+    margin: 0 0 6px 0;
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Botón de envío */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 12px 0;
+    border-radius: 6px;
+    width: 100%;
+    text-align: center;
+    margin-top: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.04);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+    form {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+    .contenedor-harina, .contenedor-subproductos {
+        width: 100%;
+        min-width: unset;
+    }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="../css/error2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 - Archivos Excel</title>
+    
+</head>
+<body>
+    <!-- Grid de fondo -->
+    <div class="cyber-grid"></div>
+    
+    <!-- Scanner lines -->
+    <div class="scanner-line" style="animation-delay: 0s;"></div>
+    <div class="scanner-line" style="animation-delay: 2s;"></div>
+    
+    <!-- Elementos flotantes -->
+    <div class="floating-elements"></div>
+    
+    <!-- Display principal -->
+    <div class="error-display">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-btn btn-close"></div>
+                    <div class="terminal-btn btn-minimize"></div>
+                    <div class="terminal-btn btn-maximize"></div>
+                </div>
+                <div class="terminal-title">Sistema OMAS v 2.0</div>
+            </div>
+            
+             <div class="icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                <path d="M12,12L8,16H16L12,12Z"/>
+            </svg>
+        </div>
+            <h1 class="error-title">Archivos No Encontrados</h1>
+            <p class="error-subtitle">En caso de error informar al administrardor</p>
+            
+            <div class="holo-display">
+                <div class="file-status">
+                    <span class="status-label">Archivos .xlsx:</span>
+                    <span class="status-value">0 encontrados</span>
+                </div>
+                <div class="file-status">
+                    <span class="status-label">Archivos .xls:</span>
+                    <span class="status-value">0 encontrados</span>
+                </div>
+                <div class="file-status">
+                    <span class="status-label">Estado del sistema:</span>
+                    <span class="status-value">Esperando datos</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            
+            <div class="action-panel">
+                <button class="cyber-btn" onclick="scanFiles()">
+                    🔍 Escanear Carpeta
+                </button>
+                
+                <button class="cyber-btn" onclick="goBack()">
+                    ⬆️ Volver
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Crear elementos flotantes
+        // funcion volver 
+        function goBack() {
+    window.location.href = "menu_adm_calidad.html";
+}
+        // funcion de escanear carpeta
+        function scanFiles() {
+        location.reload();
+    }
+        function createFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            const symbols = ['📊', '📈', '📉', '💾', '🔢', '⚡', '🔧', '📋'];
+            
+            setInterval(() => {
+                const element = document.createElement('div');
+                element.className = 'float-element';
+                element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                container.appendChild(element);
+                
+                setTimeout(() => {
+                    element.remove();
+                }, 8000);
+            }, 1500);
+        }
+
+        // Funciones de los botones
+        
+        function changeDirectory() {
+            const btn = event.target;
+            btn.innerHTML = '📁 Accediendo...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '✅ Directorio cambiado';
+                setTimeout(() => {
+                    btn.innerHTML = '📁 Cambiar Directorio';
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+
+        function uploadFiles() {
+            const btn = event.target;
+            btn.innerHTML = '⬆️ Preparando...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '📤 Listo para subir';
+                setTimeout(() => {
+                    btn.innerHTML = '⬆️ Subir Archivos';
+                    btn.disabled = false;
+                }, 2000);
+            }, 2000);
+        }
+
+        // Efecto de typing en el título
+        function typeWriter() {
+            const title = document.querySelector('.error-title');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                }
+            }, 100);
+        }
+
+        // Glitch effect en hover
+        document.querySelector('.error-code').addEventListener('mouseenter', function() {
+            this.style.animation = 'none';
+            this.style.textShadow = '2px 0 #ff0080, -2px 0 #00a2ff';
+            
+            setTimeout(() => {
+                this.style.animation = 'gradientMove 3s ease infinite';
+                this.style.textShadow = 'none';
+            }, 200);
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingElements();
+            setTimeout(typeWriter, 500);
+        });
+
+        // Efectos de teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                scanFiles();
+            }
+        });
+         const icon = document.querySelector('.icon');
+        
+        setInterval(() => {
+            icon.style.transform = 'rotate(5deg)';
+            setTimeout(() => {
+                icon.style.transform = 'rotate(-5deg)';
+                setTimeout(() => {
+                    icon.style.transform = 'rotate(0deg)';
+                }, 100);
+            }, 100);
+        }, 3000);
+    </script>
+</body>
+</html>

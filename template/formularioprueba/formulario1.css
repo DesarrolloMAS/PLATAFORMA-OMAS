@@ -1,0 +1,649 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background:url(fondoman.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: center;
+    margin: 0;
+    padding: 20px; /* Eliminar el padding superior extra */
+}
+
+
+.labelmen{
+    border-radius: 50px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #e6c791;
+    color: #955919;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Poppins", sans-serif;
+}
+.labelmen:hover {
+    background-color: #fee5b8;
+    box-shadow: 0 0 8px rgba(230, 199, 145, 0.8);
+    transform: scale(1.01);
+}
+.titulo_principal {
+    font-family: "Poppins", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    color: #955919; /* Cambiar a color oscuro para contraste con el fondo claro */
+    position: sticky; /* Cambio de fixed a sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fee5b8; /* Nuevo color de fondo */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más visible */
+    z-index: 1000;
+    padding: 20px;
+    border-bottom: 2px solid #e6c791; /* Borde inferior sutil */
+    margin-bottom: 20px; /* Agregar margen inferior para separación */
+}
+.seccion {
+    background-color: #e0e0e0; /* color hueso */
+    padding: 20px;
+    border-radius: 30px;
+    max-width: 1325px;
+    margin: 40px auto;
+    border-color:  #955919;
+    
+
+  
+}
+
+
+h1, h2, h3 {
+    color: #955919;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.datos {
+    margin-bottom: 15px;
+    border-radius: 30px;
+    border-color:  #955919;
+}
+
+.datos input,
+.datos select,
+.datos textarea {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f7f7f7;
+    border-radius: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 10px 0;
+     border-color:  #955919;
+}
+
+.datos input:focus,
+.datos select:focus,
+.datos textarea:focus {
+    border-color: #955919;
+    outline: none;
+    box-shadow: 0 0 5px rgba(2, 6, 89, 0.5);
+     font-family: "Poppins", sans-serif;
+}
+.espacio-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(10px, 3vw, 20px); /* Gap responsivo entre botones */
+    margin: clamp(20px, 4vw, 30px) auto; /* Margin responsivo */
+    padding: clamp(10px, 2vw, 15px); /* Padding responsivo */
+    flex-wrap: wrap; /* Permitir wrap en pantallas pequeñas */
+}
+
+.boton {
+    background-color: #e6c791;
+    color: #955919;
+    padding: clamp(10px, 2.5vw, 15px) clamp(20px, 5vw, 30px); /* Padding responsivo */
+    border: none;
+    border-radius: clamp(5px, 1vw, 8px); /* Border radius responsivo */
+    font-size: clamp(14px, 3vw, 18px); /* Tamaño de fuente responsivo */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: clamp(120px, 25vw, 150px); /* Ancho mínimo responsivo */
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 2px 4px rgba(230, 199, 145, 0.3);
+}
+
+.boton:hover {
+    background-color: #fee5b8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(230, 199, 145, 0.4);
+}
+
+.boton1 {
+    background-color: #e6c791;
+    color: #955919;
+    padding: clamp(10px, 2.5vw, 15px) clamp(20px, 5vw, 30px); /* Padding responsivo */
+    border: none;
+    border-radius: clamp(5px, 1vw, 8px); /* Border radius responsivo */
+    font-size: clamp(14px, 3vw, 18px); /* Tamaño de fuente responsivo */
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0; /* Quitar margin ya que usamos gap en el contenedor */
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: clamp(120px, 25vw, 150px); /* Ancho mínimo responsivo */
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 2px 4px rgba(230, 199, 145, 0.3);
+}
+
+.boton1:hover {
+    background-color: #fee5b8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(230, 199, 145, 0.4);
+}
+
+/* Media queries específicas para botones de acción */
+@media (max-width: 768px) {
+    .espacio-botones {
+        flex-direction: column; /* Botones en columna en tablets */
+        gap: 15px;
+        margin: 25px auto;
+        padding: 15px;
+    }
+    
+    .boton, .boton1 {
+        width: 100%; /* Botones ocupan todo el ancho disponible */
+        max-width: 300px; /* Pero con un máximo */
+        padding: 15px 25px;
+        font-size: 16px;
+        min-height: 50px; /* Altura mínima para mejor touch */
+    }
+}
+
+@media (max-width: 480px) {
+    .espacio-botones {
+        gap: 12px;
+        margin: 20px auto;
+        padding: 10px;
+    }
+    
+    .boton, .boton1 {
+        padding: 12px 20px;
+        font-size: 15px;
+        min-height: 48px;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 360px) {
+    .espacio-botones {
+        gap: 10px;
+        margin: 15px auto;
+        padding: 8px;
+    }
+    
+    .boton, .boton1 {
+        padding: 10px 15px;
+        font-size: 14px;
+        min-height: 44px; /* Tamaño mínimo recomendado para touch */
+        max-width: 200px;
+    }
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+  
+}
+
+
+.control_partes{
+    background-color: rgb(236, 236, 236);
+    padding: 30px;
+    width: 80%;
+    max-width: 1325px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: #955919;
+    margin: 20px auto;
+}
+
+
+.firmas-canvas{
+    width: 100%; /* Se ajusta al contenedor */
+    height: auto; /* Mantiene la proporción */
+    max-width: 400px; 
+    color: #955919;
+    touch-action: none;
+    box-sizing: border-box;
+}
+
+/* Responsive para canvas de firmas */
+@media (max-width: 768px) {
+    .firmas-canvas {
+        max-width: 100%;
+        height: 150px; /* Altura reducida para tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .firmas-canvas {
+        height: 120px; /* Altura más pequeña para móviles */
+        min-height: 100px;
+    }
+}
+
+.desplegable {
+    background-color: #e0e0e0; /* color hueso */
+    padding: 20px;
+    border-radius: 30px;
+    max-width: 1325px;
+    margin: 40px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor para desplegables lado a lado */
+.desplegables-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 1325px;
+}
+
+.desplegables-container .desplegable {
+    flex: 1;
+    min-width: 300px;
+    margin: 0;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .desplegables-container {
+        flex-direction: column;
+    }
+    
+    .desplegables-container .desplegable {
+        margin: 20px auto;
+    }
+}
+.desplegable input,
+.desplegable select,
+.desplegable textarea {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f7f7f7;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+.desplegable label {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+/* Contenedor de firmas separado - Completamente Responsivo */
+.contenedor-firmas {
+    background-color: #e0e0e0;
+    padding: clamp(15px, 4vw, 30px); /* Padding responsivo */
+    border-radius: clamp(15px, 4vw, 30px); /* Border radius responsivo */
+    max-width: 1325px;
+    width: 100%;
+    margin: clamp(20px, 5vw, 40px) auto; /* Margin responsivo */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.contenedor-firmas h2 {
+    color: #955919;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: clamp(15px, 4vw, 30px); /* Margin responsivo */
+    font-weight: 500;
+    font-size: clamp(16px, 4vw, 24px); /* Tamaño responsivo mejorado */
+}
+
+/* Contenedor principal de firmas - Flexbox completamente responsivo */
+.firma {
+    display: flex;
+    gap: clamp(15px, 3vw, 30px); /* Gap responsivo */
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: clamp(15px, 3vw, 20px); /* Margin responsivo */
+}
+
+.formul {
+    flex: 1;
+    min-width: clamp(250px, 40vw, 300px); /* Ancho mínimo responsivo */
+    max-width: 450px; /* Ancho máximo aumentado */
+    text-align: center;
+    background-color: white;
+    padding: clamp(12px, 3vw, 20px); /* Padding responsivo */
+    border-radius: clamp(8px, 2vw, 15px); /* Border radius responsivo */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Sombra mejorada */
+    margin: clamp(5px, 2vw, 10px) 0; /* Margin responsivo */
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animaciones suaves */
+}
+
+.formul:hover {
+    transform: translateY(-2px); /* Efecto hover */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.formul label {
+    display: block;
+    margin-bottom: clamp(8px, 2vw, 10px); /* Margin responsivo */
+    font-weight: bold;
+    color: #955919;  
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(12px, 3vw, 16px); /* Tamaño responsivo */
+}
+
+.formul canvas {
+    margin: clamp(8px, 2vw, 10px) 0; /* Margin responsivo */
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100%;
+    border: 2px solid  #955919; /* Border más visible */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.formul button {
+    margin: 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.formul button[id*="limpiar"] {
+    background-color: #e6c791;
+    color:  #955919;
+}
+
+.formul button[id*="guardar"] {
+    background-color: #e6c791;
+    color: #955919;
+}
+
+.formul button:hover {
+    background-color: #fee5b8;
+}
+
+/* Responsive para firmas */
+@media (max-width: 768px) {
+    .firma {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .formul {
+        margin: 10px 0;
+    }
+}
+
+/* Estilo para el div formulario2 con fondo blanco */
+.formulario .formulario2 {
+    background-color: white !important;
+    padding: 30px;
+    width: 80%;
+    max-width: 1325px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    color: #333;
+    margin: 20px auto;
+}
+  
+
+        /* Tabla principal */
+        .tabla1 {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 50px 60px rgba(0, 0, 0, 0.1);
+            border-collapse: separate;
+            border-spacing: 0;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+
+        .tabla1 thead tr:first-child th:first-child {
+            background-color: #d4a574; /* Tono más oscuro de la paleta dorada */
+            color: #2c1810; /* Texto oscuro para contraste */
+            font-size: 15px;
+            font-weight: 500;
+            font-family: poppins, sans-serif;
+            padding: 10px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* Segunda y tercera fila de encabezados */
+        .tabla1 thead tr:nth-child(2) th,
+        .tabla1 thead tr:nth-child(3) th {
+            background: #f0d49a; /* Variación más clara del tono base */
+            color: #3d2817; /* Texto oscuro para contraste */
+            padding: 5px;
+            font-weight: 60;
+            text-align: center; 
+            border: none;
+            font-size: 16px;
+        }
+        .tabla1 tbody tr:hover {
+            background-color: #fdf2e1; /* Tono muy claro para hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3); /* Sombra en tono dorado */
+        }
+
+        /* Celdas del cuerpo */
+        .tabla1 tbody th {
+            padding: 5px;
+            border: none;
+            font-weight: 50;
+            text-align: center;
+            color: #2c1810; /* Color de texto más oscuro para mejor legibilidad */
+            border-bottom: 1px solid #e6c791; /* Borde en tono dorado suave */
+            font-size: 12px;
+        }
+
+        
+
+        /* Inputs personalizados */
+        .tabla1 input[type="text"] {
+            width: 50%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 8px 12px;
+
+        }
+
+        @media (max-width: 768px) {
+            .pricing-container {
+                padding: 20px 10px;
+            }
+            
+            .tabla1 {
+                font-size: 14px;
+            }
+            
+            .tabla1 thead tr:first-child th:first-child {
+                font-size: 16px;
+                padding: 15px 10px;
+            }
+            
+            .tabla1 tbody th {
+                padding: 15px 10px;
+            }
+              }
+  input[type="checkbox"][id^="toggle"] {
+            appearance: none;
+            width: 50px;
+            height: 24px;
+            background-color: #c9a876;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #a08660;
+            margin-left: 10px;
+        }
+
+        input[type="checkbox"][id^="toggle"]:checked {
+            background-color: #8b7558;
+            border-color: #6b4423;
+        }
+
+        input[type="checkbox"][id^="toggle"]::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #f5f1eb;
+            top: 1px;
+            left: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(107, 68, 35, 0.3);
+        }
+
+        input[type="checkbox"][id^="toggle"]:checked::before {
+            left: 26px;
+            background-color: #ffffff;
+        }
+
+        input[type="checkbox"][id^="toggle"]:hover {
+            background-color: #b5976a;
+            transform: scale(1.05);
+        }
+
+        /* Estilos para los menús desplegables */
+        #Menu1, #Menu2 {
+            background-color: #ede4d3;
+            border: 1px solid #c9a876;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            box-shadow: inset 0 2px 4px rgba(139, 117, 88, 0.1);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #Menu1 label, #Menu2 label {
+            color: #8b7558;
+            font-weight: 500;
+            margin: 10px 0 5px 0;
+            display: block;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            background-color: #f5f1eb;
+            border: 2px solid #d4c4a8;
+            border-radius: 6px;
+            padding: 8px;
+            color: #6b4423;
+            margin-bottom: 15px;
+            width: 100%;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        input[type="file"]:hover {
+            border-color: #c9a876;
+            background-color: #f0e9db;
+        }
+
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #8b7558;
+            box-shadow: 0 0 0 3px rgba(139, 117, 88, 0.2);
+        }
+
+        input[type="file"]::file-selector-button {
+            background-color: #c9a876;
+            color: #6b4423;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: "Poppins", sans-serif;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background-color: #b5976a;
+            transform: translateY(-1px);
+        }
+
+        /* Estilo específico para navegadores WebKit (Chrome, Safari, Edge) */
+        input[type="file"]::-webkit-file-upload-button {
+            background-color: #c9a876;
+            color: #6b4423;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: "Poppins", sans-serif;
+        }
+
+        input[type="file"]::-webkit-file-upload-button:hover {
+            background-color: #b5976a;
+            transform: translateY(-1px);
+        }
+
+        .espacio-botones {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 20px;
+        }              

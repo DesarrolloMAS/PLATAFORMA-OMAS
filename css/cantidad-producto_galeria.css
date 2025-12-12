@@ -1,0 +1,99 @@
+/* Fondo general suave */
+body {
+    background-image: url(../img/fondo10.png);
+    background-repeat: no-repeat;             /* Que no se repita */
+    background-attachment: fixed;             /* Que se quede fija al hacer scroll */
+    background-size: cover;                   /* Que cubra toda la pantalla */
+    background-position: center;    
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+}
+
+/* Galería de productos */
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    padding: 30px 0 60px 0;
+}
+
+/* Tarjeta de producto */
+.producto {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08), 0 1.5px 4px rgba(44, 62, 80, 0.04);
+    border: none;
+    width: 180px;
+    padding: 32px 18px 24px 18px;
+    text-align: center;
+    transition: transform 0.18s, box-shadow 0.18s;
+    position: relative;
+}
+
+.producto:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16), 0 3px 8px rgba(44, 62, 80, 0.08);
+}
+
+/* Nombre del producto */
+.producto h3 {
+    color: #1a2537;
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Botón de seleccionar */
+.producto button {
+    background: linear-gradient(90deg, #007bff 0%, #0056b3 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.producto button:hover {
+    background: linear-gradient(90deg, #0056b3 0%, #007bff 100%);
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.16);
+}
+
+/* Botón volver */
+a[href*="redireccion.php"] {
+    display: inline-block;
+    margin: 28px 0 0 28px;
+    background: #e3eafc;
+    color: #2d3a4b;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
+    transition: background 0.18s, color 0.18s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+a[href*="redireccion.php"]:hover {
+    background: #c7d7f7;
+    color: #007bff;
+}

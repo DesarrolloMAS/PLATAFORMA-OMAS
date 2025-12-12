@@ -1,0 +1,504 @@
+.cuerpo{
+    font-family: "Arial", sans-serif;
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3)), 
+                url(../img/fondo4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100vh;
+    justify-content: center;
+}
+.titulo_principal {
+    font-family: "Oswald", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-style: normal;
+    color: white;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #020659;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin-top: 10px;
+    font-size: 30px;
+    height: 50px; /* Incrementa la altura */
+    line-height: 50px; /* Asegúrate de que el texto esté centrado */
+}
+.botonvolver {
+    background-color: white; /* Fondo oscuro */
+    color: black; /* Texto blanco */
+    padding: 4px 10px; /* Delgado y con espacio horizontal */
+    border: none;
+    font-size: 14px; /* Texto moderado */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Texto centrado dentro del botón */
+    text-decoration: none;
+    display: inline-block; /* No ocupa todo el ancho */
+    float:left; /* Alineado al extremo izquierdo */
+    margin-right: 10px; /* Espacio entre el botón y el siguiente contenido */
+    line-height: 1;
+    transform: scale(1.1); /* Aumenta el tamaño en un 10% */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Aumenta la sombra para resaltar */
+}
+
+.botonvolver:hover {
+    background-color: #0056b3;
+}
+.contenedor1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    gap: 10px;
+    direction: ltr;
+    margin-left: 15%;
+    background-color: rgba(200, 200, 200, 0.6);
+}
+.responsable{
+    display: flex; /* Coloca los elementos en fila */
+    flex-direction: column; /* Acomoda los elementos uno encima del otro */
+    justify-content: flex-start; /* Alinea el contenido al inicio verticalmente */
+    align-items: flex-start; /* Alinea los elementos al inicio horizontalmente */
+    background-color: #020659;
+    color: white;
+    padding: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    width: fit-content; /* Ajusta el ancho al contenido */
+    margin: 10px; /* Espaciado para separar del borde */
+    position: absolute; /* Permite ubicar el contenedor en la esquina */
+    top: 60px; /* Distancia desde la parte superior */
+    left: 0px;
+    font-family: "Oswald", serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.responsable:hover {
+    transform: scale(1.1); /* Aumenta el tamaño en un 10% */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Aumenta la sombra para resaltar */
+}
+.label1{
+    background-color: transparent; /* Cambia el color de fondo si no quieres que sobresalga */
+    font-size: 16px;
+    margin-bottom: 8px; /* Espacio entre el label y el input */
+    color: #020659;
+}
+.responsableselect{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Para ocupar todo el ancho del contenedor */
+}
+.contenedorfirma{
+    background-color: #f9f9f9; /* Fondo claro */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo */
+    width: 100%;
+    max-width: 450px; /* Define un ancho máximo */
+    margin: 20px auto; /* Centrar en la página */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1;
+}
+.contenedorfirma:hover {
+    transform: scale(1.1); 
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
+}
+.labelfir{
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.campofirm{
+    background-color: white;
+    border: 2px solid #020659; /* Borde azul oscuro */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.fechayhora{
+    display: flex;
+    flex-direction: column; /* Para que los elementos estén uno encima del otro */
+    justify-content: center;
+    align-items: center; /* Centra el contenido en su posición horizontal */
+    background-color: #020659;
+    color: white;
+    font-family: "Oswald", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-align: right;
+    padding: 43px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 10px;
+    top: 140px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.fechayhora:hover {
+    transform: scale(1.1); 
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
+}
+.responsablesint{
+    background-color: #020659; /* Fondo claro */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo */
+    width: 100%;
+    height: 300px;
+    max-width: 450px; /* Define un ancho máximo */
+    margin: 20px auto; /* Centrar en la página */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para estilo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-grow: 1;
+}
+.labelmin{
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: white !important;
+    margin-bottom: 5px !important;
+    display: block !important;
+}
+.responsablesint button {
+    background-color: #020659; /* Azul oscuro */
+    color: white;
+    padding: 5px 10px; /* Botón compacto */
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 10px;
+}
+.responsablesint button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+.responsablesint:hover {
+    transform: scale(1.1); 
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
+}
+.labelmenres{
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.labelmenres:hover {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    transform: scale(1.01);
+}
+.almacenista{
+    background-color: #020659;
+    font-family: "Oswald", serif;
+    color: white;
+    position: absolute;
+    left: 10px;
+    top: 310px;
+    padding: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.almacenista:hover {
+    transform: scale(1.1); 
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
+}
+.control{
+    font-family: Arial, sans-serif;
+    margin-bottom: 15px;
+    background-color: rgba(200, 200, 200, 0.6);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+.subtitulo{
+    font-size: 18px; /* Tamaño equilibrado */
+    font-weight: bold;
+    color: #020659; /* Azul oscuro */
+    margin-bottom: 10px; /* Espaciado inferior */
+    text-align: left; /* Alineado a la izquierda */
+    border-bottom: 2px solid white; /* Línea sutil debajo */
+    padding-bottom: 5px; /* Espaciado para separación */
+}
+.contenedormen{
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.control .result {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff; /* Fondo azul para el resultado */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-left: 5px; /* Espacio entre el label y el resultado */
+}
+.control input[type="number"],
+.control input[type="text"] {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado entre inputs */
+    border: 1px solid #ccc; /* Borde elegante */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 14px;
+    color: #333;
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Efectos de transición */
+}
+.control input[type="number"]:focus,
+.control input[type="text"]:focus {
+    border-color: #007bff; /* Cambia el color del borde al enfocarse */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efecto brillante al enfocarse */
+    outline: none; /* Quita el borde predeterminado del navegador */
+}
+.labelmen{
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #020659;
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.labelmen:hover {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    transform: scale(1.01);
+}
+.harinaext{
+    background-color: white;
+}
+.botonext{
+    background-color: #020659; /* Azul para destacar el botón */
+    color: #fff; /* Texto blanco */
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efecto suave */
+    margin-left: 10px; /* Espacio entre el botón y el texto */
+}
+.botonext:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Ligero zoom al pasar el mouse */
+}
+
+.botonext:active {
+    background-color: #004085; /* Azul más oscuro al hacer clic */
+    transform: scale(0.95); /* Botón se reduce al hacer clic */
+}
+.residuo{
+    background-color: #f9f9f9; /* Fondo claro */
+    padding: 15px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    width: 100%;
+    max-width: 400px; /* Evita que se expanda demasiado */
+    margin: 10px auto; /* Centrado */
+    display: flex;
+    flex-direction: column;
+}
+.resiudosec{
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+.residuoselec{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+.residuoselec select:focus {
+    border-color: #020659; /* Azul oscuro */
+    box-shadow: 0 0 5px rgba(2, 6, 89, 0.5);
+    outline: none;
+}
+#residuosContainer1 {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    .contenedor1 {
+        flex-direction: column;
+        align-items: center; /* Centra todos los elementos */
+        gap: 15px;
+        padding: 10px;
+    }
+
+    /* Ajustar tamaño y centrar elementos */
+    .responsable, .fechayhora, .almacenista, .contenedorfirma, .responsablesint {
+        width: 90%; /* Ajusta el ancho en móviles */
+        max-width: 350px;
+        text-align: center; /* Centra el contenido */
+        position: static;
+        margin: 10px auto; /* Centra bien los elementos */
+    }
+
+    /* Ajusta los inputs y selects */
+    .responsable input,
+    .responsable select,
+    .responsable label {
+        width: 100%; /* Asegura que ocupen el espacio correctamente */
+        text-align: left;
+    }
+
+    /* Evita que los botones se desalineen */
+    .responsable button,
+    .contenedorfirma button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    /* Asegurar que el título no desborde */
+    .titulo_principal {
+        font-size: 22px;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+}
+/* Contenedor principal de los materiales agregados */
+.material-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Diseño de cada material agregado */
+.material-fields {
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    max-width: 400px;
+}
+
+/* Efecto al pasar el mouse */
+.material-fields:hover {
+    border-color: #007bff;
+    box-shadow: 3px 5px 12px rgba(0, 123, 255, 0.2);
+}
+
+/* Título del material */
+.material-fields h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Estilo de los labels */
+.material-fields label {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-top: 8px;
+}
+
+/* Inputs de nombre y lote */
+.material-fields input {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.95em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Efecto en los inputs al hacer focus */
+.material-fields input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón de eliminar */
+.btn-eliminar {
+    background: #ff4d4d;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Efecto hover en el botón */
+.btn-eliminar:hover {
+    background: #cc0000;
+}
+
+/* Select estilizado */
+.material-select {
+    width: 50%;
+    padding: 8px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Cambio de color en focus */
+.material-select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+.observaciones{
+    background-color: #ccc;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 100px;
+}
+.observaciones:focus{
+    border-color: #020659;
+    outline: none;
+    box-shadow: 0 0 5px rgba(2, 6, 89, 0.5);
+}

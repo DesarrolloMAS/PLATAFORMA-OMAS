@@ -1,0 +1,1700 @@
+2025-06-05 03:46:22 | Script iniciado
+2025-06-05 03:46:22 | POST recibido
+2025-06-05 03:46:22 | Datos recibidos: fecha=2025-06-04, lider=Alex Chala, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=14:45, hora_final=15:00, bascula=5344, bascula_harina=4128, bultos_harina=0, lote_harina=040625B, cantidad_kg=4128, silo_granel=504, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 03:46:22 | Archivo existente cargado
+2025-06-05 03:46:22 | Fila harina encontrada: 29
+2025-06-05 03:46:22 | Fila subproductos encontrada: 74
+2025-06-05 03:46:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 03:46:22 | Archivo guardado correctamente
+2025-06-05 05:01:01 | Script iniciado
+2025-06-05 05:01:01 | POST recibido
+2025-06-05 05:01:01 | Datos recibidos: fecha=2025-06-04, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=15:05, hora_final=21:45, bascula=29504, bascula_harina=21616, bultos_harina=427, lote_harina=290625B1, cantidad_kg=, silo_granel=507, bultos_mogolla=112, hilo_mogolla=, bultos_salvado=46, hilo_salvado=, bultos_segunda=21, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 05:01:01 | Archivo existente cargado
+2025-06-05 05:01:01 | Fila harina encontrada: 30
+2025-06-05 05:01:01 | Fila subproductos encontrada: 75
+2025-06-05 05:01:01 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 05:01:01 | Archivo guardado correctamente
+2025-06-05 05:05:58 | Script iniciado
+2025-06-05 05:05:58 | POST recibido
+2025-06-05 05:05:58 | Datos recibidos: fecha=2025-06-04, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=15:05, hora_final=21:45, bascula=29504, bascula_harina=21616, bultos_harina=427, lote_harina=290525B1, cantidad_kg=21616, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 05:05:58 | Archivo existente cargado
+2025-06-05 05:05:58 | Fila harina encontrada: 31
+2025-06-05 05:05:58 | Fila subproductos encontrada: 76
+2025-06-05 05:05:58 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 05:05:58 | Archivo guardado correctamente
+2025-06-05 05:08:34 | Script iniciado
+2025-06-05 05:08:34 | POST recibido
+2025-06-05 05:08:34 | Datos recibidos: fecha=, lider=, moje=, producto=, referencia=, hora_inicio=, hora_final=, bascula=, bascula_harina=, bultos_harina=, lote_harina=, cantidad_kg=, silo_granel=, bultos_mogolla=112, hilo_mogolla=, bultos_salvado=46, hilo_salvado=, bultos_segunda=21, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=1 hora de parada visita calibracion de dsificadores A B
+2025-06-05 05:08:35 | Archivo existente cargado
+2025-06-05 05:08:35 | Fila harina encontrada: 32
+2025-06-05 05:08:35 | Fila subproductos encontrada: 77
+2025-06-05 05:08:35 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 05:08:35 | Archivo guardado correctamente
+2025-06-05 11:47:03 | Script iniciado
+2025-06-05 11:47:03 | POST recibido
+2025-06-05 11:47:03 | Datos recibidos: fecha=2025-06-05, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=04:40, bascula=34944, bascula_harina=27760, bultos_harina=331, lote_harina=290525B, cantidad_kg=, silo_granel=, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 11:47:04 | Archivo existente cargado
+2025-06-05 11:47:04 | Fila harina encontrada: 32
+2025-06-05 11:47:04 | Fila subproductos encontrada: 78
+2025-06-05 11:47:04 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 11:47:04 | Archivo guardado correctamente
+2025-06-05 11:50:27 | Script iniciado
+2025-06-05 11:50:27 | POST recibido
+2025-06-05 11:50:27 | Datos recibidos: fecha=2025-06-05, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=21:50, hora_final=04:40, bascula=34944, bascula_harina=27760, bultos_harina=331, lote_harina=290525B, cantidad_kg=, silo_granel=, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 11:50:27 | Archivo existente cargado
+2025-06-05 11:50:27 | Fila harina encontrada: 33
+2025-06-05 11:50:27 | Fila subproductos encontrada: 79
+2025-06-05 11:50:27 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 11:50:27 | Archivo guardado correctamente
+2025-06-05 13:03:02 | Script iniciado
+2025-06-05 13:03:02 | POST recibido
+2025-06-05 13:03:02 | Datos recibidos: fecha=2025-06-05, lider=Juvenal Poloche, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=04:45, hora_final=05:45, bascula=5408, bascula_harina=4304, bultos_harina=312, lote_harina=040625B, cantidad_kg=, silo_granel=, bultos_mogolla=130, hilo_mogolla=, bultos_salvado=56, hilo_salvado=, bultos_segunda=33, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 13:03:02 | Archivo existente cargado
+2025-06-05 13:03:02 | Fila harina encontrada: 34
+2025-06-05 13:03:02 | Fila subproductos encontrada: 80
+2025-06-05 13:03:02 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 13:03:02 | Archivo guardado correctamente
+2025-06-05 13:09:04 | Script iniciado
+2025-06-05 13:09:04 | POST recibido
+2025-06-05 13:09:04 | Datos recibidos: fecha=2025-06-05, lider=Juvenal Poloche, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=04:50, hora_final=05:45, bascula=5408, bascula_harina=4304, bultos_harina=312, lote_harina=040625B, cantidad_kg=, silo_granel=, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 13:09:04 | Archivo existente cargado
+2025-06-05 13:09:04 | Fila harina encontrada: 35
+2025-06-05 13:09:04 | Fila subproductos encontrada: 81
+2025-06-05 13:09:04 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 13:09:04 | Archivo guardado correctamente
+2025-06-05 15:11:18 | Script iniciado
+2025-06-05 15:11:18 | POST recibido
+2025-06-05 15:11:18 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:15, hora_final=08:15, bascula=0, bascula_harina=0, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=PRUEBA
+2025-06-05 15:11:18 | Archivo existente cargado
+2025-06-05 15:11:18 | Fila harina encontrada: 36
+2025-06-05 15:11:18 | Fila subproductos encontrada: 82
+2025-06-05 15:11:18 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:11:18 | Archivo guardado correctamente
+2025-06-05 15:13:14 | Script iniciado
+2025-06-05 15:13:14 | POST recibido
+2025-06-05 15:13:14 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=1, producto=PRUEBA 2, referencia=PRUEBA 2, hora_inicio=08:15, hora_final=08:15, bascula=1, bascula_harina=1, bultos_harina=1, lote_harina=PRUEBA 2, cantidad_kg=1, silo_granel=1, bultos_mogolla=1, hilo_mogolla=1, bultos_salvado=1, hilo_salvado=1, bultos_segunda=1, hilo_segunda=1, bultos_germen=1, hilo_germen=1, cantidad_granza=1, varadas=PRUEBA 2
+2025-06-05 15:13:14 | Archivo existente cargado
+2025-06-05 15:13:14 | Fila harina encontrada: 37
+2025-06-05 15:13:14 | Fila subproductos encontrada: 83
+2025-06-05 15:13:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:13:14 | Archivo guardado correctamente
+2025-06-05 15:25:44 | Script iniciado
+2025-06-05 15:25:44 | POST recibido
+2025-06-05 15:25:44 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:29, hora_final=08:29, bascula=0, bascula_harina=PRUEBA, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 15:25:44 | Plantilla base cargada
+2025-06-05 15:25:44 | Fila harina encontrada: 9
+2025-06-05 15:25:44 | Fila subproductos encontrada: 54
+2025-06-05 15:25:44 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:25:44 | Archivo guardado correctamente
+2025-06-05 15:31:14 | Script iniciado
+2025-06-05 15:31:14 | POST recibido
+2025-06-05 15:31:14 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:35, hora_final=08:35, bascula=0, bascula_harina=0, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 15:31:14 | Archivo existente cargado
+2025-06-05 15:31:14 | Fila harina encontrada: 10
+2025-06-05 15:31:14 | Fila subproductos encontrada: 55
+2025-06-05 15:31:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:31:14 | Archivo guardado correctamente
+2025-06-05 15:38:05 | Script iniciado
+2025-06-05 15:38:05 | POST recibido
+2025-06-05 15:38:05 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:41, hora_final=08:42, bascula=0, bascula_harina=PRUEBA, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 15:38:05 | Fila harina: , Fila subproductos: 
+2025-06-05 15:38:05 | Archivo existente cargado
+2025-06-05 15:38:05 | Fila harina encontrada: 11
+2025-06-05 15:38:05 | Fila subproductos encontrada: 56
+2025-06-05 15:38:05 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:38:05 | Archivo guardado correctamente
+2025-06-05 15:39:06 | Script iniciado
+2025-06-05 15:39:06 | POST recibido
+2025-06-05 15:39:07 | Archivo existente cargado
+2025-06-05 15:39:07 | Fila harina encontrada: 12
+2025-06-05 15:39:07 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:41, hora_final=08:42, bascula=0, bascula_harina=PRUEBA, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 15:39:07 | Fila harina: 12, Fila subproductos: 
+2025-06-05 15:39:07 | Fila subproductos encontrada: 57
+2025-06-05 15:39:07 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:39:07 | Archivo guardado correctamente
+2025-06-05 15:39:43 | Script iniciado
+2025-06-05 15:39:43 | POST recibido
+2025-06-05 15:39:43 | Archivo existente cargado
+2025-06-05 15:39:43 | Fila subproductos encontrada: 58
+2025-06-05 15:39:43 | Fila harina encontrada: 13
+2025-06-05 15:39:43 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:41, hora_final=08:42, bascula=0, bascula_harina=PRUEBA, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 15:39:43 | Fila harina: 13, Fila subproductos: 58
+2025-06-05 15:39:43 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:39:43 | Archivo guardado correctamente
+2025-06-05 15:44:07 | Script iniciado
+2025-06-05 15:44:07 | POST recibido
+2025-06-05 15:44:08 | Archivo existente cargado
+2025-06-05 15:44:08 | Fila subproductos encontrada: 59
+2025-06-05 15:44:08 | Fila harina encontrada: 14
+2025-06-05 15:44:08 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=1, producto=PRUEBA 2, referencia=PRUEBA 2, hora_inicio=08:41, hora_final=08:42, bascula=1, bascula_harina=PRUEBA 2, bultos_harina=1, lote_harina=PRUEBA 2 , cantidad_kg=1, silo_granel=1, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=PRUEBA
+2025-06-05 15:44:08 | Fila harina: 14, Fila subproductos: 59
+2025-06-05 15:44:08 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:44:08 | Archivo guardado correctamente
+2025-06-05 15:48:56 | Script iniciado
+2025-06-05 15:48:56 | POST recibido
+2025-06-05 15:48:57 | Archivo existente cargado
+2025-06-05 15:48:57 | Fila subproductos encontrada: 60
+2025-06-05 15:48:57 | Fila harina encontrada: 15
+2025-06-05 15:48:57 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:52, hora_final=08:52, bascula=0, bascula_harina=PRUEBA, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=PRUEBA
+2025-06-05 15:48:57 | Fila harina: 15, Fila subproductos: 60
+2025-06-05 15:48:57 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:48:57 | Archivo guardado correctamente
+2025-06-05 15:50:18 | Script iniciado
+2025-06-05 15:50:18 | POST recibido
+2025-06-05 15:50:19 | Archivo existente cargado
+2025-06-05 15:50:19 | Fila subproductos encontrada: 61
+2025-06-05 15:50:19 | Fila harina encontrada: 16
+2025-06-05 15:50:19 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:53, hora_final=08:53, bascula=0, bascula_harina=0, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=1, hilo_mogolla=1, bultos_salvado=1, hilo_salvado=1, bultos_segunda=1, hilo_segunda=1, bultos_germen=1, hilo_germen=1, cantidad_granza=1, varadas=PRUEBA
+2025-06-05 15:50:19 | Fila harina: 16, Fila subproductos: 61
+2025-06-05 15:50:19 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:50:19 | Archivo guardado correctamente
+2025-06-05 15:54:28 | Script iniciado
+2025-06-05 15:54:28 | POST recibido
+2025-06-05 15:54:29 | Archivo existente cargado
+2025-06-05 15:54:29 | Fila subproductos encontrada: 62
+2025-06-05 15:54:29 | Fila harina encontrada: 17
+2025-06-05 15:54:29 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=0, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:58, hora_final=08:58, bascula=0, bascula_harina=PRUEBA, bultos_harina=0, lote_harina=PRUEBA, cantidad_kg=0, silo_granel=0, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=PRUEBA
+2025-06-05 15:54:29 | Fila harina: 17, Fila subproductos: 62
+2025-06-05 15:54:29 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:54:29 | Archivo guardado correctamente
+2025-06-05 15:55:19 | Script iniciado
+2025-06-05 15:55:19 | POST recibido
+2025-06-05 15:55:19 | Archivo existente cargado
+2025-06-05 15:55:19 | Fila subproductos encontrada: 63
+2025-06-05 15:55:19 | Fila harina encontrada: 18
+2025-06-05 15:55:19 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=1, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:59, hora_final=08:59, bascula=1, bascula_harina=PRUEBA, bultos_harina=1, lote_harina=PRUEBA, cantidad_kg=1, silo_granel=1, bultos_mogolla=1, hilo_mogolla=1, bultos_salvado=1, hilo_salvado=1, bultos_segunda=1, hilo_segunda=1, bultos_germen=1, hilo_germen=1, cantidad_granza=1, varadas=PRUEBA
+2025-06-05 15:55:19 | Fila harina: 18, Fila subproductos: 63
+2025-06-05 15:55:19 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:55:19 | Archivo guardado correctamente
+2025-06-05 15:55:48 | Script iniciado
+2025-06-05 15:55:48 | POST recibido
+2025-06-05 15:55:48 | Plantilla base cargada
+2025-06-05 15:55:48 | Fila subproductos encontrada: 54
+2025-06-05 15:55:48 | Fila harina encontrada: 9
+2025-06-05 15:55:48 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=1, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:59, hora_final=08:59, bascula=1, bascula_harina=PRUEBA, bultos_harina=1, lote_harina=PRUEBA, cantidad_kg=1, silo_granel=1, bultos_mogolla=1, hilo_mogolla=1, bultos_salvado=1, hilo_salvado=1, bultos_segunda=1, hilo_segunda=1, bultos_germen=1, hilo_germen=1, cantidad_granza=1, varadas=PRUEBA
+2025-06-05 15:55:48 | Fila harina: 9, Fila subproductos: 54
+2025-06-05 15:55:48 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:55:48 | Archivo guardado correctamente
+2025-06-05 15:56:04 | Script iniciado
+2025-06-05 15:56:04 | POST recibido
+2025-06-05 15:56:05 | Archivo existente cargado
+2025-06-05 15:56:05 | Fila subproductos encontrada: 55
+2025-06-05 15:56:05 | Fila harina encontrada: 10
+2025-06-05 15:56:05 | Datos recibidos: fecha=2025-06-05, lider=Nigun Usuario Disponible, moje=1, producto=PRUEBA, referencia=PRUEBA, hora_inicio=08:59, hora_final=08:59, bascula=1, bascula_harina=PRUEBA, bultos_harina=1, lote_harina=PRUEBA, cantidad_kg=1, silo_granel=1, bultos_mogolla=1, hilo_mogolla=1, bultos_salvado=1, hilo_salvado=1, bultos_segunda=1, hilo_segunda=1, bultos_germen=1, hilo_germen=1, cantidad_granza=1, varadas=PRUEBA
+2025-06-05 15:56:05 | Fila harina: 10, Fila subproductos: 55
+2025-06-05 15:56:05 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 15:56:05 | Archivo guardado correctamente
+2025-06-05 19:00:16 | Script iniciado
+2025-06-05 19:00:16 | POST recibido
+2025-06-05 19:00:16 | Archivo existente cargado
+2025-06-05 19:00:16 | Fila subproductos encontrada: 54
+2025-06-05 19:00:16 | Fila harina encontrada: 22
+2025-06-05 19:00:16 | Datos recibidos: fecha=2025-06-05, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=11:08, bascula=27392, bascula_harina=21808, bultos_harina=400, lote_harina=040625B, cantidad_kg=21808, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 19:00:16 | Fila harina: 22, Fila subproductos: 54
+2025-06-05 19:00:16 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 19:00:16 | Archivo guardado correctamente
+2025-06-05 21:08:35 | Script iniciado
+2025-06-05 21:08:35 | POST recibido
+2025-06-05 21:08:35 | Archivo existente cargado
+2025-06-05 21:08:35 | Fila subproductos encontrada: 55
+2025-06-05 21:08:35 | Fila harina encontrada: 23
+2025-06-05 21:08:35 | Datos recibidos: fecha=2025-06-05, lider=Balmes Tulcan, moje=201, producto=Buto, referencia=Extrapan, hora_inicio=11:08, hora_final=13:45, bascula=13248, bascula_harina=10480, bultos_harina=180, lote_harina=050625B, cantidad_kg=, silo_granel=507, bultos_mogolla=133, hilo_mogolla=, bultos_salvado=40, hilo_salvado=, bultos_segunda=22, hilo_segunda=, bultos_germen=2, hilo_germen=, cantidad_granza=, varadas=
+2025-06-05 21:08:35 | Fila harina: 23, Fila subproductos: 55
+2025-06-05 21:08:35 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-05 21:08:35 | Archivo guardado correctamente
+2025-06-06 04:23:59 | Script iniciado
+2025-06-06 04:23:59 | POST recibido
+2025-06-06 04:23:59 | Archivo existente cargado
+2025-06-06 04:23:59 | Fila subproductos encontrada: 56
+2025-06-06 04:23:59 | Fila harina encontrada: 24
+2025-06-06 04:23:59 | Datos recibidos: fecha=2025-06-05, lider=Alex Chala, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=20:45, bascula=19968, bascula_harina=15552, bultos_harina=311, lote_harina=050625B, cantidad_kg=15552, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 04:23:59 | Fila harina: 24, Fila subproductos: 56
+2025-06-06 04:23:59 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 04:23:59 | Archivo guardado correctamente
+2025-06-06 04:57:08 | Script iniciado
+2025-06-06 04:57:08 | POST recibido
+2025-06-06 04:57:08 | Archivo existente cargado
+2025-06-06 04:57:08 | Fila subproductos encontrada: 57
+2025-06-06 04:57:08 | Fila harina encontrada: 25
+2025-06-06 04:57:08 | Datos recibidos: fecha=2025-06-05, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=20:45, hora_final=21:45, bascula=5024, bascula_harina=4032, bultos_harina=78, lote_harina=050625B, cantidad_kg=4032, silo_granel=507, bultos_mogolla=71, hilo_mogolla=, bultos_salvado=55, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=00, hilo_germen=, cantidad_granza=0, varadas=3 horas cargando mula
+2025-06-06 04:57:08 | Fila harina: 25, Fila subproductos: 57
+2025-06-06 04:57:08 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 04:57:08 | Archivo guardado correctamente
+2025-06-06 13:13:41 | Script iniciado
+2025-06-06 13:13:41 | POST recibido
+2025-06-06 13:13:42 | Archivo existente cargado
+2025-06-06 13:13:42 | Fila subproductos encontrada: 58
+2025-06-06 13:13:42 | Fila harina encontrada: 26
+2025-06-06 13:13:42 | Datos recibidos: fecha=2025-06-06, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=09:50, hora_final=03:25, bascula=28800, bascula_harina=22560, bultos_harina=211, lote_harina=O50625B, cantidad_kg=28800, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 13:13:42 | Fila harina: 26, Fila subproductos: 58
+2025-06-06 13:13:42 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 13:13:42 | Archivo guardado correctamente
+2025-06-06 13:19:10 | Script iniciado
+2025-06-06 13:19:10 | POST recibido
+2025-06-06 13:19:10 | Archivo existente cargado
+2025-06-06 13:19:10 | Fila subproductos encontrada: 59
+2025-06-06 13:19:10 | Fila harina encontrada: 27
+2025-06-06 13:19:10 | Datos recibidos: fecha=2025-06-06, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=09:50, hora_final=03:30, bascula=28800, bascula_harina=22560, bultos_harina=242, lote_harina=050625B1, cantidad_kg=22560, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 13:19:10 | Fila harina: 27, Fila subproductos: 59
+2025-06-06 13:19:10 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 13:19:10 | Archivo guardado correctamente
+2025-06-06 13:24:17 | Script iniciado
+2025-06-06 13:24:17 | POST recibido
+2025-06-06 13:24:17 | Archivo existente cargado
+2025-06-06 13:24:17 | Fila subproductos encontrada: 60
+2025-06-06 13:24:17 | Fila harina encontrada: 28
+2025-06-06 13:24:17 | Datos recibidos: fecha=2025-06-06, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Fuerte, hora_inicio=03:30, hora_final=05:45, bascula=11168, bascula_harina=8768, bultos_harina=342, lote_harina=050625B, cantidad_kg=8768, silo_granel=507, bultos_mogolla=126, hilo_mogolla=, bultos_salvado=56, hilo_salvado=, bultos_segunda=30, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 13:24:17 | Fila harina: 28, Fila subproductos: 60
+2025-06-06 13:24:17 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 13:24:18 | Archivo guardado correctamente
+2025-06-06 21:09:22 | Script iniciado
+2025-06-06 21:09:22 | POST recibido
+2025-06-06 21:09:22 | Archivo existente cargado
+2025-06-06 21:09:22 | Fila subproductos encontrada: 61
+2025-06-06 21:09:22 | Fila harina encontrada: 29
+2025-06-06 21:09:22 | Datos recibidos: fecha=2025-06-06, lider=Balmes Tulcan, moje=203, producto=Bulto, referencia=Fuerte, hora_inicio=05:45, hora_final=09:30, bascula=19072, bascula_harina=14992, bultos_harina=670, lote_harina=050625B, cantidad_kg=, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 21:09:22 | Fila harina: 29, Fila subproductos: 61
+2025-06-06 21:09:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 21:09:22 | Archivo guardado correctamente
+2025-06-06 21:16:22 | Script iniciado
+2025-06-06 21:16:22 | POST recibido
+2025-06-06 21:16:22 | Archivo existente cargado
+2025-06-06 21:16:22 | Fila subproductos encontrada: 62
+2025-06-06 21:16:22 | Fila harina encontrada: 30
+2025-06-06 21:16:22 | Datos recibidos: fecha=2025-06-06, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Fuerte, hora_inicio=09:30, hora_final=13:45, bascula=21632, bascula_harina=16784, bultos_harina=501, lote_harina=060625B, cantidad_kg=, silo_granel=507, bultos_mogolla=137, hilo_mogolla=, bultos_salvado=66, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 21:16:22 | Fila harina: 30, Fila subproductos: 62
+2025-06-06 21:16:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 21:16:23 | Archivo guardado correctamente
+2025-06-06 21:20:52 | Script iniciado
+2025-06-06 21:20:52 | POST recibido
+2025-06-06 21:20:52 | Archivo existente cargado
+2025-06-06 21:20:52 | Fila subproductos encontrada: 63
+2025-06-06 21:20:52 | Fila harina encontrada: 31
+2025-06-06 21:20:52 | Datos recibidos: fecha=2025-06-06, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Fuerte, hora_inicio=09:30, hora_final=13:45, bascula=21632, bascula_harina=16784, bultos_harina=40, lote_harina=210525B, cantidad_kg=, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-06 21:20:52 | Fila harina: 31, Fila subproductos: 63
+2025-06-06 21:20:52 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-06 21:20:52 | Archivo guardado correctamente
+2025-06-07 04:03:17 | Script iniciado
+2025-06-07 04:03:17 | POST recibido
+2025-06-07 04:03:18 | Archivo existente cargado
+2025-06-07 04:03:18 | Fila subproductos encontrada: 64
+2025-06-07 04:03:18 | Fila harina encontrada: 32
+2025-06-07 04:03:18 | Datos recibidos: fecha=2025-06-06, lider=Alex Chala, moje=204, producto=Bulto, referencia=Fuerte, hora_inicio=13:45, hora_final=16:00, bascula=11328, bascula_harina=8768, bultos_harina=494, lote_harina=060625B, cantidad_kg=0, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-07 04:03:18 | Fila harina: 32, Fila subproductos: 64
+2025-06-07 04:03:18 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-07 04:03:18 | Archivo guardado correctamente
+2025-06-07 04:06:09 | Script iniciado
+2025-06-07 04:06:09 | POST recibido
+2025-06-07 04:06:09 | Archivo existente cargado
+2025-06-07 04:06:09 | Fila subproductos encontrada: 65
+2025-06-07 04:06:09 | Fila harina encontrada: 33
+2025-06-07 04:06:09 | Datos recibidos: fecha=2025-06-06, lider=Alex Chala, moje=204, producto=Bulto, referencia=Fuerte, hora_inicio=13:45, hora_final=16:00, bascula=11328, bascula_harina=8768, bultos_harina=89, lote_harina=210525B, cantidad_kg=0, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-07 04:06:09 | Fila harina: 33, Fila subproductos: 65
+2025-06-07 04:06:09 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-07 04:06:09 | Archivo guardado correctamente
+2025-06-07 04:58:32 | Script iniciado
+2025-06-07 04:58:32 | POST recibido
+2025-06-07 04:58:32 | Archivo existente cargado
+2025-06-07 04:58:32 | Fila subproductos encontrada: 66
+2025-06-07 04:58:32 | Fila harina encontrada: 34
+2025-06-07 04:58:32 | Datos recibidos: fecha=2025-06-06, lider=Alex Chala, moje=201, producto=Bulto, referencia=Fuerte, hora_inicio=16:00, hora_final=21:46, bascula=29312, bascula_harina=22688, bultos_harina=732, lote_harina=060625B1, cantidad_kg=0, silo_granel=507, bultos_mogolla=121, hilo_mogolla=, bultos_salvado=71, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-07 04:58:32 | Fila harina: 34, Fila subproductos: 66
+2025-06-07 04:58:32 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-07 04:58:32 | Archivo guardado correctamente
+2025-06-07 16:00:06 | Script iniciado
+2025-06-07 16:00:06 | POST recibido
+2025-06-07 16:00:06 | Archivo existente cargado
+2025-06-07 16:00:06 | Fila subproductos encontrada: 67
+2025-06-07 16:00:06 | Fila harina encontrada: 35
+2025-06-07 16:00:06 | Datos recibidos: fecha=2025-06-07, lider=Balmes Tulcan, moje=202, producto=Bulto, referencia=Fuerte, hora_inicio=21:45, hora_final=05:02, bascula=36032, bascula_harina=28784, bultos_harina=865, lote_harina=06625B1, cantidad_kg=, silo_granel=507, bultos_mogolla=142, hilo_mogolla=, bultos_salvado=60, hilo_salvado=, bultos_segunda=120, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-07 16:00:06 | Fila harina: 35, Fila subproductos: 67
+2025-06-07 16:00:06 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-07 16:00:06 | Archivo guardado correctamente
+2025-06-07 16:03:37 | Script iniciado
+2025-06-07 16:03:37 | POST recibido
+2025-06-07 16:03:38 | Archivo existente cargado
+2025-06-07 16:03:38 | Fila subproductos encontrada: 68
+2025-06-07 16:03:38 | Fila harina encontrada: 36
+2025-06-07 16:03:38 | Datos recibidos: fecha=2025-06-07, lider=Balmes Tulcan, moje=502, producto=Bulto, referencia=Fuerte, hora_inicio=21:45, hora_final=05:00, bascula=36032, bascula_harina=28784, bultos_harina=865, lote_harina=070625B, cantidad_kg=, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-07 16:03:38 | Fila harina: 36, Fila subproductos: 68
+2025-06-07 16:03:38 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-07 16:03:38 | Archivo guardado correctamente
+2025-06-09 15:15:21 | Script iniciado
+2025-06-09 15:15:21 | POST recibido
+2025-06-09 15:15:21 | Archivo existente cargado
+2025-06-09 15:15:21 | Fila subproductos encontrada: 69
+2025-06-09 15:15:21 | Fila harina encontrada: 39
+2025-06-09 15:15:21 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=Harina T1, hora_inicio=01:00, hora_final=08:10, bascula=32835, bascula_harina=24576, bultos_harina=, lote_harina=090625B, cantidad_kg=24576, silo_granel=502, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 15:15:21 | Fila harina: 39, Fila subproductos: 69
+2025-06-09 15:15:21 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-06-09 15:15:21 | Archivo guardado correctamente
+2025-06-09 18:56:39 | Script iniciado
+2025-06-09 18:56:39 | POST recibido
+2025-06-09 18:56:39 | Archivo existente cargado: proceso_molienda.xlsx
+2025-06-09 18:56:39 | Nuevo archivo de molienda creado: proceso_molienda_2.xlsx
+2025-06-09 18:56:39 | Fila subproductos encontrada: 54
+2025-06-09 18:56:39 | Fila harina encontrada: 9
+2025-06-09 18:56:39 | Datos recibidos: fecha=2025-06-09, lider=Nigun Usuario Disponible, moje=000000, producto=PRUEBA, referencia=PRUEBA, hora_inicio=12:00, hora_final=12:00, bascula=0000, bascula_harina=PRUEBA, bultos_harina=0000, lote_harina=PRUEBA, cantidad_kg=0000, silo_granel=0000, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=PRUEBA
+2025-06-09 18:56:39 | Fila harina: 9, Fila subproductos: 54
+2025-06-09 18:56:39 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 18:56:40 | Archivo guardado correctamente
+2025-06-09 20:38:06 | Script iniciado
+2025-06-09 20:38:06 | POST recibido
+2025-06-09 20:38:06 | Archivo existente cargado: proceso_molienda.xlsx
+2025-06-09 20:38:06 | Nuevo archivo de molienda creado: proceso_molienda_2.xlsx
+2025-06-09 20:38:06 | Fila subproductos encontrada: 54
+2025-06-09 20:38:06 | Fila harina encontrada: 9
+2025-06-09 20:38:06 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=Harina T1, hora_inicio=01:00, hora_final=08:10, bascula=32808, bascula_harina=24576, bultos_harina=, lote_harina=090625B, cantidad_kg=24576, silo_granel=502, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 20:38:06 | Fila harina: 9, Fila subproductos: 54
+2025-06-09 20:38:06 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 20:38:06 | Archivo guardado correctamente
+2025-06-09 20:48:09 | Script iniciado
+2025-06-09 20:48:09 | POST recibido
+2025-06-09 20:48:10 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-09 20:48:10 | Fila subproductos encontrada: 55
+2025-06-09 20:48:10 | Fila harina encontrada: 10
+2025-06-09 20:48:10 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=202, producto=Granel, referencia=HarinaT1, hora_inicio=08:10, hora_final=13:45, bascula=20064, bascula_harina=15664, bultos_harina=, lote_harina=090625B, cantidad_kg=15664, silo_granel=502, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 20:48:10 | Fila harina: 10, Fila subproductos: 55
+2025-06-09 20:48:10 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 20:48:10 | Archivo guardado correctamente
+2025-06-09 21:04:25 | Script iniciado
+2025-06-09 21:04:25 | POST recibido
+2025-06-09 21:04:25 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-09 21:04:25 | Fila subproductos encontrada: 56
+2025-06-09 21:04:25 | Fila harina encontrada: 11
+2025-06-09 21:04:25 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Harina T1, hora_inicio=11:30, hora_final=12:50, bascula=6430, bascula_harina=5120, bultos_harina=100, lote_harina=090625B, cantidad_kg=5120, silo_granel=507, bultos_mogolla=203, hilo_mogolla=, bultos_salvado=66, hilo_salvado=, bultos_segunda=70, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 21:04:25 | Fila harina: 11, Fila subproductos: 56
+2025-06-09 21:04:25 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 21:04:25 | Archivo guardado correctamente
+2025-06-09 21:06:13 | Script iniciado
+2025-06-09 21:06:13 | POST recibido
+2025-06-09 21:06:13 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-09 21:06:13 | Fila subproductos encontrada: 57
+2025-06-09 21:06:13 | Fila harina encontrada: 12
+2025-06-09 21:06:13 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Harina T1, hora_inicio=11:30, hora_final=12:50, bascula=6430, bascula_harina=5120, bultos_harina=100, lote_harina=090625B, cantidad_kg=5120, silo_granel=507, bultos_mogolla=203, hilo_mogolla=, bultos_salvado=66, hilo_salvado=, bultos_segunda=70, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 21:06:13 | Fila harina: 12, Fila subproductos: 57
+2025-06-09 21:06:13 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 21:06:13 | Archivo guardado correctamente
+2025-06-09 21:19:59 | Script iniciado
+2025-06-09 21:19:59 | POST recibido
+2025-06-09 21:19:59 | Archivo existente cargado: proceso_molienda.xlsx
+2025-06-09 21:19:59 | Nuevo archivo de molienda creado: proceso_molienda_2.xlsx
+2025-06-09 21:19:59 | Fila subproductos encontrada: 54
+2025-06-09 21:19:59 | Fila harina encontrada: 9
+2025-06-09 21:19:59 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=Harina T1, hora_inicio=01:15, hora_final=08:10, bascula=32808, bascula_harina=24576, bultos_harina=, lote_harina=090625B, cantidad_kg=24576, silo_granel=502, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 21:19:59 | Fila harina: 9, Fila subproductos: 54
+2025-06-09 21:19:59 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 21:19:59 | Archivo guardado correctamente
+2025-06-09 21:22:19 | Script iniciado
+2025-06-09 21:22:19 | POST recibido
+2025-06-09 21:22:19 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-09 21:22:19 | Fila subproductos encontrada: 55
+2025-06-09 21:22:19 | Fila harina encontrada: 10
+2025-06-09 21:22:19 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=202, producto=Granel, referencia=Harina T1, hora_inicio=08:10, hora_final=13:45, bascula=20064, bascula_harina=15664, bultos_harina=, lote_harina=090625B, cantidad_kg=15664, silo_granel=502, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 21:22:19 | Fila harina: 10, Fila subproductos: 55
+2025-06-09 21:22:19 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 21:22:19 | Archivo guardado correctamente
+2025-06-09 21:25:00 | Script iniciado
+2025-06-09 21:25:00 | POST recibido
+2025-06-09 21:25:01 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-09 21:25:01 | Fila subproductos encontrada: 56
+2025-06-09 21:25:01 | Fila harina encontrada: 11
+2025-06-09 21:25:01 | Datos recibidos: fecha=2025-06-09, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Harina T1, hora_inicio=23:30, hora_final=12:50, bascula=6560, bascula_harina=5120, bultos_harina=100, lote_harina=090625B, cantidad_kg=5120, silo_granel=507, bultos_mogolla=213, hilo_mogolla=, bultos_salvado=66, hilo_salvado=, bultos_segunda=70, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-09 21:25:01 | Fila harina: 11, Fila subproductos: 56
+2025-06-09 21:25:01 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-09 21:25:01 | Archivo guardado correctamente
+2025-06-10 04:15:27 | Script iniciado
+2025-06-10 04:15:27 | POST recibido
+2025-06-10 04:15:27 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-10 04:15:27 | Fila subproductos encontrada: 57
+2025-06-10 04:15:27 | Fila harina encontrada: 12
+2025-06-10 04:15:27 | Datos recibidos: fecha=2025-06-09, lider=Balmes Tulcan, moje=202, producto=Granel, referencia=Harina t1, hora_inicio=13:45, hora_final=14:51, bascula=5312, bascula_harina=4112, bultos_harina=, lote_harina=090625B, cantidad_kg=4112, silo_granel=502, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-10 04:15:27 | Fila harina: 12, Fila subproductos: 57
+2025-06-10 04:15:27 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-10 04:15:27 | Archivo guardado correctamente
+2025-06-10 04:55:37 | Script iniciado
+2025-06-10 04:55:37 | POST recibido
+2025-06-10 04:55:37 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-10 04:55:37 | Fila subproductos encontrada: 58
+2025-06-10 04:55:37 | Fila harina encontrada: 13
+2025-06-10 04:55:37 | Datos recibidos: fecha=2025-06-09, lider=Balmes Tulcan, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=13:51, hora_final=21:45, bascula=32896, bascula_harina=25664, bultos_harina=, lote_harina=090625B, cantidad_kg=25664, silo_granel=502, bultos_mogolla=122, hilo_mogolla=, bultos_salvado=51, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-10 04:55:37 | Fila harina: 13, Fila subproductos: 58
+2025-06-10 04:55:37 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-10 04:55:37 | Archivo guardado correctamente
+2025-06-10 12:47:50 | Script iniciado
+2025-06-10 12:47:50 | POST recibido
+2025-06-10 12:47:50 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-10 12:47:50 | Fila subproductos encontrada: 59
+2025-06-10 12:47:50 | Fila harina encontrada: 14
+2025-06-10 12:47:50 | Datos recibidos: fecha=2025-06-10, lider=Alex Chala, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=05:00, bascula=33536, bascula_harina=26064, bultos_harina=0, lote_harina=090625B, cantidad_kg=26064, silo_granel=502, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=0
+2025-06-10 12:47:50 | Fila harina: 14, Fila subproductos: 59
+2025-06-10 12:47:50 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-10 12:47:50 | Archivo guardado correctamente
+2025-06-10 13:06:38 | Script iniciado
+2025-06-10 13:06:38 | POST recibido
+2025-06-10 13:06:39 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-10 13:06:39 | Fila subproductos encontrada: 60
+2025-06-10 13:06:39 | Fila harina encontrada: 15
+2025-06-10 13:06:39 | Datos recibidos: fecha=2025-06-10, lider=Alex Chala, moje=201, producto=Bulto, referencia=Artesanal, hora_inicio=05:00, hora_final=05:45, bascula=3200, bascula_harina=2000, bultos_harina=66, lote_harina=100625B, cantidad_kg=2000, silo_granel=507, bultos_mogolla=123, hilo_mogolla=, bultos_salvado=53, hilo_salvado=, bultos_segunda=70, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-10 13:06:39 | Fila harina: 15, Fila subproductos: 60
+2025-06-10 13:06:39 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-10 13:06:39 | Archivo guardado correctamente
+2025-06-10 21:10:44 | Script iniciado
+2025-06-10 21:10:44 | POST recibido
+2025-06-10 21:10:44 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-10 21:10:44 | Fila subproductos encontrada: 61
+2025-06-10 21:10:44 | Fila harina encontrada: 16
+2025-06-10 21:10:44 | Datos recibidos: fecha=2025-06-10, lider=Juvenal Poloche, moje=201, producto=Bulto, referencia=Artesanal, hora_inicio=05:50, hora_final=11:35, bascula=28928, bascula_harina=22608, bultos_harina=234-344, lote_harina=100625B-100625B, cantidad_kg=22608, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-10 21:10:44 | Fila harina: 16, Fila subproductos: 61
+2025-06-10 21:10:44 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-10 21:10:44 | Archivo guardado correctamente
+2025-06-10 21:15:32 | Script iniciado
+2025-06-10 21:15:32 | POST recibido
+2025-06-10 21:15:33 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-10 21:15:33 | Fila subproductos encontrada: 62
+2025-06-10 21:15:33 | Fila harina encontrada: 17
+2025-06-10 21:15:33 | Datos recibidos: fecha=2025-06-10, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Natural, hora_inicio=11:40, hora_final=13:45, bascula=10400, bascula_harina=8208, bultos_harina=160, lote_harina=100625B, cantidad_kg=8208, silo_granel=507, bultos_mogolla=139, hilo_mogolla=, bultos_salvado=50, hilo_salvado=, bultos_segunda=21, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-10 21:15:33 | Fila harina: 17, Fila subproductos: 62
+2025-06-10 21:15:33 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-10 21:15:33 | Archivo guardado correctamente
+2025-06-11 03:49:27 | Script iniciado
+2025-06-11 03:49:27 | POST recibido
+2025-06-11 03:49:27 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-11 03:49:27 | Fila subproductos encontrada: 63
+2025-06-11 03:49:27 | Fila harina encontrada: 18
+2025-06-11 03:49:27 | Datos recibidos: fecha=2025-06-10, lider=Balmes Tulcan, moje=202, producto=Bulto, referencia=Natural, hora_inicio=13:45, hora_final=17:57, bascula=21280, bascula_harina=16864, bultos_harina=331, lote_harina=100625B, cantidad_kg=, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-11 03:49:27 | Fila harina: 18, Fila subproductos: 63
+2025-06-11 03:49:27 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-11 03:49:27 | Archivo guardado correctamente
+2025-06-11 05:15:40 | Script iniciado
+2025-06-11 05:15:40 | POST recibido
+2025-06-11 05:15:40 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-11 05:15:40 | Fila subproductos encontrada: 64
+2025-06-11 05:15:40 | Fila harina encontrada: 19
+2025-06-11 05:15:40 | Datos recibidos: fecha=2025-06-10, lider=Balmes Tulcan, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=17:57, hora_final=21:45, bascula=19328, bascula_harina=15360, bultos_harina=307, lote_harina=050625B1, cantidad_kg=15360, silo_granel=507, bultos_mogolla=127, hilo_mogolla=, bultos_salvado=51, hilo_salvado=, bultos_segunda=29, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-11 05:15:40 | Fila harina: 19, Fila subproductos: 64
+2025-06-11 05:15:40 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-11 05:15:40 | Archivo guardado correctamente
+2025-06-11 12:42:06 | Script iniciado
+2025-06-11 12:42:06 | POST recibido
+2025-06-11 12:42:06 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-11 12:42:06 | Fila subproductos encontrada: 65
+2025-06-11 12:42:06 | Fila harina encontrada: 20
+2025-06-11 12:42:06 | Datos recibidos: fecha=2025-06-11, lider=Alex Chala, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=00:40, bascula=14368, bascula_harina=11520, bultos_harina=240, lote_harina=050625B1, cantidad_kg=11520, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=0
+2025-06-11 12:42:06 | Fila harina: 20, Fila subproductos: 65
+2025-06-11 12:42:06 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-11 12:42:06 | Archivo guardado correctamente
+2025-06-11 13:04:57 | Script iniciado
+2025-06-11 13:04:57 | POST recibido
+2025-06-11 13:04:57 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-11 13:04:57 | Fila subproductos encontrada: 66
+2025-06-11 13:04:57 | Fila harina encontrada: 21
+2025-06-11 13:04:57 | Datos recibidos: fecha=2025-06-11, lider=Alex Chala, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=00:40, hora_final=06:45, bascula=26080, bascula_harina=20736, bultos_harina=408, lote_harina=100625B, cantidad_kg=20736, silo_granel=507, bultos_mogolla=134, hilo_mogolla=, bultos_salvado=48, hilo_salvado=, bultos_segunda=18, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-11 13:04:57 | Fila harina: 21, Fila subproductos: 66
+2025-06-11 13:04:57 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-11 13:04:57 | Archivo guardado correctamente
+2025-06-11 21:18:48 | Script iniciado
+2025-06-11 21:18:48 | POST recibido
+2025-06-11 21:18:48 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-11 21:18:48 | Fila subproductos encontrada: 67
+2025-06-11 21:18:48 | Fila harina encontrada: 22
+2025-06-11 21:18:48 | Datos recibidos: fecha=2025-06-11, lider=Juvenal Poloche, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=13:30, bascula=38304, bascula_harina=30096, bultos_harina=372-234, lote_harina=100625B-110625B, cantidad_kg=30096, silo_granel=507, bultos_mogolla=133, hilo_mogolla=, bultos_salvado=59, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=1245pm-105pm falla de energia
+2025-06-11 21:18:48 | Fila harina: 22, Fila subproductos: 67
+2025-06-11 21:18:48 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-11 21:18:48 | Archivo guardado correctamente
+2025-06-12 04:58:14 | Script iniciado
+2025-06-12 04:58:14 | POST recibido
+2025-06-12 04:58:14 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-12 04:58:14 | Fila subproductos encontrada: 68
+2025-06-12 04:58:14 | Fila harina encontrada: 23
+2025-06-12 04:58:14 | Datos recibidos: fecha=2025-06-11, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Especial, hora_inicio=13:45, hora_final=20:09, bascula=30752, bascula_harina=23772, bultos_harina=260-200, lote_harina=110625B-110625BA, cantidad_kg=, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-12 04:58:14 | Fila harina: 23, Fila subproductos: 68
+2025-06-12 04:58:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-12 04:58:14 | Archivo guardado correctamente
+2025-06-12 05:04:34 | Script iniciado
+2025-06-12 05:04:34 | POST recibido
+2025-06-12 05:04:35 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-12 05:04:35 | Fila subproductos encontrada: 69
+2025-06-12 05:04:35 | Fila harina encontrada: 24
+2025-06-12 05:04:35 | Datos recibidos: fecha=2025-06-11, lider=Balmes Tulcan, moje=201, producto=Granel, referencia=Especial, hora_inicio=20:09, hora_final=21:45, bascula=15232, bascula_harina=11520, bultos_harina=, lote_harina=110625B, cantidad_kg=11520, silo_granel=501, bultos_mogolla=148, hilo_mogolla=, bultos_salvado=48, hilo_salvado=, bultos_segunda=13, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-12 05:04:35 | Fila harina: 24, Fila subproductos: 69
+2025-06-12 05:04:35 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-12 05:04:35 | Archivo guardado correctamente
+2025-06-12 12:44:04 | Script iniciado
+2025-06-12 12:44:04 | POST recibido
+2025-06-12 12:44:04 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-12 12:44:04 | Fila subproductos encontrada: 70
+2025-06-12 12:44:04 | Fila harina encontrada: 25
+2025-06-12 12:44:04 | Datos recibidos: fecha=2025-06-12, lider=Alex Chala, moje=201, producto=Granel, referencia=Especial, hora_inicio=21:45, hora_final=03:30, bascula=26592, bascula_harina=20176, bultos_harina=0, lote_harina=110625B, cantidad_kg=20176, silo_granel=501, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-12 12:44:04 | Fila harina: 25, Fila subproductos: 70
+2025-06-12 12:44:04 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-12 12:44:05 | Archivo guardado correctamente
+2025-06-12 13:02:12 | Script iniciado
+2025-06-12 13:02:12 | POST recibido
+2025-06-12 13:02:12 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-12 13:02:12 | Fila subproductos encontrada: 71
+2025-06-12 13:02:12 | Fila harina encontrada: 26
+2025-06-12 13:02:12 | Datos recibidos: fecha=2025-06-12, lider=Alex Chala, moje=201, producto=Granel, referencia=Especial, hora_inicio=03:30, hora_final=05:45, bascula=10080, bascula_harina=7584, bultos_harina=0, lote_harina=110625B, cantidad_kg=7584, silo_granel=501, bultos_mogolla=172, hilo_mogolla=, bultos_salvado=30, hilo_salvado=, bultos_segunda=90, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-12 13:02:12 | Fila harina: 26, Fila subproductos: 71
+2025-06-12 13:02:12 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-12 13:02:12 | Archivo guardado correctamente
+2025-06-12 19:33:58 | Script iniciado
+2025-06-12 19:33:58 | POST recibido
+2025-06-12 19:33:58 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-12 19:33:58 | Fila subproductos encontrada: 72
+2025-06-12 19:33:58 | Fila harina encontrada: 27
+2025-06-12 19:33:58 | Datos recibidos: fecha=2025-06-12, lider=Juvenal Poloche, moje=204, producto=Granel, referencia=Especial, hora_inicio=05:45, hora_final=11:10, bascula=23680, bascula_harina=18000, bultos_harina=, lote_harina=110625B, cantidad_kg=18000, silo_granel=501, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-12 19:33:58 | Fila harina: 27, Fila subproductos: 72
+2025-06-12 19:33:58 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-12 19:33:58 | Archivo guardado correctamente
+2025-06-13 03:09:58 | Script iniciado
+2025-06-13 03:09:58 | POST recibido
+2025-06-13 03:09:58 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 03:09:58 | Fila subproductos encontrada: 73
+2025-06-13 03:09:58 | Fila harina encontrada: 28
+2025-06-13 03:09:58 | Datos recibidos: fecha=2025-06-12, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=11:10, hora_final=13:45, bascula=12192, bascula_harina=9696, bultos_harina=190, lote_harina=110625B, cantidad_kg=, silo_granel=507, bultos_mogolla=165, hilo_mogolla=, bultos_salvado=55, hilo_salvado=, bultos_segunda=19, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-13 03:09:58 | Fila harina: 28, Fila subproductos: 73
+2025-06-13 03:09:58 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 03:09:58 | Archivo guardado correctamente
+2025-06-13 04:55:13 | Script iniciado
+2025-06-13 04:55:13 | POST recibido
+2025-06-13 04:55:13 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 04:55:13 | Fila subproductos encontrada: 74
+2025-06-13 04:55:13 | Fila harina encontrada: 29
+2025-06-13 04:55:13 | Datos recibidos: fecha=2025-06-12, lider=Balmes Tulcan, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=17:23, bascula=18464, bascula_harina=14544, bultos_harina=356, lote_harina=110624B, cantidad_kg=14544, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-13 04:55:13 | Fila harina: 29, Fila subproductos: 74
+2025-06-13 04:55:13 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 04:55:13 | Archivo guardado correctamente
+2025-06-13 05:00:16 | Script iniciado
+2025-06-13 05:00:16 | POST recibido
+2025-06-13 05:00:16 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 05:00:16 | Fila subproductos encontrada: 75
+2025-06-13 05:00:16 | Fila harina encontrada: 30
+2025-06-13 05:00:16 | Datos recibidos: fecha=2025-06-12, lider=Balmes Tulcan, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=05:22, hora_final=21:45, bascula=22240, bascula_harina=17776, bultos_harina=288, lote_harina=120625B, cantidad_kg=17776, silo_granel=507, bultos_mogolla=125, hilo_mogolla=, bultos_salvado=41, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-13 05:00:16 | Fila harina: 30, Fila subproductos: 75
+2025-06-13 05:00:16 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 05:00:16 | Archivo guardado correctamente
+2025-06-13 12:46:54 | Script iniciado
+2025-06-13 12:46:54 | POST recibido
+2025-06-13 12:46:54 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 12:46:54 | Fila subproductos encontrada: 76
+2025-06-13 12:46:54 | Fila harina encontrada: 31
+2025-06-13 12:46:54 | Datos recibidos: fecha=2025-06-13, lider=Alex Chala, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=12:01, hora_final=05:45, bascula=27328, bascula_harina=21696, bultos_harina=0, lote_harina=130625B, cantidad_kg=21696, silo_granel=503, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-13 12:46:54 | Fila harina: 31, Fila subproductos: 76
+2025-06-13 12:46:54 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 12:46:54 | Archivo guardado correctamente
+2025-06-13 13:04:57 | Script iniciado
+2025-06-13 13:04:57 | POST recibido
+2025-06-13 13:04:57 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 13:04:57 | Fila subproductos encontrada: 77
+2025-06-13 13:04:57 | Fila harina encontrada: 32
+2025-06-13 13:04:57 | Datos recibidos: fecha=2025-06-12, lider=Alex Chala, moje=203, producto=Granel, referencia=Extrapan, hora_inicio=21:45, hora_final=12:00, bascula=10976, bascula_harina=8608, bultos_harina=176, lote_harina=120625B, cantidad_kg=8608, silo_granel=507, bultos_mogolla=120, hilo_mogolla=, bultos_salvado=48, hilo_salvado=, bultos_segunda=78, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-13 13:04:57 | Fila harina: 32, Fila subproductos: 77
+2025-06-13 13:04:57 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 13:04:57 | Archivo guardado correctamente
+2025-06-13 20:55:14 | Script iniciado
+2025-06-13 20:55:14 | POST recibido
+2025-06-13 20:55:14 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 20:55:14 | Fila subproductos encontrada: 78
+2025-06-13 20:55:14 | Fila harina encontrada: 33
+2025-06-13 20:55:14 | Datos recibidos: fecha=2025-06-13, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=HarinaT1, hora_inicio=05:45, hora_final=08:40, bascula=14016, bascula_harina=11008, bultos_harina=, lote_harina=130625B, cantidad_kg=11008, silo_granel=503, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-13 20:55:14 | Fila harina: 33, Fila subproductos: 78
+2025-06-13 20:55:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 20:55:14 | Archivo guardado correctamente
+2025-06-13 21:07:05 | Script iniciado
+2025-06-13 21:07:05 | POST recibido
+2025-06-13 21:07:05 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-13 21:07:05 | Fila subproductos encontrada: 79
+2025-06-13 21:07:05 | Fila harina encontrada: 34
+2025-06-13 21:07:05 | Datos recibidos: fecha=2025-06-13, lider=Juvenal Poloche, moje=204, producto=Granel, referencia=Harina T1, hora_inicio=08:40, hora_final=13:45, bascula=24128, bascula_harina=18784, bultos_harina=, lote_harina=130625B, cantidad_kg=18784, silo_granel=503, bultos_mogolla=134, hilo_mogolla=, bultos_salvado=48, hilo_salvado=, bultos_segunda=33, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-13 21:07:05 | Fila harina: 34, Fila subproductos: 79
+2025-06-13 21:07:05 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-13 21:07:05 | Archivo guardado correctamente
+2025-06-14 05:21:39 | Script iniciado
+2025-06-14 05:21:39 | POST recibido
+2025-06-14 05:21:40 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-14 05:21:40 | Fila subproductos encontrada: 80
+2025-06-14 05:21:40 | Fila harina encontrada: 35
+2025-06-14 05:21:40 | Datos recibidos: fecha=2025-06-13, lider=Balmes Tulcan, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=13:45, hora_final=21:45, bascula=22100, bascula_harina=17216, bultos_harina=, lote_harina=130625B, cantidad_kg=17216, silo_granel=503, bultos_mogolla=84, hilo_mogolla=, bultos_salvado=18, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=3 horas corte de energia
+2025-06-14 05:21:40 | Fila harina: 35, Fila subproductos: 80
+2025-06-14 05:21:40 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-14 05:21:40 | Archivo guardado correctamente
+2025-06-14 11:43:20 | Script iniciado
+2025-06-14 11:43:20 | POST recibido
+2025-06-14 11:43:21 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-14 11:43:21 | Fila subproductos encontrada: 81
+2025-06-14 11:43:21 | Fila harina encontrada: 36
+2025-06-14 11:43:21 | Datos recibidos: fecha=2025-06-13, lider=Alex Chala, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=23:10, bascula=5600, bascula_harina=4400, bultos_harina=0, lote_harina=130625B, cantidad_kg=4400, silo_granel=503, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=, varadas=
+2025-06-14 11:43:21 | Fila harina: 36, Fila subproductos: 81
+2025-06-14 11:43:21 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-06-14 11:43:21 | Archivo guardado correctamente
+2025-06-14 14:49:30 | Script iniciado
+2025-06-14 14:49:30 | POST recibido
+2025-06-14 14:49:30 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-06-14 14:49:30 | Nuevo archivo de molienda creado: proceso_molienda_3.xlsx
+2025-06-14 14:49:30 | Fila subproductos encontrada: 54
+2025-06-14 14:49:30 | Fila harina encontrada: 9
+2025-06-14 14:49:30 | Datos recibidos: fecha=2025-06-14, lider=Juvenal Poloche, moje=203, producto=Granel, referencia=Harina T1, hora_inicio=23:10, hora_final=06:20, bascula=33435, bascula_harina=26520, bultos_harina=, lote_harina=130625B, cantidad_kg=26520, silo_granel=507, bultos_mogolla=137, hilo_mogolla=, bultos_salvado=49, hilo_salvado=, bultos_segunda=72, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-14 14:49:30 | Fila harina: 9, Fila subproductos: 54
+2025-06-14 14:49:30 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-14 14:49:30 | Archivo guardado correctamente
+2025-06-16 21:04:11 | Script iniciado
+2025-06-16 21:04:11 | POST recibido
+2025-06-16 21:04:12 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-16 21:04:12 | Fila subproductos encontrada: 55
+2025-06-16 21:04:12 | Fila harina encontrada: 10
+2025-06-16 21:04:12 | Datos recibidos: fecha=2025-06-16, lider=Alex Chala, moje=201, producto=Bulto, referencia=Fuerte, hora_inicio=06:00, hora_final=12:40, bascula=32040, bascula_harina=24604, bultos_harina=887=103, lote_harina=160625B/160625BP, cantidad_kg=24604, silo_granel=507, bultos_mogolla=122, hilo_mogolla=, bultos_salvado=35, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-16 21:04:12 | Fila harina: 10, Fila subproductos: 55
+2025-06-16 21:04:12 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-16 21:04:12 | Archivo guardado correctamente
+2025-06-16 21:07:27 | Script iniciado
+2025-06-16 21:07:27 | POST recibido
+2025-06-16 21:07:27 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-16 21:07:27 | Fila subproductos encontrada: 56
+2025-06-16 21:07:27 | Fila harina encontrada: 11
+2025-06-16 21:07:27 | Datos recibidos: fecha=2025-06-16, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=12:40, hora_final=13:45, bascula=4960, bascula_harina=3920, bultos_harina=66, lote_harina=120625B, cantidad_kg=3920, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-16 21:07:27 | Fila harina: 11, Fila subproductos: 56
+2025-06-16 21:07:27 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-16 21:07:27 | Archivo guardado correctamente
+2025-06-17 04:58:35 | Script iniciado
+2025-06-17 04:58:35 | POST recibido
+2025-06-17 04:58:36 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 04:58:36 | Fila subproductos encontrada: 57
+2025-06-17 04:58:36 | Fila harina encontrada: 12
+2025-06-17 04:58:36 | Datos recibidos: fecha=2025-06-16, lider=Paulo Riascos, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=18:57, hora_final=21:45, bascula=14208, bascula_harina=10800, bultos_harina=388, lote_harina=160625B, cantidad_kg=10800, silo_granel=507, bultos_mogolla=130, hilo_mogolla=, bultos_salvado=59, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-17 04:58:36 | Fila harina: 12, Fila subproductos: 57
+2025-06-17 04:58:36 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 04:58:36 | Archivo guardado correctamente
+2025-06-17 05:02:14 | Script iniciado
+2025-06-17 05:02:14 | POST recibido
+2025-06-17 05:02:14 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 05:02:14 | Fila subproductos encontrada: 58
+2025-06-17 05:02:14 | Fila harina encontrada: 13
+2025-06-17 05:02:14 | Datos recibidos: fecha=2025-06-16, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=18:57, bascula=26400, bascula_harina=20640, bultos_harina=250, lote_harina=120625B, cantidad_kg=20640, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-17 05:02:14 | Fila harina: 13, Fila subproductos: 58
+2025-06-17 05:02:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 05:02:14 | Archivo guardado correctamente
+2025-06-17 13:13:51 | Script iniciado
+2025-06-17 13:13:51 | POST recibido
+2025-06-17 13:13:52 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 13:13:52 | Fila subproductos encontrada: 59
+2025-06-17 13:13:52 | Fila harina encontrada: 14
+2025-06-17 13:13:52 | Datos recibidos: fecha=2025-06-17, lider=Balmes Tulcan, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=01:13, bascula=17696, bascula_harina=14192, bultos_harina=392, lote_harina=160625B, cantidad_kg=14192, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-17 13:13:52 | Fila harina: 14, Fila subproductos: 59
+2025-06-17 13:13:52 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 13:13:52 | Archivo guardado correctamente
+2025-06-17 13:18:53 | Script iniciado
+2025-06-17 13:18:53 | POST recibido
+2025-06-17 13:18:53 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 13:18:53 | Fila subproductos encontrada: 60
+2025-06-17 13:18:53 | Fila harina encontrada: 15
+2025-06-17 13:18:53 | Datos recibidos: fecha=2025-06-17, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=01:13, hora_final=05:45, bascula=23072, bascula_harina=18592, bultos_harina=257, lote_harina=170625B, cantidad_kg=18592, silo_granel=507, bultos_mogolla=106, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-17 13:18:53 | Fila harina: 15, Fila subproductos: 60
+2025-06-17 13:18:53 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 13:18:53 | Archivo guardado correctamente
+2025-06-17 20:51:55 | Script iniciado
+2025-06-17 20:51:55 | POST recibido
+2025-06-17 20:51:55 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 20:51:55 | Fila subproductos encontrada: 61
+2025-06-17 20:51:55 | Fila harina encontrada: 16
+2025-06-17 20:51:55 | Datos recibidos: fecha=2025-06-17, lider=Alex Chala, moje=203, producto=Granel, referencia=Especial, hora_inicio=08:00, hora_final=13:45, bascula=26688, bascula_harina=20944, bultos_harina=0, lote_harina=170625B, cantidad_kg=20944, silo_granel=501, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-17 20:51:55 | Fila harina: 16, Fila subproductos: 61
+2025-06-17 20:51:55 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 20:51:56 | Archivo guardado correctamente
+2025-06-17 21:34:52 | Script iniciado
+2025-06-17 21:34:52 | POST recibido
+2025-06-17 21:34:53 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 21:34:53 | Fila subproductos encontrada: 62
+2025-06-17 21:34:53 | Fila harina encontrada: 17
+2025-06-17 21:34:53 | Datos recibidos: fecha=2025-06-17, lider=Alex Chala, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=08:00, bascula=10624, bascula_harina=8528, bultos_harina=354, lote_harina=170625B, cantidad_kg=8528, silo_granel=507, bultos_mogolla=152, hilo_mogolla=, bultos_salvado=96, hilo_salvado=, bultos_segunda=50, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-17 21:34:53 | Fila harina: 17, Fila subproductos: 62
+2025-06-17 21:34:53 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 21:34:53 | Archivo guardado correctamente
+2025-06-17 22:35:29 | Script iniciado
+2025-06-17 22:35:29 | POST recibido
+2025-06-17 22:35:29 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-17 22:35:29 | Fila subproductos encontrada: 63
+2025-06-17 22:35:29 | Fila harina encontrada: 18
+2025-06-17 22:35:29 | Datos recibidos: fecha=2025-06-17, lider=Paulo Riascos, moje=203, producto=Granel, referencia=Especial, hora_inicio=01:45, hora_final=02:45, bascula=3776, bascula_harina=3392, bultos_harina=, lote_harina=170625B, cantidad_kg=3392, silo_granel=, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-17 22:35:29 | Fila harina: 18, Fila subproductos: 63
+2025-06-17 22:35:29 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-17 22:35:29 | Archivo guardado correctamente
+2025-06-18 12:45:22 | Script iniciado
+2025-06-18 12:45:22 | POST recibido
+2025-06-18 12:45:22 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-18 12:45:22 | Fila subproductos encontrada: 64
+2025-06-18 12:45:22 | Fila harina encontrada: 19
+2025-06-18 12:45:22 | Datos recibidos: fecha=2025-06-18, lider=Balmes Tulcan, moje=204, producto=Granel, referencia=Especial, hora_inicio=21:45, hora_final=12:46, bascula=12928, bascula_harina=9648, bultos_harina=, lote_harina=170625B, cantidad_kg=9648, silo_granel=501, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-18 12:45:22 | Fila harina: 19, Fila subproductos: 64
+2025-06-18 12:45:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-18 12:45:22 | Archivo guardado correctamente
+2025-06-18 13:03:09 | Script iniciado
+2025-06-18 13:03:09 | POST recibido
+2025-06-18 13:03:09 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-18 13:03:09 | Fila subproductos encontrada: 65
+2025-06-18 13:03:09 | Fila harina encontrada: 20
+2025-06-18 13:03:09 | Datos recibidos: fecha=2025-06-18, lider=Balmes Tulcan, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=12:46, hora_final=05:46, bascula=23808, bascula_harina=18960, bultos_harina=545-93, lote_harina=170625 -170625B, cantidad_kg=18960, silo_granel=507, bultos_mogolla=129, hilo_mogolla=, bultos_salvado=42, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-18 13:03:09 | Fila harina: 20, Fila subproductos: 65
+2025-06-18 13:03:09 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-18 13:03:10 | Archivo guardado correctamente
+2025-06-18 20:49:09 | Script iniciado
+2025-06-18 20:49:09 | POST recibido
+2025-06-18 20:49:09 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-18 20:49:09 | Fila subproductos encontrada: 66
+2025-06-18 20:49:09 | Fila harina encontrada: 21
+2025-06-18 20:49:09 | Datos recibidos: fecha=2025-06-18, lider=Alex Chala, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=07:15, bascula=7616, bascula_harina=6096, bultos_harina=120, lote_harina=170625B, cantidad_kg=6096, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-18 20:49:09 | Fila harina: 21, Fila subproductos: 66
+2025-06-18 20:49:09 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-18 20:49:09 | Archivo guardado correctamente
+2025-06-18 21:07:27 | Script iniciado
+2025-06-18 21:07:27 | POST recibido
+2025-06-18 21:07:28 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-18 21:07:28 | Fila subproductos encontrada: 67
+2025-06-18 21:07:28 | Fila harina encontrada: 22
+2025-06-18 21:07:28 | Datos recibidos: fecha=2025-06-18, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=07:15, hora_final=13:45, bascula=33152, bascula_harina=26240, bultos_harina=430-218, lote_harina=170625B-180625B, cantidad_kg=26240, silo_granel=507, bultos_mogolla=139, hilo_mogolla=, bultos_salvado=53, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=10, varadas=
+2025-06-18 21:07:28 | Fila harina: 22, Fila subproductos: 67
+2025-06-18 21:07:28 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-18 21:07:28 | Archivo guardado correctamente
+2025-06-19 04:59:24 | Script iniciado
+2025-06-19 04:59:24 | POST recibido
+2025-06-19 04:59:24 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-19 04:59:24 | Fila subproductos encontrada: 68
+2025-06-19 04:59:24 | Fila harina encontrada: 23
+2025-06-19 04:59:24 | Datos recibidos: fecha=2025-06-18, lider=Paulo Riascos, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=01:45, hora_final=08:12, bascula=32768, bascula_harina=26000, bultos_harina=521, lote_harina=180625B , cantidad_kg=26000, silo_granel=507, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=, hilo_segunda=0, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-19 04:59:24 | Fila harina: 23, Fila subproductos: 68
+2025-06-19 04:59:24 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-19 04:59:24 | Archivo guardado correctamente
+2025-06-19 05:01:55 | Script iniciado
+2025-06-19 05:01:55 | POST recibido
+2025-06-19 05:01:55 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-19 05:01:55 | Fila subproductos encontrada: 69
+2025-06-19 05:01:55 | Fila harina encontrada: 24
+2025-06-19 05:01:55 | Datos recibidos: fecha=2025-06-18, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=20:12, hora_final=21:45, bascula=6912, bascula_harina=5536, bultos_harina=, lote_harina=180625 , cantidad_kg=5536, silo_granel=504, bultos_mogolla=127, hilo_mogolla=, bultos_salvado=31, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-19 05:01:55 | Fila harina: 24, Fila subproductos: 69
+2025-06-19 05:01:55 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-19 05:01:55 | Archivo guardado correctamente
+2025-06-19 10:17:28 | Script iniciado
+2025-06-19 10:17:28 | POST recibido
+2025-06-19 10:17:28 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-19 10:17:28 | Fila subproductos encontrada: 70
+2025-06-19 10:17:28 | Fila harina encontrada: 25
+2025-06-19 10:17:28 | Datos recibidos: fecha=2025-06-19, lider=Balmes Tulcan, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=03:14, bascula=26080, bascula_harina=20784, bultos_harina=, lote_harina=180625B, cantidad_kg=20784, silo_granel=504, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-19 10:17:28 | Fila harina: 25, Fila subproductos: 70
+2025-06-19 10:17:28 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-19 10:17:28 | Archivo guardado correctamente
+2025-06-19 12:59:47 | Script iniciado
+2025-06-19 12:59:47 | POST recibido
+2025-06-19 12:59:48 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-19 12:59:48 | Fila subproductos encontrada: 71
+2025-06-19 12:59:48 | Fila harina encontrada: 26
+2025-06-19 12:59:48 | Datos recibidos: fecha=2025-06-19, lider=Balmes Tulcan, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=03:14, hora_final=05:45, bascula=12000, bascula_harina=9456, bultos_harina=, lote_harina=180625B, cantidad_kg=9456, silo_granel=504, bultos_mogolla=126, hilo_mogolla=, bultos_salvado=42, hilo_salvado=, bultos_segunda=171, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-19 12:59:48 | Fila harina: 26, Fila subproductos: 71
+2025-06-19 12:59:48 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-19 12:59:48 | Archivo guardado correctamente
+2025-06-19 21:06:31 | Script iniciado
+2025-06-19 21:06:31 | POST recibido
+2025-06-19 21:06:31 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-19 21:06:31 | Fila subproductos encontrada: 72
+2025-06-19 21:06:31 | Fila harina encontrada: 27
+2025-06-19 21:06:31 | Datos recibidos: fecha=2025-06-19, lider=Alex Chala, moje=201, producto=Granel, referencia=Harnat1, hora_inicio=05:45, hora_final=10:04, bascula=20384, bascula_harina=16000, bultos_harina=0, lote_harina=180625B, cantidad_kg=16000, silo_granel=504, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-19 21:06:31 | Fila harina: 27, Fila subproductos: 72
+2025-06-19 21:06:31 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-19 21:06:31 | Archivo guardado correctamente
+2025-06-19 21:12:52 | Script iniciado
+2025-06-19 21:12:52 | POST recibido
+2025-06-19 21:12:52 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-19 21:12:52 | Fila subproductos encontrada: 73
+2025-06-19 21:12:52 | Fila harina encontrada: 28
+2025-06-19 21:12:52 | Datos recibidos: fecha=2025-06-19, lider=Alex Chala, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=10:05, hora_final=12:55, bascula=13344, bascula_harina=10496, bultos_harina=0, lote_harina=180625B, cantidad_kg=10496, silo_granel=504, bultos_mogolla=112, hilo_mogolla=, bultos_salvado=31, hilo_salvado=, bultos_segunda=39, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=Parada de hora media por tela rota seccion c7
+2025-06-19 21:12:52 | Fila harina: 28, Fila subproductos: 73
+2025-06-19 21:12:52 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-19 21:12:52 | Archivo guardado correctamente
+2025-06-20 04:58:08 | Script iniciado
+2025-06-20 04:58:08 | POST recibido
+2025-06-20 04:58:08 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-20 04:58:08 | Fila subproductos encontrada: 74
+2025-06-20 04:58:08 | Fila harina encontrada: 29
+2025-06-20 04:58:08 | Datos recibidos: fecha=2025-06-19, lider=Paulo Riascos, moje=202, producto=Granel, referencia=Harina t1, hora_inicio=14:18, hora_final=18:39, bascula=19488, bascula_harina=15760, bultos_harina=0, lote_harina=180625B, cantidad_kg=, silo_granel=, bultos_mogolla=107, hilo_mogolla=0, bultos_salvado=15, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=
+2025-06-20 04:58:08 | Fila harina: 29, Fila subproductos: 74
+2025-06-20 04:58:08 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-20 04:58:08 | Archivo guardado correctamente
+2025-06-20 05:02:26 | Script iniciado
+2025-06-20 05:02:26 | POST recibido
+2025-06-20 05:02:26 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-20 05:02:26 | Fila subproductos encontrada: 75
+2025-06-20 05:02:26 | Fila harina encontrada: 30
+2025-06-20 05:02:26 | Datos recibidos: fecha=2025-06-19, lider=Paulo Riascos, moje=203, producto=Granel, referencia=Harina t1, hora_inicio=06:39, hora_final=21:45, bascula=14656, bascula_harina=11408, bultos_harina=0, lote_harina=180625B, cantidad_kg=11408, silo_granel=504, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=0
+2025-06-20 05:02:26 | Fila harina: 30, Fila subproductos: 75
+2025-06-20 05:02:26 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-20 05:02:26 | Archivo guardado correctamente
+2025-06-20 12:52:20 | Script iniciado
+2025-06-20 12:52:42 | Script iniciado
+2025-06-20 12:52:53 | Script iniciado
+2025-06-20 12:52:53 | POST recibido
+2025-06-20 12:52:53 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-20 12:52:53 | Fila subproductos encontrada: 76
+2025-06-20 12:52:53 | Fila harina encontrada: 31
+2025-06-20 12:52:53 | Datos recibidos: fecha=2025-06-20, lider=Balmes Tulcan, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=03:02, bascula=17152, bascula_harina=13376, bultos_harina=, lote_harina=18625B, cantidad_kg=13376, silo_granel=504, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=2 horas cernedor 1 tela rota
+2025-06-20 12:52:53 | Fila harina: 31, Fila subproductos: 76
+2025-06-20 12:52:53 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-20 12:52:53 | Archivo guardado correctamente
+2025-06-20 13:51:01 | Script iniciado
+2025-06-20 13:51:01 | POST recibido
+2025-06-20 13:51:01 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-20 13:51:01 | Fila subproductos encontrada: 77
+2025-06-20 13:51:01 | Fila harina encontrada: 32
+2025-06-20 13:51:01 | Datos recibidos: fecha=2025-06-20, lider=Balmes Tulcan, moje=204, producto=Granel, referencia=Harianat1, hora_inicio=03:02, hora_final=05:45, bascula=3424, bascula_harina=2640, bultos_harina=, lote_harina=200625B, cantidad_kg=2640, silo_granel=502, bultos_mogolla=65, hilo_mogolla=, bultos_salvado=22, hilo_salvado=, bultos_segunda=64, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=1 hora y30 minutos cernedor 2 tela rota
+2025-06-20 13:51:01 | Fila harina: 32, Fila subproductos: 77
+2025-06-20 13:51:01 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-20 13:51:01 | Archivo guardado correctamente
+2025-06-20 21:03:09 | Script iniciado
+2025-06-20 21:03:09 | POST recibido
+2025-06-20 21:03:10 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-20 21:03:10 | Fila subproductos encontrada: 78
+2025-06-20 21:03:10 | Fila harina encontrada: 33
+2025-06-20 21:03:10 | Datos recibidos: fecha=2025-06-20, lider=Alex Chala, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=05:45, hora_final=13:46, bascula=37312, bascula_harina=29616, bultos_harina=0, lote_harina=200625B, cantidad_kg=29616, silo_granel=502, bultos_mogolla=132, hilo_mogolla=, bultos_salvado=45, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=, varadas=
+2025-06-20 21:03:10 | Fila harina: 33, Fila subproductos: 78
+2025-06-20 21:03:10 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-20 21:03:10 | Archivo guardado correctamente
+2025-06-20 22:19:53 | Script iniciado
+2025-06-20 22:19:53 | POST recibido
+2025-06-20 22:19:53 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-20 22:19:53 | Fila subproductos encontrada: 79
+2025-06-20 22:19:53 | Fila harina encontrada: 34
+2025-06-20 22:19:53 | Datos recibidos: fecha=2025-06-20, lider=Paulo Riascos, moje=201, producto=Granel, referencia=Harina t1, hora_inicio=13:46, hora_final=14:28, bascula=2912, bascula_harina=2288, bultos_harina=0, lote_harina=200625B, cantidad_kg=2288, silo_granel=202, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=
+2025-06-20 22:19:53 | Fila harina: 34, Fila subproductos: 79
+2025-06-20 22:19:53 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-20 22:19:53 | Archivo guardado correctamente
+2025-06-21 05:07:46 | Script iniciado
+2025-06-21 05:07:46 | POST recibido
+2025-06-21 05:07:46 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-21 05:07:46 | Fila subproductos encontrada: 80
+2025-06-21 05:07:46 | Fila harina encontrada: 35
+2025-06-21 05:07:46 | Datos recibidos: fecha=2025-06-20, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Exclusiva, hora_inicio=14:28, hora_final=20:57, bascula=31744, bascula_harina=25056, bultos_harina=507, lote_harina=200625B, cantidad_kg=0, silo_granel=507, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=0
+2025-06-21 05:07:46 | Fila harina: 35, Fila subproductos: 80
+2025-06-21 05:07:46 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-21 05:07:46 | Archivo guardado correctamente
+2025-06-21 05:11:27 | Script iniciado
+2025-06-21 05:11:27 | POST recibido
+2025-06-21 05:11:27 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-21 05:11:27 | Fila subproductos encontrada: 81
+2025-06-21 05:11:27 | Fila harina encontrada: 36
+2025-06-21 05:11:27 | Datos recibidos: fecha=2025-06-20, lider=Paulo Riascos, moje=03, producto=Granel, referencia=Especial, hora_inicio=08:56, hora_final=09:47, bascula=2528, bascula_harina=1888, bultos_harina=0, lote_harina=200625B, cantidad_kg=1888, silo_granel=501, bultos_mogolla=105, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=0
+2025-06-21 05:11:27 | Fila harina: 36, Fila subproductos: 81
+2025-06-21 05:11:27 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-06-21 05:11:27 | Archivo guardado correctamente
+2025-06-21 12:22:11 | Script iniciado
+2025-06-21 12:22:11 | POST recibido
+2025-06-21 12:22:11 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-06-21 12:22:11 | Nuevo archivo de molienda creado: proceso_molienda_4.xlsx
+2025-06-21 12:22:11 | Fila subproductos encontrada: 54
+2025-06-21 12:22:11 | Fila harina encontrada: 9
+2025-06-21 12:22:11 | Datos recibidos: fecha=2025-06-21, lider=Balmes Tulcan, moje=203, producto=Granel, referencia=Especial, hora_inicio=21:45, hora_final=03:55, bascula=28832, bascula_harina=22640, bultos_harina=, lote_harina=200625B, cantidad_kg=22640, silo_granel=501, bultos_mogolla=177, hilo_mogolla=, bultos_salvado=98, hilo_salvado=, bultos_segunda=73, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-21 12:22:11 | Fila harina: 9, Fila subproductos: 54
+2025-06-21 12:22:11 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-21 12:22:11 | Archivo guardado correctamente
+2025-06-24 20:26:32 | Script iniciado
+2025-06-24 20:26:32 | POST recibido
+2025-06-24 20:26:32 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-24 20:26:32 | Fila subproductos encontrada: 55
+2025-06-24 20:26:32 | Fila harina encontrada: 10
+2025-06-24 20:26:32 | Datos recibidos: fecha=2025-06-24, lider=Balmes Tulcan, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=06:10, hora_final=13:22, bascula=32736, bascula_harina=24816, bultos_harina=, lote_harina=200625B, cantidad_kg=24816, silo_granel=502, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-24 20:26:32 | Fila harina: 10, Fila subproductos: 55
+2025-06-24 20:26:32 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-24 20:26:32 | Archivo guardado correctamente
+2025-06-24 20:54:15 | Script iniciado
+2025-06-24 20:54:15 | POST recibido
+2025-06-24 20:54:16 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-24 20:54:16 | Fila subproductos encontrada: 56
+2025-06-24 20:54:16 | Fila harina encontrada: 11
+2025-06-24 20:54:16 | Datos recibidos: fecha=2025-06-24, lider=Balmes Tulcan, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=13:22, hora_final=13:45, bascula=1792, bascula_harina=1376, bultos_harina=, lote_harina=200625B, cantidad_kg=1376, silo_granel=502, bultos_mogolla=109, hilo_mogolla=, bultos_salvado=46, hilo_salvado=, bultos_segunda=18, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-24 20:54:16 | Fila harina: 11, Fila subproductos: 56
+2025-06-24 20:54:16 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-24 20:54:16 | Archivo guardado correctamente
+2025-06-25 04:49:22 | Script iniciado
+2025-06-25 04:49:22 | POST recibido
+2025-06-25 04:49:22 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-25 04:49:22 | Fila subproductos encontrada: 57
+2025-06-25 04:49:22 | Fila harina encontrada: 12
+2025-06-25 04:49:22 | Datos recibidos: fecha=2025-06-24, lider=Alex Chala, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=13:45, hora_final=20:20, bascula=31424, bascula_harina=24384, bultos_harina=0, lote_harina=200625B, cantidad_kg=24424, silo_granel=502, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-25 04:49:22 | Fila harina: 12, Fila subproductos: 57
+2025-06-25 04:49:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-25 04:49:22 | Archivo guardado correctamente
+2025-06-25 04:58:57 | Script iniciado
+2025-06-25 04:58:57 | POST recibido
+2025-06-25 04:58:57 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-25 04:58:57 | Fila subproductos encontrada: 58
+2025-06-25 04:58:57 | Fila harina encontrada: 13
+2025-06-25 04:58:57 | Datos recibidos: fecha=2025-06-24, lider=Alex Chala, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=20:20, hora_final=21:45, bascula=6688, bascula_harina=5120, bultos_harina=0, lote_harina=200625B, cantidad_kg=6688, silo_granel=502, bultos_mogolla=112, hilo_mogolla=, bultos_salvado=64, hilo_salvado=, bultos_segunda=37, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-25 04:58:57 | Fila harina: 13, Fila subproductos: 58
+2025-06-25 04:58:57 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-25 04:58:57 | Archivo guardado correctamente
+2025-06-25 12:44:02 | Script iniciado
+2025-06-25 12:44:02 | POST recibido
+2025-06-25 12:44:02 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-25 12:44:02 | Fila subproductos encontrada: 59
+2025-06-25 12:44:02 | Fila harina encontrada: 14
+2025-06-25 12:44:02 | Datos recibidos: fecha=2025-06-25, lider=Paulo Riascos, moje=203, producto=Granel, referencia=HarinaT1, hora_inicio=21:44, hora_final=01:16, bascula=16064, bascula_harina=12192, bultos_harina=0, lote_harina=200625B, cantidad_kg=12192, silo_granel=502, bultos_mogolla=0, hilo_mogolla=0, bultos_salvado=0, hilo_salvado=0, bultos_segunda=0, hilo_segunda=0, bultos_germen=0, hilo_germen=0, cantidad_granza=0, varadas=
+2025-06-25 12:44:02 | Fila harina: 14, Fila subproductos: 59
+2025-06-25 12:44:02 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-25 12:44:02 | Archivo guardado correctamente
+2025-06-25 13:16:08 | Script iniciado
+2025-06-25 13:16:08 | POST recibido
+2025-06-25 13:16:08 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-25 13:16:08 | Fila subproductos encontrada: 60
+2025-06-25 13:16:08 | Fila harina encontrada: 15
+2025-06-25 13:16:08 | Datos recibidos: fecha=2025-06-25, lider=Paulo Riascos, moje=204, producto=Bulto, referencia=Artesanal, hora_inicio=01:24, hora_final=04:45, bascula=9216, bascula_harina=7324, bultos_harina=, lote_harina=250625B, cantidad_kg=0, silo_granel=507, bultos_mogolla=76, hilo_mogolla=0, bultos_salvado=40, hilo_salvado=, bultos_segunda=25, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=3 h0ras docificador mejorante
+2025-06-25 13:16:08 | Fila harina: 15, Fila subproductos: 60
+2025-06-25 13:16:08 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-25 13:16:08 | Archivo guardado correctamente
+2025-06-25 21:06:59 | Script iniciado
+2025-06-25 21:06:59 | POST recibido
+2025-06-25 21:07:00 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-25 21:07:00 | Fila subproductos encontrada: 61
+2025-06-25 21:07:00 | Fila harina encontrada: 16
+2025-06-25 21:07:00 | Datos recibidos: fecha=2025-06-25, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Artesanal, hora_inicio=05:45, hora_final=10:45, bascula=24192, bascula_harina=19296, bultos_harina=112-330, lote_harina=250625B-250625B, cantidad_kg=19296, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-25 21:07:00 | Fila harina: 16, Fila subproductos: 61
+2025-06-25 21:07:00 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-25 21:07:00 | Archivo guardado correctamente
+2025-06-25 21:10:50 | Script iniciado
+2025-06-25 21:10:50 | POST recibido
+2025-06-25 21:10:50 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-25 21:10:50 | Fila subproductos encontrada: 62
+2025-06-25 21:10:50 | Fila harina encontrada: 17
+2025-06-25 21:10:50 | Datos recibidos: fecha=2025-06-25, lider=Balmes Tulcan, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=10:45, hora_final=13:45, bascula=13568, bascula_harina=10720, bultos_harina=41-173, lote_harina=18625B-250625B, cantidad_kg=10720, silo_granel=507, bultos_mogolla=124, hilo_mogolla=, bultos_salvado=21, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-25 21:10:50 | Fila harina: 17, Fila subproductos: 62
+2025-06-25 21:10:50 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-25 21:10:50 | Archivo guardado correctamente
+2025-06-26 04:57:42 | Script iniciado
+2025-06-26 04:57:42 | POST recibido
+2025-06-26 04:57:42 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-26 04:57:42 | Fila subproductos encontrada: 63
+2025-06-26 04:57:42 | Fila harina encontrada: 18
+2025-06-26 04:57:42 | Datos recibidos: fecha=2025-06-25, lider=Alex Chala, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=21:45, bascula=18592, bascula_harina=15056, bultos_harina=600, lote_harina=250625B, cantidad_kg=0, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-26 04:57:42 | Fila harina: 18, Fila subproductos: 63
+2025-06-26 04:57:42 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-26 04:57:42 | Archivo guardado correctamente
+2025-06-26 04:06:19 | Script iniciado
+2025-06-26 04:06:19 | POST recibido
+2025-06-26 04:06:19 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-26 04:06:19 | Fila subproductos encontrada: 64
+2025-06-26 04:06:19 | Fila harina encontrada: 19
+2025-06-26 04:06:19 | Datos recibidos: fecha=2025-06-25, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=17:20, hora_final=20:00, bascula=9890, bascula_harina=7950, bultos_harina=318, lote_harina=250625B, cantidad_kg=0, silo_granel=507, bultos_mogolla=80, hilo_mogolla=, bultos_salvado=78, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=3 horas de parada por daño del compresor y energia
+2025-06-26 04:06:19 | Fila harina: 19, Fila subproductos: 64
+2025-06-26 04:06:19 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-26 04:06:19 | Archivo guardado correctamente
+2025-06-26 13:06:23 | Script iniciado
+2025-06-26 13:06:23 | POST recibido
+2025-06-26 13:06:23 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-26 13:06:23 | Fila subproductos encontrada: 65
+2025-06-26 13:06:23 | Fila harina encontrada: 20
+2025-06-26 13:06:23 | Datos recibidos: fecha=2025-06-26, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Extrapan x25, hora_inicio=21:45, hora_final=03:53, bascula=24064, bascula_harina=19408, bultos_harina=382, lote_harina=250625B, cantidad_kg=19408, silo_granel=, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-26 13:06:23 | Fila harina: 20, Fila subproductos: 65
+2025-06-26 13:06:23 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-26 13:06:23 | Archivo guardado correctamente
+2025-06-26 13:11:22 | Script iniciado
+2025-06-26 13:11:22 | POST recibido
+2025-06-26 13:11:22 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-26 13:11:22 | Fila subproductos encontrada: 66
+2025-06-26 13:11:22 | Fila harina encontrada: 21
+2025-06-26 13:11:22 | Datos recibidos: fecha=2025-06-26, lider=Paulo Riascos, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=03:55, hora_final=05:45, bascula=9472, bascula_harina=7584, bultos_harina=487, lote_harina=250625B, cantidad_kg=7584, silo_granel=, bultos_mogolla=101, hilo_mogolla=, bultos_salvado=58, hilo_salvado=, bultos_segunda=18, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-06-26 13:11:22 | Fila harina: 21, Fila subproductos: 66
+2025-06-26 13:11:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-26 13:11:22 | Archivo guardado correctamente
+2025-06-26 21:14:51 | Script iniciado
+2025-06-26 21:14:51 | POST recibido
+2025-06-26 21:14:51 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-26 21:14:51 | Fila subproductos encontrada: 67
+2025-06-26 21:14:51 | Fila harina encontrada: 22
+2025-06-26 21:14:51 | Datos recibidos: fecha=2025-06-26, lider=Balmes Tulcan, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=10:40, bascula=23904, bascula_harina=19136, bultos_harina=120-253, lote_harina=250625B-260625B, cantidad_kg=19136, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-26 21:14:51 | Fila harina: 22, Fila subproductos: 67
+2025-06-26 21:14:51 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-26 21:14:51 | Archivo guardado correctamente
+2025-06-26 21:19:41 | Script iniciado
+2025-06-26 21:19:41 | POST recibido
+2025-06-26 21:19:41 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-26 21:19:41 | Fila subproductos encontrada: 68
+2025-06-26 21:19:41 | Fila harina encontrada: 23
+2025-06-26 21:19:41 | Datos recibidos: fecha=2025-06-26, lider=Balmes Tulcan, moje=204, producto=Granel, referencia=Artesanal, hora_inicio=10:39, hora_final=13:45, bascula=13056, bascula_harina=10312, bultos_harina=, lote_harina=260625B, cantidad_kg=10312, silo_granel=503, bultos_mogolla=132, hilo_mogolla=, bultos_salvado=50, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-26 21:19:41 | Fila harina: 23, Fila subproductos: 68
+2025-06-26 21:19:41 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-26 21:19:41 | Archivo guardado correctamente
+2025-06-27 04:26:02 | Script iniciado
+2025-06-27 04:26:02 | POST recibido
+2025-06-27 04:26:02 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-27 04:26:02 | Fila subproductos encontrada: 69
+2025-06-27 04:26:02 | Fila harina encontrada: 24
+2025-06-27 04:26:02 | Datos recibidos: fecha=2025-06-26, lider=Alex Chala, moje=204, producto=Granel, referencia=Artesanal, hora_inicio=13:45, hora_final=18:15, bascula=20240, bascula_harina=16248, bultos_harina=110, lote_harina=260625B/250625B, cantidad_kg=10760, silo_granel=503/507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-06-27 04:26:02 | Fila harina: 24, Fila subproductos: 69
+2025-06-27 04:26:02 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-27 04:26:02 | Archivo guardado correctamente
+2025-06-27 04:56:47 | Script iniciado
+2025-06-27 04:56:47 | POST recibido
+2025-06-27 04:56:48 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-27 04:56:48 | Fila subproductos encontrada: 70
+2025-06-27 04:56:48 | Fila harina encontrada: 25
+2025-06-27 04:56:48 | Datos recibidos: fecha=2025-06-26, lider=Alex Chala, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=18:15, hora_final=21:45, bascula=17664, bascula_harina=14192, bultos_harina=277, lote_harina=260625B, cantidad_kg=14192, silo_granel=507, bultos_mogolla=112, hilo_mogolla=, bultos_salvado=50, hilo_salvado=, bultos_segunda=133, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=30 minutos neomatico t1
+2025-06-27 04:56:48 | Fila harina: 25, Fila subproductos: 70
+2025-06-27 04:56:48 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-27 04:56:48 | Archivo guardado correctamente
+2025-06-27 13:23:47 | Script iniciado
+2025-06-27 13:23:47 | POST recibido
+2025-06-27 13:23:47 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-27 13:23:47 | Fila subproductos encontrada: 71
+2025-06-27 13:23:47 | Fila harina encontrada: 26
+2025-06-27 13:23:47 | Datos recibidos: fecha=2025-06-27, lider=Paulo Riascos, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=01:00, bascula=15520, bascula_harina=13232, bultos_harina=250_19, lote_harina=260625B_270625B, cantidad_kg=13232, silo_granel=201, bultos_mogolla=54, hilo_mogolla=, bultos_salvado=21, hilo_salvado=, bultos_segunda=27, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-27 13:23:47 | Fila harina: 26, Fila subproductos: 71
+2025-06-27 13:23:47 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-27 13:23:47 | Archivo guardado correctamente
+2025-06-27 13:23:55 | Script iniciado
+2025-06-27 13:23:55 | POST recibido
+2025-06-27 13:23:55 | Archivo existente cargado: proceso_molienda_4.xlsx
+2025-06-27 13:23:55 | Fila subproductos encontrada: 72
+2025-06-27 13:23:55 | Fila harina encontrada: 27
+2025-06-27 13:23:55 | Datos recibidos: fecha=2025-06-27, lider=Paulo Riascos, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=01:00, bascula=15520, bascula_harina=13232, bultos_harina=250_19, lote_harina=260625B_270625B, cantidad_kg=13232, silo_granel=201, bultos_mogolla=54, hilo_mogolla=, bultos_salvado=21, hilo_salvado=, bultos_segunda=27, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-06-27 13:23:55 | Fila harina: 27, Fila subproductos: 72
+2025-06-27 13:23:55 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_4.xlsx
+2025-06-27 13:23:55 | Archivo guardado correctamente
+2025-07-14 12:53:19 | Script iniciado
+2025-07-14 12:53:19 | POST recibido
+2025-07-14 12:53:19 | Carpeta de destino creada
+2025-07-14 12:53:19 | Plantilla base cargada
+2025-07-14 12:53:19 | Fila subproductos encontrada: 54
+2025-07-14 12:53:19 | Fila harina encontrada: 9
+2025-07-14 12:53:19 | Datos recibidos: fecha=2025-07-14, lider=Javier Acosta, moje=1, producto=2, referencia=3, hora_inicio=07:54, hora_final=07:54, bascula=4, bascula_harina=5, bultos_harina=6, lote_harina=7, cantidad_kg=8, silo_granel=9, bultos_mogolla=1, hilo_mogolla=2, bultos_salvado=3, hilo_salvado=4, bultos_segunda=5, hilo_segunda=6, bultos_germen=7, hilo_germen=8, cantidad_granza=9, varadas=10
+2025-07-14 12:53:19 | Fila harina: 9, Fila subproductos: 54
+2025-07-14 12:53:19 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-14 12:53:19 | Archivo guardado correctamente
+2025-07-17 02:55:22 | Script iniciado
+2025-07-17 02:55:22 | POST recibido
+2025-07-17 02:55:22 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 02:55:22 | Fila subproductos encontrada: 55
+2025-07-17 02:55:22 | Fila harina encontrada: 10
+2025-07-17 02:55:22 | Datos recibidos: fecha=2025-07-16, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=13:20, hora_final=19:50, bascula=32256, bascula_harina=25904, bultos_harina=1035, lote_harina=160725B, cantidad_kg=25904, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-17 02:55:22 | Fila harina: 10, Fila subproductos: 55
+2025-07-17 02:55:22 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 02:55:22 | Archivo guardado correctamente
+2025-07-17 03:01:49 | Script iniciado
+2025-07-17 03:01:49 | POST recibido
+2025-07-17 03:01:49 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 03:01:49 | Fila subproductos encontrada: 56
+2025-07-17 03:01:49 | Fila harina encontrada: 11
+2025-07-17 03:01:49 | Datos recibidos: fecha=2025-07-16, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Exclusiva, hora_inicio=19:50, hora_final=21:45, bascula=9024, bascula_harina=7200, bultos_harina=154, lote_harina=160725B, cantidad_kg=7200, silo_granel=5074, bultos_mogolla=105, hilo_mogolla=, bultos_salvado=49, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-17 03:01:49 | Fila harina: 11, Fila subproductos: 56
+2025-07-17 03:01:49 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 03:01:49 | Archivo guardado correctamente
+2025-07-17 10:18:07 | Script iniciado
+2025-07-17 10:18:07 | POST recibido
+2025-07-17 10:18:07 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 10:18:07 | Fila subproductos encontrada: 57
+2025-07-17 10:18:07 | Fila harina encontrada: 12
+2025-07-17 10:18:07 | Datos recibidos: fecha=2025-07-17, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Exclusiva, hora_inicio=21:45, hora_final=02:26, bascula=23264, bascula_harina=18560, bultos_harina=361, lote_harina=160725B, cantidad_kg=, silo_granel=, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-17 10:18:07 | Fila harina: 12, Fila subproductos: 57
+2025-07-17 10:18:07 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 10:18:07 | Archivo guardado correctamente
+2025-07-17 10:56:34 | Script iniciado
+2025-07-17 10:56:34 | POST recibido
+2025-07-17 10:56:34 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 10:56:34 | Fila subproductos encontrada: 58
+2025-07-17 10:56:34 | Fila harina encontrada: 13
+2025-07-17 10:56:34 | Datos recibidos: fecha=2025-07-17, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harina t1, hora_inicio=02:26, hora_final=05:45, bascula=15616, bascula_harina=12640, bultos_harina=, lote_harina=170725B, cantidad_kg=12640, silo_granel=204, bultos_mogolla=128, hilo_mogolla=, bultos_salvado=47, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=2, hilo_germen=, cantidad_granza=, varadas=
+2025-07-17 10:56:34 | Fila harina: 13, Fila subproductos: 58
+2025-07-17 10:56:34 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 10:56:35 | Archivo guardado correctamente
+2025-07-17 10:56:46 | Script iniciado
+2025-07-17 10:56:46 | POST recibido
+2025-07-17 10:56:46 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 10:56:46 | Fila subproductos encontrada: 59
+2025-07-17 10:56:46 | Fila harina encontrada: 14
+2025-07-17 10:56:46 | Datos recibidos: fecha=2025-07-17, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harina t1, hora_inicio=02:26, hora_final=05:45, bascula=15616, bascula_harina=12640, bultos_harina=, lote_harina=170725B, cantidad_kg=12640, silo_granel=204, bultos_mogolla=128, hilo_mogolla=, bultos_salvado=47, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=2, hilo_germen=, cantidad_granza=, varadas=
+2025-07-17 10:56:46 | Fila harina: 14, Fila subproductos: 59
+2025-07-17 10:56:46 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 10:56:46 | Archivo guardado correctamente
+2025-07-17 18:49:40 | Script iniciado
+2025-07-17 18:49:40 | POST recibido
+2025-07-17 18:49:40 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 18:49:40 | Fila subproductos encontrada: 60
+2025-07-17 18:49:40 | Fila harina encontrada: 15
+2025-07-17 18:49:40 | Datos recibidos: fecha=2025-07-17, lider=Balmes Tulcan, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=05:45, hora_final=09:30, bascula=17696, bascula_harina=14320, bultos_harina=0, lote_harina=170725B, cantidad_kg=14320, silo_granel=504, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-17 18:49:40 | Fila harina: 15, Fila subproductos: 60
+2025-07-17 18:49:40 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 18:49:40 | Archivo guardado correctamente
+2025-07-17 19:18:49 | Script iniciado
+2025-07-17 19:18:49 | POST recibido
+2025-07-17 19:18:49 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-17 19:18:49 | Fila subproductos encontrada: 61
+2025-07-17 19:18:49 | Fila harina encontrada: 16
+2025-07-17 19:18:49 | Datos recibidos: fecha=2025-07-17, lider=, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=09:30, hora_final=13:45, bascula=20608, bascula_harina=16592, bultos_harina=0, lote_harina=170725B, cantidad_kg=16592, silo_granel=504, bultos_mogolla=126, hilo_mogolla=, bultos_salvado=50, hilo_salvado=, bultos_segunda=109, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-17 19:18:49 | Fila harina: 16, Fila subproductos: 61
+2025-07-17 19:18:49 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-17 19:18:49 | Archivo guardado correctamente
+2025-07-18 00:26:46 | Script iniciado
+2025-07-18 00:26:46 | POST recibido
+2025-07-18 00:26:46 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 00:26:46 | Fila subproductos encontrada: 62
+2025-07-18 00:26:46 | Fila harina encontrada: 17
+2025-07-18 00:26:46 | Datos recibidos: fecha=2025-07-17, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=HarinaT1, hora_inicio=13:45, hora_final=16:45, bascula=13600, bascula_harina=10704, bultos_harina=, lote_harina=170725B, cantidad_kg=10704, silo_granel=504, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 00:26:46 | Fila harina: 17, Fila subproductos: 62
+2025-07-18 00:26:46 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 00:26:46 | Archivo guardado correctamente
+2025-07-18 03:05:24 | Script iniciado
+2025-07-18 03:05:24 | POST recibido
+2025-07-18 03:05:25 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 03:05:25 | Fila subproductos encontrada: 63
+2025-07-18 03:05:25 | Fila harina encontrada: 18
+2025-07-18 03:05:25 | Datos recibidos: fecha=2025-07-17, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=16:45, hora_final=21:45, bascula=24480, bascula_harina=19872, bultos_harina=403, lote_harina=120725B1, cantidad_kg=19872, silo_granel=507, bultos_mogolla=118, hilo_mogolla=, bultos_salvado=41, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 03:05:25 | Fila harina: 18, Fila subproductos: 63
+2025-07-18 03:05:25 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 03:05:25 | Archivo guardado correctamente
+2025-07-18 05:07:57 | Script iniciado
+2025-07-18 05:07:57 | POST recibido
+2025-07-18 05:07:57 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 05:07:57 | Fila subproductos encontrada: 64
+2025-07-18 05:07:57 | Fila harina encontrada: 19
+2025-07-18 05:07:57 | Datos recibidos: fecha=2025-07-17, lider=Paulo Riascos, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=23:58, bascula=11296, bascula_harina=9136, bultos_harina=284, lote_harina=120725B1, cantidad_kg=9136, silo_granel=203, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 05:07:57 | Fila harina: 19, Fila subproductos: 64
+2025-07-18 05:07:57 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 05:07:57 | Archivo guardado correctamente
+2025-07-18 05:08:03 | Script iniciado
+2025-07-18 05:08:03 | POST recibido
+2025-07-18 05:08:03 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 05:08:03 | Fila subproductos encontrada: 65
+2025-07-18 05:08:03 | Fila harina encontrada: 20
+2025-07-18 05:08:03 | Datos recibidos: fecha=2025-07-17, lider=Paulo Riascos, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=23:58, bascula=11296, bascula_harina=9136, bultos_harina=284, lote_harina=120725B1, cantidad_kg=9136, silo_granel=203, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 05:08:03 | Fila harina: 20, Fila subproductos: 65
+2025-07-18 05:08:03 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 05:08:03 | Archivo guardado correctamente
+2025-07-18 11:23:32 | Script iniciado
+2025-07-18 11:23:32 | POST recibido
+2025-07-18 11:23:32 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 11:23:32 | Fila subproductos encontrada: 66
+2025-07-18 11:23:32 | Fila harina encontrada: 20
+2025-07-18 11:23:32 | Datos recibidos: fecha=2025-07-18, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=23:57, hora_final=05:51, bascula=29888, bascula_harina=23920, bultos_harina=110, lote_harina=170725B, cantidad_kg=, silo_granel=, bultos_mogolla=125, hilo_mogolla=, bultos_salvado=46, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=2, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 11:23:32 | Fila harina: 20, Fila subproductos: 66
+2025-07-18 11:23:32 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 11:23:32 | Archivo guardado correctamente
+2025-07-18 18:32:11 | Script iniciado
+2025-07-18 18:32:11 | POST recibido
+2025-07-18 18:32:11 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 18:32:11 | Fila subproductos encontrada: 67
+2025-07-18 18:32:11 | Fila harina encontrada: 21
+2025-07-18 18:32:11 | Datos recibidos: fecha=2025-07-18, lider=Balmes Tulcan, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=05:45, hora_final=13:00, bascula=25984, bascula_harina=32448, bultos_harina=, lote_harina=180725B, cantidad_kg=25984, silo_granel=503, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 18:32:11 | Fila harina: 21, Fila subproductos: 67
+2025-07-18 18:32:11 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 18:32:11 | Archivo guardado correctamente
+2025-07-18 19:02:33 | Script iniciado
+2025-07-18 19:02:33 | POST recibido
+2025-07-18 19:02:33 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-18 19:02:33 | Fila subproductos encontrada: 68
+2025-07-18 19:02:33 | Fila harina encontrada: 22
+2025-07-18 19:02:33 | Datos recibidos: fecha=2025-07-18, lider=Balmes Tulcan, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=13:00, hora_final=13:45, bascula=3456, bascula_harina=2736, bultos_harina=, lote_harina=180725B, cantidad_kg=2736, silo_granel=503, bultos_mogolla=118, hilo_mogolla=, bultos_salvado=39, hilo_salvado=, bultos_segunda=142, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-18 19:02:33 | Fila harina: 22, Fila subproductos: 68
+2025-07-18 19:02:33 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-18 19:02:33 | Archivo guardado correctamente
+2025-07-19 01:26:50 | Script iniciado
+2025-07-19 01:26:50 | POST recibido
+2025-07-19 01:26:51 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-19 01:26:51 | Fila subproductos encontrada: 69
+2025-07-19 01:26:51 | Fila harina encontrada: 23
+2025-07-19 01:26:51 | Datos recibidos: fecha=2025-07-18, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=HarinaT1, hora_inicio=13:45, hora_final=20:00, bascula=29760, bascula_harina=22896, bultos_harina=, lote_harina=180725B, cantidad_kg=22896, silo_granel=503, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-19 01:26:51 | Fila harina: 23, Fila subproductos: 69
+2025-07-19 01:26:51 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-19 01:26:51 | Archivo guardado correctamente
+2025-07-19 02:52:12 | Script iniciado
+2025-07-19 02:52:12 | POST recibido
+2025-07-19 02:52:12 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-19 02:52:12 | Fila subproductos encontrada: 70
+2025-07-19 02:52:12 | Fila harina encontrada: 24
+2025-07-19 02:52:12 | Datos recibidos: fecha=2025-07-18, lider=Juvenal Poloche, moje=203, producto=Granel, referencia=HarinaT1, hora_inicio=20:00, hora_final=21:45, bascula=8416, bascula_harina=6512, bultos_harina=, lote_harina=180725B, cantidad_kg=6512, silo_granel=503, bultos_mogolla=114, hilo_mogolla=, bultos_salvado=35, hilo_salvado=, bultos_segunda=30, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-07-19 02:52:12 | Fila harina: 24, Fila subproductos: 70
+2025-07-19 02:52:12 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-19 02:52:12 | Archivo guardado correctamente
+2025-07-19 08:50:03 | Script iniciado
+2025-07-19 08:50:03 | POST recibido
+2025-07-19 08:50:03 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-19 08:50:03 | Fila subproductos encontrada: 71
+2025-07-19 08:50:03 | Fila harina encontrada: 25
+2025-07-19 08:50:03 | Datos recibidos: fecha=2025-07-19, lider=Paulo Riascos, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=21:44, hora_final=03:03, bascula=25120, bascula_harina=19440, bultos_harina=0, lote_harina=180725B, cantidad_kg=19440, silo_granel=503, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-19 08:50:03 | Fila harina: 25, Fila subproductos: 71
+2025-07-19 08:50:03 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-19 08:50:03 | Archivo guardado correctamente
+2025-07-19 11:25:54 | Script iniciado
+2025-07-19 11:25:54 | POST recibido
+2025-07-19 11:25:54 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-19 11:25:54 | Fila subproductos encontrada: 72
+2025-07-19 11:25:54 | Fila harina encontrada: 26
+2025-07-19 11:25:54 | Datos recibidos: fecha=2025-07-19, lider=Paulo Riascos, moje=202, producto=Granel, referencia=Harinat1⁹, hora_inicio=03:01, hora_final=06:01, bascula=13504, bascula_harina=10928, bultos_harina=0, lote_harina=180725B, cantidad_kg=10928, silo_granel=505, bultos_mogolla=119, hilo_mogolla=, bultos_salvado=36, hilo_salvado=, bultos_segunda=47, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-07-19 11:25:54 | Fila harina: 26, Fila subproductos: 72
+2025-07-19 11:25:54 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-19 11:25:54 | Archivo guardado correctamente
+2025-07-21 18:03:21 | Script iniciado
+2025-07-21 18:03:21 | POST recibido
+2025-07-21 18:03:21 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-21 18:03:21 | Fila subproductos encontrada: 73
+2025-07-21 18:03:21 | Fila harina encontrada: 27
+2025-07-21 18:03:21 | Datos recibidos: fecha=2025-07-21, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Especial, hora_inicio=03:17, hora_final=10:20, bascula=33024, bascula_harina=25024, bultos_harina=, lote_harina=250725B, cantidad_kg=25024, silo_granel=501, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-21 18:03:21 | Fila harina: 27, Fila subproductos: 73
+2025-07-21 18:03:21 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-21 18:03:21 | Archivo guardado correctamente
+2025-07-21 19:09:09 | Script iniciado
+2025-07-21 19:09:09 | POST recibido
+2025-07-21 19:09:09 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-21 19:09:09 | Fila subproductos encontrada: 74
+2025-07-21 19:09:09 | Fila harina encontrada: 28
+2025-07-21 19:09:09 | Datos recibidos: fecha=2025-07-21, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Extrapan x 25, hora_inicio=10:32, hora_final=13:46, bascula=15136, bascula_harina=11392, bultos_harina=398, lote_harina=210725B, cantidad_kg=11392, silo_granel=, bultos_mogolla=177, hilo_mogolla=, bultos_salvado=66, hilo_salvado=, bultos_segunda=18, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-21 19:09:09 | Fila harina: 28, Fila subproductos: 74
+2025-07-21 19:09:09 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-21 19:09:09 | Archivo guardado correctamente
+2025-07-22 02:48:24 | Script iniciado
+2025-07-22 02:48:24 | POST recibido
+2025-07-22 02:48:24 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-22 02:48:24 | Fila subproductos encontrada: 75
+2025-07-22 02:48:24 | Fila harina encontrada: 29
+2025-07-22 02:48:24 | Datos recibidos: fecha=2025-07-21, lider=Alex Chala, moje=201, producto=Bulto, referencia=Extrpan, hora_inicio=13:45, hora_final=17:30, bascula=19008, bascula_harina=15248, bultos_harina=601 + 9, lote_harina=210725B 160725B, cantidad_kg=0, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-22 02:48:24 | Fila harina: 29, Fila subproductos: 75
+2025-07-22 02:48:24 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-22 02:48:24 | Archivo guardado correctamente
+2025-07-22 02:57:44 | Script iniciado
+2025-07-22 02:57:44 | POST recibido
+2025-07-22 02:57:44 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-22 02:57:44 | Fila subproductos encontrada: 76
+2025-07-22 02:57:44 | Fila harina encontrada: 30
+2025-07-22 02:57:44 | Datos recibidos: fecha=2025-07-21, lider=Alex Chala, moje=202, producto=Granel, referencia=HARINA T1, hora_inicio=17:40, hora_final=21:45, bascula=19680, bascula_harina=15040, bultos_harina=0, lote_harina=210725B, cantidad_kg=15040, silo_granel=502, bultos_mogolla=128, hilo_mogolla=, bultos_salvado=45, hilo_salvado=, bultos_segunda=104, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-22 02:57:44 | Fila harina: 30, Fila subproductos: 76
+2025-07-22 02:57:44 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-22 02:57:44 | Archivo guardado correctamente
+2025-07-22 08:30:13 | Script iniciado
+2025-07-22 08:30:13 | POST recibido
+2025-07-22 08:30:13 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-22 08:30:13 | Fila subproductos encontrada: 77
+2025-07-22 08:30:13 | Fila harina encontrada: 31
+2025-07-22 08:30:13 | Datos recibidos: fecha=2025-07-22, lider=Juvenal Poloche, moje=202, producto=Granel, referencia=Harina T1, hora_inicio=21:45, hora_final=00:25, bascula=12768, bascula_harina=9712, bultos_harina=, lote_harina=210725B, cantidad_kg=9712, silo_granel=502, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-22 08:30:13 | Fila harina: 31, Fila subproductos: 77
+2025-07-22 08:30:13 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-22 08:30:13 | Archivo guardado correctamente
+2025-07-22 10:57:31 | Script iniciado
+2025-07-22 10:57:31 | POST recibido
+2025-07-22 10:57:31 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-22 10:57:31 | Fila subproductos encontrada: 78
+2025-07-22 10:57:31 | Fila harina encontrada: 32
+2025-07-22 10:57:31 | Datos recibidos: fecha=2025-07-22, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=00:25, hora_final=05:45, bascula=26912, bascula_harina=21136, bultos_harina=408-13, lote_harina=170725B-210725B, cantidad_kg=21136, silo_granel=507, bultos_mogolla=111, hilo_mogolla=, bultos_salvado=62, hilo_salvado=, bultos_segunda=31, hilo_segunda=, bultos_germen=2, hilo_germen=, cantidad_granza=, varadas=
+2025-07-22 10:57:31 | Fila harina: 32, Fila subproductos: 78
+2025-07-22 10:57:31 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-22 10:57:31 | Archivo guardado correctamente
+2025-07-22 19:09:00 | Script iniciado
+2025-07-22 19:09:00 | POST recibido
+2025-07-22 19:09:00 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-22 19:09:00 | Fila subproductos encontrada: 79
+2025-07-22 19:09:00 | Fila harina encontrada: 33
+2025-07-22 19:09:00 | Datos recibidos: fecha=2025-07-22, lider=Paulo Riascos, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=07:06, hora_final=13:45, bascula=29952, bascula_harina=23664, bultos_harina=578, lote_harina=210725B, cantidad_kg=, silo_granel=, bultos_mogolla=102, hilo_mogolla=, bultos_salvado=48, hilo_salvado=, bultos_segunda=51, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=12.4 pm. 12,10 p m instalada de secador del comprensor
+2025-07-22 19:09:00 | Fila harina: 33, Fila subproductos: 79
+2025-07-22 19:09:00 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-22 19:09:00 | Archivo guardado correctamente
+2025-07-23 02:59:11 | Script iniciado
+2025-07-23 02:59:11 | POST recibido
+2025-07-23 02:59:11 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-23 02:59:11 | Fila subproductos encontrada: 80
+2025-07-23 02:59:11 | Fila harina encontrada: 34
+2025-07-23 02:59:11 | Datos recibidos: fecha=2025-07-22, lider=Alex Chala, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=14:40, hora_final=21:45, bascula=32864, bascula_harina=25904, bultos_harina=0, lote_harina=220725B, cantidad_kg=25904, silo_granel=504, bultos_mogolla=121, hilo_mogolla=, bultos_salvado=42, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=2, hilo_germen=, cantidad_granza=17, varadas=20 minutos dsificador A
+2025-07-23 02:59:11 | Fila harina: 34, Fila subproductos: 80
+2025-07-23 02:59:11 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-23 02:59:11 | Archivo guardado correctamente
+2025-07-23 03:05:32 | Script iniciado
+2025-07-23 03:05:32 | POST recibido
+2025-07-23 03:05:32 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-23 03:05:32 | Fila subproductos encontrada: 81
+2025-07-23 03:05:32 | Fila harina encontrada: 35
+2025-07-23 03:05:32 | Datos recibidos: fecha=2025-07-22, lider=Alex Chala, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=14:40, bascula=4288, bascula_harina=3424, bultos_harina=84, lote_harina=210725B, cantidad_kg=3424, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-23 03:05:32 | Fila harina: 35, Fila subproductos: 81
+2025-07-23 03:05:32 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-23 03:05:32 | Archivo guardado correctamente
+2025-07-23 10:53:18 | Script iniciado
+2025-07-23 10:53:18 | POST recibido
+2025-07-23 10:53:18 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-23 10:53:18 | Fila subproductos encontrada: 82
+2025-07-23 10:53:18 | Fila harina encontrada: 36
+2025-07-23 10:53:18 | Datos recibidos: fecha=2025-07-23, lider=Juvenal Poloche, moje=202, producto=Granel, referencia=Harina t 1, hora_inicio=09:50, hora_final=05:45, bascula=37312, bascula_harina=29488, bultos_harina=, lote_harina=220725B, cantidad_kg=29488, silo_granel=504, bultos_mogolla=119, hilo_mogolla=0, bultos_salvado=39, hilo_salvado=0, bultos_segunda=111, hilo_segunda=0, bultos_germen=1, hilo_germen=0, cantidad_granza=, varadas=
+2025-07-23 10:53:18 | Fila harina: 36, Fila subproductos: 82
+2025-07-23 10:53:18 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda.xlsx
+2025-07-23 10:53:18 | Archivo guardado correctamente
+2025-07-23 17:33:27 | Script iniciado
+2025-07-23 17:33:27 | POST recibido
+2025-07-23 17:33:27 | Archivo existente cargado: proceso_molienda.xlsx
+2025-07-23 17:33:27 | Nuevo archivo de molienda creado: proceso_molienda_2.xlsx
+2025-07-23 17:33:27 | Fila subproductos encontrada: 54
+2025-07-23 17:33:27 | Fila harina encontrada: 9
+2025-07-23 17:33:27 | Datos recibidos: fecha=2025-07-23, lider=Paulo Riascos, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=05:45, hora_final=11:50, bascula=29632, bascula_harina=23744, bultos_harina=0, lote_harina=220725B, cantidad_kg=23744, silo_granel=504, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-23 17:33:27 | Fila harina: 9, Fila subproductos: 54
+2025-07-23 17:33:27 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-23 17:33:27 | Archivo guardado correctamente
+2025-07-23 18:58:58 | Script iniciado
+2025-07-23 18:58:58 | POST recibido
+2025-07-23 18:58:58 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-23 18:58:58 | Fila subproductos encontrada: 55
+2025-07-23 18:58:58 | Fila harina encontrada: 10
+2025-07-23 18:58:58 | Datos recibidos: fecha=2025-07-23, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=00:12, hora_final=13:45, bascula=7168, bascula_harina=5168, bultos_harina=, lote_harina=220725B, cantidad_kg=5168, silo_granel=504, bultos_mogolla=111, hilo_mogolla=, bultos_salvado=39, hilo_salvado=, bultos_segunda=45, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-23 18:58:58 | Fila harina: 10, Fila subproductos: 55
+2025-07-23 18:58:58 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-23 18:58:58 | Archivo guardado correctamente
+2025-07-23 19:01:25 | Script iniciado
+2025-07-23 19:01:25 | POST recibido
+2025-07-23 19:01:25 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-23 19:01:25 | Fila subproductos encontrada: 56
+2025-07-23 19:01:25 | Fila harina encontrada: 11
+2025-07-23 19:01:25 | Datos recibidos: fecha=2025-07-23, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=00:12, hora_final=13:45, bascula=7168, bascula_harina=5168, bultos_harina=, lote_harina=220725B, cantidad_kg=5168, silo_granel=504, bultos_mogolla=111, hilo_mogolla=, bultos_salvado=39, hilo_salvado=, bultos_segunda=45, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=11.46 12.10 pm tubo del t1
+2025-07-23 19:01:25 | Fila harina: 11, Fila subproductos: 56
+2025-07-23 19:01:25 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-23 19:01:25 | Archivo guardado correctamente
+2025-07-24 02:23:09 | Script iniciado
+2025-07-24 02:23:09 | POST recibido
+2025-07-24 02:23:09 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-24 02:23:09 | Fila subproductos encontrada: 57
+2025-07-24 02:23:09 | Fila harina encontrada: 12
+2025-07-24 02:23:09 | Datos recibidos: fecha=2025-07-23, lider=Alex Chala, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=13:45, hora_final=20:00, bascula=26592, bascula_harina=20512, bultos_harina=0, lote_harina=220725B, cantidad_kg=20512, silo_granel=504, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=30 minutos de parada por motor banco c4 y alarma turbina neomatica
+2025-07-24 02:23:09 | Fila harina: 12, Fila subproductos: 57
+2025-07-24 02:23:09 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-24 02:23:09 | Archivo guardado correctamente
+2025-07-24 03:05:41 | Script iniciado
+2025-07-24 03:05:41 | POST recibido
+2025-07-24 03:05:41 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-24 03:05:41 | Fila subproductos encontrada: 58
+2025-07-24 03:05:41 | Fila harina encontrada: 13
+2025-07-24 03:05:41 | Datos recibidos: fecha=2025-07-23, lider=Alex Chala, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=20:00, hora_final=21:45, bascula=8864, bascula_harina=7152, bultos_harina=105 / 31, lote_harina=210725B / 230725B, cantidad_kg=0, silo_granel=507, bultos_mogolla=110, hilo_mogolla=, bultos_salvado=36, hilo_salvado=, bultos_segunda=32, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-07-24 03:05:41 | Fila harina: 13, Fila subproductos: 58
+2025-07-24 03:05:41 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-24 03:05:41 | Archivo guardado correctamente
+2025-07-24 10:47:14 | Script iniciado
+2025-07-24 10:47:14 | POST recibido
+2025-07-24 10:47:14 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-24 10:47:14 | Fila subproductos encontrada: 59
+2025-07-24 10:47:14 | Fila harina encontrada: 14
+2025-07-24 10:47:14 | Datos recibidos: fecha=2025-07-24, lider=Juvenal Poloche, moje=201, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=02:50, bascula=25600, bascula_harina=20400, bultos_harina=229, lote_harina=230725B, cantidad_kg=20400, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-24 10:47:14 | Fila harina: 14, Fila subproductos: 59
+2025-07-24 10:47:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-24 10:47:14 | Archivo guardado correctamente
+2025-07-24 11:08:57 | Script iniciado
+2025-07-24 11:08:57 | POST recibido
+2025-07-24 11:08:57 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-24 11:08:57 | Fila subproductos encontrada: 60
+2025-07-24 11:08:57 | Fila harina encontrada: 15
+2025-07-24 11:08:57 | Datos recibidos: fecha=2025-07-24, lider=Juvenal Poloche, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=02:50, hora_final=05:45, bascula=14912, bascula_harina=11648, bultos_harina=411, lote_harina=230725B, cantidad_kg=11648, silo_granel=507, bultos_mogolla=125, hilo_mogolla=, bultos_salvado=47, hilo_salvado=, bultos_segunda=30, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-07-24 11:08:57 | Fila harina: 15, Fila subproductos: 60
+2025-07-24 11:08:57 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-24 11:08:57 | Archivo guardado correctamente
+2025-07-24 19:09:24 | Script iniciado
+2025-07-24 19:09:24 | POST recibido
+2025-07-24 19:09:24 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-24 19:09:24 | Fila subproductos encontrada: 61
+2025-07-24 19:09:24 | Fila harina encontrada: 16
+2025-07-24 19:09:24 | Datos recibidos: fecha=2025-07-24, lider=Alex Chala, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=13:45, bascula=38778, bascula_harina=30608, bultos_harina=110 / 505, lote_harina=230725B / 240725B, cantidad_kg=0, silo_granel=507, bultos_mogolla=107, hilo_mogolla=, bultos_salvado=47, hilo_salvado=, bultos_segunda=29, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=, varadas=20 minuto de parada neomitico t1
+2025-07-24 19:09:24 | Fila harina: 16, Fila subproductos: 61
+2025-07-24 19:09:24 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-24 19:09:24 | Archivo guardado correctamente
+2025-07-25 02:59:48 | Script iniciado
+2025-07-25 02:59:48 | POST recibido
+2025-07-25 02:59:48 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-25 02:59:48 | Fila subproductos encontrada: 62
+2025-07-25 02:59:48 | Fila harina encontrada: 17
+2025-07-25 02:59:48 | Datos recibidos: fecha=2025-07-24, lider=Alex Chala, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=15:50, bascula=10592, bascula_harina=8304, bultos_harina=277, lote_harina=240725B, cantidad_kg=8304, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-25 02:59:48 | Fila harina: 17, Fila subproductos: 62
+2025-07-25 02:59:48 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-25 02:59:48 | Archivo guardado correctamente
+2025-07-25 03:05:39 | Script iniciado
+2025-07-25 03:05:39 | POST recibido
+2025-07-25 03:05:39 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-25 03:05:39 | Fila subproductos encontrada: 63
+2025-07-25 03:05:39 | Fila harina encontrada: 18
+2025-07-25 03:05:39 | Datos recibidos: fecha=2025-07-24, lider=Alex Chala, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=15:50, hora_final=21:45, bascula=29472, bascula_harina=23088, bultos_harina=342, lote_harina=240725B1, cantidad_kg=23088, silo_granel=507, bultos_mogolla=135, hilo_mogolla=, bultos_salvado=42, hilo_salvado=, bultos_segunda=27, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-25 03:05:39 | Fila harina: 18, Fila subproductos: 63
+2025-07-25 03:05:39 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-25 03:05:39 | Archivo guardado correctamente
+2025-07-25 04:12:59 | Script iniciado
+2025-07-25 04:12:59 | POST recibido
+2025-07-25 04:12:59 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-25 04:12:59 | Fila subproductos encontrada: 64
+2025-07-25 04:12:59 | Fila harina encontrada: 19
+2025-07-25 04:12:59 | Datos recibidos: fecha=2025-07-24, lider=Juvenal Poloche, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=21:45, hora_final=22:55, bascula=5504, bascula_harina=4320, bultos_harina=96, lote_harina=240725B1, cantidad_kg=4320, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-25 04:12:59 | Fila harina: 19, Fila subproductos: 64
+2025-07-25 04:12:59 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-25 04:12:59 | Archivo guardado correctamente
+2025-07-25 11:09:11 | Script iniciado
+2025-07-25 11:09:11 | POST recibido
+2025-07-25 11:09:11 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-25 11:09:11 | Fila subproductos encontrada: 65
+2025-07-25 11:09:11 | Fila harina encontrada: 20
+2025-07-25 11:09:11 | Datos recibidos: fecha=2025-07-25, lider=Juvenal Poloche, moje=201, producto=Bulto, referencia=Natural, hora_inicio=22:55, hora_final=02:15, bascula=12992, bascula_harina=9824, bultos_harina=212, lote_harina=250725B, cantidad_kg=9824, silo_granel=507, bultos_mogolla=59, hilo_mogolla=, bultos_salvado=24, hilo_salvado=, bultos_segunda=49, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=2:15AM-5:30 AM banco C4
+2025-07-25 11:09:11 | Fila harina: 20, Fila subproductos: 65
+2025-07-25 11:09:11 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-25 11:09:11 | Archivo guardado correctamente
+2025-07-25 18:50:30 | Script iniciado
+2025-07-25 18:50:30 | POST recibido
+2025-07-25 18:50:30 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-25 18:50:30 | Fila subproductos encontrada: 66
+2025-07-25 18:50:30 | Fila harina encontrada: 21
+2025-07-25 18:50:30 | Datos recibidos: fecha=2025-07-25, lider=Alex Chala, moje=202, producto=Granel, referencia=Artesanal, hora_inicio=09:30, hora_final=13:45, bascula=19136, bascula_harina=15088, bultos_harina=0, lote_harina=250725, cantidad_kg=15088, silo_granel=503, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-25 18:50:30 | Fila harina: 21, Fila subproductos: 66
+2025-07-25 18:50:30 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-25 18:50:30 | Archivo guardado correctamente
+2025-07-25 19:06:15 | Script iniciado
+2025-07-25 19:06:15 | POST recibido
+2025-07-25 19:06:15 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-25 19:06:15 | Fila subproductos encontrada: 67
+2025-07-25 19:06:15 | Fila harina encontrada: 22
+2025-07-25 19:06:15 | Datos recibidos: fecha=2025-07-25, lider=Alex Chala, moje=201, producto=Bulto, referencia=Natural, hora_inicio=05:45, hora_final=13:45, bascula=14816, bascula_harina=11664, bultos_harina=287, lote_harina=250725B, cantidad_kg=0, silo_granel=507, bultos_mogolla=125, hilo_mogolla=, bultos_salvado=46, hilo_salvado=, bultos_segunda=37, hilo_segunda=, bultos_germen=3, hilo_germen=, cantidad_granza=, varadas=
+2025-07-25 19:06:15 | Fila harina: 22, Fila subproductos: 67
+2025-07-25 19:06:15 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-25 19:06:15 | Archivo guardado correctamente
+2025-07-26 04:54:06 | Script iniciado
+2025-07-26 04:54:06 | POST recibido
+2025-07-26 04:54:06 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-26 04:54:06 | Fila subproductos encontrada: 68
+2025-07-26 04:54:06 | Fila harina encontrada: 23
+2025-07-26 04:54:06 | Datos recibidos: fecha=2025-07-25, lider=Juvenal Poloche, moje=202, producto=Granel -Bulto, referencia=Artesanal, hora_inicio=13:45, hora_final=17:30, bascula=12288, bascula_harina=9968, bultos_harina=5952- 139, lote_harina=250725B-250725B, cantidad_kg=9968, silo_granel=503-507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-26 04:54:06 | Fila harina: 23, Fila subproductos: 68
+2025-07-26 04:54:06 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-26 04:54:06 | Archivo guardado correctamente
+2025-07-26 05:00:56 | Script iniciado
+2025-07-26 05:00:56 | POST recibido
+2025-07-26 05:00:56 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-26 05:00:56 | Fila subproductos encontrada: 69
+2025-07-26 05:00:56 | Fila harina encontrada: 24
+2025-07-26 05:00:56 | Datos recibidos: fecha=2025-07-25, lider=Juvenal Poloche, moje=203, producto=Granel, referencia=HarinaT1, hora_inicio=17:30, hora_final=22:30, bascula=17728, bascula_harina=13360, bultos_harina=, lote_harina=250725B, cantidad_kg=13360, silo_granel=502, bultos_mogolla=67, hilo_mogolla=, bultos_salvado=31, hilo_salvado=, bultos_segunda=18, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=8 PM -9 PM =alimentador banco C2
+2025-07-26 05:00:56 | Fila harina: 24, Fila subproductos: 69
+2025-07-26 05:00:56 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-26 05:00:56 | Archivo guardado correctamente
+2025-07-26 14:14:55 | Script iniciado
+2025-07-26 14:14:55 | POST recibido
+2025-07-26 14:14:55 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-26 14:14:55 | Fila subproductos encontrada: 70
+2025-07-26 14:14:55 | Fila harina encontrada: 25
+2025-07-26 14:14:55 | Datos recibidos: fecha=2025-07-26, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harinat1, hora_inicio=18:33, hora_final=08:06, bascula=44928, bascula_harina=35808, bultos_harina=0, lote_harina=250725B, cantidad_kg=49168, silo_granel=502, bultos_mogolla=170, hilo_mogolla=, bultos_salvado=74, hilo_salvado=, bultos_segunda=108, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-26 14:14:55 | Fila harina: 25, Fila subproductos: 70
+2025-07-26 14:14:55 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-26 14:14:55 | Archivo guardado correctamente
+2025-07-28 18:08:08 | Script iniciado
+2025-07-28 18:08:08 | POST recibido
+2025-07-28 18:08:08 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-28 18:08:08 | Fila subproductos encontrada: 71
+2025-07-28 18:08:08 | Fila harina encontrada: 26
+2025-07-28 18:08:08 | Datos recibidos: fecha=2025-07-28, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=Harina t1, hora_inicio=23:20, hora_final=05:55, bascula=31296, bascula_harina=24304, bultos_harina=0, lote_harina=280725B, cantidad_kg=24304, silo_granel=504, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-28 18:08:08 | Fila harina: 26, Fila subproductos: 71
+2025-07-28 18:08:08 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-28 18:08:08 | Archivo guardado correctamente
+2025-07-28 18:22:07 | Script iniciado
+2025-07-28 18:22:07 | POST recibido
+2025-07-28 18:22:07 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-28 18:22:07 | Fila subproductos encontrada: 72
+2025-07-28 18:22:07 | Fila harina encontrada: 27
+2025-07-28 18:22:07 | Datos recibidos: fecha=2025-07-28, lider=Juvenal Poloche, moje=204, producto=Bulto -granel, referencia=Especial, hora_inicio=05:55, hora_final=12:55, bascula=32640, bascula_harina=24512, bultos_harina=260 - 11408, lote_harina=280725 B - 280725 B, cantidad_kg=13104 -11408, silo_granel=507 - 501, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-28 18:22:07 | Fila harina: 27, Fila subproductos: 72
+2025-07-28 18:22:07 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-28 18:22:07 | Archivo guardado correctamente
+2025-07-28 18:56:52 | Script iniciado
+2025-07-28 18:56:52 | POST recibido
+2025-07-28 18:56:52 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-28 18:56:52 | Fila subproductos encontrada: 73
+2025-07-28 18:56:52 | Fila harina encontrada: 28
+2025-07-28 18:56:52 | Datos recibidos: fecha=2025-07-28, lider=Juvenal Poloche, moje=202, producto=Granel, referencia=Harina T1, hora_inicio=13:05, hora_final=13:45, bascula=3168, bascula_harina=2352, bultos_harina=, lote_harina=280725 B, cantidad_kg=2352, silo_granel=504, bultos_mogolla=220, hilo_mogolla=, bultos_salvado=89, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-28 18:56:52 | Fila harina: 28, Fila subproductos: 73
+2025-07-28 18:56:52 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-28 18:56:52 | Archivo guardado correctamente
+2025-07-29 02:37:07 | Script iniciado
+2025-07-29 02:37:07 | POST recibido
+2025-07-29 02:37:07 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 02:37:07 | Fila subproductos encontrada: 74
+2025-07-29 02:37:07 | Fila harina encontrada: 29
+2025-07-29 02:37:07 | Datos recibidos: fecha=2025-07-28, lider=Paulo Riascos, moje=202, producto=Granel, referencia=Harina t1, hora_inicio=13:45, hora_final=21:45, bascula=28576, bascula_harina=22336, bultos_harina=, lote_harina=280725B, cantidad_kg=22336, silo_granel=, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=343 pma 458 revicion de seccion c5 filtracio
+2025-07-29 02:37:07 | Fila harina: 29, Fila subproductos: 74
+2025-07-29 02:37:07 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 02:37:07 | Archivo guardado correctamente
+2025-07-29 02:54:04 | Script iniciado
+2025-07-29 02:54:04 | POST recibido
+2025-07-29 02:54:04 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 02:54:04 | Fila subproductos encontrada: 75
+2025-07-29 02:54:04 | Fila harina encontrada: 30
+2025-07-29 02:54:04 | Datos recibidos: fecha=2025-07-28, lider=Paulo Riascos, moje=203, producto=Granel, referencia=Harina t1, hora_inicio=20:59, hora_final=21:45, bascula=3648, bascula_harina=2864, bultos_harina=, lote_harina=280725B, cantidad_kg=2864, silo_granel=, bultos_mogolla=116, hilo_mogolla=, bultos_salvado=35, hilo_salvado=, bultos_segunda=95, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-29 02:54:04 | Fila harina: 30, Fila subproductos: 75
+2025-07-29 02:54:04 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 02:54:04 | Archivo guardado correctamente
+2025-07-29 02:58:47 | Script iniciado
+2025-07-29 02:58:47 | POST recibido
+2025-07-29 02:58:47 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 02:58:47 | Fila subproductos encontrada: 76
+2025-07-29 02:58:47 | Fila harina encontrada: 31
+2025-07-29 02:58:47 | Datos recibidos: fecha=2025-07-28, lider=Paulo Riascos, moje=203, producto=Granel, referencia=Harina t1, hora_inicio=20:59, hora_final=21:45, bascula=3648, bascula_harina=2864, bultos_harina=, lote_harina=280725B, cantidad_kg=2864, silo_granel=, bultos_mogolla=116, hilo_mogolla=, bultos_salvado=35, hilo_salvado=, bultos_segunda=95, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-29 02:58:47 | Fila harina: 31, Fila subproductos: 76
+2025-07-29 02:58:47 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 02:58:47 | Archivo guardado correctamente
+2025-07-29 10:51:44 | Script iniciado
+2025-07-29 10:51:44 | POST recibido
+2025-07-29 10:51:44 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 10:51:44 | Fila subproductos encontrada: 77
+2025-07-29 10:51:44 | Fila harina encontrada: 32
+2025-07-29 10:51:44 | Datos recibidos: fecha=2025-07-29, lider=Alex Chala, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=03:45, bascula=28448, bascula_harina=22096, bultos_harina=0, lote_harina=280725B, cantidad_kg=22096, silo_granel=504, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-07-29 10:51:44 | Fila harina: 32, Fila subproductos: 77
+2025-07-29 10:51:44 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 10:51:44 | Archivo guardado correctamente
+2025-07-29 11:06:21 | Script iniciado
+2025-07-29 11:06:21 | POST recibido
+2025-07-29 11:06:21 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 11:06:21 | Fila subproductos encontrada: 78
+2025-07-29 11:06:21 | Fila harina encontrada: 33
+2025-07-29 11:06:21 | Datos recibidos: fecha=2025-07-29, lider=Alex Chala, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=03:45, hora_final=05:45, bascula=10208, bascula_harina=7904, bultos_harina=0, lote_harina=280725B, cantidad_kg=7904, silo_granel=504, bultos_mogolla=124, hilo_mogolla=, bultos_salvado=44, hilo_salvado=, bultos_segunda=50, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-29 11:06:21 | Fila harina: 33, Fila subproductos: 78
+2025-07-29 11:06:21 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 11:06:21 | Archivo guardado correctamente
+2025-07-29 17:03:52 | Script iniciado
+2025-07-29 17:03:52 | POST recibido
+2025-07-29 17:03:52 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 17:03:52 | Fila subproductos encontrada: 79
+2025-07-29 17:03:52 | Fila harina encontrada: 34
+2025-07-29 17:03:52 | Datos recibidos: fecha=2025-07-29, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=Harina T1, hora_inicio=05:45, hora_final=11:45, bascula=24096, bascula_harina=18800, bultos_harina=, lote_harina=280725B, cantidad_kg=18800, silo_granel=504, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-29 17:03:52 | Fila harina: 34, Fila subproductos: 79
+2025-07-29 17:03:52 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 17:03:52 | Archivo guardado correctamente
+2025-07-29 18:51:47 | Script iniciado
+2025-07-29 18:51:47 | POST recibido
+2025-07-29 18:51:47 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-29 18:51:47 | Fila subproductos encontrada: 80
+2025-07-29 18:51:47 | Fila harina encontrada: 35
+2025-07-29 18:51:47 | Datos recibidos: fecha=2025-07-29, lider=Juvenal Poloche, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=11:45, hora_final=13:45, bascula=9184, bascula_harina=7344, bultos_harina=291, lote_harina=290725B, cantidad_kg=7344, silo_granel=507, bultos_mogolla=105, hilo_mogolla=, bultos_salvado=42, hilo_salvado=, bultos_segunda=59, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=8:45 AM 9:25AM motor del Banco C4
+2025-07-29 18:51:47 | Fila harina: 35, Fila subproductos: 80
+2025-07-29 18:51:47 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-29 18:51:47 | Archivo guardado correctamente
+2025-07-30 00:58:40 | Script iniciado
+2025-07-30 00:58:40 | POST recibido
+2025-07-30 00:58:40 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-30 00:58:40 | Fila subproductos encontrada: 81
+2025-07-30 00:58:40 | Fila harina encontrada: 36
+2025-07-30 00:58:40 | Datos recibidos: fecha=2025-07-29, lider=Paulo Riascos, moje=204, producto=Bulto, referencia=Extrapan, hora_inicio=13:45, hora_final=18:31, bascula=23488, bascula_harina=18784, bultos_harina=709 x25, lote_harina=290725 bimm, cantidad_kg=, silo_granel=, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-30 00:58:40 | Fila harina: 36, Fila subproductos: 81
+2025-07-30 00:58:40 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-07-30 00:58:40 | Archivo guardado correctamente
+2025-07-30 03:18:39 | Script iniciado
+2025-07-30 03:18:39 | POST recibido
+2025-07-30 03:18:39 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-07-30 03:18:39 | Nuevo archivo de molienda creado: proceso_molienda_3.xlsx
+2025-07-30 03:18:39 | Fila subproductos encontrada: 54
+2025-07-30 03:18:39 | Fila harina encontrada: 9
+2025-07-30 03:18:39 | Datos recibidos: fecha=2025-07-29, lider=Paulo Riascos, moje=202, producto=Bulto, referencia=Extrapan, hora_inicio=18:32, hora_final=21:46, bascula=16382, bascula_harina=13008, bultos_harina=266, lote_harina=240725B1, cantidad_kg=, silo_granel=, bultos_mogolla=115, hilo_mogolla=, bultos_salvado=47, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-30 03:18:39 | Fila harina: 9, Fila subproductos: 54
+2025-07-30 03:18:39 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-30 03:18:39 | Archivo guardado correctamente
+2025-07-30 10:50:02 | Script iniciado
+2025-07-30 10:50:02 | POST recibido
+2025-07-30 10:50:02 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-07-30 10:50:02 | Fila subproductos encontrada: 55
+2025-07-30 10:50:02 | Fila harina encontrada: 10
+2025-07-30 10:50:02 | Datos recibidos: fecha=2025-07-29, lider=Alex Chala, moje=202, producto=Bulto, referencia=Extrpan, hora_inicio=21:45, hora_final=01:10, bascula=16411, bascula_harina=12864, bultos_harina=257, lote_harina=290725B, cantidad_kg=0, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-30 10:50:02 | Fila harina: 10, Fila subproductos: 55
+2025-07-30 10:50:02 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-30 10:50:02 | Archivo guardado correctamente
+2025-07-30 11:10:44 | Script iniciado
+2025-07-30 11:10:44 | POST recibido
+2025-07-30 11:10:44 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-07-30 11:10:44 | Fila subproductos encontrada: 56
+2025-07-30 11:10:44 | Fila harina encontrada: 11
+2025-07-30 11:10:44 | Datos recibidos: fecha=2025-07-30, lider=Alex Chala, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=01:10, hora_final=05:45, bascula=23360, bascula_harina=28256, bultos_harina=297 / 68, lote_harina=290725B /240725B1, cantidad_kg=0, silo_granel=507, bultos_mogolla=135, hilo_mogolla=, bultos_salvado=55, hilo_salvado=, bultos_segunda=26, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-07-30 11:10:44 | Fila harina: 11, Fila subproductos: 56
+2025-07-30 11:10:44 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-30 11:10:44 | Archivo guardado correctamente
+2025-07-30 14:15:23 | Script iniciado
+2025-07-30 14:15:23 | POST recibido
+2025-07-30 14:15:23 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-07-30 14:15:23 | Fila subproductos encontrada: 57
+2025-07-30 14:15:23 | Fila harina encontrada: 12
+2025-07-30 14:15:23 | Datos recibidos: fecha=2025-07-30, lider=Juvenal Poloche, moje=203, producto=Bulto, referencia=Extrapan, hora_inicio=05:45, hora_final=07:35, bascula=9152, bascula_harina=7216, bultos_harina=147, lote_harina=290725B, cantidad_kg=7216, silo_granel=507, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-30 14:15:23 | Fila harina: 12, Fila subproductos: 57
+2025-07-30 14:15:23 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-30 14:15:23 | Archivo guardado correctamente
+2025-07-30 18:54:47 | Script iniciado
+2025-07-30 18:54:47 | POST recibido
+2025-07-30 18:54:47 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-07-30 18:54:47 | Fila subproductos encontrada: 58
+2025-07-30 18:54:47 | Fila harina encontrada: 13
+2025-07-30 18:54:47 | Datos recibidos: fecha=2025-07-30, lider=Juvenal Poloche, moje=201, producto=Granel, referencia=HarinaT1, hora_inicio=07:45, hora_final=13:45, bascula=28096, bascula_harina=22352, bultos_harina=, lote_harina=300725B, cantidad_kg=, silo_granel=502, bultos_mogolla=117, hilo_mogolla=, bultos_salvado=44, hilo_salvado=, bultos_segunda=99, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-07-30 18:54:47 | Fila harina: 13, Fila subproductos: 58
+2025-07-30 18:54:47 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-30 18:54:47 | Archivo guardado correctamente
+2025-07-31 03:07:17 | Script iniciado
+2025-07-31 03:07:17 | POST recibido
+2025-07-31 03:07:17 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-07-31 03:07:17 | Fila subproductos encontrada: 59
+2025-07-31 03:07:17 | Fila harina encontrada: 14
+2025-07-31 03:07:17 | Datos recibidos: fecha=2025-07-30, lider=Paulo Riascos, moje=204, producto=Granel, referencia=Harina, hora_inicio=21:47, hora_final=21:46, bascula=36992, bascula_harina=28704, bultos_harina=, lote_harina=300725B, cantidad_kg=28704, silo_granel=502, bultos_mogolla=120, hilo_mogolla=, bultos_salvado=35, hilo_salvado=, bultos_segunda=68, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-07-31 03:07:17 | Fila harina: 14, Fila subproductos: 59
+2025-07-31 03:07:17 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-31 03:07:17 | Archivo guardado correctamente
+2025-07-31 11:15:50 | Script iniciado
+2025-07-31 11:15:50 | POST recibido
+2025-07-31 11:15:50 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-07-31 11:15:50 | Fila subproductos encontrada: 60
+2025-07-31 11:15:50 | Fila harina encontrada: 15
+2025-07-31 11:15:50 | Datos recibidos: fecha=2025-07-31, lider=Alex Chala, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=05:45, bascula=37728, bascula_harina=29104, bultos_harina=0, lote_harina=300725B, cantidad_kg=29104, silo_granel=502, bultos_mogolla=120, hilo_mogolla=, bultos_salvado=34, hilo_salvado=, bultos_segunda=69, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=15 minutos neomatico t1
+2025-07-31 11:15:50 | Fila harina: 15, Fila subproductos: 60
+2025-07-31 11:15:50 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-07-31 11:15:50 | Archivo guardado correctamente
+2025-08-04 18:47:43 | Script iniciado
+2025-08-04 18:59:03 | Script iniciado
+2025-08-04 18:59:03 | POST recibido
+2025-08-04 18:59:03 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-04 18:59:03 | Fila subproductos encontrada: 61
+2025-08-04 18:59:03 | Fila harina encontrada: 16
+2025-08-04 18:59:03 | Datos recibidos: fecha=2025-08-04, lider=Balmes Tulcan, moje=201, producto=Granel, referencia=Harinat1, hora_inicio=22:00, hora_final=05:35, bascula=32576, bascula_harina=24804, bultos_harina=0, lote_harina=030825, cantidad_kg=24804, silo_granel=503, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-08-04 18:59:03 | Fila harina: 16, Fila subproductos: 61
+2025-08-04 18:59:03 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-04 18:59:03 | Archivo guardado correctamente
+2025-08-04 19:11:30 | Script iniciado
+2025-08-04 19:11:30 | POST recibido
+2025-08-04 19:11:30 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-04 19:11:30 | Fila subproductos encontrada: 62
+2025-08-04 19:11:30 | Fila harina encontrada: 17
+2025-08-04 19:11:30 | Datos recibidos: fecha=2025-08-04, lider=Alex Chala, moje=204, producto=Granel, referencia=Especial, hora_inicio=05:35, hora_final=12:35, bascula=32384, bascula_harina=24816, bultos_harina=0, lote_harina=040825B, cantidad_kg=24816, silo_granel=501, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-08-04 19:11:30 | Fila harina: 17, Fila subproductos: 62
+2025-08-04 19:11:30 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-04 19:11:31 | Archivo guardado correctamente
+2025-08-04 19:16:28 | Script iniciado
+2025-08-04 19:16:28 | POST recibido
+2025-08-04 19:16:28 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-04 19:16:28 | Fila subproductos encontrada: 63
+2025-08-04 19:16:28 | Fila harina encontrada: 18
+2025-08-04 19:16:28 | Datos recibidos: fecha=2025-08-04, lider=Alex Chala, moje=202, producto=Granel, referencia=Harinat1, hora_inicio=12:30, hora_final=13:45, bascula=5536, bascula_harina=4288, bultos_harina=0, lote_harina=030825B, cantidad_kg=4288, silo_granel=503, bultos_mogolla=260, hilo_mogolla=, bultos_salvado=98, hilo_salvado=, bultos_segunda=18, hilo_segunda=, bultos_germen=0, hilo_germen=, cantidad_granza=0, varadas=
+2025-08-04 19:16:28 | Fila harina: 18, Fila subproductos: 63
+2025-08-04 19:16:28 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-04 19:16:28 | Archivo guardado correctamente
+2025-08-05 00:30:32 | Script iniciado
+2025-08-05 00:30:32 | POST recibido
+2025-08-05 00:30:32 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-05 00:30:32 | Fila subproductos encontrada: 64
+2025-08-05 00:30:32 | Fila harina encontrada: 19
+2025-08-05 00:30:32 | Datos recibidos: fecha=2025-08-04, lider=Juvenal Poloche, moje=202, producto=Granel, referencia=HarinaT1, hora_inicio=13:45, hora_final=19:25, bascula=26880, bascula_harina=20592, bultos_harina=, lote_harina=030825B, cantidad_kg=20592, silo_granel=503, bultos_mogolla=, hilo_mogolla=, bultos_salvado=, hilo_salvado=, bultos_segunda=, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-08-05 00:30:32 | Fila harina: 19, Fila subproductos: 64
+2025-08-05 00:30:32 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-05 00:30:32 | Archivo guardado correctamente
+2025-08-05 02:54:01 | Script iniciado
+2025-08-05 02:54:01 | POST recibido
+2025-08-05 02:54:01 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-05 02:54:01 | Fila subproductos encontrada: 65
+2025-08-05 02:54:01 | Fila harina encontrada: 20
+2025-08-05 02:54:01 | Datos recibidos: fecha=2025-08-04, lider=Juvenal Poloche, moje=203, producto=Granel, referencia=HarinaT1, hora_inicio=19:45, hora_final=21:45, bascula=11072, bascula_harina=8464, bultos_harina=, lote_harina=030825B, cantidad_kg=8464, silo_granel=503, bultos_mogolla=117, hilo_mogolla=, bultos_salvado=62, hilo_salvado=, bultos_segunda=109, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-08-05 02:54:01 | Fila harina: 20, Fila subproductos: 65
+2025-08-05 02:54:01 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-05 02:54:01 | Archivo guardado correctamente
+2025-08-05 10:43:05 | Script iniciado
+2025-08-05 10:43:05 | POST recibido
+2025-08-05 10:43:05 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-05 10:43:05 | Fila subproductos encontrada: 66
+2025-08-05 10:43:05 | Fila harina encontrada: 21
+2025-08-05 10:43:05 | Datos recibidos: fecha=2025-08-05, lider=Balmes Tulcan, moje=203, producto=Granel, referencia=Harinat1, hora_inicio=21:45, hora_final=02:23, bascula=21152, bascula_harina=16000, bultos_harina=, lote_harina=030825B, cantidad_kg=16000, silo_granel=503, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-08-05 10:43:05 | Fila harina: 21, Fila subproductos: 66
+2025-08-05 10:43:05 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-05 10:43:05 | Archivo guardado correctamente
+2025-08-05 11:26:03 | Script iniciado
+2025-08-05 11:26:03 | POST recibido
+2025-08-05 11:26:03 | Archivo existente cargado: proceso_molienda_3.xlsx
+2025-08-05 11:26:03 | Fila subproductos encontrada: 67
+2025-08-05 11:26:03 | Fila harina encontrada: 22
+2025-08-05 11:26:03 | Datos recibidos: fecha=2025-08-05, lider=Balmes Tulcan, moje=201, producto=Bulto, referencia=Exclusiva, hora_inicio=02:23, hora_final=05:45, bascula=16864, bascula_harina=13408, bultos_harina=200×25, lote_harina=050825B, cantidad_kg=13408, silo_granel=507, bultos_mogolla=127, hilo_mogolla=, bultos_salvado=30, hilo_salvado=, bultos_segunda=42, hilo_segunda=, bultos_germen=1, hilo_germen=, cantidad_granza=, varadas=
+2025-08-05 11:26:03 | Fila harina: 22, Fila subproductos: 67
+2025-08-05 11:26:03 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
+2025-08-05 11:26:03 | Archivo guardado correctamente

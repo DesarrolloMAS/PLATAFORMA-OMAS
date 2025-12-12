@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "SCHOPPER_LABPASSCH01",
+    "nombre_maquina": "EQUIPOS_ZS",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "verificacion_equipos_ZS",
+    "estado_general": "El equipo se encuentra en buen estado",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "N\/A",
+    "Pulsador": "N\/A",
+    "cargador": "N\/A",
+    "Display": "N\/A",
+    "Bateria": "N\/A",
+    "Recipiente": "Cumple",
+    "Limpieza_Filtro": "N\/A",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Julian Lopez",
+    "archivo_pdf": "EQUIPOS_ZS_SCHOPPER_LABPASSCH01_2025-08-04.pdf"
+}

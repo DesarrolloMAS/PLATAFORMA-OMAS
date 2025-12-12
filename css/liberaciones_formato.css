@@ -1,0 +1,313 @@
+/* Barra lateral fija para el título principal */
+.titulo_principal_contenedor {
+    position: fixed; /* Fija la barra en la pantalla */
+    top: 0;
+    left: 0; /* Barra en el lado izquierdo */
+    width: 60px; /* Ancho de la barra */
+    height: 100%; /* Ocupa toda la altura de la pantalla */
+    background-color: #0056b3; /* Fondo azul oscuro */
+    color: white; /* Texto blanco */
+    text-align: center; /* Centra el texto horizontalmente */
+    display: flex;
+    justify-content: center; /* Centra el texto verticalmente */
+    align-items: center;
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
+    font-size: 18px; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    letter-spacing: 5px; /* Espaciado entre letras */
+    writing-mode: vertical-lr; /* Orientación del texto en vertical de izquierda a derecha */
+    text-orientation: upright; /* Asegura que las letras sean legibles */
+    line-height: 1.5; /* Espaciado entre líneas para mayor claridad */
+}
+
+/* Espaciado para evitar que el contenido quede oculto detrás de la barra */
+.body_contenido {
+    margin-left: 80px; /* Espaciado igual al ancho de la barra más un poco de margen */
+    padding: 20px; /* Espaciado interno para el contenido */
+}
+.overlay-fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1); /* Opacidad negra del 30% */
+    z-index: -1;
+}
+
+.body {
+        background-image: url("/img/fondo9.jpg");
+        background-size: cover;            /* Cubre toda la pantalla */
+        background-repeat: no-repeat;      /* No se repite */
+        background-position: center center;/* Centrado */
+        background-attachment: fixed;      /* Efecto parallax */
+        font-family: 'Arial', sans-serif;
+    
+}
+/* Espaciado para evitar que el contenido quede oculto detrás de la barra */
+.body_contenido {
+    margin-left: 80px; /* Espaciado igual al ancho de la barra más un poco de margen */
+    padding: 20px; /* Espaciado interno para el contenido */
+}
+
+/* Contenedor básico */
+.contenedor_basico {
+    display: flex; /* Alinea los elementos horizontalmente */
+    align-items: center; /* Centra verticalmente los elementos */
+    gap: 20px; /* Espaciado entre los elementos */
+    padding: 0; /* Sin espaciado interno */
+    margin: 20px 0 20px 100px; /* Ajusta el margen izquierdo para evitar la barra del título */
+    font-family: 'Arial', sans-serif; /* Fuente moderna */
+}
+
+/* Estilo para las etiquetas */
+/* Sombra pronunciada para los labels */
+.contenedor_basico label {
+    font-size: 17px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    color: #ffffff; /* Color del texto */
+    text-shadow: 10px 1px 15px rgba(0, 0, 0, 0.5); /* Sombra pronunciada y difusa */
+    letter-spacing: 0.5px; /* Espaciado entre letras para un diseño más limpio */
+}
+
+/* Estilo para los inputs y selects */
+.contenedor_basico input[type="date"],
+.contenedor_basico select {
+    padding: 8px 12px; /* Espaciado interno */
+    font-size: 14px; /* Tamaño de fuente */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al enfocar los inputs y selects */
+.contenedor_basico input[type="date"]:focus,
+.contenedor_basico select:focus {
+    border-color: #0056b3; /* Cambia el color del borde al enfocar */
+    outline: none; /* Elimina el borde azul predeterminado */
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); /* Sombra ligera */
+}
+/* Oculta inicialmente el contenedor de harinas */
+.contenedor_harinas {
+    position: relative;
+    transform: translateX(-100%);
+    opacity: 0;
+    margin-left: 80px; /* Deja espacio para la barra */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    pointer-events: none; /* Para evitar que interactúe cuando esté oculto */
+}
+
+
+/* Muestra el contenedor de harinas cuando el checkbox está marcado */
+#toggle_harinas:checked ~ .contenedor_harinas {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto; /* Permite la interacción cuando está visible */
+}
+
+/* Oculta el checkbox */
+#toggle_harinas {
+    display: none;
+}
+.contenedor_harinas {
+    position: relative;
+    transform: translateX(-100%);
+    opacity: 0;
+    margin-left: 80px; /* Espacio por la barra lateral */
+    padding: 30px;
+    background-color: #f9f9f9; /* Fondo claro y limpio */
+    border-left: 6px solid #0056b3; /* Línea azul como extensión de la barra */
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    pointer-events: none;
+    font-family: 'Arial', sans-serif;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background: linear-gradient(to right, #e6f0ff, #ffffff);
+
+}
+.labelmen {
+    display: block;
+    background-color: #e6f0ff;
+    border-left: 6px solid #0056b3;
+    padding: 12px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+
+.labelmen:hover {
+    background-color: #d0e4ff;
+}
+
+
+.labelmen:hover {
+    background-color: #d0e4ff;
+    transform: translateX(2px);
+}
+
+.labelmen input[type="checkbox"] {
+    accent-color: #0056b3;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.contenedor_harina {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cddfff;
+    border-left: 6px solid #0056b3;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 86, 179, 0.05);
+    transition: all 0.3s ease;
+    display: none; /* Por defecto oculto */
+}
+
+.contenedor_harina h2 {
+    font-size: 18px;
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+.contenedor_harina label {
+    display: block;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.contenedor_harina input[type="text"],
+.contenedor_harina input[type="number"],
+.contenedor_harina select {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contenedor_harina input:focus,
+.contenedor_harina select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+    outline: none;
+}
+.contenedor_harina button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contenedor_harina button:hover {
+    background-color: #003f87;
+}
+input[type="checkbox"]:checked + label.labelmen {
+    background-color: #0056b3;
+    color: white;
+    border-left: 6px solid #003f87;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px rgba(0, 86, 179, 0.2);
+}
+input[type="checkbox"][id^="harina"] {
+    display: none;
+}
+#contenedor_harina_extra {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cddfff;
+    border-left: 6px solid #0056b3;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 86, 179, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  #contenedor_harina_extra h2 {
+    font-size: 18px;
+    color: #0056b3;
+    margin-bottom: 15px;
+  }
+  
+  #contenedor_harina_extra button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #contenedor_harina_extra button:hover {
+    background-color: #003f87;
+  }
+  .formulario input[type="submit"] {
+    display: block;
+    margin: 30px auto 0 auto; /* Centrado con espacio superior */
+    padding: 12px 30px;
+    background-color: #0056b3;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 2px 2px 10px rgba(0, 86, 179, 0.2);
+}
+
+.formulario input[type="submit"]:hover {
+    background-color: #003f87;
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 12px rgba(0, 86, 179, 0.3);
+}
+a[href*="redireccion.php"] {
+    display: inline-block;
+    margin: 20px 100px 10px 100px; /* alineado con los márgenes del formulario */
+    padding: 10px 25px;
+    background-color: #ffffff;
+    color: #0056b3;
+    font-weight: bold;
+    text-decoration: none;
+    border: 2px solid #0056b3;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 2px 2px 8px rgba(0, 86, 179, 0.1);
+}
+
+a[href*="redireccion.php"]:hover {
+    background-color: #0056b3;
+    color: white;
+    box-shadow: 3px 3px 12px rgba(0, 86, 179, 0.3);
+    transform: translateY(-1px);
+}
+
+
+
+
+
+
+

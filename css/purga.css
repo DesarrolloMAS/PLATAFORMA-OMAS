@@ -1,0 +1,185 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: "Big Shoulders", sans-serif;
+    background-color: #1a1a2e;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Cambiado de height a min-height */
+    overflow-y: auto; /* Permite el desplazamiento vertical si es necesario */
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 2rem;
+    animation: fadeIn 1s ease-in-out; /* Animación de entrada */
+}
+
+/* Botón "Volver" */
+.volver {
+    display: block; /* Asegura que el botón sea un bloque */
+    background-color: #007bff; /* Azul para el botón */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    text-align: center;
+    width: 100%; /* Botón ocupa todo el ancho */
+    margin-bottom: 20px; /* Espaciado inferior */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+
+.volver:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
+}
+
+/* Estilo para el formulario */
+form {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente los contenedores */
+    gap: 20px;
+    width: 80%;
+    animation: slideUp 1s ease-in-out; /* Animación de entrada */
+    flex-wrap: wrap; /* Permite que los contenedores se apilen en dispositivos pequeños */
+}
+
+/* Estilo para los contenedores */
+.cambio_silo, .contenedor_linea {
+    background-color: #2b2b36; /* Gris mate claro */
+    border-radius: 10px;
+    padding: 20px;
+    width: 40%; /* Ancho del contenedor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos dentro del contenedor */
+    gap: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.cambio_silo:hover, .contenedor_linea:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+}
+
+.cambio_silo h2, .contenedor_linea h2 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out; /* Animación de entrada */
+}
+
+/* Estilo para los grupos de inputs */
+.form-group {
+    width: 100%; /* Asegura que cada grupo ocupe todo el ancho del contenedor */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos dentro del grupo */
+    gap: 5px; /* Espaciado entre el label y el input */
+}
+
+.form-group label {
+    width: 90%; /* Asegura que los labels tengan el mismo ancho */
+    text-align: left;
+    color: #fff;
+}
+
+/* Estilo para inputs y selects */
+.form-group input, .form-group select {
+    width: 90%; /* Asegura que los inputs y selects tengan el mismo ancho */
+    padding: 10px;
+    border: 1px solid #0f3460;
+    border-radius: 5px;
+    background-color: #1a1a2e;
+    color: #fff;
+    font-size: 0.9rem;
+    text-align: center; /* Centra el texto dentro del input */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #007bff; /* Azul para el borde al enfocar */
+    box-shadow: 0 0 8px #007bff; /* Efecto de brillo azul */
+}
+
+/* Botón de envío */
+input[type="submit"] {
+    background-color: #007bff; /* Azul para el botón */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    width: 100%; /* Botón ocupa todo el ancho */
+    text-align: center;
+    margin-top: 20px; /* Espaciado superior */
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
+}
+
+/* Opciones de los selects */
+select option {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column; /* Apila los contenedores en dispositivos pequeños */
+        align-items: center;
+    }
+
+    .cambio_silo, .contenedor_linea {
+        width: 90%; /* Los contenedores ocupan casi todo el ancho en móviles */
+    }
+
+    .form-group input, .form-group select {
+        width: 95%; /* Inputs más anchos en móviles */
+    }
+
+    .form-group label {
+        width: 95%; /* Ajusta el ancho del label en móviles */
+    }
+}

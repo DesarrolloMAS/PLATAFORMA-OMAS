@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNCION - Fuera de Servicio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a23 0%, #1a1a3a 50%, #2a2a5a 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Partículas de fondo animadas */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .particle:nth-child(odd) {
+            background: #0066ff;
+            animation-delay: -2s;
+        }
+
+        .particle:nth-child(3n) {
+            background: #00ccff;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(-40px) rotate(180deg); }
+            75% { transform: translateY(-20px) rotate(270deg); }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Logo/Título OMAS */
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #00ffff;
+            text-shadow: 
+                0 0 10px #00ffff,
+                0 0 20px #00ffff,
+                0 0 40px #00ffff,
+                0 0 80px #00ffff;
+            animation: neonGlow 2s ease-in-out infinite alternate;
+            letter-spacing: 0.2em;
+        }
+
+        @keyframes neonGlow {
+            from {
+                text-shadow: 
+                    0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 40px #00ffff,
+                    0 0 80px #00ffff;
+            }
+            to {
+                text-shadow: 
+                    0 0 5px #00ffff,
+                    0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 40px #00ffff,
+                    0 0 80px #00ffff,
+                    0 0 120px #00ffff;
+            }
+        }
+
+        /* Mensaje principal */
+        .main-message {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            animation: slideInUp 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .sub-message {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #b3b3ff;
+            animation: slideInUp 1s ease-out 0.3s both;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Indicador de estado */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .status-dot {
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 20px #ff6b6b;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* Círculo de progreso animado */
+        .progress-circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            animation: slideInUp 1s ease-out 0.9s both;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring__circle {
+            stroke: #1a1a3a;
+            stroke-width: 8;
+            fill: transparent;
+            r: 70;
+            cx: 75;
+            cy: 75;
+        }
+
+        .progress-ring__circle--progress {
+            stroke: #00ffff;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            animation: progressAnimation 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px #00ffff);
+        }
+
+        @keyframes progressAnimation {
+            0% { stroke-dashoffset: 440; }
+            50% { stroke-dashoffset: 110; }
+            100% { stroke-dashoffset: 440; }
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem;
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        /* Información adicional */
+        .info-section {
+            animation: slideInUp 1s ease-out 1.2s both;
+            margin-top: 2rem;
+        }
+
+        .info-text {
+            font-size: 1rem;
+            color: #9999cc;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: #7777aa;
+            margin-top: 1rem;
+        }
+
+        /* Botón de recarga */
+        .reload-btn {
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            animation: slideInUp 1s ease-out 1.5s both;
+        }
+
+        .reload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            background: linear-gradient(45deg, #0080ff, #00ddff);
+        }
+
+        .reload-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Efectos de líneas animadas */
+        .animated-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            height: 2px;
+            width: 200px;
+            animation: moveLine 4s linear infinite;
+        }
+
+        .line:nth-child(1) {
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .line:nth-child(2) {
+            top: 40%;
+            animation-delay: 1s;
+        }
+
+        .line:nth-child(3) {
+            top: 60%;
+            animation-delay: 2s;
+        }
+
+        .line:nth-child(4) {
+            top: 80%;
+            animation-delay: 3s;
+        }
+
+        @keyframes moveLine {
+            0% { left: -200px; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            .main-message {
+                font-size: 1.8rem;
+            }
+            .sub-message {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas animadas -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Líneas animadas -->
+    <div class="animated-lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="logo">Solicitud de Mantenimiento</div>
+        
+        <div class="main-message">Opcion Fuera de Servicio</div>
+        
+      
+        
+        <div class="status-indicator">
+            <div class="status-dot"></div>
+            <div class="status-text">Sistema en Mantenimiento</div>
+        </div>
+        
+        <div class="progress-circle">
+            <svg class="progress-ring" width="150" height="150">
+                <circle class="progress-ring__circle" />
+                <circle class="progress-ring__circle progress-ring__circle--progress" />
+            </svg>
+            <div class="progress-text">Trabajando...</div>
+        </div>
+        
+      
+            
+         
+            <div class="contact-info">
+                Para consultas urgentes, contacta a soporte técnico
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generar partículas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numParticles = 50;
+            
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Posición aleatoria
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Duración de animación aleatoria
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Efecto de parpadeo para el logo
+        function addLogoFlicker() {
+            const logo = document.querySelector('.logo');
+            setInterval(() => {
+                if (Math.random() < 0.1) {
+                    logo.style.opacity = '0.3';
+                    setTimeout(() => {
+                        logo.style.opacity = '1';
+                    }, 50);
+                }
+            }, 200);
+        }
+        
+        // Inicializar efectos
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            addLogoFlicker();
+            
+            // Actualizar tiempo transcurrido
+            let startTime = Date.now();
+            setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                document.querySelector('.progress-text').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        });
+        
+        // Efecto de movimiento del mouse
+        document.addEventListener('mousemove', function(e) {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                if (index % 5 === 0) {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    particle.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+.formulario{ 
+    background-color:  #10142a; 
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    box-shadow: 
+        0 0 20px rgb(161, 221, 245),
+        0 0 40px rgb(190, 238, 247),
+        inset 0 0 20px rgb(245, 237, 237);
+    border: 2px solid rgba(118, 198, 252, 0.473);
+    border-radius: 20px;
+    width: 300px;
+    text-align: left;
+    margin: 0 auto; /* Centrado horizontal adicional */
+  
+}
+
+.encabezado{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    background-color:#020659;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+.body{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-family: Arial,sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../img/fondo16.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  
+}
+    .formulariot{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: rgb(51, 71, 250);
+}
+
+.formulariog{
+    margin-bottom: 15px;
+}
+
+
+
+.formulariog input,
+.formulariog select {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid rgb(5, 5, 5);
+    border-radius: 50px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-style: italic;
+    color: rgb(2, 2, 2); /* Color del texto blanco para visibilidad */
+    /
+    
+}
+
+/* Estilo para placeholder */
+.formulariog input:focus,
+.formulariog select:focus {
+    
+    border-color: #201d27;
+    outline: none;
+   background-color: #fdfdff;/* Fondo transparente en focus */
+   
+   
+   
+   
+}
+.boton {
+    background-color:  #10142a; 
+    color: white;
+    padding: 13px 90px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 18px #00f6ff55, 0 0 2px #566573 ;
+    transition: 
+        box-shadow 0.2s,
+        background 0.2s,
+        color 0.2s,
+        transform 0.18s;
+}
+.boton1 {
+     background: rgba(0,246,255,0.08);
+    color: #fff;
+    box-shadow: 0 0 32px #566573 , 0 0 8px #566573 ;
+    transform: scale(1.04);
+    border-color: #fff;
+
+}
+
+
+
+.botonprime{
+    text-decoration: none !important;
+    background-color:  #10142a;
+    color: white;
+    padding: 13px 100px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 18px #00f6ff55, 0 0 2px #566573 ;
+}
+
+
+
+/* Cuando el select no tiene una opción válida seleccionada (muestra el placeholder) */
+select:invalid {
+    color: rgba(112, 108, 108, 0.7); /* Color blanco semi-transparente para placeholder */
+}
+
+/* Cuando el select tiene una opción válida seleccionada */
+select:valid {
+    color: rgb(12, 11, 11); /* Color blanco para opción seleccionada */
+}
+
+
+
+
+.formularic{
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px); /* Restar altura de ambas barras */
+    margin-top: 80px; /* Espacio para barra superior */
+    margin-bottom: 80px; /* Espacio para barra inferior */
+    padding: 0 20px; /* Padding horizontal para móviles */
+}
+
+/* Contenedor para logo y texto */
+.header-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 15px; /* Espacio entre logo y texto */
+}
+
+/* Estilos para centrar el logo SVG */
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+}
+
+.icon svg {
+    width: 80px;
+    height: 80px;
+    color: #f1f1f1;
+    filter: drop-shadow(0 0 15px rgba(226, 236, 238, 0.8));
+    transition: transform 0.3s ease;
+}
+
+/* Estilos para el texto al lado del logo */
+.header-text {
+    color: white;
+    text-align: left;
+}
+
+.header-text h2 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(212, 203, 203, 0.5);
+}
+
+.header-text p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.titulo {
+     font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 2.5rem;
+    color: #f1f1f1;
+    text-shadow: 0 0 10px rgba(164, 207, 224, 0.781);
+    display: flex;
+    letter-spacing: 0.6em;
+    font-weight: 900;
+     line-height: 1;
+}
+.formulariog select {
+    appearance: none; /* Quitar estilo por defecto */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 40px;
+   
+ }
+
+/* Barra superior */
+.barra-superior {
+      background-color: #10142a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Usar viewport width para que sea completamente responsiva */
+    height: 80px; /* Altura base más pequeña */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 
+        0 0 30px rgba(24, 188, 243, 0.575),
+        0 0 50px rgb(226, 239, 243),
+        0 5px 15px rgb(173, 212, 224);
+    z-index: 1001;
+    border-bottom: 3px solid rgb(255, 255, 255);
+   
+}
+
+/* Barra inferior */
+.barra-inferior {
+    background-color: #10142a;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw; /* Corregir el 500% a 100vw */
+    height: 80px; /* Altura base más pequeña */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 
+        0 0 30px rgba(24, 188, 243, 0.575),
+        0 0 50px rgb(226, 239, 243),
+        0 -5px 15px rgb(173, 212, 224);
+    z-index: 1001;
+    border-top: 3px solid rgb(255, 255, 255);
+}
+
+
+
+/* Agregar pulsación adicional a las barras */
+.barra-superior::after,
+.barra-inferior::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+/* Ajustar el z-index del formulario para que esté por debajo de las barras */
+.formulario {
+    z-index: 500;
+}
+/* Estilo para inputs con texto */
+.formulariog input {
+   color: rgb(0, 0, 0); /* Color texto */
+}
+
+/* Estilo para selects con texto */
+
+    
+
+
+/* Estilo para opciones del select */
+.formulariog select option {
+   background-color: rgba(255, 250, 250, 0.95);
+    color: rgb(0, 0, 0);
+    padding: 100px 15px;
+    border-radius: 20px; /* Bordes más sutiles pero funcionales */
+}
+

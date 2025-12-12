@@ -1,0 +1,81 @@
+/* estilos para formatos_guardados.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    background-image: url(../img/fondo7.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    color: #0c4a6e;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    color: #1e3a8a;
+    font-size: 20px;
+}
+
+.card p {
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+
+.botones {
+    display: flex;
+    gap: 10px;
+}
+
+.botones form {
+    flex: 1;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button[type="submit"] {
+    background: #0ea5e9;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background: #0369a1;
+}
+
+button[name="eliminar"] {
+    background: #ef4444;
+}
+
+button[name="eliminar"]:hover {
+    background: #b91c1c;
+}

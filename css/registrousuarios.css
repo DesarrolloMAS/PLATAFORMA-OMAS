@@ -1,0 +1,206 @@
+.formularioc {
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1cm;
+    max-width: 90x;
+    animation: slideUp 0.6s ease-out;
+}
+
+
+
+.formularioregistro {
+    display: flex;
+    padding: 20px;
+}
+
+
+/* css anny */
+.titulo {
+
+
+      text-align: center;
+    margin-top: 48px;
+    margin-bottom: 18px;
+    color: #fdfefe ;
+    font-size: 100PX;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+   
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #f5f5fc; /* Azul oscuro */
+    text-shadow: 0 0 12px hsla(226, 62%, 45%, 0.945); /* efecto difuminado */
+    margin-top: 20px;
+ 
+}
+
+
+
+.titulo2{
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: "Big Shoulders", sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    text-shadow: 0 0 10px #c0c1fa;
+}
+
+
+.formulario{
+   
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre las secciones */
+    justify-content: center; /* Centra las secciones horizontalmente */
+}
+
+.seccion{
+    flex: 1;
+    min-width: 300px; /* Ancho mínimo para mantener las secciones visibles */
+    max-width: 60%; /* Aumenta el ancho máximo de cada sección */
+    background-color:  #10142a; 
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    
+}
+
+
+.barra-superior {
+      background-color: #10142a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Usar viewport width para que sea completamente responsiva */
+    height: 80px; /* Altura base más pequeña */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 
+        0 0 30px rgba(24, 188, 243, 0.575),
+        0 0 50px rgb(226, 239, 243),
+        0 5px 15px rgb(173, 212, 224);
+    z-index: 1001;
+    border-bottom: 3px solid rgb(255, 255, 255);
+   
+}
+
+/* Barra inferior */
+.barra-inferior {
+    background-color: #10142a;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw; /* Corregir el 500% a 100vw */
+    height: 80px; /* Altura base más pequeña */
+    background-size: cover;
+    background-position: center;
+    box-shadow: 
+        0 0 30px rgba(24, 188, 243, 0.575),
+        0 0 50px rgb(226, 239, 243),
+        0 -5px 15px rgb(173, 212, 224);
+    z-index: 1001;
+    border-top: 3px solid rgb(255, 255, 255);
+}
+.formulariog {
+    margin-bottom: 20px;
+}
+
+
+.body{
+    
+    padding-top: 80px; /* Ajusta según la altura del encabezado */
+    font-family: poppins, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(../img/fondo16.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+
+.boton {
+    background-color: #020659;
+    color: white;
+    padding: 10px 90px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+.boton1 {
+    background-color: #626466;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #0056b3;
+}
+
+.boton:hover {
+    background-color:#0056b3;
+}
+
+
+.botonprime{
+    text-decoration: none !important;
+    background-color: #020659;
+    color: white;
+    padding: 10px 98px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+.botonprime:hover {
+    background-color: #0439D9;
+}
+.formularioa {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+
+.formulariog input,
+.formulariog select {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid rgb(5, 5, 5);
+    border-radius: 50px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-style: italic;
+    color: rgb(2, 2, 2); /* Color del texto blanco para visibilidad */
+    /
+    
+}
+
+/* Estilo para placeholder */
+.formulariog input:focus,
+.formulariog select:focus {
+    
+    border-color: #201d27;
+    outline: none;
+   background-color: #fdfdff;/* Fondo transparente en focus */
+}

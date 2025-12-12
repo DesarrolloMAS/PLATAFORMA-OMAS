@@ -1,0 +1,220 @@
+/* Fondo general */
+body {
+    background: #7269b3;
+    background: linear-gradient(135deg, #7269b3 0%, #6ec6ff 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    margin: 0;
+}
+
+/* Contenedor principal del formulario */
+.formulario-control {
+    background: #fff;
+    border-radius: 28px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16), 0 3px 8px rgba(44, 62, 80, 0.08);
+    padding: 38px 36px 32px 36px;
+    width: 750px;
+    max-width: 98vw;
+    position: relative;
+    margin: 40px 0;
+}
+
+/* Título principal */
+.formulario-control h1 {
+    text-align: center;
+    color: #2d3a4b;
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+}
+
+/* Subtítulo */
+.formulario-control h2 {
+    color: #7269b3;
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    margin-top: 18px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Flex container for two columns */
+.contenedor-flex {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+/* Each block as a column */
+.bloque-control,
+.bloque-muestreo {
+    background: #f8fafd;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+    padding: 22px 18px 18px 18px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 320px;
+}
+
+.bloque-muestreo {
+    margin-left: 0;
+}
+
+.bloque-muestreo h2 {
+    color: #7269b3;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    margin-top: 0;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Grupos de campos */
+.formulario-control .contenedor_horario,
+.formulario-control .contenedor_lote,
+.formulario-control > div:not(:last-child) {
+    margin-bottom: 18px;
+}
+
+/* Etiquetas */
+.formulario-control label,
+.bultos-grid label {
+    display: block;
+    color: #7b809a;
+    font-size: 0.97rem;
+    margin-bottom: 6px;
+    margin-top: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+/* Inputs */
+.formulario-control input[type="text"],
+.formulario-control input[type="date"],
+.formulario-control input[type="time"],
+.formulario-control input[type="number"] {
+    width: 100%;
+    padding: 11px 14px;
+    border: none;
+    border-radius: 12px;
+    background: #f4f6fb;
+    color: #2d3a4b;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    outline: none;
+    box-sizing: border-box;
+    transition: box-shadow 0.18s;
+    box-shadow: 0 1px 3px rgba(44, 62, 80, 0.04);
+}
+
+.formulario-control input[type="text"]:focus,
+.formulario-control input[type="date"]:focus,
+.formulario-control input[type="time"]:focus,
+.formulario-control input[type="number"]:focus {
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    background: #eaf1fb;
+}
+
+/* Grid for bultos */
+.bultos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+}
+
+.bultos-grid label {
+    grid-column: span 2;
+    margin-bottom: 0;
+    margin-top: 8px;
+    color: #7b809a;
+    font-size: 0.97rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+.bultos-grid input[type="number"] {
+    grid-column: span 2;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: #f4f6fb;
+    color: #2d3a4b;
+    font-size: 1rem;
+    margin-bottom: 2px;
+    box-sizing: border-box;
+}
+
+/* Botón */
+.formulario-control button[type="submit"] {
+    width: 100%;
+    padding: 13px 0;
+    background: linear-gradient(90deg, #7269b3 0%, #6ec6ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 18px;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    transition: background 0.18s, box-shadow 0.18s;
+}
+
+.formulario-control button[type="submit"]:hover {
+    background: linear-gradient(90deg, #6ec6ff 0%, #7269b3 100%);
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.16);
+}
+
+/* Placeholder para iconos y detalles decorativos */
+.formulario-control::before,
+.formulario-control::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+}
+
+.formulario-control::before {
+    width: 60px;
+    height: 60px;
+    background: #6ec6ff;
+    top: -30px;
+    left: -30px;
+}
+
+.formulario-control::after {
+    width: 40px;
+    height: 40px;
+    background: #7269b3;
+    bottom: -20px;
+    right: -20px;
+}
+
+/* Responsive: stack columns on mobile */
+@media (max-width: 900px) {
+    .formulario-control {
+        width: 98vw;
+        padding: 18px 6vw 18px 6vw;
+    }
+    .contenedor-flex {
+        flex-direction: column;
+        gap: 18px;
+        align-items: stretch;
+    }
+    .bloque-control,
+    .bloque-muestreo {
+        max-width: 100%;
+        margin: 0;
+    }
+}

@@ -1,0 +1,213 @@
+/* RESET GENERAL */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
+    padding: 30px;
+    color: #333;
+    background-image: url(../img/fondo8.jpg);
+    background-repeat: no-repeat;             /* Que no se repita */
+    background-attachment: fixed;             /* Que se quede fija al hacer scroll */
+    background-size: cover;                   /* Que cubra toda la pantalla */
+    background-position: center;     
+}
+/* Botón de VOLVER */
+div a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #0077aa;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+div a:hover {
+    background-color: #005f88;
+    transform: scale(1.05);
+}
+
+div a:active {
+    background-color: #004466;
+}
+
+/* Centrar el botón */
+div {
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* ENCABEZADO */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #004c6d;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #0077aa;
+}
+
+/* FORMULARIO */
+form {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* BLOQUES DE HARINAS */
+#harinasContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bloque-harina {
+    background-color: #f5faff;
+    border: 1px solid #cce7f6;
+    border-radius: 8px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    position: relative;
+}
+
+.bloque-harina button.removeHarina {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* TABLA DE INSUMOS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #0077aa;
+    color: white;
+}
+
+.agregar-fila-btn {
+    background-color: #0077aa;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.agregar-fila-btn:hover {
+    background-color: #005f88;
+}
+
+/* BOTONES */
+button[type="submit"],
+button[type="button"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #0077aa;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005f88;
+}
+
+/* TEXTAREA */
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+/* FIRMAS */
+.contenedorfirma {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.labelfir {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.campofirm {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.botonext {
+    background-color: #444;
+    color: white;
+    padding: 7px 12px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.botonext:hover {
+    background-color: #222;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .bloque-harina {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

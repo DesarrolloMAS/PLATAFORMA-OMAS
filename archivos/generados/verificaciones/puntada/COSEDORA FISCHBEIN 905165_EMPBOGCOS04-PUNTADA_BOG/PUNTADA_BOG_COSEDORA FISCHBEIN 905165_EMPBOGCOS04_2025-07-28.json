@@ -1,0 +1,12 @@
+{
+    "codigo_maquina": "COSEDORA FISCHBEIN 905165_EMPBOGCOS04",
+    "nombre_maquina": "PUNTADA_BOG",
+    "tipo_maquina": "puntada",
+    "estado_general": "",
+    "Puntada": "Cumple",
+    "Lubricacion": "Cumple",
+    "Observaciones": "Se encuentra muy desgastada el looper . exc\u00e9ntrica. Barra de porta looper ",
+    "formato": "verificacion_iman_ZC",
+    "usuario": "Ivan Jojoa",
+    "archivo_pdf": "PUNTADA_BOG_COSEDORA FISCHBEIN 905165_EMPBOGCOS04_2025-07-28.pdf"
+}

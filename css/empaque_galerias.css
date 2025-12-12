@@ -1,0 +1,156 @@
+/* Fondo general */
+body {
+    font-family: "Big Shoulders", sans-serif;
+    background-image: url(../img/fondo14.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #ebf6ff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-top: 48px;
+    margin-bottom: 18px;
+    color: #ebf6ff;
+    font-size: 2.5rem;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px #ebf6ff;
+}
+
+/* Galería de productos */
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 40px;
+    margin-top: 24px;
+    justify-content: center;
+}
+
+/* Tarjeta de producto */
+.producto {
+    background-color: rgba(16, 20, 42, 0.92);
+    border: 2.5px solid #8d9ff8;
+    border-radius: 18px;
+    color: #0f5fa0;
+    min-width: clamp(180px, 18vw, 260px);
+    min-height: clamp(120px, 18vw, 220px);
+    box-shadow: 0 0 18px #00f6ff55, 0 0 2px #ebf6ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 
+        box-shadow 0.2s,
+        background 0.2s,
+        color 0.2s,
+        transform 0.18s;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    text-align: center;
+    padding: 24px 12px 18px 12px;
+}
+
+.producto:hover {
+    background: rgba(0,246,255,0.08);
+    color: #fff;
+    box-shadow: 0 0 32px #ebf6ff, 0 0 8px #ebf6ff;
+    transform: scale(1.04);
+    border-color: #fff;
+}
+
+.producto h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.25rem;
+    color: #1882d8;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #ebf6ff;
+}
+
+/* Botones */
+.producto button,
+.producto .continuar-btn {
+    background-color: #10142a;
+    color: #ebf6ff;
+    border: 2px solid #ebf6ff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 8px 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #00f6ff55;
+    transition: 
+        box-shadow 0.2s,
+        background 0.2s,
+        color 0.2s,
+        border-color 0.2s;
+}
+
+.producto button:hover,
+.producto .continuar-btn:hover {
+    background: rgba(0,246,255,0.08);
+    color: #fff;
+    box-shadow: 0 0 16px #ebf6ff, 0 0 4px #ebf6ff;
+    border-color: #fff;
+}
+
+.input-lote {
+    margin-top: 10px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    border: 2px solid #ebf6ff;
+    background: #10142a;
+    color: #ebf6ff;
+    font-size: 1rem;
+    font-family: "Big Shoulders", sans-serif;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 6px #00f6ff33;
+}
+
+.input-lote:focus {
+    border-color: #00f6ff;
+    box-shadow: 0 0 12px #00f6ff99;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .galeria {
+        gap: 18px;
+    }
+    .producto {
+        min-width: 140px;
+        min-height: 120px;
+        font-size: 1rem;
+        padding: 14px 4px 10px 4px;
+    }
+}
+
+@media (max-width: 600px) {
+    .galeria {
+        flex-direction: column;
+        align-items: center;
+    }
+    .producto {
+        width: 90vw;
+        min-width: unset;
+    }
+}

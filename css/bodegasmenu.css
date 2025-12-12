@@ -1,0 +1,150 @@
+.titulo_principal{
+    font-family: "Oswald", serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    color: white;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    background: #020659;
+    text-align: center;
+    box-shadow: rgb(rgb(175, 175, 175), rgb(254, 255, 255), rgb(255, 255, 255));
+    z-index: 1000;
+}
+.titulo_secundario{
+    font-family: "Oswald", serif;
+    font-optical-sizing: auto;
+    font-weight: 250;
+    font-style: normal;
+    color: white;
+    position: sticky; /* Mantiene el título fijo en su posición */
+    top: 80px; /* Asegura que esté debajo del último grupo de bodegas */
+    width: 100%;
+    background: #020659;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 999; /* Asegura que esté por encima de otros elementos */
+}
+
+.cuerpo{
+    background-image: url(../img/fondo5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contenedor-bodegas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 120px;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+.card {
+    width: 250px;
+    height: 300px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagen dentro de la tarjeta */
+.card img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+
+/* Contenido de la tarjeta */
+.card-body {
+    padding: 10px;
+    background: #020659;
+    color: white;
+    font-family: "Oswald", sans-serif;
+}
+
+/* Hacer las tarjetas clickeables */
+.card a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    height: 100%;
+}
+/* PARTE DE LA TABLA /*
+/* 🔹 Estilo general de la tabla */
+.tabla-verificaciones {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Estilo para las cabeceras */
+.tabla-verificaciones th {
+    background: #020659;
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* 🔹 Estilo para las filas */
+.tabla-verificaciones td {
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 🔹 Alternar color de fondo en filas */
+.tabla-verificaciones tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+/* 🔹 Última fila sin borde */
+.tabla-verificaciones tr:last-child td {
+    border-bottom: none;
+}
+
+/* 🔹 Resaltar cuando el usuario pasa el cursor */
+.tabla-verificaciones tr:hover {
+    background: #e0e0e0;
+    transition: 0.3s ease-in-out;
+}
+
+/* 🔹 Estilos para el cronómetro */
+.cronometro {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 🔹 Estilo específico cuando el tiempo se ha agotado */
+td[style*="color: red;"] {
+    font-weight: bold;
+    font-size: 18px;
+    color: red !important;
+    background: #ffe5e5;
+}

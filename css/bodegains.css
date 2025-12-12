@@ -1,0 +1,136 @@
+/* Estilo del título */
+.titulo_principal {
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #020659;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Fondo del formulario */
+.cuerpo {
+    background-image: url(../img/fondo5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+}
+
+/* Contenedor del formulario */
+.contenedor-formulario {
+    width: 90%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Títulos dentro del formulario */
+h2 {
+    font-family: "Oswald", sans-serif;
+    color: #020659;
+    margin-bottom: 10px;
+}
+
+/* Estilo de la tabla */
+.tabla-inspeccion {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla-inspeccion th, .tabla-inspeccion td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.tabla-inspeccion th {
+    background: #020659;
+    color: white;
+}
+
+/* Asegura que la primera columna (preguntas) esté alineada a la izquierda */
+.tabla-inspeccion td:first-child {
+    text-align: left;
+}
+
+/* Opciones de radio más accesibles */
+.tabla-inspeccion input[type="radio"] {
+    transform: scale(1.3); /* Hace más grandes los radio buttons */
+    margin: 5px;
+}
+
+/* Estilos para los campos de Hallazgos */
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.campo label {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #020659;
+    margin-bottom: 5px;
+}
+
+.campo input, .campo textarea {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón de enviar */
+input[type="submit"] {
+    background: #020659;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background: #0336a0;
+}
+
+/* Estilo responsivo para móviles */
+@media (max-width: 600px) {
+    .contenedor-formulario {
+        width: 95%;
+    }
+
+    .tabla-inspeccion th, .tabla-inspeccion td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .tabla-inspeccion input[type="radio"] {
+        transform: scale(1.1);
+    }
+
+    input[type="submit"] {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+}

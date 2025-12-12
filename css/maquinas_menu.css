@@ -1,0 +1,243 @@
+/* 🔹 Estilos generales */
+body {
+    font-family: "Poppins", sans-serif;
+    background-image: url("/img/fondo6.jpg");
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 🔹 Título Principal */
+.titulo_principal {
+    font-size: 42px;
+    color: white;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 🔹 Contenedor del Menú */
+.menu-container {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 15px;
+    background: rgba(214, 219, 227, 0.9);
+    border-radius: 12px;
+}
+
+/* 🔹 Botón Desplegable */
+.desplegable {
+    margin-bottom: 20px; /* Espacio entre contenedores de máquinas */
+    display: block;
+    background: #020659;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.desplegable:hover {
+    background: #74c4f9;
+}
+
+/* 🔹 Contenedor de Máquinas */
+.menu-maquinas {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+}
+
+/* 🔹 Mostrar cuando se activa */
+.menu-maquinas.hidden {
+    display: none;
+}
+
+.menu-maquinas:not(.hidden) {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 🔹 Contenedor de cada Máquina */
+.maquina {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #ffffff, #f0f0f5);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* 🔹 Efecto hover para resaltar */
+.maquina:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* 🔹 Imagen de la Máquina */
+.maquina img {
+    width: 200px;
+    height: auto;
+    border-radius: 12px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 🔹 Efecto hover para la imagen */
+.maquina img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Información de la Máquina */
+.maquina-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* 🔹 Nombre de la máquina */
+.maquinaname{
+    font-size: 24px;
+    font-weight: bold;
+    color: #1a237e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* 🔹 Contenedor de Códigos */
+.codigos-container {
+    display: flex;
+    flex-wrap: wrap;  /* Permite que los códigos pasen a la siguiente línea si no caben */
+    gap: 8px;  /* Espaciado entre los botones */
+    justify-content: flex-start; /* Alinear a la izquierda */
+    max-width: 550px; /* Limitar el ancho para evitar desbordamientos */
+    max-height: 200px; /* Si hay demasiados códigos, el contenedor tendrá scroll */
+    overflow-y: auto; /* Agregar scroll solo si es necesario */
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Botón de código mejorado */
+.codigo-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;  /* Mejor alineación */
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    font-family: "Poppins", sans-serif;
+    min-width: 160px; /* Ancho mínimo para mantener consistencia */
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+/* 🔹 Estado No Verificado */
+.no-verificada {
+    color: white;
+    background: #dc3545;
+    border: 2px solid #a71d2a;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+    animation: parpadeo 1s infinite alternate;
+}
+
+/* 🔹 Estado Por Vencer */
+.por-vencer {
+    color: white;
+    background: #ffc107;
+    border: 2px solid #d39e00;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+    animation: parpadeo 1.5s infinite alternate;
+}
+
+/* 🔹 Estado Verificado */
+.verificada {
+    color: white;
+    background: #28a745;
+    border: 2px solid #1e7e34;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
+}
+/* 🔹 Botón tipo desplegable individual */
+.volver {
+    background: #020659;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    display: inline-block;
+}
+
+.volver:hover {
+    background: #74c4f9;
+    transform: scale(1.05);
+}
+
+
+/* 🔹 Animación de parpadeo */
+@keyframes parpadeo {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* 🔹 RESPONSIVE DESIGN */
+
+/* 📌 Móviles */
+@media screen and (max-width: 768px) {
+    .maquina {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .maquina img {
+        width: 80%;
+        max-width: 250px;
+    }
+
+    .codigos-container {
+        justify-content: center;
+        max-width: 100%; /* Para que los códigos no se salgan */
+    }
+
+    .titulo_principal {
+        font-size: 32px;
+    }
+}
+
+/* 📌 Pantallas más pequeñas */
+@media screen and (max-width: 480px) {
+    .maquina-info p {
+        font-size: 18px;
+    }
+
+    .codigo-link {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}

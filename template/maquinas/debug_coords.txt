@@ -1,0 +1,1 @@
+{"nuevo_texto":"141401","pos_x":"458.61","pos_y":"100.60","zona":"Balanzas","maquina":"LABBOGBAL01-Balanza_ZC","archivo":"Balanza_ZC_LABBOGBAL01_2025-03-31.pdf"}

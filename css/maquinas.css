@@ -1,0 +1,132 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(/img/fondo6.jpg);
+    text-align: center;
+    background-repeat: no-repeat;             /* Que no se repita */
+    background-attachment: fixed;             /* Que se quede fija al hacer scroll */
+    background-size: cover;                   /* Que cubra toda la pantalla */
+    background-position: center;              /* Centrada en la pantalla */
+    text-align: center;
+}
+/* Contenedor de cada fila (Celda + Diferencia) */
+.celda-container {
+    display: flex;
+    gap: 10px; /* Espaciado entre los inputs */
+    align-items: center; /* Alinear verticalmente */
+    margin-bottom: 8px; /* Espacio entre filas */
+}
+
+/* Etiqueta para la celda */
+.celda-container label {
+    width: 80px; /* Mantiene las etiquetas alineadas */
+    font-weight: bold;
+}
+
+/* Inputs de las celdas */
+.celda-container input {
+    flex: 1; /* Ocupa el espacio disponible */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Contenedor principal */
+div {
+    background: white;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+p {
+    color: #ffffff;
+    margin-top: 25px;
+}
+h1 {
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #34495e;
+}
+
+h3 {
+    color: #555;
+}
+
+h4 {
+    color: #777;
+}
+
+/* Imagen */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Formularios */
+form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+/* Campos de entrada y selección */
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+textarea, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón */
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+/* Agrupación horizontal para verificación de calibración */
+.calibracion-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.calibracion-row input[type="number"] {
+    flex: 1;
+}
