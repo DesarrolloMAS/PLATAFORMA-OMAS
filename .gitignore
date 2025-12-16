@@ -1,0 +1,8 @@
+# Archivos generados por la aplicacion
+/archivos/generados/
+#Archivos de sistema
+.DS_Store
+Thumbs.db
+#Archivs de configuracion local
+*.log
+.env
