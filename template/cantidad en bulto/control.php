@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +10,14 @@
     <form action="procesamiento_control.php" method="post" class="formulario-control">
         <h1>Control de Cantidad/Producto en Bulto</h1>
         <input type="hidden" name="harina" value="<?php echo isset($_GET['harina']) ? htmlspecialchars($_GET['harina']) : ''; ?>">
+        <input type="hidden" name="peso_producto" value="<?php echo isset($_GET['peso']) ? htmlspecialchars($_GET['peso']) : ''; ?>">
         <div class="contenedor-flex">
             <div class="bloque-control">
                 <div class="contenedor_horario">
                     <label for="fecha">Fecha</label>
-                    <input type="date" id="fecha" name="fecha" require>
+                    <input type="date" id="fecha" name="fecha" required>
                     <label for="hora">Hora</label>
-                    <input type="time" id="hora" name="hora" require>
+                    <input type="time" id="hora" name="hora" required>
                 </div>
                 <div class="contenedor_lote">
                     <label for="lote">Lote</label>
@@ -26,6 +26,10 @@
                 <div>
                     <label for="responsable">Responsable</label>
                     <input type="text" id="responsable" name="responsable">
+                </div>
+                <div>
+                    <label for="peso_producto_display">Peso del Producto (kg)</label>
+                    <input type="text" id="peso_producto_display" value="<?php echo isset($_GET['peso']) ? htmlspecialchars($_GET['peso']) : ''; ?>" readonly>
                 </div>
             </div>
             <div class="bloque-muestreo">
@@ -58,7 +62,5 @@
             <button type="submit">Guardar</button>
         </div>
     </form>
-</body>
-</html>
 </body>
 </html>

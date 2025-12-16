@@ -118,7 +118,7 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&family=Roboto:wght@100;300&display=swap"  rel="stylesheet">
     <link rel="stylesheet" href="./css/index.css">
-    <title>Ingreso Organizacion MAS</title>
+    <title>OMAS DESARROLLO</title>
 </head>
 <body class="body">
     <!-- Barra superior -->

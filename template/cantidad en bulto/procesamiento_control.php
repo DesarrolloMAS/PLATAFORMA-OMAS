@@ -7,11 +7,15 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 if ($sede === 'ZC') {
     $carpetaDestino = '/var/www/fmt/archivos/generados/control_cantidad/';
+    $zona = 'Bogotá';
 } else {
     $carpetaDestino = '/var/www/fmt/archivos/generados/control_cantidad_zs/';
+    $zona = 'Pasto';
 }
+$date = date('Y-m');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recoge los datos del formulario
+    $peso_producto = $_POST['peso_producto'] ?? '';
     $harina = $_POST['harina'] ?? 'SinNombre';
     $fecha = $_POST['fecha'] ?? '';
     $hora = $_POST['hora'] ?? '';
@@ -68,6 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sheet->setCellValue('B' . $fila, $hora);           // Personaliza la celda para hora
     $sheet->setCellValue('C' . $fila, $lote);           // Personaliza la celda para lote
     $sheet->setCellValue('N' . $fila, $responsable);    // Personaliza la celda para responsable
+    $sheet->setCellValue('K5' , $peso_producto);  // Personaliza la celda para peso del producto
+    $sheet->setCellValue('B5' , $zona);  // Personaliza la celda para la zona
+    $sheet->setCellValue('D5' , $date);  // Personaliza la celda para la zona
 
     // Bultos en celdas independientes (personaliza las celdas según tu plantilla)
     $sheet->setCellValue('D' . $fila, $bulto_1);   // Bulto 1
@@ -79,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sheet->setCellValue('J' . $fila, $bulto_7);   // Bulto 7
     $sheet->setCellValue('K' . $fila, $bulto_8);   // Bulto 8
     $sheet->setCellValue('L' . $fila, $bulto_9);   // Bulto 9
-    $sheet->setCellValue('M' . $fila, $bulto_10);  // Bulto 10}
+    $sheet->setCellValue('M' . $fila, $bulto_10);  // Bulto 10
 
     $imagen_logoPath =  __DIR__ .'/../../archivos/formularios/logomas.png';
     $imagen_logoImg = new Drawing();

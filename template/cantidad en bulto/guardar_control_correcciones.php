@@ -25,28 +25,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_
         try {
             $spreadsheet = IOFactory::load($rutaArchivo);
             $hoja = $spreadsheet->getActiveSheet();
-            $celdasConFormula = ['O01','O02','O03','O04','O05','O06','O07','O08','O09','O10','O11','O12','O13','O14','O15','O16','O17','O18','O19','O20','O21','O22','O23','O24','O25','O26','O27','O28'];
-            for ($fila = 10; $fila <= 60; $fila++) {
-                $celdasConFormula[] = "G$fila";
-            }
-            $formulasGuardadas = [];
-            foreach ($celdasConFormula as $celdaRef) {
-                if ($hoja->getCell($celdaRef)->isFormula()) {
-                    $formulasGuardadas[$celdaRef] = $hoja->getCell($celdaRef)->getValue();
-                }
-            }
-            // 🔥 Recorrer todas las celdas enviadas desde el formulario
-            foreach ($_POST['data'] as $filaIndex => $fila) {
-                foreach ($fila as $colIndex => $valorCelda) {
-                    $letraCol = Coordinate::stringFromColumnIndex($colIndex + 1);
-                    $celdaRef = $letraCol . ($filaIndex + 1);
-    
-                    // Solo modificar si la celda **NO** está en la lista de fórmulas a conservar
-                    if (!in_array($celdaRef, $celdasConFormula)) {
-                        $hoja->setCellValue($celdaRef, $valorCelda);
-                    }
-                }
-            }
+            $celdasConFormula = ['O01','O02','O03','O04','O05','O06','O07','O08','O09','O10','O11','O12','O13','O14','O15','O16','O17','O18','O19','O20','O21','O22','O23','O24','O25','O26','O27','O28','P05','Q05'];
+for ($fila = 10; $fila <= 60; $fila++) {
+    $celdasConFormula[] = "G$fila";
+}
+
+$formulasGuardadas = [];
+foreach ($celdasConFormula as $celdaRef) {
+    if ($hoja->getCell($celdaRef)->isFormula()) {
+        $formulasGuardadas[$celdaRef] = $hoja->getCell($celdaRef)->getValue();
+    }
+}
+
+foreach ($_POST['data'] as $filaIndex => $fila) {
+    foreach ($fila as $colIndex => $valorCelda) {
+        $letraCol = Coordinate::stringFromColumnIndex($colIndex + 1);
+        $celdaRef = $letraCol . ($filaIndex + 1);
+
+        if (!in_array($celdaRef, $celdasConFormula)) {
+            $hoja->setCellValue($celdaRef, $valorCelda);
+        }
+    }
+}
+
+foreach ($formulasGuardadas as $celdaRef => $formula) {
+    $hoja->setCellValue($celdaRef, $formula);
+}
+$hoja->setCellValue('P5', '=M5+K5');
         $firmaturn1 = $_POST['firma_turn1'];
     if ($firmaturn1) {
         $firmaturn1Path = __DIR__ . '/../../archivos/firmas_imagenes/firma_turn1.png';

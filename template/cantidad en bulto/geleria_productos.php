@@ -4,57 +4,53 @@ require '../conection.php';
 $sede = $_SESSION['sede'];
 if ($sede === 'ZC') {
     $productos = [
-    'Mogolla',
-    'Salvado',
-    'Fuerte x25',
-    'Natural x50',
-    'Centeno',
-    'Exclusiva x50',
-    'Artesanal x50',
-    'Artesanal x25',
-    'Extrapan x50',
-    'Extrapan x25',
-    'Extrapan x10',
-    'Segunda',
-    'Fuerte de Exportación',
-    'Especial x50',
-    'Especial x25',
-    'Harina T1 x50',
-    'Fuerte Exportacion',
-    'Harina de centeno',
-    'Harina Integral',
-    'Grano entero fino',
-    'Trigo entero',
-    'Manitoba',
-    'Centeno Pepa'
-];
+        ['nombre' => 'Mogolla', 'peso' => 40],
+        ['nombre' => 'Salvado', 'peso' => 25],
+        ['nombre' => 'Fuerte x25', 'peso' => 25],
+        ['nombre' => 'Natural x50', 'peso' => 50],
+        ['nombre' => 'Centeno', 'peso' => 25],
+        ['nombre' => 'Exclusiva x50', 'peso' => 50],
+        ['nombre' => 'Artesanal x50', 'peso' => 50],
+        ['nombre' => 'Artesanal x25', 'peso' => 25],
+        ['nombre' => 'Extrapan x50', 'peso' => 50],
+        ['nombre' => 'Extrapan x25', 'peso' => 25],
+        ['nombre' => 'Extrapan x10', 'peso' => 10],
+        ['nombre' => 'Segunda', 'peso' => 50],
+        ['nombre' => 'Fuerte de Exportación', 'peso' => 25],
+        ['nombre' => 'Especial x50', 'peso' => 50],
+        ['nombre' => 'Especial x25', 'peso' => 25],
+        ['nombre' => 'Harina T1 x50', 'peso' => 50],
+        ['nombre' => 'Harina Integral', 'peso' => 25],
+        ['nombre' => 'Grano entero fino', 'peso' => 25],
+        ['nombre' => 'Trigo entero', 'peso' => 25],
+        ['nombre' => 'Manitoba', 'peso' => 25],
+        ['nombre' => 'Centeno Pepa', 'peso' => 25]
+
+    ];
 } else {
     $productos = [
-    'Mogolla x50',
-    'Salvado x30',
-    'Granza x50',
-    'Segunda x50',
-    'Artesanal x50',
-    'Artesanal x25',
-    'Artesanal x10',
-    'Artesanal x10 (5 und)',
-    'Germen de Trigo x25',
-    'Harina Integral x25',
-    'Harina de Trigo Nariño x10',
-    'Harina de Trigo Nariño x10 5 und',
-    'Extrapan x50',
-    'Extrapan x25',
-    'Extrapan x10',
-    'Germen de Trigo x25',
-    'Semola Fina x25',
-    'Harina de Trigo Nariño x2500GR',
-    'Harina de Trigo Nariño x1000GR',
-    'Harina de Trigo Nariño x500GR',
-    'Harina de Trigo Extrapan x10 (5 und)'
-];
+        ['nombre' => 'Mogolla x50', 'peso' => 40],
+        ['nombre' => 'Salvado x30', 'peso' => 30],
+        ['nombre' => 'Granza x50', 'peso' => 50],
+        ['nombre' => 'Segunda x50', 'peso' => 50],
+        ['nombre' => 'Artesanal x50', 'peso' => 50],
+        ['nombre' => 'Artesanal x25', 'peso' => 25],
+        ['nombre' => 'Artesanal x10', 'peso' => 10],
+        ['nombre' => 'Artesanal x10 (5 und)', 'peso' => 10],
+        ['nombre' => 'Germen de Trigo x25', 'peso' => 25],
+        ['nombre' => 'Harina Integral x25', 'peso' => 25],
+        ['nombre' => 'Harina de Trigo Nariño x10', 'peso' => 10],
+        ['nombre' => 'Harina de Trigo Nariño x10 5 und', 'peso' => 10],
+        ['nombre' => 'Extrapan x50', 'peso' => 50],
+        ['nombre' => 'Extrapan x25', 'peso' => 25],
+        ['nombre' => 'Extrapan x10', 'peso' => 10],
+        ['nombre' => 'Semola Fina x25', 'peso' => 25],
+        ['nombre' => 'Harina de Trigo Nariño x2500GR', 'peso' => 2.5],
+        ['nombre' => 'Harina de Trigo Nariño x1000GR', 'peso' => 1],
+        ['nombre' => 'Harina de Trigo Nariño x500GR', 'peso' => 0.5],
+        ['nombre' => 'Harina de Trigo Extrapan x10 (5 und)', 'peso' => 10]
+    ];
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -89,6 +85,11 @@ if ($sede === 'ZC') {
         .producto button:hover {
             background: #0056b3;
         }
+        .peso {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body class="body">
@@ -96,9 +97,11 @@ if ($sede === 'ZC') {
     <div class="galeria">
         <?php foreach ($productos as $producto): ?>
             <div class="producto">
-                <h3><?php echo htmlspecialchars($producto); ?></h3>
+                <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
+                <p class="peso">Peso: <?php echo $producto['peso']; ?> kg</p>
                 <form action="control.php" method="get">
-                    <input type="hidden" name="harina" value="<?php echo htmlspecialchars($producto); ?>">
+                    <input type="hidden" name="harina" value="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                    <input type="hidden" name="peso" value="<?php echo $producto['peso']; ?>">
                     <button type="submit">Seleccionar</button>
                 </form>
             </div>
