@@ -26,7 +26,14 @@ function obtenerUsuariosDesdeSQL($pdoUsuarios) {
 }
 $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
 $usuarios = obtenerUsuariosDesdeSQL($pdoUsuarios);
-$usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
+
+// Debug: agregar datos de prueba si la base está vacía
+if (empty($cargos)) {
+    $cargos = ['Administrador', 'Aprendiz', 'Lider de Mantenimiento', 'Auxiliar de mantenimiento'];
+}
+if (empty($usuarios)) {
+    $usuarios = ['Prueba', 'Usuario Test', 'Admin Test'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +52,6 @@ $usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
 <body class="body">
     <br><br><br><br><br><br>
 
-
 <form action="./formulario01.php" method="post" id="formulario1" class="formulario" enctype="multipart/form-data">
     <div class="formulario2">
         <h1 class="titulo">Solicitud De Reparacion Y Mantenimiento</h1>
@@ -56,17 +62,20 @@ $usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
                     <input type="time" id="horainicial" name="horainicial" prequired >
                     <input type="text" name="nombre_solicitante" id="nombre_solicitante" placeholder="Ingrese su Nombre" required>
                     <select name="cargo_solicitante" id="cargo_solicitante" required>
-                         <?php if (!empty($cargos)): ?>
-        <?php foreach ($cargos as $cargo): ?>
-            <option value="<?php echo htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8'); ?>">
-                <?php echo htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8'); ?>
-            </option>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <option value="">No hay cargos disponibles</option>
-    <?php endif; ?>
-                    <option value="">No hay cargos disponibles</option>
-                    <option value="NULL">Ninguno.</option>
+                        <option value="">-- Seleccionar Cargo --</option>
+                        <?php 
+                        // Debug: ver qué contiene $cargos
+                        if (!empty($cargos)) {
+                            foreach ($cargos as $cargoItem) {
+                                $value = htmlspecialchars($cargoItem, ENT_QUOTES, 'UTF-8');
+                                $text = htmlspecialchars($cargoItem, ENT_QUOTES, 'UTF-8');
+                                echo "<option value=\"$value\">$text</option>";
+                            }
+                        } else {
+                            echo '<option value="">No hay cargos disponibles</option>';
+                        }
+                        ?>
+                        <option value="NULL">Ninguno.</option>
                     </select>
                 </div>
             </div>
@@ -75,10 +84,20 @@ $usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
             <div class="seccion">
                 <h2 class="titulo">Información de la Zona, Máquina o Equipo</h2>
                 <div class="datos">
-                    <input type="text" name="objeto_dañado" id="objeto_dañado" placeholder="Zona, Máquina o Equipo afectados" required>
+                    <input type="text" name="objeto_dañado" id="objeto_dañado" 
+                        placeholder="Zona, Máquina o Equipo afectados" required
+                        oninput="validarNombreArchivo(this)">
+                    <span id="error_objeto_dañado" class="mensaje-error" style="display: none;"></span>
+                    <span id="exito_objeto_dañado" class="mensaje-exito" style="display: none;"></span>
                 </div>
-                <div class="datos">
-                    <input type="text" name="ubi" id="ubi" placeholder="Ingrese la Ubicación" required>
+                <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 12px;">
+                    <strong>📋 Reglas para el nombre:</strong>
+                    <ul style="margin: 5px 0; padding-left: 20px;">
+                        <li>❌ No usar: <code>/ \ : * ? " < > |</code></li>
+                        <li>✅ Máximo 50 caracteres</li>
+                        <li>✅ Sin espacios excesivos</li>
+                        <li>✅ Ejemplos válidos: "Bomba Principal", "Motor A-3", "Transportador_1"</li>
+                    </ul>
                 </div>
                 <div class="datos">
                     <input type="text" name="marca" id="marca" placeholder="Ingrese la Marca">
@@ -221,17 +240,20 @@ $usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
                     <div class="datos">
                         <label for="VoBo">VoBo de Mantenimiento</label>
                         <select name="VoBo" id="VoBo" required>
-                        <?php if (!empty($usuario)): ?>
-        <?php foreach ($usuario as $usuario): ?>
-            <option value="<?php echo htmlspecialchars($usuario, ENT_QUOTES, 'UTF-8'); ?>">
-                <?php echo htmlspecialchars($usuario, ENT_QUOTES, 'UTF-8'); ?>
-            </option>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <option value="">No hay Usuarios disponibles</option>
-    <?php endif; ?>
-                <option value="NULL">Ninguno.</option>
-                </select>
+                            <option value="">-- Seleccionar Usuario --</option>
+                            <?php 
+                            if (!empty($usuarios)) {
+                                foreach ($usuarios as $usuarioItem) {
+                                    $value = htmlspecialchars($usuarioItem, ENT_QUOTES, 'UTF-8');
+                                    $text = htmlspecialchars($usuarioItem, ENT_QUOTES, 'UTF-8');
+                                    echo "<option value=\"$value\">$text</option>";
+                                }
+                            } else {
+                                echo '<option value="">No hay Usuarios disponibles</option>';
+                            }
+                            ?>
+                            <option value="NULL">Ninguno.</option>
+                        </select>
                 </div>
             </div>
                 <!-- Control de inocuidad -->
@@ -506,6 +528,7 @@ $usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
  
     <div class="espacio-botones">
         <button type="submit" class="boton">Enviar</button>
+        <button type="button" class="boton" onclick="guardarBorradorServidor()">Guardar</button>
         <button type="reset" class="boton">Restablecer</button>
     </div>
     </div>
@@ -518,10 +541,164 @@ $usuario = obtenerUsuariosDesdeSQL($pdoUsuarios);
 
 
     <!-- ESPACIO PARA SCRIPTS -->
-
+<script src="guardado.js"></script>
 <script>
     //Menus Desplegables
 // JavaScript
+//FUNCIONES DE REPORTES DE ERRORES ESPECIFICOS PARA EL NOMBRE DEL DOCUMENTO
+function validarNombreArchivo(input) {
+    const valor = input.value;
+    const errorSpan = document.getElementById('error_objeto_dañado');
+    const exitoSpan = document.getElementById('exito_objeto_dañado');
+    const submitBtn = document.querySelector('button[type="submit"]');
+    const guardarBtn = document.querySelector('button[onclick="guardarBorradorServidor()"]');
+    
+    // Limpiar mensajes anteriores
+    errorSpan.style.display = 'none';
+    exitoSpan.style.display = 'none';
+    input.classList.remove('campo-error', 'campo-valido');
+    
+    // Si está vacío, no validar aún
+    if (valor.length === 0) {
+        return;
+    }
+    
+    // Caracteres problemáticos para nombres de archivo
+    const caracteresProblematicos = /[\/\\:*?"<>|]/g;
+    const caracteresEncontrados = valor.match(caracteresProblematicos);
+    
+    // Verificar longitud
+    const longitudMaxima = 50;
+    const longitudActual = valor.length;
+    
+    // Verificar espacios excesivos
+    const espaciosExcesivos = /\s{3,}/g;
+    
+    let errores = [];
+    
+    // Validar caracteres problemáticos
+    if (caracteresEncontrados) {
+        const caracteresUnicos = [...new Set(caracteresEncontrados)];
+        errores.push(`❌ Caracteres no permitidos: ${caracteresUnicos.join(', ')}`);
+    }
+    
+    // Validar longitud
+    if (longitudActual > longitudMaxima) {
+        errores.push(`❌ Demasiado largo: ${longitudActual}/${longitudMaxima} caracteres`);
+    }
+    
+    // Validar espacios excesivos
+    if (espaciosExcesivos.test(valor)) {
+        errores.push(`❌ Demasiados espacios consecutivos`);
+    }
+    
+    // Validar que no empiece o termine con espacios
+    if (valor.startsWith(' ') || valor.endsWith(' ')) {
+        errores.push(`❌ No debe empezar o terminar con espacios`);
+    }
+    
+    // Mostrar resultados
+    if (errores.length > 0) {
+        // Hay errores
+        input.classList.add('campo-error');
+        errorSpan.innerHTML = errores.join('<br>');
+        errorSpan.style.display = 'block';
+        
+        // Deshabilitar botones
+        if (submitBtn) submitBtn.disabled = true;
+        if (guardarBtn) guardarBtn.disabled = true;
+        
+        // Mostrar sugerencia de corrección
+        mostrarSugerenciaCorreccion(valor);
+        
+    } else {
+        // Todo está bien
+        input.classList.add('campo-valido');
+        exitoSpan.innerHTML = `✅ Nombre válido para archivo: "${limpiarNombreParaArchivo(valor)}"`;
+        exitoSpan.style.display = 'block';
+        
+        // Habilitar botones
+        if (submitBtn) submitBtn.disabled = false;
+        if (guardarBtn) guardarBtn.disabled = false;
+    }
+}
+
+function limpiarNombreParaArchivo(nombre) {
+    // Función para mostrar cómo quedaría el nombre limpio
+    return nombre
+        .replace(/[\/\\:*?"<>|]/g, '_')  // Reemplazar caracteres problemáticos
+        .replace(/\s+/g, '_')           // Reemplazar espacios múltiples con un guión bajo
+        .substring(0, 50)               // Limitar longitud
+        .replace(/^_+|_+$/g, '');       // Quitar guiones bajos al inicio y final
+}
+
+function mostrarSugerenciaCorreccion(valorOriginal) {
+    const errorSpan = document.getElementById('error_objeto_dañado');
+    const nombreLimpio = limpiarNombreParaArchivo(valorOriginal);
+    
+    if (nombreLimpio !== valorOriginal && nombreLimpio.length > 0) {
+        const sugerencia = `<br><br>💡 <strong>Sugerencia:</strong> "${nombreLimpio}"`;
+        errorSpan.innerHTML += sugerencia;
+        
+        // Agregar botón para aplicar sugerencia
+        const btnAplicar = `<br><button type="button" onclick="aplicarSugerencia('${nombreLimpio}')" style="
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            border-radius: 3px; 
+            cursor: pointer; 
+            margin-top: 5px;
+        ">Usar esta sugerencia</button>`;
+        errorSpan.innerHTML += btnAplicar;
+    }
+}
+
+function aplicarSugerencia(nombreSugerido) {
+    const input = document.getElementById('objeto_dañado');
+    input.value = nombreSugerido;
+    validarNombreArchivo(input);
+}
+
+// Función para validar antes de enviar el formulario
+function validarFormularioCompleto() {
+    const objetoDañado = document.getElementById('objeto_dañado');
+    validarNombreArchivo(objetoDañado);
+    
+    const tieneErrores = objetoDañado.classList.contains('campo-error');
+    
+    if (tieneErrores) {
+        alert('❌ Por favor corrija el nombre del equipo antes de continuar.\n\nEl nombre contiene caracteres no válidos que impedirán crear el archivo correctamente.');
+        objetoDañado.focus();
+        return false;
+    }
+    
+    return true;
+}
+
+// Interceptar el envío del formulario
+document.addEventListener('DOMContentLoaded', function() {
+    const formulario = document.getElementById('formulario1');
+    if (formulario) {
+        formulario.addEventListener('submit', function(e) {
+            if (!validarFormularioCompleto()) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
+    
+    // También validar cuando se guarda borrador
+    const guardarBtn = document.querySelector('button[onclick="guardarBorradorServidor()"]');
+    if (guardarBtn) {
+        guardarBtn.addEventListener('click', function(e) {
+            if (!validarFormularioCompleto()) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
+});
 
 let responsablecount = 0;
 function addResponsableField() {
@@ -733,11 +910,14 @@ function removematerialFields(id) {
     inicializarCanvas('canvasfirma3', 'limpiarFirma3', 'guardarFirma3', 'firma_respLim');
     inicializarCanvas('canvasfirma4', 'limpiarFirma4', 'guardarFirma4', 'firma_respLim2');
 
-    document.getElementById('downloadPdf').addEventListener('click', async () => {
-        const condition = confirm("¿Quieres convertir el Excel a PDF?");
-        if (!condition) return;
+    // Verificar si el elemento downloadPdf existe antes de agregar el listener
+    const downloadPdfBtn = document.getElementById('downloadPdf');
+    if (downloadPdfBtn) {
+        downloadPdfBtn.addEventListener('click', async () => {
+            const condition = confirm("¿Quieres convertir el Excel a PDF?");
+            if (!condition) return;
 
-        const excelUrl = 'ruta/al/excel/generado.xlsx';
+            const excelUrl = 'ruta/al/excel/generado.xlsx';
 
         try {
             const response = await fetch(excelUrl);
@@ -768,7 +948,9 @@ function removematerialFields(id) {
             console.error("Error:", error.message);
             alert("Hubo un problema al procesar el archivo.");
         }
-    });
+    }); // Cerrar el addEventListener del downloadPdf
+    } // Cerrar el if que verifica la existencia del elemento
+    
     function toggleMenu1() {
             const checkbox = document.getElementById('toggle1');
             const menu = document.getElementById('Menu1');
