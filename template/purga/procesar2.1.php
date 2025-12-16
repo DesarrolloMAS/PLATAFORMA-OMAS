@@ -7,9 +7,9 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 $sede = $_SESSION['sede'];
 if ($sede === 'ZS'){
-    $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/proceso_molienda/';
+    $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/Purga De proceso/';
 }else
-    $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/proceso_molienda/';
+    $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/Purga De proceso/';
 if (isset($_GET['archivo'])) {
     $archivo = $_GET['archivo'];
     $rutaArchivo = $carpeta . DIRECTORY_SEPARATOR . $archivo;

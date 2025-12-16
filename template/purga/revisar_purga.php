@@ -48,7 +48,7 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/fmt/css/revision.css"> <!-- Asegúrate de tener estilos -->
+    <link rel="stylesheet" href="/css/revision.css"> <!-- Asegúrate de tener estilos -->
     <title>Vista Previa de Excel</title><a href="procesar2.php?archivo=<?php echo urlencode($archivo); ?>">Corregir</a>
     <h1 class="titulo_principal">Vista Previa del Archivo Excel</h1>
 <br><br><br><br>
@@ -74,7 +74,7 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 <body>
     <h1 class="titulo_principal">Vista Previa del Archivo Excel <a class="boton" href="../redireccion.php">Volver</a></h1>
     <br><br><br><br><br>
-    <!-- <a class="boton" href="procesar2.1.php?archivo=<?php echo urlencode($archivo); ?>">Corregir</a> -->
+    <a class="boton" href="procesar2.1.php?archivo=<?php echo urlencode($archivo); ?>">Corregir</a>
     <?php echo $htmlContent; ?>
 </body>
 

@@ -1698,3 +1698,21 @@
 2025-08-05 11:26:03 | Fila harina: 22, Fila subproductos: 67
 2025-08-05 11:26:03 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_3.xlsx
 2025-08-05 11:26:03 | Archivo guardado correctamente
+2025-12-16 18:28:47 | Script iniciado
+2025-12-16 18:28:47 | POST recibido
+2025-12-16 18:28:47 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-12-16 18:28:47 | Fila subproductos encontrada: 76
+2025-12-16 18:28:47 | Fila harina encontrada: 30
+2025-12-16 18:28:47 | Datos recibidos: fecha=2025-12-16, lider=Balmes Tulcan, moje=203, producto=Bulto, referencia=Fuerte, hora_inicio=05:45, hora_final=09:05, bascula=16928, bascula_harina=13232, bultos_harina=, lote_harina=161225B, cantidad_kg=13232, silo_granel=507, bultos_mogolla=0, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-12-16 18:28:47 | Fila harina: 30, Fila subproductos: 76
+2025-12-16 18:28:47 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-12-16 18:28:47 | Archivo guardado correctamente
+2025-12-16 19:18:14 | Script iniciado
+2025-12-16 19:18:14 | POST recibido
+2025-12-16 19:18:14 | Archivo existente cargado: proceso_molienda_2.xlsx
+2025-12-16 19:18:14 | Fila subproductos encontrada: 77
+2025-12-16 19:18:14 | Fila harina encontrada: 31
+2025-12-16 19:18:14 | Datos recibidos: fecha=2025-12-16, lider=Balmes Tulcan, moje=204, producto=Bulto, referencia=Fuerte, hora_inicio=09:05, hora_final=13:45, bascula=23840, bascula_harina=18336, bultos_harina=400, lote_harina=171225B, cantidad_kg=18336, silo_granel=507, bultos_mogolla=36, hilo_mogolla=, bultos_salvado=0, hilo_salvado=, bultos_segunda=0, hilo_segunda=, bultos_germen=, hilo_germen=, cantidad_granza=, varadas=
+2025-12-16 19:18:14 | Fila harina: 31, Fila subproductos: 77
+2025-12-16 19:18:14 | Guardando archivo en ../../archivos/generados/proceso_molienda/proceso_molienda_2.xlsx
+2025-12-16 19:18:14 | Archivo guardado correctamente

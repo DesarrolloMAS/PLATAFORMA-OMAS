@@ -1,12 +1,9 @@
-<?php
-// Este archivo solo sirve el HTML y JS, la lógica de archivos la hace rastreo_doc.php
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Revisión de Máquinas</title>
-    <link rel="stylesheet" href="/fmt/css/revision_maquinas.css">
+    <link rel="stylesheet" href="/css/revision_maquinas.css">
     <style>
         .maquina {
             border-left: 3px solid #e0e0e0;
@@ -53,7 +50,7 @@
     <div id="visor-pdfs"><p>Cargando archivos...</p></div>
 
     <script>
-    fetch('/fmt/template/maquinas/rastreo_doc.php')
+    fetch('/template/maquinas/rastreo_doc.php')
       .then(res => {
         if (!res.ok) throw new Error('No se pudo cargar el backend');
         return res.json();

@@ -77,7 +77,6 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 </head>
 <body>
     <h1 class="titulo_principal">Vista Previa del Archivo Excel <a class="boton" href="galeria_empaques.php">Volver</a></h1>
-    <br><br><br><br><br>
     <a class="boton" href="correccion_empaque.php?archivo=<?php echo urlencode($archivo); ?>">Corregir</a>
     <?php echo $htmlContent; ?>
 </body>
