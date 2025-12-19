@@ -24,7 +24,7 @@ if (empty($archivos)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title >Lista de Archivos</title>
-    <link rel="stylesheet" href="/css/revision.css"><!-- Asegúrate de tener estilos -->
+    <link rel="stylesheet" href="/css/revision_prev.css"><!-- Asegúrate de tener estilos -->
 </head>
 <body class="body">
     <h1 class="titulo_principal">Lista de Archivos Excel<a href="../revisiones_almacen.html">Volver</a></h1>

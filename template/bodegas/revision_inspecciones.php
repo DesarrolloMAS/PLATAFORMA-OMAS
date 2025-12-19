@@ -19,7 +19,7 @@ $archivos = array_filter(scandir($carpeta), function($archivo) use ($carpeta) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title >Lista de Archivos</title>
-    <link rel="stylesheet" href="/css/revision.css"><!-- Asegúrate de tener estilos -->
+    <link rel="stylesheet" href="/css/revision_prev.css">
 </head>
 <body class="body">
     <h1 class="titulo_principal">Lista de Archivos Excel<a href="../menu_adm.html">Volver</a></h1>

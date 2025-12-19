@@ -32,65 +32,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar el usuario
     $usuario = validarUsuario($pdoUsuarios, $nombre, $cedula, $cargo, $sede);
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nombre = htmlspecialchars(trim($_POST['nombre']));
+        $cedula = htmlspecialchars(trim($_POST['cedula']));
+        $cargo = htmlspecialchars(trim($_POST['cargo']));
+        $sede = htmlspecialchars(trim($_POST['sede1']));
     
-    if ($usuario) {
-        $_SESSION['id_usuario'] = $usuario['id_usuario']; // ID del usuario
-        $_SESSION['nombre'] = $usuario['nombre_u']; // Nombre del usuario
-        $_SESSION['area'] = $usuario['Area']; // **Área del usuario** (modificación realizada aquí)
-        $_SESSION['rol'] = $usuario['rol']; // Rol del usuario
-        $_SESSION['cargo'] = $usuario['Cargo']; // Cargo del usuario
-        $_SESSION['sede'] = $usuario['sede']; // Sede del usuario
+        // Validar el usuario
+        $usuario = validarUsuario($pdoUsuarios, $nombre, $cedula, $cargo, $sede);
     
-
-        // Redirigir según el área y el rol
-        switch ($usuario['Area']) {
-            case 'Operaciones':
-                // Redirigir según el rol en el área de Operaciones
+        if ($usuario) {
+            // Guardar datos en la sesión
+            $_SESSION['id_usuario'] = $usuario['id_usuario'];
+            $_SESSION['nombre'] = $usuario['nombre_u'];
+            $_SESSION['area'] = $usuario['Area'];
+            $_SESSION['rol'] = $usuario['rol'];
+            $_SESSION['cargo'] = $usuario['Cargo'];
+            $_SESSION['sede'] = $usuario['sede'];
+            $_SESSION['cedula'] = $usuario['cedula'];
+    
+            // Lógica preferencial para la cédula específica
+            if ($cedula === '1085253029') {
                 switch ($usuario['rol']) {
-                    case 'adm': // Rol alto en Operaciones
-                        header('Location: ./template/menu_adm.html');
-                        exit();
-                    case '1': // Rol alto en Operaciones
-                        header('Location: ./template/menu_adm.html');
-                        exit();
-                    case '3': // Rol bajo en Operaciones
-                        header('Location: ./template/menu.html');
+                    case '1': // Rol alto
+                        header('Location: ./template/menu_ino_calidad.html');
                         exit();
                     default:
                         header('Location: ./template/problemas.html');
                         exit();
                 }
-                break;
-
-            case 'Calidad':
-                // Redirigir según el rol en el área de Calidad
-                switch ($usuario['rol']) {
-                    case 'adm': // Rol alto en Operaciones
-                        header('Location: ./template/menu_adm_calidad.html');
-                        exit();
-                    case '1': // Rol alto en Calidad
-                        header('Location: ./template/menu_adm_calidad.html');
-                        exit();
-                    case '3': // Rol bajo en Calidad
-                        header('Location: ./template/menu_calidad.html');
-                        exit();
-                    default:
-                        header('Location: ./template/problemas.html');
-                        exit();
-                }
-                break;
-
-            default:
-                // Si el área no coincide con Operaciones o Calidad
-                header('Location: ./template/default_dashboard.php');
-                exit();
+            }
+    
+            // Lógica general para otros usuarios
+            switch ($usuario['Area']) {
+                case 'Operaciones':
+                    switch ($usuario['rol']) {
+                        case 'adm':
+                        case '1': // Rol alto
+                            header('Location: ./template/menu_adm.html');
+                            exit();
+                        case '3': // Rol bajo
+                            header('Location: ./template/menu.html');
+                            exit();
+                        default:
+                            header('Location: ./template/problemas.html');
+                            exit();
+                    }
+                    break;
+    
+                case 'Calidad':
+                    switch ($usuario['rol']) {
+                        case 'adm':
+                        case '1': // Rol alto
+                            header('Location: ./template/menu_adm_calidad.html');
+                            exit();
+                        case '3': // Rol bajo
+                            header('Location: ./template/menu_calidad.html');
+                            exit();
+                        default:
+                            header('Location: ./template/problemas.html');
+                            exit();
+                    }
+                    break;
+    
+                default:
+                    // Área no reconocida
+                    header('Location: ./template/default_dashboard.php');
+                    exit();
+            }
+        } else {
+            // Usuario no válido
+            echo "<script>
+                alert('Credenciales incorrectas. Por favor, verifica los datos.');
+                window.location.href = 'index.php';
+            </script>";
+            exit();
         }
-    } else {
-        echo "<script>
-            alert('Credenciales incorrectas. Por favor, verifica los datos.');
-            window.location.href = 'index.php';
-        </script>";
-        exit();
     }
 }
 
@@ -118,7 +135,7 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&family=Roboto:wght@100;300&display=swap"  rel="stylesheet">
     <link rel="stylesheet" href="./css/index.css">
-    <title>OMAS</title>
+    <title>Ingreso Organizacion MAS</title>
 </head>
 <body class="body">
     <!-- Barra superior -->

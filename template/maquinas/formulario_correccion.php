@@ -1,6 +1,6 @@
 <?php
 require_once '../sesion.php';
-require_once '/var/www/html/fmt/vendor/autoload.php';
+require_once '/var/www/fmt/vendor/autoload.php';
 
 $formato = $_GET['formato'] ?? '';
 $zona = $_GET['zona'] ?? '';

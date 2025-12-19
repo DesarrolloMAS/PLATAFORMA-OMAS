@@ -10,9 +10,9 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
 $sede = $_SESSION['sede'];
 if($sede === 'ZC'){
-    $carpeta = 'C:/xampp/htdocs/fmt/archivos/generados/empaque/';
+    $carpeta = '/var/www/fmt/archivos/generados/envasado/';
 }else{
-    $carpeta = 'C:/xampp/htdocs/fmt/archivos/generados/empaque_zs/';
+    $carpeta = '/var/www/fmt/archivos/generados/envasado_zs/';
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_POST['data'])) {
     $archivo = $_POST['archivo'];

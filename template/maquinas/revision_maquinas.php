@@ -2,54 +2,58 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revisión de Máquinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/revision_maquinas.css">
-    <style>
-        .maquina {
-            border-left: 3px solid #e0e0e0;
-            padding-left: 12px;
-            margin-bottom: 18px;
-            background: #fff;
-        }
-        .maquina-bogota {
-            border-left: 3px solid #003366 !important;
-        }
-        .maquina-pasto {
-            border-left: 3px solid #c0392b !important;
-        }
-        .maquina-titulo {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        .pdf-item {
-            margin-bottom: 6px;
-        }
-        .zona-header {
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-top: 20px;
-            margin-bottom: 8px;
-            color: #003366;
-        }
-        .zona-header:hover {
-            text-decoration: underline;
-        }
-        .zona-contenido {
-            margin-left: 20px;
-            display: none;
-        }
-        .zona-contenido-visible {
-            display: block;
-        }
-    </style>
 </head>
 <body>
-    <h1>📁 Revisión de Máquinas</h1>
-    <a class="volver" href="../redireccion.php">Volver</a>
-    <div id="visor-pdfs"><p>Cargando archivos...</p></div>
+    <div class="header-container">
+        <h1>
+            <div class="header-icon">📁</div>
+            Revisión de Máquinas
+        </h1>
+        <a class="volver" href="../redireccion.php">
+            <span>←</span> Volver
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="toolbar">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-icon">📊</div>
+                    <span id="total-archivos">Cargando estadísticas...</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">✓</div>
+                    <span id="archivos-seleccionados">0 seleccionados</span>
+                </div>
+            </div>
+            <button id="eliminar-seleccionados">
+                🗑️ Eliminar seleccionados
+            </button>
+        </div>
+
+        <div id="visor-pdfs">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p class="message">Cargando archivos...</p>
+            </div>
+        </div>
+    </div>
 
     <script>
+    let totalArchivos = 0;
+
+    // Actualizar contador de seleccionados
+    function actualizarContadorSeleccionados() {
+        const checks = document.querySelectorAll('.pdf-checkbox:checked');
+        document.getElementById('archivos-seleccionados').textContent = 
+            `${checks.length} seleccionado${checks.length !== 1 ? 's' : ''}`;
+    }
+
+    // Cargar datos desde el backend
     fetch('/template/maquinas/rastreo_doc.php')
       .then(res => {
         if (!res.ok) throw new Error('No se pudo cargar el backend');
@@ -60,28 +64,49 @@
         container.innerHTML = '';
 
         if (!data || Object.keys(data).length === 0) {
-          container.innerHTML = '<p>No hay archivos para mostrar.</p>';
+          container.innerHTML = '<p class="message">No hay archivos para mostrar.</p>';
           return;
         }
 
-        Object.entries(data).forEach(([zona, maquinas]) => {
-          const zonaDiv = document.createElement('div');
+        // Calcular total de archivos
+        totalArchivos = 0;
+        Object.values(data).forEach(maquinas => {
+          Object.values(maquinas).forEach(info => {
+            totalArchivos += info.pdfs.length;
+          });
+        });
+        document.getElementById('total-archivos').textContent = 
+          `${totalArchivos} archivo${totalArchivos !== 1 ? 's' : ''} total${totalArchivos !== 1 ? 'es' : ''}`;
+
+        // Renderizar zonas y máquinas
+        Object.entries(data).forEach(([zona, maquinas], index) => {
+          const zonaCard = document.createElement('div');
+          zonaCard.classList.add('zona-card');
+          zonaCard.style.animationDelay = `${0.3 + index * 0.05}s`;
+
+          const numMaquinas = Object.keys(maquinas).length;
+          let numArchivos = 0;
+          Object.values(maquinas).forEach(info => {
+            numArchivos += info.pdfs.length;
+          });
 
           const header = document.createElement('div');
           header.classList.add('zona-header');
-          header.textContent = `🔹 ${zona}`;
-          header.onclick = () => {
-            contenido.classList.toggle('zona-contenido-visible');
-            if (contenido.classList.contains('zona-contenido-visible')) {
-              contenido.style.display = 'block';
-            } else {
-              contenido.style.display = 'none';
-            }
-          };
+          header.innerHTML = `
+            <div class="zona-title">
+              <span class="zona-icon">▶</span>
+              <span>${zona}</span>
+            </div>
+            <span class="zona-badge">${numArchivos} archivo${numArchivos !== 1 ? 's' : ''}</span>
+          `;
 
           const contenido = document.createElement('div');
           contenido.classList.add('zona-contenido');
-          contenido.style.display = 'none';
+
+          header.onclick = () => {
+            header.classList.toggle('active');
+            contenido.classList.toggle('zona-contenido-visible');
+          };
 
           Object.entries(maquinas).forEach(([maquina, info]) => {
             const maquinaDiv = document.createElement('div');
@@ -100,38 +125,84 @@
               const pdfDiv = document.createElement('div');
               pdfDiv.classList.add('pdf-item');
 
-              // Construye el link real según la estructura de carpetas
-              const link = `/fmt/archivos/generados/verificaciones/${zona}/${maquina}/${pdf}`;
+              const link = `/archivos/generados/verificaciones/${zona}/${maquina}/${pdf}`;
+              
               pdfDiv.innerHTML = `
-                <span style="font-size:1.1em;">📄</span> ${pdf}
-                <a href="${link}" target="_blank" style="margin-left:10px;">📂 Ver</a>
-                <button onclick="corregirPDF(
-                  '${encodeURIComponent(zona)}',
-                  '${encodeURIComponent(maquina)}',
-                  '${encodeURIComponent(pdf)}',
-                  '${encodeURIComponent(maquina)}',
-                  '${encodeURIComponent(pdf.replace('.pdf','').split('_').slice(-1)[0])}'
-                )" style="margin-left:10px;">✏️ Corregir</button>
+                <input type="checkbox" class="pdf-checkbox" value="${link}">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">${pdf}</span>
+                <div class="pdf-actions">
+                  <a href="${link}" target="_blank" class="btn-action btn-ver">
+                    📂 Ver
+                  </a>
+                  <button onclick="corregirPDF(
+                    '${encodeURIComponent(zona)}',
+                    '${encodeURIComponent(maquina)}',
+                    '${encodeURIComponent(pdf)}',
+                    '${encodeURIComponent(maquina)}',
+                    '${encodeURIComponent(pdf.replace('.pdf','').split('_').slice(-1)[0])}'
+                  )" class="btn-action btn-corregir">
+                    ✏️ Corregir
+                  </button>
+                </div>
               `;
+
+              const checkbox = pdfDiv.querySelector('.pdf-checkbox');
+              checkbox.addEventListener('change', actualizarContadorSeleccionados);
+
               maquinaDiv.appendChild(pdfDiv);
             });
 
             contenido.appendChild(maquinaDiv);
           });
 
-          zonaDiv.appendChild(header);
-          zonaDiv.appendChild(contenido);
-          container.appendChild(zonaDiv);
+          zonaCard.appendChild(header);
+          zonaCard.appendChild(contenido);
+          container.appendChild(zonaCard);
         });
       })
       .catch(err => {
-        document.getElementById('visor-pdfs').innerHTML = `<p style="color:red;">Error al cargar los datos: ${err.message}</p>`;
+        document.getElementById('visor-pdfs').innerHTML = 
+          `<p class="message error-message">Error al cargar los datos: ${err.message}</p>`;
         console.error("Error:", err);
       });
 
+    // Función para redirigir al formulario de corrección
     function corregirPDF(zona, maquina, archivo, formato, fecha) {
       window.location.href = `formulario_correccion.php?zona=${zona}&maquina=${maquina}&archivo=${archivo}&formato=${formato}&fecha=${fecha}`;
     }
+
+    // Eliminar archivos seleccionados
+    document.getElementById('eliminar-seleccionados').onclick = function() {
+      const checks = document.querySelectorAll('.pdf-checkbox:checked');
+      if (checks.length === 0) {
+        alert('Selecciona al menos un archivo para eliminar.');
+        return;
+      }
+      if (!confirm(`¿Seguro que deseas eliminar ${checks.length} archivo${checks.length !== 1 ? 's' : ''}?`)) return;
+
+      const archivos = Array.from(checks).map(cb => {
+        const rutaCompleta = decodeURIComponent(cb.value);
+        return rutaCompleta.replace('/archivos/generados/verificaciones/', '');
+      });
+
+      const formData = new FormData();
+      archivos.forEach(a => formData.append('archivos[]', a));
+
+      fetch('/template/eliminar_archivo_maquinas.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(resp => {
+        alert(resp.replace(/\\n/g, '\n'));
+        location.reload();
+      })
+      .catch(err => {
+        alert('Error al eliminar archivos: ' + err.message);
+        console.error('Error:', err);
+      });
+    };
     </script>
 </body>
 </html>

@@ -1,4 +1,9 @@
 <?php
+// ============================================
+// SESION MODIFICADA PARA QUE DURE UN TOTAL DE 2 HORAS
+// ============================================
+ini_set('session.gc_maxlifetime', 7200);
+session_set_cookie_params(7200);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
