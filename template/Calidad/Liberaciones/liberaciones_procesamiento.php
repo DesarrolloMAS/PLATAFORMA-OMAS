@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once '/var/www/html/fmt/vendor/autoload.php';
+require_once '/var/www/fmt/vendor/autoload.php';
 require_once '../../sesion.php';
 require '../../conection.php';
 
@@ -12,7 +12,7 @@ verificarAutenticacion(); // Verifica que el usuario esté autenticado
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ruta de la plantilla base
-    $baseExcelPath = "/var/www/html/fmt/archivos/formularios/calidad/formulario_liberaciones.xlsx";
+    $baseExcelPath = "/var/www/fmt/archivos/formularios/calidad/formulario_liberaciones.xlsx";
 
     if (!file_exists($baseExcelPath)) {
         die("Error: No se encontró la plantilla base.");

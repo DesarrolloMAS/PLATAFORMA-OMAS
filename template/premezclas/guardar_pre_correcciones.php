@@ -1,5 +1,4 @@
 <?php
-session_start();
 require __DIR__ . '/../../vendor/autoload.php';
 require '../sesion.php';
 require '../conection.php';
@@ -10,9 +9,9 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
 $sede = $_SESSION['sede'];
 if($sede === 'ZS'){
-    $carpeta = 'C:/xampp/htdocs/fmt/archivos/generados/premezclas';
+    $carpeta = '/var/www/fmt/archivos/generados/premezclas';
 }else{
-    $carpeta = 'C:/xampp/htdocs/fmt/archivos/generados/premezclas';
+    $carpeta = '/var/www/fmt/archivos/generados/premezclas';
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_POST['data'])) {
     $archivo = $_POST['archivo'];

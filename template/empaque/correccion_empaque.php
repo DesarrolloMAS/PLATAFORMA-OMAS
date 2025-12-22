@@ -111,7 +111,7 @@ if (isset($_GET['archivo'])) {
                                text-align: <?php echo $alineacion; ?>;">
                         <?php echo $imagenHTML; ?>
                         <input type="text" name="data[<?php echo $filaIndex; ?>][<?php echo $colIndex; ?>]" 
-                               value="<?php echo htmlspecialchars($celda, ENT_QUOTES, 'UTF-8'); ?>">
+                               value="<?php echo htmlspecialchars($celda ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </td>
                 <?php endforeach; ?>
             </tr>

@@ -1,0 +1,3 @@
+[20-Dec-2025 14:09:13 UTC] Error al guardar la firma del Turno.
+[20-Dec-2025 14:11:28 UTC] Error al guardar la firma del Turno.
+[20-Dec-2025 14:14:07 UTC] Error al guardar la firma del Turno.

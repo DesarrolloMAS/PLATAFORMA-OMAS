@@ -1,5 +1,4 @@
 <?php
-session_start();
 require __DIR__ . '/../../vendor/autoload.php';
 require '../sesion.php'; // Incluye el archivo de autenticación
 require '../conection.php'; // Conexión a la base de datos
@@ -8,6 +7,7 @@ verificarAutenticacion(); // Verifica que el usuario esté autenticado
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Mpdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+$date = date('Y-m-d');
 if (!isset($_SESSION['id_usuario']) || empty($_SESSION['id_usuario'])) {
     die("Error: El usuario no está definido en la sesión.");
 }
@@ -49,17 +49,17 @@ error_reporting(E_ALL);
 //exit;
 if ($sede === "ZC"){
     $ubicacion = __DIR__ . '/../../archivos/generados/excelC_M'; 
-    $numero = 1319;
+    $numero = 1416;
 }else{
     $ubicacion =  __DIR__ . '/../../archivos/generados/excelC_MZS';
-    $numero = 0001;
+    $numero = 0062;
 }
 $prefijo = "Control_Molienda";
 $extension = "Xlsx";
 
 function guardarConNombreConsecutivo($ubicacion, $prefijo, $numero, $extension) { 
     do {
-        $nombreArchivo = $prefijo . "_" . $numero . "." . $extension;
+        $nombreArchivo = $prefijo . "_" . $numero . "_" . $date . "." . $extension;
         $rutaCompleta = $ubicacion . "/" . $nombreArchivo;
         $numero++;
     } while (file_exists($rutaCompleta));
