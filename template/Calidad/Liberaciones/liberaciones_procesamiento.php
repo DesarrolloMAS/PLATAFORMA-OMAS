@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 require_once '/var/www/fmt/vendor/autoload.php';
 require_once '../../sesion.php';
 require '../../conection.php';
@@ -221,9 +218,9 @@ if (isset($_POST['harina_extra']) && is_array($_POST['harina_extra'])) {
 
     $contadorFila = 0; // Contador para limitar a un máximo de 4 filas
     foreach ($_POST['harina_extra'] as $loteKey => $loteData) {
-        // Verificar que no exceda las 4 filas permitidas
-        if ($contadorFila >= 4) {
-            break; // Salir si ya se llenaron las 4 filas
+        // Verificar que no exceda las 5 filas permitidas
+        if ($contadorFila >= 5) {
+            break; // Salir si ya se llenaron las 5 filas
         }
 
         // Asignar datos del lote extra a las celdas correspondientes
@@ -243,15 +240,15 @@ if (isset($_POST['harina_extra']) && is_array($_POST['harina_extra'])) {
         $contadorFila++; // Incrementar el contador de filas
     }
 }
-$nombreArchivoBase = 'liberaciones_' . date('Y-m-d');
+$nombreArchivoBase = 'liberaciones_' . ($_POST['fecha'] ?? 'Fecha no especificada');
 $nombreArchivo = $nombreArchivoBase . '.xlsx';
-$rutaArchivo = "/var/www/html/fmt/archivos/generados/Calidad/liberaciones/$nombreArchivo";
+$rutaArchivo = "/var/www/fmt/archivos/generados/Calidad/liberaciones/$nombreArchivo";
 
 // Verificar si el archivo ya existe y agregar sufijo si es necesario
 $contador = 1;
 while (file_exists($rutaArchivo)) {
     $nombreArchivo = $nombreArchivoBase . '_' . $contador . '.xlsx';
-    $rutaArchivo = "/var/www/html/fmt/archivos/generados/Calidad/liberaciones/$nombreArchivo";
+    $rutaArchivo = "/var/www/fmt/archivos/generados/Calidad/liberaciones/$nombreArchivo";
     $contador++;
 }
 
