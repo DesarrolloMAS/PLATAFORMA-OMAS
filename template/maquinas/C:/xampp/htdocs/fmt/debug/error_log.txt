@@ -141,3 +141,33 @@
 2025-08-01 20:28:55 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Flowbalancer/FLOWBALANCER_BOGOTA/MZAH 12 SILO 203_MOLBOGFLO03-FLOWBALANCER_BOGOTA_2025-07-18.pdf
 2025-08-01 20:29:58 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Flowbalancer/FLOWBALANCER_BOGOTA/MZAH 12 SILO 204_MOLBOGFLO04-FLOWBALANCER_BOGOTA_2025-07-18.json
 2025-08-01 20:29:59 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Flowbalancer/FLOWBALANCER_BOGOTA/MZAH 12 SILO 204_MOLBOGFLO04-FLOWBALANCER_BOGOTA_2025-07-18.pdf
+2026-01-05 16:05:11 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/ANALITICA220G_LABBOGBAL01-BALANZAS_ZC_2026-01-05.json
+2026-01-05 16:05:11 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/ANALITICA220G_LABBOGBAL01-BALANZAS_ZC_2026-01-05.pdf
+2026-01-05 16:14:17 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/TERMOHIGROMETRO_LABBOGTER06-EQUIPOS_BOG_2026-01-05.json
+2026-01-05 16:14:17 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/TERMOHIGROMETRO_LABBOGTER06-EQUIPOS_BOG_2026-01-05.pdf
+2026-01-05 16:49:37 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/BBG3KG_LABBOGBAL02-BALANZAS_ZC_2026-01-05.json
+2026-01-05 16:49:37 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/BBG3KG_LABBOGBAL02-BALANZAS_ZC_2026-01-05.pdf
+2026-01-05 17:15:40 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS15KG_PREBOGBAL02-BALANZAS_ZC_2026-01-05.json
+2026-01-05 17:15:40 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS15KG_PREBOGBAL02-BALANZAS_ZC_2026-01-05.pdf
+2026-01-05 17:30:14 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS3KG_LABBOGBAL03-BALANZAS_ZC_2026-01-05.json
+2026-01-05 17:30:14 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS3KG_LABBOGBAL03-BALANZAS_ZC_2026-01-05.pdf
+2026-01-05 18:00:27 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS3KG_LABBOGBAL03-BALANZAS_ZC_2026-01-05.json
+2026-01-05 18:00:27 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS3KG_LABBOGBAL03-BALANZAS_ZC_2026-01-05.pdf
+2026-01-05 18:09:15 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS6KG_MOLBOGBAL01-BALANZAS_ZC_2026-01-05.json
+2026-01-05 18:09:15 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Balanzas/BALANZAS_ZC/OHAUS6KG_MOLBOGBAL01-BALANZAS_ZC_2026-01-05.pdf
+2026-01-05 20:51:11 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Bascula/BBG MOGOLLA_EMPBOGBA S02-BASCULA_BOGOTA/BBG MOGOLLA_EMPBOGBA S02-BASCULA_BOGOTA_2026-01-05.json
+2026-01-05 20:51:11 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Bascula/BBG MOGOLLA_EMPBOGBA S02-BASCULA_BOGOTA/BBG MOGOLLA_EMPBOGBA S02-BASCULA_BOGOTA_2026-01-05.pdf
+2026-01-05 20:55:33 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Bascula/BBG PREMEZCLAS_PREBOGBA S01-BASCULA_BOGOTA/BBG PREMEZCLAS_PREBOGBA S01-BASCULA_BOGOTA_2026-01-05.json
+2026-01-05 20:55:33 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Bascula/BBG PREMEZCLAS_PREBOGBA S01-BASCULA_BOGOTA/BBG PREMEZCLAS_PREBOGBA S01-BASCULA_BOGOTA_2026-01-05.pdf
+2026-01-06 13:42:45 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Bascula/BBG SEGUNDA_EMPBOGBA S03-BASCULA_BOGOTA/BBG SEGUNDA_EMPBOGBA S03-BASCULA_BOGOTA_2026-01-05.json
+2026-01-06 13:42:45 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Bascula/BBG SEGUNDA_EMPBOGBA S03-BASCULA_BOGOTA/BBG SEGUNDA_EMPBOGBA S03-BASCULA_BOGOTA_2026-01-05.pdf
+2026-01-06 13:59:29 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/Bascula/M.TOLEDO_EMPBOGBA S01-BASCULA_BOGOTA/M.TOLEDO_EMPBOGBA S01-BASCULA_BOGOTA_2026-01-05.json
+2026-01-06 13:59:29 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/Bascula/M.TOLEDO_EMPBOGBA S01-BASCULA_BOGOTA/M.TOLEDO_EMPBOGBA S01-BASCULA_BOGOTA_2026-01-05.pdf
+2026-01-06 18:19:31 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/ANALIZADOR DE HUMEDAD_LABBOGANH01-EQUIPOS_BOG_2026-01-05.json
+2026-01-06 18:19:32 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/ANALIZADOR DE HUMEDAD_LABBOGANH01-EQUIPOS_BOG_2026-01-05.pdf
+2026-01-06 18:23:28 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/ANALIZADOR DE VIBRACIONES_MANBOGVIB01-EQUIPOS_BOG_2026-01-05.json
+2026-01-06 18:23:28 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/ANALIZADOR DE VIBRACIONES_MANBOGVIB01-EQUIPOS_BOG_2026-01-05.pdf
+2026-01-06 18:33:13 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/CAMARA TERMOGRAFICA FLUKE_MANBOGCAT01-EQUIPOS_BOG_2026-01-05.json
+2026-01-06 18:33:13 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/CAMARA TERMOGRAFICA FLUKE_MANBOGCAT01-EQUIPOS_BOG_2026-01-05.pdf
+2026-01-06 18:37:14 | 📝 JSON actualizado en: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/CHILLER_LABBOGCHL01-EQUIPOS_BOG_2026-01-05.json
+2026-01-06 18:37:14 | ✅ PDF generado: /var/www/fmt/archivos/generados/verificaciones/equipos/EQUIPOS_BOG/CHILLER_LABBOGCHL01-EQUIPOS_BOG_2026-01-05.pdf

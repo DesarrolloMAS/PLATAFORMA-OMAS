@@ -57,10 +57,10 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
     <h1 class="titulo_principal">Vista Previa del Archivo Excel</h1>
 
     <!-- Botón para generar PDF -->
-    <!-- <form action="generarpdf.php" method="POST">
+    <form action="generarpdf.php" method="POST">
         <input type="hidden" name="archivo" value="<?php echo htmlspecialchars($archivo); ?>">
         <button type="submit" class="boton">Generar PDF</button>
-    </form> -->
+    </form>
     <style>
         table {
             border-collapse: collapse;
