@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     let textoFecha = fecha ? `(Última verificación: ${fecha})` : "(Sin verificación)";
                     let formatoArchivo = grupo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, "_") + ".php";
-                    let urlFormato = `/fmt/template/maquinas/${zona.replace(/\s+/g, "_")}/${formatoArchivo}?codigo=${encodeURIComponent(codigo)}&maquina=${encodeURIComponent(grupo)}`;
+                    let urlFormato = `/template/maquinas/${zona.replace(/\s+/g, "_")}/${formatoArchivo}?codigo=${encodeURIComponent(codigo)}&maquina=${encodeURIComponent(grupo)}`;
                     let codigoLink = document.createElement("a");
                     codigoLink.href = urlFormato;
                     codigoLink.classList.add("codigo-link", clase);

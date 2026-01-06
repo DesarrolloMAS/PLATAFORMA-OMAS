@@ -1,14 +1,15 @@
 <?php
-require_once '/var/www/html/fmt/vendor/autoload.php';
+require_once '/var/www/fmt/vendor/autoload.php';
 require_once '../../sesion.php';
 require '../../conection.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Mpdf\Mpdf;
-$sede = $_SESSION['sede'];
+$sede = $_GET['sede'] ?? $_SESSION['sede'];
 if ($sede === 'ZS'){
-    $carpeta = '/var/www/html/fmt/archivos/generados/Calidad/liberaciones_zs';
-}else
-    $carpeta = '/var/www/html/fmt/archivos/generados/Calidad/liberaciones';
+    $carpeta = '/var/www/fmt/archivos/generados/Calidad/liberaciones_zs';
+}else if ($sede === 'ZC'){
+    $carpeta = '/var/www/fmt/archivos/generados/Calidad/liberaciones';
+}
 if (isset($_GET['archivo'])) {
     $archivo = $_GET['archivo'];
     $rutaArchivo = $carpeta . DIRECTORY_SEPARATOR . $archivo; // Agregar separador entre carpeta y archivo
@@ -51,14 +52,14 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/revision.css"> <!-- Asegúrate de tener estilos -->
+    <link rel="stylesheet" href="/css/revision_prev.css"> 
     <title>Vista Previa de Excel</title><a href="correccion_liberaciones.php?archivo=<?php echo urlencode($archivo); ?>">Corregir</a>
     <h1 class="titulo_principal">Vista Previa del Archivo Excel</h1>
 
     <!-- Botón para generar PDF -->
     <form action="generarpdf.php" method="POST">
         <input type="hidden" name="archivo" value="<?php echo htmlspecialchars($archivo); ?>">
-        <button type="submit" class="boton">Generar PDF</button>
+        <!-- <button type="submit" class="boton">Generar PDF</button> -->
     </form>
     <style>
         table {
@@ -82,4 +83,3 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 </body>
 
 </html>
-

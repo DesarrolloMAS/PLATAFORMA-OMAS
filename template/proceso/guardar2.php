@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_
         try {
             $spreadsheet = IOFactory::load($rutaArchivo);
             $hoja = $spreadsheet->getActiveSheet();
-            $celdasConFormula = ['B59','D59','F59','H59','J59','I11','B62','B63','B64','B65','B66'];
+            $celdasConFormula = [];
             for ($fila = 11; $fila <= 75; $fila++) {
                 $celdasConFormula[] = "I$fila";
             }

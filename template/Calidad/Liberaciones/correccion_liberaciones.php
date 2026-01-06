@@ -1,13 +1,24 @@
 <?php
-require_once '/var/www/html/fmt/vendor/autoload.php';
+require_once '/var/www/fmt/vendor/autoload.php';
 require_once '../../sesion.php';
 require '../../conection.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
+// Función helper para sanitizar valores y evitar errores con null
+function sanitizeValue($value) {
+    if ($value === null || $value === false) {
+        return '';
+    }
+    return (string)$value;
+}
 
-$carpeta = '/var/www/html/fmt/archivos/generados/Calidad/liberaciones';
-
+$sede = $_GET['sede'] ?? $_SESSION['sede'];
+if ($sede === 'ZS') {
+    $carpeta = '/var/www/fmt/archivos/generados/Calidad/liberaciones_zs';
+} else {
+    $carpeta = '/var/www/fmt/archivos/generados/Calidad/liberaciones';
+}
 
 if (isset($_GET['archivo'])) {
     $archivo = $_GET['archivo'];
@@ -182,7 +193,7 @@ for ($r = $startRow + 1; $r < count($filas); $r++) {
             // Imprimir encabezados
             echo "<tr>";
             for ($c = 0; $c < $colCount; $c++) {
-                echo "<th>" . htmlspecialchars($headers[$c], ENT_QUOTES, 'UTF-8') . "</th>";
+                echo "<th>" . htmlspecialchars(sanitizeValue($headers[$c]), ENT_QUOTES, 'UTF-8') . "</th>";
             }
             echo "</tr>";
 
@@ -194,7 +205,7 @@ for ($r = $startRow + 1; $r < count($filas); $r++) {
                 echo "<tr>";
                 for ($c = 0; $c < $colCount; $c++) {
                     $valor = isset($fila[$c]) ? $fila[$c] : '';
-                    echo "<td><input type='text' name='data[$r][$c]' value='" . htmlspecialchars($valor, ENT_QUOTES, 'UTF-8') . "'></td>";
+                    echo "<td><input type='text' name='data[$r][$c]' value='" . htmlspecialchars(sanitizeValue($valor), ENT_QUOTES, 'UTF-8') . "'></td>";
                 }
                 echo "</tr>";
             }
