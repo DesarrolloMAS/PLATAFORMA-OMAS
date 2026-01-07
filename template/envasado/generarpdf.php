@@ -6,12 +6,12 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Mpdf\Mpdf;
 $zona=$_SESSION['sede'];
 if ($zona === 'ZC'){
-    $carpeta = realpath(__DIR__ . '/../../archivos/generados/excelC_M/');
-    $pdfCarpeta = $carpeta . '/../pdfsC_M/';
+    $carpeta = realpath(__DIR__ . '/../../archivos/generados/envasado/');
+    $pdfCarpeta = $carpeta . '/../envasado_pdf/';
 }
 else{
-    $carpeta = realpath(__DIR__ . '/../../archivos/generados/excelC_MZS/');
-    $pdfCarpeta = $carpeta . '/../pdfsC_MZS/';
+    $carpeta = realpath(__DIR__ . '/../../archivos/generados/envasado_zs/');
+    $pdfCarpeta = $carpeta . '/../envasado_pdfzs/';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['archivo'])) {
     $archivo = trim($_POST['archivo']);
@@ -25,13 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['archivo'])) {
         // Cargar el archivo Excel
         $spreadsheet = IOFactory::load($rutaArchivo);
         $hoja = $spreadsheet->getActiveSheet();
-        // Extraer fecha del diligenciamiento del documento 
-        if ($zona === 'ZC'){
-            $dia = $hoja->getCell('I8')->getValue() ?? 'SinFecha';
-            }
-        else{
-            $dia = $hoja->getCell('G7')->getValue() ?? 'SinFecha'; 
-            }
+
         // Convertir hoja a HTML
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Html($spreadsheet);
         ob_start();
@@ -43,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['archivo'])) {
         $mpdf->WriteHTML($htmlContent);
 
         // Guardar el PDF en una ubicación específica
-        $pdfNombre = pathinfo($archivo, PATHINFO_FILENAME) . '_' . $dia . '.pdf';
+        $pdfNombre = pathinfo($archivo, PATHINFO_FILENAME) . '.pdf';
         $pdfRuta = $pdfCarpeta . $pdfNombre;
 
         if (!is_dir($pdfCarpeta)) {
@@ -52,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['archivo'])) {
 
         $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 
-        header("Location: reformulario002.php");
+        header("Location: galeria_envasados.php");
         } catch (Exception $e) {
         die("Error al procesar el archivo: " . $e->getMessage());
         }

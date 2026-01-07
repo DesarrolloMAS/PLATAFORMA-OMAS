@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'sesion.php'; // Ajusta la ruta si es necesario
 
 $usuario = $_SESSION['nombre'] ?? 'Usuario desconocido';
@@ -31,7 +30,7 @@ function eliminarArchivoVerificacion($rutaRelativa, $usuario) {
         // Log de la eliminación para auditoría
         $fecha = date('Y-m-d H:i:s');
         $logMessage = "[$fecha] Usuario: $usuario eliminó el archivo: $rutaRelativa (Verificaciones)\n";
-        $logDir = __DIR__ . '/../../logs/';
+        $logDir = __DIR__ . '/../logs/';
         if (!file_exists($logDir)) {
             mkdir($logDir, 0777, true);
         }
