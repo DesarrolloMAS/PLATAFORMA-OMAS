@@ -71,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         case '1': // Rol alto
                             header('Location: ./template/menu_adm.html');
                             exit();
+                        case '2': // Rol Intermedio
+                            header('Location: ./template/menu_adm.html');
+                            exit();
                         case '3': // Rol bajo
                             header('Location: ./template/menu.html');
                             exit();
@@ -88,6 +91,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             exit();
                         case '3': // Rol bajo
                             header('Location: ./template/menu_calidad.html');
+                            exit();
+                        default:
+                            header('Location: ./template/problemas.html');
+                            exit();
+                    }
+                    break;
+                case 'HSEQ':
+                    switch ($usuario['rol']) {
+                        case 'adm':
+                        case '1': // Rol alto
+                            header('Location: ./template/menu_hseq_adm.html');
+                            exit();
+                        case '3': // Rol bajo
+                            header('Location: ./template/menu_hseq_adm.html');
                             exit();
                         default:
                             header('Location: ./template/problemas.html');
@@ -201,8 +218,73 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
             <a href="./template/registroUsuarios.php" class="botonprime">Registrarse</a>
         </form>
             </div>
-    
+</div>
+
     <!-- Barra inferior -->
     <div class="barra-inferior"></div>
+    <div id="sesion-expirada-popup" class="popup-sesion" style="display:none;">
+    <div class="animacion-sesion">
+        <span class="loader"></span>
+        <p>Tu sesión ha expirado. Por favor, inicia sesión nuevamente.</p>
+    </div>
+</div>
 </body>
+<!-- FUNCION SESION FINALIZADA -->
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('motivo') === 'sesion') {
+    const popup = document.getElementById('sesion-expirada-popup');
+    popup.style.display = 'flex';
+    setTimeout(() => {
+      popup.classList.add('fadeout');
+    }, 500); // Muestra 2 segundos
+    setTimeout(() => {
+      popup.style.display = 'none';
+    }, 3000); // Desaparece después de 3 segundos
+  }
+});
+</script>
+
+<style>
+.popup-sesion {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background: rgba(0,0,0,0.2);
+  transition: opacity 1s;
+  opacity: 1;
+}
+.popup-sesion.fadeout {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.animacion-sesion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  padding: 18px 28px;
+  font-size: 1.1em;
+  box-shadow: 0 4px 24px #0002;
+}
+.loader {
+  width: 28px;
+  height: 28px;
+  border: 4px solid #ffeeba;
+  border-top: 4px solid #ffc107;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
 </html>

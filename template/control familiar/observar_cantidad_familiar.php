@@ -52,7 +52,7 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/revision.css"> <!-- Asegúrate de tener estilos -->
+    <link rel="stylesheet" href="/css/revision_prev.css"> <!-- Asegúrate de tener estilos -->
     <title>Vista Previa de Excel</title>
     <h1 class="titulo_principal">Vista Previa del Archivo Excel</h1>
     <br><br><br><br>

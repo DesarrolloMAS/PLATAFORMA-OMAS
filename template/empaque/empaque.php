@@ -1,9 +1,11 @@
 <?php
 require '../../vendor/autoload.php';
+require '../sesion.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
-
+$sede = $_SESSION['sede'];
 $archivo = isset($_GET['archivo']) ? $_GET['archivo'] : (isset($_POST['archivo']) ? $_POST['archivo'] : '');
 $ruta_archivo = '../../archivos/generados/empaque/' . basename($archivo);
+$nombre_empaque = pathinfo($archivo, PATHINFO_FILENAME);
 
 $mensaje = '';
 
@@ -34,7 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $archivo && file_exists($ruta_archi
     $sheet->setCellValue('L' . $fila, $_POST['cantidad_total_entregadas'] ?? '');
     $sheet->setCellValue('M' . $fila, $_POST['cantidad_no_conformes_fabrica'] ?? '');
     $sheet->setCellValue('N' . $fila, $_POST['cantidad_no_conformes_planta'] ?? '');
-
+    // Encabezado
+    $sheet->setCellValue('C5', $_POST[$sede] ?? '');
+    $sheet->setCellValue('C6', 'COMPAÑIA DE EMPAQUES');
+    $sheet->setCellValue('H5', $nombre_empaque);
+    $sheet->setCellValue('O5' . $fila, $_POST['lote'] ?? '');
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
     $writer->save($ruta_archivo);
 
@@ -70,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $archivo && file_exists($ruta_archi
 <body>
     <h1 class="titulo-empaque">CONTROL DE ALISTAMIENTO DE MATERIALES DE EMPAQUE EN ALMACEN</h1>
     <form class="form-empaque" action="" method="post">
+        <input type="hidden" name="lote" value="<?php echo isset($_GET['lote']) ? htmlspecialchars($_GET['lote']) : (isset($_POST['lote']) ? htmlspecialchars($_POST['lote']) : ''); ?>">
         <input type="hidden" name="archivo" value="<?php echo htmlspecialchars($archivo); ?>">
         <div>
             <label for="fecha_alistamiento">Fecha de Alistamiento</label>

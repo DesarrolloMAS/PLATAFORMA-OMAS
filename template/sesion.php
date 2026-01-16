@@ -8,14 +8,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 function verificarAutenticacion() {
-    if (!isset($_SESSION['id_usuario']) || !isset($_SESSION['area'])) {
-        header('Location: ../index.php'); 
+    if (
+        !isset($_SESSION['id_usuario']) ||
+        !isset($_SESSION['area']) ||
+        !isset($_SESSION['sede']) ||
+        !isset($_SESSION['nombre'])
+    ) {
+        header('Location: /index.php?motivo=sesion'); 
         exit();
     }
-}
-
-if (!isset($_SESSION['nombre'])) {
-    die("Error: Usuario no hay nombre.");
 }
 
 function verificarRol($rolRequerido) {

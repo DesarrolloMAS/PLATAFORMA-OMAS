@@ -1,8 +1,46 @@
+<script>
+setInterval(function() {
+    verificarSesionAjax(function(activa) {
+        // Si no está activa, ya se redirigió
+    });
+}, 10000); // Cada 10 segundos
+function verificarSesionAjax(callback) {
+    fetch('/template/verificar_sesion.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.activa) {
+                callback(true);
+            } else {
+                // Muestra mensaje o redirige
+                alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                window.location.href = '/index.php?motivo=sesion';
+                callback(false);
+            }
+        })
+        .catch(() => {
+            alert('Error al verificar la sesión.');
+            callback(false);
+        });
+}
+
+// Ejemplo: antes de enviar un formulario
+const form = document.querySelector('form');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        verificarSesionAjax(function(activa) {
+            if (activa) {
+                form.submit();
+            }
+            // Si no está activa, ya se redirigió
+        });
+    });
+}
+</script>
 <?php
 require 'conection.php'; // Conexión a la base de datos
 require 'sesion.php';
 verificarAutenticacion();
-
 function obtenerCargosDesdeSQL($pdoUsuarios) {
     try {
         $stmt = $pdoUsuarios->query("SELECT DISTINCT Cargo FROM usuarios");
@@ -58,8 +96,8 @@ if (empty($usuarios)) {
             <div class="seccion">
                 <h2 class="titulo">Información del Solicitante</h2>
                 <div class="datos">
-                    <input type="date" id="fechainicial" name="fechainicial" required>
-                    <input type="time" id="horainicial" name="horainicial" prequired >
+                    <input type="date" id="fechainicial" name="fechainicial">
+                    <input type="time" id="horainicial" name="horainicial">
                     <input type="text" name="nombre_solicitante" id="nombre_solicitante" placeholder="Ingrese su Nombre" required>
                     <select name="cargo_solicitante" id="cargo_solicitante" required>
                         <option value="">-- Seleccionar Cargo --</option>
@@ -213,11 +251,11 @@ if (empty($usuarios)) {
                 </div>
                 <div class="datos">
                     <label for="fecha_cierre">Fecha de Cierre del Mantenimiento</label>
-                    <input type="date" id="fecha_cierre" name="fecha_cierre" required>
+                    <input type="date" id="fecha_cierre" name="fecha_cierre">
                 </div>
                 <div class="datos">
                     <label for="hora_cierre">Hora del Cierre del Mantenimiento</label>
-                    <input type="time" id="hora_cierre" name="hora_cierre" required>
+                    <input type="time" id="hora_cierre" name="hora_cierre">
 
                 </div>
             </div>
@@ -313,7 +351,7 @@ if (empty($usuarios)) {
                 <div class="datos">
                     <label for="fecha_revisionl">Fecha y Hora de la revisión de la limpieza</label>
                     <input type="time" id="hora_revisionl" name="hora_revisionl">
-                    <input type="date" id="fecha_revisionl" name="fecha_revisionl" required>
+                    <input type="date" id="fecha_revisionl" name="fecha_revisionl">
                 </div>
                     <br>
             </div>
@@ -336,7 +374,7 @@ if (empty($usuarios)) {
                 <textarea name="trabajo_realizar" placeholder="trabajo a realizar" id="trabajo_realizar"></textarea required>
             </div>
             <div class="datos">
-                    <input type="date" id="fechacontrol" name="fechacontrol" required>
+                    <input type="date" id="fechacontrol" name="fechacontrol">
             </div>
         </div>
         <div class="tabla" >
@@ -545,6 +583,74 @@ if (empty($usuarios)) {
 <script>
     //Menus Desplegables
 // JavaScript
+// ========================================================================
+// FUNCIONES PARA LAS ALERTAS DE QUE FALTA INFORMACION EN ALGUN ESPACIO
+document.addEventListener('DOMContentLoaded', function() {
+    const formulario = document.getElementById('formulario1');
+    if (!formulario) return;
+
+    formulario.addEventListener('submit', function(e) {
+        // Validar fechas y horas
+        const requiredFields = [
+            { id: 'fechainicial', label: 'Fecha inicial' },
+            { id: 'horainicial', label: 'Hora inicial' },
+            { id: 'fecha_cierre', label: 'Fecha de cierre' },
+            { id: 'hora_cierre', label: 'Hora de cierre' },
+            { id: 'fecha_revisionl', label: 'Fecha de revisión de limpieza' },
+            { id: 'hora_revisionl', label: 'Hora de revisión de limpieza' },
+            { id: 'fechacontrol', label: 'Fecha control' }
+        ];
+        let missing = [];
+        requiredFields.forEach(field => {
+            const el = document.getElementById(field.id);
+            if (!el || !el.value || el.value.trim() === "") {
+                missing.push(field.label);
+            }
+        });
+        if (missing.length > 0) {
+            mostrarAlertaAnimada('Por favor complete los siguientes campos:<br><ul><li>' + missing.join('</li><li>') + '</li></ul>');
+            e.preventDefault();
+            return false;
+        }
+
+        // Validar nombre del equipo
+        if (!validarFormularioCompleto()) {
+            mostrarAlertaAnimada('❌ Por favor corrija el nombre del equipo antes de continuar.');
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Alerta animada personalizada
+    function mostrarAlertaAnimada(mensaje) {
+        let alerta = document.getElementById('alerta-campos');
+        if (!alerta) {
+            alerta = document.createElement('div');
+            alerta.id = 'alerta-campos';
+            alerta.style.position = 'fixed';
+            alerta.style.top = '20px';
+            alerta.style.left = '50%';
+            alerta.style.transform = 'translateX(-50%)';
+            alerta.style.background = '#ffdddd';
+            alerta.style.color = '#a94442';
+            alerta.style.border = '2px solid #a94442';
+            alerta.style.padding = '20px';
+            alerta.style.borderRadius = '8px';
+            alerta.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+            alerta.style.zIndex = '9999';
+            alerta.style.fontSize = '18px';
+            alerta.style.textAlign = 'center';
+            alerta.style.transition = 'opacity 0.5s';
+            document.body.appendChild(alerta);
+        }
+        alerta.innerHTML = mensaje;
+        alerta.style.opacity = '1';
+        setTimeout(() => {
+            alerta.style.opacity = '0';
+        }, 4000);
+    }
+});
+// ========================================================================
 //FUNCIONES DE REPORTES DE ERRORES ESPECIFICOS PARA EL NOMBRE DEL DOCUMENTO
 function validarNombreArchivo(input) {
     const valor = input.value;

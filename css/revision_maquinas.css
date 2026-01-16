@@ -117,6 +117,9 @@ h1 {
     justify-content: space-between;
     align-items: center;
     animation: fadeIn 0.5s ease 0.1s both;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 @keyframes fadeIn {

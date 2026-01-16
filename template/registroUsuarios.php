@@ -60,7 +60,7 @@ $stmt->execute(); // Ejecutar la consulta
 
                 echo "<script>
                     alert('Registro exitoso.');
-                    window.location.href = '/fmt/index.php';
+                    window.location.href = '/index.php';
                 </script>";
             } catch (PDOException $e) {
                 echo "<script>
@@ -148,12 +148,13 @@ $stmt->execute(); // Ejecutar la consulta
                         <option value="Operario de Carga">Operario de Carga</option>
                         <option value="Tecnico Mecanico">Tecnico Mecanico</option>
                         <option value="Revision Inocuidad">Revision Inocuidad</option>
-                        <option value="Administrador">Administrador</option>
+                        <option value="Jefe HSEQ">Jefe HSEQ</option>
+                        <option value="Analista HSEQ">Analista HSEQ</option>
+                        <option value="Auxiliar HSEQ">Auxiliar HSEQ</option>
                     </select>   
                 </div>
                 <div class="formulariog">
                     <select name="campo_rol" id="campo_rol">
-                    <option value="adm">Administrador</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -165,6 +166,7 @@ $stmt->execute(); // Ejecutar la consulta
                         <option value="Operaciones">Operaciones</option>
                         <option value="Calidad">Calidad</option>
                         <option value="Tecnología">Tecnología</option>
+                        <option value="HSEQ">HSEQ</option>
                     </select>
                 </div>
                 <div class="formulariog">

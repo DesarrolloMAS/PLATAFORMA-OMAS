@@ -1,3 +1,52 @@
+<script>
+// ============================================
+// VERIFICACION DE SESION AJAX 10 SEG
+setInterval(function() {
+    verificarSesionAjax(function(activa) {
+        // Si no está activa, ya se redirigió
+    });
+}, 10000); // Cada 10 segundos
+function verificarSesionAjax(callback) {
+    fetch('/template/verificar_sesion.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.activa) {
+                callback(true);
+            } else {
+                // Muestra mensaje o redirige
+                alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                window.location.href = '/index.php?motivo=sesion';
+                callback(false);
+            }
+        })
+        .catch(() => {
+            alert('Error al verificar la sesión.');
+            callback(false);
+        });
+}
+
+// Ejemplo: antes de enviar un formulario
+const form = document.querySelector('form');
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        verificarSesionAjax(function(activa) {
+            if (activa) {
+                form.submit();
+            }
+            // Si no está activa, ya se redirigió
+        });
+    });
+}
+// ============================================
+</script>
+<?php
+//=============================================
+//VALIDACION DE SESION JS 
+require_once '../sesion.php';
+verificarAutenticacion();
+//=============================================
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
