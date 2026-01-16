@@ -5,7 +5,7 @@ $dbnameControl = 'control_molienda';
 $dbnameControl_zs = 'control_molienda_zs';
 $dbnamemaquinas = 'maquinas';
 $username = 'root'; // Cambia esto según tu configuración
-$password = '0000'; // Cambia esto según tu configuración
+$password = 'Desarrollo26*'; // Cambia esto según tu configuración
 
 // Conexión a la base de datos "usuarios"
 try {
