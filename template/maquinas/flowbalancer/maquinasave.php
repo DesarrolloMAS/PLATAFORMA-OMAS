@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_SESSION['nombre'] ?? 'anonimo';
 
     // Carpeta de destino igual que Equipos
-    $ruta_maquina = "/var/www/html/fmt/archivos/generados/verificaciones/{$zona}/{$nombre_maquina}/";
+    $ruta_maquina = "/var/www/fmt/archivos/generados/verificaciones/{$zona}/{$nombre_maquina}/";
 
     // Crear carpeta si no existe
     if (!file_exists($ruta_maquina)) mkdir($ruta_maquina, 0777, true);

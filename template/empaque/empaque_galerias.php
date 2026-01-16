@@ -17,7 +17,8 @@ if ($sede === 'ZC') {
         'Empaque Galeras Naranja X25',
         'Empaque Galeras Kraft X25',
         'Empaque Galeras Multi Beige X25',
-        'Empaque Fuerte de Exportacion'
+        'Empaque Fuerte de Exportacion',
+        'Empaque Exclusiva  x25'
     ];
 } else {
     $productos = [

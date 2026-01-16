@@ -24,7 +24,8 @@ if ($sede === 'ZC') {
         ['nombre' => 'Grano entero fino', 'peso' => 25],
         ['nombre' => 'Trigo entero', 'peso' => 25],
         ['nombre' => 'Manitoba', 'peso' => 25],
-        ['nombre' => 'Centeno Pepa', 'peso' => 25]
+        ['nombre' => 'Centeno Pepa', 'peso' => 25],
+        ['nombre' => 'Exclusiva x25', 'peso' => 25]
 
     ];
 } else {

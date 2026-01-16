@@ -1,16 +1,16 @@
 {
-    "fechainicial": "2026-01-06",
-    "horainicial": "12:32",
-    "nombre_solicitante": "John gíraldo ",
+    "fechainicial": "2026-01-13",
+    "horainicial": "07:10",
+    "nombre_solicitante": "IVAN JOJOA",
     "cargo_solicitante": {
-        "value": "Lider de Mantenimiento",
-        "selectedIndex": 3,
-        "selectedText": "Lider de Mantenimiento"
+        "value": "Auxiliar de mantenimiento",
+        "selectedIndex": 4,
+        "selectedText": "Auxiliar de mantenimiento"
     },
-    "objeto_dañado": "Cámaras",
-    "marca": "",
-    "cod": "",
-    "descripcion_daños": "Instalación de cámara ",
+    "objeto_dañado": "MOLINO MARTILLO",
+    "marca": "N\/A",
+    "cod": "MOLBOGIMA03         ",
+    "descripcion_daños": "fugas, pintura en mal estado, fisuras, visor de entrada en mal estado ",
     "equipo_name": "",
     "termografia1": {
         "value": "N\/A",
@@ -42,18 +42,13 @@
     "firma_solicitante": "",
     "firma_autorizado": "",
     "tipomantenimiento": {
-        "value": "Preventivo, No Planeado",
-        "selectedIndex": 2,
-        "selectedText": "Preventivo, No Planeado"
+        "value": "Preventivo, Planeado",
+        "selectedIndex": 0,
+        "selectedText": "Preventivo, Planeado"
     },
     "descripcion_trabajo": "",
     "fecha_cierre": "",
     "hora_cierre": "",
-    "responsable-Miembro_De_La_Compañia_0": {
-        "value": "Harold Taramuel",
-        "selectedIndex": 9,
-        "selectedText": "Harold Taramuel"
-    },
     "VoBo": {
         "value": "",
         "selectedIndex": 0,
@@ -76,15 +71,15 @@
     "firma_respLim2": "",
     "hora_revisionl": "",
     "fecha_revisionl": "",
-    "control_responsable": "Harold Taramuel ",
-    "cargo_control": "Auxiliar de mantenimiento ",
-    "trabajo_realizar": "Instalación de cámara",
-    "fechacontrol": "2026-01-06",
-    "herramientas_cantidad1": "1",
-    "descripcion_herramientas1": "Escalera de extensión ",
+    "control_responsable": "",
+    "cargo_control": "",
+    "trabajo_realizar": "",
+    "fechacontrol": "",
+    "herramientas_cantidad1": "",
+    "descripcion_herramientas1": "",
     "herramientas_salida1": "",
-    "herramientas_cantidad2": "1",
-    "descripcion_herramientas2": "Taladro inalámbrico ",
+    "herramientas_cantidad2": "",
+    "descripcion_herramientas2": "",
     "herramientas_salida2": "",
     "herramientas_cantidad3": "",
     "descripcion_herramientas3": "",
