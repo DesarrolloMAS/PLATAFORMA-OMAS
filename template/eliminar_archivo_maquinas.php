@@ -26,19 +26,36 @@ function eliminarArchivoVerificacion($rutaRelativa, $usuario) {
     if (!is_file($rutaCompleta)) {
         return "❌ No es un archivo válido: $rutaRelativa";
     }
+
+    $mensajes = [];
+
+    // Eliminar PDF
     if (unlink($rutaCompleta)) {
-        // Log de la eliminación para auditoría
-        $fecha = date('Y-m-d H:i:s');
-        $logMessage = "[$fecha] Usuario: $usuario eliminó el archivo: $rutaRelativa (Verificaciones)\n";
-        $logDir = __DIR__ . '/../logs/';
-        if (!file_exists($logDir)) {
-            mkdir($logDir, 0777, true);
-        }
-        file_put_contents($logDir . 'eliminaciones_verificaciones.log', $logMessage, FILE_APPEND | LOCK_EX);
-        return "✅ Archivo eliminado correctamente";
+        $mensajes[] = "✅ Archivo PDF eliminado correctamente";
     } else {
-        return "❌ Error al eliminar el archivo (verifique permisos): $rutaRelativa";
+        $mensajes[] = "❌ Error al eliminar el archivo PDF (verifique permisos): $rutaRelativa";
     }
+
+    // Eliminar JSON asociado
+    $rutaJson = preg_replace('/\.pdf$/i', '.json', $rutaCompleta);
+    if (file_exists($rutaJson) && is_file($rutaJson)) {
+        if (unlink($rutaJson)) {
+            $mensajes[] = "✅ Archivo JSON eliminado correctamente";
+        } else {
+            $mensajes[] = "❌ Error al eliminar el archivo JSON: " . basename($rutaJson);
+        }
+    }
+
+    // Log de la eliminación para auditoría
+    $fecha = date('Y-m-d H:i:s');
+    $logMessage = "[$fecha] Usuario: $usuario eliminó el archivo: $rutaRelativa (Verificaciones)\n";
+    $logDir = __DIR__ . '/../logs/';
+    if (!file_exists($logDir)) {
+        mkdir($logDir, 0777, true);
+    }
+    file_put_contents($logDir . 'eliminaciones_verificaciones.log', $logMessage, FILE_APPEND | LOCK_EX);
+
+    return implode(' | ', $mensajes);
 }
 
 // Procesar la petición POST

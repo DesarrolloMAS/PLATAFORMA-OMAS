@@ -23,6 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre_maquina = $_POST['nombre_maquina'] ?? '';
     $usuario = $_SESSION['nombre'] ?? 'anonimo';
 
+    //VALIDAR CODIGO DE ORDEN O DETENER EL PROCESO
+
+    if (empty($_POST['codigo_orden'])) {
+        die("❌ Debe ingresar el Código de Orden de Trabajo para continuar.");
+    }
+
     // Nombre base de archivo
     $nombre_archivo = "{$codigo_maquina}-{$nombre_maquina}_{$fecha}";
 
@@ -33,11 +39,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ruta_pdf = $ruta_maquina . $nombre_archivo . ".pdf";
     $ruta_json = $ruta_maquina . $nombre_archivo . ".json";
 
+    // MOVER ARCHIVOS ANTIGUOS A CARPETA DE RESPALDO
+
+    $json_path_original = $_POST['json_path'] ?? '';
+    $pdf_path_original = dirname($json_path_original) . '/' . ($_POST['archivo_pdf'] ?? '');
+    
+
+    // Determinar el creador_html.php correcto
+    $carpetaCorrecciones = str_replace(
+        '/archivos/generados/verificaciones/',
+        '/archivos/correcciones/verificaciones/',
+        dirname($json_path_original)
+    );
+
+    if (!file_exists($carpetaCorrecciones)) {
+        mkdir($carpetaCorrecciones, 0777, true);
+    }
+
+    // Mover JSON original
+    if (file_exists($json_path_original)) {
+        rename($json_path_original, $carpetaCorrecciones . '/' . basename($json_path_original));
+    }
+    // Mover PDF original
+    if (file_exists($pdf_path_original)) {
+        rename($pdf_path_original, $carpetaCorrecciones . '/' . basename($pdf_path_original));
+    }
+
     // Actualizar JSON
     file_put_contents($ruta_json, json_encode($_POST, JSON_PRETTY_PRINT));
     escribirLog("📝 JSON actualizado en: $ruta_json");
 
-    // Determinar el creador_html.php correcto
     $creador_html_path = __DIR__ . "/{$tipo_maquina}/creador_html.php";
     $css_path = __DIR__ . "/{$tipo_maquina}/creador_html.css";
     if (!file_exists($creador_html_path)) {

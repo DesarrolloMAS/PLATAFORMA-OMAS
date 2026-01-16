@@ -1,1 +1,16 @@
-VERSION ESTABLE 1.3
+2026|01|09| VERSION ESTABLE 1.3 
+2026|01|16| VERSION 1.4 CAMBIOS IMPLEMENTADOS {
+    correccion de la redireccion del boton volver en el popup evento cuando no hay documentos
+    correccion css cantidad familiar 
+    Creacion e implementacion del sistema de barrido y sincronizacion de documentos con entorno azure especificamente sharepoint
+    Correccion de bug interfaz IOS con la el formulario 01 fechas y horas 
+    Implementacion de la eliminacion automatica al cargar orden de trabajo en verificaciones de maquinas
+    Implementaciones y correcciones en el sistema de sesiones junto con anuncios JS para sesiones finalizadas y seguridad para aprovechamiento de URL forzada
+    Cambios de interfaz de menu de revision de verificaciones de maquinas para facilitar el borrado 
+    Correccion de eliminacion de verificaciones de maquinas, presentaba error de solo borrado pdf dejando atras el JSON 
+    Correccion del bug de boton de eliminaciones de liberaciones para calidad
+    Creacion del apartado y menu principal de administracion para el area de HSEQ
+    creacion de usuarios estandar para HSEQ ademas de agregar sus credenciales en el registro 
+    Implementacion de automatizacion de la informacion para el formulario 09 control de empaque para completado automatico de su encabezado
+    Correccion de menu de mantenimiento, errores de direccionamiento
+}
