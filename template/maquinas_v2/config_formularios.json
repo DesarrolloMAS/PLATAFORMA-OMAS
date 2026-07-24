@@ -1,0 +1,204 @@
+{
+  "balanzas": {
+    "titulo": "Verificación de Balanza",
+    "imagen_generica": "/fmt/img/MAQUINAS/Balanzas/Balanza_ZC.jpeg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "estado_limpieza", "label": "Estado de limpieza", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "nivelada", "label": "Nivelada", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "escala", "label": "Escala de lectura en cero", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "cargador", "label": "Cargador", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "display", "label": "Estado del display", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "cables_senal", "label": "Cables de señal", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "stickers", "label": "Stickers mant. y calibración", "type": "select", "options": ["Cumple", "No Cumple", "N/A"] },
+      { "name": "verificacion_estado", "label": "¿Cumple verificación de estado?", "type": "select", "options": ["No", "Si"] }
+    ],
+    "bloques_calibracion": [
+      {
+        "titulo": "Verificación de Calibración",
+        "nota": "La diferencia entre la medición de los puntos de apoyo y el peso de la masa patrón debe ser de máximo +/- una vez la escala de lectura de cada balanza.",
+        "campo_base": { "name": "peso_utilizado", "label": "Peso utilizado", "placeholder": "Ingrese valor en gramos" },
+        "puntos": ["P1", "P2", "P3", "P4", "P5", "P6"],
+        "prefijo_punto": "p",
+        "campos_por_punto": [
+          { "sufijo": "peso_indicador", "label": "Peso indicador", "calculado": false },
+          { "sufijo": "diferencia", "label": "Diferencia", "calculado": true }
+        ],
+        "campo_resultado": { "name": "verificacion_masas", "label": "¿Cumple la tolerancia?", "options": ["No", "Si"] }
+      }
+    ],
+    "escalas_lectura": {
+      "ANALITICA220G_LABBOGBAL01": "0.02 g",
+      "BBG3KG_LABBOGBAL02": "0.5 g",
+      "OHAUS15KG_PREBOGBAL02": "0.5 g",
+      "OHAUS3KG_LABBOGBAL03": "0.2 g",
+      "OHAUS6KG_MOLBOGBAL01": "1 g",
+      "CAS 15KG_EMPPASBAL01": "5 g",
+      "FE 45C 30KG_EMPPASBAL02": "10 g",
+      "JAVAR3KG_LABPASBAL01": "0.1 g",
+      "OHAUS TROOPER SCALE_MICPASBAL01": "0.1 g",
+      "PROW SS_LABPASBAL02": "0.5 g",
+      "SUPER SS 15KG_EMPPASBAL03": "5 g"
+    },
+    "rangos_emp": {
+      "ANALITICA220G_LABBOGBAL01": "Clase II · Capacidad máxima 220 g · d = 0,0001 g · e = 0,001 g\n• 0 a 5 g → ±0,001 g\n• >5 a 20 g → ±0,002 g\n• >20 a 220 g → ±0,003 g",
+      "BBG3KG_LABBOGBAL02": "Clase II · Capacidad máxima 3000 g · d = e = 0,1 g\n• 0 a 500 g → ±0,1 g\n• >500 g a 2 kg → ±0,2 g\n• >2 kg a 3 kg → ±0,3 g",
+      "OHAUS6KG_MOLBOGBAL01": "Clase III · Capacidad máxima 6000 g · d = e = 1 g\n• 0 a 500 g → ±0,5 g\n• >500 g a 2 kg → ±1 g\n• >2 kg a 6 kg → ±1,5 g",
+      "OHAUS15KG_PREBOGBAL02": "Clase II · Capacidad máxima 15000 g · d = e = 0,5 g\n• 0 a 2,5 kg → ±0,5 g\n• >2,5 kg a 10 kg → ±1 g\n• >10 kg a 15 kg → ±1,5 g"
+    },
+    "observaciones": true
+  },
+
+  "bascula": {
+    "titulo": "Verificación de Báscula",
+    "imagen_generica": "/fmt/img/MAQUINAS/Bascula/Bascula_Bogota.jpeg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "estado_limpieza", "label": "Estado de limpieza", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "estabilidad", "label": "Mesa y soportes estables", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "escala", "label": "Escala de lectura en cero", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "cargador", "label": "Cargador", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "display", "label": "Estado del display", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "cables_senal", "label": "Cables de señal", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "stickers", "label": "Stickers mant. y calibración", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "verificacion_estado", "label": "¿Cumple verificación de estado?", "type": "select", "options": ["No", "Si"] }
+    ],
+    "rangos_emp": {
+      "M.TOLEDO_EMPBOGBA S01": "Clase III · Capacidad máxima 100 kg · d = e = 0,05 kg\n• 0 a 25 kg → ±0,025 kg\n• >25 a 100 kg → ±0,05 kg",
+      "BBG MOGOLLA_EMPBOGBA S02": "Clase III · Capacidad máxima 100 kg · d = e = 0,05 kg\n• 0 a 25 kg → ±0,025 kg\n• >25 a 100 kg → ±0,05 kg",
+      "BBG SEGUNDA_EMPBOGBA S03": "Clase III · Capacidad máxima 100 kg · d = e = 0,02 kg\n• 0 a 10 kg → ±0,01 kg\n• >10 a 40 kg → ±0,02 kg\n• >40 a 100 kg → ±0,03 kg",
+      "BBG PREMEZCLAS_PREBOGBA S01": "Clase III · Capacidad máxima 100 kg · d = e = 0,05 kg\n• 0 a 25 kg → ±0,025 kg\n• >25 a 100 kg → ±0,05 kg"
+    },
+    "bloques_calibracion": [
+      {
+        "titulo": "Verificación de Calibración",
+        "nota": "La diferencia entre la medición de los puntos de apoyo y el peso de la masa patrón debe ser de máximo +/- una vez la escala de lectura de cada báscula.",
+        "campo_base": { "name": "peso_utilizado", "label": "Peso utilizado", "placeholder": "Ingrese valor en gramos" },
+        "puntos": ["P1", "P2", "P3", "P4", "P5", "P6"],
+        "prefijo_punto": "p",
+        "campos_por_punto": [
+          { "sufijo": "peso_indicador", "label": "Peso indicador", "calculado": false },
+          { "sufijo": "diferencia", "label": "Diferencia", "calculado": true }
+        ],
+        "campo_resultado": { "name": "verificacion_masas", "label": "¿Cumple la tolerancia?", "options": ["No", "Si"] }
+      }
+    ],
+    "observaciones": true
+  },
+
+  "camionera": {
+    "titulo": "Verificación de Báscula Camionera",
+    "imagen_generica": "/fmt/img/MAQUINAS/Camionera/Camionera_Bog.jpeg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "estado_limpieza", "label": "Estado de limpieza (superficie libre de huecos)", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "bordes_obstrucciones", "label": "Bordes libres de obstrucciones", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "topes_holgura", "label": "Topes con holgura", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "tapas_acceso", "label": "Tapas de acceso", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "tarjeta_sumatoria_humedad", "label": "Tarjeta sumatoria libre de humedad", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "cables_senal", "label": "Cables de señal", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "tornilleria_ajustada", "label": "Tornillería ajustada", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "cojinetes_celda", "label": "Cojinetes de celda sin desgaste", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "carcamo_limpio", "label": "Cárcamo limpio", "type": "select", "options": ["Cumple", "No Cumple"] }
+    ],
+    "rangos_emp": {
+      "CAMIONERA_BOG_BOGOTA": "Clase III · Capacidad máxima 60.000 kg · d = e = 10 kg\n• 0 a 5.000 kg → ±5 kg\n• >5.000 a 20.000 kg → ±10 kg\n• >20.000 a 60.000 kg → ±15 kg"
+    },
+    "bloques_calibracion": [
+      {
+        "titulo": "Verificación con Pesas Patrón",
+        "campo_base": { "name": "patron_utilizado_kg", "label": "Peso utilizado", "placeholder": "Inserte valor en Kg" },
+        "puntos": ["Celda 1", "Celda 2", "Celda 3", "Celda 4", "Celda 5", "Celda 6", "Celda 7", "Celda 8"],
+        "prefijo_punto": "celda",
+        "campos_por_punto": [
+          { "sufijo": "indicador", "label": "Indicador de peso", "calculado": false },
+          { "sufijo": "diferencia", "label": "Diferencia", "calculado": true }
+        ],
+        "campo_resultado": { "name": "verificacion_masas", "label": "¿Cumple la tolerancia?", "options": ["No", "Si"] }
+      },
+      {
+        "titulo": "Verificación con Vehículo",
+        "campo_base": { "name": "peso_vehiculo_referencia", "label": "Peso utilizado vehículo", "placeholder": "Peso utilizado en Kg" },
+        "puntos": ["1 (Frente)", "2 (Centro)", "3 (Atrás)", "4 (Centro)"],
+        "prefijo_punto": "posicion",
+        "campos_por_punto": [
+          { "sufijo": "indicador", "label": "Indicador de peso", "calculado": false },
+          { "sufijo": "diferencia", "label": "Diferencia", "calculado": true }
+        ],
+        "campo_resultado": { "name": "cumplimiento_vehiculo", "label": "¿Cumple la tolerancia?", "options": ["Si", "No"] }
+      }
+    ],
+    "observaciones": true
+  },
+
+  "flowbalancer": {
+    "titulo": "Verificación de Flowbalancer",
+    "imagen_generica": "/fmt/img/MAQUINAS/flowbalancer/flowbalancer_Bogota.jpeg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "estado_limpieza", "label": "Estado de limpieza", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "estabilidad", "label": "Mesa y soportes estables", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "escala", "label": "Escala de lectura en cero", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "cargador", "label": "Celda de carga", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "display", "label": "Estado del display", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "cables_senal", "label": "Cables de señal", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "membrana_presion", "label": "Membrana de presión", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "verificacion_estado", "label": "¿Cumple la verificación de estado?", "type": "select", "options": ["No", "Si"] }
+    ],
+    "campos_extra": {
+      "titulo": "Masas Patrón",
+      "campos": [
+        { "name": "patron_utilizado_kg", "label": "Patrón utilizado en Kg", "type": "number", "placeholder": "Inserte valor en Kg" },
+        { "name": "con_masas_wt", "label": "Con masas patrón WT", "type": "number" },
+        { "name": "sin_masas_wt", "label": "Sin masas patrón WT", "type": "number" },
+        { "name": "con_masas_zero", "label": "Con masas patrón ZERO", "type": "number" },
+        { "name": "sin_masas_zero", "label": "Sin masas patrón ZERO", "type": "number" },
+        { "name": "verificacion_masas", "label": "¿Cumple la verificación de masas?", "type": "select", "options": ["No", "Si"] }
+      ]
+    },
+    "observaciones": true
+  },
+
+  "iman": {
+    "titulo": "Verificación de Imán",
+    "imagen_generica": "/fmt/img/MAQUINAS/Iman/iman_Bog.jpeg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "acople", "label": "Acople", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "soporte", "label": "Soporte", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "manija", "label": "Manija", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "estructura", "label": "Estructura", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "tornilleria_completa_ajustada", "label": "Tornillería completa y ajustada", "type": "select", "options": ["Cumple", "No cumple"] }
+    ],
+    "observaciones": true
+  },
+
+  "puntada": {
+    "titulo": "Verificación de Cosedora",
+    "imagen_generica": "/fmt/img/MAQUINAS/Puntada/puntada_Bog.jpg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "puntada", "label": "Puntada", "type": "select", "options": ["Cumple", "No cumple"] },
+      { "name": "lubricacion", "label": "Lubricación", "type": "select", "options": ["Cumple", "No cumple"] }
+    ],
+    "observaciones": true
+  },
+
+  "equipos": {
+    "titulo": "Verificación de Equipos de Laboratorio",
+    "imagen_generica": "/fmt/img/MAQUINAS/Otros/equipo_bog.jpeg",
+    "campos_estado": [
+      { "name": "estado_general", "label": "Estado general de la máquina", "type": "text", "placeholder": "Indique el estado general de la máquina" },
+      { "name": "estado_limpieza", "label": "Estado de limpieza", "type": "select", "options": ["Cumple", "No Cumple"] },
+      { "name": "conexion_usb", "label": "Conexión USB", "type": "select", "options": ["Cumple", "No Cumple", "N/A"] },
+      { "name": "pulsador", "label": "Pulsador", "type": "select", "options": ["Cumple", "No Cumple", "N/A"] },
+      { "name": "cargador", "label": "Cargador", "type": "select", "options": ["Cumple", "No Cumple", "N/A"] },
+      { "name": "display", "label": "Estado del display", "type": "select", "options": ["Cumple", "No Cumple", "N/A"] },
+      { "name": "bateria", "label": "Batería", "type": "select", "options": ["Cumple", "No Cumple", "N/A"] },
+      { "name": "recipiente", "label": "Recipiente", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "limpieza_filtro", "label": "Limpieza filtro", "type": "select", "options": ["Cumple", "No cumple", "N/A"] },
+      { "name": "verificacion_estado", "label": "¿Cumple la verificación de estado?", "type": "select", "options": ["No", "Si"] }
+    ],
+    "observaciones": true
+  }
+}

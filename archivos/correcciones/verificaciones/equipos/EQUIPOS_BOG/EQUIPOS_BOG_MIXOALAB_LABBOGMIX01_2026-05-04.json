@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "MIXOALAB_LABBOGMIX01",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "Bueno ",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "N\/A",
+    "Pulsador": "Cumple",
+    "cargador": "Cumple",
+    "Display": "Cumple",
+    "Bateria": "N\/A",
+    "Recipiente": "Cumple",
+    "Limpieza_Filtro": "Cumple",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "EQUIPOS_BOG_MIXOALAB_LABBOGMIX01_2026-05-04.pdf"
+}

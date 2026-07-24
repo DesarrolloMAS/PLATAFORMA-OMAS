@@ -4,17 +4,24 @@ require '../conection.php'; // Conexión a la base de datos
 require '../sesion.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 $sede = $_SESSION['sede'];
-// Escanear la carpeta de archivos Excel
 if ($sede === 'ZS'){
     $carpeta =  __DIR__ . '/../../archivos/generados/reprocesos_zs';
-}else
+} else {
     $carpeta =  __DIR__ . '/../../archivos/generados/reprocesos_zc';
+}
+
+if (!is_dir($carpeta)) {
+    header("Location: /template/error2.html");
+    exit;
+}
+
 $archivos = array_filter(scandir($carpeta), function($archivo) use ($carpeta) {
     return is_file("$carpeta/$archivo") && preg_match('/\.(xlsx|xls)$/i', $archivo);
 });
 
 if (empty($archivos)) {
-     die (header("Location: /template/error2.html"));
+    header("Location: /template/error2.html");
+    exit;
 }
 ?>
 

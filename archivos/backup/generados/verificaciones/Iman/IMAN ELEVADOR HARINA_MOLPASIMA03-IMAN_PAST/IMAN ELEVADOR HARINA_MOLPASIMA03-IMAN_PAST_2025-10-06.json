@@ -1,0 +1,21 @@
+{
+    "codigo_maquina": "IMAN ELEVADOR HARINA_MOLPASIMA03",
+    "nombre_maquina": "IMAN_PAST",
+    "tipo_maquina": "iman",
+    "estado_general": "El equipo se encuentra en buen estado",
+    "Acopie": "Cumple",
+    "Soporte": "Cumple",
+    "Manija": "Cumple",
+    "Estructura": "Cumple",
+    "Tornilleria_Completa_y_Ajustada": "Cumple",
+    "Observaciones": "",
+    "formato": "IMAN ELEVADOR HARINA_MOLPASIMA03-IMAN_PAST",
+    "usuario": "Julian Lopez",
+    "tecnico_correccion": "Andres Ortega",
+    "codigo_orden": "15853",
+    "json_path": "\/var\/www\/fmt\/archivos\/generados\/verificaciones\/Iman\/IMAN ELEVADOR HARINA_MOLPASIMA03-IMAN_PAST\/IMAN_PAST_IMAN ELEVADOR HARINA_MOLPASIMA03_2025-10-06.json",
+    "zona": "Iman",
+    "maquina": "IMAN ELEVADOR HARINA_MOLPASIMA03-IMAN_PAST",
+    "archivo_pdf": "IMAN ELEVADOR HARINA_MOLPASIMA03-IMAN_PAST_2025-10-06.pdf",
+    "fecha": "2025-10-06"
+}

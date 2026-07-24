@@ -13,6 +13,7 @@
 </div>
 
 <form action="premezclas_save.php" method="POST">
+  <input type="hidden" value=<?php echo date("Ymd"); ?> name="consecutivo">
 
   <!-- Harinas Especiales -->
   <h2>HARINAS ESPECIALES</h2>

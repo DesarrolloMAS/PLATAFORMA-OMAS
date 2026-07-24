@@ -1,6 +1,7 @@
 <?php
 require '../sesion.php';
 require '../conection.php';
+$sede = $_SESSION['sede'];
 $filtro_cargo = 'Lider de Turno';
 $query = $pdoUsuarios->prepare("SELECT id_usuario, nombre_u FROM usuarios WHERE Cargo = :filtro_cargo");
 $query->execute(['filtro_cargo' => $filtro_cargo]);
@@ -17,6 +18,7 @@ $usuarios = $query->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <h1>CONTROL DE PROCESO DE MOLIENDA</h1>
     <form action="control_save.php" method="POST">
+        <input type="hidden" name="sede" value="<?php echo htmlspecialchars($sede); ?>">
     <a class="volver" href="../redireccion.php">VOLVER</a>
         <div class="contenedor-harina">
             <h2>Datos de Harina</h2>

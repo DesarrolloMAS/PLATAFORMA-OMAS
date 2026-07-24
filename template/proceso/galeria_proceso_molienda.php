@@ -23,7 +23,7 @@ if (empty($archivos)) {
     <link rel="stylesheet" href="/css/revision_prev.css"><!-- Asegúrate de tener estilos -->
 </head>
 <body class="body">
-    <h1 class="titulo_principal">Lista de Archivos Excel<a href="../redireccion.php">Volver</a></h1>
+    <h1 class="titulo_principal">Lista de Archivos Excel<a href="../revisiones_producccion.html">Volver</a></h1>
     <div class="menu">
         <?php foreach ($archivos as $archivo): ?>
             <div class="file-card" >

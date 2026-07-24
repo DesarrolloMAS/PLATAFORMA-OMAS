@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "RAPTOR_LABBOGRAP01",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "Bueno ",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "Cumple",
+    "Pulsador": "Cumple",
+    "cargador": "Cumple",
+    "Display": "Cumple",
+    "Bateria": "N\/A",
+    "Recipiente": "N\/A",
+    "Limpieza_Filtro": "N\/A",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "EQUIPOS_BOG_RAPTOR_LABBOGRAP01_2026-06-02.pdf"
+}

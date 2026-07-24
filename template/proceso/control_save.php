@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     file_put_contents('debug_guardado.txt', date('Y-m-d H:i:s') . " | POST recibido\n", FILE_APPEND);
 
     // Recoge los datos del formulario
+    $sede = $_POST['sede'] ?? 'NO PROPORCIONADO';
     $fecha = $_POST['fecha'] ?? '';
     $lider = $_POST['lider'] ?? '';
     $moje = $_POST['moje'] ?? '';
@@ -141,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $rutaArchivo = $rutaArchivoNuevo;
         $nombreArchivo = $nombreArchivoNuevo;
         $fila_harina = 9; // Reinicia la fila para el nuevo archivo
-        $fila_subproductos = 54; // También reinicia subproductos para el nuevo archivo
+        $fila_subproductos = 54; // También reinicia subproductos para el nuevo archivom
     }
 
     // --- Buscar la primera fila vacía para subproductos (tabla 2) ---
@@ -196,6 +197,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sheet->setCellValue('I' . $fila_subproductos, $hilo_germen);
     $sheet->setCellValue('J' . $fila_subproductos, $cantidad_granza);
     $sheet->setCellValue('K' . $fila_subproductos, $varadas);
+
+    // VALORES ENCABEZADO
+    $sheet->setCellValue('E5', $sede);
 
     // Depuración: log antes de guardar
     file_put_contents('debug_guardado.txt', date('Y-m-d H:i:s') . " | Guardando archivo en $rutaArchivo\n", FILE_APPEND);

@@ -1,0 +1,22 @@
+[
+    {
+        "id": "bodegaprueba",
+        "nombre": "BODEGAPRUEBA"
+    },
+    {
+        "id": "bodega_2",
+        "nombre": "BODEGA 2"
+    },
+    {
+        "id": "bodega_4",
+        "nombre": "BODEGA 4"
+    },
+    {
+        "id": "bodega_microingredientes",
+        "nombre": "BODEGA MICROINGREDIENTES"
+    },
+    {
+        "id": "laboratorio",
+        "nombre": "LABORATORIO"
+    }
+]

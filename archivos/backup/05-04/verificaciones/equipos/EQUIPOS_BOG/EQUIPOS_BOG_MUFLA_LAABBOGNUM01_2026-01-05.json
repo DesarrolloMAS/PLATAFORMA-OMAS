@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "MUFLA_LAABBOGNUM01",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "Bueno ",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "Cumple",
+    "Pulsador": "Cumple",
+    "cargador": "Cumple",
+    "Display": "Cumple",
+    "Bateria": "N\/A",
+    "Recipiente": "Cumple",
+    "Limpieza_Filtro": "Cumple",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "EQUIPOS_BOG_MUFLA_LAABBOGNUM01_2026-01-05.pdf"
+}

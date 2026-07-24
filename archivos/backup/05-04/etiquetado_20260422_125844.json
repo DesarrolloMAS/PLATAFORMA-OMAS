@@ -1,0 +1,50 @@
+{
+    "fecha_inspeccion": "2026-04-22",
+    "hora_inspeccion": "07:53",
+    "responsable": "miguel mora",
+    "seccion1": {
+        "tipos": [
+            "Materias Primas"
+        ]
+    },
+    "seccion2": {
+        "rotulo_correspondiente": "Cumple",
+        "rotulo_condiciones": "Cumple",
+        "rotulo_legible": "Cumple",
+        "identificacion_correspondiente": "Cumple",
+        "identificacion_condiciones": "Cumple",
+        "identificacion_legible": "Cumple"
+    },
+    "seccion3": {
+        "identifempaques_vencimiento": "",
+        "envasado_correspondiente": "",
+        "hilos_identificados": "",
+        "aditivos_etiquetados": "",
+        "mejorantes_etiquetados": "",
+        "empaques_identificados": ""
+    },
+    "seccion4": {
+        "no_conformes_identificados": "",
+        "bodegas_libres": "",
+        "lineas_libres": "",
+        "contenedor_recoleccion": ""
+    },
+    "dinamicas": {
+        "Materias Primas": {
+            "Aditivos Alimentarios": {
+                "Nombre": "0",
+                "Lote Proveedor": "1",
+                "Lote Interno": "2",
+                "Fecha Vencimiento": "2026-04-22",
+                "Proveedor": "Organizacion MAS",
+                "Ubicacion del Insumo \/ Producto": "BODEGA PNC",
+                "Etiqueta Completa y sin desprender": "Cumple",
+                "Contenido legible o indeleble": "Cumple",
+                "Declaracion de Alergenos completa": "Cumple",
+                "Cumplimiento de etiquetado del insumo\/producto (%)": ""
+            }
+        }
+    },
+    "observaciones_comentarios": "",
+    "firma_jefe": "miguel mora"
+}

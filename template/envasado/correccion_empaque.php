@@ -7,7 +7,7 @@ $sede = $_SESSION['sede'];
 if ($sede === 'ZC'){
     $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/envasado/';
 }else{
-    $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/envasado_zs/';
+    $carpeta = rtrim(__DIR__, '/') . '/../../archivos/generados/envasadozs/';
 }
 if (isset($_GET['archivo'])) {
     $archivo = $_GET['archivo'];

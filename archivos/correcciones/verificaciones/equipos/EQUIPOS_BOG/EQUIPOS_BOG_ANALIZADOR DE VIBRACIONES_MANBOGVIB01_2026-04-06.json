@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "ANALIZADOR DE VIBRACIONES_MANBOGVIB01",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "Bueno ",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "Cumple",
+    "Pulsador": "Cumple",
+    "cargador": "Cumple",
+    "Display": "Cumple",
+    "Bateria": "Cumple",
+    "Recipiente": "N\/A",
+    "Limpieza_Filtro": "N\/A",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "EQUIPOS_BOG_ANALIZADOR DE VIBRACIONES_MANBOGVIB01_2026-04-06.pdf"
+}

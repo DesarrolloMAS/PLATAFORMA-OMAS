@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e6071baccc1",
+        "timestamp": "2026-04-20 10:59:39",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-08",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Cafe X25",
+            "lote_empaque": "MP-01953",
+            "producto_envasar": "HARINA EXCLUSIVA X25",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-08",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "500",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "498",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

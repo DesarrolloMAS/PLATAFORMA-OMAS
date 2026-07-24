@@ -1,0 +1,30 @@
+[
+    {
+        "ubicacion_id": "bodega_2",
+        "ubicacion_nombre": "BODEGA 2",
+        "fecha": "2026-05-02",
+        "hora": "06:15",
+        "temperatura": "19.7",
+        "humedad": "63%",
+        "humedad_max": "78%",
+        "temp_max": "26.2",
+        "humedad_min": "38%",
+        "temp_min": "15.6",
+        "verificacion": "Mariana Loaiza ",
+        "timestamp_recepcion": "2026-05-02 14:12:22"
+    },
+    {
+        "ubicacion_id": "bodega_2",
+        "ubicacion_nombre": "BODEGA 2",
+        "fecha": "2026-05-04",
+        "hora": "07:06",
+        "temperatura": "19.3",
+        "humedad": "67%",
+        "humedad_max": "15.6",
+        "temp_max": "26.2",
+        "humedad_min": "36%",
+        "temp_min": "78%",
+        "verificacion": "Mariana Loaiza",
+        "timestamp_recepcion": "2026-05-04 12:07:33"
+    }
+]

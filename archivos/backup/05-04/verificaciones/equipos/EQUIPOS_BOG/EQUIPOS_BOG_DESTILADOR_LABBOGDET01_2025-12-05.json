@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "DESTILADOR_LABBOGDET01",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "BUENO",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "N\/A",
+    "Pulsador": "Cumple",
+    "cargador": "Cumple",
+    "Display": "Cumple",
+    "Bateria": "N\/A",
+    "Recipiente": "Cumple",
+    "Limpieza_Filtro": "Cumple",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "John Giraldo",
+    "archivo_pdf": "EQUIPOS_BOG_DESTILADOR_LABBOGDET01_2025-12-05.pdf"
+}

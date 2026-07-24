@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPECCIÓN DE TRABAJO — HSEQ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --success: #10B981;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "HSEQ";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* SECTION CARDS */
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        /* GRID */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .form-grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .form-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .form-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+
+            .form-grid-2,
+            .form-grid-3,
+            .form-grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group.span2 {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 11px 13px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 9px auto;
+            padding-right: 28px;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background-color: var(--panel-bg);
+            color: var(--text-main);
+        }
+
+        input[type="date"].form-control,
+        input[type="time"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        /* VERIFICACION TABLE */
+        .verif-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+
+        .verif-table thead th {
+            padding: 10px 14px;
+            font-size: 11px;
+            font-family: 'Space Mono', monospace;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 240, 255, 0.04);
+        }
+
+        .verif-table tbody tr {
+            border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+            transition: background 0.2s;
+        }
+
+        .verif-table tbody tr:hover {
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        .verif-table td {
+            padding: 10px 14px;
+            vertical-align: middle;
+        }
+
+        .verif-label {
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .verif-table td .form-control {
+            margin: 0;
+        }
+
+        /* TRABAJADORES TABLE */
+        .dynamic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .dynamic-table th {
+            text-align: left;
+            padding: 10px 10px;
+            font-size: 11px;
+            font-family: 'Space Mono', monospace;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 240, 255, 0.04);
+        }
+
+        .dynamic-table td {
+            padding: 7px 8px;
+            vertical-align: middle;
+        }
+
+        .dynamic-table tbody tr {
+            border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+        }
+
+        .dynamic-table tbody tr:hover {
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        .btn-add {
+            background: var(--input-bg);
+            border: 1px dashed var(--accent);
+            color: var(--accent);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        .btn-remove {
+            background: rgba(255, 51, 102, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 5px 9px;
+            cursor: pointer;
+            border-radius: var(--r-sm);
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .btn-remove:hover {
+            background: rgba(255, 51, 102, 0.2);
+        }
+
+        /* FIRMAS GRID */
+        .firmas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 5px;
+        }
+
+        .firma-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            padding: 16px;
+            background: var(--input-bg);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .firma-card-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* SUBMIT */
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px dashed var(--border-color);
+            margin: 20px 0;
+        }
+
+        /* Badges de estado en select */
+        select.verif-select option[value="Cumple"] {
+            color: #10B981;
+        }
+
+        select.verif-select option[value="No Cumple"] {
+            color: #FF3366;
+        }
+
+        .firma-canvas-wrap {
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+            height: 46px;
+        }
+
+        .firma-canvas-wrap canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .btn-clear-firma {
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            line-height: 1;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header-box">
+            <div class="header-nav">
+                <a href="../permiso_completo/index.html" class="btn-back">← VOLVER</a>
+            </div>
+            <h1 class="main-title">Inspección de Trabajo</h1>
+            <div class="sub-title">Formato de Inspección y Control — Seguridad y Salud en el Trabajo (HSEQ)</div>
+        </div>
+
+        <form id="inspeccionForm">
+
+            <!-- 01 GENERALIDADES -->
+            <div class="section-card">
+                <div class="section-title"><span>01</span> Generalidades</div>
+                <input type="hidden" name="fecha">
+                <div class="form-grid form-grid-4">
+                    <div class="form-group">
+                        <label class="form-label">Hora</label>
+                        <input type="time" name="hora" class="form-control" required>
+                    </div>
+                    <div class="form-group span2">
+                        <label class="form-label">Empresa</label>
+                        <input type="text" name="empresa" class="form-control" value="ORGANIZACIÓN MAS SAS" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sede</label>
+                        <select name="sede" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Zona Sur">Zona Sur</option>
+                            <option value="Zona Centro">Zona Centro</option>
+                            <option value="Zona Suroccidente">Zona Suroccidente</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Área</label>
+                        <select name="area" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Operativo">Operativo</option>
+                            <option value="Administrativo">Administrativo</option>
+                        </select>
+                    </div>
+                    <div class="form-group span2">
+                        <label class="form-label">Lugar</label>
+                        <input type="text" name="lugar" class="form-control"
+                            placeholder="Lugar específico de la actividad" required>
+                    </div>
+                    <div class="form-group span2">
+                        <label class="form-label">Inspector Responsable</label>
+                        <select name="inspector_responsable" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Julieth Lopez">Julieth Lopez</option>
+                            <option value="Anyela Chamorro">Anyela Chamorro</option>
+                            <option value="Angelo Rodriguez">Angelo Rodriguez</option>
+                        </select>
+                    </div>
+                    <div class="form-group span2">
+                        <label class="form-label">Cargo</label>
+                        <input type="text" name="cargo" class="form-control" value="Auxiliar HSEQ">
+                    </div>
+                </div>
+                <hr class="divider">
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Actividad</label>
+                        <input type="text" name="tipo_actividad" class="form-control"
+                            placeholder="Ej: Trabajo en alturas, Trabajo en caliente..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Actividad a Realizar</label>
+                        <input type="text" name="actividad_realizar" class="form-control"
+                            placeholder="Descripción de la actividad" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 02 PELIGROS -->
+            <div class="section-card">
+                <div class="section-title"><span>02</span> Peligros propios de la ejecución del trabajo y asociados a
+                    este</div>
+                <div class="form-grid form-grid-3">
+                    <div class="form-group">
+                        <label class="form-label">Biológico</label>
+                        <select name="peligro_biologico" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Químico</label>
+                        <select name="peligro_quimico" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Biomecánico</label>
+                        <select name="peligro_biomecanico" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Físico</label>
+                        <select name="peligro_fisico" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Psicosocial</label>
+                        <select name="peligro_psicosocial" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fenómenos Naturales</label>
+                        <select name="peligro_fenomenos" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">Condiciones de Seguridad (Mecánicos, Eléctricos, Locativos,
+                            Tecnológicos, Tránsito, Públicos, Trabajo en Altura, Espacios Confinados, etc.)</label>
+                        <select name="peligro_condiciones_seg" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03 VERIFICACION DOCUMENTAL -->
+            <div class="section-card">
+                <div class="section-title"><span>03</span> Verificación Documental</div>
+                <table class="verif-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Requisito</th>
+                            <th style="width: 20%;">Estado</th>
+                            <th style="width: 40%;">Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="verif-label">Permiso de trabajo aprobado</td>
+                            <td>
+                                <select name="vd_permiso_trabajo" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="vd_permiso_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">ATS socializado</td>
+                            <td>
+                                <select name="vd_ats" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="vd_ats_obs" class="form-control" placeholder="Observación...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Personal autorizado/certificado</td>
+                            <td>
+                                <select name="vd_personal" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="vd_personal_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Plan de emergencia disponible</td>
+                            <td>
+                                <select name="vd_plan_emergencia" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="vd_plan_emergencia_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Procedimiento de trabajo disponible</td>
+                            <td>
+                                <select name="vd_procedimiento" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="vd_procedimiento_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 04 INSPECCION CONTROLES CRITICOS -->
+            <div class="section-card">
+                <div class="section-title"><span>04</span> Inspección de Controles Críticos</div>
+                <table class="verif-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Control</th>
+                            <th style="width: 20%;">Estado</th>
+                            <th style="width: 40%;">Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="verif-label">Delimitación y señalización del área</td>
+                            <td>
+                                <select name="cc_delimitacion" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="cc_delimitacion_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Uso correcto de EPP</td>
+                            <td>
+                                <select name="cc_epp" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="cc_epp_obs" class="form-control" placeholder="Observación...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Herramientas/equipos en buen estado</td>
+                            <td>
+                                <select name="cc_herramientas" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="cc_herramientas_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Supervisión designada</td>
+                            <td>
+                                <select name="cc_supervision" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="cc_supervision_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Plan de rescate/emergencia</td>
+                            <td>
+                                <select name="cc_rescate" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="cc_rescate_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                        <tr>
+                            <td class="verif-label">Orden y aseo del área</td>
+                            <td>
+                                <select name="cc_orden_aseo" class="form-control verif-select">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Cumple">Cumple</option>
+                                    <option value="No Cumple">No Cumple</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="cc_orden_aseo_obs" class="form-control"
+                                    placeholder="Observación..."></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 05 TRABAJADORES AUTORIZADOS -->
+            <div class="section-card">
+                <div class="section-title"><span>05</span> Trabajadores Autorizados</div>
+                <div style="overflow-x: auto;">
+                    <table class="dynamic-table" id="tablaTrabajadores">
+                        <thead>
+                            <tr>
+                                <th style="width:40px;">N°</th>
+                                <th>Nombres y Apellidos</th>
+                                <th style="width:110px;">Tipo de Doc</th>
+                                <th style="width:130px;">N° Documento</th>
+                                <th>Cargo</th>
+                                <th style="width:130px;">Día de la Semana</th>
+                                <th style="width:120px;">Firma</th>
+                                <th style="width:40px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn-add" onclick="agregarTrabajador()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Añadir Trabajador
+                </button>
+            </div>
+
+            <!-- 06 FIRMAS DE AUTORIZACION -->
+            <div class="section-card">
+                <div class="section-title"><span>06</span> Firmas de Autorización</div>
+                <div class="firmas-grid">
+                    <div class="firma-card">
+                        <div class="firma-card-title">Inspector</div>
+                        <div class="form-group">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="firma_inspector_nombre" class="form-control"
+                                placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasInspectorFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasInspectorFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="firma-card">
+                        <div class="firma-card-title">Supervisor</div>
+                        <div class="form-group">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="firma_supervisor_nombre" class="form-control"
+                                placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasSupervisorFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasSupervisorFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="firma-card">
+                        <div class="firma-card-title">Responsable SST</div>
+                        <div class="form-group">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="firma_resp_sst_nombre" class="form-control"
+                                placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasRespSstFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasRespSstFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="firma-card">
+                        <div class="firma-card-title">Responsable de la Actividad</div>
+                        <div class="form-group">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="firma_resp_actividad_nombre" class="form-control"
+                                placeholder="Nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasRespActividadFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasRespActividadFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnGuardar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
+                REGISTRAR INSPECCIÓN
+            </button>
+
+            <div class="system-status">
+                <div class="status-dot"></div>
+                SISTEMA JSON INTERCONECTADO — PLATAFORMA OMAS / HSEQ
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function initCanvasFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#003366';
+            ctx.lineWidth = 1.5;
+            ctx.lineCap = 'round';
+            let drawing = false;
+            const getPos = (e) => {
+                const r = canvas.getBoundingClientRect();
+                const sx = canvas.width / r.width;
+                const sy = canvas.height / r.height;
+                const src = e.touches ? e.touches[0] : e;
+                return { x: (src.clientX - r.left) * sx, y: (src.clientY - r.top) * sy };
+            };
+            canvas.addEventListener('mousedown', (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+            canvas.addEventListener('mousemove', (e) => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+            canvas.addEventListener('mouseup', () => { drawing = false; });
+            canvas.addEventListener('mouseleave', () => { drawing = false; });
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+            canvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); }, { passive: false });
+            canvas.addEventListener('touchend', () => { drawing = false; });
+        }
+        function limpiarCanvasFijo(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+        function obtenerFirmaImg(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return null;
+            const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+            return Array.from(imgData).some((v, idx) => idx % 4 === 3 && v > 0) ? canvas.toDataURL('image/png') : null;
+        }
+
+        let contTrab = 0;
+        const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+        const tiposDoc = ['CC', 'CE', 'PPT', 'Pasaporte', 'Permiso de Protección Personal'];
+
+        function buildSelect(opts, name, cls = '') {
+            return `<select name="${name}" class="form-control${cls ? ' ' + cls : ''}">${opts.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
+        }
+
+        function agregarTrabajador() {
+            const tbody = document.querySelector('#tablaTrabajadores tbody');
+            const tr = document.createElement('tr');
+            contTrab++;
+            tr.innerHTML = `
+            <td style="color:var(--accent);font-family:'Space Mono',monospace;font-size:13px;text-align:center;">${contTrab}</td>
+            <td><input type="text" name="t_nombre[]" class="form-control" placeholder="Nombres y apellidos"></td>
+            <td>
+                <select name="t_tipo_doc[]" class="form-control">
+                    ${tiposDoc.map(d => `<option value="${d}">${d}</option>`).join('')}
+                </select>
+            </td>
+            <td><input type="text" name="t_documento[]" class="form-control" placeholder="N° documento"></td>
+            <td><input type="text" name="t_cargo[]" class="form-control" placeholder="Cargo"></td>
+            <td>
+                <select name="t_dia[]" class="form-control">
+                    <option value="">Seleccione...</option>
+                    ${diasSemana.map(d => `<option value="${d}">${d}</option>`).join('')}
+                </select>
+            </td>
+            <td>
+                <div class="firma-canvas-wrap" style="min-width:100px;">
+                    <canvas id="canvasTrabFirma_${contTrab}" width="200" height="46"></canvas>
+                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasTrabFirma_${contTrab}')">✕</button>
+                </div>
+            </td>
+            <td><button type="button" class="btn-remove" onclick="this.closest('tr').remove()">✕</button></td>
+        `;
+            tbody.appendChild(tr);
+            initCanvasFirma('canvasTrabFirma_' + contTrab);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            document.querySelector('[name="hora"]').value = now.toTimeString().slice(0, 5);
+            agregarTrabajador();
+            ['canvasInspectorFirma', 'canvasSupervisorFirma', 'canvasRespSstFirma', 'canvasRespActividadFirma'].forEach(id => initCanvasFirma(id));
+
+            // ── Fecha tomada del Análisis de Trabajo Seguro del mismo flujo ──
+            const flujoIdInsp = new URLSearchParams(window.location.search).get('flujo');
+            if (flujoIdInsp) {
+                fetch('../permiso_completo/obtener_registro_paso.php?id_flujo=' + encodeURIComponent(flujoIdInsp) + '&paso=analisis')
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.status === 'success' && res.registro && res.registro.datos && res.registro.datos.fecha_elaboracion) {
+                            document.querySelector('[name="fecha"]').value = res.registro.datos.fecha_elaboracion;
+                        }
+                    })
+                    .catch(() => { });
+            }
+        });
+
+        document.getElementById('inspeccionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('btnGuardar');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = 'PROCESANDO JSON...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            const formData = new FormData(this);
+            const jsonData = {};
+            const arrays = ['t_nombre', 't_tipo_doc', 't_documento', 't_cargo', 't_dia', 't_firma'];
+            arrays.forEach(k => { jsonData[k] = []; });
+
+            for (let [key, value] of formData.entries()) {
+                if (key.endsWith('[]')) {
+                    const k = key.replace('[]', '');
+                    if (jsonData[k]) jsonData[k].push(value);
+                } else {
+                    jsonData[key] = value;
+                }
+            }
+
+            // Recoger firmas de trabajadores desde canvas
+            jsonData['t_firma'] = [];
+            document.querySelectorAll('#tablaTrabajadores tbody tr').forEach(tr => {
+                const canvas = tr.querySelector('canvas');
+                const imgData = canvas ? canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data : null;
+                const tieneTrazo = imgData && Array.from(imgData).some((v, i) => i % 4 === 3 && v > 0);
+                jsonData['t_firma'].push(tieneTrazo ? canvas.toDataURL('image/png') : null);
+            });
+            // Firmas fijas
+            jsonData.firma_inspector_firma = obtenerFirmaImg('canvasInspectorFirma');
+            jsonData.firma_supervisor_firma = obtenerFirmaImg('canvasSupervisorFirma');
+            jsonData.firma_resp_sst_firma = obtenerFirmaImg('canvasRespSstFirma');
+            jsonData.firma_resp_actividad_firma = obtenerFirmaImg('canvasRespActividadFirma');
+            jsonData.id_flujo = new URLSearchParams(window.location.search).get('flujo');
+
+            fetch('procesar.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const flujoId = new URLSearchParams(window.location.search).get('flujo');
+                        if (flujoId) {
+                            fetch('../permiso_completo/actualizar_paso.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id_flujo: flujoId, paso: 'inspeccion', id_registro: data.id })
+                            })
+                                .finally(() => {
+                                    Swal.fire({
+                                        title: '¡REGISTRADO!',
+                                        text: 'Inspección guardada. Volviendo al menú de permisos.',
+                                        icon: 'success',
+                                        background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                                    }).then(() => window.location.href = '../permiso_completo/index.html');
+                                });
+                        } else {
+                            Swal.fire({
+                                title: '¡REGISTRADO!',
+                                text: 'Inspección guardada correctamente.',
+                                icon: 'success',
+                                background: '#151A22',
+                                color: '#fff',
+                                confirmButtonColor: '#00F0FF'
+                            }).then(() => window.location.reload());
+                        }
+                    } else {
+                        Swal.fire({ title: 'Error', text: data.message || 'Error guardando el registro.', icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                    }
+                })
+                .catch(() => {
+                    Swal.fire({ title: 'Error de conexión', text: 'No se pudo conectar con el servidor.', icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                });
+        });
+    </script>
+</body>
+
+</html>

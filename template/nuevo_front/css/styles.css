@@ -1,0 +1,481 @@
+/* ==========================================================================
+   PLATAFORMA-OMAS — Nuevo Front (prototipo)
+   Tema: Dark Futurist — SaaS minimalista, negros/grises, acentos naranja glow
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg-0: #08090b;
+    --bg-1: #0e0f12;
+    --panel: rgba(20, 21, 25, 0.72);
+    --panel-solid: #141519;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 138, 61, 0.45);
+    --text-main: #f2f2f3;
+    --text-muted: #8b8d97;
+    --text-faint: #55575f;
+    --accent: #ff7a1a;
+    --accent-2: #ffb454;
+    --accent-glow: rgba(255, 122, 26, 0.35);
+    --danger: #ff5470;
+    --success: #3ddc97;
+
+    --select-bg: #0c0d10;
+    --select-bg-active: #131519;
+    --select-panel-bg: #0e0f12;
+
+    --r-lg: 20px;
+    --r-md: 14px;
+    --r-sm: 8px;
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--bg-0);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Canvas de fondo 3D (Three.js) */
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+}
+
+/* Velo de degradado sobre el canvas para mantener contraste y legibilidad */
+.bg-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(255, 122, 26, 0.10), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(0,0,0,0.55), transparent 60%),
+        linear-gradient(180deg, rgba(8,9,11,0.35) 0%, rgba(8,9,11,0.75) 100%);
+}
+
+.page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Marca / encabezado superior */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 46px;
+    opacity: 0;
+}
+
+.brand-logo-frame {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.brand-logo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(ellipse at center, var(--accent-glow), transparent 70%);
+    filter: blur(26px);
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.brand-logo-frame:hover::before {
+    opacity: 1;
+    transform: scale(1);
+    animation: brandGlowPulse 3.2s ease-in-out infinite;
+}
+
+.brand-logo {
+    width: min(390px, 84vw);
+    height: auto;
+    display: block;
+    filter:
+        drop-shadow(0 0 10px rgba(255, 122, 26, 0.18))
+        drop-shadow(0 0 3px rgba(255, 255, 255, 0.08));
+    transition: filter 0.4s ease;
+}
+
+.brand-logo-frame:hover .brand-logo {
+    filter:
+        drop-shadow(0 0 22px var(--accent-glow))
+        drop-shadow(0 0 8px rgba(255, 255, 255, 0.12));
+    animation: brandFloat 2.6s ease-in-out infinite;
+}
+
+.brand-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        115deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.55) 48%,
+        rgba(255, 178, 84, 0.65) 52%,
+        transparent 65%
+    );
+    background-size: 250% 100%;
+    background-position: 150% 0;
+    -webkit-mask-image: url('../img/logo_omas.png');
+    mask-image: url('../img/logo_omas.png');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.brand-logo-frame:hover .brand-shine {
+    opacity: 1;
+    animation: brandShine 3.2s ease-in-out 0.15s infinite;
+}
+
+@keyframes brandGlowPulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.96); }
+    50% { opacity: 1; transform: scale(1.04); }
+}
+
+@keyframes brandFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes brandShine {
+    0% { background-position: 150% 0; }
+    55%, 100% { background-position: -50% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .brand-logo,
+    .brand-logo-frame::before,
+    .brand-shine,
+    .brand-logo-frame:hover .brand-logo,
+    .brand-logo-frame:hover::before,
+    .brand-logo-frame:hover .brand-shine {
+        animation: none;
+    }
+}
+
+/* Tarjeta de login (glassmorphism sutil) */
+.auth-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--panel);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 36px 32px 30px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255,255,255,0.02) inset;
+    opacity: 0;
+}
+
+.auth-card:hover {
+    border-color: var(--border-hover);
+    transition: border-color 0.4s var(--ease);
+}
+
+.auth-head { margin-bottom: 28px; }
+
+.auth-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    background: linear-gradient(180deg, #ffffff, #b9bac0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.auth-sub {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.field {
+    position: relative;
+    margin-bottom: 16px;
+    opacity: 0;
+}
+
+/* Eleva el campo por encima de los siguientes .field mientras su panel está
+   abierto. Necesario porque el transform del entrance animation convierte a
+   cada .field en su propio stacking context, así que el z-index del panel
+   por sí solo no basta para ganarle a los .field posteriores. */
+.field--select-open {
+    z-index: 40;
+}
+
+.field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 14.5px;
+    outline: none;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.field input::placeholder { color: var(--text-faint); }
+
+.field input:focus {
+    border-color: var(--accent);
+    background: rgba(255, 122, 26, 0.05);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Select nativo — se mantiene en el DOM como fuente de verdad del formulario,
+   oculto visualmente (patrón "visually-hidden", no display:none) */
+.select-native {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    pointer-events: none;
+}
+
+/* Select premium — trigger + panel animado */
+.select-shell {
+    position: relative;
+}
+
+.select-trigger {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--select-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 14.5px;
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.select-trigger-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.select-trigger:hover { border-color: rgba(255, 255, 255, 0.16); }
+
+.select-trigger:focus-visible,
+.select-trigger[aria-expanded="true"] {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--select-bg-active);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.select-trigger--error {
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 0 3px rgba(255, 84, 112, 0.28) !important;
+}
+
+.select-chevron {
+    display: flex;
+    color: var(--text-muted);
+    transition: transform 0.25s var(--ease);
+    flex-shrink: 0;
+}
+.select-trigger[aria-expanded="true"] .select-chevron { transform: rotate(180deg); color: var(--accent); }
+
+.select-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 30;
+    opacity: 0;
+    background: var(--select-panel-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--r-md);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    padding: 6px;
+}
+.select-panel--open { display: block; }
+
+.select-list {
+    position: relative;
+    max-height: 220px;
+    overflow-y: auto;
+}
+.select-list::-webkit-scrollbar { width: 6px; }
+.select-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
+.select-list::-webkit-scrollbar-track { background: transparent; }
+
+.select-highlight {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 0;
+    opacity: 0;
+    background: linear-gradient(135deg, rgba(255, 122, 26, 0.16), rgba(255, 180, 84, 0.08));
+    border: 1px solid rgba(255, 122, 26, 0.25);
+    border-radius: var(--r-sm);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.select-option {
+    position: relative;
+    z-index: 1;
+    padding: 9px 12px;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    transition: color 0.15s var(--ease);
+}
+
+.select-option--active { color: var(--text-main); }
+
+.select-option--selected {
+    color: var(--text-main);
+    font-weight: 600;
+}
+.select-option--selected::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent-glow);
+    flex-shrink: 0;
+}
+
+.submit-row { margin-top: 24px; opacity: 0; }
+
+.btn-primary {
+    width: 100%;
+    padding: 13px 18px;
+    border: none;
+    border-radius: var(--r-sm);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #14100a;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14.5px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    box-shadow: 0 8px 24px var(--accent-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.auth-foot {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    opacity: 0;
+}
+
+.auth-foot a {
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 600;
+}
+.auth-foot a:hover { text-decoration: underline; }
+
+.status-line {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-faint);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.03em;
+    opacity: 0;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+    animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+@media (max-width: 420px) {
+    .auth-card { padding: 28px 22px 24px; }
+    .brand { margin-bottom: 34px; }
+}

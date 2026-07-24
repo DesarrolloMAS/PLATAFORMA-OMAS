@@ -1,0 +1,50 @@
+[
+    {
+        "id_registro": "EMPV2_69da506c4d1ef",
+        "timestamp": "2026-04-11 13:45:16",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-10",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "HARINA MANITOBA X 25",
+            "lote_producto": "100426B",
+            "fecha_vencimiento": "10042027",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-10",
+            "entregado_a": "OLFER VARGAS",
+            "cantidad_solicitada": "90",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "90",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69de8667294d0",
+        "timestamp": "2026-04-14 18:24:39",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-14",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Multi Beige X25",
+            "lote_empaque": "MP-02224",
+            "producto_envasar": "HARINA INTEGRAL X 25 ",
+            "lote_producto": "100426B",
+            "fecha_vencimiento": "10102026",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-14",
+            "entregado_a": "OLFER VARGAS",
+            "cantidad_solicitada": "159",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "159",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

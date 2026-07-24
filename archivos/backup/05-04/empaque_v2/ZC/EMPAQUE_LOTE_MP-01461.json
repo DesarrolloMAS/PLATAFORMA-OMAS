@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e60f0699e15",
+        "timestamp": "2026-04-20 11:33:26",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-08",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Cafe X50",
+            "lote_empaque": "MP-01461",
+            "producto_envasar": "HARINA EXCLUSIVA X50",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-08",
+            "entregado_a": "BALMER",
+            "cantidad_solicitada": "246",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "245",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

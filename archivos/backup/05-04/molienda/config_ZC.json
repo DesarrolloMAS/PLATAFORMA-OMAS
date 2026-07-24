@@ -1,0 +1,228 @@
+{
+    "harinas": [
+        {
+            "id": "extrapan_x50",
+            "name": "EXTRAPAN X50",
+            "weight": 50
+        },
+        {
+            "id": "extrapan_x25",
+            "name": "EXTRAPAN X25",
+            "weight": 25
+        },
+        {
+            "id": "extrapan_x10",
+            "name": "EXTRAPAN X10",
+            "weight": 10
+        },
+        {
+            "id": "artesanal_x50",
+            "name": "ARTESANAL X50",
+            "weight": 50
+        },
+        {
+            "id": "artesanal_x25",
+            "name": "ARTESANAL X25",
+            "weight": 25
+        },
+        {
+            "id": "fuerte_x25",
+            "name": "FUERTE X25",
+            "weight": 25
+        },
+        {
+            "id": "natural_x50",
+            "name": "NATURAL X50",
+            "weight": 50
+        },
+        {
+            "id": "especial_x50",
+            "name": "ESPECIAL X50",
+            "weight": 50
+        },
+        {
+            "id": "especial_x25",
+            "name": "ESPECIAL X25",
+            "weight": 25
+        },
+        {
+            "id": "exclusiva_x50",
+            "name": "EXCLUSIVA X50",
+            "weight": 50
+        },
+        {
+            "id": "alta_proteina",
+            "name": "HARINA ALTA PROTEINA X1",
+            "weight": 1
+        },
+        {
+            "id": "media_proteina",
+            "name": "HARINA MEDIA PROTEINA X1",
+            "weight": 1
+        },
+        {
+            "id": "baja_proteina",
+            "name": "HARINA BAJA PROTEINA X1",
+            "weight": 1
+        },
+        {
+            "id": "artesanal_kg",
+            "name": "ARTESANAL X1",
+            "weight": 1
+        },
+        {
+            "id": "fuerte_exp",
+            "name": "FUERTE EXPORTACION",
+            "weight": 25
+        },
+        {
+            "id": "harina_t1_x50",
+            "name": "HARINA T1 X 50",
+            "weight": 50
+        },
+        {
+            "id": "Exclusiva_x25",
+            "name": "EXCLUSIVA X 25",
+            "weight": 25
+        }
+    ],
+    "subproductos": [
+        {
+            "id": "salvado_x25",
+            "name": "SALVADO X25",
+            "weight": 25
+        },
+        {
+            "id": "mogolla_x40",
+            "name": "MOGOLLA X40",
+            "weight": 40
+        },
+        {
+            "id": "segunda_x50",
+            "name": "SEGUNDA X50",
+            "weight": 50
+        },
+        {
+            "id": "semola_fina_x25",
+            "name": "SEMOLA FINA X25",
+            "weight": 25
+        },
+        {
+            "id": "semola_gruesa_x25",
+            "name": "SEMOLA GRUESA X25",
+            "weight": 25
+        },
+        {
+            "id": "germen_x25_sub",
+            "name": "GERMEN DE TRIGO X25",
+            "weight": 25
+        },
+        {
+            "id": "granza_x50",
+            "name": "GRANZA 50KG",
+            "weight": 50
+        },
+        {
+            "id": "hilo_sub",
+            "name": "HILO",
+            "weight": 1
+        }
+    ],
+    "materiales": [
+        {
+            "id": "emp_extrapan_x50",
+            "name": "EMPAQUE EXTRA PAN 50",
+            "weight": 1
+        },
+        {
+            "id": "emp_extrapan_x25",
+            "name": "EMPAQUE EXTRA PAN 25",
+            "weight": 1
+        },
+        {
+            "id": "emp_extrapan_x10",
+            "name": "EMPAQUE EXTRAPAN X10",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_rojo_x50",
+            "name": "EMPAQUE GALERAS ROJO",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_verde_x50",
+            "name": "EMPAQUE GALERAS VERDE",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_cafe_x50",
+            "name": "EMPAQUE GALERAS CAFE",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_azul_x50",
+            "name": "EMPAQUE GALERAS AZUL",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_naranja_x25",
+            "name": "EMPAQUE GALERAS NARANJA",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_kraft_x25",
+            "name": "EMPAQUE GALERAS KRAFT",
+            "weight": 1
+        },
+        {
+            "id": "emp_multi_beige_x25",
+            "name": "EMPAQUE MULTI BEIGE",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_mog_x40",
+            "name": "EMPAQUE GALERAS MOG",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_sal_x25",
+            "name": "EMPAQUE GALERAS SAL",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_seg_x50",
+            "name": "EMPAQUE GALERAS SEG",
+            "weight": 1
+        },
+        {
+            "id": "vitaminamat",
+            "name": "VITAMINA (MATERIAL)",
+            "weight": 1
+        },
+        {
+            "id": "mejorante_extrapan",
+            "name": "MEJORANTE EXTRA PAN",
+            "weight": 1
+        },
+        {
+            "id": "mejorante_artesanal",
+            "name": "MEJORANTE ARTESANAL",
+            "weight": 1
+        },
+        {
+            "id": "hilo_blanco",
+            "name": "HILO BLANCO",
+            "weight": 1
+        },
+        {
+            "id": "hilo_verde",
+            "name": "HILO VERDE",
+            "weight": 1
+        },
+        {
+            "id": "hilo_naranja",
+            "name": "HILO NARANJA",
+            "weight": 1
+        }
+    ]
+}

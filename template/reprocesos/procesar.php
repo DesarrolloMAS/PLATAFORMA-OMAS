@@ -57,11 +57,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($archivoSalida);
 
-        // Eliminar el archivo JSON después de procesar
+        // Calcular cantidad restante
+        $cantidadOriginal = floatval($datosJSON['cantidad'] ?? 0);
+        $cantidadProcesada = floatval($datosFormulario['cantidad'] ?? 0);
+        $cantidadRestante = $cantidadOriginal - $cantidadProcesada;
+
+        // Eliminar o actualizar el archivo JSON después de procesar
         if (isset($_POST['json_file'])) {
             $jsonFile = $_POST['json_file'];
             if (file_exists($jsonFile)) {
-                unlink($jsonFile);
+                if ($cantidadRestante <= 0) {
+                    // Si se completó el reproceso, eliminar archivo
+                    unlink($jsonFile);
+                    $mensajeExito = "¡Archivo Excel generado y reproceso completado!";
+                } else {
+                    // Si queda saldo, actualizar la cantidad en el JSON
+                    $datosJSON['cantidad'] = $cantidadRestante;
+                    file_put_contents($jsonFile, json_encode($datosJSON, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                    $mensajeExito = "¡Archivo Excel generado! Quedan <strong>$cantidadRestante KG</strong> pendientes.";
+                }
             }
         }
 
@@ -93,9 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </head>
         <body>
             <div class='container'>
-                <div class='success'>¡Archivo Excel generado correctamente!</div>
+                <div class='success'><?php echo $mensajeExito; ?></div>
                 <div class='archivo'>El archivo <strong>$nombreArchivo</strong> ha sido guardado exitosamente.</div>
-                <a class='btn' href='/fmt/template/reprocesos/reprocesos_menu.php'>Volver al menú de reprocesos</a>
+                <a class='btn' href='/template/reprocesos/reprocesos_menu.php'>Volver al menú de reprocesos</a>
             </div>
         </body>
         </html>

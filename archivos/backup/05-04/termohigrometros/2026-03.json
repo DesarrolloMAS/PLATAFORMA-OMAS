@@ -1,0 +1,26 @@
+[
+    {
+        "fecha": "2026-03-20",
+        "hora": "15:00",
+        "temperatura": "13.6",
+        "humedad": "62%",
+        "humedad_max": "97%",
+        "temp_max": "42.1",
+        "humedad_min": "10%",
+        "temp_min": "11.7",
+        "verificacion": "PRUEBA",
+        "timestamp_recepcion": "2026-03-20 19:57:44"
+    },
+    {
+        "fecha": "2026-03-21",
+        "hora": "15:01",
+        "temperatura": "10.9",
+        "humedad": "49%",
+        "humedad_max": "97%",
+        "temp_max": "42.1",
+        "humedad_min": "10%",
+        "temp_min": "10.9",
+        "verificacion": "PRUEBA",
+        "timestamp_recepcion": "2026-03-20 19:58:49"
+    }
+]

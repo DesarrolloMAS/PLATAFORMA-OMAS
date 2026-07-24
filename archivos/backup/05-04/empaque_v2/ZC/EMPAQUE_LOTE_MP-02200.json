@@ -1,0 +1,74 @@
+[
+    {
+        "id_registro": "EMPV2_69e60791a7ab0",
+        "timestamp": "2026-04-20 11:01:37",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-08",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Kraft X25",
+            "lote_empaque": "MP-02200",
+            "producto_envasar": "ARTESANAL X25",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-08",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "300",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "300",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e67c49ed2bf",
+        "timestamp": "2026-04-20 19:19:37",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-15",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Kraft X25",
+            "lote_empaque": "MP-02200",
+            "producto_envasar": "ARTESAL X25",
+            "lote_producto": "150426B",
+            "fecha_vencimiento": "15042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-15",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "198",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "198",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69eb780dcec28",
+        "timestamp": "2026-04-24 14:02:53",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-23",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Kraft X25",
+            "lote_empaque": "MP-02200",
+            "producto_envasar": "ARTESAL X25",
+            "lote_producto": "230426B",
+            "fecha_vencimiento": "23042027",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-23",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "300",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "300",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

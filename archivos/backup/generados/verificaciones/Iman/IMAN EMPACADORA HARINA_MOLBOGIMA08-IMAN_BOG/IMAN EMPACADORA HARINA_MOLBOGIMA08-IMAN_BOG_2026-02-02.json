@@ -1,0 +1,21 @@
+{
+    "codigo_maquina": "IMAN EMPACADORA HARINA_MOLBOGIMA08",
+    "nombre_maquina": "IMAN_BOG",
+    "tipo_maquina": "iman",
+    "estado_general": "Bueno ",
+    "Acople": "Cumple",
+    "Soporte": "Cumple",
+    "Manija": "Cumple",
+    "Estructura": "Cumple",
+    "Tornilleria_Completa_y_Ajustada": "Cumple",
+    "Observaciones": "",
+    "formato": "IMAN EMPACADORA HARINA_MOLBOGIMA08-IMAN_BOG",
+    "usuario": "Harold Taramuel",
+    "tecnico_correccion": "John Giraldo",
+    "codigo_orden": "16772",
+    "json_path": "\/var\/www\/fmt\/archivos\/generados\/verificaciones\/Iman\/IMAN EMPACADORA HARINA_MOLBOGIMA08-IMAN_BOG\/IMAN_BOG_IMAN EMPACADORA HARINA_MOLBOGIMA08_2026-02-02.json",
+    "zona": "Iman",
+    "maquina": "IMAN EMPACADORA HARINA_MOLBOGIMA08-IMAN_BOG",
+    "archivo_pdf": "IMAN EMPACADORA HARINA_MOLBOGIMA08-IMAN_BOG_2026-02-02.pdf",
+    "fecha": "2026-02-02"
+}

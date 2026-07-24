@@ -1,0 +1,100 @@
+{
+    "fecha_solicitud": "2026-07-06",
+    "hora_solicitud": "09:30",
+    "clasificacion": "Mecanico",
+    "nombre_solicitante": "Julian Torres ",
+    "cargo_solicitante": "Aprendiz",
+    "objeto_dañado": "Turbina sistema neumático",
+    "ubicacion": "Quinto Piso",
+    "marca": "N\/A",
+    "codigo_equipo": "MOLPASTUR01 ",
+    "descripcion_falla": "Se realizó lubricación para dar cumplimiento con el cronograma de mantenimiento.",
+    "usa_mediciones": "0",
+    "firma_solicitante": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACWCAYAAADwkd5lAAAPMklEQVR4AeydQbLkRhGGZSJgRRBwAxsOgNmwNT4CJ5jxDfAJgBMwN8BzEjNrFpgDEDYnwBEEG1iY\/MZKW6\/n9XvdUpWqSvomlFOSWqpMfdmTv6rU3fODyT8SkIAEJCCBFQQUkBXQPEUCEpCABKZJAfFdIIFWBPQrgcEJKCCDJ9DwJSABCbQioIC0Iq9fCUhAAoMTGFhABidv+BKQgAQGJ6CADJ5Aw5eABCTQioAC0oq8fiUwMAFDlwAEFBAoaBKQgAQkcDcBBeRuZJ4gAQlIQAIQUECgsLfpTwISkMABCCggB0iilyABCUigBQEFpAV1fUpAAq0I6LcgAQWkIEy7koAEJHAmAgrImbLttUpAAhIoSEABKQjzDF15jRKQgASSgAKSJGwlIAEJSOAuAgrIXbg8WAISkEArAv35VUD6y4kRSUACEhiCgAIyRJoMUgISkEB\/BBSQ\/nJiRHUI2KsEJFCYgAJSGKjdSUACEjgLAQXkLJn2OiUgAQkUJnCzgBT2a3cSkIAEJDA4AQVk8AQavgQkIIFWBBSQVuT78fubCOUPYS7dEjAwCfRJQAHpMy97RIVwfB6OsN9H6yIBCUjgLgIKyF24DnMwIw6EAxH5S1zVx2EuYxAgZ+SOHI4RsVEelsAZBOSwybvzwig8v4tzvgzLEccfYx3xQERi1aVDAuQNQzS+ifho2Y5VFwm0JaCAtOVf2juFJY071L+FAwQjC8+fYvv9sK\/DEA6OiVWXzghkDhGLNPYRJmJv7iChNSeggDRPweoAKChYFpgUidxmlPFh9I5gRDNReL6apunTsJ+FsR2NSycElrnMHLKP8MgVovFebNCyHasDLIZ4aAIKyBjppZBgFJZ\/RchLsWA\/FrsnRhYUFyynpxCMLDwfTNP0avJPawLkC2MEmKNEcss+jPjIIWKRuWOb\/ZoEuiGggHSTionCkfbZNE1MPVFULsXip\/EaCwUFS6Gg0DCyoOhgFCdeVzCg1cYyn+SCXGLLfC5HiV9EiOSL3JFLWrZjt4sE+iSggOybl2VByTtPCgpGcUl7EWG9P00Tx0\/xh0KCLcWCAoNRnHgtDnNpSIBcYZnDZU4RCl7DCJF8YZlPRom\/ihfIJ\/tj1UUC\/RNQQMrniCKBMYpYFpPLgrJ8PpFRUDwwnlW8jp0UlLwbZf3sYsGnyP4dXGCJIcJwhhnMsXi56oIP7FpueQ3LIIgthYIcPpZPR4lJy3YoAgrI+nRRJDCK+rKY5DqjCF7H0gvFBMuCwp0nBSWNAoPxrOJlnMSx0bjMBPgU2Y\/ndRpEGM4fxUZyR1gwnhXlNGC+tralH\/rEsg\/yioXrtwu5wsgftswp7xFew94e7F\/9EzDC5wkoIA8ZURDSuLPNYpEtBSQt912bnmAUgUBQTDAKCi3GfoqJd54P+T+39SYO+GsYozP48dwgNh9deFbEJ9Ayn1ta+kkn+MXyJoB8LnPLa1gebyuBwxI4m4Asiwh3hSkCl6LAfu5sl8ezvnwj5CeerhUSRhEIBMUEy3Px9ZPY+G+Yy30EyMGv4xRGZxRunhtQvNPYl4bIxKEPlr\/HFvvzmHtb\/OQ5vH\/IKxbdukjgfASOJiAUmDT+gSMEGEUbYz3tcuRA9ikGaY8VGgpIWn7iCT95Dn08Z5z\/vzjoh2HM4UdzwKXNJWUeaBEZWCPwGBH9Mv5a3hhw3D0Wp7tIQAJJYEQB+UcEj0hQuBEDijDigLGd9phAMK2EUTQoKnk3SaHBcpuWAsRxSwvXRZYfRS\/EwRw+8cemSyUCvE8w8kvOccN7A2M\/xj5NAhK4k8BoAoJ4\/DyuEZGgACAkFOHY9XZZFnuKBUKAUTwwppUw9lE48vi3J+\/81yezP+InlnnTpiIBOPM+4L2BG95DGM+72NYkcAQCu13DaALyiyDDSOM\/0VIEEAKMooCxnkaxaCkQEeKTC7ERKwdRxBBD1rX6BHhv8H5hmhJvOa3FuiYBCdxIYDQB4bKImY9yUgQowhj7RzRix4gdEaHV9iPANCU3InhkVKuIQ0KTwI0EKMY3HuphlQgwCkFEKF6IYiU3dnuFAMwfiMiV49wtAQlcEFBALoA02swCxigEIWkUxmndIiKIOADIAa0mAQk8Q0ABeQbQTi9TvFJE\/ryTT908JLAcCfLN84evuiUBCbxDoLyAvOPCHTcS4C6Yj\/byrWfWbzzNwwoSQETojhw4EoSEJoEnCCggT8Bp8FJ+tJdpFEWkQQLCZY4EyUFsukhAAtcIKCDXyLTZv5zKooB5F7x\/HhBu8gB7bP8I1nv0TAnsSkAB2RX3Tc4oYN4F34Sq2kHyr4bWjo9EQAHpM5uISN4Fs95nlMeNCvYYIxD5HzfPXtlGAgrIAmBnq8u7YIvY\/slZ8t\/fux4lMAABBaTfJHEHvCxi3A33G+3xIoM\/xpUp4FDQJHBBQAG5ANLZJoUrRcTvh+yfnGTvBxqqs9fBiAQUkP6zhojk90McheybL0Yg+b8eKuD7stfbAAQUkAGSFCEuvx8Smy47EuC\/H8YdXy6k1SQggZmAAjKD6LzhThhjBIJdhut2PQJwx\/DAaJBWk4AEgoACEhAGWd7McTIfP6\/a7ERg+SxkJ5e6kUD\/BBSQ\/nOUEebdLyMQLPfb1ifACATDk+yhoH1P4MRrCshYyfdOuF2+ZN+OvZ47JaCAdJqYK2E5CrkCZofdjEAwRiDYDi51IYG+CSggfefnsegoYuw\/yLMQLmUYy1GIH+kdJmUGWpOAAlKTbp2+s4hxF4zV8WKvjxFI8fYjvY\/Rcd\/pCCgg46WcIpZfbns5XvjDRwx\/LkLxhoI2NIGtwSsgWwm2Of\/17PbF3NpIQAIS2J2AArI78iIOX0Uv3gkHhAZLTiH6DKoBfF32RUAB6Ssf90RjIbuHVo1j7VMCJyeggIz7BmAEgjEXj417JWNFDnMiljkUtFMTUEDGTr+jkDb5U0TacNdrZwQaCkhnJMYMZ1nIvCMeM4dGLYFhCSggw6buu8BTRHyo+x2S6iuO\/Koj1sEIBBSQEbL0dIxZzByBPM3JVxcEXJVACQIKSAmKbftgBIIRRf5WFutaPQLJW9Gux9ieByCggAyQpBtCzFGIXyy8AVahQxSRQiDtZlwCCsia3PV3DsXs6wiL32jyrjhA7LjIe0fYuuqLgALSVz62RPPb+WQfps8gKjc56vuosh+7l0C3BBSQblOzOjDviFejW3WivFdhW32SJ3ZEQAHpKBkbQ2EaC6MbixoU6lqyruvF3iXQMQEFpOPkrAgtp1WcxloBb8UpX83nKNgzCJtzEVBAjpnvqwXtmJfb7KpSQJoFoGMJtCSggLSkX9430yoYPSsiUNAkIIFqBBSQamibdZzTWP6\/3c1SoGMJPEbgePsUkOPlNK+I74Tkuq0EJCCB4gQUkOJIm3fIFBZGIE5jQaGevZm7lvMMwuZcBBSQ7fmmeHwT3fT0O1Q5jXWkT2MFYhcJSKAnAgpIuWz0+I1kxK3cFdqTBCQggQUBBWQBY+Uq00UYxRpb2U3R04gHo9NeYiKWo1ky7vHm4WisvZ6WBK74VkCugLlzd86F9zRllNNYfhrrzmR6uAQkcBsBBeQ2Ts8dlXeiPd3tf\/hc0L4uAQlIYAsBBWQLve\/PRUAw9vQiIq8IJsyP8waEtoveJXBMAgpIubzmlFFP01h5db2IWsZjKwEJHICAAlIuicsRSC8FO2Mqd5X2JAEJSGAmMIKAzKEO0WTB7nEUMgTAwYLMfPdywzAYPsMdnYACUjaDOY3VS0F5b768l3NrIwEJSKAYAQWkGMq3HXFHmj\/x3cM304mHwDIm1jUJ3E7AIyXwBAEF5Ak4K1\/6ZD7PaawZhI0EJHBMAgpI+bxy14\/Rc+tRSE6l+VFeslHHMtfJuo4Xe5VAhwQUkDpJmZ+FTK1HITl1lW2dq7VXCUjglAQUkDpp5670i7nrz+a2RfNidko886qNBCQggTIEFJAyHB\/r5fW8kyLeeipLAZmTYXMeAl5pfQIKSD3G\/JTIx3P3TGXtLSLpL3\/ocQ7FRgISkEAZAgpIGY7XeuHOfykie01n4QfRIi4f7kKhnv1z7trv2swgbM5DQAGpn+uliDCdVft\/L2TkgR+uLB\/ms36febQEJCCBZwgoIM8AKvQyIvLpoi9GBzWEBPGgb1zxDIZt1rV6BPITbtnW82TPEuiMgAKyX0J4JsJPiyxHBRR7hASB2RrJ59EB\/UUz4cMpFUhoEhiPwDARKyD7p4pRwaWQfBRhICS8hsXmswvPNjCEg3NZ5ySeudzaB8dr2wik+JPDbT15tgQGI6CAtEsYRR4hYaqJEQORMILAEIQvYwficGkUrOW+FA6mUOiP1+NUFwlIQAJ1CSggdfne0jtTTSkmKSScx8+PIA6Xxp0u+xAKjBEH9gEnadMkAwlIYB8CCsg+nG\/1kkKCIPDQnfbSLvcjItitPjxOAhKQQBECCkgRjMU7QRB46E57abm\/uFM7lIAEJHAPgXcF5J6zPVYCEkDgocC0Iq0mgdMQUEBOk2ovVAISkEBZAgpIWZ72JoEtBDxXAkMRUECGSpfBSkACEuiHgALSTy6MRAISkMBQBA4lIEORN1gJSEACgxNQQAZPoOF3QYBfAMC6CMYgJLAXAQVkL9L6kcChCXhxZySggJwx616zBCQggQIEFJACEO1CAhKQwBkJKCB9ZN0oJCABCQxHQAEZLmUGLAEJSKAPAgpIH3kwCglIoBUB\/a4moICsRueJEpCABM5NQAE5d\/69eglIQAKrCSggq9F54rcE\/FsCEjgrAQXkrJn3uiUgAQlsJKCAbATo6RKQgARaEWjtVwFpnQH9S0ACEhiUgAIyaOIMWwISkEBrAgpI6wzovx0BPUtAApsIKCCb8HmyBCQggfMSUEDOm3uvXAISkMAmAhsEZJNfT5aABCQggcEJKCCDJ9DwJSABCbQioIC0Iq9fCWwg4KkS6IGAAtJDFoxBAhKQwIAEFJABk2bIEpCABHogcE4B6YG8MUhAAhIYnIACMngCDV8CEpBAKwIKSCvy+pXAOQl41QcioIAcKJleigQkIIE9CSgge9LWlwQkIIEDEVBABkum4UpAAhLohYAC0ksmjEMCEpDAYAQUkMESZrgSkEArAvq9JKCAXBJxWwISkIAEbiKggNyEyYMkIAEJSOCSgAJyScTtWgTsVwISOBgBBeRgCfVyJCABCexF4P8AAAD\/\/8KConEAAAAGSURBVAMAtTXtPHrRA5sAAAAASUVORK5CYII=",
+    "firma_autorizado": "",
+    "tipo_ejecucion": "Preventivo, Planeado",
+    "trabajo_realizado": "Se realiza lubricacion para cumplircon el cronograma de mantenimiento, después su respectiva limpieza equipo funcional y en buen estado.",
+    "fecha_cierre": "2026-07-06",
+    "hora_cierre": "09:40",
+    "tipo_responsable": "Miembro De La Compañia",
+    "nombre_responsable": "Anderson Tutalcha Julian Torres ",
+    "vobo_mantenimiento": "Manuel Armando Jojoa",
+    "insumos_riesgo": "Si, grasa ",
+    "retirados_zona": "Si",
+    "novedad_inocuidad": "Ninguna ",
+    "condiciones_higienicas": "Si",
+    "implementos_limpieza": "Wypall y brocha ",
+    "fecha_revisionl": "2026-07-06",
+    "hora_revisionl": "09:40",
+    "firma_respLim": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAAKPElEQVR4AeydO640RxmGGzIScIyQwBI5EBECEWQsAbwDvAJgBbADwwoQGRkmIDc5Eo4QGVgswK7H0+8\/PTM9Z259q+rnqL+pS9f1qb\/ev6q655yvdv5IQAISqISAglXJQNlMCUig6xQs\/xVIQALVEFCwqhmq1xtqCRKonYCCVfsI2n4J7IiAgrWjwbarEqidgIJV+wjafgmMEWg0TsFqdGDtlgRaJKBgtTiq9kkCjRJQsBodWLslgRYJKFhjo2qcBCSwSQIK1iaHxUZJQAJjBBSsMSrGSUACmySgYG1yWGzUcgSsqSYCClZNo2VbJbBzAgrWzv8B2H0J1ERAwapptGyrBHZO4EXB2jk9uy8BCSxKQMFaFLeVSUACrxBQsF6hZ14JSGBRAgrWdLh\/VYr6uFirl\/2SwOoEFKzXh+DHpYj\/FvtdsR8V+7yYwlUgeElgagIK1utE\/1SKeK8Y1x\/5KIZwIWTF6yUBCUxFQMF6jSQrKcTq01LMV4r9sthvi3H9tXwoWgWCV30EttpiBev5kUGsWElRwvt89Pab4ka0Pip+LwlIYCICCtZzIDlgj1j9ZKQIRItV13fKPfzF8ZKABF4loGA9R5ADdnJyZsVKC\/+5fdBHRNj6oI4EJPAsAQXrcXJ\/6LP8s7icWRXn9OpDCBnGORbWR+tIQALPElCwHieXFdPf78ias6xf35HWJBKQwA0CCtYNQCO3OZci+q3VFfcxVlgYKyyMOO02AVhht1OaYlcEFKzHhjvbwb89kC2rLJ8Y3oaGSPE6SIzw7VxrprDuRQkoWI\/h\/kWfnCeAvfemwwqLRKzMnICQuDS4nIsUQh92lzmM2SUBBev+YR+uru7ZDg5L\/mQY0P+OAK+H\/KuEECtEq3g7RIpXRXwdpPPnnICCdU7kejirKibU9VTjdz7so9c+fEcg\/lLawncf+c7jmCHMc4oFwoRAUTevh7DyLE3qWFHxbQHE6hnGlKE1TmBdwaoLbsTmmcmcCchkXaPX1B+B+GlpAF8nKs7oxbaXvpJ+TLzoQwwWSYMfG4bxUzcChVEmLvmpnHuIOUJFXuI0CVwloGBdRXNyg4lHxCtbOyYnZWSy4l\/KvvVkRUPxQmwwBCeGsCUNfmwYxs9rIPQZSzNgwUoK+30idSVwi4CCdYvQ6f3PToMPhdjykIFJjbukfbdUxiqGN\/NpR1z8WMIICVaSX73YGpMGG+bFj6Us\/BhhhAmjDRh+8l+txBsSGCOgYI1RuYz7dh9V+7aFhwX0IS5+LGGEBENUhobw9Ag6XukgDTbMix9LWfgxwh93XadAdf68SkDBuo9gtjOvTDryYpSF3VfzNlIhPKyUaA3bPLaEtfWBtmuVE1Cwbg8gk5VUiA3uXo2VEqsuOCBWiBZPHffKw36vQEDBuh86W6H7U4+nzNZqjXOs8RY9HstWMKstXkt4vARztE5gtv4pWLfRsgUiFSsL3FcsZbBCeaWctfOy2soTU1Zaa7fH+ndCQMG6PdB5sTFiczvH2yl4ykaK2kXrB3SiGP3ItrkEvSQwHwEF6222TEZSTCVWlJXtVMomrlZje0jb2eK20B\/6om2YgIL19uBkEk5xfpWaIn68UJm4oVuTn76EDaJVU9tta4UEFKzlB41JTq0RQ\/w1G\/2gT7huDWseyQrarmC9PUhZNTAh30752N2UxyR\/LOc2Uw+ffvqqwzbHqIlWKVj3DWME5r7U96c6FyxWKHxf7zz+\/hLXSQmfnM3lqeo6LamsVpv7GAEF6zqvfOE5T\/Wup3z8TlYkw3MsXg\/Iiu7xEtfPwasOtOL75aM2wS1N9qqBgIJ1fZQiVDlUvp7y+TtMbAyxwqUknryxYsFfm0WIaxbe2pjvqr0K1vXhzuonwnU95eN3ECSMnBErwjWLFX1hS4uL+HqWBQltUgJVC9akJC4LY9IRm0mIfyqj7B8OCmNlUrtYpTs5y\/p5InQlMBUBBWucJIIyfmc8lvQY516slBA5bCyc32H+tb4oVnCk7YPVOznLggdWfYfswHYIKFjjY5GJxsrnPAX3ECW2cjzRw\/BjPCFjK8kZDjYW5qs+5M9KBME6r6P2MP2jDzDA1SQwCQEF6zGM\/y7JESZECeEqwS8vRIdJisAhRLix8zC\/w5zt33Al8mUhDX3Qd7oDIwz\/a2ZuCRQCClaBMHJlZYAIjdzu\/l8iER2M3xH1fh9ma4cQ4cbOw8PfYZ7yW5vU9AsRL1g6XnPo\/JHAFAQUrLcpMvGGKb5ZAgjU14vLPax4n77yykRrggWQD\/go5uF7geA1DQEF65JjxCMrhMsU08VE8NhiTlfqtkoKz221ytZsmMD1pilYl2wywTh7urw7T0zqnKf0dUpFjDFqb7F\/9EtbmICCtTDws+oyoc+iDUpAAmMEFKxLKrcO3C9zvBYT0WpxFZKnhR+9hsjcEjgQULAOHMY+IyRj9zYct8mm8e7ZJhtmo+oioGCdjldWOUuKVVYhWdmdtqju0JBj2NbdI1u\/KgEF6xR\/JlVeNzi9a+gZAkPReia\/eSTwjoCC9Q7Fap5M6Ijlag2ZqeKIf4sryJmQ3V3s7hIqWKdDnvehIiKndw09QyAsfeP9GXrmOSGgYJ3g6LLKySTrFvpJfal\/oWoXqSZ9e2+R2qykaQIK1nF4IxaZYMc7+l4lEKZh\/Gp55t8pgT0L1vmQZzLlzOX8\/pzhPPZ32zQnZcuunoCCdRzCCFbE43hnfl9EstVtU8uvbsz\/r8Ma3hFQsN6h6L7Re\/ktob13MSd15tB\/sYoXrsgV5MLAW6tOwTqO6P+O3tV8a6zuluzsJ0tWNqxLfxsEFKzjOGZLmAPi4535famzVcFK\/8J4fqLW0CQBBWt7w+qk3t6Y2KKNEFCwNjIQpRlulwoELwm8ReAuwXqrgEbuZVWTrcsa3fqsr5TfAd97m3LCNqyb6pydWYaAgrUM53tq4Y9WkK7VJ4Wtns8xZtpCBBSsA+j8r5\/3oQ6xy35mBcLETnuWbcG8tW3hKey8PbT02QkoWLMjfqiC\/\/Sp+duHWB9c0Jmvqj\/3Rbcoxn3XdOYmoGAdCLOqwRcX\/xr2j0Gla672Bs3QK4HtEFCwDmPxvYPTrf2k7mdd131YjL99mDOtEmziypa31TO6JgZp651QsA4jlPOVtQWL1gz\/MjTh1qzV70tWOE71NVnBOoxZzlWyCjjE+jklgXyPUMGakurOylKwdjbgK3Y3q9dPV2yDVVdOQME6DuDnR68+CUhgiwQUrMOocMj9IItDRj8lIIHlCDhJl2O995pyhrX2qyN7H4eq+69gVT18VTU+Tz8VrKqGbVuNVbC2NR62ZpsEbNVGCChYGxmInTSDs0JsJ921m1MTULCmJmp5EpDAbAQUrNnQWrAEJDA1gSUEa+o2W54EJLBTAgrWTgfebkugRgIKVo2jZpslsFMCCtZOB36ubluuBOYkoGDNSdeyJSCBSQkoWJPitDAJSGBOAgrWnHQtWwItE1ihbwrWCtCtUgISeI7AFwAAAP\/\/IhaObQAAAAZJREFUAwAO8CHY5+4giAAAAABJRU5ErkJggg==",
+    "firma_respLim2": "",
+    "control_responsable": "Manuel armando jojoa",
+    "cargo_control": "Lider de mantenimiento mecanico",
+    "trabajo_realizar_control": "Lubricación ",
+    "fechacontrol": "2026-07-06",
+    "tool_cant": [
+        "1"
+    ],
+    "tool_desc": [
+        "Grasera "
+    ],
+    "tool_salida": [
+        "1"
+    ],
+    "part_cant": [
+        ""
+    ],
+    "part_desc": [
+        ""
+    ],
+    "part_used": [
+        ""
+    ],
+    "part_unused": [
+        ""
+    ],
+    "part_removed": [
+        ""
+    ],
+    "part_verif": [
+        ""
+    ],
+    "mat_cant": [
+        "43"
+    ],
+    "mat_unidad": [
+        "Gramos "
+    ],
+    "mat_desc": [
+        "Grasa "
+    ],
+    "mat_used": [
+        "43"
+    ],
+    "mat_verif": [
+        "0"
+    ],
+    "vobo_ingreso_control": "Manuel Armando jojoa ",
+    "vobo_salida_control": "Manuel Armando jojoa ",
+    "med_parte": [
+        "Equipo"
+    ],
+    "med_termografia": [
+        "N\/A"
+    ],
+    "med_vibraciones": [
+        "N\/A"
+    ],
+    "med_equipo_name": [
+        ""
+    ],
+    "med_rango": [
+        ""
+    ],
+    "med_amperaje": [
+        ""
+    ],
+    "med_obs": [
+        ""
+    ]
+}

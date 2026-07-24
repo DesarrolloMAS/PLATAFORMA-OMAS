@@ -6,3 +6,7 @@ Thumbs.db
 #Archivs de configuracion local
 *.log
 .env
+# Dependencias reinstalables
+/node_modules/
+/vendor/
+/chrome-linux64/

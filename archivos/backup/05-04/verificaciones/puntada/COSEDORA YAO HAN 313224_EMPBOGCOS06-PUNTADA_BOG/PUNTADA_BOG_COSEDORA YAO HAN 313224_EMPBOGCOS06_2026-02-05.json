@@ -1,0 +1,12 @@
+{
+    "codigo_maquina": "COSEDORA YAO HAN 313224_EMPBOGCOS06",
+    "nombre_maquina": "PUNTADA_BOG",
+    "tipo_maquina": "puntada",
+    "estado_general": "BUENO",
+    "Puntada": "Cumple",
+    "Lubricacion": "Cumple",
+    "Observaciones": "exceso de producto en parte interna de la maquina\r\n",
+    "formato": "verificacion_iman_ZC",
+    "usuario": "John Giraldo",
+    "archivo_pdf": "PUNTADA_BOG_COSEDORA YAO HAN 313224_EMPBOGCOS06_2026-02-05.pdf"
+}

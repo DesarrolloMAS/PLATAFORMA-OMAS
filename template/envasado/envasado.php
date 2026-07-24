@@ -1,5 +1,6 @@
 <?php
-$harina = $_GET['harina'] ?? '';
+$harina = $_GET['harina'] ?? 'NO ESPECIFICADO';
+$empaque = $_GET['empaque'] ?? 'NO ESPECIFICADO';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,7 @@ $harina = $_GET['harina'] ?? '';
     <form action="envasado_save.php" method="post">
     <h1>Comprobaciones en linea de envasado</h1>
     <input type="hidden" name="harina" value="<?php echo htmlspecialchars($_GET['harina'] ?? ''); ?>">
+    <input type="hidden" name="empaque" value="<?php echo htmlspecialchars($empaque); ?>">
     <div>
     <h2>Recepcion empaque para envasado</h2>
     <label for="fecha">Fecha</label>

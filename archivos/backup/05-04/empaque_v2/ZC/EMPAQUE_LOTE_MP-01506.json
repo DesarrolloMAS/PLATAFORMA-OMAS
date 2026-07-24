@@ -1,0 +1,76 @@
+[
+    {
+        "id_registro": "EMPV2_69e60f7d41a14",
+        "timestamp": "2026-04-20 11:35:25",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": 0,
+            "fecha_alistamiento": "2026-04-08",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Rojo X50",
+            "lote_empaque": "MP-01506",
+            "producto_envasar": "ARTESANAL X 50",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-08",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "349",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "349",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0",
+            "proveedor": "COMPAÑÍA DE EMPAQUES",
+            "lote_proveedor": ""
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e6356cbc3c5",
+        "timestamp": "2026-04-20 14:17:16",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-10",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Rojo X50",
+            "lote_empaque": "MP-01506",
+            "producto_envasar": "ARTESANAL X 50",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-10",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "105",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "105",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69eb77bd0b299",
+        "timestamp": "2026-04-24 14:01:33",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-23",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Rojo X50",
+            "lote_empaque": "MP-01506",
+            "producto_envasar": "ARTESANAL X 50",
+            "lote_producto": "230426B",
+            "fecha_vencimiento": "23042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-23",
+            "entregado_a": "BALMER",
+            "cantidad_solicitada": "356",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "356",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

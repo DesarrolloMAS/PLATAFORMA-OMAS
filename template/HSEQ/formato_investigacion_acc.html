@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigación de Accidentes e Incidentes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/formato_investigacion_acc.css">
+</head>
+<body>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <header>
+        <h1>Investigación de Accidentes</h1>
+    </header>
+
+    <form method="POST" action="formato_investigacion_pros.php" enctype="multipart/form-data" id="formInvestigacion">
+        <div class="module">
+        <div class="module-header">INSTRUCCIONES DE DILIGENCIAMIENTO</div>
+        <div class="module-header">Responda cada una de las preguntas indicadas, con letra imprenta clara o a máquina de escribir. 
+                                    Nota: TODA LAS CASILLAS DEBEN SER DILIGENCIADAS</div>
+        </div>
+
+    <!-- 1. INFORMACIÓN INVESTIGACIÓN -->
+    <div class="module grid-3">
+        <div class="module-header">Información de la Investigación</div>
+        <div class="field"><label class="field-label">Fecha Investigación</label><input type="date" name="inv_fecha" id="inv_fecha"></div>
+        <div class="field"><label class="field-label">Hora Investigación</label><input type="time" name="inv_hora" id="inv_hora"></div>
+        <div class="field"><label class="field-label">Código</label><input name="inv_codigo" id="inv_codigo" placeholder="Código"></div>
+        <div class="field">
+            <label class="field-label">Dirección</label>
+            <input value="Calle 17a # 35-22" disabled>
+            <input type="hidden" name="inv_direccion" value="Calle 17a # 35-22">
+        </div>
+        <div class="field">
+            <label class="field-label">Departamento</label>
+            <input value="Bogotá D.C" disabled>
+            <input type="hidden" name="inv_departamento" value="Bogotá D.C">
+        </div>
+        <div class="field">
+            <label class="field-label">Municipio</label>
+            <input value="Bogotá D.C" disabled>
+            <input type="hidden" name="inv_municipio" value="Bogotá D.C">
+        </div>
+        <div class="field span-3"><label class="field-label">Responsable</label><input name="inv_responsable" id="inv_responsable" placeholder="Nombre completo"></div>
+    </div>
+
+    <!-- 2. INFORMACIÓN EMPRESA -->
+    <div class="module grid-3">
+        <div class="module-header">Información de la Empresa</div>
+        <div class="field">
+            <label class="field-label">Actividad Económica</label>
+            <input id="emp_actividad" placeholder="Actividad" value="Elaboracion de productos de molineria" disabled>
+            <input type="hidden" name="emp_actividad" value="Elaboracion de productos de molineria">
+        </div>
+        <div class="field">
+            <label class="field-label">Zona</label>
+            <input value="Urbana" disabled>
+            <input type="hidden" name="emp_zona" value="Urbana">
+        </div>
+        <div class="field">
+            <label class="field-label">Departamento</label>
+            <input value="Bogotá D.C" disabled>
+            <input type="hidden" name="emp_departamento" value="Bogotá D.C">
+        </div>
+        <div class="field">
+            <label class="field-label">Sede</label>
+
+            <input name="emp_sede" id="campo_sede" placeholder="Sede" readonly>
+        </div>
+        <div class="field">
+            <label class="field-label">NIT</label>
+            <input value="830019403" disabled>
+            <input type="hidden" name="emp_nit" value="830019403">
+        </div>
+        <div class="field">
+            <label class="field-label">Teléfono</label>
+            <input value="6025418" disabled>
+            <input type="hidden" name="emp_telefono" value="6025418">
+        </div>
+        <div class="field span-2">
+            <label class="field-label">Dirección</label>
+            <input value="Calle 17a # 35-22" disabled>
+            <input type="hidden" name="emp_direccion" value="Calle 17a # 35-22">
+        </div>
+        <div class="field">
+            <label class="field-label">Municipio</label>
+            <input value="Bogotá D.C" disabled>
+            <input type="hidden" name="emp_municipio" value="Bogotá D.C">
+        </div>
+        <div class="field span-3"><label class="field-label">Correo</label><input type="email" name="emp_correo" id="emp_correo" placeholder="correo@empresa.com"></div>
+    </div>
+
+    <!-- 3. DATOS TRABAJADOR COMPLETOS -->
+    <div class="module grid-3">
+        <div class="module-header">Datos Generales del Trabajador</div>
+        <div class="field"><label class="field-label">Tipo Vinculación</label><select name="trab_vinculacion" id="trab_vinculacion"><option value="SIN SELECCIONAR">Seleccionar</option><option value="Planta">Planta</option><option value="Contratista">Contratista</option><option value="Estudiante o Aprendiz">Estudiante o Aprendiz</option></select></div>
+        <div class="field"><label class="field-label">EPS</label><input name="trab_eps" id="trab_eps" placeholder="EPS"></div>
+        <div class="field"><label class="field-label">ARL</label><input name="trab_arl" id="trab_arl" placeholder="ARL"></div>
+
+        <div class="field"><label class="field-label">Primer Apellido</label><input name="trab_apellido1" id="trab_apellido1" placeholder="Apellido 1"></div>
+        <div class="field"><label class="field-label">Segundo Apellido</label><input name="trab_apellido2" id="trab_apellido2" placeholder="Apellido 2"></div>
+        <div class="field"><label class="field-label">AFP</label><input name="trab_afp" id="trab_afp" placeholder="AFP"></div>
+
+        <div class="field"><label class="field-label">Primer Nombre</label><input name="trab_nombre1" id="trab_nombre1" placeholder="Nombre 1"></div>
+        <div class="field"><label class="field-label">Segundo Nombre</label><input name="trab_nombre2" id="trab_nombre2" placeholder="Nombre 2"></div>
+        <div class="field"><label class="field-label">Sexo</label><select name="trab_sexo" id="trab_sexo"><option value="SIN SELECCIONAR">Seleccionar</option><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option><option value="Otro">Otro</option></select></div>
+
+        <div class="field"><label class="field-label">Tipo Identificacion</label><select name="trab_tipo_id" id="trab_tipo_id"><option value="CC">Cedula de ciudadania</option><option value="CE">Cedula de extranjeria</option><option value="PASAPORTE">Pasaporte</option><option value="Permiso por proteccion temporal">Permiso por proteccion temporal</option><option value="Salvo conducto de permanencia">Salvo conducto de permanencia</option></select></div>
+        <div class="field"><label class="field-label">Número Identificacion</label><input name="trab_numero_id" id="trab_numero_id" placeholder="Número"></div>
+        <div class="field"><label class="field-label">Cargo</label><input name="trab_cargo" id="trab_cargo" placeholder="Cargo"></div>
+
+        <div class="field"><label class="field-label">Fecha Nacimiento</label><input type="date" id="fn" name="trab_fecha_nacimiento"></div>
+        <div class="field"><label class="field-label">Edad</label><input type="number" id="ed" name="trab_edad" placeholder="Auto"></div>
+        <div class="field"><label class="field-label">Fecha Ingreso</label><input type="date" name="trab_fecha_ingreso" id="trab_fecha_ingreso"></div>
+
+        <div class="field"><label class="field-label">Departamento</label><input name="trab_departamento" id="trab_departamento" placeholder="Depto"></div>
+        <div class="field"><label class="field-label">Municipio</label><input name="trab_municipio" id="trab_municipio" placeholder="Ciudad"></div>
+        <div class="field"><label class="field-label">Zona</label><select name="trab_zona" id="trab_zona"><option value="Urbana">Urbana</option><option value="Rural">Rural</option></select></div>
+
+        <div class="field"><label class="field-label">Ocupación</label><input name="trab_ocupacion" id="trab_ocupacion" placeholder="Profesión"></div>
+        <div class="field"><label class="field-label">Área Trabajo</label><select name="trab_area" id="trab_area"><option value="Operativo">Operativo</option><option value="Administrativo">Administrativo</option></select></div>
+        <div class="field"><label class="field-label">Antigüedad</label><input name="trab_antiguedad" id="trab_antiguedad" placeholder="2 años"></div>
+
+        <div class="field span-2"><label class="field-label">Dirección</label><input name="trab_direccion" id="trab_direccion" placeholder="Dirección completa"></div>
+        <div class="field"><label class="field-label">Teléfono</label><input name="trab_telefono" id="trab_telefono" placeholder="Teléfono"></div>
+
+        <div class="field span-2"><label class="field-label">Correo</label><input type="email" name="trab_correo" id="trab_correo" placeholder="correo@ejemplo.com"></div>
+        <div class="field"><label class="field-label">Salario</label><input name="trab_salario" id="trab_salario" placeholder="Monto"></div>
+
+         <div class="field"><label class="field-label">Jornada</label><select name="trab_jornada" id="trab_jornada"><option value="Diurna">Diurna</option><option value="Nocturna">Nocturna</option><option value="Mixta">Mixta</option><option value="Turnos">Turnos</option><option value="Por horas">Por horas</option></select></div>
+    </div>
+
+    <!-- 4. INFORMACIÓN ACCIDENTE COMPLETO -->
+    <div class="module grid-3">
+        <div class="module-header">Información sobre el Accidente</div>
+        <div class="field"><label class="field-label">Fecha Accidente</label><input type="date" name="acc_fecha" id="acc_fecha"></div>
+        <div class="field"><label class="field-label">Hora Accidente</label><input type="time" name="acc_hora" id="acc_hora"></div>
+        <div class="field"><label class="field-label">Día Semana</label><input name="acc_dia" id="acc_dia" placeholder="Lunes"></div>
+
+        <div class="field"><label class="field-label">Jornada</label><select name="acc_jornada" id="acc_jornada"><option value="Diurna">Diurna</option><option value="Nocturna">Nocturna</option><option value="Mixta">Mixta</option><option value="Turnos">Turnos</option><option value="Por horas">Por horas</option></select></div>
+        <div class="field"><label class="field-label">Tiempo Previo</label><input name="acc_tiempo_previo" id="acc_tiempo_previo" placeholder="4h"></div>
+        <div class="field"><label class="field-label">Num Testigos</label><input type="number" name="acc_num_testigos" id="acc_num_testigos" placeholder="0"></div>
+
+        <div class="field">
+            <label class="field-label">Municipio</label>
+            <input value="Bogotá" disabled>
+            <input type="hidden" name="acc_municipio" value="Bogotá">
+        </div>
+        <div class="field">
+            <label class="field-label">Zona</label>
+            <select name="acc_zona" id="acc_zona"><option value="SIN SELECCIONAR">Seleccionar</option><option value="Urbana">Urbana</option><option value="Rural">Rural</option></select>
+        </div>
+        <div class="field">
+            <label class="field-label">Departamento</label>
+            <input value="Bogotá D.C" disabled>
+            <input type="hidden" name="acc_departamento" value="Bogotá D.C">
+        </div>
+
+        <div class="field span-2"><label class="field-label">Lugar Exacto</label><input name="acc_lugar" id="acc_lugar" placeholder="Descripción precisa"></div>
+        <div class="field"><label class="field-label">Tipo Accidente</label><select name="acc_tipo" id="acc_tipo"><option value="SIN SELECCIONAR">Seleccionar</option><option value="Incidente">Incidente</option><option value="Accidente leve">Accidente leve</option><option value="Accidente grave">Accidente Grave</option><option value="Accidente mortal">Accidente Mortal</option></select></div>
+
+        <div class="field span-2"><label class="field-label">¿Realizaba su Labor Habitual?</label><select name="acc_labor_habitual" id="acc_labor_habitual"><option value="SIN SELECCIONAR">Seleccionar</option><option value="si">Sí</option><option value="no">No</option></select></div>
+        <div class="field"><label class="field-label">Fecha Muerte</label><input type="date" name="acc_fecha_muerte" id="acc_fecha_muerte"></div>
+
+        <div class="field span-3"><label class="field-label">Justificación</label><input name="acc_justificacion" id="acc_justificacion" placeholder="¿Por qué este tipo?"></div>
+        <div class="field span-3"><label class="field-label">Descripción Detallada</label><textarea name="acc_descripcion" id="acc_descripcion" rows="5" placeholder="Describa el accidente..."></textarea></div>
+    </div>
+
+    <!-- 5. DESCRIPCIÓN ACCIDENTE -->
+    <div class="module grid-2">
+        <div class="module-header">Descripción del Accidente</div>
+        <div class="field"><label class="field-label">QUIEN ES EL TRABAJADOR ACCIDENTADO</label><textarea name="desc_identificacion" id="desc_identificacion" rows="3" placeholder="Nombre y datos"></textarea></div>
+        <div class="field"><label class="field-label">DESCRIBA LA TAREA QUE DESARROLLABÁ EL TRABAJADOR EN EL MOMENTO DEL ACCIDENTE LABORAL</label><textarea name="desc_tarea" id="desc_tarea" rows="3" placeholder="Descripción"></textarea></div>
+
+        <div class="field span-2"><label class="field-label">DESCRIBA LA FORMA COMO OCURRIÓ EL ACCIDENTE LABORAL: (INFORMACIÓN DEL ACCIDENTADO)</label><textarea name="desc_forma" id="desc_forma" rows="4" placeholder="Cómo ocurrió"></textarea></div>
+
+        <div class="field"><label class="field-label">CUANDO OCURRIO EL ACCIDENTE (FECHA Y HORA EXACTA)</label><textarea name="desc_cuando" id="desc_cuando" rows="3" placeholder="Fecha y hora"></textarea></div>
+        <div class="field"><label class="field-label">DONDE OCURRIO EL ACCIDENTE (LUGAR DEL EVENTO)</label><textarea name="desc_donde" id="desc_donde" rows="3" placeholder="Lugar"></textarea></div>
+
+        <div class="field"><label class="field-label">POR QUE OCURRIO EL ACCIDENTE:</label><textarea name="desc_porque" id="desc_porque" rows="3" placeholder="Causas"></textarea></div>
+        <div class="field"><label class="field-label">DECLARACIÓN DE LOS TESTIGOS:</label><textarea name="desc_declaracion" id="desc_declaracion" rows="3" placeholder="Declaraciones"></textarea></div>
+
+        <div class="subsection">Testigos</div>
+        <table class="data-table span-2">
+            <thead><tr><th>NOMBRES</th><th>DOCUMENTO</th><th>CARGO</th></tr></thead>
+            <tbody>
+                <tr><td><input name="testigo_nombre[]" placeholder="Nombres"></td><td><input name="testigo_documento[]" placeholder="Doc"></td><td><input name="testigo_cargo[]" placeholder="Cargo"></td></tr>
+                <tr><td><input name="testigo_nombre[]" placeholder="Nombres"></td><td><input name="testigo_documento[]" placeholder="Doc"></td><td><input name="testigo_cargo[]" placeholder="Cargo"></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 6. REGISTRO FOTOGRÁFICO -->
+    <div class="module grid-2">
+        <div class="module-header">Registro Fotográfico</div>
+        <div class="field">
+    <label class="field-label">TOMA 1</label>
+    <div class="upload-zone">
+        <input type="file" id="f1" name="tomo1[]" accept="image/*" multiple>
+        <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+        <div class="upload-text">Seleccione imágenes</div>
+    </div>
+    <div class="file-badge" id="b1"><span id="c1">0 archivos</span></div>
+</div>
+<div class="field">
+    <label class="field-label">TOMA 2</label>
+    <div class="upload-zone">
+        <input type="file" id="f2" name="tomo2[]" accept="image/*" multiple>
+        <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+        <div class="upload-text">Seleccione imágenes</div>
+    </div>
+    <div class="file-badge" id="b2"><span id="c2">0 archivos</span></div>
+</div>
+<div class="field">
+    <label class="field-label">TOMA 3</label>
+    <div class="upload-zone">
+        <input type="file" id="f3" name="tomo3[]" accept="image/*" multiple>
+        <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+        <div class="upload-text">Seleccione imágenes</div>
+    </div>
+    <div class="file-badge" id="b3"><span id="c3">0 archivos</span></div>
+</div>
+<div class="field">
+    <label class="field-label">TOMA 4</label>
+    <div class="upload-zone">
+        <input type="file" id="f4" name="tomo4[]" accept="image/*" multiple>
+        <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
+        <div class="upload-text">Seleccione imágenes</div>
+    </div>
+    <div class="file-badge" id="b4"><span id="c4">0 archivos</span></div>
+</div>
+    </div>
+<!-- CARACTERIZACIÓN DEL ACCIDENTE LABORAL (SEGÚN ANSI Z 16.2) -->
+<div class="module">
+    <div class="module-header">Caracterización del Accidente Laboral <span style="font-weight:400; font-size:0.9em;">(Según Norma ANSI Z 16.2)</span></div>
+    <div class="data-table span-3" style="margin-bottom: 16px;">
+        <table style="width:100%;">
+            <thead>
+                <tr>
+                    <th style="width:40px;">N°</th>
+                    <th>VARIABLE</th>
+                    <th>DESCRIPCIÓN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Naturaleza de la lesión</td>
+                    <td>
+                        <select name="carac_lesion" required>
+                            <option value="">Seleccionar</option>
+                            <option value="No se evidencia">No se evidencia</option>
+                            <option value="10. SIN LESION APARENTE">10. SIN LESION APARENTE</option>
+                            <option value="100. AMPUTACIONES, ENUCLEACIONES">100. AMPUTACIONES, ENUCLEACIONES</option>
+                            <option value="120. QUEMADURA CALORICA">120. QUEMADURA CALORICA</option>
+                            <option value="130. QUEMADURA QUIMICA">130. QUEMADURA QUIMICA</option>
+                            <option value="140. CONTUSION CEREBRAL">140. CONTUSION CEREBRAL</option>
+                            <option value="150. ENFERMEDAD INFECCIONESA O CONTAGIOSA">150. ENFERMEDAD INFECCIONESA O CONTAGIOSA</option>
+                            <option value="160. CONTUSION, MACHUCON, MAGULLAMIENTO">160. CONTUSION, MACHUCON, MAGULLAMIENTO</option>
+                            <option value="170. CORTADA, LACERACION, PINCHAZO">170. CORTADA, LACERACION, PINCHAZO</option>
+                            <option value="180. DERMATITIS, ERUPCION, INFLAMACION PIEL O TEJIDO SUBTUCANEO">180. DERMATITIS, ERUPCION, INFLAMACION PIEL O TEJIDO SUBTUCANEO</option>
+                            <option value="190. LUXACION, ESGUINCE">190. LUXACION, ESGUINCE</option>
+                            <option value="200. CHOQUE ELECTRICO, ELECTROCUCION">200. CHOQUE ELECTRICO, ELECTROCUCION</option>
+                            <option value="210. FRACTURA">210. FRACTURA</option>
+                            <option value="220. CONGELACION, LESION CUTANEA POR FRIO Y OTROS EFECTOS POR LA EXPOSICION A BAJAS TEMPERATURAS">220. CONGELACION, LESION CUTANEA POR FRIO Y OTROS EFECTOS POR LA EXPOSICION A BAJAS TEMPERATURAS</option>
+                            <option value="230. PERDIDA DE LA AUDICION O SU DETERIORO">230. PERDIDA DE LA AUDICION O SU DETERIORO</option>
+                            <option value="240. INSOLACION, CALAMBRES CALORICOS, AGOTAMIENTO O POSTRACION POR CALOR Y OTROS EFECTOS DEL CALOR AMBIENTAL">240. INSOLACION, CALAMBRES CALORICOS, AGOTAMIENTO O POSTRACION POR CALOR Y OTROS EFECTOS DEL CALOR AMBIENTAL</option>
+                            <option value="250. HERNIAS, RUPTURA">250. HERNIAS, RUPTURA</option>
+                            <option value="260. INFLAMACIÓN O IRRITACIÓN DE MÚSCULOS, ARTICULACIONES O TENDONES">260. INFLAMACIÓN O IRRITACIÓN DE MÚSCULOS, ARTICULACIONES O TENDONES</option>
+                            <option value="270. ENVENENAMIENTO">270. ENVENENAMIENTO</option>
+                            <option value="290. EFECTOS DE LAS RADIACIONES, QUEMADURAS SOLARES Y TODA FORMA DE LESIÓN DE TEJIDOS">290. EFECTOS DE LAS RADIACIONES, QUEMADURAS SOLARES Y TODA FORMA DE LESIÓN DE TEJIDOS</option>
+                            <option value="300. RASPADURAS, ABRASIONES">300. RASPADURAS, ABRASIONES</option>
+                            <option value="310. DISTENSIONES, DESGARROS">310. DISTENSIONES, DESGARROS</option>
+                            <option value="400. LESIONES MÚLTIPLES">400. LESIONES MÚLTIPLES</option>
+                            <option value="990. ENFERMEDAD OCUPACIONAL (NO IDENTIFICADA EN OTRA PARTE)">990. ENFERMEDAD OCUPACIONAL (NO IDENTIFICADA EN OTRA PARTE)</option>
+                            <option value="995. OTRAS LESIONES NO IDENTIFICADAS EN OTRA PARTE">995. OTRAS LESIONES NO IDENTIFICADAS EN OTRA PARTE</option>
+                            <option value="998. MUERTE">998. MUERTE</option>
+                            <option value="999. SIN CLASIFICAR, NO DETERMINADA">999. SIN CLASIFICAR, NO DETERMINADA</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Parte del cuerpo afectada</td>
+                    <td>
+                        <select name="carac_cuerpo" required>
+                            <option value="">Seleccionar</option>
+                            <option value="No se evidencia">No se evidencia</option>
+                            <option value="160. CRANEO">160. CRANEO</option>
+                            <option value="198. CABEZA NO IDENTIFICADA EN OTRA PARTE">198. CABEZA NO IDENTIFICADA EN OTRA PARTE</option>
+                            <option value="200. CUELLO">200. CUELLO</option>
+                            <option value="300. EXTREMIDADES SUPERIORES">300. EXTREMIDADES SUPERIORES</option>
+                            <option value="311. PARTE SUPERIOR DEL BRAZO">311. PARTE SUPERIOR DEL BRAZO</option>
+                            <option value="313. CODO(S)">313. CODO(S)</option>
+                            <option value="315. ANTEBRAZOS">315. ANTEBRAZOS</option>
+                            <option value="317. BRAZO MULTIPLE, (COMBINACION DE LAS PARTES ANTES CITADAS)">317. BRAZO MULTIPLE, (COMBINACION DE LAS PARTES ANTES CITADAS)</option>
+                            <option value="319. BRAZO NO IDENTIFICADO EN OTRA PARTE">319. BRAZO NO IDENTIFICADO EN OTRA PARTE</option>
+                            <option value="320. MUÑECAS">320. MUÑECAS</option>
+                            <option value="330. MANO(S) (EXCLUYENDO MUÑECA Y DEDOS)">330. MANO(S) (EXCLUYENDO MUÑECA Y DEDOS)</option>
+                            <option value="340. DEDO(S), MANO(S)">340. DEDO(S), MANO(S)</option>
+                            <option value="398. EXTREMIDADES SUPERIORES MÚLTIPLES">398. EXTREMIDADES SUPERIORES MÚLTIPLES</option>
+                            <option value="399. EXTREMIDADES SUPERIORES, NO IDENTIFICADAS EN OTRA PARTE">399. EXTREMIDADES SUPERIORES, NO IDENTIFICADAS EN OTRA PARTE</option>
+                            <option value="400. TRONCO">400. TRONCO</option>
+                            <option value="410. ABDOMEN, INCLUYE ÓRGANOS INTERNOS">410. ABDOMEN, INCLUYE ÓRGANOS INTERNOS</option>
+                            <option value="420. ESPALDA, INCLUYE MÚSCULOS DE LA COLUMNA Y MEDULA">420. ESPALDA, INCLUYE MÚSCULOS DE LA COLUMNA Y MEDULA</option>
+                            <option value="430. TÓRAX, INCLUYE COSTILLA, ESTERNÓN, ÓRGANOS INTERNOS">430. TÓRAX, INCLUYE COSTILLA, ESTERNÓN, ÓRGANOS INTERNOS</option>
+                            <option value="440. CADERAS, INCLUYE PELVIS, ÓRGANOS PÉLVICOS, NALGAS">440. CADERAS, INCLUYE PELVIS, ÓRGANOS PÉLVICOS, NALGAS</option>
+                            <option value="450. HOMBRO(S)">450. HOMBRO(S)</option>
+                            <option value="498. TRONCO MÚLTIPLE (CUALQUIER COMBINACIÓN DE LAS PARTES ANTERIORES)">498. TRONCO MÚLTIPLE (CUALQUIER COMBINACIÓN DE LAS PARTES ANTERIORES)</option>
+                            <option value="499. TRONCO NO IDENTIFICADO EN OTRA PARTE">499. TRONCO NO IDENTIFICADO EN OTRA PARTE</option>
+                            <option value="500. EXTREMIDADES INFERIORES">500. EXTREMIDADES INFERIORES</option>
+                            <option value="510. PIERNA (ARRIBA DEL TOBILLO)">510. PIERNA (ARRIBA DEL TOBILLO)</option>
+                            <option value="511. MUSLO(S)">511. MUSLO(S)</option>
+                            <option value="513. RODILLA(S)">513. RODILLA(S)</option>
+                            <option value="515. PARTE INFERIOR DE LA PIERNA">515. PARTE INFERIOR DE LA PIERNA</option>
+                            <option value="518. PIERNA MÚLTIPLE (CUALQUIER COMBINACIÓN DE LAS PARTES ANTERIORES)">518. PIERNA MÚLTIPLE (CUALQUIER COMBINACIÓN DE LAS PARTES ANTERIORES)</option>
+                            <option value="519. PIERNAS NO IDENTIFICADAS EN OTRAS PARTES">519. PIERNAS NO IDENTIFICADAS EN OTRAS PARTES</option>
+                            <option value="520. TOBILLO(S)">520. TOBILLO(S)</option>
+                            <option value="530. PIE, EXCLUYENDO TOBILLOS Y DEDOS">530. PIE, EXCLUYENDO TOBILLOS Y DEDOS</option>
+                            <option value="540. DEDOS DEL PIE">540. DEDOS DEL PIE</option>
+                            <option value="598. EXTREMIDADES INFERIORES MÚLTIPLE (CUALQUIER COMBINACIÓN DE LAS PARTES ANTERIORES)">598. EXTREMIDADES INFERIORES MÚLTIPLE (CUALQUIER COMBINACIÓN DE LAS PARTES ANTERIORES)</option>
+                            <option value="599. EXTREMIDADES INFERIORES NO IDENTIFICADAS">599. EXTREMIDADES INFERIORES NO IDENTIFICADAS</option>
+                            <option value="700. MÚLTIPLES PARTES (CUANDO SE HA AFECTADO MAS DE UNA DE LAS PARTES DEL CUERPO)">700. MÚLTIPLES PARTES (CUANDO SE HA AFECTADO MAS DE UNA DE LAS PARTES DEL CUERPO)</option>
+                            <option value="800. SISTEMAS ORGÁNICOS">800. SISTEMAS ORGÁNICOS</option>
+                            <option value="801. SISTEMA CIRCULATORIO">801. SISTEMA CIRCULATORIO</option>
+                            <option value="810. SISTEMA DIGESTIVO">810. SISTEMA DIGESTIVO</option>
+                            <option value="820. SISTEMA EXCRETORIO">820. SISTEMA EXCRETORIO</option>
+                            <option value="830. SISTEMA MUSCULO ESQUELÉTICO">830. SISTEMA MUSCULO ESQUELÉTICO</option>
+                            <option value="840. SISTEMA NERVIOSO">840. SISTEMA NERVIOSO</option>
+                            <option value="850. SISTEMA RESPIRATORIO">850. SISTEMA RESPIRATORIO</option>
+                            <option value="880. OTROS SISTEMAS ORGÁNICOS">880. OTROS SISTEMAS ORGÁNICOS</option>
+                            <option value="900. PARTES DEL CUERPO NO IDENTIFICADAS EN OTRA PARTE">900. PARTES DEL CUERPO NO IDENTIFICADAS EN OTRA PARTE</option>
+                            <option value="999. SIN CLASIFICAR (INSUFICIENTE INFORMACIÓN PARA IDENTIFICAR LA PARTE AFECTADA)">999. SIN CLASIFICAR (INSUFICIENTE INFORMACIÓN PARA IDENTIFICAR LA PARTE AFECTADA)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Mecanismo o fuente del accidente</td>
+                    <td>
+                        <select name="carac_mecanismo" required>
+                            <option value="">Seleccionar</option>
+                            <option value="No se evidencia">No se evidencia</option>
+                            <option value="10. GOLPEADO CONTRA">10. GOLPEADO CONTRA</option>
+                            <option value="20. GOLPEADO POR">20. GOLPEADO POR</option>
+                            <option value="30. CAIDA DE UN NIVEL SUPERIOR">30. CAIDA DE UN NIVEL SUPERIOR</option>
+                            <option value="39. CAIDA A NIVEL MAS BAJO NO ESPECIFICADO EN OTRA PARTE">39. CAIDA A NIVEL MAS BAJO NO ESPECIFICADO EN OTRA PARTE</option>
+                            <option value="50. CAIDA DE UN MISMO NIVEL">50. CAIDA DE UN MISMO NIVEL</option>
+                            <option value="60. CODIGO EN DEBAJO DE">60. CODIGO EN DEBAJO DE</option>
+                            <option value="80. FRICCION Y RASPADURA">80. FRICCION Y RASPADURA</option>
+                            <option value="100. REACCION CORPORAL">100. REACCION CORPORAL</option>
+                            <option value="120. SOBRE ESFUERZO">120. SOBRE ESFUERZO</option>
+                            <option value="130. CONTACTO CON CORRIENTE ELECTRICA">130. CONTACTO CON CORRIENTE ELECTRICA</option>
+                            <option value="150. CONTACTO CON TEMPERATURAS EXTREMAS">150. CONTACTO CON TEMPERATURAS EXTREMAS</option>
+                            <option value="180. CONTACTO CON RADIACIONES, SUSTANCIAS CAUSTICAS, TOXICAS O NOCIVAS">180. CONTACTO CON RADIACIONES, SUSTANCIAS CAUSTICAS, TOXICAS O NOCIVAS</option>
+                            <option value="200. ACCIDENTE DE TRANSPORTE PUBLICO">200. ACCIDENTE DE TRANSPORTE PUBLICO</option>
+                            <option value="300. ACCIDENTE DE VEHÍCULOS MOTORIZADOS">300. ACCIDENTE DE VEHÍCULOS MOTORIZADOS</option>
+                            <option value="330. INCIDENTES SIN CHOQUES">330. INCIDENTES SIN CHOQUES</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Agente del accidente</td>
+                    <td>
+                        <select name="carac_agente" required>
+                            <option value="">Seleccionar</option>
+                            <option value="No se evidencia">No se evidencia</option>
+                            <option value="400. MOVIMIENTO DEL CUERPO (EXCLUYENDO LEVANTAR HALAR, EMPUJAR, ETC)">400. MOVIMIENTO DEL CUERPO (EXCLUYENDO LEVANTAR HALAR, EMPUJAR, ETC)</option>
+                            <option value="500. CALDERAS, RECIPIENTES A PRESION">500. CALDERAS, RECIPIENTES A PRESION</option>
+                            <option value="600. CAJAS, BARRILES, ENVASES, PAQUETES (VACIOS O LLENOS)">600. CAJAS, BARRILES, ENVASES, PAQUETES (VACIOS O LLENOS)</option>
+                            <option value="700. EDIFICACIONES Y ESTRUCUTRAS (EXLUCYENDO PISOS Y SUPERFICIES DE TRABAJO)">700. EDIFICACIONES Y ESTRUCUTRAS (EXLUCYENDO PISOS Y SUPERFICIES DE TRABAJO)</option>
+                            <option value="800. OBJETOS DE CERAMICA">800. OBJETOS DE CERAMICA</option>
+                            <option value="900. SUSTANCIAS O COMPUESTOS QUIMICOS">900. SUSTANCIAS O COMPUESTOS QUIMICOS</option>
+                            <option value="1000. VESTUARIO, TRAJES, ZAPATOS">1000. VESTUARIO, TRAJES, ZAPATOS</option>
+                            <option value="1200. FRIO (ATMOSERICO, AMBIENTAL)">1200. FRIO (ATMOSERICO, AMBIENTAL)</option>
+                            <option value="1300. TRANSPORTADORES">1300. TRANSPORTADORES</option>
+                            <option value="1400. DROGAS Y MEDICINAS">1400. DROGAS Y MEDICINAS</option>
+                            <option value="1500. APARATOS ELÉCTRICOS">1500. APARATOS ELÉCTRICOS</option>
+                            <option value="1700. LLAMA, FUEGO, HUMO">1700. LLAMA, FUEGO, HUMO</option>
+                            <option value="1800. PRODUCTOS ALIMENTICIOS (INCLUYENDO ANIMALES Y SUS PRODUCTOS)">1800. PRODUCTOS ALIMENTICIOS (INCLUYENDO ANIMALES Y SUS PRODUCTOS)</option>
+                            <option value="1900. MOBILIARIOS, MUEBLES O ADORNOS FIJOS, ACCESORIOS (EXCLUYENDO PARTES FIJAS DE LOS EDIFICIOS)">1900. MOBILIARIOS, MUEBLES O ADORNOS FIJOS, ACCESORIOS (EXCLUYENDO PARTES FIJAS DE LOS EDIFICIOS)</option>
+                            <option value="2000. ARTÍCULOS DE VIDRIO (EXCLUYENDO BOTELLAS, JARROS, FRASCOS)">2000. ARTÍCULOS DE VIDRIO (EXCLUYENDO BOTELLAS, JARROS, FRASCOS)</option>
+                            <option value="2200. HERRAMIENTA MANUAL, NO ACCIONADAS A MOTOR">2200. HERRAMIENTA MANUAL, NO ACCIONADAS A MOTOR</option>
+                            <option value="2300. HERRAMIENTA MANUAL, ACCIONADA A MOTOR">2300. HERRAMIENTA MANUAL, ACCIONADA A MOTOR</option>
+                            <option value="2400. CALOR ATMOSFÉRICO, AMBIENTAL (EXCLUYENDO OBJETOS O SUSTANCIAS CALIENTES)">2400. CALOR ATMOSFÉRICO, AMBIENTAL (EXCLUYENDO OBJETOS O SUSTANCIAS CALIENTES)</option>
+                            <option value="2500. EQUIPOS DE CALEFACCIÓN, NO IDENTIFICADOS EN OTRA PARTE">2500. EQUIPOS DE CALEFACCIÓN, NO IDENTIFICADOS EN OTRA PARTE</option>
+                            <option value="2700. AGENTES INFECCIOSOS O PARÁSITOS NO IDENTIFICADOS EN OTRA PARTE">2700. AGENTES INFECCIOSOS O PARÁSITOS NO IDENTIFICADOS EN OTRA PARTE</option>
+                            <option value="2800. ESCALERAS (FIJAS O PORTÁTILES)">2800. ESCALERAS (FIJAS O PORTÁTILES)</option>
+                            <option value="2900. LÍQUIDOS (NO IDENTIFICADOS EN OTRA PARTE)">2900. LÍQUIDOS (NO IDENTIFICADOS EN OTRA PARTE)</option>
+                            <option value="3000. MAQUINAS">3000. MAQUINAS</option>
+                            <option value="4000. APARATOS DE TRASMISIÓN DE FUERZA MECÁNICA">4000. APARATOS DE TRASMISIÓN DE FUERZA MECÁNICA</option>
+                            <option value="4100. ARTÍCULOS DE METAL, NO IDENTIFICADOS EN OTRA PARTE (PLATINAS, VARILLAS, ALAMBRES, ETC.)">4100. ARTÍCULOS DE METAL, NO IDENTIFICADOS EN OTRA PARTE (PLATINAS, VARILLAS, ALAMBRES, ETC.)</option>
+                            <option value="4500. PAPEL Y ARTÍCULOS DE PULPA NO IDENTIFICADOS EN OTRA PARTE">4500. PAPEL Y ARTÍCULOS DE PULPA NO IDENTIFICADOS EN OTRA PARTE</option>
+                            <option value="4600. PARTÍCULAS (NO IDENTIFICABLES)">4600. PARTÍCULAS (NO IDENTIFICABLES)</option>
+                            <option value="4800. ARTÍCULOS DE PLÁSTICO NO ESPECIFICADOS EN OTRA PARTE (POLVO, LÁMINAS, VARILLAS, MOLDEADOS, ETC.)">4800. ARTÍCULOS DE PLÁSTICO NO ESPECIFICADOS EN OTRA PARTE (POLVO, LÁMINAS, VARILLAS, MOLDEADOS, ETC.)</option>
+                            <option value="4900. BOMBAS Y GENERADORES DE ENERGÍA">4900. BOMBAS Y GENERADORES DE ENERGÍA</option>
+                            <option value="5000. SUSTANCIAS Y EQUIPO RADIACTIVO">5000. SUSTANCIAS Y EQUIPO RADIACTIVO</option>
+                            <option value="5100. JABONES, DETERGENTES, COMPUESTOS PARA LIMPIEZA">5100. JABONES, DETERGENTES, COMPUESTOS PARA LIMPIEZA</option>
+                            <option value="5300. DESECHO INDUSTRIAL, ESCOMBROS, MATERIALES DE DESPERDICIO">5300. DESECHO INDUSTRIAL, ESCOMBROS, MATERIALES DE DESPERDICIO</option>
+                            <option value="5400. VAPOR">5400. VAPOR</option>
+                            <option value="5600. VEHÍCULOS">5600. VEHÍCULOS</option>
+                            <option value="5700. PRODUCTOS DE MADERA, NO ESPECIFICADOS EN OTRA PARTE">5700. PRODUCTOS DE MADERA, NO ESPECIFICADOS EN OTRA PARTE</option>
+                            <option value="5800. SUPERFICIES DE TRABAJO (SUPERFICIE USADA COMO APOYO PARA LAS PERSONAS)">5800. SUPERFICIES DE TRABAJO (SUPERFICIE USADA COMO APOYO PARA LAS PERSONAS)</option>
+                            <option value="5900. MEDIO AMBIENTE">5900. MEDIO AMBIENTE</option>
+                            <option value="8800. MISCELÁNEOS, NO ESPECIFICADOS EN OTRA PARTE">8800. MISCELÁNEOS, NO ESPECIFICADOS EN OTRA PARTE</option>
+                            <option value="9800. DESCONOCIDO, SIN IDENTIFICAR DIFERENTE A PARTÍCULAS">9800. DESCONOCIDO, SIN IDENTIFICAR DIFERENTE A PARTÍCULAS</option>
+                            <option value="9900. NINGUNO">9900. NINGUNO</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Tipo de accidente</td>
+                    <td>
+                        <select name="carac_tipo_acc" required>
+                            <option value="">Seleccionar</option>
+                            <option value="No se evidencia">No se evidencia</option>
+                            <option value="2">2. Accidente leve</option>
+                            <option value="3">3. Accidente grave</option>
+                            <option value="4">4. Accidente mortal</option>
+                            <option value="1">1. Incidente</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <!-- 7. TÉCNICA 5 PORQUÉS COMPLETO -->
+<div class="module">
+    <div class="module-header">Técnica de los 5 ¿Por Qué?</div>
+
+    <div class="selector-bar">
+        <label>Agregar:</label>
+        <select id="sel" onchange="tog(this.value)">
+            <option value="">Categoría</option>
+            <option value="mo">Mano Obra</option>
+            <option value="mq">Maquinaria</option>
+            <option value="ma">Medio Ambiente</option>
+            <option value="mt">Material</option>
+            <option value="md">Metodo</option>
+        </select>
+    </div>
+
+    <div class="analysis-card analysis-extra" id="mo">
+        <div class="analysis-header"><div class="analysis-title">Metodo</div><button type="button" class="close-btn" onclick="cls('mo')">×</button></div>
+        <div class="field"><label class="field-label">Mano de Obra</label><textarea name="porques_mano_obra_metodo" rows="2" placeholder="Describa brevemente el trabajo relacionado con mano de obra..."></textarea></div>
+        <div class="why-grid">
+            <div class="why-cell"><div class="why-number">1</div><textarea name="porques_mano_obra_1" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">2</div><textarea name="porques_mano_obra_2" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">3</div><textarea name="porques_mano_obra_3" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">4</div><textarea name="porques_mano_obra_4" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">5</div><textarea name="porques_mano_obra_5" rows="3"></textarea></div>
+        </div>
+    </div>
+
+    <div class="analysis-card analysis-extra" id="mq">
+        <div class="analysis-header"><div class="analysis-title">Metodo</div><button type="button" class="close-btn" onclick="cls('mq')">×</button></div>
+        <div class="field"><label class="field-label">Maquinaria</label><textarea name="porques_maquinaria_metodo" rows="2" placeholder="Describa brevemente el trabajo relacionado con maquinaria..."></textarea></div>
+        <div class="why-grid">
+            <div class="why-cell"><div class="why-number">1</div><textarea name="porques_maquinaria_1" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">2</div><textarea name="porques_maquinaria_2" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">3</div><textarea name="porques_maquinaria_3" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">4</div><textarea name="porques_maquinaria_4" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">5</div><textarea name="porques_maquinaria_5" rows="3"></textarea></div>
+        </div>
+    </div>
+
+    <div class="analysis-card analysis-extra" id="ma">
+        <div class="analysis-header"><div class="analysis-title">Metodo</div><button type="button" class="close-btn" onclick="cls('ma')">×</button></div>
+        <div class="field"><label class="field-label">Medio Ambiente</label><textarea name="porques_medio_ambiente_metodo" rows="2" placeholder="Describa brevemente el trabajo relacionado con medio ambiente..."></textarea></div>
+        <div class="why-grid">
+            <div class="why-cell"><div class="why-number">1</div><textarea name="porques_medio_ambiente_1" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">2</div><textarea name="porques_medio_ambiente_2" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">3</div><textarea name="porques_medio_ambiente_3" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">4</div><textarea name="porques_medio_ambiente_4" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">5</div><textarea name="porques_medio_ambiente_5" rows="3"></textarea></div>
+        </div>
+    </div>
+
+    <div class="analysis-card analysis-extra" id="mt">
+        <div class="analysis-header"><div class="analysis-title">Metodo</div><button type="button" class="close-btn" onclick="cls('mt')">×</button></div>
+        <div class="field"><label class="field-label">Materiales</label><textarea name="porques_material_metodo" rows="2" placeholder="Describa brevemente el trabajo relacionado con material..."></textarea></div>
+        <div class="why-grid">
+            <div class="why-cell"><div class="why-number">1</div><textarea name="porques_material_1" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">2</div><textarea name="porques_material_2" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">3</div><textarea name="porques_material_3" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">4</div><textarea name="porques_material_4" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">5</div><textarea name="porques_material_5" rows="3"></textarea></div>
+        </div>
+    </div>
+
+    <div class="analysis-card analysis-extra" id="md">
+        <div class="analysis-header"><div class="analysis-title">Metodo</div><button type="button" class="close-btn" onclick="cls('md')">×</button></div>
+        <div class="field"><label class="field-label">Medición</label><textarea name="porques_medicion_metodo" rows="2" placeholder="Describa brevemente el trabajo relacionado con medición..."></textarea></div>
+        <div class="why-grid">
+            <div class="why-cell"><div class="why-number">1</div><textarea name="porques_medicion_1" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">2</div><textarea name="porques_medicion_2" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">3</div><textarea name="porques_medicion_3" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">4</div><textarea name="porques_medicion_4" rows="3"></textarea></div>
+            <div class="why-cell"><div class="why-number">5</div><textarea name="porques_medicion_5" rows="3"></textarea></div>
+        </div>
+    </div>
+
+    <div class="field"><label class="field-label">Causa Raíz (Conclusión)</label><textarea name="porques_causa_raiz" id="porques_causa_raiz" rows="3" placeholder="Conclusión"></textarea></div>
+</div>
+
+    <!-- 8. ANÁLISIS CAUSA COMPLETO -->
+<div class="module">
+        <div class="module-header">Análisis de Causa</div>
+
+        <div class="cause-section">
+            <div class="cause-header">Causas Directas e Inmediatas</div>
+            <div class="cause-columns">
+                <div class="cause-column">
+                    <div class="column-header">Condiciones Inseguras</div>
+                    <select name="causa_condicion_insegura_1" onchange="toggleOtro(this, 'otro_ci_1')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. DEFECTO DE LOS AGENTES</option>
+                        <option>100. RIESGO DE LA ROPA O VESTUARIO</option>
+                        <option>200. RIESGO AMBIENTALES NO ESPECIFICADOS EN OTRA PARTE</option>
+                        <option>300. METODOS O PROCEDIMIENTOS PELIGROSOS</option>
+                        <option>400. RIESGOS DE COLOCACION O EMPLAZAMIENTO</option>
+                        <option>500. INADECUADAMENTE PROTEGIDO</option>
+                        <option>600. RIESGOS AMBIENTALES EN TRABAJOS EXTERIORES, DISTINTOS A LOS RIESGOS PUBLICOS</option>
+                        <option>700. RIESGOS PUBLICOS</option>
+                        <option>980. CONDICIONES AMBIENTALES PELIGROSAS, NO ESPECIFICADAS EN OTRA PARTE</option>
+                        <option>990. INDETERMINADA, INFORMACION INSUFICIENTE</option>
+                        <option>999. NO HAY CONDICION AMBIENTAL PELIGROSA</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_condicion_insegura_texto_1" id="otro_ci_1" rows="2" placeholder="Especifique la condición insegura..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_condicion_insegura_2" onchange="toggleOtro(this, 'otro_ci_2')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. DEFECTO DE LOS AGENTES</option>
+                        <option>100. RIESGO DE LA ROPA O VESTUARIO</option>
+                        <option>200. RIESGO AMBIENTALES NO ESPECIFICADOS EN OTRA PARTE</option>
+                        <option>300. METODOS O PROCEDIMIENTOS PELIGROSOS</option>
+                        <option>400. RIESGOS DE COLOCACION O EMPLAZAMIENTO</option>
+                        <option>500. INADECUADAMENTE PROTEGIDO</option>
+                        <option>600. RIESGOS AMBIENTALES EN TRABAJOS EXTERIORES, DISTINTOS A LOS RIESGOS PUBLICOS</option>
+                        <option>700. RIESGOS PUBLICOS</option>
+                        <option>980. CONDICIONES AMBIENTALES PELIGROSAS, NO ESPECIFICADAS EN OTRA PARTE</option>
+                        <option>990. INDETERMINADA, INFORMACION INSUFICIENTE</option>
+                        <option>999. NO HAY CONDICION AMBIENTAL PELIGROSA</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_condicion_insegura_texto_2" id="otro_ci_2" rows="2" placeholder="Especifique la condición insegura..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_condicion_insegura_3" onchange="toggleOtro(this, 'otro_ci_3')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. DEFECTO DE LOS AGENTES</option>
+                        <option>100. RIESGO DE LA ROPA O VESTUARIO</option>
+                        <option>200. RIESGO AMBIENTALES NO ESPECIFICADOS EN OTRA PARTE</option>
+                        <option>300. METODOS O PROCEDIMIENTOS PELIGROSOS</option>
+                        <option>400. RIESGOS DE COLOCACION O EMPLAZAMIENTO</option>
+                        <option>500. INADECUADAMENTE PROTEGIDO</option>
+                        <option>600. RIESGOS AMBIENTALES EN TRABAJOS EXTERIORES, DISTINTOS A LOS RIESGOS PUBLICOS</option>
+                        <option>700. RIESGOS PUBLICOS</option>
+                        <option>980. CONDICIONES AMBIENTALES PELIGROSAS, NO ESPECIFICADAS EN OTRA PARTE</option>
+                        <option>990. INDETERMINADA, INFORMACION INSUFICIENTE</option>
+                        <option>999. NO HAY CONDICION AMBIENTAL PELIGROSA</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_condicion_insegura_texto_3" id="otro_ci_3" rows="2" placeholder="Especifique la condición insegura..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_condicion_insegura_4" onchange="toggleOtro(this, 'otro_ci_4')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. DEFECTO DE LOS AGENTES</option>
+                        <option>100. RIESGO DE LA ROPA O VESTUARIO</option>
+                        <option>200. RIESGO AMBIENTALES NO ESPECIFICADOS EN OTRA PARTE</option>
+                        <option>300. METODOS O PROCEDIMIENTOS PELIGROSOS</option>
+                        <option>400. RIESGOS DE COLOCACION O EMPLAZAMIENTO</option>
+                        <option>500. INADECUADAMENTE PROTEGIDO</option>
+                        <option>600. RIESGOS AMBIENTALES EN TRABAJOS EXTERIORES, DISTINTOS A LOS RIESGOS PUBLICOS</option>
+                        <option>700. RIESGOS PUBLICOS</option>
+                        <option>980. CONDICIONES AMBIENTALES PELIGROSAS, NO ESPECIFICADAS EN OTRA PARTE</option>
+                        <option>990. INDETERMINADA, INFORMACION INSUFICIENTE</option>
+                        <option>999. NO HAY CONDICION AMBIENTAL PELIGROSA</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_condicion_insegura_texto_4" id="otro_ci_4" rows="2" placeholder="Especifique la condición insegura..." style="display:none; margin-top:6px;"></textarea>
+                </div>
+                
+                <div class="cause-column">
+                    <div class="column-header">Actos Inseguros</div>
+
+                    <select name="causa_acto_inseguro_1" onchange="toggleOtro(this, 'otro_ai_1')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>50. LIMPIEZA, LUBRICACION, AJUSTE O REPARACION DE EQUIPO MOVIL ELECTRICO O DE PRESION</option>
+                        <option>100. OMITIR USO DE EPP'S DISPONIBLES</option>
+                        <option>150. OMITIR EL USO DE ATUENDO PERSONAL SEGURO</option>
+                        <option>200. NO ASEGURAR, ADVERTIR</option>
+                        <option>250. BROMAS O JUEGOS PESADOS, DISTRAER, FASTIDIAR, MOLESTAR, ASUSTAR, REÑOR, ETC.</option>
+                        <option>300. USO IMPROPIO DEL EQUIPO</option>
+                        <option>350. USO IMPROPIO DE LAS MANOS O PARTES DEL CUERPO</option>
+                        <option>400. FALTA DE ATENCION A LAS CONDICIONES DEL PISO O LAS VECINDADES</option>
+                        <option>450. HACER INOPERANTE LOS DISPOSITIVOS DE SEGURIDAD</option>
+                        <option>500. OPERAR O TRABAJAR A VELOCIDAD INSEGURA</option>
+                        <option>550. ADOPTAR UNA POSICION O POSTURA INSEGURA</option>
+                        <option>600. ERRORES DE CONDUCCION</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_acto_inseguro_texto_1" id="otro_ai_1" rows="2" placeholder="Especifique el acto inseguro..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_acto_inseguro_2" onchange="toggleOtro(this, 'otro_ai_2')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>50. LIMPIEZA, LUBRICACION, AJUSTE O REPARACION DE EQUIPO MOVIL ELECTRICO O DE PRESION</option>
+                        <option>100. OMITIR USO DE EPP'S DISPONIBLES</option>
+                        <option>150. OMITIR EL USO DE ATUENDO PERSONAL SEGURO</option>
+                        <option>200. NO ASEGURAR, ADVERTIR</option>
+                        <option>250. BROMAS O JUEGOS PESADOS, DISTRAER, FASTIDIAR, MOLESTAR, ASUSTAR, REÑOR, ETC.</option>
+                        <option>300. USO IMPROPIO DEL EQUIPO</option>
+                        <option>350. USO IMPROPIO DE LAS MANOS O PARTES DEL CUERPO</option>
+                        <option>400. FALTA DE ATENCION A LAS CONDICIONES DEL PISO O LAS VECINDADES</option>
+                        <option>450. HACER INOPERANTE LOS DISPOSITIVOS DE SEGURIDAD</option>
+                        <option>500. OPERAR O TRABAJAR A VELOCIDAD INSEGURA</option>
+                        <option>550. ADOPTAR UNA POSICION O POSTURA INSEGURA</option>
+                        <option>600. ERRORES DE CONDUCCION</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_acto_inseguro_texto_2" id="otro_ai_2" rows="2" placeholder="Especifique el acto inseguro..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_acto_inseguro_3" onchange="toggleOtro(this, 'otro_ai_3')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>50. LIMPIEZA, LUBRICACION, AJUSTE O REPARACION DE EQUIPO MOVIL ELECTRICO O DE PRESION</option>
+                        <option>100. OMITIR USO DE EPP'S DISPONIBLES</option>
+                        <option>150. OMITIR EL USO DE ATUENDO PERSONAL SEGURO</option>
+                        <option>200. NO ASEGURAR, ADVERTIR</option>
+                        <option>250. BROMAS O JUEGOS PESADOS, DISTRAER, FASTIDIAR, MOLESTAR, ASUSTAR, REÑOR, ETC.</option>
+                        <option>300. USO IMPROPIO DEL EQUIPO</option>
+                        <option>350. USO IMPROPIO DE LAS MANOS O PARTES DEL CUERPO</option>
+                        <option>400. FALTA DE ATENCION A LAS CONDICIONES DEL PISO O LAS VECINDADES</option>
+                        <option>450. HACER INOPERANTE LOS DISPOSITIVOS DE SEGURIDAD</option>
+                        <option>500. OPERAR O TRABAJAR A VELOCIDAD INSEGURA</option>
+                        <option>550. ADOPTAR UNA POSICION O POSTURA INSEGURA</option>
+                        <option>600. ERRORES DE CONDUCCION</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_acto_inseguro_texto_3" id="otro_ai_3" rows="2" placeholder="Especifique el acto inseguro..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_acto_inseguro_4" onchange="toggleOtro(this, 'otro_ai_4')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>50. LIMPIEZA, LUBRICACION, AJUSTE O REPARACION DE EQUIPO MOVIL ELECTRICO O DE PRESION</option>
+                        <option>100. OMITIR USO DE EPP'S DISPONIBLES</option>
+                        <option>150. OMITIR EL USO DE ATUENDO PERSONAL SEGURO</option>
+                        <option>200. NO ASEGURAR, ADVERTIR</option>
+                        <option>250. BROMAS O JUEGOS PESADOS, DISTRAER, FASTIDIAR, MOLESTAR, ASUSTAR, REÑOR, ETC.</option>
+                        <option>300. USO IMPROPIO DEL EQUIPO</option>
+                        <option>350. USO IMPROPIO DE LAS MANOS O PARTES DEL CUERPO</option>
+                        <option>400. FALTA DE ATENCION A LAS CONDICIONES DEL PISO O LAS VECINDADES</option>
+                        <option>450. HACER INOPERANTE LOS DISPOSITIVOS DE SEGURIDAD</option>
+                        <option>500. OPERAR O TRABAJAR A VELOCIDAD INSEGURA</option>
+                        <option>550. ADOPTAR UNA POSICION O POSTURA INSEGURA</option>
+                        <option>600. ERRORES DE CONDUCCION</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_acto_inseguro_texto_4" id="otro_ai_4" rows="2" placeholder="Especifique el acto inseguro..." style="display:none; margin-top:6px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+ <div class="cause-section">
+            <div class="cause-header">Causas Indirectas o Básicas</div>
+            <div class="cause-columns">
+                <div class="cause-column">
+                    <div class="column-header">Factores de Trabajo</div>
+
+                    <select name="causa_factor_trabajo_1" onchange="toggleOtro(this, 'otro_ft_1')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>SUPERVISION Y LIDERAZGO DEFICIENTE</option>
+                        <option>INGENIERIA INADECUADA</option>
+                        <option>ADQUISICIONES INADECUADAS</option>
+                        <option>MANTENIMIENTO DEFICIENTE</option>
+                        <option>HERRAMIENTAS Y EQUIPOS INADECUADOS</option>
+                        <option>ESTANDARES DE TRABAJO DEFICIENTES</option>
+                        <option>USO Y DESGASTE NORMAL</option>
+                        <option>ABUSO O MAL USO</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_trabajo_texto_1" id="otro_ft_1" rows="2" placeholder="Especifique el factor de trabajo..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_factor_trabajo_2" onchange="toggleOtro(this, 'otro_ft_2')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>SUPERVISION Y LIDERAZGO DEFICIENTE</option>
+                        <option>INGENIERIA INADECUADA</option>
+                        <option>ADQUISICIONES INADECUADAS</option>
+                        <option>MANTENIMIENTO DEFICIENTE</option>
+                        <option>HERRAMIENTAS Y EQUIPOS INADECUADOS</option>
+                        <option>ESTANDARES DE TRABAJO DEFICIENTES</option>
+                        <option>USO Y DESGASTE NORMAL</option>
+                        <option>ABUSO O MAL USO</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_trabajo_texto_2" id="otro_ft_2" rows="2" placeholder="Especifique el factor de trabajo..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_factor_trabajo_3" onchange="toggleOtro(this, 'otro_ft_3')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>SUPERVISION Y LIDERAZGO DEFICIENTE</option>
+                        <option>INGENIERIA INADECUADA</option>
+                        <option>ADQUISICIONES INADECUADAS</option>
+                        <option>MANTENIMIENTO DEFICIENTE</option>
+                        <option>HERRAMIENTAS Y EQUIPOS INADECUADOS</option>
+                        <option>ESTANDARES DE TRABAJO DEFICIENTES</option>
+                        <option>USO Y DESGASTE NORMAL</option>
+                        <option>ABUSO O MAL USO</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_trabajo_texto_3" id="otro_ft_3" rows="2" placeholder="Especifique el factor de trabajo..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_factor_trabajo_4" onchange="toggleOtro(this, 'otro_ft_4')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>SUPERVISION Y LIDERAZGO DEFICIENTE</option>
+                        <option>INGENIERIA INADECUADA</option>
+                        <option>ADQUISICIONES INADECUADAS</option>
+                        <option>MANTENIMIENTO DEFICIENTE</option>
+                        <option>HERRAMIENTAS Y EQUIPOS INADECUADOS</option>
+                        <option>ESTANDARES DE TRABAJO DEFICIENTES</option>
+                        <option>USO Y DESGASTE NORMAL</option>
+                        <option>ABUSO O MAL USO</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_trabajo_texto_4" id="otro_ft_4" rows="2" placeholder="Especifique el factor de trabajo..." style="display:none; margin-top:6px;"></textarea>
+                </div>
+                <div class="cause-column">
+                    <div class="column-header">Factores Personales</div>
+
+                    <select name="causa_factor_personal_1" onchange="toggleOtro(this, 'otro_fp_1')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. CAPACIDAD FISICA / FISIOLOGIA INADECUADA</option>
+                        <option>100. CAPACIDAD MENTAL/PSICOLOGIA INADECUADA</option>
+                        <option>200. TENSION FISICA O FISIOLOGICA</option>
+                        <option>300. TENSION MENTAL O PSICOLOGICA</option>
+                        <option>400. FALTA DE CONOCIMIENTO</option>
+                        <option>500. FALTA DE HABILIDAD</option>
+                        <option>600. MOTIVACION DEFICIENTE</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_personal_texto_1" id="otro_fp_1" rows="2" placeholder="Especifique el factor personal..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_factor_personal_2" onchange="toggleOtro(this, 'otro_fp_2')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. CAPACIDAD FISICA / FISIOLOGIA INADECUADA</option>
+                        <option>100. CAPACIDAD MENTAL/PSICOLOGIA INADECUADA</option>
+                        <option>200. TENSION FISICA O FISIOLOGICA</option>
+                        <option>300. TENSION MENTAL O PSICOLOGICA</option>
+                        <option>400. FALTA DE CONOCIMIENTO</option>
+                        <option>500. FALTA DE HABILIDAD</option>
+                        <option>600. MOTIVACION DEFICIENTE</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_personal_texto_2" id="otro_fp_2" rows="2" placeholder="Especifique el factor personal..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_factor_personal_3" onchange="toggleOtro(this, 'otro_fp_3')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. CAPACIDAD FISICA / FISIOLOGIA INADECUADA</option>
+                        <option>100. CAPACIDAD MENTAL/PSICOLOGIA INADECUADA</option>
+                        <option>200. TENSION FISICA O FISIOLOGICA</option>
+                        <option>300. TENSION MENTAL O PSICOLOGICA</option>
+                        <option>400. FALTA DE CONOCIMIENTO</option>
+                        <option>500. FALTA DE HABILIDAD</option>
+                        <option>600. MOTIVACION DEFICIENTE</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_personal_texto_3" id="otro_fp_3" rows="2" placeholder="Especifique el factor personal..." style="display:none; margin-top:6px;"></textarea>
+
+                    <select name="causa_factor_personal_4" onchange="toggleOtro(this, 'otro_fp_4')">
+                        <option value="">Seleccione</option>
+                        <option value="No se evidencia">No se evidencia</option>
+                        <option>0. CAPACIDAD FISICA / FISIOLOGIA INADECUADA</option>
+                        <option>100. CAPACIDAD MENTAL/PSICOLOGIA INADECUADA</option>
+                        <option>200. TENSION FISICA O FISIOLOGICA</option>
+                        <option>300. TENSION MENTAL O PSICOLOGICA</option>
+                        <option>400. FALTA DE CONOCIMIENTO</option>
+                        <option>500. FALTA DE HABILIDAD</option>
+                        <option>600. MOTIVACION DEFICIENTE</option>
+                        <option value="otro">Otro - Especificar</option>
+                    </select>
+                    <textarea name="causa_factor_personal_texto_4" id="otro_fp_4" rows="2" placeholder="Especifique el factor personal..." style="display:none; margin-top:6px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. PLAN ACCIONES COMPLETO -->
+    <div class="module">
+        <div class="module-header">Plan de Acciones Correctivas y Preventivas</div>
+        <div class="module-header">SOBRE CAUSAS INMEDIATAS</div>
+        <table class="data-table">
+            <thead><tr><th>FECHA</th><th style="width:40%">MEDIDAS</th><th>CONTROL</th><th>RESPONSABLE</th></tr></thead>
+            <tbody>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+            </tbody>
+        </table>
+        <div class="module-header">SOBRE CAUSAS BASICAS</div>
+        <table class="data-table">
+            <thead><tr><th>FECHA</th><th style="width:40%">MEDIDAS</th><th>CONTROL</th><th>RESPONSABLE</th></tr></thead>
+            <tbody>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+                <tr><td><input type="date" name="plan_fecha[]"></td><td><input name="plan_medida[]" placeholder="Medida"></td><td><select name="plan_control[]"><option>Control</option><option>Fuente</option><option>Medio</option><option>Individuo</option></select></td><td><input name="plan_responsable[]" placeholder="Resp"></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 11. RESULTADO ANÁLISIS -->
+    <div class="module">
+        <div class="module-header">Resultado del Análisis del Accidente de Trabajo</div>
+        <div class="field"><label class="field-label">Análisis Final</label><textarea name="resultado_analisis" id="resultado_analisis" rows="6" placeholder="Conclusiones finales y recomendaciones del equipo investigador"></textarea></div>
+    </div>
+    <!-- 10. EQUIPO INVESTIGADOR COMPLETO -->
+    <div class="module">
+        <div class="module-header">Equipo Investigador</div>
+        <table class="data-table">
+            <thead><tr><th>NOMBRES</th><th>APELLIDOS</th><th>CARGO</th><th>TIPO</th><th>NÚM</th><th>FIRMA</th></tr></thead>
+            <tbody>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option><option>Cedula de extranjeria</option><option>Pasaporte</option><option>Permiso por proteccion temporal</option><option>Salvo conducto de permanencia</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option><option>Cedula de extranjeria</option><option>Pasaporte</option><option>Permiso por proteccion temporal</option><option>Salvo conducto de permanencia</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option><option>Cedula de extranjeria</option><option>Pasaporte</option><option>Permiso por proteccion temporal</option><option>Salvo conducto de permanencia</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option><option>Cedula de extranjeria</option><option>Pasaporte</option><option>Permiso por proteccion temporal</option><option>Salvo conducto de permanencia</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option><option>Cedula de extranjeria</option><option>Pasaporte</option><option>Permiso por proteccion temporal</option><option>Salvo conducto de permanencia</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option><option>Cedula de extranjeria</option><option>Pasaporte</option><option>Permiso por proteccion temporal</option><option>Salvo conducto de permanencia</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+                <tr><td><input name="equipo_nombre[]"></td><td><input name="equipo_apellido[]"></td><td><input name="equipo_cargo[]"></td><td><select name="equipo_tipo_id[]"><option>CC</option></select></td><td><input name="equipo_numero[]"></td><td><div class="signature-box"></div></td></tr>
+            </tbody>
+        </table>
+    </div>
+<div class="module">
+        <div class="module-header">NOTA NORMATIVA: De conformidad con lo establecido en el Artículo 13 de la Resolucion 1401 de 2007, el informe de investigación del accidente de trabajo debe contener como mínimo la siguiente información: lugar y dirección donde ocurrió el evento y donde se realiza la investigación, fecha(s) y hora(s) de la investigación, nombres completos, cargos, números de identificación y firmas de los investigadores, así como la firma del representante legal.</div>
+</div>
+
+
+    <!-- BOTÓN ENVIAR -->
+    <div class="module submit-module">
+        <button type="submit" class="btn-submit" id="btnEnviar">
+            <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Enviar Investigación
+        </button>
+    </div>
+<div id="signatureModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:24px; border-radius:8px; box-shadow:0 2px 16px #0002; position:relative; min-width:320px;">
+    <div style="font-weight:600; margin-bottom:8px;">Dibuje la firma</div>
+    <canvas id="signatureCanvas" width="320" height="120" style="border:1px solid #888; border-radius:4px; background:#fafafa; cursor:crosshair;"></canvas>
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <button type="button" id="clearSignature">Limpiar</button>
+      <button type="button" id="saveSignature">Guardar</button>
+      <button type="button" id="closeSignature">Cancelar</button>
+    </div>
+  </div>
+</div>
+    </form>
+
+<script>
+
+    ['f1','f2','f3','f4'].forEach((id, i) => {
+  const input = document.getElementById(id);
+  input?.addEventListener('change', function() {
+    const previewZone = document.createElement('div');
+    previewZone.style.display = 'flex';
+    previewZone.style.gap = '8px';
+    previewZone.style.marginTop = '8px';
+    previewZone.innerHTML = '';
+    Array.from(this.files).forEach(file => {
+      if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.style.maxWidth = '80px';
+        img.style.maxHeight = '80px';
+        img.style.borderRadius = '4px';
+        previewZone.appendChild(img);
+      }
+    });
+    // Elimina previews anteriores
+    const parent = input.parentNode;
+    parent.querySelectorAll('.preview-zone').forEach(e => e.remove());
+    previewZone.className = 'preview-zone';
+    parent.appendChild(previewZone);
+  });
+});
+    document.getElementById('acc_fecha')?.addEventListener('change', function() {
+    const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    if (this.value) {
+        const partes = this.value.split('-');
+        const fecha = new Date(partes[0], partes[1] - 1, partes[2]);
+        if (!isNaN(fecha)) {
+            document.getElementById('acc_dia').value = dias[fecha.getDay()];
+        }
+    }
+});
+    fetch('/template/api_usuario.php')
+        .then(res => {
+            if(!res.ok) throw new Error("La API no respondió con éxito");
+            return res.json();
+        })
+        .then(data => {
+            if(data && data.sede) {
+                document.getElementById('campo_sede').value = data.sede;
+            } else {
+                document.getElementById('campo_sede').removeAttribute('readonly');
+            }
+        })
+        .catch(err => {
+            console.warn("Error autocompletando Sede, se habilita modo manual:", err);
+            document.getElementById('campo_sede').removeAttribute('readonly');
+        });
+let currentSignatureBox = null;
+let currentHiddenInput = null;
+
+// Añade un input oculto para cada firma y evento a cada caja de firma
+document.querySelectorAll('.signature-box').forEach((box, idx) => {
+  box.style.cursor = 'pointer';
+  box.style.minHeight = '40px';
+  box.style.border = '1px dashed #888';
+  box.style.background = '#f8f8f8';
+  box.style.display = 'flex';
+  box.style.alignItems = 'center';
+  box.style.justifyContent = 'center';
+  box.textContent = 'Click para firmar';
+  // Crea input oculto
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'equipo_firma[]';
+  box.parentNode.appendChild(input);
+  // Evento click
+  box.addEventListener('click', () => {
+    currentSignatureBox = box;
+    currentHiddenInput = input;
+    openSignatureModal(box.dataset.signature || null);
+  });
+});
+
+// Modal y canvas
+const modal = document.getElementById('signatureModal');
+const canvas = document.getElementById('signatureCanvas');
+const ctx = canvas.getContext('2d');
+let drawing = false, lastX = 0, lastY = 0;
+
+function openSignatureModal(existing) {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if (existing) {
+    const img = new window.Image();
+    img.onload = () => ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    img.src = existing;
+  }
+  modal.style.display = 'flex';
+}
+
+function closeSignatureModal() {
+  modal.style.display = 'none';
+}
+
+canvas.addEventListener('mousedown', e => {
+  drawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+canvas.addEventListener('mousemove', e => {
+  if (!drawing) return;
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#222';
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mouseleave', () => drawing = false);
+
+document.getElementById('clearSignature').onclick = () => {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+};
+document.getElementById('closeSignature').onclick = closeSignatureModal;
+document.getElementById('saveSignature').onclick = () => {
+  const data = canvas.toDataURL('image/png');
+  if (currentSignatureBox && currentHiddenInput) {
+    // Muestra miniatura en la caja
+    currentSignatureBox.innerHTML = `<img src="${data}" style="max-height:36px; max-width:120px; display:block; margin:auto;">`;
+    currentSignatureBox.dataset.signature = data;
+    currentHiddenInput.value = data;
+  }
+  closeSignatureModal();
+};
+        function toggleOtro(sel, textareaId) {
+            const ta = document.getElementById(textareaId);
+            if (sel.value === 'otro') {
+                ta.style.display = 'block';
+                ta.focus();
+            } else {
+                ta.style.display = 'none';
+                ta.value = '';
+            }
+        }
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+            cursorGlow.style.opacity = '1';
+        });
+
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.module').forEach(module => {
+            observer.observe(module);
+        });
+
+        document.getElementById('fn')?.addEventListener('change', function() {
+            const f = new Date(this.value), h = new Date();
+            let e = h.getFullYear() - f.getFullYear();
+            if (h.getMonth() < f.getMonth() || (h.getMonth() === f.getMonth() && h.getDate() < f.getDate())) e--;
+            if (e >= 0 && e < 120) {
+                const edadInput = document.getElementById('ed');
+                edadInput.value = e;
+                edadInput.style.animation = 'typing-glow 0.5s ease';
+                setTimeout(() => edadInput.style.animation = '', 500);
+            }
+        });
+
+        ['f1','f2'].forEach((id, i) => {
+            document.getElementById(id)?.addEventListener('change', function() {
+                const c = this.files.length;
+                const b = document.getElementById('b' + (i + 1));
+                const t = document.getElementById('c' + (i + 1));
+                if (c > 0) {
+                    b.style.display = 'flex';
+                    t.textContent = c + (c === 1 ? ' archivo' : ' archivos');
+                } else {
+                    b.style.display = 'none';
+                }
+            });
+        });
+
+        function tog(v) {
+            if (v) {
+                const card = document.getElementById(v);
+                card?.classList.add('active');
+                document.getElementById('sel').value = '';
+                setTimeout(() => {
+                    card?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        function cls(id) {
+            const card = document.getElementById(id);
+            if (card) {
+                card.style.animation = 'none';
+                card.style.maxHeight = '0';
+                card.style.opacity = '0';
+                setTimeout(() => {
+                    card.classList.remove('active');
+                    card.style.animation = '';
+                    card.style.maxHeight = '';
+                    card.style.opacity = '';
+                }, 300);
+            }
+        }
+
+        console.log('%c✨ Sistema v5 COMPLETO Cargado', 'color: #3b82f6; font-size: 16px; font-weight: bold;');
+            document.getElementById('trab_fecha_ingreso')?.addEventListener('change', function() {
+    const fechaIngreso = new Date(this.value);
+    const hoy = new Date();
+    if (isNaN(fechaIngreso)) {
+        document.getElementById('trab_antiguedad').value = '';
+        return;
+    }
+    let años = hoy.getFullYear() - fechaIngreso.getFullYear();
+    let meses = hoy.getMonth() - fechaIngreso.getMonth();
+    let dias = hoy.getDate() - fechaIngreso.getDate();
+
+    if (dias < 0) {
+        meses--;
+        dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+    }
+    if (meses < 0) {
+        años--;
+        meses += 12;
+    }
+    document.getElementById('trab_antiguedad').value = `${años} años, ${meses} meses, ${dias} días`;
+});
+    </script>
+</body>
+</html>

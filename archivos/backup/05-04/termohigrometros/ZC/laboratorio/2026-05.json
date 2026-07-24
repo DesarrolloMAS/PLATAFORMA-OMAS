@@ -1,0 +1,30 @@
+[
+    {
+        "ubicacion_id": "laboratorio",
+        "ubicacion_nombre": "LABORATORIO",
+        "fecha": "2026-05-02",
+        "hora": "09:12",
+        "temperatura": "20.6",
+        "humedad": "61%",
+        "humedad_max": "76%",
+        "temp_max": "29.0",
+        "humedad_min": "27%",
+        "temp_min": "13.9",
+        "verificacion": "Mariana Loaiza ",
+        "timestamp_recepcion": "2026-05-02 14:13:04"
+    },
+    {
+        "ubicacion_id": "laboratorio",
+        "ubicacion_nombre": "LABORATORIO",
+        "fecha": "2026-05-04",
+        "hora": "08:30",
+        "temperatura": "18.7",
+        "humedad": "68%",
+        "humedad_max": "76%",
+        "temp_max": "29.0",
+        "humedad_min": "27%",
+        "temp_min": "13.9",
+        "verificacion": "Mariana Loaiza ",
+        "timestamp_recepcion": "2026-05-04 13:31:16"
+    }
+]

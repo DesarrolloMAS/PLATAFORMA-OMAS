@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANÁLISIS DE TRABAJO SEGURO (ATS)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --success: #10B981;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ── HEADER ── */
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "ATS";
+            position: absolute;
+            top: 20px;
+            right: -24px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .header-meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .header-meta span {
+            color: var(--accent);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ── SECCIÓN CARD ── */
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        /* ── GRIDS ── */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .form-grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .form-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .form-grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 11px 13px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 13px top 50%;
+            background-size: 10px auto;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* ── TABLA DINÁMICA ── */
+        .dynamic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .dynamic-table th {
+            text-align: left;
+            padding: 10px 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dynamic-table td {
+            padding: 6px 6px;
+        }
+
+        .dynamic-table td .form-control {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .btn-add {
+            background: var(--input-bg);
+            border: 1px dashed var(--accent);
+            color: var(--accent);
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            margin-top: 12px;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        .btn-remove {
+            background: rgba(255, 51, 102, 0.08);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 5px 9px;
+            cursor: pointer;
+            border-radius: var(--r-sm);
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .btn-remove:hover {
+            background: rgba(255, 51, 102, 0.2);
+        }
+
+        /* ── EPP GRID ── */
+        .epp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .epp-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .epp-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            min-width: 130px;
+            flex-shrink: 0;
+        }
+
+        .epp-item .form-control {
+            flex: 1;
+        }
+
+        /* ── NOTA CRITICA ── */
+        .nota-critica {
+            background: rgba(255, 176, 0, 0.08);
+            border: 1px solid rgba(255, 176, 0, 0.3);
+            border-radius: var(--r-sm);
+            padding: 12px 16px;
+            font-size: 12px;
+            color: var(--warning);
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+            font-weight: 700;
+            margin-top: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── FIRMAS ── */
+        .firmas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .firma-box {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            padding: 16px;
+        }
+
+        .firma-box-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        /* ── SUBMIT ── */
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        /* ── PIE ── */
+        .system-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 30px 0 10px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 6px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .form-grid-2,
+            .form-grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .firmas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .epp-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .firma-canvas-wrap {
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+            height: 46px;
+        }
+
+        .firma-canvas-wrap canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .btn-clear-firma {
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            line-height: 1;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header-box">
+            <div class="header-nav">
+                <a href="../permiso_completo/index.html" class="btn-back">← MENÚ HSEQ</a>
+                <div class="header-meta">
+                    Código: <span>HSEQ-HS-RE-FO-001</span> &nbsp;|&nbsp;
+                    Versión: <span>1</span> &nbsp;|&nbsp;
+                    Fecha: <span>28/03/2023</span>
+                </div>
+            </div>
+            <div class="main-title">Análisis de Trabajo Seguro (ATS)</div>
+            <div class="sub-title">Sub-proceso Seguridad y Salud en el Trabajo — Manual de Seguridad y Salud en el
+                Trabajo</div>
+        </div>
+
+        <form id="atsForm">
+
+            <!-- ═══ 01 GENERALIDADES ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>01</span> Generalidades</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Elaboración</label>
+                        <input type="date" name="fecha_elaboracion" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Trabajo</label>
+                        <select name="tipo_trabajo" class="form-control" required>
+                            <option value="">Seleccione...</option>
+                            <option>Trabajo en alturas</option>
+                            <option>Trabajo en caliente</option>
+                            <option>Espacios confinados</option>
+                            <option>Riesgo eléctrico</option>
+                            <option>Líneas energizadas</option>
+                            <option>Izaje de cargas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha Inicio</label>
+                        <input type="date" name="fecha_inicio" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha Fin</label>
+                        <input type="date" name="fecha_fin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hora Inicio</label>
+                        <input type="time" name="hora_inicio" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hora Fin</label>
+                        <input type="time" name="hora_fin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Valoración del Riesgo</label>
+                        <select name="valoracion_riesgo" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>Alto</option>
+                            <option>Medio</option>
+                            <option>Bajo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Frecuencia</label>
+                        <select name="frecuencia" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>Rutinario</option>
+                            <option>No rutinario</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Zona de Trabajo</label>
+                        <input type="text" name="zona_trabajo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dependencia</label>
+                        <input type="text" name="dependencia" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Equipo o Sistema Objeto de Intervención</label>
+                        <input type="text" name="equipo_sistema" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Altura Máxima a Trabajar (m)</label>
+                        <input type="text" name="altura_maxima" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group full" style="margin-top: 18px;">
+                    <label class="form-label">Descripción de la Actividad a Realizar</label>
+                    <textarea name="descripcion_actividad" class="form-control" rows="4" required></textarea>
+                </div>
+
+                <div class="form-grid" style="margin-top: 18px; align-items: end;">
+                    <div class="form-group full">
+                        <label class="form-label">¿Las actividades incluyen actividades críticas adicionales? En caso
+                            afirmativo, seleccione la(s) actividad(es) correspondiente(s)</label>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start;">
+                            <select name="actividades_criticas" class="form-control" style="flex: 0 0 200px;">
+                                <option value="">Seleccione...</option>
+                                <option>SÍ</option>
+                                <option>NO</option>
+                            </select>
+                            <div id="actividadCriticaContainer"
+                                style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 10px;">
+                                <div class="actividad-critica-row"
+                                    style="display: flex; gap: 8px; align-items: center;">
+                                    <select name="actividad_critica_detalle"
+                                        class="form-control actividad-critica-select" style="flex: 1;">
+                                        <option value="">Seleccione...</option>
+                                        <option>Trabajo en alturas</option>
+                                        <option>Espacios confinados</option>
+                                        <option>Trabajo en caliente</option>
+                                        <option>Riesgo electrico</option>
+                                        <option>Lineas energizadas</option>
+                                        <option>Izaje de cargas</option>
+                                    </select>
+                                    <button type="button" class="btn-remove btn-remove-actividad"
+                                        style="display: none;">✕</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 02 TRABAJADORES AUTORIZADOS ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>02</span> Trabajadores Autorizados</div>
+                <table class="dynamic-table" id="tablaTrabajadores">
+                    <thead>
+                        <tr>
+                            <th style="width:40px;">N°</th>
+                            <th>Nombres y Apellidos</th>
+                            <th style="width:100px;">Tipo Doc</th>
+                            <th style="width:130px;">N° Documento</th>
+                            <th>Cargo</th>
+                            <th style="width:130px;">Día de la Semana</th>
+                            <th style="width:120px;">Firma</th>
+                            <th style="width:40px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyTrabajadores"></tbody>
+                </table>
+                <button type="button" class="btn-add" onclick="agregarTrabajador()">+ Añadir Trabajador</button>
+            </div>
+
+            <!-- ═══ 03 ELEMENTOS, HERRAMIENTAS Y EQUIPOS ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>03</span> Elementos, Herramientas y Equipos a Utilizar</div>
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Manuales</label>
+                        <input type="text" name="herr_manuales" class="form-control"
+                            placeholder="Describa las herramientas manuales">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Eléctricas</label>
+                        <input type="text" name="herr_electricas" class="form-control"
+                            placeholder="Describa las herramientas eléctricas">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Neumáticas</label>
+                        <input type="text" name="herr_neumaticas" class="form-control"
+                            placeholder="Describa las herramientas neumáticas">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hidráulicas</label>
+                        <input type="text" name="herr_hidraulicas" class="form-control"
+                            placeholder="Describa las herramientas hidráulicas">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mecánicas</label>
+                        <input type="text" name="herr_mecanicas" class="form-control"
+                            placeholder="Describa las herramientas mecánicas">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Otras</label>
+                        <input type="text" name="herr_otras" class="form-control"
+                            placeholder="Otras herramientas o equipos">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 04 RIESGOS CRÍTICOS ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>04</span> Identificación de Riesgos Críticos Asociados al Trabajo</div>
+                <div class="form-group full">
+                    <label class="form-label">¿El trabajo a ejecutar presenta riesgos críticos asociados? En caso
+                        afirmativo, especifique cuáles</label>
+                    <div id="riesgoCriticoContainer"
+                        style="display: flex; flex-direction: column; gap: 10px; align-items: stretch;">
+                        <div class="riesgo-critico-row" style="display: flex; gap: 8px; align-items: center;">
+                            <select name="riesgos_criticos_detalle" class="form-control riesgo-critico-select"
+                                style="flex: 1; min-width: 200px;">
+                                <option value="">Seleccione...</option>
+                                <option>Trabajo en alturas</option>
+                                <option>Espacios confinados</option>
+                                <option>Trabajo en caliente</option>
+                                <option>Riesgo electrico</option>
+                                <option>Lineas energizadas</option>
+                                <option>Izaje de cargas</option>
+                            </select>
+                            <button type="button" class="btn-remove btn-remove-riesgo" style="display: none;">✕</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 05 CONTROLES CRÍTICOS OBLIGATORIOS ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>05</span> Controles Críticos Obligatorios</div>
+                <div class="form-grid form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Aislamiento de energías (LOTO / desenergización)</label>
+                        <select name="ctrl_loto" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Evaluación de riesgos (ATS socializado)</label>
+                        <select name="ctrl_ats" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Medición de atmósferas (si aplica)</label>
+                        <select name="ctrl_atmosferas" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Protección contra caídas</label>
+                        <select name="ctrl_caidas" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Control de ignición</label>
+                        <select name="ctrl_ignicion" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Delimitación del área</label>
+                        <select name="ctrl_delimitacion" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vigía asignado</label>
+                        <select name="ctrl_vigia" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Uso de EPP completo</label>
+                        <select name="ctrl_epp" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Personal competente</label>
+                        <select name="ctrl_personal" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Plan de emergencia y rescate</label>
+                        <select name="ctrl_emergencia" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="nota-critica">NOTA: Si alguno NO cumple — NO iniciar actividad</div>
+            </div>
+
+            <!-- ═══ 06 EPP ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>06</span> Elementos de Protección Personal (EPP)</div>
+                <div class="epp-grid">
+                    <div class="epp-item">
+                        <span class="epp-label">Casco</span>
+                        <select name="epp_casco" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Protector Auditivo</span>
+                        <select name="epp_auditivo" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Chaleco</span>
+                        <select name="epp_chaleco" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Casco Dieléctrico</span>
+                        <select name="epp_casco_dielectrico" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Prot. Respiratorio</span>
+                        <select name="epp_respiratorio" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Overol</span>
+                        <select name="epp_overol" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Barbuquejo</span>
+                        <select name="epp_barbuquejo" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Botas de Seguridad</span>
+                        <select name="epp_botas" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Overol Ignífugo</span>
+                        <select name="epp_overol_ignifugo" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Protector Visual</span>
+                        <select name="epp_visual" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Guantes Carnaza</span>
+                        <select name="epp_guantes_carnaza" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Careta Soldar</span>
+                        <select name="epp_careta_soldar" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Delantal</span>
+                        <select name="epp_delantal" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Guantes Poliuretano</span>
+                        <select name="epp_guantes_poli" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Mascarilla</span>
+                        <select name="epp_mascarilla" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Polainas</span>
+                        <select name="epp_polainas" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Guantes Dieléctrico</span>
+                        <select name="epp_guantes_dielectrico" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                    <div class="epp-item">
+                        <span class="epp-label">Mangas Dieléctricas</span>
+                        <select name="epp_mangas_dielectricas" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option>SÍ</option>
+                            <option>NO</option>
+                            <option>N/A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 07 PLAN DE EMERGENCIA ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>07</span> Plan de Emergencia</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Emergencia</label>
+                        <select name="tipo_emergencia" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="Incendio">Incendio</option>
+                            <option value="Electrocución">Electrocución</option>
+                            <option value="Caída de altura">Caída de altura</option>
+                            <option value="Asfixia">Asfixia</option>
+                            <option value="Falla en izaje">Falla en izaje</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ruta de Evacuación</label>
+                        <input type="text" name="ruta_evacuacion" class="form-control" placeholder="Describa la ruta">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Punto de Encuentro</label>
+                        <select name="punto_encuentro" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="Parque">Parque</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Brigadista Responsable</label>
+                        <input type="text" name="brigadista_responsable" class="form-control"
+                            placeholder="Ingrese el nombre del brigadista responsable">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Equipos Disponibles</label>
+                        <select name="equipos_disponibles" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="Botiquín">Botiquín</option>
+                            <option value="Equipo de rescate">Equipo de rescate</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ 08 FIRMAS ═══ -->
+            <div class="section-card">
+                <div class="section-title"><span>08</span> Firmas de Autorización del Permiso</div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.6;">
+                    Nota: Verificando el cumplimiento por parte de los trabajadores a los procedimientos de los trabajos
+                    seguros instaurados, se avala la efectividad en campo y se firma el actual ATS para actividades de
+                    terceros.
+                </p>
+                <div class="firmas-grid">
+                    <!-- Jefe Encargado -->
+                    <div class="firma-box">
+                        <div class="firma-box-title">Jefe Encargado de la Actividad</div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="jefe_nombre" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Identificación</label>
+                            <input type="text" name="jefe_id" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasJefeFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasJefeFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Jefe Suplente -->
+                    <div class="firma-box">
+                        <div class="firma-box-title">Jefe Encargado de la Actividad Suplente</div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="jefe_suplente_nombre" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Identificación</label>
+                            <input type="text" name="jefe_suplente_id" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasJefeSupFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasJefeSupFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Coordinador -->
+                    <div class="firma-box">
+                        <div class="firma-box-title">Coordinador de Trabajo Seguro</div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="coord_nombre" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Identificación</label>
+                            <input type="text" name="coord_id" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasCoordFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasCoordFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Coordinador Suplente -->
+                    <div class="firma-box">
+                        <div class="firma-box-title">Coordinador de Trabajo Seguro Suplente</div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="coord_suplente_nombre" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label class="form-label">Identificación</label>
+                            <input type="text" name="coord_suplente_id" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Firma</label>
+                            <div class="firma-canvas-wrap">
+                                <canvas id="canvasCoordSupFirma" width="200" height="46"></canvas>
+                                <button type="button" class="btn-clear-firma"
+                                    onclick="limpiarCanvasFijo('canvasCoordSupFirma')">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="section-card">
+                <button type="submit" class="btn-submit">GUARDAR ANÁLISIS DE TRABAJO SEGURO</button>
+            </div>
+
+        </form>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO — PLATAFORMA OMAS / HSEQ
+        </div>
+
+    </div>
+
+    <script>
+        function initCanvasFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#003366';
+            ctx.lineWidth = 1.5;
+            ctx.lineCap = 'round';
+            let drawing = false;
+            const getPos = (e) => {
+                const r = canvas.getBoundingClientRect();
+                const sx = canvas.width / r.width;
+                const sy = canvas.height / r.height;
+                const src = e.touches ? e.touches[0] : e;
+                return { x: (src.clientX - r.left) * sx, y: (src.clientY - r.top) * sy };
+            };
+            canvas.addEventListener('mousedown', (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+            canvas.addEventListener('mousemove', (e) => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+            canvas.addEventListener('mouseup', () => { drawing = false; });
+            canvas.addEventListener('mouseleave', () => { drawing = false; });
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+            canvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); }, { passive: false });
+            canvas.addEventListener('touchend', () => { drawing = false; });
+        }
+        function limpiarCanvasFijo(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+        function obtenerFirmaImg(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return null;
+            const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+            return Array.from(imgData).some((v, idx) => idx % 4 === 3 && v > 0) ? canvas.toDataURL('image/png') : null;
+        }
+
+        let contadorTrabajadores = 0;
+
+        function agregarTrabajador() {
+            contadorTrabajadores++;
+            const tbody = document.getElementById('bodyTrabajadores');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+            <td style="text-align:center; color: var(--text-muted); font-family:'Space Mono',monospace; font-size:12px;">${contadorTrabajadores}</td>
+            <td><input type="text" name="trab_nombre_${contadorTrabajadores}" class="form-control" placeholder="Nombres y apellidos"></td>
+            <td>
+                <select name="trab_tipo_doc_${contadorTrabajadores}" class="form-control">
+                    <option value="CC">CC</option>
+                    <option value="CE">CE</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="PPT">PPT</option>
+                </select>
+            </td>
+            <td><input type="text" name="trab_doc_${contadorTrabajadores}" class="form-control" placeholder="N° documento"></td>
+            <td><input type="text" name="trab_cargo_${contadorTrabajadores}" class="form-control" placeholder="Cargo"></td>
+            <td>
+                <select name="trab_dia_${contadorTrabajadores}" class="form-control">
+                    <option value="">Seleccione</option>
+                    <option>Lunes</option><option>Martes</option><option>Miércoles</option>
+                    <option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
+                </select>
+            </td>
+            <td>
+                <div class="firma-canvas-wrap" style="min-width:100px;">
+                    <canvas id="canvasTrabFirma_${contadorTrabajadores}" width="200" height="46"></canvas>
+                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasTrabFirma_${contadorTrabajadores}')">✕</button>
+                </div>
+            </td>
+            <td><button type="button" class="btn-remove" onclick="this.closest('tr').remove()">✕</button></td>
+        `;
+            tbody.appendChild(tr);
+            initCanvasFirma('canvasTrabFirma_' + contadorTrabajadores);
+        }
+
+        // Agregar 3 filas por defecto
+        agregarTrabajador();
+        agregarTrabajador();
+        agregarTrabajador();
+
+        // ── Actividades críticas dinámicas (máx. 6) ──
+        const MAX_ACTIVIDADES_CRITICAS = 6;
+        const APOYO_KEY_MAP = {
+            'Trabajo en alturas': 'alturas',
+            'Espacios confinados': 'confinados',
+            'Trabajo en caliente': 'caliente',
+            'Riesgo electrico': 'electrico',
+            'Lineas energizadas': 'energizadas',
+            'Izaje de cargas': 'izaje',
+        };
+        const contenedorActividadesCriticas = document.getElementById('actividadCriticaContainer');
+
+        function actualizarBotonesActividadCritica() {
+            const filas = contenedorActividadesCriticas.querySelectorAll('.actividad-critica-row');
+            filas.forEach(fila => {
+                fila.querySelector('.btn-remove-actividad').style.display = filas.length > 1 ? 'inline-flex' : 'none';
+            });
+        }
+
+        contenedorActividadesCriticas.addEventListener('change', function (e) {
+            if (!e.target.classList.contains('actividad-critica-select')) return;
+            const filas = this.querySelectorAll('.actividad-critica-row');
+            const filaActual = e.target.closest('.actividad-critica-row');
+            const esUltima = filaActual === filas[filas.length - 1];
+            if (e.target.value && esUltima && filas.length < MAX_ACTIVIDADES_CRITICAS) {
+                const nuevaFila = filas[0].cloneNode(true);
+                nuevaFila.querySelector('select').value = '';
+                this.appendChild(nuevaFila);
+                actualizarBotonesActividadCritica();
+            }
+        });
+
+        contenedorActividadesCriticas.addEventListener('click', function (e) {
+            const btn = e.target.closest('.btn-remove-actividad');
+            if (!btn) return;
+            const filas = this.querySelectorAll('.actividad-critica-row');
+            if (filas.length <= 1) return;
+            btn.closest('.actividad-critica-row').remove();
+            actualizarBotonesActividadCritica();
+        });
+
+        // ── Riesgos críticos dinámicos (máx. 6) ──
+        const MAX_RIESGOS_CRITICOS = 6;
+        const contenedorRiesgosCriticos = document.getElementById('riesgoCriticoContainer');
+
+        function actualizarBotonesRiesgoCritico() {
+            const filas = contenedorRiesgosCriticos.querySelectorAll('.riesgo-critico-row');
+            filas.forEach(fila => {
+                fila.querySelector('.btn-remove-riesgo').style.display = filas.length > 1 ? 'inline-flex' : 'none';
+            });
+        }
+
+        contenedorRiesgosCriticos.addEventListener('change', function (e) {
+            if (!e.target.classList.contains('riesgo-critico-select')) return;
+            const filas = this.querySelectorAll('.riesgo-critico-row');
+            const filaActual = e.target.closest('.riesgo-critico-row');
+            const esUltima = filaActual === filas[filas.length - 1];
+            if (e.target.value && esUltima && filas.length < MAX_RIESGOS_CRITICOS) {
+                const nuevaFila = filas[0].cloneNode(true);
+                nuevaFila.querySelector('select').value = '';
+                this.appendChild(nuevaFila);
+                actualizarBotonesRiesgoCritico();
+            }
+        });
+
+        contenedorRiesgosCriticos.addEventListener('click', function (e) {
+            const btn = e.target.closest('.btn-remove-riesgo');
+            if (!btn) return;
+            const filas = this.querySelectorAll('.riesgo-critico-row');
+            if (filas.length <= 1) return;
+            btn.closest('.riesgo-critico-row').remove();
+            actualizarBotonesRiesgoCritico();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            ['canvasJefeFirma', 'canvasJefeSupFirma', 'canvasCoordFirma', 'canvasCoordSupFirma'].forEach(id => initCanvasFirma(id));
+        });
+
+        // Submit
+        document.getElementById('atsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const data = {};
+
+            // Campos simples
+            new FormData(form).forEach((val, key) => { data[key] = val; });
+
+            // Actividades críticas: recolectar todas las seleccionadas
+            data.actividad_critica_detalle = Array.from(document.querySelectorAll('.actividad-critica-select'))
+                .map(s => s.value)
+                .filter(v => v);
+
+            // Riesgos críticos: recolectar todos los seleccionados
+            data.riesgos_criticos_detalle = Array.from(document.querySelectorAll('.riesgo-critico-select'))
+                .map(s => s.value)
+                .filter(v => v);
+
+            // Trabajadores: recolectar dinámicamente
+            const trabajadores = [];
+            const tbody = document.getElementById('bodyTrabajadores');
+            tbody.querySelectorAll('tr').forEach((tr, idx) => {
+                const inputs = tr.querySelectorAll('input, select');
+                if (inputs.length > 0) {
+                    const canvasFirma = tr.querySelector('canvas');
+                    const imgData2 = canvasFirma ? canvasFirma.getContext('2d').getImageData(0, 0, canvasFirma.width, canvasFirma.height).data : null;
+                    const tieneTrazo = imgData2 && Array.from(imgData2).some((v, i) => i % 4 === 3 && v > 0);
+                    const firma = tieneTrazo ? canvasFirma.toDataURL('image/png') : null;
+                    const t = {
+                        nombre: inputs[0]?.value || '',
+                        tipo_doc: inputs[1]?.value || '',
+                        documento: inputs[2]?.value || '',
+                        cargo: inputs[3]?.value || '',
+                        dia: inputs[4]?.value || '',
+                        firma: firma,
+                    };
+                    trabajadores.push(t);
+                }
+            });
+            data.trabajadores = trabajadores;
+
+            data.jefe_firma = obtenerFirmaImg('canvasJefeFirma');
+            data.jefe_suplente_firma = obtenerFirmaImg('canvasJefeSupFirma');
+            data.coord_firma = obtenerFirmaImg('canvasCoordFirma');
+            data.coord_suplente_firma = obtenerFirmaImg('canvasCoordSupFirma');
+            data.id_flujo = new URLSearchParams(window.location.search).get('flujo');
+
+            fetch('procesar.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(r => r.json())
+                .then(res => {
+                    if (res.status === 'success') {
+                        const flujoId = new URLSearchParams(window.location.search).get('flujo');
+                        if (flujoId) {
+                            // Certificados de apoyo correspondientes a las actividades críticas seleccionadas
+                            const apoyosAuto = (data.actividad_critica_detalle || [])
+                                .map(actividad => APOYO_KEY_MAP[actividad])
+                                .filter(Boolean);
+
+                            const promesas = [
+                                fetch('../permiso_completo/actualizar_paso.php', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ id_flujo: flujoId, paso: 'analisis', id_registro: res.id })
+                                }),
+                                ...apoyosAuto.map(apoyo_key => fetch('../permiso_completo/agregar_apoyo.php', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ id_flujo: flujoId, apoyo_key })
+                                }))
+                            ];
+
+                            Promise.all(promesas)
+                                .finally(() => {
+                                    Swal.fire({
+                                        title: '¡REGISTRADO!',
+                                        text: 'ATS guardado. Volviendo al menú de permisos.',
+                                        icon: 'success',
+                                        background: '#151A22', color: '#E2E8F0', confirmButtonColor: '#00F0FF'
+                                    }).then(() => window.location.href = '../permiso_completo/index.html');
+                                });
+                        } else {
+                            Swal.fire({
+                                title: '¡REGISTRADO!',
+                                text: 'El ATS fue guardado correctamente. ID: ' + res.id,
+                                icon: 'success',
+                                background: '#151A22',
+                                color: '#E2E8F0',
+                                confirmButtonColor: '#00F0FF',
+                                confirmButtonText: 'Aceptar'
+                            }).then(() => {
+                                form.reset();
+                                document.getElementById('bodyTrabajadores').innerHTML = '';
+                                contadorTrabajadores = 0;
+                                agregarTrabajador(); agregarTrabajador(); agregarTrabajador();
+                            });
+                        }
+                    } else {
+                        Swal.fire({ title: 'Error', text: res.message || 'Error al guardar.', icon: 'error', background: '#151A22', color: '#E2E8F0' });
+                    }
+                })
+                .catch(() => {
+                    Swal.fire({ title: 'Error de red', text: 'No se pudo conectar con el servidor.', icon: 'error', background: '#151A22', color: '#E2E8F0' });
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+{
+    "fecha_solicitud": "2026-06-16",
+    "hora_solicitud": "11:00",
+    "clasificacion": "Mecanico",
+    "nombre_solicitante": "Manuel Armando Jojoa",
+    "cargo_solicitante": "Lider de Mantenimiento Mecanico",
+    "objeto_dañado": "Banda transportadora despachos",
+    "ubicacion": "Bodega producto terminado ",
+    "marca": "N\/A",
+    "codigo_equipo": "EMPPASBAT01",
+    "descripcion_falla": "Se realizó mantenimiento preventivo a banda transportadora ",
+    "usa_mediciones": "0",
+    "firma_solicitante": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACWCAYAAADwkd5lAAAQAElEQVR4AeydO7LkyHWGi5Ihd2TKEhkhWxqugKKhkMnQCmZoy9BoBZJWQBryZ2YFDHnyhlwBHz6DNGlyPHpkfrfrv42urrqFRwLIBL6OOhcJIPPkyS87zo8E6vFXF\/9JQAISkIAEZhBQQGZAs4kEJCABCVwuCoj\/CySwFwH7lUDnBBSQzifQ8CUgAQnsRUAB2Yu8\/UpAAhLonEDHAtI5ecOXgAQk0DkBBaTzCTR8CUhAAnsRUED2Im+\/EuiYgKFLAAIKCBQ0CUhAAhKYTEABmYzMBhKQgAQkAAEFBApbm\/2tTeCL0sEvi\/2u2FfFfElAAisQUEBWgKrL3Qn8pETwabHvFvus2J+L\/byYLwlIoCIBBaQiTF01QeC\/r1H8omy\/LvY\/xXj9oPzJuVL0dVICDrsiAQWkIkxdNUHgv65R\/HPZfl4M0fhh2fLiHMcpaxKQwEICCshCgDZvigBiQUCsPtjGuH2Vlcg35aAiUiD4ksBSAgrIUoIna9\/4cFlhEGKEhHKMYwgJ+6lHWZOABGYSUEBmgrNZcwQQCIJCJDDKt8atLM6xAkn92zruS0ACIwkoICNBWa0bAre3r24Dz60sViEIye159yXQKIH2wlJA2psTI5pHAEGg5bOVBSuQiAjPQ2ijSUACMwgoIDOg2aQ5Avmw4LPVRwJHZH5\/3XEVcgXhRgJTCSggU4lZv0UCEQNWF4\/iuz3+4+uBrFyuu24kIIGxBBSQsaSs1zIBPiRIfFMEJHVdgUBOk8AMAgrIDGg2aY5ARCCiMDbA1E\/7se2sJwEJFAKjBaTU9SWBoxHIw\/Qeb2P9qUwGVja+JLAPAQVkH+72Wo9AVg9ZTUzxnDb4wKa03bvuX5cA\/qYYbwgomzdfjI13nFGX8puVPSmBsQQUkLGkrNcqgSTEse\/Auh1HRKThVchtyC\/7\/\/Ly93Ih7jC4HnrdcBzhwChTN+N9rWRBAnMJKCBzydnuKARyG4sE29OYEIKIJsIwjJ2xIBoYZc4xTj6JT1mTQBUCCkgVjDrZkcCPrn2TUK\/FSRvaYTRKsqXcgyVetjFEA2OfcSEc3ymD4fYV+6XoSwJ1CJxBQOqQ0kurBPjhKGJbkhxJsvi4vZLnWOuW2BENLMLBagNDOFofg\/F1SkAB6XTiGg37f0tcSxJ5aT7pRbKkwdI+0z7+8Nm6ESuCMRQ9PlCJaGAZU+vjML6OCSggHU9eY6H\/f4nn34v9oBg\/Icvvkpfiqi+SKB3kWQDluZaEG59z\/azdjvj4vXfEgzL9\/Yo\/xfgJ34yj7DbwMoRDE1BADj29mw7uX6+9\/fa6zbOJ627zm9wKGl7RtxQ0YoFoYMPbdqw2vl8CjXB4y6rA8LUNAQVkG85n6uUfroMl4WHX3VU2rHZwnORJea7FBzFjc\/3UbkcsiAZGGf9flz8IB5a4hwKYeqWaLwmsR0ABWY9tBc\/duMhVb5IZiY3g176aT6JMv\/S5xOJn7bjHxMgtQEQDY5zEhkjwjqrPiwP2y+b1xT7GgRbiJw7t4AQUkINP8MbDy7MIEhlG4ou41A4F3\/ikH7Y1jASNn\/imvKXRL4LBM6SflI7ZZ3wIMvaM5TB+2hYXviSwHgEFZD22Z\/J873lHkhlXw2skM67CYRzRorzUSNa8kwk\/rADYbmHwQTgwyvRJHIgGRlwce2bUG3J\/Vt\/zbxDw1HMCCshzRtZ4TiAPdYdXyCQzjNZf8mcl451HNV1HkO6JYs1+EAp4IRoY+\/iHGaLxvbJDuWwmvfBJO\/xhkxpbWQJTCCggU2hZdyoBEiFtSPK1k9nf47hYfo2wFKu8avu7DQoOCAaW1RkJH1Y832DL\/m27KftZhfxsSiPrSmAqAQVkKjHr3xIgIXLsw6THkXeW4yTLd0fq\/E2\/dby995J4a\/vHH6KBUaZH+kIwMMocq2H44hbYJ8UZK5Ky8SWB+gQUkPpM9fghgVwNJ2l+eHb5HslyuZcPPcTn0phpj2DwUJwt+\/iGCaKBsf9h73X2\/MneOhz18gYBBeQNOJ4aRYCkSMU8O6A8NBIkxrHUpbzEavl5FEPGMrcf2iEYGGX6YUWAYGCsCsKEc2sY\/jF80x9b7RwENhulArIZ6lN3xBU3AGrfxkqCxHdNi998UHGs79+UisPVRtm94AvRmPtQ\/LLg31rcF4Rk0yMRUECONJvtjoUkSnRcjWOUl1h8ZKWwxNe9tsN4751\/duzbUgHRqPVQvLib9WIcGI1ZDbHVJFCNgAJSDeVpHeUqPYnqEYicT\/J\/VG\/349cA5sT7j6UtosHD67Qvh3Z9ZRUCd2zXYOz8WAQUkGPN5x6jSVJ6ljCTyCI4S2KNj2d9LukjbTO+7Pe2hRFG3LVvIeJTOzEBBeTEk7\/x0EliGAkZW9L90vZj+q4peGP6W7NOxgI3bM2+9H0iAvUF5ETwHOplajJKIqt1JYwgXVb6F99Tx7hSOIvcMhYMJ7XY40s7OQEF5OT\/ASoNP8npmbvU6yUp9xbvW\/x5qM952GOUNQksIqCALMJ3+sZJRFPeDbU0KafP\/Arf6SdhAOBZsfYK8Fl\/nj84AQXk4BPc4PCSxJZ+T9MfNxhbYj3KbZ98oBARxjZAaBdHJqCAHHl21x\/bnHdDZQXCW13nRJjEN2XVM6efYZv0OTzWa\/lootjrPBwibgVkMI0WJxNIYo0ojHWQ+mk\/tt3W9RIn\/bYeKzGOMVYhjIvxYGPaWEcCdwkoIHexeHAjAj0kMJLtRjg268ZVyGaoj92RAnLs+V1zdEn+cxJsElhugU2JM23m9DulnyPXhR3GHGINjNUQeiSggPQ4a8eJ2eS131xGxI\/yBoH9SJ64ZwXkxJO\/49C5+k33U0Vkav30M3ebh\/Vb9zs33rHtmAOMcfFcZGw760nglYAC8oqi68IewZN46DcJlvIUI3lNqX9bd2n7W39n3HcVcsZZrzhmBaQiTF1NIhDhaf0WSoQqz14mDbLxyoyNH7oiTFchUNAmEVBAJuGyckUCJK+p7rLqmdrO+o8JDH\/6Vr6POT0+c+IzCsiJJ3\/noUdA5iSttN15CIfoHpYYg2l9NUiMWkMEFJCGJqOzUHJLJ8lnTvhpO0dE5vQ3p00PMc4Z17BNnoUwD9jwnGUJPCSggDxE44kNCHxyubz08unL3+d\/ktzy\/OR5C2uMIYBIRkRchYwhZp0XAgrICwb\/zCCQZE7ymdH8pcmvX\/5eLnO\/F+viv2oEeIjOXDKvWDXHOjouAQXkuHPbw8i+ugaZ22HX3eY2+ebfoyfWrEK+aW4GDGgVAkudKiBLCdp+SwKfXTvjSvla3GRzlt8egSsGVFYkbDUJPCSggDxE44k3CORKPJ8heKNq1VNZCVR1qrMPCGQVwrOQzPMHFdyRQAgoICHhdg6BpQKSq92xiSoP29NuTsz12hzTE2wxRoeIsNUkcJeAAnIXiwefEEjCP8u7oTLOjPsJnu5PZxXCeLHuB+QA1iGggKzDVa8S6JkAK5CvrwP48rp1I4GPCOwoIB\/F4oFzEiBZMfJnV7o5n\/q00dYj8PnV9XfLNuxL0ZcE3hNQQN6zsDSeQN52e5ZknnFm3ONJ9V0z4\/ZZSN\/zuFr0CshqaHVcmUCugvM8orL7c7kbOVqfhYwEddZqCshZZ37ZuJPMc4W6zJutWyXA\/GLElzmnrEnghYAC8oLBPzsSyIrCBLXjJLzRdVYh3sZ6A9JZTykgc2beNjUJ5MOBPKyt6bemrzNfhTN2DJ6KPBS0VwIKyCsKCyMJJIkkqYxs9rBavibknx7WeHciD7Br9fvOq3\/HEHAVMobSCesoICec9EaHnJVIo+GdOixEG+PiAdsThn03REABaWgyOgklCSTPLpaGTWLCR\/xSvmc5n\/r36nhsPQKuQtZj261nBaTbqTtU4BGFiESLg+shxjW5Dcf\/xZod6bsfAgpIP3NVJdJOnbQgLPkix04RVgk7X2\/yoyredNI9AQWk+yncfABrPMzO7bBnQpGr4M0HXTrMw\/5SPO0rPwD2bJ5OC+hsA1dAzjbjbY43whBxuo1y+L1Mt+e22h8rclvFs0c\/zBNG3\/7gFBQm2fEqKyDHm9O1R5SrzySStfvDf353JEmcY9o+BPIw\/ZHY7xOVve5CQAHZBbud3hCIGEWcbk6\/7kZIXg9sWEiMZ0+ccMCYK2zDKbCr1ggoIK3NSNvxJGGQQGpHGnFIH0P\/JG321+gXv9o0AlmF+PUm07gdrrYCcrgpXXVASeBbf+1IRCX9rzrIB87Td2J5UO0Uh4cs5HGKKb8\/SAXkPheP3ieQZJHVwv1a847mLaLpY54XW21FICLiKmQr4nv286BvBeQBGA9vTiAJKberEkAEJedzfI9tYkhMe8TQSp+5jSWLVmZkhzgUkB2gd9xlksWa74ZKH8GU\/TX7TF9uxxNATDFaZI4oaycioICcaLIbH2qSEWEeLCExpENaViHexjrk9D4flALynJE1tiNwb5WRW1pDgdkuog97SnwK3DsumRN4YO+O+vc0BBSQ00x1FwPNp5uHV7RJTElWew4kMUTU9oyllb7DZDhnrcRmHCsT6EFAVkag+wYJRDQiKK2F+ElrAe0YT25jZc52DMWutyaggGxN3P7eIsDVbN4iPPzK8CSpt9pueW7rz8FsObapfTFnGO0UESicyBSQE012J0PNcwa+Mjy3RVpZiSRRnmcFMu4\/TQT+Z+OqW+soBBSQo8zkNuPIvf8k0jV6zTfv5mo2HzBcoy991iHA\/wdWjghr5q2OZ700TUABaXp6ThucovF46ltN0D++hpxV43XXzZEJKCCrzq7OZxJgFcKtrP8s7SmXja9CgFt535RtiyLCKqSEdiE27OK\/4xNQQI4\/xzVHuOXDY5LQT2sGX8nXMFFWcjnaTfpu9Sq\/9fhGg7biOAIKyDhO1pJACwSSoBFXrIWYhjHkYXoTsQ0Ds7wOAQVkHa5H9cqD0qOObey4eFA8tu4a9SIiLa5CiA1j3IoIFA5uCsjBJ7jy8JIUkiQqu+\/CXQTk052ibf0qP\/G1KHA7Tdlxu1VAjju3y0Zm60cE8m4jPqfyqM6axxFvjD4i6JRbMWLDiA1rJS7jWIGAArICVF1KYGUCucr\/cuV+5rpPfK5C5hLspJ0C0slEGWYzBLi6Jpg9r66J4Y8lCN4Vx1t7S7GpF\/EREIwwytp4At3UVEC6mSoDbYjAMEHuFda\/XTtu9Sr\/V9f4WhS4a2hulhJQQJYSPE\/7XEkmeZ5n5B+PlA85cnTP5M08YMTBhwvZtmR8CJR48vU3lLWDEVBADjahDudy2YBBEje3kDbo7mEXedaAuGMPK+5wAkYYXbcWGzFpFQgoIBUg6uJ0BJIY1xYQbv\/8udB9lICJIyKy52qohHj31XJsdwP24DQCCsg0Xta+XPI5iMvJ\/5G8QfAouXNuiSEeEYW3+qAesVCH8pI+a7clLnwSG0ZZOxCBjwXkQINzKFUJ5INzCkhVrHedkWwjHlzFPxMG6uAobSi3sjuf3QAABWVJREFUYhGRFmNrhVG3cSgg3U7d5oHnXTV+nck79GslbcQjD8Xp45l4EA1JGqP8O\/40ZIyBcBgXW+1ABBSQA02mQ+meAEl2qnhk0EnUPJcZIzppt\/YWYcPoh\/Gx1Q5CQAE5yEQ6jM0JrJEU54oHgyeeiAi3i1pK1sO4iFU7CAEF5CAT6TB2IUDSpuMayTrigc+5KwjatZisGVM41WCFL60BAocSkAZ4GoIE5hDguQWJlUT7wzkOBm0QEfzgL6I0OL1bkZjovNXv7yI2bSIBBWQiMKtLYEDg\/67lJUmRJM9zC77baql4XMO5ZBWCiHyVgztvExNj3TkUu69FQAGpRfI8fnwb7\/u5XvrONMSDJM\/V+d++d7u4hL98lchnxRurkrJZ8\/XUNzGFF2N+2sAK7RNQQNqfo1Yi9HMgH88ESZGjJESM8lgbiketlcew75+WnfjloXoLIhJRI54Snq\/eCSggvc\/gdvHnS\/FqXilvF\/16PUVEpvSwtngkFmIbigj95tweW+KhX8QWo6x1TEABaWPyeoiCrw\/\/tgS6dxIqITT1yr39sVfV8CN5kkyT3Ncc0LAf+qX\/Nft75pt4ntXxfCcEFJBOJqqRMHn+gZA0Ek53YZC8SeIk0S3EI4DSH1v6J46c23o7VXC3js\/+JhBQQCbAsqoE7hAgKXOYxMz2kZG0qUP9LcUj8aRftsTx1rf8ps0aW\/rHiAFbo49pPq09m4ACMhudDSXwSiDfD\/YoIf6y1OQciXMP8Sjdv77onzg4EFGjvIeNve23R2z2OYKAAjICklUk8ITA19fziMS1+LJhH\/HgHWyIDMn75cTOf4gjv6qIiGz9Dq3cxoLPzijsfgkBBWQJPdteLhchFAK5oh8mRMokZ8SDzz98r9Rr6UV8SeSsBLYUEXhh8CAOtlqHBBSQDifNkJsjgEgQVN7qzKe\/EQ+OkaS\/T6FBQzSIj9C2FpFhv\/SvdUhAAelw0gy5OQJ8aI+vIiEwHk7z6W\/KJEmSNOVWjfiIk\/gQkQgf+2vacAXiKmQm6b2bKSB7z4D9H4VAkjDj+UP5w6euSc6l2PyLOHkuQqAkc0SQLftrWkQkK7g1+9L3CgQUkBWg6vKUBFiFfKeMHPu7smW\/bLp5kcyJnS1BsxJBWCivZfkyyv9YqwP9rktAAVmXr95bJmBs9wiwEslqiltaa4pIRJZv6N1ixXNvvB5bQEABWQDPphI4KAFEYysRyYoHsToozuMOSwE57tw6MgksIXArIryzbIm\/R20jVI\/Oe7xhAgsEpOFRGZoEJFCDACLCmwF4hxnvLOPhOsdq+I4PViAYt7CwHHfbAQEFpINJMkQJ7EiA5xR8hX9WCtxqqi0k+VQ8vnccql1PJaCATCVmfQk0QGCHEFh5ICKsFuieZM8xykstPl2BLCW5cXsFZGPgdieBjgkgGLfv0qqxGkFA+K4w0HzBH60PAgpIH\/NklBJoiQBCwmdGWJEQV1YjS1YQuY3Fb87gU+uAwDkFpIOJMUQJdEAAIRmKyJIPH+ZdXvk+sQ6Gb4gKiP8HJCCBJQQQkdvVSG5rcW6qbz5UOLWN9XcioIDsBN5uJXAwAogFz0dyK4rbWtitmBxs2OcejgJy7vl39BKoSYCH4TwHyYqEffwjJJhiAo0DmQJyoMl0KBJoiEBWJG+JCYIS4\/kJ4X\/LH60PAgpIH\/P0GqUFCXRI4FZM+IXGR8N469yjNh7fiYACshN4u5XASQkgJvxCIyuTe\/b5Sbl0OWwFpMtpM2gJSGB7AvZ4S0ABuSXivgQkIAEJjCKggIzCZCUJSEACErgloIDcEnF\/LQL6lYAEDkZAATnYhDocCUhAAlsR+AsAAAD\/\/+WbIAYAAAAGSURBVAMAtPNwS13BnsQAAAAASUVORK5CYII=",
+    "firma_autorizado": "",
+    "tipo_ejecucion": "Preventivo, Planeado",
+    "trabajo_realizado": "Se realizó lubricación preventiva y limpieza ",
+    "fecha_cierre": "2026-06-16",
+    "hora_cierre": "11:20",
+    "tipo_responsable": "Miembro De La Compañia",
+    "nombre_responsable": "Manuel Jojoa y Julian Torres",
+    "vobo_mantenimiento": "Andres Ortega",
+    "insumos_riesgo": "Si, grasas ",
+    "retirados_zona": "Si",
+    "novedad_inocuidad": "Ninguna ",
+    "condiciones_higienicas": "Si",
+    "implementos_limpieza": "Wypall y brocha ",
+    "fecha_revisionl": "2026-06-16",
+    "hora_revisionl": "11:20",
+    "firma_respLim": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAAMO0lEQVR4AeydT47tNBPFzSd9EkMQElNADJEQrADeChArAHYAKwBWADsAlsAKgBWAGDHizxAJCYYgIUH9+uWg6L57+6ZzY8flnFbqOrETu+pU1+myk5v+X\/GPETACRiAJAiasJI6ymkbACJRiwvJvgREwAmkQMGGlcdXtiroHI5AdARNWdg9afyNwIARMWAdytk01AtkRMGFl96D1NwLnEBi0zoQ1qGNtlhEYEQET1ohetU1GYFAETFiDOtZmGYERETBhnfOq6+5D4M37Gt1mBGoiYMKqiW7uviEm5KMw46tJ\/plKjmPXmxFoi4AJqy3evY4GMSEQETInpg9DadqQ2C1fl1K+CfFmBJojYMJqDnkXA0I+yCk5UYeg5M\/xATl9HOWjSZ6aSrKu2B1hsw2ZEDBhZfLWel0hoffj8nMEFdXlj1IK5DQnppdKKRxDTrQhUTXEBh4Itg1h0FGMMGGN6WkF45ygPglTqY+iQD4IhIQ8Wx6TE3VIHHa\/MW39fqGW2I2Ax1yY7i7swqf1gIAJqwcv3K7Db9GFApFAZp9gJEijqUBCTPE+KI+JCZJCqEeiOtUmonrljNZkkthN9gQOv8c5lAj1SFQV7AaD4p88CNxIWHkMHUxTgg4hCCGo58I+jpHYLQQjQkBKmOJ9Wh5P\/aJIvb06ac\/vLwQlcgILMklwEWE\/M507x0NrcdRNzS4yIIDDM+hpHUuBjAjEuVBXZj9fxL6CEaIiIJGoHmrDbtbdMAqCEjlxTCaJnLtZABYI51kSImDC6ttpBCYBRuYAUXGMoDX1kJIIirp34kPtsTvMhk1kUj+FRcJCmdOfUfddiLAgk0TIusAIiWZvIyBgwurPiwQn5KTAfGNSkcBDFJiUHNNMSUbB\/md8VJDWXYIDAhYImdSLkxLYy3ochz\/Ex+sh1EXhbWQETFh9eFeBKZLiGM0IQgITcpJQR9upkFEwFSKo2T9tz3KsTAqSQk6xUEap9bjXwjCdE7veRkbAhLWPdwkwSIWAPEdSIidKBeYSTd+bTpqv6UxVXRfgISxOMykwmJNU14ZYuboImLDq4qveCchTgpqTCpkRgSkhi0J0\/dKSazQ1hACWXrfHeWCCjqeEDRZklSIpbLqkn2wFy0vnuH4FAr1eYsKq4xmC8T6CIggRCIrAZJGYY+RWjRhX\/UAIt\/a35fXg8m10eEpS6DvHgqwyTru6cR0n0S+lZXAETFjbOZiggSAUjPzVp44RCCxEQUmJUEf71qLMg\/EhsK37f0h\/6DDHhTUnrtedPXBA1mKh6xiHfi0DI2DCWu9cAgSZByPH9Mi0hjcaEIhkUJSIgotzagrjMB5jzImT41byeQwk8hYu6IWgm+7scRynrt5Ezti5uhNfmAMBE9bD\/ETg8SwQAlEh1NELgUcgPooDpnjUUxeHu2yMrWBu\/ajDr2Exz4RFUdADETaUHJeNf8B74y7dXW8ImLCWe0TZAo8NIFxJ4BGAyqI4RmjrQZgO8kQ4+rLfSqfnp4EgTPBBauFCv2S0DMkjEZSWQREwYS137F9x6t8hCsI5SUV1t9vbk2ZMmVplIWDzY4zbkiRjuKKn34t\/xkTAhLXcr0\/Hqf8PIQj5qx67KTZ0hWRRFtKibCEvtxhkGkPPn+lbAVN1g8JDNEXAhNUU7t0GE8mSYbG\/myIe2AjcgoAJ6xb0cl07z7Igrlza368tWSRnYBfCvmVABExYAzr1gkkEtUiLu5sXTktbjX1plbfiyxDYl7CW6eiztkOA6aACm0cztut5\/5547g0tnGGBwqBiwhrUsfeYpSyLRx1GCm4RsZ7\/ugcCN2VFwISV1XPr9SaweS6KHkaaGmIXNkHElJYBETBhDejUBSYR3AinNiIthqousmmkzLE6aJkGMGFl8ta2uirLIriRbXt3b0agAgImrAqgJupSpDVKlqX1uZYPyCZyd35VTVj5fXiLBUyhEPrgPVWUFiNwKwLVrjdhVYM2TcfKsnhPVfYvD4t8meIiaZxgRZchYMJahtPoZ\/FKYmx8i4\/kItJKbobVP4eACescKser45XEBDpZCZIZgV8m5d+dShcDIWDC6s+Ze2k0yoI1bzoFwxf4sIyFgAlrLH\/eYg0ZFkKGxVd4bumrh2uxowc9rMOGCJiwNgRzgK5GyLIg3QFcYRPOIWDCOofKcesIdgQEMmdZsqH7LAugLcsRMGEtx+ooZ46QZR3FV4ez04R1OJdfNZjshP8ZyInsU2YTk242jy3U14S1EKiDnabnsnhHuqdVB3N+z+amJqyegU2uG5kVghkZv5cn3U22eHAgMWG1dSYBlGUxW9MqdEbaInX7aPw\/RnrJqDt6W84gYMI6A0rFKoKHjIWy4jCbdE2WgtAZOlNmEq3DZdLZul5BwIR1BaANm8msFPgigg27r9JVP1nWw82T7sL84T34iu4QMGG1d4kCqf3IDx8RYkW40oEPCpZdETBhtYF\/nl2x32bUbUYRwTKNRbbptX4vIlp0RuqP6BGqI2DCqg7x3QD6xwgK\/rvKJB8Evv6FFu\/MSqL2nZrofrfjj0wIXNbVhHUZm61aeHuA\/vVUtuxKGEjvbO\/LEtF6OitPJi9NWPUd+PM0xBdTmbFQpsLUCslig\/TOoq\/1vIKACesKQBs066979hfKZQx+6ZyJZDf4lRu3CxNWXd\/qHenKsuqOdtd7tQ+tv4mAqw20ccd+gHRjQPfszoRVF309vDgCYc2zlUwZi3xQ19PuvQkCJqwmMA8ziIg3091CLbxnItlhfmG2NsSEtTWiY\/f33mRepruFygx588Sk\/jDF4QwxYdV1uTIRPYdVd7T6vSv4na3Ux9ojnEHAhHUGlA2rtH4yCmEBTTbSyqYvGFsuIGDCugDMRtUEC0J3o2Ulme4W6g\/HaD7g9+pQcmTCauXorI8DXMJH9mTKGp+ZjNEUfTp0kQ0BE1Y7j43y110ZYybCynizoN1vZqKRTFj1nUWA63EAvldYf8T6I2ATo4xCwthiSYCACauNk\/QXni9BO8jbYD4f5evpwNhPQGQtTFhtPEdGorWfTIvVbdBpMwo+YCSTFigkFRNWO8fxihaChoBhv93I24+kp8czfaFbOoP\/9oi4xyYImLCawPzfIPMsK3PgaMFd5X8GdrzDHwvUY1pOaUmIwCLCSmhXryoTNHPS6lXPa3rpJgL2XDu3l3bpmolke8GuGz1MWO1dwXSQBxnJsLLeNdT38kQC7VFcN6L0Bft1PfiqXREwYe0Dv94+yvQEAttHi\/WjZg34EbLb9V4b4EoT1j5O\/DSGnQdPP6QVil3Z5mSljOXKJd00S9+5Dd0oZ0WuI2DCuo5RrTMgqYykpWBXllgLn1r9irT0Ntha47jfCgiYsCqA+oAuT0mr9zUt9NNzZJkeaZi75MvpgOn4tOsiCwImrP09NSctgghS2F+rJzVAT\/SjJWt2he7c8KDUu97ZP6jkM9uE1YfPIAORAKTwT6hFXRS7b0wBfwotlFmhZ9bsKswomhJiF1L8kwcBE1Y\/voIEngp1elrXgjS\/Cp14dolnrx7FPnpGkXoTaaU24ojKm7D68zokMSetPbItMg+ISlkVAf5SQEUZRfpN61ifpbfkYAaYsFY7vOqFkNZptvVtjEh9FFU2kRTTP8iKYwiKrAqpMuhOnWodi6xxJxU87BoETFhrUGt3DQTFmhEj8rZMMh5lXLRRv0YgI27ri5zoUyTF9I8+yfIgKkiL45FENoEDMpJtQ9tiwurfvawZKduCRNAY4kIgGu4qEnQS2k+FNggOUuIayk\/iJMiJttgtBDH9Q1KMx\/ll4B\/sHdi8MU0zYeXxKwSCQCYQizTnriIEJIGQJL\/HSezTBsGJnKK6MB0iexNBUdL\/UQL5IetYxT99IGDC6sMPD9UCYhFx8Z4n1mQgGmTel\/75AvUIpIRwLYvoZG\/Uz685yj6YYaufxwKFJGLCSuKoC2pCXGRNr0c7RIRARhIdUyKQExKnH34TDqwNguHhAckAgAkrg5fW66igXN\/D2Fcan2T+bUFYySCxugdCQGuBrO8dyOy8ppqw8vrOmhuBwyFgwjqcy23wDAFNCVnDQmZN3u0RARNWj15JrFNC1ZkWQlxIQvWPpbIJ61j+trVPIsCdVu6gPtnimu4QMGF15xIrZASMwCUETFiXkHG9ETAC9yOwQ6sJawfQPaQRMALrEPgXAAD\/\/\/cOFoQAAAAGSURBVAMA2jDN2C28JOYAAAAASUVORK5CYII=",
+    "firma_respLim2": "",
+    "control_responsable": "Manuel armando jojoa",
+    "cargo_control": "Lider de mantenimiento mecanico",
+    "trabajo_realizar_control": "Mantenimiento preventivo ",
+    "fechacontrol": "2026-06-16",
+    "tool_cant": [
+        "1"
+    ],
+    "tool_desc": [
+        "Juego de llaves "
+    ],
+    "tool_salida": [
+        "1"
+    ],
+    "part_cant": [
+        ""
+    ],
+    "part_desc": [
+        ""
+    ],
+    "part_used": [
+        ""
+    ],
+    "part_unused": [
+        ""
+    ],
+    "part_removed": [
+        ""
+    ],
+    "part_verif": [
+        ""
+    ],
+    "mat_cant": [
+        "225"
+    ],
+    "mat_unidad": [
+        "Gramos "
+    ],
+    "mat_desc": [
+        "Aceite premium - Frixo 365"
+    ],
+    "mat_used": [
+        "225"
+    ],
+    "mat_verif": [
+        "0"
+    ],
+    "vobo_ingreso_control": "Andres Ortega ",
+    "vobo_salida_control": "Andres Ortega ",
+    "med_parte": [
+        "Equipo"
+    ],
+    "med_termografia": [
+        "N\/A"
+    ],
+    "med_vibraciones": [
+        "N\/A"
+    ],
+    "med_equipo_name": [
+        ""
+    ],
+    "med_rango": [
+        ""
+    ],
+    "med_amperaje": [
+        ""
+    ],
+    "med_obs": [
+        ""
+    ]
+}

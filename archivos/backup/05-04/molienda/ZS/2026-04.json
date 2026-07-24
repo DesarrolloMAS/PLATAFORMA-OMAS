@@ -1,0 +1,1213 @@
+[
+    {
+        "id": "69e680767f823",
+        "fecha": "2026-04-20",
+        "hora": "19:33",
+        "responsable": "miguel mora",
+        "almacenista": "Jader Peñata",
+        "responsables_intervencion": [
+            "PRUEBA TURNO 1"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "15",
+                        "id": "PRUEBA TURNO 1"
+                    }
+                ],
+                "peso_unit": "50"
+            }
+        },
+        "subproductos": {
+            "salvado_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "100",
+                        "id": "PRUEBA TURNO 1"
+                    }
+                ],
+                "peso_unit": "25"
+            }
+        },
+        "materiales": {
+            "emp_extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "10",
+                        "id": "PRUEBA TURNO 1"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "trigo": [
+            {
+                "tipo": "PRUEBA TURNO 1",
+                "cantidad": 10,
+                "lote": "PRUEBA TURNO 1",
+                "destino_harina": "extrapan_x50"
+            }
+        ],
+        "firma": "Miguel Mora",
+        "created_at": "2026-04-20 19:37:26",
+        "turno": 1,
+        "sap_diario": {
+            "extrapan_x50": "101010-B",
+            "salvado_x25": "120101-B"
+        }
+    },
+    {
+        "id": "69ebaa4f4efa5",
+        "fecha": "2026-04-20",
+        "hora": "17:36",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Prueba"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "10",
+                        "id": "100426P"
+                    }
+                ],
+                "peso_unit": "50"
+            }
+        },
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Prueba Sur",
+        "created_at": "2026-04-24 17:37:19",
+        "turno": 2
+    },
+    {
+        "id": "69ebacc54ddd6",
+        "fecha": "2026-04-23",
+        "hora": "17:10",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Prueba"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "narino_2500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "280",
+                        "id": "220426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_1000": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "130",
+                        "id": "170426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1300",
+                        "id": "160426P"
+                    }
+                ],
+                "peso_unit": "12.5"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "25",
+                        "id": "MP-02322"
+                    }
+                ],
+                "peso_unit": "25"
+            }
+        },
+        "subproductos": {
+            "nuevo_1776979442854": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "2",
+                        "id": "MP-02214"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "nuevo_1776979444046": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "2",
+                        "id": "MP-02215"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "materiales": {
+            "Bolsa fardo 32x65": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1300",
+                        "id": "MP-02314"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Empaque blanco": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "410",
+                        "id": "MP-02318"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "trigo": [
+            {
+                "tipo": "Srw - cps",
+                "cantidad": 46000,
+                "lote": "",
+                "destino_harina": "narino_2500"
+            }
+        ],
+        "firma": "Prueba Sur",
+        "created_at": "2026-04-24 17:47:49",
+        "turno": 1
+    },
+    {
+        "id": "69ebce023f154",
+        "fecha": "2026-04-23",
+        "hora": "19:58",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Jeisson Zambrano",
+            "William Burgos",
+            "Marcial Diaz",
+            "Efrain Chchinoy",
+            "Neyder Tobar"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1040",
+                        "id": "220426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "12",
+                        "id": "MP-02322"
+                    }
+                ],
+                "peso_unit": "25"
+            }
+        },
+        "subproductos": {
+            "salvado_x30": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "350",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "30"
+            },
+            "mogolla_x40": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "250",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "40"
+            },
+            "segunda_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "60",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "nuevo_1776979442854": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02214"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "nuevo_1776979444046": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02215"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "materiales": {
+            "emp_extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1040",
+                        "id": "MP-02319"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_mog_x40": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "250",
+                        "id": "MP-02216"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_sal_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "350",
+                        "id": "MP-02203"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_seg_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "60",
+                        "id": "MP-02168"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "hilo_blanco": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02244"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 2500g": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "35",
+                        "id": "MP-02273"
+                    },
+                    {
+                        "valor": "245",
+                        "id": "MP-02305"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 1000g": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "130",
+                        "id": "MP-02274"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 500g ": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02275"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Bolsa fardo 32x65": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1600",
+                        "id": "MP-02314"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Empaque blanco": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "410",
+                        "id": "MP-02318"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "trigo": [
+            {
+                "tipo": "Cwrs - cps",
+                "cantidad": 66228,
+                "lote": "",
+                "destino_harina": "extrapan_x50"
+            },
+            {
+                "tipo": "Srw - cps",
+                "cantidad": 46022,
+                "lote": "",
+                "destino_harina": "VITAMINA"
+            }
+        ],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-24 20:09:38",
+        "turno": 2
+    },
+    {
+        "id": "69ebd3098965a",
+        "fecha": "2026-04-24",
+        "hora": "20:17",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Javier Acosta",
+            "Carlos Carlosama",
+            "Fredi Naspiran",
+            "Brayan Rosales"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "narino_2500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "240",
+                        "id": "220426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_1000": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "84",
+                        "id": "170426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1200",
+                        "id": "230426P"
+                    },
+                    {
+                        "valor": "750",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "12.5"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02322"
+                    }
+                ],
+                "peso_unit": "25"
+            },
+            "ARTESANAL": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "140",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-24 20:31:05",
+        "turno": 1,
+        "sap_diario": []
+    },
+    {
+        "id": "69ebd933453ec",
+        "fecha": "2026-04-24",
+        "hora": "07:15",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Jeisson Zambrano",
+            "William Burgos",
+            "Marcial Diaz",
+            "Efrain Cachinoy",
+            "Neyder Tobar"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1040",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "extrapan_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "50",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "25"
+            },
+            "extrapan_x10": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "200",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "10"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02322"
+                    }
+                ],
+                "peso_unit": "25"
+            }
+        },
+        "subproductos": {
+            "salvado_x30": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "460",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "30"
+            },
+            "mogolla_x40": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "250",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "40"
+            },
+            "segunda_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "50",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "nuevo_1776979442854": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02214"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "nuevo_1776979444046": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02215"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "materiales": {
+            "emp_extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1040",
+                        "id": "MP-02319"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_extrapan_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "50",
+                        "id": "MP-01837"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_extrapan_x10": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "200",
+                        "id": "MP-1720"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_rojo_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "700",
+                        "id": "MP-02158"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_mog_x40": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "250",
+                        "id": "MP-02216"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_sal_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "460",
+                        "id": "MP-02203"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_seg_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "50",
+                        "id": "MP-02168"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "mejorante_extrapan": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "3",
+                        "id": "130426P"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "mejorante_artesanal": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "160426P"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "hilo_blanco": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02244"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 2500g": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "380",
+                        "id": "MP-02305"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 1000g": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "60",
+                        "id": "MP-02274"
+                    },
+                    {
+                        "valor": "60",
+                        "id": "MP-02306"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 500g ": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02275"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Bolsa fardo 32x65": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1000",
+                        "id": "MP-02314"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Empaque blanco": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "600",
+                        "id": "MP-02318"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "trigo": [
+            {
+                "tipo": "Cwrs - cps",
+                "cantidad": 79392,
+                "lote": "",
+                "destino_harina": "extrapan_x50"
+            }
+        ],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-24 20:57:23",
+        "turno": 2
+    },
+    {
+        "id": "69ef714919211",
+        "fecha": "2026-04-24",
+        "hora": "17:10",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Javier Acosta",
+            "CARLOS CARLOSAMA",
+            "BRAYAN ROSALES",
+            "EDISON PAZ",
+            "CRISTIAN PEREZ"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "narino_2500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "240",
+                        "id": "220426P"
+                    },
+                    {
+                        "valor": "110",
+                        "id": "240426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_1000": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "84",
+                        "id": "170426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1200",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "12.5"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1",
+                        "id": "MP-02322"
+                    }
+                ],
+                "peso_unit": "25"
+            }
+        },
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [
+            {
+                "tipo": "Cwrs - cps",
+                "cantidad": 66682,
+                "lote": "",
+                "destino_harina": "narino_2500"
+            }
+        ],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 14:23:05",
+        "turno": 1
+    },
+    {
+        "id": "69ef7d8211ee4",
+        "fecha": "2026-04-20",
+        "hora": "15:14",
+        "responsable": "Javier Acosta",
+        "almacenista": "Dario Salas",
+        "responsables_intervencion": [
+            "Prueba",
+            "Prueba"
+        ],
+        "sede": "ZS",
+        "harinas": [],
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 15:15:14",
+        "turno": 2
+    },
+    {
+        "id": "69ef7e5cc0e0a",
+        "fecha": "2026-04-27",
+        "hora": "15:18",
+        "responsable": "Javier Acosta",
+        "almacenista": "Dario Salas",
+        "responsables_intervencion": [
+            "Prueba",
+            "Prueba"
+        ],
+        "sede": "ZS",
+        "harinas": [],
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 15:18:52",
+        "turno": 1
+    },
+    {
+        "id": "69ef7ebcce656",
+        "fecha": "2026-04-27",
+        "hora": "15:20",
+        "responsable": "Javier Acosta",
+        "almacenista": "Dario Salas",
+        "responsables_intervencion": [
+            "Prueba"
+        ],
+        "sede": "ZS",
+        "harinas": [],
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 15:20:28",
+        "turno": 2
+    },
+    {
+        "id": "69ef86838fe1d",
+        "fecha": "2026-04-27",
+        "hora": "15:52",
+        "responsable": "Javier Acosta",
+        "almacenista": "Dario Salas",
+        "responsables_intervencion": [
+            "Prueba 2"
+        ],
+        "sede": "ZS",
+        "harinas": [],
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 15:53:39",
+        "turno": 1
+    },
+    {
+        "id": "69ef86db41c6c",
+        "fecha": "2026-04-27",
+        "hora": "15:54",
+        "responsable": "Javier Acosta",
+        "almacenista": "Dario Salas",
+        "responsables_intervencion": [
+            "Prueba 2.2"
+        ],
+        "sede": "ZS",
+        "harinas": [],
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 15:55:07",
+        "turno": 2
+    },
+    {
+        "id": "69ef8ecd95962",
+        "fecha": "2026-04-24",
+        "hora": "17:10",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Javier Acosta",
+            "Carlos Carlosa",
+            "Brayan Rosales",
+            "Cristian Perez",
+            "Edison  Paz"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "narino_2500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "240",
+                        "id": "220426P"
+                    },
+                    {
+                        "valor": "110",
+                        "id": "240426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_1000": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "84",
+                        "id": "170426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "narino_500": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1200",
+                        "id": "230426P"
+                    }
+                ],
+                "peso_unit": "12.5"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "25"
+            }
+        },
+        "subproductos": [],
+        "materiales": [],
+        "trigo": [
+            {
+                "tipo": "Srw - cps",
+                "cantidad": 46338,
+                "lote": "",
+                "destino_harina": "narino_2500"
+            }
+        ],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 16:29:01",
+        "turno": 1
+    },
+    {
+        "id": "69ef944233a04",
+        "fecha": "2026-04-24",
+        "hora": "07:20",
+        "responsable": "Javier Acosta",
+        "almacenista": "Jorge Lara",
+        "responsables_intervencion": [
+            "Jeisson Zambrano",
+            "Efrain  hachinoy",
+            "Marcial Diaz",
+            "Neider Tovar",
+            "William Burgos"
+        ],
+        "sede": "ZS",
+        "harinas": {
+            "extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1070",
+                        "id": "240426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "germen_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "20",
+                        "id": "220426P"
+                    }
+                ],
+                "peso_unit": "25"
+            },
+            "VITAMINA": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "25"
+            }
+        },
+        "subproductos": {
+            "salvado_x30": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "380",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "30"
+            },
+            "mogolla_x40": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "208",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "40"
+            },
+            "segunda_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "52",
+                        "id": "060426P"
+                    }
+                ],
+                "peso_unit": "50"
+            },
+            "nuevo_1776979442854": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "1"
+            },
+            "nuevo_1776979444046": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "1"
+            }
+        },
+        "materiales": {
+            "emp_extrapan_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1070",
+                        "id": "MP-02319"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_multi_beige_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "20",
+                        "id": "MP-02120"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_mog_x40": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "208",
+                        "id": "MP-02216"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_sal_x25": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "380",
+                        "id": "MP-02203"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "emp_galeras_seg_x50": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "52",
+                        "id": "MP-02168"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "mejorante_extrapan": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "1"
+            },
+            "hilo_blanco": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 2500g": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "380",
+                        "id": "MP-02305"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 1000g": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "84",
+                        "id": "MP-02306"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Lamina nariño 500g ": {
+                "active": "on",
+                "lotes": [],
+                "peso_unit": "1"
+            },
+            "Bolsa fardo 32x65": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "1200",
+                        "id": "MP-02314"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Empaque blanco": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "434",
+                        "id": "MP-02318"
+                    }
+                ],
+                "peso_unit": "1"
+            },
+            "Etiqueta adhesiva": {
+                "active": "on",
+                "lotes": [
+                    {
+                        "valor": "20",
+                        "id": "(Cafe)- MP-01238"
+                    }
+                ],
+                "peso_unit": "1"
+            }
+        },
+        "trigo": [
+            {
+                "tipo": "Cwrs - cps",
+                "cantidad": 66682,
+                "lote": "",
+                "destino_harina": "extrapan_x50"
+            }
+        ],
+        "firma": "Javier Acosta",
+        "created_at": "2026-04-27 16:52:18",
+        "turno": 2
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e8e30977ac6",
+        "timestamp": "2026-04-22 15:02:33",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-21",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "EMPAQUE GALERAS LETRA VERDE",
+            "lote_empaque": "MP-01990",
+            "producto_envasar": "HARINA NATURAL ",
+            "lote_producto": "210426B",
+            "fecha_vencimiento": "21042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-21",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "575",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "573",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

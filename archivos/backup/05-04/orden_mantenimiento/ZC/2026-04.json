@@ -1,0 +1,465 @@
+[
+    {
+        "id": "69ea0fd900039",
+        "timestamp": "2026-04-23 12:26:01",
+        "usuario_creador": "Miguel Mora",
+        "sede": "ZC",
+        "datos": {
+            "fecha_solicitud": "2026-04-23",
+            "hora_solicitud": "12:19",
+            "clasificacion": "Mecanico",
+            "nombre_solicitante": "Miguel Mora",
+            "cargo_solicitante": "Administrador",
+            "objeto_da\u00f1ado": "PRUEBA",
+            "ubicacion": "PRUEBA",
+            "marca": "PRUEBA",
+            "codigo_equipo": "PRUEBA",
+            "descripcion_falla": "PRUEBA",
+            "equipo_name": "",
+            "termografia": "N\/A",
+            "vibraciones": "N\/A",
+            "rango_multimetro": "",
+            "amperaje": "",
+            "ot_preventivo": "",
+            "obs_mediciones": "",
+            "tipo_ejecucion": "Predictivo, Planeado",
+            "trabajo_realizado": "PRUEBA",
+            "fecha_cierre": "2026-04-23",
+            "hora_cierre": "12:19",
+            "tipo_responsable": "Miembro De La Compa\u00f1ia",
+            "nombre_responsable": "PRUEBA",
+            "vobo_mantenimiento": "Alex Chala",
+            "insumos_riesgo": "PRUEBA",
+            "retirados_zona": "No",
+            "novedad_inocuidad": "PRUEBA",
+            "condiciones_higienicas": "Si",
+            "implementos_limpieza": "PRUEBA",
+            "fecha_revisionl": "2026-04-23",
+            "hora_revisionl": "07:27",
+            "firma_respLim": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAAQAElEQVR4AezdA5QsS7oF4H5+b+ZpbN+xba+xbdu2bdu2bdu2bduzv5mba9Xcc86t7lvoyqrdK3dHqiIjd+S\/8w9kxD9v9a8MlIEyMBIGKlgjyagmswyUga2tClafgjJQBkbDQAVrNFk1e0IbQxkYOwMVrLHnYNNfBjaIgQrWBmV2b7UMjJ2BCtbYc7DpLwN7Y2BN91Ww1jRje1tlYB0ZqGCtY672nsrAmjJQwVrTjO1tlYF1ZKCCtbdc7b4yUAZWkoEK1kpmSxNVBsrA3hioYO2Nle4rA2VgJRmoYK1ktjRRy2OgVxoTAxWsMeVW01oGNpyBCtaGPwC9\/TIwJgYqWGPKraa1DGw4AzMK1oaz19svA2VgqQxUsJZKdy9WBsrALAxUsGZhr78tA2VgqQxUsJZK96gv1sSXgV1noIK161nQBJSBMrBdBipY22Wq55WBMrDrDFSwdj0LmoAysHoMrGqKKlirmjNNVxkoA3swUMHag5LuKANlYFUZqGCtas40XWWgDOzBQAVrD0pm39EYykAZWAwDFazF8NpYy0AZWAADFawFkNooy0AZWAwDFazF8NpYN4WB3udSGahgLZXuXqwMlIFZGKhgzcJef1sGysBSGahgLZXuXqwMlIFZGNhdwZol5f1tGSgDG8dABWvjsrw3XAbGy0AFa7x515SXgY1joIK1cVm+Wzfc65aB2RmoYM3OYWMoA2VgSQxUsJZEdC9TBsrA7AxUsGbnsDGUgTLwjwwsbKuCtTBqG3EZKAPzZqCCNW9GG18ZKAMLY6CCtTBqG3EZKAPzZqCCNW9GZ4+vMZSBMrAPBipY+yCmu8tAGVg9BipYq5cnTVEZKAP7YKCCtQ9iursMLIOBXmNnDFSwdsZXz14+A4fIJU8UHPFAcNQcg8lzbMPe9tkPk8emrTsfpp230+PihJ3+bvL8f839b8RSwdqIbF7Jm2RkjO6ESd1JgwsGNwweELwg+EDw\/eDHwSeCbx0IvpZjMHmObdjbPvth8ti0defDtPN2elycsNPfTZ7\/+9z\/d4PPBO8KXhU8M3hEcPfgZsFVgwsHZw68AI6U8GDBqJYK1qiya7SJ\/c+k\/HTBtYNHBW8Lfhcwuk8m\/GjwioCB3TLhJYNTBYcJ\/hQwyG8n3BfEBZPHbcPe9tkPk8emrTsfpp230+PihJ3+bjj\/N+Hln4LDBccLzhCcP7hC4AVwp4QPDp4SvCx4e+AF8M2Evwr+GLwp8KK4VML9gpVdRi1YK8vq+ibs8Lk1b2dFGOAhHRDHyjkXCe4YvDD4fPDr4D3B44LrB2cJPHu\/TUiMGM5rs\/7Y4HbB5YLTB+Lmif1H1nkE+wJBhMnjtmFv++yHyWPT1p0P087b6XFxwk5\/N5zPSzp4+DlycOIAtxdNeLXg5sE9gkcGzwpeHbw7+GzwveDPwb8E5wi8KJ6f8AvBT4M3B\/cLLhOsjIh5aJKeLmVgKgME5Os5y9tZEQZ4SAfEF3POSwOGcomExw4sDOFFWfHGZ1DHyPp\/BcTovxOeL7hecN\/gucF7g+8EXaYz4IUgH3ir78jpPKmnJnxIcOfgRsEVgwsEZwyOH3j5ECtidNls87CIFLH6v2yfPbh1IC\/k3U+yzhMjYpfOuhdTguUuFazl8r3qVztCEuhB5NlMwhtYMe7fclzxZcBQLBlChqMIx2gelnOvEygK8gKOk3VFvXsmZFBfTdhl9xn4UpLwvIA4nTOhRg4vGV7u\/bP9luBnwf8HngPnOd+L6Q\/ZZ\/2aCXncCRa7VLAWy++YYlf04jV5EL2tJ+HNSqx+mBviDSnCwFAsGUJFE\/Eoltw05z4+eF+g6JdghqU\/XSYDngGe1W1yUSJFrA4oYsQqh7d4W0\/Iimfncwm9qNSheRayOd+lgjVfPsccm1YkoqROafCYhpBHRax4YCppx3yfTftBY+CAIvbvicZL60wJtUSqo+Sd3zjbWikVId+a9TsEpw7mojVziSSJ6TJ+Bm61\/y2o5xg8piH0YGqxq1jtT1KDvzGg+K8bxV2ypXVScVKx\/zHZ1s3irAlVAbw\/oZfeSxLyvHVj0bKZzZ0tFayd8bXOZ388N+eBemPCLmXgoDDwi\/xIw4qWYHVaKvd1rdCF4i85prFFQ4BuLD\/KtsaZmyQ8ReDluH+96dYQapHWAJDDf18qWH\/nof+3tvTBuXiJKANzZED3Cf3ujpI4tQafPCEPS6NLVrd0f3loVj4UELXJelPrWqR1HCZ6WjS3KlhhqksZKAMLZ4CHxbNSKc\/TOlSueLKAgPmiQZFxqDMdQvtolA7FxOtcNvKbLmWgDJSBpTJAwD6WKxIwvfTVkyoWTsI+ffm+nPMUL19fwQoT67X0bsrAWjHw4tzNCQJdLH5RwQoTXcpAGVhpBhQNdWLdr4K10vnUxJWBMjDBwPcrWBNsdLUMjIyBjUtuBWvjsrw3XAbGy0AFa7x515SXgY1joIK1cVneGy4Do2Pg6EmxTqZ33GTBCgddykAZWCEG9Ls6TdJzrcCgg0ZHNT7XV7LtM557VLDCRJcyUAaWzsDRckVjzBuZ1hj+hqYx8qzhiAxLdIMcN\/68bwmNx2WMtUdWsMJKlzJQBubOgHHTTpJYiZLPb\/Rof3m2fWJj1A8DOPqm0Mi0RngwwKMRHIxu6gPqyZFpjcdljLUbVbDCYJf1Z6B3uBAGiMx5EvN1A0MnGxPebEfGTjNyg09viJIRGoyTdaGcZwQGHzITLV4TIdv2yLQVrDDYpQyUgT0YoA1GWeDZXCVH7xo8LVCv9I2ExsJSjDN5iPGvDJ1sxA+zHfmw2UCQvKXX51yTj9w2oQkt1FEZW81gkeLmfSkCKgpOHZlWohJPlzJQBjaQgUPnno0Gaphj3+qZteh12WemI9OHmXTEWP4mtDBI35VzTL2SGXqyumVIGF7S07Nxt4CwESFCZ4KRA\/PAcvrOlwrWzjnrL8rAmBgwkJ4ZcMwJqdimfujDuQEe0g8SGg3URBJmK1I0O3f2Gb\/dEMgG2ftgtlWK+61ZjRQBj5t9inWEiUARKh4Y4SJghMwUYjltvsu2BGu+l2xsZaAMzJkBAmOaNNN5PThxvzL4TGAIF5NDmL5LsUyxzSCNBtJj+0TL1GCvyLnqkm6WUH8nQxj\/T9YnPTBFOh6YIh4PLIeXv0j08q\/aK5aBMrATBvRPUllNTG6RHz46IBym6FJ5TUBMkvrw7Cc6xuU\/XtYtKsDVD5lI1WQRinXmJjQGlRmOTL46tOQZ\/VNLnuGyf+nHq4YK1qrlSNOzqQz8b278lIH6pNsnfFKg\/kjxynyPugPoPPnA7Fc0O1fCYwZs2HDCKsOfnG2z1KjcVvktThXc5oY0kap6qGfkHLM\/G+Uzq+Na3Oy4UtzULpaBxr5IBg6byM0uc6WEKqmfmfC9AS9I50j1ReqT7pV9Vw\/UDxmBU32QUTffkH1a5G6Z0DDDvK6DZV0luBlqrpH1ewe6FxgnXdeCbK7PUsFan7zsnSyXAU33WsFOn8vqX2ReR8U1gqG+6IXZr+5I8YoHpD7pe9lnWiyV03fO+hWC0wbiSrBl0gZz+qmHUh913ux0DUU3c\/6pEDcjzYOyX\/+mTyWc2hUg56zNUsFam6zsjczAAC9Gr2ytaXpday1TLCMM+h6pxDZRqLoiLWfEh1ekH5LilXqfp+T6imu3S6hFzljk4lNHZNqq7N5S36SFTkudVjnnmVnZZyp6eRu3\/II5kfD5lk4XA32ZsqsLBipYWCjWhQF1Nup19C3infBg9LBW\/CIAz8mNqqxWXNJ6pmKZ+Kgn0iubR6QJX2uYYtnNc75KapXY6oG0xh0y+\/xGEU4xTc\/u12Sf4p2WNp6T7+Aum33qmcy5R5B8qqKzpHoqokjYTPH+lpynv1OCZS\/ju14Fa3x5tgkp1sdHfQ+P40y5Ya1j6nQ0y+sP9MTse0mgolmx6LtZ\/0NARLSc6Vs0TUT0Tzp4fuN3+iPxnrSm8WrUI+l9\/YAc93Eu0VPk4zXph6SVTTcC\/Y9ulXN4Vop5rkkM9QQ3DrkPd\/fLcfVW6pyI39Wyra6Jd6Xy3Jx7N8k+rXvqpnTg5N35lk7fJi17xJNHJj2Ki1rzTH2ltVDxEx8q3HmDhJMwq8dSLMUTD1BRU690gv2mXO+tgT5TPET1aISX90e4dXX4dI7zIL+Y0GgJRJWwfyfbKux5mkZS+Hm2fbSsaIpL9W1EOLvnv1Sw5s\/pdmPUVM1owHg\/6ijUV+iUpxhhzjbwhtbio65DfQkDVsGquHHOXEy9BuPhBahLYRhamrzh4fI5RwsRgzdsB0waC2NkLIohBEF\/Gy1NPAWtSpMGYyIAxunbMN7EYDCMm7cwGI2WqGfnus8NhIyGsWj1Yhzmp1NfwxDU7xAMYqN3tYde0Ul9D6NhVFrHtJoRK2lk8O5Tr2szqgxN9DwfBqN\/EViHJGOfC69HSxrucUyQtLLhiBjdM7\/UXUBvb0U5gsbIQdoYPgEgBO6RMBAI90wwCAcBISQEBUcEhtDgj\/AQIEJEkAgTgcI7\/gkXASNkBE1eEThCR\/CkEx+EkCDyKuW7z2QILJ48F+fPfbg3Xp9iqGfIs+SZct+eMf2zFI1PmHO9LHDiufR86iSq6Hz4HMMXT5Mg66+l4t9EqeraFG1zymKWCtZieN1OrJqqFUuA4XqTeaMxZBW1H0kk4I3t7cfQJ41E8eWNOYcB6YOjnmUwFB4CIwH9bwgIgycsMGkshIexECKCcJ\/EyUgVo7zhJw2GARM2338RusFgiOA187vBaAjk5bLN8IWMhrFo9WIcOiYSZoagfkcHRcU5Iu6hz08P0sJYPNM8NLAOIiNmhJDng3staETSzMIEk5dGPHlHRhLgqfG6dMDkxQ15oiWPJ6ZO652JmAjLCy14Q17oiElkCZwiJuGWD7wwdV1DXmjxU1SVB14CQx6ouDeKgTzw4vAC8SLBv2Iq\/lXKq4BX34Z7LyQe38C9l5ai58WSRv2svNAUk73gvOjOlv0En\/enuKsY7eUob7Q+ehHIIx7iMXKuF6vWyCNknferocAoCvKNpyrviD++vUxz2vwXkc8\/1o2IceabZDxDJIxpAI9gcp2nMMBvJsEbGeBj0wHiAMYJ3HXbYJ0nM4DxToJ7P0AdzyQY+QBFgSEt1hn\/AEUFcNw9\/iT\/CAHDJ7y8EZ4Hw1WxTRQZoOZ+lc6LMCLPOoNiWAyMoTE4hscAGSKDZJgMlKEyWIbLgBkyg2bYDFwaGTzDJwCEgCAQBgJBKAgG4SDahISgEBYCQ2gIjvsmQISIIBEmAkWovDAIFwHzMiFohI3AETqC5wWER0JIEAkjgSSUBJNwElAvNYJKWAksoSW4hJcAE2IvSMIsnwg1wSbcBFz+EXTCTuAJvfz2PHh+PGfy27Ob7F7MIhMXE3NjncaAb7V4BCAfBkx6BtZ5HAMY3CTEMYBLPsDvgHGCD1Ftg3Uu\/ADGOwmVwwO4+5Ng5AMUB4a0WGf8Aw6RmwfH9SBxjQAAAM5JREFU3Z\/iAyFg+IogvC3eF8NVzOHRMUDFJkWqURlR7rXLkhhgJEu6VC9TBspAGZiNgQrWbPz115vBQO9yRRioYK1IRjQZZaAMTGeggjWdo55RBsrAijBQwVqRjGgyykAZmM7AMgRreip6RhkoA2VgGwxUsLZBUk8pA2VgNRioYK1GPjQVZaAMbIOBCtY2SOop22egZ5aBRTJQwVoku427DJSBuTJQwZornY2sDJSBRTJQwVoku427DKwzA7twbxWsXSC9lywDZeCgMfBXAAAA\/\/9pv+KNAAAABklEQVQDAIYCkvZqfelWAAAAAElFTkSuQmCC",
+            "firma_respLim2": "",
+            "control_responsable": "PRUEBA",
+            "cargo_control": "PRUEBA",
+            "trabajo_realizar_control": "PRUEBA",
+            "fechacontrol": "2026-04-23",
+            "tool_cant": [
+                "0"
+            ],
+            "tool_desc": [
+                "PRUEBA0"
+            ],
+            "tool_salida": [
+                "0"
+            ],
+            "part_cant": [
+                "0"
+            ],
+            "part_desc": [
+                "PRUEBA"
+            ],
+            "part_used": [
+                "0"
+            ],
+            "part_unused": [
+                "0"
+            ],
+            "part_removed": [
+                "0"
+            ],
+            "part_verif": [
+                "0"
+            ],
+            "mat_cant": [
+                "0"
+            ],
+            "mat_unidad": [
+                "0"
+            ],
+            "mat_desc": [
+                "PRUEBA"
+            ],
+            "mat_used": [
+                "0"
+            ],
+            "mat_verif": [
+                "0"
+            ],
+            "vobo_ingreso_control": "PRUEBA",
+            "vobo_salida_control": "PRUEBA"
+        },
+        "evidencias": {
+            "antes": "img_69ea0fd8f3bf0.png",
+            "despues": "img_69ea0fd8f3fb0.png"
+        },
+        "firmas": {
+            "solicitante": "sig_sol_69ea0fd8f40bd.png",
+            "autorizado": "sig_aut_69ea0fd8f40fa.png"
+        }
+    },
+    {
+        "id": "69ea3d184852d",
+        "timestamp": "2026-04-23 15:39:04",
+        "usuario_creador": "Miguel Mora",
+        "sede": "ZC",
+        "datos": {
+            "fecha_solicitud": "2026-04-23",
+            "hora_solicitud": "15:34",
+            "clasificacion": "Mecanico",
+            "nombre_solicitante": "Miguel Mora",
+            "cargo_solicitante": "Administrador",
+            "objeto_da\u00f1ado": "PRUEBA EQUIPO",
+            "ubicacion": "PRUEBA UBICACION",
+            "marca": "PRUEBA MARCA",
+            "codigo_equipo": "PRUEBA CODIGO",
+            "descripcion_falla": "PRUEBA DESCRIPCION",
+            "usa_mediciones": "1",
+            "equipo_name": "PRUEBA PRIMER COMPONENTE",
+            "termografia": "Si",
+            "vibraciones": "Bueno",
+            "rango_multimetro": "PRUEBA MULTIMETRO",
+            "amperaje": "PRUEBA AMPERAJE",
+            "ot_preventivo": "",
+            "obs_mediciones": "PRUEBA OBSERVACIONES",
+            "tipo_ejecucion": "Preventivo, Planeado",
+            "trabajo_realizado": "PRUEBA TRABAJO",
+            "fecha_cierre": "2026-04-23",
+            "hora_cierre": "15:34",
+            "tipo_responsable": "Miembro De La Compa\u00f1ia",
+            "nombre_responsable": "PRUEBA",
+            "vobo_mantenimiento": "Miguel Mora",
+            "insumos_riesgo": "PRUEBA INOCUIDAD",
+            "retirados_zona": "Si",
+            "novedad_inocuidad": "PRUEBA 2",
+            "condiciones_higienicas": "Si",
+            "implementos_limpieza": "PRUEBA",
+            "fecha_revisionl": "2026-04-23",
+            "hora_revisionl": "10:40",
+            "control_responsable": "PRUEBA",
+            "cargo_control": "PRUEBACARGO",
+            "trabajo_realizar_control": "PRUEBA ESPECIFICO",
+            "fechacontrol": "2026-04-23",
+            "tool_cant": [
+                "0"
+            ],
+            "tool_desc": [
+                "PRUEBA"
+            ],
+            "tool_salida": [
+                "0"
+            ],
+            "part_cant": [
+                "0"
+            ],
+            "part_desc": [
+                "PRUEBA"
+            ],
+            "part_used": [
+                "0"
+            ],
+            "part_unused": [
+                "0"
+            ],
+            "part_removed": [
+                "0"
+            ],
+            "part_verif": [
+                "0"
+            ],
+            "mat_cant": [
+                "0"
+            ],
+            "mat_unidad": [
+                "0"
+            ],
+            "mat_desc": [
+                "PRUEBA"
+            ],
+            "mat_used": [
+                "0"
+            ],
+            "mat_verif": [
+                "0"
+            ],
+            "vobo_ingreso_control": "PRUEBA",
+            "vobo_salida_control": "PRUEBA"
+        },
+        "evidencias": {
+            "antes": "img_69ea3d18481d3.png",
+            "despues": "img_69ea3d184835e.png"
+        },
+        "firmas": {
+            "solicitante": "sig_sol_69ea3d1848473.png",
+            "autorizado": "sig_aut_69ea3d18484b7.png",
+            "limpieza": "sig_limp_69ea3d18484e1.png",
+            "revisa_limpieza": "sig_rev_limp_69ea3d1848509.png"
+        }
+    },
+    {
+        "id": "69ea687393cfc",
+        "timestamp": "2026-04-23 18:44:03",
+        "usuario_creador": "Miguel Mora",
+        "sede": "ZC",
+        "datos": {
+            "fecha_solicitud": "2026-04-23",
+            "hora_solicitud": "18:40",
+            "clasificacion": "NA",
+            "nombre_solicitante": "Miguel Mora",
+            "cargo_solicitante": "Administrador",
+            "objeto_da\u00f1ado": "PRUEBA",
+            "ubicacion": "v",
+            "marca": "PRUEBA",
+            "codigo_equipo": "PRUEBA",
+            "descripcion_falla": "PRUEBA",
+            "usa_mediciones": "1",
+            "med_equipo_name": [
+                "MOTOR PRUEBA 1",
+                "MOTOR PRUEBA 2",
+                "EQUIPO PRUEBA"
+            ],
+            "med_parte": [
+                "Motor",
+                "Motor",
+                "Equipo"
+            ],
+            "med_termografia": [
+                "Si",
+                "Si",
+                "Si"
+            ],
+            "med_vibraciones": [
+                "Bueno",
+                "Bueno",
+                "N\/A"
+            ],
+            "med_rango": [
+                "PRUEBA RANGO",
+                "PRUEBA RANGO 2",
+                "PRUEBA RANGO 3"
+            ],
+            "med_amperaje": [
+                "PRUEBA AMPERAJE",
+                "PRUEBA AMPERAJE 2",
+                "PRUEBA AMPERAJE 3"
+            ],
+            "med_obs": [
+                "OBSERVACIONES PRUEBA",
+                "OBSERVACIONES PRUEBA 2",
+                "OBSERVACIONES PRUEBA 2"
+            ],
+            "tipo_ejecucion": "Preventivo, Planeado",
+            "trabajo_realizado": "PRUEBA",
+            "fecha_cierre": "2026-04-23",
+            "hora_cierre": "18:40",
+            "tipo_responsable": "Miembro De La Compa\u00f1ia",
+            "nombre_responsable": "PRUEBA",
+            "vobo_mantenimiento": "Prueba",
+            "insumos_riesgo": "PRUEBA",
+            "retirados_zona": "Si",
+            "novedad_inocuidad": "PRUEBA",
+            "condiciones_higienicas": "Si",
+            "implementos_limpieza": "PRUEBA",
+            "fecha_revisionl": "2026-04-23",
+            "hora_revisionl": "13:45",
+            "control_responsable": "PRUEBA",
+            "cargo_control": "PRUEBA",
+            "trabajo_realizar_control": "PRUEBA",
+            "fechacontrol": "2026-04-23",
+            "tool_cant": [
+                "0"
+            ],
+            "tool_desc": [
+                "PRUEBA"
+            ],
+            "tool_salida": [
+                "0"
+            ],
+            "part_cant": [
+                "0"
+            ],
+            "part_desc": [
+                "PRUEBA"
+            ],
+            "part_used": [
+                "00"
+            ],
+            "part_unused": [
+                "00"
+            ],
+            "part_removed": [
+                "00"
+            ],
+            "part_verif": [
+                "00"
+            ],
+            "mat_cant": [
+                "00"
+            ],
+            "mat_unidad": [
+                "00"
+            ],
+            "mat_desc": [
+                "PRUEBA"
+            ],
+            "mat_used": [
+                "00"
+            ],
+            "mat_verif": [
+                "00"
+            ],
+            "vobo_ingreso_control": "PRUEBA",
+            "vobo_salida_control": "PRUEBA"
+        },
+        "evidencias": {
+            "antes": "img_69ea687393867.png",
+            "despues": "img_69ea6873939b6.png"
+        },
+        "firmas": {
+            "solicitante": "sig_sol_69ea687393c29.png",
+            "autorizado": "sig_aut_69ea687393c7d.png",
+            "limpieza": "sig_limp_69ea687393cac.png",
+            "revisa_limpieza": "sig_rev_limp_69ea687393cd6.png"
+        }
+    },
+    {
+        "id": "69ea71c699a0f",
+        "timestamp": "2026-04-23 19:23:50",
+        "usuario_creador": "John Giraldo",
+        "sede": "ZC",
+        "datos": {
+            "fecha_solicitud": "2026-04-23",
+            "hora_solicitud": "10:34",
+            "clasificacion": "Mecanico",
+            "nombre_solicitante": "John Giraldo",
+            "cargo_solicitante": "Lider de Mantenimiento",
+            "objeto_da\u00f1ado": "cepilladora mogolla",
+            "ubicacion": "3 PISO",
+            "marca": "N\/A",
+            "codigo_equipo": "MOLBOGCEP01         ",
+            "descripcion_falla": "No presenta fallas de operaci\u00f3n ",
+            "usa_mediciones": "1",
+            "med_equipo_name": [
+                "chumacera 1 ",
+                "chumacera 2",
+                "Motor R1",
+                "Motor R2"
+            ],
+            "med_parte": [
+                "Equipo",
+                "Equipo",
+                "Motor",
+                "Motor"
+            ],
+            "med_termografia": [
+                "Si",
+                "Si",
+                "Si",
+                "Si"
+            ],
+            "med_vibraciones": [
+                "Bueno",
+                "Bueno",
+                "Satisfactorio",
+                "Satisfactorio"
+            ],
+            "med_rango": [
+                "15A",
+                "15A",
+                "15 A",
+                "15 A"
+            ],
+            "med_amperaje": [
+                "9 A",
+                "9 A",
+                "9 A",
+                "9 A"
+            ],
+            "med_obs": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "tipo_ejecucion": "Preventivo, Planeado",
+            "trabajo_realizado": "Se hace una inspecci\u00f3n general, se hace limpieza lubricaci\u00f3n, se hace an\u00e1lisis de termograf\u00eda y vibraciones se miden l\u00edneas de conexi\u00f3n del motor para verificaci\u00f3n de consumos nominales. ",
+            "fecha_cierre": "2026-04-23",
+            "hora_cierre": "11:00",
+            "tipo_responsable": "Miembro De La Compa\u00f1ia",
+            "nombre_responsable": "JOhn Giraldo",
+            "vobo_mantenimiento": "John Giraldo",
+            "insumos_riesgo": "Grasa grado alimenticio",
+            "retirados_zona": "Si",
+            "novedad_inocuidad": "N\/A",
+            "condiciones_higienicas": "Si",
+            "implementos_limpieza": "trapos ",
+            "fecha_revisionl": "2026-04-23",
+            "hora_revisionl": "11:15",
+            "control_responsable": "JOHN GIRALDO",
+            "cargo_control": "LIDER DE MANTENIMIENTO ",
+            "trabajo_realizar_control": "Mantenimiento preventivo",
+            "fechacontrol": "2026-04-23",
+            "tool_cant": [
+                "1",
+                "1",
+                "1",
+                "1"
+            ],
+            "tool_desc": [
+                "Inyector de grasa",
+                "c\u00e1mara termogr\u00e1fica",
+                "Analizador de vibraciones",
+                "mult\u00edmetro"
+            ],
+            "tool_salida": [
+                "1",
+                "1",
+                "1",
+                "1"
+            ],
+            "part_cant": [
+                ""
+            ],
+            "part_desc": [
+                ""
+            ],
+            "part_used": [
+                ""
+            ],
+            "part_unused": [
+                ""
+            ],
+            "part_removed": [
+                ""
+            ],
+            "part_verif": [
+                ""
+            ],
+            "mat_cant": [
+                "10"
+            ],
+            "mat_unidad": [
+                "gramos"
+            ],
+            "mat_desc": [
+                "grasa grado alimenticio"
+            ],
+            "mat_used": [
+                "10g"
+            ],
+            "mat_verif": [
+                "10g"
+            ],
+            "vobo_ingreso_control": "JOHN GIRALDO",
+            "vobo_salida_control": "JOHN GIRALDO"
+        },
+        "evidencias": {
+            "antes": "img_69ea71c6997e9.jpg",
+            "despues": "img_69ea71c6998a5.jpg"
+        },
+        "firmas": {
+            "solicitante": "sig_sol_69ea71c699931.png",
+            "autorizado": "sig_aut_69ea71c699978.png",
+            "limpieza": "sig_limp_69ea71c6999b4.png",
+            "revisa_limpieza": "sig_rev_limp_69ea71c6999e4.png"
+        }
+    }
+]

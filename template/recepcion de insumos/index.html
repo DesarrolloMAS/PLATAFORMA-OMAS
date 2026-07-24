@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL RECEPCIÓN DE INSUMOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "V1 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title { color: var(--text-muted); font-size: 14px; }
+
+        .doc-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .doc-meta-item {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: var(--r-sm);
+        }
+
+        .doc-meta-item span { color: var(--accent); font-weight: 700; }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 10px auto;
+            padding-right: 32px;
+            cursor: pointer;
+        }
+
+        select.form-control option { background-color: var(--panel-bg); color: var(--text-main); }
+
+        input[type="date"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        textarea.form-control { resize: vertical; min-height: 90px; font-family: 'Barlow', sans-serif; }
+
+        /* ─── Tablas ─── */
+        .table-scroll { overflow-x: auto; }
+
+        .data-table {
+            width: 100%;
+            min-width: 640px;
+            border-collapse: collapse;
+            margin-top: 4px;
+        }
+
+        .data-table thead th {
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 10px 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .data-table tbody tr:hover td { background: rgba(0, 240, 255, 0.025); }
+
+        .data-table tbody td {
+            padding: 6px;
+            border: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .data-table tbody td .form-control {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .requisito-cell {
+            text-align: left;
+            font-size: 13px;
+            color: var(--text-main);
+            padding: 8px 12px !important;
+            min-width: 260px;
+        }
+        .requisito-cell .requisito-no {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+        .eval-select { min-width: 130px; }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70%  { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;">
+            <div>
+                <h1 class="main-title">Control Recepción de Insumos</h1>
+                <div class="sub-title">PPR Gestión de Proveedores — Procedimiento Recepción de Insumos</div>
+                <div class="doc-meta">
+                    <div class="doc-meta-item">Código: <span>GC-CM-PE-PV-FO-019</span></div>
+                    <div class="doc-meta-item">Versión: <span>2</span></div>
+                    <div class="doc-meta-item">Fecha Doc: <span>20/10/2021</span></div>
+                </div>
+            </div>
+            <a href="../menu_almacen.html" class="btn-back">← VOLVER</a>
+        </div>
+    </div>
+
+    <form id="recepcionForm">
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Información General</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" name="fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Orden de Compra No.</label>
+                    <input type="text" name="orden_compra" class="form-control" placeholder="Ej: 6371" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Proveedor</label>
+                    <input type="text" name="proveedor" class="form-control" placeholder="Nombre del proveedor" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Entrada No.</label>
+                    <input type="text" name="entrada_no" class="form-control" placeholder="Ej: 1001433 - 1001434" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSUMOS RECIBIDOS -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Insumos Recibidos</div>
+            <div class="table-scroll">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width:220px;">Nombre</th>
+                            <th style="min-width:120px;">Cantidad</th>
+                            <th style="min-width:160px;">Lote Interno</th>
+                        </tr>
+                    </thead>
+                    <tbody id="insumosTbody">
+                        <!-- filas generadas por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CUMPLIMIENTO CONDICIONES COMERCIALES -->
+        <div class="section-card">
+            <div class="section-title"><span>03</span> Cumplimiento Condiciones Comerciales</div>
+            <div class="table-scroll">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width:280px; text-align:left; padding-left:12px;">Requisito</th>
+                            <th style="min-width:140px;">C / NC / NA</th>
+                            <th style="min-width:220px;">Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="requisito-cell"><span class="requisito-no">1</span>Remisión/Certificados/Otros</td>
+                            <td>
+                                <select name="eval_remision" class="form-control eval-select" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="C">CUMPLE (C)</option>
+                                    <option value="NC">NO CUMPLE (NC)</option>
+                                    <option value="NA">NO APLICA (NA)</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="obs_remision" class="form-control" placeholder="Observaciones"></td>
+                        </tr>
+                        <tr>
+                            <td class="requisito-cell"><span class="requisito-no">2</span>La cantidad recibida corresponde a la solicitada (Dejar observación si se realiza entrega parcial)</td>
+                            <td>
+                                <select name="eval_cantidad" class="form-control eval-select" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="C">CUMPLE (C)</option>
+                                    <option value="NC">NO CUMPLE (NC)</option>
+                                    <option value="NA">NO APLICA (NA)</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="obs_cantidad" class="form-control" placeholder="Observaciones"></td>
+                        </tr>
+                        <tr>
+                            <td class="requisito-cell"><span class="requisito-no">3</span>Tiempo de entrega pactado</td>
+                            <td>
+                                <select name="eval_tiempo_entrega" class="form-control eval-select" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="C">CUMPLE (C)</option>
+                                    <option value="NC">NO CUMPLE (NC)</option>
+                                    <option value="NA">NO APLICA (NA)</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="obs_tiempo_entrega" class="form-control" placeholder="Observaciones"></td>
+                        </tr>
+                        <tr>
+                            <td class="requisito-cell"><span class="requisito-no">4</span>Chequeo medio de transporte</td>
+                            <td>
+                                <select name="eval_medio_transporte" class="form-control eval-select" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="C">CUMPLE (C)</option>
+                                    <option value="NC">NO CUMPLE (NC)</option>
+                                    <option value="NA">NO APLICA (NA)</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="obs_medio_transporte" class="form-control" placeholder="Observaciones"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- OBSERVACIONES GENERALES -->
+        <div class="section-card">
+            <div class="section-title"><span>04</span> Observaciones Generales</div>
+            <div class="form-grid">
+                <div class="form-group full">
+                    <textarea name="observaciones_generales" class="form-control" placeholder="Observaciones generales de la recepción..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- FIRMAS -->
+        <div class="section-card">
+            <div class="section-title"><span>05</span> Firmas de Responsables</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Proveedor - Conductor (Nombre)</label>
+                    <input type="text" name="proveedor_conductor_nombre" class="form-control" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Proveedor - Conductor (Cédula)</label>
+                    <input type="text" name="proveedor_conductor_cedula" class="form-control" placeholder="No. de cédula" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Recibido (Nombre)</label>
+                    <input type="text" name="recibido_nombre" class="form-control" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Recibido (Cédula)</label>
+                    <input type="text" name="recibido_cedula" class="form-control" placeholder="No. de cédula" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            REGISTRAR RECEPCIÓN
+        </button>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO - AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    function nuevaFilaInsumo() {
+        const tr = document.createElement('tr');
+        tr.className = 'insumo-row';
+        tr.innerHTML = `
+            <td><input type="text" class="form-control ins-nombre" placeholder="Nombre del insumo"></td>
+            <td><input type="text" class="form-control ins-cantidad" placeholder="Ej: 100 Kg"></td>
+            <td><input type="text" class="form-control ins-lote" placeholder="Ej: MP-02336"></td>`;
+        return tr;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const hoy = new Date().toISOString().split('T')[0];
+        document.querySelector('[name="fecha"]').value = hoy;
+
+        const tbody = document.getElementById('insumosTbody');
+        for (let i = 0; i < 4; i++) {
+            tbody.appendChild(nuevaFilaInsumo());
+        }
+    });
+
+    document.getElementById('recepcionForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const insumos = [];
+        document.querySelectorAll('#insumosTbody .insumo-row').forEach(tr => {
+            const nombre   = tr.querySelector('.ins-nombre').value.trim();
+            const cantidad = tr.querySelector('.ins-cantidad').value.trim();
+            const lote     = tr.querySelector('.ins-lote').value.trim();
+            if (!nombre && !cantidad && !lote) return;
+            insumos.push({ nombre, cantidad, lote_interno: lote });
+        });
+
+        if (insumos.length === 0) {
+            Swal.fire({
+                title: 'Sin insumos diligenciados',
+                text: 'Registre al menos un insumo recibido antes de guardar.',
+                icon: 'warning', background: '#151A22', color: '#fff', confirmButtonColor: '#FFB000'
+            });
+            return;
+        }
+
+        const btn = document.getElementById('btnGuardar');
+        const overlayText = btn.innerHTML;
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((value, key) => { jsonData[key] = value; });
+        jsonData.insumos = insumos;
+
+        fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: '¡REGISTRADO!',
+                    text: 'Recepción de insumos guardada estructuralmente vía JSON.',
+                    icon: 'success',
+                    background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                }).then(() => window.location.reload());
+            } else {
+                Swal.fire({
+                    title: 'Error del Sistema',
+                    text: data.message || 'Error en el túnel JSON.',
+                    icon: 'error',
+                    background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366'
+                });
+                btn.innerHTML = overlayText; btn.disabled = false; btn.style.opacity = '1';
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            Swal.fire({
+                title: 'Error de Conexión',
+                text: 'No se pudo conectar con el servidor.',
+                icon: 'error',
+                background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366'
+            });
+            btn.innerHTML = overlayText; btn.disabled = false; btn.style.opacity = '1';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+    "codigo_maquina": "IMAN REPASO_MOLBOGIMA06",
+    "nombre_maquina": "IMAN_BOG",
+    "tipo_maquina": "iman",
+    "estado_general": "Bueno ",
+    "Acople": "Cumple",
+    "Soporte": "Cumple",
+    "Manija": "Cumple",
+    "Estructura": "Cumple",
+    "Tornilleria_Completa_y_Ajustada": "Cumple",
+    "Observaciones": "",
+    "formato": "IMAN REPASO_MOLBOGIMA06-IMAN_BOG",
+    "usuario": "Harold Taramuel",
+    "tecnico_correccion": "John Giraldo",
+    "codigo_orden": "16394",
+    "json_path": "\/var\/www\/fmt\/archivos\/generados\/verificaciones\/Iman\/IMAN REPASO_MOLBOGIMA06-IMAN_BOG\/IMAN_BOG_IMAN REPASO_MOLBOGIMA06_2025-12-03.json",
+    "zona": "Iman",
+    "maquina": "IMAN REPASO_MOLBOGIMA06-IMAN_BOG",
+    "archivo_pdf": "IMAN REPASO_MOLBOGIMA06-IMAN_BOG_2025-12-03.pdf",
+    "fecha": "2025-12-03"
+}

@@ -1,0 +1,103 @@
+{
+    "fecha_solicitud": "2026-07-21",
+    "hora_solicitud": "15:00",
+    "clasificacion": "Mecanico",
+    "nombre_solicitante": "Carlos carlosama",
+    "cargo_solicitante": "Maquinista",
+    "objeto_dañado": "Empacadora tornillo libra",
+    "ubicacion": "Zona Empaque",
+    "marca": "N\/A",
+    "codigo_equipo": "EMPPASEMP05",
+    "descripcion_falla": "Mantenimiento preventivo cambio de correas de arrastre ",
+    "usa_mediciones": "0",
+    "firma_solicitante": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACWCAYAAADwkd5lAAAQAElEQVR4Aeyd3bEkxRGFBz3pEXkADgh40KNCYAEmAB4ICwALhAmLBQoMUKwU0ruIkAFIHqwsgDq7faB3985MT3d1VWbVd2PqVv9VZdaXc\/NU\/8zc31z4gQAEIAABCOwggIDsgEYTCEAAAhC4XBAQ3gUQ6EUAuxBITgABSR5A3IcABCDQiwAC0os8diEAAQgkJ5BYQJKTx30IQAACyQkgIMkDiPsQgAAEehFAQHqRxy4EEhPAdQiIAAIiChQIQAACEHiYAALyMDIaQAACEICACCAgotC6YA8CEIDAAAQQkAGCyBAgAAEI9CCAgPSgjk0IQKAXAexWJICAVIRJVxCAAARmIoCAzBRtxgoBCECgIgEEpCLMGbp6Yowfl20qz0v9Yyk\/lfKslK9L4QUBCAxMAAEZOLgnDu3PpW+LhYRDRSLyXtmu12fl11elSEwkJCpllRcEIDASAQRkpGiePxYJgUThL8WUxeLvZVnlk1KrvFPqb0rRtlJdJCQqaqf22kaBAAQeJhCvAQISLyYRPdLZhc4yJATyT+LwZVmQWEg0VLRNpWy+SCi0TfslJv+9vPpRe+17tcZvCEAgNQEEJHX4TnfewiHx0LIEQsKg8u1G6xKM98uxEpJSvTwjcX9ap0AAAkkJICBJA9fAbYmFE72WJRoqWt5jXkLi9hIj9a2b7Xv62tOGNhCAQGUCCEhloIN0p2T\/p2UsOnNw4l827a4kPurru6UH3WyXrWWVCgIQyEQAAckUrXa+6l6FrEk8zkjwn5fO1XepXl7SOsOG+qZAAAInEtgsICf6QNexCDiZK8F7+QwP1bdsqG8Jlta1TIEABJIQQECSBKqRm0riSuYyp2XVZxbZQETOJEzfEDiRAAJyItyEXVs8nNRbDAERuUuZAyAQkwACEjMuPbxSIpddiYeXtd6iyJ7sypZETDfbtUz5lYA+\/S8uYuWip9i87dcjWYJAIwIISCPQwc0oISlxy00tq25dZNcioifA9Khvax+i2RMDPe6sT\/Hr0\/\/ioji56Ck2b9MxKuIoYYk2FvwZkMAMAjJg2KoPSQlJnTqBa7lHUfJbf2q9hw9RbOq7xiQeEhH5pDMNPf6sGK2LtmmfjlFRLCUsFhMx1XYKBKoTQECqI03XoROMEreXew7ii8W4EqfKsjpV9e8y2vV3jemzMyp6\/FkxWhdt0z59bYxqics\/Snu9JCYqEhOdlegymLZTIFCFAAJSBeMQnWgmG2Egmk0rCcoXJT\/VMxWddXxYBvxDKRYFMSmrd186TuIi4VVbcVRRQ52V6DKY9mu9TcHK0AQQkKHDu2lwTtKREot8UTJUItTypoEMcJDEQ2PW2D+qMB6xU5GYrM9KdEai7RVM0MXMBBCQmaN\/uTiJeJZ6CfRjnyRwHwfy6yxX1uKhS1G17Yih+pU4qW9xdfy1ToHAwwQQkIeRtWxwui09wXO6kZ0GlOhU1FzJTvWoReNUgletJH\/WON3\/Wpx1NnKWPfodnAACMniA7wxPSUuHRJ2JOtHJTxX5OlrRuCzkZ4rHmpviLVu6z6LtEhFt0zIFApsJICCbUQ13oBOGk3TEAWrGbP9GPQuRgIi9x6nlFkVsdZ\/FD0+Ir98TLeyHt4GD9wkgIPcZjXqEEkaGsSmpaaasRKtHUTP4\/IiPjoPG+Ui7WsfqMWCLl3zhbKQW2Qn6QUAmCPITQ1Qy9uZeicv2t9SeJetR1C3HZznG7J3Ae\/ktP\/Sklv2QkGhbL3+wm4QAApIkUJXdtIA4YVTu\/nK51O3x29KdLrmU6qKnlVSPUJSoI41DouH3hHzTBxoj+YcvwQggIMEC0sgdJQeZclLWcvTixCbxU4nu7z3\/lKx9zHrZ23rV8kU32GVfH2jUJa0ReGs8lMoEEJDKQBN0pwQhNyUeKlrOUOSrReRvGRy+46O\/qsRjunN4091irUtauvckwzrrQ0REIkdp5iUC0gx1GENOXP5kchjHNjhi8Rvhfev7OR7ThuE3P0RPaUlMZBgREQXKawRG+EN8bUCs3CWQIXHdGoRmxv+5dUCCfZ7Ne4Yf2WVdzlqLSGRf8a0xAQSkMfDO5jIlrluofn9r59F9Ddo7Dt83sFXDhERE39asvrixLgqUlwQQkJcYpvmVLXFNE5gEA31\/8VE31v+5LFNNTgABmfwNwPC7EPBTcJHvfzwF5l\/Lxj8sNdXkBOoLyORAgw\/f37nka9rB3R3SPZ8FZhzcH4vTugf121LzgsAFAZnrTeDkhYD0i7tjEPHx3X5UsJySAAKSMmy7nHbi2tWYRtUI+DHqah2uOmIRAk0JICBNcXc1ZgFh5ts1DJdPF\/MvlpoKAmkJICBpQ4fjSQm8u\/it7\/daFqkgkJMAArKK2+CL3EAfPMAMDwKtCSAgrYn3s+dLWNxA7xcDLENgKAIIyFDhZDAQyEoAvzMSQEAyRu1xn\/2BNc4+HmdXswVngTVp0ld3AghI9xA0dSDjN\/A2BYQxCEBgOwEEZDuryEfe88030O8dx34IQAACmwkgIJtRpT7Ql058KSv1YHAeAhCIQQABiREHvJiDgIWcS4kjxXvisSAg4wffScv\/z2H8ETNCCECgCQEEpAnmEEYQkP5h8PdgWdT7e4QHEDhAAAE5AC9JUyeroJdNklCs46ZFnMep6\/Ckl84EEJDOAcA8BCAAgawEEJCskcNvCEAAAgcJHG2OgBwlSHsIQAACkxJAQMYPvD9EyHX38WPNCCHQlAAC0hQ3xoYiwGAgMDkBBGTyNwDDhwAEILCXAAKyl1yedn6Ml0tYeWKGpxBIQaCjgKTgg5MQgAAEIHCFAAJyBQybIQABCEDgNgEE5Daf7Hu5fJU9gif5T7cQqEEAAalBkT4gsI0A34W1jRNHJSGAgCQJFG4OQYDvwhoijAzCBBAQk3ikznOsL2HxRYoxYuYn4fzhzhhe4QUEdhJAQHaCS9KMSyZJAoWbEMhIAAHJGLXtPnPJZDsrjsxBAC8DEUBAAgUDVyAAAQhkIoCAZIoWvkIAAhAIRAABCRSMFq5goysB30T3ww1dncE4BI4SQECOEqQ9BCAAgUkJICCTBp5hQwACrQmMZw8BGS+mjAgCEIBAEwIISBPMGIHALwT8aDX3QX5BwkJWAghI1sjN5zcjhgAEghFAQIIFBHeGJ+AzkOEHygDHJ4CAjB9jRhiLgL+XjEtYseKCN7cIXNmHgFwBw2YIQAACELhNAAG5zYe9EKhNwB8m5Bt5a5Olv+YEEJDmyDE4HwFGDIExCSAgY8bVo\/LXubv2dmoIQAAChwkgIIcRhu7g2eLdB0tN1Z+AL2FxE71\/LPDgIIEMAnJwiDQvBF6UwgsCEIBAVQIISFWcdAaBTQQ4C9mEiYOiE0BAokcI\/2oQ0OWir0tHqkvFazMBDoTADQIIyA04A+xipvsqiF+VSqVUIV7vhvACJyBwkAACchAgzVMQ8JmHBbW30\/9fHPh8qbNXz8sAzLgs8pqFAAJyaqRDdO6kyR94iHC8dMIxGeF7sXxpkPfXy9DO9QsBmSveM47Wic1JOwID+8Kn0SNEAx92E0BAdqOjYRICFhB\/iWESt3HzKAHan08AATmfMRYgAAEIDEkAARkyrK8NyjNvz8Rf2znBii8T+bJRhCHblxFiYr4RuOJDYwIISGPgacyN46iTtJP2OCOLNRL4xopHE28QkCaYuxrxHzYzxa5heMu442KBe+sANkAgOgEEJHqE8O8IASdnJ+sjfdH2aQJm\/PRetu4hkKYNApImVIcdnfEr3Uluh982mztApDejGudABGScWF4bif+wZxQQM\/GDBF6PUNsnRC5CNPBhFwEEZBe2tI2mSFZpo5PPcd5P+WJW1WMEpCrOsJ35LCSsgyc55gcHIo7fPn120thbduuxtLSJrQAEEJAAQWjowmwzRo83YoL7sGHczzJlvr4cd5Yd+g1K4G0BCeoobh0i8M3S2jPyZZWqI4FvF9sz35taEFBlJYCAZI0cft8j4NlxxLMP+27f7Ku3U0MgBQEEJEWYDjs5Y6JyUs50eeVwoBt3wBltY+DRzCEg0SJyvj9OrOdbwsI9Ar60GOm\/Jd7z+an9nqA8tY9tAxNAQAYO7htDm+2P\/NM3xs9qfQKejMz23qpPMmmPQwlI0hi0dtt\/9K3ttrbnp5z0H\/Na295qz4l3lphs5cJxSQggIEkCVcFNXy6Z4bp1poSMiFR4c9NFHwIISB\/uWD2XgAXEonmutWO9\/29p\/vlSZ6nMePm\/7lncxs+aBBCQmjRj9zXTTDfTWdYPy9vmg6XOUllALIBZ\/MbPigQQkIowE3XlP\/5ELj\/kqscX+f6HB+QPFOqejf32vsi1nxzLwDgyx9S+ISAxwtfKC5+FtLLXw44TWobLV+aTLS5rxtl8N3PqCgQQkAoQE3aRaaabEO\/DLlvsPKt\/uIPGDTJdImyMZi5zCMhc8XaiGjkBOAl7lpwhwp7FZxB2cbWfWs7A97aP7N1NAAHZjY6GAQk4oTkhB3Txqkv22cn56oFBdngyEsQd3OhBAAHpQb2fzWxJai+pjN9\/5YTsM6i9Yz+7nf2zWJ9tj\/4DE0BAAgfnJNf83H6lme5JXu7r1snNQrmvl76tIsfl2YImo0AvrlPVJICA1KSZoy8LSA5vt3u5TrwZBUQ+OzbrsWwncP6R\/u+J8vV8a1gITwABCR+i6g5muVTy6MB9SeW7RxsGOv6LxRefSS2rISrz1fvHyyEcm9mJ3mNHQHpHoL19zx6jznL3EvGTZf5k995+IrSLGJuIohYhVlP7gIDMGf7RRMQzYs2O\/cnujJFVXFTkeyQRMV\/5tV7WOmViAgjInMH3TdBRZpX7xhEz9hJBeRZxTPZN\/lEgcEFA5nwTeJY7wujXM+L1ctaxOTY6A1HpPQ4xtZhpubc\/2A9EAAEJFIyGrkRLUkeG7uQ20uzY8YnwFe8WscwPJxx5f9H2BoEDAnKjV3ZlIOAklcHXaz6uZ8Tr5WvHZ9n+\/eKoHpt1Al82Na3E1A8nRBCzpoPH2H0CCMh9RqMe4Rm7Z\/CZx+mxZB7D2nc9COAx9YyPbduXtY8sQ4B7ILwHLj1nuJcDP5odO8Fp+UBXIZtqTDpLVHy0\/JqTDVZsU+Lh5QZmMZGJAGcgmaJV11clJxX1qiSlOmNRgsvo9xafPTYJZcsY6StLZFM+Ih6iQHmSAALyJBY2BiegpDZDgpPAW0Sel5i0EBHZ0L2XYu7CjXNRoFwlMKeAXMUx3Q4np78mHbn9T+r+Jrcllq0+tyNbEio5JvHgxrlIUK4SQECuoplih2a4Gui75ZdmnqVK8Zrh7GMdCMVGsVLtBL\/eX2NZ4mGuEmbEowbVwftAQAYP8IbhKVnoMCcPLUcuuj4v\/+y3lmconyyDlIhITJbVKtWb4qH1Kh0\/0QmbBiKAgAwUzJ1DcbJQYlLZ2U2TZvLV1+e13MRoICMWEX0246fi11EGivePpR9PHtT\/0T5Ld7xmIYCAzBLp2+P0bN6JTW+nXgAAAXpJREFU5PbRffYqsdk\/XZ\/v40VfqzrzUJJfx0uXtMTmEc90vARIbd8rDV+Uon7Vf1nkBYFtBBCQbZzCHHWSI0oo6lozUhUtRyryz+Kh5Dnz9XklefEQB8VI8RIbCYK2q2ib9qlo2UVtdZyO1z6tSzh+V1a0XCpeENhOAAHZzmr0I52QnFyijFcJ0T7JR61H8a2nH+LwTnFgfTYmTio6s5BQqGjZRZe+SpOLxELCoaLlCz8Q2EMAAdlDbcw2SkgamWerWu5d5JMSovxAPETh7aKzMQmJihiprI+SQLh8WXZINFS0razy2k6AI98kgIC8SWTudc9mNWOVkPSkgXg8Tl\/MVCQmLhILF33HFsLxOFdaXCGAgFwBM+lmzWb9L2E982+NQsKlJGf7mlErKbb2A3sQgMAdAgjIHUAT7v6ojFkJXIlcZyJltcrrXie2J5u+Vo943KPGfgh0JICAdIQf2LQueVhEzp79r4VDy8Ii2\/LhbNuyRYEABHYS+BkAAP\/\/pk6gDQAAAAZJREFUAwDDPr51pkbkmQAAAABJRU5ErkJggg==",
+    "firma_autorizado": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACWCAYAAADwkd5lAAAHrUlEQVR4Aezdi3HkRBAGYB8JEBKQERkAEZACRAJkRAaggZXLp7W0evf0zEetzvvQqHu+dtVfOl+Zb978R4AAAQIEdggIkB1olhAgQIDA25sA8V1AIEpAXQLJBQRI8gFqnwABAlECAiRKXl0CBAgkF0gcIMnltU+AAIHkAgIk+QC1T4AAgSgBARIlry6BxAJaJ1AEBEhRcBAgQIDAZgEBspnMAgIECBAoAgKkKNx9qEeAAIEGBARIA0O0BQIECEQICJAIdTUJEIgSUPdEAQFyIqZLESBAoCcBAdLTtO2VAAECJwoIkBMxe7iUPRIgQGAUECCjhK8ECBAgsElAgGzicjIBAgSiBOqrK0Dqm4mOCBAgkEJAgKQYkyYJECBQn4AAqW8mOrpGwFUJEDhZQICcDOpyBAgQ6EVAgPQyafskQIDAyQKrA+Tkui5HgAABAskFBEjyAWqfAAECUQICJEpeXQKrBZxIoE4BAVLnXHRFgACB6gUESPUj0iABAgTqFOghQOqU1xUBAgSSCwiQ5APUPgECBKIEBEiUvLoEehCwx6YFBEjT47U5AgQIXCcgQK6zdWUCBAg0LSBAqh6v5ggQIFCvgACpdzY6I0CAQNUCAqTq8WiOAIEoAXVfCwiQ10bOIECAAIFPBATIJyjeIkCAAIHXAgLktZEz9ghYQ4BA8wICpPkR2yABAgSuERAg17i6KgECBKIEbqsrQG6jVogAAQJtCQiQtuZpNwQIELhNQIDcRq1QFgF9EiCwTkCArHNyFgECBAhMBATIBMRLAgQIEFgncH6ArKvrLAIECBBILiBAkg9Q+wQIEIgSECBR8uoSOF\/AFQncKiBAbuVWjAABAu0ICJB2ZmknBAgQuFVAgHzg9pQAAQIE1gsIkPVWziRAgACBDwIC5AOGpwQIRAmom1FAgGScmp4JECBQgYAAqWAIWiBAgEBGAQGScWrPPXuHAAECtwsIkNvJFSRAgEAbAgKkjTnaBQECUQId1xUgHQ\/f1gkQIHBEQIAc0bOWAAECHQsIkI6HX8fWdUGAQFYBAZJ1cvomQIBAsIAACR6A8gQIEIgSOFpXgBwVtJ4AAQKdCgiQTgdv2wQIEDgqIECOClrfr4CdE+hcQIB0\/g1g+wQIENgrIED2yllHgACBzgUCA6RzedsnQIBAcgEBknyA2idAgECUgACJkleXQKCA0gTOEBAgZyi6BgECBDoUECAdDt2WCRAgcIaAANmjaA0BAgT6E\/hx2PLPw\/HH4\/hHgAwSHgQIECDwUuDX4YyfhuP7x\/EmQAYJDwIE0ghoNEag3HmUyn8Nf\/zwOL4IkEHCgwABAgQWBcqdRzmh3H38OTwphzuQAcKDAAECBOYFxruPX6anuAOZijT+2vYIECCwUWC8+xiD5H25AHmn8IQAAQIEJgJjaDzdfZTzBEhRcBAgQOBygZQFZu8+ym4ESFFwECBAgMBUYPHuo5wsQIqCgwABAgSmAot3H+VkAVIUHBkE9EiAwH0C\/\/0z3aHc78Mx+xAgszQ+IECAQLcC3z52\/tvj66dfBMinLN4kQIBA1wJ\/f7X7mRcCZAbG2wQIECCwLCBAln18SoAAgR4Fyq8sKfsefxZSnj8dAuSJxBsEzhZwPQJtCgiQNudqVwQIELhcQIBcTqwAAQIE2hTIECBtytsVAQIE6hRY9fOP0roAKQoOAgQIENgsIEA2k1lAoCMBWyWwICBAFnB8RIAAgQ4Fxr\/CKv\/72sXtC5BFHh8SIECAwJyAAJmTOeV9FyFAgEC7AgKk3dnaGQECBC4VECCX8ro4AQJRAuruFvjusXLx15iUcwRIUXAQIECAwGYBAbKZzAICBAgQKAICpCg4ngW8Q4BArwLjP+P1V1i9fgfYNwECBK4WcAdytbDrEyBAYJtAmrMFSJpRaZQAAQJ1CQiQuuahGwIECNQg8PLXmJQmBUhRcDQlYDMECBwS+DKsHn+QPjydfwiQeRufECBAgMCCgABZwPERAQIECMwLPAfI\/Lk+IUCAAAEC7wIC5J3CEwIECBDYIiBAtmg5l8C1Aq5OIJWAAEk1Ls0SIECgHgEBUs8sdEKAAIFUAk0FSCp5zRIgQCC5gABJPkDtEyBAIEpAgETJq0ugKQGb6VFAgPQ4dXsmQIDACQIC5ARElyBAgECPAgKkjqnrggABAukEBEi6kWmYAAECdQgIkDrmoAsCBKIE1N0tIEB201lIgACBvgUESN\/zt3sCBAjsFhAgu+ks\/F\/AnwQI9CogQHqdvH0TIEDgoIAAOQhoOQECBKIEousKkOgJqE+AAIGkAgIk6eC0TYAAgWgBARI9AfXjBFQmQOCQgAA5xGcxAQIE+hUQIP3O3s4JECBwSOBAgByqazEBAgQIJBcQIMkHqH0CBAhECQiQKHl1CRwQsJRADQICpIYp6IEAAQIJBQRIwqFpmQABAjUI9BkgNcjrgQABAskFBEjyAWqfAAECUQICJEpeXQJ9Cth1QwICpKFh2goBAgTuFBAgd2qrRYAAgYYEBEiyYWqXAAECtQgIkFomoQ8CBAgkExAgyQamXQIEogTUnQoIkKmI1wQIECCwSkCArGJyEgECBAhMBQTIVMTrqwRclwCBxgQESGMDtR0CBAjcJfAvAAAA\/\/\/XDLtAAAAABklEQVQDABNlGS1kDW+5AAAAAElFTkSuQmCC",
+    "tipo_ejecucion": "Preventivo, Planeado",
+    "trabajo_realizado": "Se delimito el area de trabajo, se desenergizó la máquina se desajustaron los tensores para retirar las correas en mal estado y colocar las nuevas, finalmente se ajustó todo y se reaizó limpieza para presentación, equipo se encuentra funcional y en buen estado.",
+    "fecha_cierre": "2026-07-21",
+    "hora_cierre": "15:30",
+    "tipo_responsable": "Miembro De La Compañia",
+    "nombre_responsable": "Carlos carlosama ",
+    "vobo_mantenimiento": "Carlos Carlosama",
+    "insumos_riesgo": "Ninguno ",
+    "retirados_zona": "N\/A",
+    "novedad_inocuidad": "Ninguna ",
+    "condiciones_higienicas": "Si",
+    "implementos_limpieza": "Wypall y brocha ",
+    "fecha_revisionl": "2026-07-21",
+    "hora_revisionl": "15:30",
+    "firma_respLim": "",
+    "firma_respLim2": "",
+    "control_responsable": "Manuel armando jojoa",
+    "cargo_control": "Lider de mantenimiento mecanico",
+    "trabajo_realizar_control": "Mantenimiento preventivo ",
+    "fechacontrol": "2026-07-21",
+    "tool_cant": [
+        "1",
+        "1"
+    ],
+    "tool_desc": [
+        "Caja de herramientas ",
+        "Juego de llaves "
+    ],
+    "tool_salida": [
+        "1",
+        "1"
+    ],
+    "part_cant": [
+        "2"
+    ],
+    "part_desc": [
+        "Banda 630x50"
+    ],
+    "part_used": [
+        "2"
+    ],
+    "part_unused": [
+        "0"
+    ],
+    "part_removed": [
+        "2"
+    ],
+    "part_verif": [
+        "2"
+    ],
+    "mat_cant": [
+        ""
+    ],
+    "mat_unidad": [
+        ""
+    ],
+    "mat_desc": [
+        ""
+    ],
+    "mat_used": [
+        ""
+    ],
+    "mat_verif": [
+        ""
+    ],
+    "vobo_ingreso_control": "Manuel Armando Jojoa ",
+    "vobo_salida_control": "Manuel Armando jojoa ",
+    "med_parte": [
+        "Equipo"
+    ],
+    "med_termografia": [
+        "N\/A"
+    ],
+    "med_vibraciones": [
+        "N\/A"
+    ],
+    "med_equipo_name": [
+        ""
+    ],
+    "med_rango": [
+        ""
+    ],
+    "med_amperaje": [
+        ""
+    ],
+    "med_obs": [
+        ""
+    ]
+}

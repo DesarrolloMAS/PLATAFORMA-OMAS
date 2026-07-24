@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Inspección de Etiquetado — MAS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ok:#16a34a;--ok-bg:#f0fdf4;--ok-bd:#bbf7d0;
+  --fail:#dc2626;--fail-bg:#fef2f2;--fail-bd:#fecaca;
+  --na:#d97706;--na-bg:#fffbeb;--na-bd:#fde68a;
+  --bg:#f8fafc;--bg2:#f1f5f9;--bg3:#e8edf2;--bg4:#dde3ea;
+  --text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --border:#e2e8f0;--border2:#cbd5e1;--border3:#b0bec5;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);color:var(--text);
+  padding:24px 12px 60px;
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* ══ DOCUMENT SHELL ══ */
+.doc{
+  width:100%;max-width:1200px;
+  border:1.5px solid var(--border3);
+  border-radius:10px;overflow:hidden;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+/* ══ CABECERA PRINCIPAL ══ */
+.doc-header{
+  display:grid;
+  grid-template-columns:110px 1fr 170px;
+  border-bottom:1.5px solid var(--border3);
+  background:var(--bg2);
+}
+.logo-cell{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:12px 10px;border-right:1.5px solid var(--border3);
+  gap:2px;
+}
+.logo-main{font-size:26px;font-weight:700;letter-spacing:.12em;color:var(--text);}
+.logo-sub{font-family:'DM Mono',monospace;font-size:7px;color:var(--text3);letter-spacing:.08em;text-align:center;margin-top:2px;}
+.header-center{
+  padding:0;display:flex;flex-direction:column;
+}
+.header-title-block{
+  padding:8px 16px 6px;
+  border-bottom:1px solid var(--border2);
+  text-align:center;
+}
+.header-sup{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;}
+.header-title{font-size:13px;font-weight:700;color:var(--text);letter-spacing:.04em;}
+.header-fields{display:flex;flex-wrap:wrap;gap:0;padding:0;}
+.hf{
+  display:flex;align-items:baseline;gap:6px;
+  padding:7px 16px;border-right:1px solid var(--border);
+  flex:1;
+}
+.hf-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+.hf-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;color:var(--text);border-bottom:1px solid var(--border2);min-width:80px;padding-bottom:1px;}
+/* Doc codes column (right) — mirrors physical form */
+.header-codes{
+  border-left:1.5px solid var(--border3);
+  display:flex;flex-direction:column;
+}
+.code-row{
+  display:flex;align-items:center;
+  border-bottom:1px solid var(--border2);
+  flex:1;
+}
+.code-row:last-child{border-bottom:none;}
+.code-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 8px;border-right:1px solid var(--border2);
+  min-width:60px;background:var(--bg3);
+}
+.code-val{
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:500;color:var(--text2);
+  padding:4px 8px;flex:1;
+}
+
+/* ══ INSTRUCCIÓN ══ */
+.instruccion{
+  padding:5px 16px;background:#fffbeb;
+  border-bottom:1px solid #fde68a;
+  font-family:'DM Mono',monospace;font-size:9px;color:#92400e;letter-spacing:.04em;
+}
+
+/* ══ SECTION HEADING ══ */
+.sec-row{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 12px;
+  background:var(--bg3);
+  border-top:1.5px solid var(--border3);
+  border-bottom:1px solid var(--border2);
+}
+.sec-num{
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:700;
+  width:18px;height:18px;border-radius:3px;
+  background:var(--bg4);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);flex-shrink:0;
+}
+.sec-lbl{
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--text2);
+}
+.sec-note{
+  margin-left:auto;font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--text3);letter-spacing:.06em;
+}
+
+/* ══ MAIN MATRIX TABLE ══ */
+.matrix-wrap{overflow-x:auto;}
+.matrix{width:100%;border-collapse:collapse;font-size:10px;}
+
+/* Column groups */
+.matrix th, .matrix td{
+  border:1px solid var(--border2);
+  padding:0;vertical-align:middle;
+  text-align:center;
+}
+.th-group{
+  font-family:'DM Mono',monospace;font-size:8px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--bg4);color:var(--text2);
+  padding:5px 6px;text-align:center;
+  border-bottom:1.5px solid var(--border3);
+}
+.th-sub{
+  font-family:'DM Mono',monospace;font-size:8px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  background:var(--bg3);color:var(--text3);
+  padding:4px 5px;text-align:center;white-space:nowrap;
+  border-bottom:1.5px solid var(--border3);
+}
+/* Type column (leftmost) */
+.col-tipo{
+  background:var(--bg3);
+  font-family:'DM Mono',monospace;font-size:8px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text2);
+  padding:6px 8px;text-align:left;white-space:nowrap;
+  border-right:1.5px solid var(--border3);
+}
+.col-cat{
+  background:var(--bg2);
+  font-family:'DM Mono',monospace;font-size:8px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--text2);
+  padding:4px 8px;text-align:left;white-space:nowrap;
+  border-right:1px solid var(--border2);
+}
+/* Type row spanning header */
+.tipo-span{
+  background:var(--bg4);
+  font-family:'DM Mono',monospace;font-size:8px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text2);
+  text-align:left;padding:5px 8px;
+  border-right:1.5px solid var(--border3);
+  border-bottom:1px solid var(--border3);
+}
+
+/* Data cells */
+.dc{padding:5px 6px;font-size:10px;color:var(--text);text-align:left;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis;}
+.dc-c{padding:4px 3px;text-align:center;}
+
+/* Badges inline */
+.b{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:600;
+  padding:2px 6px;border-radius:3px;border:1px solid;
+  letter-spacing:.02em;white-space:nowrap;
+}
+.b-ok {background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok);}
+.b-nc {background:var(--fail-bg);border-color:var(--fail-bd);color:var(--fail);}
+.b-na {background:var(--na-bg);border-color:var(--na-bd);color:var(--na);}
+.b-em {background:var(--bg2);border-color:var(--border);color:var(--text3);}
+
+/* Compact badge just letter like physical form */
+.bc{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:700;
+  width:18px;height:18px;border-radius:3px;border:1px solid;
+}
+.bc-ok {background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok);}
+.bc-nc {background:var(--fail-bg);border-color:var(--fail-bd);color:var(--fail);}
+.bc-na {background:var(--na-bg);border-color:var(--na-bd);color:var(--na);}
+.bc-em {background:var(--bg2);border-color:var(--border);color:var(--text3);}
+
+/* PCT cell */
+.pct-c{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:700;
+  text-align:center;padding:4px 6px;
+}
+
+/* ══ SECCIONES 2/3/4 TABLE ══ */
+.small-sec{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  border-top:1.5px solid var(--border3);
+}
+.small-col{border-right:1px solid var(--border2);}
+.small-col:last-child{border-right:none;}
+.small-col-head{
+  padding:5px 10px;background:var(--bg4);
+  border-bottom:1px solid var(--border3);
+  font-family:'DM Mono',monospace;font-size:8px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--text2);
+}
+.small-kv{padding:6px 10px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.small-kv:last-child{border-bottom:none;}
+.small-lbl{font-size:10px;color:var(--text2);line-height:1.35;flex:1;}
+.small-pct-box{
+  grid-column:span 1;
+  padding:8px 10px;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--border);
+}
+.pct-big{font-family:'DM Mono',monospace;font-size:20px;font-weight:700;}
+
+/* ══ LEYENDA ══ */
+.leyenda{
+  padding:6px 16px;background:var(--bg2);
+  border-top:1px solid var(--border);
+  display:flex;gap:16px;align-items:center;
+  font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);
+  border-bottom:1px solid var(--border2);
+}
+.ley-item{display:flex;align-items:center;gap:5px;}
+
+/* ══ FIRMAS ══ */
+.firma-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  border-top:1.5px solid var(--border3);background:var(--bg2);
+}
+.firma-cell{padding:18px 16px;border-right:1px solid var(--border);}
+.firma-cell:last-child{border-right:none;}
+.firma-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px;}
+.firma-line{border-bottom:1px solid var(--border2);}
+.firma-name{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px;min-height:16px;}
+.btn-verificar{background:var(--bg2);color:var(--text2);border:1px dashed var(--border3);padding:4px 10px;font-size:9px;cursor:pointer;border-radius:4px;font-family:'DM Mono',monospace;transition:all 0.2s;}
+.btn-verificar:hover{background:var(--bg3);color:var(--text);border-color:var(--text3);}
+
+/* ══ CUMPLIMIENTO GLOBAL ══ */
+.global-bar{
+  padding:10px 16px;
+  background:var(--bg2);border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;
+  border-bottom:1px solid var(--border2);
+}
+.gb-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;}
+.gb-track{flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.gb-fill{height:100%;border-radius:3px;}
+.gb-pct{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;min-width:44px;text-align:right;}
+
+/* ══ PRINT ══ */
+@media print{
+  body{background:#fff;padding:0;}
+  .doc{box-shadow:none;border-radius:0;max-width:100%;}
+  @page{margin:.8cm;size:A4 landscape;}
+  .disable-print { display: none !important; }
+}
+@media(max-width:700px){
+  .small-sec{grid-template-columns:1fr 1fr;}
+  .doc-header{grid-template-columns:70px 1fr;}
+  .header-codes{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="doc" id="doc"></div>
+<script>
+/* ══════════════════════════════════════
+   LABELS
+══════════════════════════════════════ */
+const S2_GRUPOS = {
+  "Lotes de PNC con 10 bultos o menos":[
+    ["rotulo_correspondiente",  "Presentan el rótulo de PNC correspondiente"],
+    ["rotulo_condiciones",      "Rótulo en buenas condiciones y sin desprender"],
+    ["rotulo_legible",          "Contenido legible e indeleble"]
+  ],
+  "Planchas de PNC (más de 10 bultos)":[
+    ["identificacion_correspondiente", "Presentan el formato de identificación correspondiente"],
+    ["identificacion_condiciones",     "Formato en buenas condiciones y sin desprender"],
+    ["identificacion_legible",         "Contenido legible e indeleble"]
+  ]
+};
+const S3_ITEMS=[
+  ["identifempaques_vencimiento", "Empaques timbrados con lote y fecha de vencimiento"],
+  ["envasado_correspondiente", "Empaques / hilos / rótulos correctamente asignados a la línea"],
+  ["hilos_identificados",      "Rollos de hilo claramente identificados"],
+  ["aditivos_etiquetados",     "Aditivos alimentarios debidamente etiquetados"],
+  ["mejorantes_etiquetados",   "Mejorantes debidamente etiquetados"],
+  ["empaques_identificados",   "Empaques (por unidad) debidamente identificados"]
+];
+const S4_ITEMS=[
+  ["no_conformes_identificados","Bodega con materiales no conformes identificados y aislados"],
+  ["bodegas_libres",            "Bodegas de producto terminado libres de material no conforme"],
+  ["lineas_libres",             "Líneas de producción libres de material no conforme"],
+  ["contenedor_recoleccion",    "Uso de contenedor / bolsa para recolección"]
+];
+const PCT_KEY="Cumplimiento de etiquetado del insumo/producto (%)";
+
+/* ══ FIELD DEFINITIONS PER SUBTYPE ══
+   Columns that appear in the matrix table.
+   "info" = text data columns | "check" = C/NC/NA columns
+*/
+const TIPO_DEF = {
+  "Materias Primas":{
+    "Aditivos Alimentarios":{
+      info:["Nombre","Lote Proveedor","Lote Interno","Fecha Vencimiento","Proveedor","Ubicacion del Insumo / Producto"],
+      check:["Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    },
+    "Mejorantes":{
+      info:["Nombre","Lote Interno","Fecha Vencimiento","Proveedor","Ubicacion del Insumo / Producto"],
+      check:["Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    },
+    "Granos y semillas Nacional":{
+      info:["Nombre","Lote Proveedor","Lote Interno","Fecha Vencimiento","Proveedor","Ubicacion del Insumo / Producto"],
+      check:["Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    }
+  },
+  "Materiales de Envasado":{
+    "Empaques":{
+      info:["Nombre","Lote Proveedor","Lote Interno","Proveedor","Ubicacion del Insumo / Producto"],
+      check:["Etiquetado en buen estado y legible","Etiquetado completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"],
+      extra:["Observaciones"]
+    },
+    "Hilos":{
+      info:["Nombre","Lote Proveedor","Lote Interno","Proveedor","Ubicacion del Insumo / Producto"],
+      check:["Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    }
+  },
+  "Productos en Proceso":{
+    "Producto":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto","Ubicacion en el molino"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es legible","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    }
+  },
+  "Subproductos":{
+    "SubProducto":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es legible","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Declaracion de Alergenos completa"]
+    }
+  },
+  "Productos Terminados":{
+    "Concentrados":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    },
+    "Harinas De trigo":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    },
+    "Harinas Especiales":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    },
+    "Productos Especiales":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    }
+  },
+  "Productos en Reproceso":{
+    "Purgas de proceso":{
+      info:["Nombre del Producto","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    },
+    "Coneccion de PNC":{
+      info:["Nombre del Producto","lote interno","fecha de vencimiento","Ubicacion del Insumo / Producto"],
+      check:["En buen estado del etiquetado impreso en el empaque","El etiquetado impreso en el empaque es completo e indeleble","En buen estado y legible el lote y fecha de vencimiento timbrado en el empaque","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble","Etiqueta Completa y sin desprender","Contenido legible o indeleble","Declaracion de Alergenos completa"]
+    }
+  }
+};
+
+/* ══ HELPERS ══ */
+function fmtDate(s){
+  if(!s)return"—";
+  const p=s.split("-");
+  return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:s;
+}
+function isDateKey(k){return /fecha|venc/i.test(k);}
+
+function bcell(v){
+  if(!v||v==="")return`<span class="bc bc-em">—</span>`;
+  const l=v.toLowerCase();
+  if(l==="cumple")    return`<span class="bc bc-ok">C</span>`;
+  if(l==="no cumple") return`<span class="bc bc-nc">NC</span>`;
+  if(l==="no aplica"||l==="n/a") return`<span class="bc bc-na">NA</span>`;
+  return`<span class="bc bc-em">—</span>`;
+}
+function fullBadge(v){
+  if(!v||v==="")return`<span class="b b-em">—</span>`;
+  const l=v.toLowerCase();
+  if(l==="cumple")    return`<span class="b b-ok">Cumple</span>`;
+  if(l==="no cumple") return`<span class="b b-nc">No Cumple</span>`;
+  if(l==="no aplica"||l==="n/a") return`<span class="b b-na">N/A</span>`;
+  return`<span class="b b-em">${v}</span>`;
+}
+function pctColor(n){return n>=80?"var(--ok)":n>=50?"var(--na)":"var(--fail)";}
+
+function calcStats(obj){
+  let ok=0,fail=0,na=0;
+  function walk(o){
+    if(!o||typeof o!=="object")return;
+    for(const v of Object.values(o)){
+      if(typeof v==="string"){
+        const l=v.toLowerCase();
+        if(l==="cumple")ok++;
+        else if(l==="no cumple")fail++;
+        else if(l==="no aplica"||l==="n/a")na++;
+      }else walk(v);
+    }
+  }
+  walk(obj);
+  return{ok,fail,na,total:ok+fail};
+}
+
+/* ══ RENDER MATRIX SECTION ══
+   Builds a matrix table per "tipo" (Materias Primas, etc.)
+   Rows = subcategories | Cols = data fields + check fields + pct
+*/
+function renderMatriz(tipoDef, tipoData){
+  if(!tipoData||typeof tipoData!=="object") return "";
+  let h="";
+
+  Object.entries(tipoDef).forEach(([tipo, subcatDefs])=>{
+    const tipoData2 = tipoData[tipo]||{};
+    const subcatNames = Object.keys(subcatDefs);
+
+    // Collect all info & check cols for this tipo
+    const infoCols = new Set();
+    const checkCols = new Set();
+    const extraCols = new Set();
+    subcatNames.forEach(sub=>{
+      (subcatDefs[sub].info||[]).forEach(c=>infoCols.add(c));
+      (subcatDefs[sub].check||[]).forEach(c=>checkCols.add(c));
+      (subcatDefs[sub].extra||[]).forEach(c=>extraCols.add(c));
+    });
+    const iCols=[...infoCols];
+    const cCols=[...checkCols];
+    const eCols=[...extraCols];
+    const totalCols = 1 + iCols.length + cCols.length + eCols.length + 1; // cat + info + check + extra + pct
+
+    h+=`<table class="matrix" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th class="th-group" rowspan="2" style="text-align:left;padding-left:8px;width:130px;">${tipo}</th>
+          ${iCols.length?`<th class="th-group" colspan="${iCols.length}">Datos del Insumo / Producto</th>`:""}
+          ${cCols.length?`<th class="th-group" colspan="${cCols.length}">Verificación de Etiquetado</th>`:""}
+          ${eCols.length?`<th class="th-group" colspan="${eCols.length}">Adicional</th>`:""}
+          <th class="th-group" rowspan="2">Cumpl.<br>(%)</th>
+        </tr>
+        <tr>
+          ${iCols.map(c=>`<th class="th-sub">${c}</th>`).join("")}
+          ${cCols.map(c=>`<th class="th-sub" style="max-width:90px;white-space:normal;line-height:1.2;">${c}</th>`).join("")}
+          ${eCols.map(c=>`<th class="th-sub">${c}</th>`).join("")}
+        </tr>
+      </thead>
+      <tbody>`;
+
+    subcatNames.forEach(sub=>{
+      const fields = tipoData2[sub]||{};
+      const def = subcatDefs[sub];
+      const pctVal = fields[PCT_KEY]||"";
+      const n = parseFloat(pctVal)||0;
+      const pc = pctColor(n);
+
+      h+=`<tr>
+        <td class="col-cat">${sub}</td>
+        ${iCols.map(c=>{
+          const v = fields[c]||"";
+          const display = isDateKey(c) ? fmtDate(v) : (v||"—");
+          return`<td class="dc" title="${display}">${display}</td>`;
+        }).join("")}
+        ${cCols.map(c=>`<td class="dc-c">${bcell(fields[c])}</td>`).join("")}
+        ${eCols.map(c=>`<td class="dc">${fields[c]||"—"}</td>`).join("")}
+        <td class="pct-c" style="color:${n?pc:"var(--text3)"};">${pctVal?pctVal+"%":"—"}</td>
+      </tr>`;
+    });
+
+    h+=`</tbody></table>`;
+  });
+  return h;
+}
+
+/* ══ RENDER BOTTOM SECTIONS (2/3/4) ══ */
+function renderBottomSections(data, globalPct, stats){
+  const s2=data.seccion2||{};
+  const s3=data.seccion3||{};
+  const s4=data.seccion4||{};
+
+  // Stats per section
+  function secPct(items, obj){
+    let ok=0,tot=0;
+    items.forEach(([k])=>{
+      const v=(obj[k]||"").toLowerCase();
+      if(v==="cumple"||v==="no cumple"){tot++;if(v==="cumple")ok++;}
+    });
+    return tot?Math.round((ok/tot)*100):null;
+  }
+  const s2items_all=[...Object.values(S2_GRUPOS).flat()];
+  const p2=secPct(s2items_all,s2);
+  const p3=secPct(S3_ITEMS,s3);
+  const p4=secPct(S4_ITEMS,s4);
+
+  let h=`<div class="small-sec">`;
+
+  // SEC 2 — dos grupos
+  h+=`<div class="small-col" style="grid-column:span 2;">
+    <div class="small-col-head">Sección 2 — PNC's</div>`;
+  Object.entries(S2_GRUPOS).forEach(([grp, items])=>{
+    h+=`<div style="padding:4px 10px 2px;font-family:'DM Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2);">${grp}</div>`;
+    items.forEach(([k,lbl])=>{
+      h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span>${fullBadge(s2[k])}</div>`;
+    });
+  });
+  h+=`</div>`;
+
+  // SEC 3
+  h+=`<div class="small-col">
+    <div class="small-col-head">Sección 3 — Insumos en líneas de producción</div>`;
+  S3_ITEMS.forEach(([k,lbl])=>{
+    h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span>${fullBadge(s3[k])}</div>`;
+  });
+  h+=`</div>`;
+
+  // SEC 4
+  h+=`<div class="small-col">
+    <div class="small-col-head">Sección 4 — Etiquetas / empaques defectuosos</div>`;
+  S4_ITEMS.forEach(([k,lbl])=>{
+    h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span>${fullBadge(s4[k])}</div>`;
+  });
+  h+=`</div>`;
+
+  h+=`</div>`;
+
+  // Cumplimientos por sección + global
+  h+=`<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;border-top:1px solid var(--border);background:var(--bg2);">`;
+  [
+    ["Cumplimiento Global", globalPct, true],
+    ["Secc. 2 — PNC's", p2, false],
+    ["Secc. 3 — Líneas", p3, false],
+    ["Secc. 4 — No Conformes", p4, false],
+    ["Criterios evaluados", stats.total, false, true]
+  ].forEach(([lbl,val,isGlobal,isCount])=>{
+    const n=parseFloat(val)||0;
+    const pc=isCount?"var(--text2)":pctColor(n);
+    const display=isCount?(val||"—"):(val!==null?val+"%":"—");
+    h+=`<div style="padding:10px 12px;border-right:1px solid var(--border);text-align:center;${isGlobal?"background:var(--bg3);":""}">
+      <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;">${lbl}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:${isGlobal?"22":"18"}px;font-weight:700;color:${pc};">${display}</div>
+      ${isGlobal?`<div style="margin-top:6px;display:flex;justify-content:center;gap:10px;">
+        <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ok);">${stats.ok} C</span>
+        <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--fail);">${stats.fail} NC</span>
+        <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--na);">${stats.na} NA</span>
+      </div>`:""}
+    </div>`;
+  });
+  h+=`</div>`;
+
+  return h;
+}
+
+/* ══ MAIN RENDER ══ */
+function render(d){
+  const stats = calcStats(d);
+  const globalPct = stats.total ? Math.round((stats.ok/stats.total)*100) : null;
+  const gpc = globalPct!==null ? pctColor(globalPct) : "var(--text3)";
+
+  let h="";
+
+  /* — HEADER — */
+  h+=`<div class="doc-header">
+    <div class="logo-cell">
+      <span class="logo-main">mas</span>
+      <span class="logo-sub">Sistema de Gestión de<br>Calidad y Desarrollo</span>
+    </div>
+    <div class="header-center">
+      <div class="header-title-block">
+        <div class="header-sup">PFR Etiquetado</div>
+        <div class="header-title">"Inspección de Etiquetado"</div>
+      </div>
+      <div class="header-fields">
+        <div class="hf"><span class="hf-lbl">Fecha de Inspección</span><span class="hf-val">${fmtDate(d.fecha_inspeccion)}</span></div>
+        <div class="hf"><span class="hf-lbl">Hora de Inspección</span><span class="hf-val">${d.hora_inspeccion||"—"}</span></div>
+      </div>
+    </div>
+    <div class="header-codes">
+      <div class="code-row"><span class="code-lbl">Código</span><span class="code-val">SGR-BS-FC-004</span></div>
+      <div class="code-row"><span class="code-lbl">Versión</span><span class="code-val">01</span></div>
+      <div class="code-row"><span class="code-lbl">Fecha</span><span class="code-val">02/06/2015</span></div>
+      <div class="code-row"><span class="code-lbl">Página</span><span class="code-val">1 de 2</span></div>
+    </div>
+  </div>`;
+
+  /* — INSTRUCCIÓN — */
+  h+=`<div class="instruccion">Diligencie las casillas con la información correspondiente según lo indicado en cada uno de los ítems. &nbsp;|&nbsp; Escala: C = Cumple &nbsp; NC = No Cumple &nbsp; NA = No Aplica</div>`;
+
+  /* — SECCIÓN 1: TABLA MATRICIAL — */
+  h+=`<div class="sec-row">
+    <span class="sec-num">1</span>
+    <span class="sec-lbl">Materiales de Proceso (Insumos y Productos)</span>
+    <span class="sec-note">Escala según corresponda: C = Cumple · NC = No Cumple · NA = No Aplica</span>
+  </div>`;
+
+  const din = d.dinamicas||{};
+  if(Object.keys(din).length){
+    h+=`<div class="matrix-wrap">`;
+    h+=renderMatriz(TIPO_DEF, din);
+    h+=`</div>`;
+  }
+
+  /* — LEYENDA — */
+  h+=`<div class="leyenda">
+    <span>Escala:</span>
+    <span class="ley-item"><span class="bc bc-ok">C</span> Cumple</span>
+    <span class="ley-item"><span class="bc bc-nc">NC</span> No Cumple</span>
+    <span class="ley-item"><span class="bc bc-na">NA</span> No Aplica</span>
+  </div>`;
+
+  /* — SECCIONES 2/3/4 — */
+  h+=renderBottomSections(d, globalPct, stats);
+
+  /* — FIRMAS — */
+  let jefeFirma = "";
+  if(d.firma_jefe) {
+    jefeFirma = `<div class="firma-name">${d.firma_jefe}</div>`;
+  } else if(fileName) {
+    jefeFirma = `<button class="btn-verificar disable-print" onclick="firmarJefe('${fileName}')">VERIFICAR</button>`;
+  } else {
+    jefeFirma = `<div class="firma-name disable-print" style="color:var(--text3);font-size:9px;font-weight:400;">[No disponible en demo]</div>`;
+  }
+
+  h+=`<div class="firma-row">
+    <div class="firma-cell">
+        <div class="firma-name">${d.responsable || ''}</div>
+        <div class="firma-lbl">Inspector responsable</div>
+        <div class="firma-line"></div>
+    </div>
+    <div class="firma-cell">
+        ${jefeFirma}
+        <div class="firma-lbl">Jefe de producción / supervisión</div>
+        <div class="firma-line"></div>
+    </div>
+    <div class="firma-cell"><div class="firma-lbl">Inspector por el regulador</div><div class="firma-line"></div></div>
+  </div>`;
+
+  document.getElementById("doc").innerHTML=h;
+}
+
+/* ══ API FIRMA ══ */
+window.firmarJefe = function(fName) {
+  if (!confirm("¿Confirmas que deseas firmar/verificar esta inspección usando tu usuario actualmente conectado?")) return;
+  fetch('api_firmar_jefe.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ file: fName, zona: zonaParam })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.status === 'ok') location.reload();
+    else alert('Atención: ' + data.message);
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Ocurrió un error al firmar.');
+  });
+};
+
+/* ══ LOAD JSON ══ */
+function getParam(key){
+  return new URLSearchParams(window.location.search).get(key);
+}
+const fileName = getParam("file");
+const zonaParam = getParam("zona") || "";
+if(fileName){
+  fetch("leer_json.php?zona="+encodeURIComponent(zonaParam)+"&file="+encodeURIComponent(fileName))
+    .then(r=>r.json())
+    .then(data=>{
+      if(data&&!data.error) render(data);
+      else document.getElementById("doc").innerHTML=`<div style="padding:40px;text-align:center;color:var(--fail);font-family:monospace;">No se pudo cargar el archivo.</div>`;
+    })
+    .catch(()=>{
+      document.getElementById("doc").innerHTML=`<div style="padding:40px;text-align:center;color:var(--fail);font-family:monospace;">Error al cargar el archivo.</div>`;
+    });
+} else {
+  /* ══ DEMO DATA (cuando no hay parámetro ?file=) ══ */
+  render({
+    "fecha_inspeccion":"2026-02-16","hora_inspeccion":"08:04",
+    "seccion1":{"tipos":["Materias Primas","Materiales de Envasado","Productos Terminados","Productos en Reproceso"]},
+    "seccion2":{"rotulo_correspondiente":"No Aplica","rotulo_condiciones":"No Aplica","rotulo_legible":"No Aplica","identificacion_correspondiente":"Cumple","identificacion_condiciones":"Cumple","identificacion_legible":"Cumple"},
+    "seccion3":{"envasado_correspondiente":"Cumple","hilos_identificados":"Cumple","aditivos_etiquetados":"Cumple","mejorantes_etiquetados":"Cumple","empaques_identificados":"Cumple"},
+    "seccion4":{"no_conformes_identificados":"Cumple","bodegas_libres":"Cumple","lineas_libres":"Cumple","contenedor_recoleccion":"Cumple"},
+    "dinamicas":{
+      "Materias Primas":{
+        "Aditivos Alimentarios":{"Nombre":"Dímoda 4","Lote Proveedor":"4c4489996","Lote Interno":"160216B","Fecha Vencimiento":"2026-12-22","Proveedor":"Damico S.A.S","Ubicacion del Insumo / Producto":"Cuarto Mejorante","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"Cumple","Declaracion de Alergenos completa":"Cumple","Cumplimiento de etiquetado del insumo/producto (%)":"100"},
+        "Mejorantes":{"Nombre":"PH 200 Mejoante Manitoba","Lote Interno":"170276B","Fecha Vencimiento":"2026-05-17","Proveedor":"Organizacion MAS S.A.S","Ubicacion del Insumo / Producto":"Cuarto Mejorante","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"Cumple","Declaracion de Alergenos completa":"Cumple","Cumplimiento de etiquetado del insumo/producto (%)":"100"},
+        "Granos y semillas Nacional":{"Nombre":"","Lote Proveedor":"","Lote Interno":"","Fecha Vencimiento":"","Proveedor":"","Ubicacion del Insumo / Producto":"","Etiqueta Completa y sin desprender":"","Contenido legible o indeleble":"","Declaracion de Alergenos completa":"","Cumplimiento de etiquetado del insumo/producto (%)":""}
+      },
+      "Materiales de Envasado":{
+        "Empaques":{"Nombre":"Empaque Colores Mogolla","Lote Proveedor":"276934","Lote Interno":"MF-02289","Proveedor":"Compañia de Cuarto Empaques SA","Ubicacion del Insumo / Producto":"Línea 2","Etiquetado en buen estado y legible":"Cumple","Etiquetado completo e indeleble":"Cumple","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"Cumple","Declaracion de Alergenos completa":"Cumple","Cumplimiento de etiquetado del insumo/producto (%)":"100","Observaciones":""},
+        "Hilos":{"Nombre":"4.10 Verde","Lote Proveedor":"DM2509FXC","Lote Interno":"MF-02234","Proveedor":"Hilados Cuarto Lacrollo S.AS","Ubicacion del Insumo / Producto":"Línea 2","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"No Aplica","Declaracion de Alergenos completa":"No Aplica","Cumplimiento de etiquetado del insumo/producto (%)":"100"}
+      },
+      "Productos Terminados":{
+        "Harinas De trigo":{"Nombre del Producto":"Harina Trigo Nativa 1x10Kg","lote interno":"C20216B","fecha de vencimiento":"2027-02-05","Ubicacion del Insumo / Producto":"Bodega","En buen estado del etiquetado impreso en el empaque":"Cumple","El etiquetado impreso en el empaque es completo e indeleble":"Cumple","En buen estado y leable el lote y fecha de vencimiento timbrado en el empaque":"Cumple","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble":"Cumple","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"No Aplica","Declaracion de Alergenos completa":"No Aplica","Cumplimiento de etiquetado del insumo/producto (%)":"100"},
+        "Harinas Especiales":{"Nombre del Producto":"Harina Integral","lote interno":"C10216B","fecha de vencimiento":"2026-08-02","Ubicacion del Insumo / Producto":"Bodega","En buen estado del etiquetado impreso en el empaque":"Cumple","El etiquetado impreso en el empaque es completo e indeleble":"Cumple","En buen estado y leable el lote y fecha de vencimiento timbrado en el empaque":"Cumple","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble":"Cumple","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"Cumple","Declaracion de Alergenos completa":"Cumple","Cumplimiento de etiquetado del insumo/producto (%)":"100"},
+        "Productos Especiales":{"Nombre del Producto":"Sémola Fina","lote interno":"160276B","fecha de vencimiento":"2027-02-16","Ubicacion del Insumo / Producto":"Bodega Harinoels","En buen estado del etiquetado impreso en el empaque":"Cumple","El etiquetado impreso en el empaque es completo e indeleble":"Cumple","En buen estado y leable el lote y fecha de vencimiento timbrado en el empaque":"Cumple","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble":"Cumple","Etiqueta Completa y sin desprender":"Cumple","Contenido legible o indeleble":"Cumple","Declaracion de Alergenos completa":"Cumple","Cumplimiento de etiquetado del insumo/producto (%)":"100"}
+      },
+      "Productos en Reproceso":{
+        "Purgas de proceso":{"Nombre del Producto":"","Ubicacion del Insumo / Producto":"","En buen estado del etiquetado impreso en el empaque":"","El etiquetado impreso en el empaque es completo e indeleble":"","En buen estado y leable el lote y fecha de vencimiento timbrado en el empaque":"","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble":"","Etiqueta Completa y sin desprender":"","Contenido legible o indeleble":"","Declaracion de Alergenos completa":"","Cumplimiento de etiquetado del insumo/producto (%)":""},
+        "Coneccion de PNC":{"Nombre del Producto":"","lote interno":"","fecha de vencimiento":"","Ubicacion del Insumo / Producto":"","En buen estado del etiquetado impreso en el empaque":"","El etiquetado impreso en el empaque es completo e indeleble":"","En buen estado y leable el lote y fecha de vencimiento timbrado en el empaque":"","El lote y fecha de vencimiento timbrado en el empaque es completo e indeleble":"","Etiqueta Completa y sin desprender":"","Contenido legible o indeleble":"","Declaracion de Alergenos completa":"","Cumplimiento de etiquetado del insumo/producto (%)":""}
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

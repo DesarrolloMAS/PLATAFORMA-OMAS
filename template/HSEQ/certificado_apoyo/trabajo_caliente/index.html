@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRABAJO EN CALIENTE — Certificado de Apoyo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --success: #10B981;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* ── HEADER ── */
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--warning);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-box::before {
+            content: "HSEQ / CALIENTE";
+            position: absolute;
+            top: -10px; right: 20px;
+            background: var(--warning);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 10px; font-weight: 700;
+            padding: 4px 16px;
+            border-radius: var(--r-sm);
+            box-shadow: 0 0 10px rgba(255,176,0,0.4);
+        }
+
+        .main-title {
+            font-size: 24px; font-weight: 700; color: #fff;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+        }
+        .sub-title { color: var(--text-muted); font-size: 13px; font-family: 'Space Mono', monospace; }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-back:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,240,255,0.05); }
+
+        /* ── CARDS ── */
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .section-title {
+            font-size: 11px; font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase; letter-spacing: 2px;
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* ── GRIDS ── */
+        .form-grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+        }
+        .col-span-2 { grid-column: span 2; }
+        .col-span-4 { grid-column: span 4; }
+
+        @media (max-width: 768px) {
+            .form-grid-4 { grid-template-columns: 1fr 1fr; }
+            .col-span-2  { grid-column: span 2; }
+            .col-span-4  { grid-column: span 2; }
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label {
+            font-size: 11px; font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 11px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0,240,255,0.1);
+        }
+        textarea.form-control { resize: vertical; min-height: 100px; }
+        select.form-control option { background: var(--input-bg); }
+
+        /* ── CHECK ROWS ── */
+        .checks-grid { display: flex; flex-direction: column; gap: 10px; }
+
+        .check-row {
+            display: grid;
+            grid-template-columns: 1fr 160px 1fr;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            transition: border-color 0.3s;
+        }
+        .check-row:hover { border-color: rgba(0,240,255,0.2); }
+
+        .check-label { font-size: 13px; color: var(--text-main); line-height: 1.4; }
+
+        .check-select {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 9px 10px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px; font-weight: 700;
+            text-align: center;
+            transition: all 0.3s;
+            width: 100%;
+            cursor: pointer;
+        }
+        .check-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,240,255,0.1); }
+        .check-select.val-cumple  { border-color: var(--success); color: var(--success); }
+        .check-select.val-no      { border-color: var(--danger);  color: var(--danger); }
+        .check-select.val-na      { border-color: var(--text-muted); color: var(--text-muted); }
+
+        .obs-input {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 9px 12px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .obs-input:focus { outline: none; border-color: rgba(0,240,255,0.4); }
+        .obs-input::placeholder { color: var(--text-muted); font-size: 12px; }
+
+        /* ── ACTIVIDADES CRÍTICAS ROW ── */
+        .criticas-row {
+            display: grid;
+            grid-template-columns: 1fr 160px 1fr;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .criticas-label {
+            font-size: 13px; color: var(--text-main);
+            line-height: 1.4; font-weight: 600;
+        }
+
+        /* ── FIRMAS TABLE ── */
+        .firmas-header {
+            display: grid;
+            grid-template-columns: 120px 1fr 140px 160px 140px;
+            gap: 8px;
+            padding: 8px 10px;
+            background: rgba(0,240,255,0.08);
+            border: 1px solid rgba(0,240,255,0.2);
+            border-radius: var(--r-sm);
+            margin-bottom: 8px;
+        }
+        .firmas-header span {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px; font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase; letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .firma-row {
+            display: grid;
+            grid-template-columns: 120px 1fr 140px 160px 140px;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .firma-input {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 12px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 13px;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        .firma-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,240,255,0.1); }
+
+        .firma-canvas-wrap {
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+            height: 46px;
+        }
+        .firma-canvas-wrap canvas {
+            width: 100%; height: 100%;
+            cursor: crosshair;
+            display: block;
+        }
+        .btn-clear-firma {
+            position: absolute; top: 2px; right: 4px;
+            background: none; border: none;
+            color: var(--danger); font-size: 11px;
+            cursor: pointer; font-family: 'Space Mono', monospace;
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .firmas-header, .firma-row { grid-template-columns: 1fr 1fr; }
+            .check-row { grid-template-columns: 1fr; }
+            .criticas-row { grid-template-columns: 1fr; }
+        }
+
+        /* ── SUBMIT ── */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--warning);
+            color: var(--bg-color);
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 13px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(255,176,0,0.4);
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+        .flujo-overlay {
+            position: fixed; inset: 0; z-index: 3000;
+            background: rgba(11,14,20,0.92); backdrop-filter: blur(6px);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .flujo-overlay-box {
+            max-width: 480px; text-align: center; padding: 40px 32px;
+            background: var(--panel-bg); border: 1px solid var(--danger);
+            border-radius: 10px; box-shadow: 0 0 30px rgba(255,51,102,0.25);
+        }
+        .flujo-overlay-icon { font-size: 44px; margin-bottom: 16px; }
+        .flujo-overlay-box h2 { color: var(--danger); margin: 0 0 12px; font-size: 18px; }
+        .flujo-overlay-box p { color: var(--text-muted); margin: 0 0 22px; line-height: 1.5; font-size: 14px; }
+    </style>
+</head>
+<body>
+<div id="flujoOverlay" class="flujo-overlay" style="display:none;">
+    <div class="flujo-overlay-box">
+        <div class="flujo-overlay-icon">🔒</div>
+        <h2 id="flujoOverlayTitulo">Formulario bloqueado</h2>
+        <p id="flujoOverlayMsg">Este formulario debe abrirse desde un flujo de Permiso de Trabajo.</p>
+        <a href="../../permiso_completo/index.html" class="btn-back">← Volver al flujo</a>
+    </div>
+</div>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header-box">
+        <div>
+            <div class="main-title">🔥 Trabajo en Caliente</div>
+            <div class="sub-title">Certificado de Apoyo — HSEQ</div>
+        </div>
+        <a href="../../permiso_completo/index.html" class="btn-back">← Volver</a>
+    </div>
+
+    <form id="formCaliente">
+
+        <!-- GENERALIDADES -->
+        <div class="section-card">
+            <div class="section-title">// Generalidades</div>
+            <input type="hidden" id="fecha">
+            <input type="hidden" id="hora">
+            <div class="form-grid-4">
+                <div class="form-group">
+                    <label for="valoracion_riesgo">Valoración del Riesgo</label>
+                    <select id="valoracion_riesgo" class="form-control" required>
+                        <option value="">Seleccione</option>
+                        <option value="ALTO">ALTO</option>
+                        <option value="MEDIO">MEDIO</option>
+                        <option value="BAJO">BAJO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="frecuencia">Frecuencia</label>
+                    <select id="frecuencia" class="form-control" required>
+                        <option value="">Seleccione</option>
+                        <option value="DIARIA">DIARIA</option>
+                        <option value="SEMANAL">SEMANAL</option>
+                        <option value="QUINCENAL">QUINCENAL</option>
+                        <option value="MENSUAL">MENSUAL</option>
+                        <option value="ESPORÁDICA">ESPORÁDICA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zona_trabajo">Zona de Trabajo</label>
+                    <input type="text" id="zona_trabajo" class="form-control" placeholder="Ej: Bodega 1 — Planta Baja" required>
+                </div>
+                <div class="form-group">
+                    <label for="dependencia">Dependencia</label>
+                    <input type="text" id="dependencia" class="form-control" placeholder="Ej: Mantenimiento" required>
+                </div>
+                <div class="form-group col-span-2">
+                    <label for="equipo_sistema">Equipo o Sistema Objeto de Trabajo</label>
+                    <input type="text" id="equipo_sistema" class="form-control"
+                           placeholder="Describa el equipo o sistema">
+                </div>
+            </div>
+        </div>
+
+        <!-- DESCRIPCIÓN DE LA ACTIVIDAD -->
+        <div class="section-card">
+            <div class="section-title">// Descripción de la Actividad a Realizar</div>
+            <div class="form-group">
+                <textarea id="descripcion_actividad" class="form-control"
+                          style="min-height:120px;"
+                          placeholder="Describa detalladamente la actividad de trabajo en caliente..." required></textarea>
+            </div>
+        </div>
+
+        <!-- ACTIVIDADES CRÍTICAS ADICIONALES -->
+        <div class="section-card">
+            <div class="section-title">// Actividades Críticas Adicionales</div>
+            <div class="criticas-row">
+                <span class="criticas-label">¿Las labores incluyen actividades críticas adicionales? En caso afirmativo, seleccione la(s) actividad(es) correspondiente(s).</span>
+                <select id="tiene_actividades_criticas" class="check-select" onchange="colorSelect(this); toggleCriticas(this.value)">
+                    <option value="">Seleccione</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                </select>
+                <input type="text" id="actividades_criticas" class="obs-input"
+                       placeholder="Describa la(s) actividad(es) crítica(s)..."
+                       style="display:none;">
+            </div>
+        </div>
+
+        <!-- PLANEACIÓN Y CONTROLES -->
+        <div class="section-card">
+            <div class="section-title">// Planeación y Controles</div>
+            <div class="checks-grid">
+
+                <div class="check-row">
+                    <span class="check-label">¿El sitio donde se ejecutará el trabajo está libre de sustancias químicas y materiales que puedan ser combustibles o inflamables?</span>
+                    <select class="check-select" id="c_sustancias" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_sustancias" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Los equipos y materiales están cubiertos y protegidos correctamente con lonas?</span>
+                    <select class="check-select" id="c_lonas" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_lonas" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Se han instalado mamparas para proteger y aislar las personas y equipos de las áreas vecinas?</span>
+                    <select class="check-select" id="c_mamparas" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_mamparas" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Se han dispuesto extintores adecuados en cantidad y clase en el sitio de trabajo, diferentes a los existentes en la zona?</span>
+                    <select class="check-select" id="c_extintores" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_extintores" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Los equipos a utilizar tienen sus cables y conexiones en buenas condiciones?</span>
+                    <select class="check-select" id="c_cables" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_cables" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿La persona encargada de ejecutar la labor ha recibido instrucciones y precauciones a seguir en la ejecución de la tarea?</span>
+                    <select class="check-select" id="c_instrucciones" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_instrucciones" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Se tienen los elementos de protección personal apropiados para realizar el trabajo?</span>
+                    <select class="check-select" id="c_epp" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_epp" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Se ha consultado otros permisos y se cumple con los requerimientos de estos en caso de trabajar en alturas o en espacios confinados?</span>
+                    <select class="check-select" id="c_otros_permisos" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_otros_permisos" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">¿Se garantiza que la persona que realizará el trabajo conoce el equipo y los procedimientos contemplados para solicitar un permiso?</span>
+                    <select class="check-select" id="c_conocimiento" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_conocimiento" placeholder="Observación">
+                </div>
+
+                <div class="check-row">
+                    <span class="check-label">Otros controles requeridos según la actividad</span>
+                    <select class="check-select" id="c_otros_controles" onchange="colorSelect(this)">
+                        <option value="">Seleccione</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                    <input type="text" class="obs-input" id="obs_otros_controles" placeholder="Observación">
+                </div>
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">GUARDAR REGISTRO</button>
+    </form>
+
+</div>
+
+<script>
+    // ── Bloqueo por flujo: exige permiso + análisis + inspección completos ──
+    (function() {
+        const overlay = document.getElementById('flujoOverlay');
+        const titulo  = document.getElementById('flujoOverlayTitulo');
+        const msg     = document.getElementById('flujoOverlayMsg');
+        const btnG    = document.getElementById('btnGuardar');
+
+        function bloquear(t, m) {
+            titulo.textContent = t;
+            msg.textContent = m;
+            overlay.style.display = 'flex';
+            if (btnG) btnG.disabled = true;
+        }
+
+        const flujoIdCheck = new URLSearchParams(window.location.search).get('flujo');
+        if (!flujoIdCheck) {
+            bloquear('Formulario bloqueado', 'Este formulario debe abrirse desde un flujo de Permiso de Trabajo.');
+            return;
+        }
+        fetch('../../permiso_completo/obtener_flujo.php?id_flujo=' + encodeURIComponent(flujoIdCheck))
+            .then(r => r.json())
+            .then(res => {
+                if (res.status !== 'success') {
+                    bloquear('Flujo no encontrado', 'No se pudo verificar el estado del flujo de Permiso de Trabajo.');
+                    return;
+                }
+                const p = res.flujo.pasos || {};
+                const faltantes = [];
+                if (!(p.permiso && p.permiso.completado))    faltantes.push('Permiso de Trabajo');
+                if (!(p.analisis && p.analisis.completado))   faltantes.push('Análisis de Trabajo Seguro');
+                if (!(p.inspeccion && p.inspeccion.completado)) faltantes.push('Inspección');
+                if (faltantes.length) {
+                    bloquear('Completa los pasos principales primero', 'Debes completar: ' + faltantes.join(', ') + '.');
+                    return;
+                }
+
+                // ── Fecha tomada del Análisis de Trabajo Seguro ──
+                fetch('../../permiso_completo/obtener_registro_paso.php?id_flujo=' + encodeURIComponent(flujoIdCheck) + '&paso=analisis')
+                    .then(r2 => r2.json())
+                    .then(res2 => {
+                        if (res2.status === 'success' && res2.registro && res2.registro.datos && res2.registro.datos.fecha_elaboracion) {
+                            document.getElementById('fecha').value = res2.registro.datos.fecha_elaboracion;
+                        }
+                    })
+                    .catch(() => {});
+            })
+            .catch(() => bloquear('Error de verificación', 'No se pudo verificar el estado del flujo. Intenta de nuevo.'));
+    })();
+
+    // ── Colorear selects de control ──
+    function colorSelect(sel) {
+        sel.classList.remove('val-cumple', 'val-no', 'val-na');
+        const v = sel.value;
+        if (v === 'CUMPLE')    sel.classList.add('val-cumple');
+        if (v === 'NO CUMPLE') sel.classList.add('val-no');
+        if (v === 'N/A')       sel.classList.add('val-na');
+        if (v === 'SI')        sel.classList.add('val-cumple');
+        if (v === 'NO')        sel.classList.add('val-no');
+    }
+
+    // ── Mostrar campo de actividades críticas ──
+    function toggleCriticas(val) {
+        const el = document.getElementById('actividades_criticas');
+        el.style.display = (val === 'SI') ? 'block' : 'none';
+    }
+
+    // ── Recoger datos de controles ──
+    const CONTROLES = [
+        { key: 'sustancias',      sel: 'c_sustancias',      obs: 'obs_sustancias' },
+        { key: 'lonas',           sel: 'c_lonas',           obs: 'obs_lonas' },
+        { key: 'mamparas',        sel: 'c_mamparas',        obs: 'obs_mamparas' },
+        { key: 'extintores',      sel: 'c_extintores',      obs: 'obs_extintores' },
+        { key: 'cables',          sel: 'c_cables',          obs: 'obs_cables' },
+        { key: 'instrucciones',   sel: 'c_instrucciones',   obs: 'obs_instrucciones' },
+        { key: 'epp',             sel: 'c_epp',             obs: 'obs_epp' },
+        { key: 'otros_permisos',  sel: 'c_otros_permisos',  obs: 'obs_otros_permisos' },
+        { key: 'conocimiento',    sel: 'c_conocimiento',    obs: 'obs_conocimiento' },
+        { key: 'otros_controles', sel: 'c_otros_controles', obs: 'obs_otros_controles' },
+    ];
+
+    // ── Envío ──
+    document.getElementById('formCaliente').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const controles = {};
+        CONTROLES.forEach(c => {
+            controles[c.key] = {
+                resultado:   document.getElementById(c.sel).value,
+                observacion: document.getElementById(c.obs).value.trim()
+            };
+        });
+
+        const jsonData = {
+            fecha:                      document.getElementById('fecha').value,
+            hora:                       document.getElementById('hora').value,
+            valoracion_riesgo:          document.getElementById('valoracion_riesgo').value,
+            frecuencia:                 document.getElementById('frecuencia').value,
+            zona_trabajo:               document.getElementById('zona_trabajo').value.trim(),
+            dependencia:                document.getElementById('dependencia').value.trim(),
+            equipo_sistema:             document.getElementById('equipo_sistema').value.trim(),
+            descripcion_actividad:      document.getElementById('descripcion_actividad').value.trim(),
+            tiene_actividades_criticas: document.getElementById('tiene_actividades_criticas').value,
+            actividades_criticas:       document.getElementById('actividades_criticas').value.trim(),
+            controles
+        };
+
+        jsonData.id_flujo = new URLSearchParams(window.location.search).get('flujo');
+
+        const btn = document.getElementById('btnGuardar');
+        btn.disabled = true;
+        btn.textContent = 'GUARDANDO...';
+
+        try {
+            const res  = await fetch('procesar.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            });
+            const data = await res.json();
+
+            if (data.status === 'success') {
+                const flujoId = new URLSearchParams(window.location.search).get('flujo');
+                const redirect = () => {
+                    window.location.href = flujoId ? '../../permiso_completo/index.html' : 'rev_trabajo_caliente.php';
+                };
+                const showOk = (msg) => Swal.fire({
+                    title: '¡REGISTRADO!', text: msg, icon: 'success',
+                    background: '#151A22', color: '#fff',
+                    confirmButtonColor: '#FFB000', confirmButtonText: 'Aceptar'
+                }).then(redirect);
+                if (flujoId) {
+                    fetch('../../permiso_completo/agregar_apoyo.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id_flujo: flujoId, apoyo_key: 'caliente', id_registro: data.id })
+                    }).finally(() => showOk('Certificado guardado. Volviendo al menú de permisos.'));
+                } else {
+                    showOk('Certificado de trabajo en caliente guardado correctamente.');
+                }
+            } else {
+                throw new Error(data.message || 'Error desconocido.');
+            }
+        } catch (err) {
+            Swal.fire({
+                title: 'ERROR',
+                text: err.message,
+                icon: 'error',
+                background: '#151A22', color: '#fff',
+                confirmButtonColor: '#FF3366'
+            });
+            btn.disabled = false;
+            btn.textContent = 'GUARDAR REGISTRO';
+        }
+    });
+</script>
+</body>
+</html>

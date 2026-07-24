@@ -1,0 +1,11 @@
+{
+    "codigo_maquina": "COSEDORA FISCHBEIN 212038F_EMPBOGCOS01",
+    "nombre_maquina": "PUNTADA_BOG",
+    "tipo_maquina": "puntada",
+    "estado_general": "Se encuentra con puntada de 7MM DE PUNTADA ",
+    "Puntada": "Cumple",
+    "Lubricacion": "Cumple",
+    "Observaciones": "Buen estado",
+    "formato": "verificacion_iman_ZC",
+    "accion": "guardar"
+}

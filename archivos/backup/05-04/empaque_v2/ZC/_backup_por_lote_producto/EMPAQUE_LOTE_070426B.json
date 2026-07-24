@@ -1,0 +1,74 @@
+[
+    {
+        "id_registro": "EMPV2_69d96a21a1300",
+        "timestamp": "2026-04-10 21:22:41",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-07",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Multi Beige X25",
+            "lote_empaque": "MP-02224",
+            "producto_envasar": "GRANO ENTERA FINA",
+            "lote_producto": "070426B",
+            "fecha_vencimiento": "07072026",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-07",
+            "entregado_a": "JOSE",
+            "cantidad_solicitada": "104",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "104",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e603f69dee7",
+        "timestamp": "2026-04-20 10:46:14",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-07",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Extrapan x50",
+            "lote_empaque": "MP-02197",
+            "producto_envasar": "EXTRAPAN X 50",
+            "lote_producto": "070426B",
+            "fecha_vencimiento": "07042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-07",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "635",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "634",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e610ede7f8b",
+        "timestamp": "2026-04-20 11:41:33",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-08",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Extrapan x50",
+            "lote_empaque": "MP-02197",
+            "producto_envasar": "EXTRAPAN X 50",
+            "lote_producto": "070426B",
+            "fecha_vencimiento": "07042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-08",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "135",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "135",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

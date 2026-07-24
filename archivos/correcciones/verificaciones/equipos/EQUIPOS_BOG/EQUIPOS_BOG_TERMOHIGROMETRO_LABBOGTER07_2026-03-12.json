@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "TERMOHIGROMETRO_LABBOGTER07",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "Bueno ",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "N\/A",
+    "Pulsador": "Cumple",
+    "cargador": "N\/A",
+    "Display": "Cumple",
+    "Bateria": "Cumple",
+    "Recipiente": "N\/A",
+    "Limpieza_Filtro": "N\/A",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "EQUIPOS_BOG_TERMOHIGROMETRO_LABBOGTER07_2026-03-12.pdf"
+}

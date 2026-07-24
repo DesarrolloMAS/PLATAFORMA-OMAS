@@ -1,0 +1,12 @@
+{
+    "codigo_maquina": "COSEDORA PEDESTAL_EMPBOGCOS07",
+    "nombre_maquina": "PUNTADA_BOG",
+    "tipo_maquina": "puntada",
+    "estado_general": "BUENO",
+    "Puntada": "Cumple",
+    "Lubricacion": "Cumple",
+    "Observaciones": "",
+    "formato": "verificacion_iman_ZC",
+    "usuario": "John Giraldo",
+    "archivo_pdf": "PUNTADA_BOG_COSEDORA PEDESTAL_EMPBOGCOS07_2026-02-05.pdf"
+}

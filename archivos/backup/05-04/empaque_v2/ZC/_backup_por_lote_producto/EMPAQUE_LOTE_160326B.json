@@ -1,0 +1,74 @@
+[
+    {
+        "id_registro": "EMPV2_69e6014d68868",
+        "timestamp": "2026-04-20 10:34:53",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-06",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Mogolla",
+            "lote_empaque": "MP-02335",
+            "producto_envasar": "MOGOLLA",
+            "lote_producto": "160326B",
+            "fecha_vencimiento": "06042026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-06",
+            "entregado_a": "BALMER",
+            "cantidad_solicitada": "407",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "4040",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e601a7ddc47",
+        "timestamp": "2026-04-20 10:36:23",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-06",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Salvado",
+            "lote_empaque": "MP-02152",
+            "producto_envasar": "SALVADO",
+            "lote_producto": "160326B",
+            "fecha_vencimiento": "16092026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-06",
+            "entregado_a": "BALMER",
+            "cantidad_solicitada": "159",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "157",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e60202680c4",
+        "timestamp": "2026-04-20 10:37:54",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-06",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Segunda",
+            "lote_empaque": "MP-02153",
+            "producto_envasar": "SEGUNDA",
+            "lote_producto": "160326B",
+            "fecha_vencimiento": "16\/09\/2026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-06",
+            "entregado_a": "BALMER",
+            "cantidad_solicitada": "150",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "147",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

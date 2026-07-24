@@ -1,0 +1,15 @@
+{
+    "codigo_maquina": "IMAN MARTILLO_MOLBOGMA03",
+    "nombre_maquina": "IMAN_BOG",
+    "tipo_maquina": "iman",
+    "estado_general": "Bueno ",
+    "Acople": "Cumple",
+    "Soporte": "Cumple",
+    "Manija": "Cumple",
+    "Estructura": "Cumple",
+    "Tornilleria_Completa_y_Ajustada": "Cumple",
+    "Observaciones": "",
+    "formato": "verificacion_iman_ZC",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "IMAN_BOG_IMAN MARTILLO_MOLBOGMA03_2026-01-05.pdf"
+}

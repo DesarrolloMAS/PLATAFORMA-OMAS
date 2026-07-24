@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e6397975667",
+        "timestamp": "2026-04-20 14:34:33",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-13",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Fuerte de Exportacion",
+            "lote_empaque": "MP-01940",
+            "producto_envasar": "FUERTE DE EXPORTACION",
+            "lote_producto": "140426BP",
+            "fecha_vencimiento": "14102026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-13",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "80",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "80",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

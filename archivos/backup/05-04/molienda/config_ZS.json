@@ -1,0 +1,223 @@
+{
+    "harinas": [
+        {
+            "id": "extrapan_x50",
+            "name": "EXTRAPAN X50",
+            "weight": 50
+        },
+        {
+            "id": "extrapan_x25",
+            "name": "EXTRAPAN X25",
+            "weight": 25
+        },
+        {
+            "id": "extrapan_x10",
+            "name": "EXTRAPAN X10",
+            "weight": 10
+        },
+        {
+            "id": "extrapan_x10_5u",
+            "name": "EXTRAPAN X10 (5 UND)",
+            "weight": 10
+        },
+        {
+            "id": "artesanal_x50",
+            "name": "ARTESANAL X50",
+            "weight": 50
+        },
+        {
+            "id": "artesanal_x25",
+            "name": "ARTESANAL X25",
+            "weight": 25
+        },
+        {
+            "id": "artesanal_x10",
+            "name": "ARTESANAL X10",
+            "weight": 10
+        },
+        {
+            "id": "narino_2500",
+            "name": "NARI\u00d1O 2500 GR",
+            "weight": 50
+        },
+        {
+            "id": "narino_1000",
+            "name": "NARI\u00d1O 1000 GR",
+            "weight": 50
+        },
+        {
+            "id": "narino_500",
+            "name": "NARI\u00d1O 500 GR",
+            "weight": 12.5
+        },
+        {
+            "id": "integral_x25",
+            "name": "INTEGRAL X25",
+            "weight": 25
+        },
+        {
+            "id": "germen_x25",
+            "name": "GERMEN DE TRIGO X25",
+            "weight": 25
+        },
+        {
+            "id": "semola_fina_x25",
+            "name": "SEMOLA FINA X25",
+            "weight": 25
+        },
+        {
+            "id": "VITAMINA",
+            "name": "VITAMINA X 25",
+            "weight": 25
+        },
+        {
+            "id": "ARTESANAL",
+            "name": "HARINA DE TRIGO  ARTESANAL X 10KG (5 UND)",
+            "weight": 1
+        }
+    ],
+    "subproductos": [
+        {
+            "id": "salvado_x30",
+            "name": "SALVADO X30",
+            "weight": 30
+        },
+        {
+            "id": "mogolla_x40",
+            "name": "MOGOLLA X40",
+            "weight": 40
+        },
+        {
+            "id": "segunda_x50",
+            "name": "SEGUNDA PREMIUM X50",
+            "weight": 50
+        },
+        {
+            "id": "semola_fina_x25",
+            "name": "SEMOLA FINA X25",
+            "weight": 25
+        },
+        {
+            "id": "semola_gruesa_x25",
+            "name": "SEMOLA GRUESA X25",
+            "weight": 25
+        },
+        {
+            "id": "germen_x25_sub",
+            "name": "GERMEN DE TRIGO X25",
+            "weight": 25
+        },
+        {
+            "id": "nuevo_1776977655626",
+            "name": "EMPAQUE BLANCO 60X106 X 50",
+            "weight": 1
+        },
+        {
+            "id": "nuevo_1776979442854",
+            "name": "CINTA DE TRANSFERENCIA TERMICA 40X122MM",
+            "weight": 1
+        },
+        {
+            "id": "nuevo_1776979444046",
+            "name": "CINTA DE TRANSFERENCIA TERMICA 85X122MM",
+            "weight": 1
+        }
+    ],
+    "materiales": [
+        {
+            "id": "emp_extrapan_x50",
+            "name": "EMPAQUE EXTRA PAN 50",
+            "weight": 1
+        },
+        {
+            "id": "emp_extrapan_x25",
+            "name": "EMPAQUE EXTRA PAN 25",
+            "weight": 1
+        },
+        {
+            "id": "emp_extrapan_x10",
+            "name": "EMPAQUE EXTRAPAN X10",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_rojo_x50",
+            "name": "EMPAQUE GALERAS ROJO",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_kraft_x25",
+            "name": "EMPAQUE GALERAS KRAFT",
+            "weight": 1
+        },
+        {
+            "id": "emp_multi_beige_x25",
+            "name": "EMPAQUE MULTI BEIGE",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_mog_x40",
+            "name": "EMPAQUE GALERAS MOG",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_sal_x25",
+            "name": "EMPAQUE GALERAS SAL",
+            "weight": 1
+        },
+        {
+            "id": "emp_galeras_seg_x50",
+            "name": "EMPAQUE GALERAS SEG",
+            "weight": 1
+        },
+        {
+            "id": "vitaminamat",
+            "name": "VITAMINA (MATERIAL)",
+            "weight": 1
+        },
+        {
+            "id": "mejorante_extrapan",
+            "name": "MEJORANTE EXTRA PAN",
+            "weight": 1
+        },
+        {
+            "id": "mejorante_artesanal",
+            "name": "MEJORANTE ARTESANAL",
+            "weight": 1
+        },
+        {
+            "id": "hilo_blanco",
+            "name": "HILO BLANCO",
+            "weight": 1
+        },
+        {
+            "id": "Lamina nari\u00f1o 2500g",
+            "name": "Nari\u00f1o 2500g",
+            "weight": 1
+        },
+        {
+            "id": "Lamina nari\u00f1o 1000g",
+            "name": "Nari\u00f1o 1000g",
+            "weight": 1
+        },
+        {
+            "id": "Lamina nari\u00f1o 500g ",
+            "name": "Nari\u00f1o 500g",
+            "weight": 1
+        },
+        {
+            "id": "Bolsa fardo 32x65",
+            "name": "Bolsa fardo ",
+            "weight": 1
+        },
+        {
+            "id": "Empaque blanco",
+            "name": "Empaque blanco (60x106) x 50",
+            "weight": 1
+        },
+        {
+            "id": "Etiqueta adhesiva",
+            "name": "Etiqueta adhesiva",
+            "weight": 1
+        }
+    ]
+}

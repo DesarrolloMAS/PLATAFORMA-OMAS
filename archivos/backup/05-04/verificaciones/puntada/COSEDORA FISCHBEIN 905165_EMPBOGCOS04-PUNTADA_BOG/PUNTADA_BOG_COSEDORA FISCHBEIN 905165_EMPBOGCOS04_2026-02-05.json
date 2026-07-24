@@ -1,0 +1,12 @@
+{
+    "codigo_maquina": "COSEDORA FISCHBEIN 905165_EMPBOGCOS04",
+    "nombre_maquina": "PUNTADA_BOG",
+    "tipo_maquina": "puntada",
+    "estado_general": "BUENO",
+    "Puntada": "Cumple",
+    "Lubricacion": "Cumple",
+    "Observaciones": "",
+    "formato": "verificacion_iman_ZC",
+    "usuario": "John Giraldo",
+    "archivo_pdf": "PUNTADA_BOG_COSEDORA FISCHBEIN 905165_EMPBOGCOS04_2026-02-05.pdf"
+}

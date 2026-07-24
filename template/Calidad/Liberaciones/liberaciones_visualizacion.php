@@ -27,18 +27,29 @@ if (isset($_GET['archivo'])) {
         ob_start();
         $writer->save('php://output');
         $htmlContent = ob_get_clean();
-        $mpdf = new Mpdf();
-$mpdf->WriteHTML($htmlContent);
+        $mpdf = new Mpdf([
+            'orientation' => 'L',
+            'format' => 'A4'
+        ]);
+        $mpdf->WriteHTML($htmlContent);
 
 // Guardar el PDF en una ubicación específica
-$pdfCarpeta = $carpeta . '/../pdfs_liberaciones/';
-$pdfNombre = 'Registro_de_Liberacion' . '.pdf';
+if ($sede === 'ZS') {
+    $pdfCarpeta = realpath(__DIR__ . '/../../../archivos/generados/Calidad/') . '/pdfs_liberaciones_zs/';
+} else {
+    $pdfCarpeta = realpath(__DIR__ . '/../../../archivos/generados/Calidad/') . '/pdfs_liberaciones/';
+}
+
+$nombreBase = pathinfo($archivo, PATHINFO_FILENAME);
+$pdfNombre = 'Liberacion_' . $nombreBase . '.pdf';
 $pdfRuta = $pdfCarpeta . $pdfNombre;
 
 if (!is_dir($pdfCarpeta)) {
     mkdir($pdfCarpeta, 0777, true);
 }
 
+// Limpiar caché de estado para asegurar que el archivo se vea como "nuevo"
+clearstatcache();
 $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
     } catch (Exception $e) {
         die("Error al procesar el archivo: " . $e->getMessage());

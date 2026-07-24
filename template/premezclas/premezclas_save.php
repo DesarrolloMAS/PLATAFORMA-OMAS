@@ -1,9 +1,5 @@
 <?php
 // Configuración para ocultar errores en pantalla
-error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE); // Mostrar solo errores graves
-ini_set('display_errors', 0); // No mostrar errores en pantalla
-ini_set('log_errors', 1); // Registrar errores en un archivo de log
-ini_set('error_log', __DIR__ . '/../../logs/error_log.txt'); // Ruta del archivo de log
 
 require __DIR__ . '/../../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -12,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $consecutivo = $_POST['consecutivo'] ?? date("Ymd");
         $fecha = $_POST['fecha'] ?? date('Y-m-d');
         $harinas = $_POST['harina'] ?? [];
         $lotesHarina = $_POST['harina_lote'] ?? [];
@@ -32,6 +29,7 @@ try {
         $spreadsheet = IOFactory::load($plantillaPath);
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('I6', $fecha);
+        $sheet->setCellValue('D5', $consecutivo);
 
         // Insertar HARINAS ESPECIALES (desde fila 11 en adelante)
         $filaHarina = 9;
@@ -59,6 +57,7 @@ try {
 
         // Firma
         if (!empty($firma)) {
+            error_log('Firma recibida: ' . substr($firma, 0, 30));
             $firmaPath = __DIR__ . '/../../archivos/formularios/firma_turno.png';
             $firmaData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $firma));
             if (file_put_contents($firmaPath, $firmaData) === false) {

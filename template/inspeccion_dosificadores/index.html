@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPECCIÓN DE DOSIFICADORES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --success: #10B981;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .btn-back:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 240, 255, 0.05); }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-box::before {
+            content: "V1 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px top 50%;
+            background-size: 10px auto;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        select.form-control option { background-color: var(--panel-bg); color: var(--text-main); }
+        input[type="date"].form-control { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); }
+        input[readonly].form-control {
+            background-color: rgba(255,255,255,0.02);
+            color: var(--accent);
+            border-color: var(--border-color);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+
+        /* ── PRUEBAS (Gramos por minuto) ── */
+        .pruebas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .prueba-item {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            padding: 10px 12px;
+        }
+
+        .prueba-item label {
+            display: block;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .results-box {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--accent);
+            border-radius: var(--r-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .result-item { text-align: center; }
+        .result-value { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); }
+        .result-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
+
+        /* ── CRITERIOS DE ACEPTACIÓN (referencia estática) ── */
+        .criterios-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+        .criterio-item {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--warning);
+            border-radius: var(--r-sm);
+            padding: 12px 16px;
+        }
+
+        .criterio-titulo {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .criterio-texto { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+        .plan-accion-box {
+            background: rgba(255, 51, 102, 0.05);
+            border: 1px dashed var(--danger);
+            border-radius: var(--r-md);
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .plan-accion-box strong { color: var(--danger); }
+
+        textarea.form-control { resize: vertical; min-height: 90px; }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active { transform: translateY(0); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <div>
+            <h1 class="main-title">Inspección de Dosificadores</h1>
+            <div class="sub-title">PPR Metrología — Inspección del Funcionamiento de los Dosificadores (V1 JSON Persistente)</div>
+        </div>
+        <a href="menu_dosificadores.php" id="btnVolver" class="btn-back">← VOLVER</a>
+    </div>
+
+    <form id="dosificadoresForm">
+        <!-- 1. ESPECIFICACIONES -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Especificaciones</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" name="fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Dosificador</label>
+                    <input type="text" name="dosificador" id="inputDosificador" class="form-control" placeholder="Ej: Dosificador 1" required readonly>
+                    <input type="hidden" name="dosificador_id" id="inputDosificadorId">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Microingrediente</label>
+                    <input type="text" name="microingrediente" class="form-control" placeholder="Nombre del microingrediente" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Cantidad Bulto 50kg</label>
+                    <input type="number" step="any" name="cantidad_bulto_50kg" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Carga Trigo</label>
+                    <input type="text" name="carga_trigo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Extracción (%)</label>
+                    <input type="number" step="any" name="extraccion_pct" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Bultos por Hora</label>
+                    <input type="number" step="any" name="bultos_por_hora" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Microingrediente por Minuto</label>
+                    <input type="number" step="any" name="micro_por_minuto" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Microingrediente por Hora</label>
+                    <input type="number" step="any" name="micro_por_hora" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Micro. por Min. Límite Inferior</label>
+                    <input type="number" step="any" name="micro_min_limite_inferior" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Micro. por Min. Límite Superior</label>
+                    <input type="number" step="any" name="micro_min_limite_superior" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Micro. por Hora Límite Inferior</label>
+                    <input type="number" step="any" name="micro_hora_limite_inferior" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Porcentaje Dosificador</label>
+                    <input type="number" step="any" name="porcentaje_dosificador" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Frecuencia Dosificador</label>
+                    <input type="text" name="frecuencia_dosificador" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Micro. por Hora Límite Superior</label>
+                    <input type="number" step="any" name="micro_hora_limite_superior" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Inspeccionado por</label>
+                    <input type="text" name="inspeccionado_por" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Verificado por</label>
+                    <input type="text" name="verificado_por" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. RESULTADOS -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Resultados — Gramos por Minuto</div>
+            <div class="pruebas-grid" id="pruebasGrid"></div>
+
+            <div class="results-box">
+                <div class="result-item">
+                    <div class="result-value" id="resPromedioMin">0.00</div>
+                    <div class="result-label">Promedio Min. (g/min)</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="resGramosHora">0.00</div>
+                    <div class="result-label">Gramos Hora</div>
+                </div>
+                <div class="result-item" style="min-width: 160px;">
+                    <select name="cumple" id="selCumple" class="form-control" required style="text-align:center; font-family:'Space Mono',monospace; font-weight:700;">
+                        <option value="">¿Cumple?</option>
+                        <option value="CUMPLE">CUMPLE</option>
+                        <option value="NO CUMPLE">NO CUMPLE</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="promedio_min" id="inputPromedioMin">
+            <input type="hidden" name="gramos_hora" id="inputGramosHora">
+
+            <div class="section-title" style="font-size: 13px; margin-top: 10px;"><span>i</span> Criterios de Aceptación</div>
+            <div class="criterios-list">
+                <div class="criterio-item">
+                    <div class="criterio-titulo">Fortificación Colombiana</div>
+                    <div class="criterio-texto">El promedio de gramos por minuto y los gramos hora no deben estar por debajo de su respectiva especificación.</div>
+                </div>
+                <div class="criterio-item">
+                    <div class="criterio-titulo">Fortificación Ecuatoriana</div>
+                    <div class="criterio-texto">El promedio de gramos por minuto y los gramos hora pueden variar ± 4% respecto a su especificación.</div>
+                </div>
+                <div class="criterio-item">
+                    <div class="criterio-titulo">Mejoradores de Harina</div>
+                    <div class="criterio-texto">El promedio de gramos por minuto y los gramos hora no deben estar por debajo de su especificación y máximo 2% por encima.</div>
+                </div>
+            </div>
+
+            <div class="plan-accion-box">
+                <strong>Plan de Acción en caso de NC:</strong> Ajustar microdosificador y verificar nuevamente el muestreo por minuto.
+            </div>
+
+            <div class="form-group full">
+                <label class="form-label">Observaciones</label>
+                <textarea name="observaciones" class="form-control" placeholder="Observaciones adicionales (opcional)"></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            REGISTRAR INSPECCIÓN
+        </button>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO - AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    function getQueryParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const hoy = new Date().toISOString().split('T')[0];
+        document.querySelector('[name="fecha"]').value = hoy;
+
+        // El dosificador se selecciona en menu_dosificadores.php; este formulario
+        // solo puede diligenciarse para un dosificador ya elegido desde ahí.
+        const dosificadorNombre = getQueryParam('dosificador') || '';
+        const dosificadorId     = getQueryParam('dosificador_id') || '';
+        const from              = getQueryParam('from') || 'calidad';
+
+        document.getElementById('btnVolver').href = `menu_dosificadores.php?from=${encodeURIComponent(from)}`;
+
+        if (!dosificadorNombre) {
+            Swal.fire({
+                title: 'Dosificador no especificado',
+                text: 'Debe seleccionar un dosificador desde el menú antes de iniciar la inspección.',
+                icon: 'warning',
+                background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+            }).then(() => { window.location.href = `menu_dosificadores.php?from=${encodeURIComponent(from)}`; });
+            return;
+        }
+
+        document.getElementById('inputDosificador').value = dosificadorNombre;
+        document.getElementById('inputDosificadorId').value = dosificadorId;
+        document.title = 'INSPECCIÓN - ' + dosificadorNombre;
+
+        // Generar los 10 campos de prueba (Gramos por minuto)
+        const grid = document.getElementById('pruebasGrid');
+        for (let i = 1; i <= 10; i++) {
+            const item = document.createElement('div');
+            item.className = 'prueba-item';
+            item.innerHTML = `
+                <label for="gramos_prueba_${i}">N° Prueba ${i}</label>
+                <input type="number" step="any" name="gramos_prueba_${i}" id="gramos_prueba_${i}" class="form-control gramos-input" placeholder="Gramos">
+            `;
+            grid.appendChild(item);
+        }
+
+        document.querySelectorAll('.gramos-input').forEach(inp => inp.addEventListener('input', calcularResultados));
+    });
+
+    function calcularResultados() {
+        const inputs = document.querySelectorAll('.gramos-input');
+        let suma = 0;
+        let cantidad = 0;
+
+        inputs.forEach(inp => {
+            const val = parseFloat(inp.value);
+            if (!isNaN(val)) { suma += val; cantidad++; }
+        });
+
+        const promedioMin = cantidad > 0 ? (suma / cantidad) : 0;
+        const gramosHora = promedioMin * 60;
+
+        document.getElementById('resPromedioMin').textContent = promedioMin.toFixed(2);
+        document.getElementById('resGramosHora').textContent = gramosHora.toFixed(2);
+        document.getElementById('inputPromedioMin').value = promedioMin.toFixed(2);
+        document.getElementById('inputGramosHora').value = gramosHora.toFixed(2);
+    }
+
+    document.getElementById('dosificadoresForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        calcularResultados();
+
+        const btn = document.getElementById('btnGuardar');
+        const overlayText = btn.innerHTML;
+
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((value, key) => { jsonData[key] = value; });
+
+        fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: '¡REGISTRADO!',
+                    text: 'Inspección de dosificador guardada estructuralmente vía JSON.',
+                    icon: 'success',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#00F0FF'
+                }).then(() => {
+                    window.location.reload();
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error del Sistema',
+                    text: data.message || 'Error en el túnel JSON.',
+                    icon: 'error',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#FF3366'
+                });
+                btn.innerHTML = overlayText;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            Swal.fire({
+                title: 'Error de Conexión',
+                text: 'No se pudo comunicar con el servidor.',
+                icon: 'error',
+                background: '#151A22',
+                color: '#fff',
+                confirmButtonColor: '#FF3366'
+            });
+            btn.innerHTML = overlayText;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+{
+    "fecha_solicitud": "2026-06-24",
+    "hora_solicitud": "09:30",
+    "clasificacion": "Mecanico",
+    "nombre_solicitante": "Manuel Armando Jojoa",
+    "cargo_solicitante": "Lider de Mantenimiento Mecanico",
+    "objeto_dañado": "Rosca transportadora alimentación B1, B2",
+    "ubicacion": "Bodega 1, 2",
+    "marca": "N\/A",
+    "codigo_equipo": "RALPASROT05",
+    "descripcion_falla": "Se realizó mantenimiento predictivo y lubricación para cumplir con el cronograma de mantenimiento.",
+    "usa_mediciones": "1",
+    "med_equipo_name": [
+        "Motor"
+    ],
+    "med_parte": [
+        "Motor"
+    ],
+    "med_termografia": [
+        "Si"
+    ],
+    "med_vibraciones": [
+        "N\/A"
+    ],
+    "med_rango": [
+        "200\\220"
+    ],
+    "med_amperaje": [
+        "7A"
+    ],
+    "med_obs": [
+        ""
+    ],
+    "firma_solicitante": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAACWCAYAAADwkd5lAAAQAElEQVR4AeydPZIsRxWFR0AEmDKxENoAIQxMAikIbBksQNIOhIcHrEBSBL6kHaAVCCLwEcECpIeJg0wceOT3lEcqzfRP\/WRW3sw8L\/pOVldXZZ775fQ99dPT7zsP\/mcCJmACJmACOwjYQHZA8y4mYAImYAIPDzYQ\/xaYQCsCHtcEOidgA+l8Ai3fBEzABFoRsIG0Iu9xTcAETKBzAh0bSOfkLd8ETMAEOidgA+l8Ai3fBEzABFoRsIG0Iu9xTaBjApZuAhCwgUDBYQImYAImsJmADWQzMu9gAiZgAiYAARsIFM4Oj2cCJmACAxCwgQwwiU7BBEzABFoQsIG0oO4xTcAEWhHwuAUJ2EAKwnRXJmACJjATARvITLPtXE3ABEygIAEbSEGYM3TlHE3ABExABGwgIuHWBL4i8O5XjX+agAncI2ADuUfIr89G4L2U8L9T+GECwQjEk2MDiTcnVtSOwOt56JdTq+W06IcJmMAlAjaQS1S8zgQeHn5nCCZgArcJ2EBu8\/Gr4xDYmsmPt+7g7Z8Q8FncEyRjrbCBjDWfzqYMgf+lbjAQF8AEYscDbp+m\/Yjfp9aPQQnYQAadWKe1iwCFjx3\/yQ\/HLgIYBsYByz+nHnieGj9GJLDaQEZM3jmZwBUCz\/J63wfJIFY2mIWY\/SHt80YKPwYmYAMZeHIDpPZF0vA8xR9T9PB4K4v8U27drCPA2QZnHUvzwEzW7e2tuiVgA+l26roQ\/q+s8te57aX5LAulMObFlk3osWGEedByyYqzDptH6CkrJ84GUo6le3pK4Gd51Q9TS4FJTegHZ0wSSDFkuQfd6GwRsME8GBt2mIe4sc4xOAEbyOAT7PRMoBKBpXlwv+PVSuO428AEZjCQwPiHlkaBIUFdDtL1cdb1EH\/JInvTnWVXbZhbnXlgHr5kVRV33M5tIHHnZhRlX+ZEKDpEfhq+8aWYy1PEHNo8LrOZbq0NZLopb5KwinH0o3m+A0uApJmCqXWzt7DYZh6zExs8fxvI4BMcID3+opvLHAGk3JWA1uVGNpFvaNg8vmHhpUzABpJBuKlKgEJMUISIqoMd6FxnIGg90M1wu3KPw2cew03r8YRsIMcZVuxhiK75eOcykeiXsZZafSP94QHz0JzBg+cP\/mcCELCBQMFxBgFdxnr9jMEKjaEzkdcK9ddTN8wTZx0yD+aPdT3lYK2VCdhAKgN2918ToBjrbKSX\/zYWzSSgS1sszxAfpSQxDwwDBvyB4HRnHomBH3cI2EDuAPLLRQl8kHvTd07lpyEaiiVCKJi0swbmofnhrAPzmJ3JrL8Ld\/O2gdxF5A0KEtAfFfZ0SUjFUwZTEEeorsiPsw6Zx8dJnc86EgQ\/rhOwgVxn41eOEPhm3+VHYynGBK9SsGgd7QlgFJgHc8L8cNbxdntZVhCdgA0k+gyNq083Z6NkSPFEC580olXoeTS90ne0xTyUmy9ZHaU52f42kMkmvEG6unGuoSlSWu6h5Yi8B51bNWKYnHUszQMz2dqPt49H4DRFNpDTUHugTICCTFDAiLy6eaNLbWqbC6ooAKPAPODPXHDJinUVh3TXIxKwgYw4q\/3kpKPfCIp1pqRWmiiwLFNsaXsPjELcORvEPJRj77lZ\/8kEbCAnA\/dwLwhQuF4sRPxxQZMKbM8mgnbOOpbmgZlcSNerTGAdARvIOk7eqiyBZUGmsJXtfV9vv8i7SVt+OkSDUWAesCY\/zjpYN0RyTqIdARtIO\/azj0whg4GOiFmOGvokFgU4qsZLutCLcYgxeWAeYn9pH68zgdUEyhvI6qG94eQEerqMpYKrs5Qepo4zDMwDE0EvxqFlnjtM4DABG8hhhO5gJwEVZYoasbMb73aBAMahsw44v5S2oU3N1cd\/0itEavwwgXUEbCDrOHmr\/QRufW3JvaK2f9Sye0pndKND3\/OUOm1qHjjrIFi+F99NG3w\/BWcuqfHDBO4TsIHcZ+QtjhF4\/LHYZW+6jKWj5eVrZy+r6MosHo+v9dru8eutn3PWQaADrWvOOthW8au8EGEushQ30QnYQKLPUP\/6vryRAoWOlynKBMtRI+pXusNtedaBKa8961iyZi4I1vksBAqOuwRsIAtEXmxCQEWryeAbBv173jbSlwzy1evLsw6M40jxx3xI02chUHDcJWADuYvIG1Qm8Enu\/8PcRm0o1mh7hR8BAqPQV6+X+nguZq5LjvQfIE1LiEzABhJ5dubQ9n5Oc4bvoMqpHm6epR50lsBZA5ex0qoij3dyL\/Rfst\/c7bXG63skYAPpcdbG08yRL1m1Klhrxm2tET6KH+UFzKP0mQJ50i9DYCK0DhO4SMAGchGLV55MgEswDNm6YOnyDVpuxRrDubX\/0df+mzr4R4rS5pG6fPGgX4yEPFl+sdI\/TOAxARvIYyJ9Pu9dNcWqZQ4USsb\/mB83orVOSfteWvhJipqP5VmI+NQcz313SMAG0uGkDShZhZlCRURPsQeNRxkyJ0sTOdqf9x+QgA1kwEntNCUKVnTpKqg9fSfWEaZcvmJeMEyWj\/Q17r4TZ2YDmXjyg6Wu4tziPogMgWIZDEtzOct5wUiaC7KAOARsIHHmYlQlt74La5mzineLIqUxpWGp69Kytr\/02mjrYLI0kdHycz4HCNhADsDzrqsI3Plk07f6oFixImqBlj40zhRcviJ35oXlmXJ3rjcI2EBuwPFLhwhQbOhAf2nO8r1o8XFe6aRA3tPH69pO+7Fuhliehbw7Q8LO8T4BG8h9Rt7iPAIqzueNuH0k\/cX82ktz20eIuQdzI4PXV6jEVGpVqwkc3dAGcpSg9y9JgCJFfxzdEyzXDo2j4nhvvA\/yBm\/mdqYGVp+lhDFPX8pKIGZ\/2EBm\/w2ol78+2bR1BJnI1v3O2p4CetZYEcf5TRbFp+UwlPzUzYwEbCAzzvq5OW81BN0zOevbeWV0a3Vqu9cfzuUYZTTyX94PiaLLOhoQsIE0gO4hbxJYfjtv1CNciihJRNWHtprB5SsYkD\/LNcdy34EJ2EACT07n0igupEChod0Se\/bZ0v9y2yM6te+yv1mWl2chM3OYZb4v5tnQQC7q8UoTgMCyOPE8WkifLn9F03eGHkxeHPS\/Ip4xrscIRMAGEmgyLOVrAhQnnnBkS7BcI3T5Ze0nsGpo6LlP+GmubCI9z+RO7TaQneC8200CKvoqLjc3vvLikX2vdHl19daxtD15Elc7jvpCQV1v5L7ggKHkp25mIGADmWGW+8xRl0f4uGitDNT3nsInE6mlrad+ZSLwxEh60m6tBwjYQA7A865XCaiIHLk0pAJNX8TVwXa+INPQOFu7UW4Uza37jrY9DGX4Z338ejSGXeZjA9kzbd7nHgF93Yfae9tfe53CdO21UutlBFv7O0PbVk0tt8eQ+eJM5vyjlkI89nkEbCDnsfZI2wnUPKrVmcNeI9B+Nc6OtpOKscc7WQbflWUuGcbIjQ1k5Nltl9sreeijR6Iq0hzVlixIy740Rpa8qdG+y\/42dTDYxvCQ6fOprBpcBkPWdzo2kL7nL6p6FQ4KylGN6kNnDEf7Y3\/pU7FjnaMMAS5l1ZizMurcS1ECNpCiON1ZBQIq8ir6JYYo9QeA0vZeCVED9cGnsjAR5gxDGSg1p7IkYANZ0phg+YQUKRoMQwGhPRr0Q9BPqWIkjUf742vN0fUyPxzfIiBz5cxRvL+1gZ\/0T8AG0v8czpDBshgdzVemoT6P9Lf84scj\/Yy4L6Yvxr4fMuIMp5xsIAmCH0UJ6Ghz78djL4mhGBG8pv5ZjhBRdUVgg1mLD2ciETQ11DDe0DaQ8eZ01Ix0NHu0EGl\/iltJVtGMrWRuR\/ry\/ZAj9ILvawMJPkEdytMNah15lkqB\/ggKNbGnX5lGybMjGZvy3qNr9H3ECPPeO3ejM+oyPxtIl9MWWrQKBMW+pFD6UiHa+3UZFDD6qaGNfh2XCcBbc+f7IZcZdbnWBtLltE0rmkKkr8vQ2cRaGNqeQqbltfve2g5NvC7jZNnxlADMmTtekZGz7OiYgA2k48kLKF1FVEW1hkR9XQZFSOOtGYft12y3Zxvlu0XPnnF63+fVlACs4IShpKd+dEHgikgbyBUwXh2WAAWIswgErr0comLFflpm\/1KheyoUxlJ9jtoPc0BuGLp5QaLjsIF0PHkBpas4P6usjXEwEoahENHeijXb3Nr\/3mvS4hvp90g9PMBqaSIP\/tcvARtIv3MXUbmucZ+hbfnxUIrStTExG16jaGmZ5zXiyhF1jaG67pN5YM7gxVlk18nMLN4GMvPsl8+dr\/Gm16PfwksfawJTYDuO\/ClGLC+DdbXPPhiPYkhLMCat4zYBzR28MJTbW\/vVkARsICGnpXtRy4JaMxnGUSHiSJZixHi0PCd4zj2K2kUKLYzlWEcAXpxFsjUmz5yx7OiIQA8G0hHOqaWqAFAYzgSBMWhMDON5GpxWeihSWk4vVXtgUnROMaR13CfAvOkAwNzu8wq3hQ0k3JR0K0hFWoX0zEQwicfj8vylJIIilZrqj7PGqZ7IyQPoAIDfH5ZPHt7DHSFgAzlCz\/tGIkABwjAUPD9Tnwzk7HHr5nhO78uzEPM7h3mRUWwgRTC6k0RAlyBmPorUp9BcBNMvxIYH5isT4fLjhl29aUsCNpCW9D32aARsIPtnlAMPjIQePueHIz4BG0jVOZqmc978JKsCwPKMoaNoPlbcU\/6cMWkOW+rmXhbj\/zj9QFNq\/IhMwAYSeXb608aN6\/5Ul1MsA+2t+KGXS5ARTEQmjJ5yM+OeqhCwgVTBOl2nOuJWAZ0OwCJhMaAoL1aHXpRmzWNLsZgYeuDH8m4t3rE+ARtIfcYzjMCbnTx549POHD0eQWveNI+t52\/JMIqm1kxCjm8DCTktXYnyG7yr6boqNpKJoIVArC9lQSFo2ECCTkxzWesFyEA+Xr\/L0FtS+Ai4EL0lG0Wzbqijh+iN4xR6bSBTTPMpSeojrKcM5kGKE9Blowj3QZScNPksRESCtTaQYBPSoRwVHI66O5RfRXKPhU\/zF+lon5vo6EITy1UmK2Cn3UiygXQzVWGF8uZGHG90WsdX\/2kSHMSG5R5CcxhJ99KMI+nqYT6ra7SBVEc89AB6Q6vwDJ3sxuR0Se\/djftF2FzzGkELv1sEWj7khyMOARtInLnoUYkKTag\/IAwC8oOs483c9tDoaF+XJaNo1g11\/4V6lBnJOmwgGYQbEyhM4LPcn0w2Pw3d6Eg\/omaZm2+oB\/oVsoEEmowOpejN7BucTyePYkzwSsSCjK5LEVUzv2NogyXLl7R73ckEnhrIyQI8nAkMTKDno2YKdbSpWfKMqC8ar+p6bCDVEQ87gI4C9aYeNtEDiXHEzO49FbtPEJzirRTRHvAk0KWzX5YdjQjYQBqB97DTEFDBW2MiEaC8n0VEvWGtG+rwJLJcNy0I2EBaUB9jTH1SRwVyjKzKZ6EztJ6OmKNrjq6v\/G9R0B5tIEEnpgNZOvqzDRe+0wAABRNJREFUgdyeLPGBF3F76xivRtfM5VM0wpPlGNQmVDGUgUw4f61S5o3L2LyJaR23CYjT27c3C\/MqegkERT1zWp6F6PcRvY4TCdhAToQ90FAqhM8GyqlmKroxrct+Nccq1bcKdNTijMER5OuzECg0CBtIA+gecjoC3Jim2EW9MX1pQtBL8NoKE2Gz00M31Hsy5tMh1RzQBlKT7rh9v5JT+yi3bu4T0Ne9RL0kdCkDnYVE1hzd5C5xHWadDWSYqTw1ER2R6s176uCdDiZWYtdDGmgm0ExE1NyDyUXkVkSTDaQIxsOd9NSBCgmFpSfdrbXCi0CHGLIcPaIX6B6ZRp\/z1fpsIKtRecNMQMVPl2TyajcrCEQvxpdSWBZozf2l7VquW2psqWO6sW0g0025E25IYFnoohbjS3ikO+q9kGPGfCljr1tFwAayCpM3WhDQJ15UVBYveXEFAXGLWowvpaACjekRl7ZpuU5MI2pryaX62DaQ6oiHG0BvUr1ph0uwckLLYlx5qGLdM9cEHWr+WY4U0fVFYlVMiw2kGMpZO3LeGwlQ6L7I+3ya2x4aGV\/UM6fo+nqY480abSCbkU29g\/7ilyI4NYiDyb+T9+donshPQzfMOYHIiJoja4PZkGEDGXJaqyXFX1LT+Uv8cOwmQLHr8YhZmj\/cnXndHXVmF9HgqmTeulMbSOsZ6Gt8vUEpgH0pj6eWszk4UuxYjqfwqSL08jvAgUREzWhDNUxpHZUJ2EAqAx6s+1\/mfH6bWzfHCOiInvsK7x7r6rS9dfkNzdFMRDz1ScHToMw6kA1k1pnfl\/fP025\/TfGDFP0\/2mfAEf3HWcabuY3eoFmFGhOJdLSPNvhF0oSeYcMGMuzUVksME6nW+YQd89X4FD6KXrQj+mvTgc6liVzbrsV6WDIuPGkdFQnYQCrCddcmsJLAshj38g3HmAjFmkLN8spUT9sMXacNNutABwxkVmTO2wSKE6AQ61LWW6n3iAU5yXryWBpfFM3S5PsgT6ar\/AobSHmm7tEE9hDgUpaKH\/cWohTkW7lgfPpPndAc4agfTWiOoAUdQ4cNZOjpdXKdEcA0VplIoLwo2NL8XiBdSLGJQKFi2EAqwnXXJrCDwGMToUDv6ObUXdD8WRrxtRSfp2j96IFZa0ZFxreBFMHoTkygKAEKso7quZbP86IDVOjsp6lP\/pCPPzJ8npZ99J8gjP6Y00BGn1XnNwIBTEMmwv0FnkfP69UkUJr5osgeNCfJfuwlYAPZS877mUB9AhRgFeReTCSCZv1vmT4Lqvw7agOpDNjdm8BBAhEK8tYUbmne2pe3D0zABhJ4cizNBDKBZUHmnkheHbpZaubsiUtaZwnWTfReWJ3Fpfg4NpDiSN2hCVQhQEHma\/T1dxdVBincKZqll8tJZ91c59NgpMINfVpHJQI2kEpga3Xrfk2gMwKcDWB8tEjnTARjYblWvJw71r2Q\/NRNaQI2kNJE3Z8JmMAlApyJqKDrklZtI+FjxZe0eF0hAjaQQiDdjQmYwF0CXMbSp8pYxkhqmIi+Gl9nPXeFrdvAWz0mYAN5TMTPTcAEahLAMLikJSPBRLg3wvpS4+oeiA2kFNEr\/dhAroDxahMwgaoEMIzHRlLi\/gj9IlzfbsyyoxIBG0glsO72CQGvMIFLBCj4OhspcVmLMxrG8f0PKFQOG0hlwO7eBEzgLgFM5PHZCJe1dEaCsdztJG3wtxQ8uFlPnyw7KhL4PwAAAP\/\/ThWyqgAAAAZJREFUAwCFbVvVgxzX0AAAAABJRU5ErkJggg==",
+    "firma_autorizado": "",
+    "tipo_ejecucion": "Preventivo, Planeado",
+    "trabajo_realizado": "Se tomó foto térmica del motor, se midió amperaje en el tablero eléctrico, se realizó lubricacion y respectiva limpieza, equipo en buen estado y funcional.",
+    "fecha_cierre": "2026-06-24",
+    "hora_cierre": "09:40",
+    "tipo_responsable": "Miembro De La Compañia",
+    "nombre_responsable": "Anderson Tutalcha, Carlos Chagueza ",
+    "vobo_mantenimiento": "Andres Ortega",
+    "insumos_riesgo": "Si, grasa ",
+    "retirados_zona": "Si",
+    "novedad_inocuidad": "Ninguna ",
+    "condiciones_higienicas": "Si",
+    "implementos_limpieza": "Wypall y brocha ",
+    "fecha_revisionl": "",
+    "hora_revisionl": "",
+    "firma_respLim": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAALfElEQVR4AeydPbLkNBSFGyIyoEjIgIAYWAEQEVKsgGEHwwqAkAh2AOyCDNgB5FTBREMEkxIN95vyqWd6+nXblmT9+LzyfZJt6f4cPZ26Utv9Xjz5xwgYASPQCQImrE4Gym4aASNwOpmw\/FdgBIxANwiYsLoZqnRHrcEI9I6ACav3EbT\/RuBACJiwDjTYDtUI9I6ACav3EbT\/RuASAoNeM2ENOrAOywiMiIAJa8RRdUxGYFAETFiDDqzDMgIjImDCujSqvrYUgYfR8McQH0ZgFwRMWLvAPKSRxxHVNyEfhTwN+SDEhxEoioAJqyi8wyr\/PiJ7PeRJyN8hHN\/xy2IESiJgwiqJ7pi6v4ywPg3heDV+vRbyV8ibIRBZFD0d9rUnBExYPY1WG75+Mbnx1VRSfM2vEIjMS8MAwkcZBExYZXAdVevPU2C\/RkmmFcWz49v4LQL7Keq9HHxo8Ec4i7APR4aoGOOyj9YQMGG1NiJt+\/P+5N4PUzkvILA\/pwutkxZZID7yoQFLWQTXyRCJEfIycYFIY5JIWI1FY3dKIgAhoZ9MioyK+rl8Nl2AEMheptOmCrIoyAofcezz+PVhyAshEDES1ZOIS3FzzVIZARNW5QHoyLz2rq65TFaiCU\/2cq1tjXuQFFkUtlnWQlKQL35z7UH8QriuOIgbkotbPmojYMKqPQJ92J9nGfP6Je+Z8CIAMplLbWpdkz+Q0Xs3nCAOskmaQXIsEyE8zi2VEDBhVQK+M7NkGbisCUz9mrDE4j4TvJXshI11fCIGyIj6LYGcybbmBKz6rb6+XwABE1YBUAdTyaRVSPO6rt1XsjfEPbITypqC39pYp77WFwgYoqMfe1tbdNDXkoiACSsRwAN0J0siTJZRlEtlvjdUe4KvzRAvxUgMIi30cX6pna8VRMCEVRDcQVSTURDK0mUUbSXzCS7i0729Si1J8SWVZOiPHnwfmrQIsEUxYbU4Ku34xATFG01S6muE\/R6EPrXeNdSSVLHgS4qgR3hAWiLEFJ3uuxABE9ZCoNxsMwLs\/9CZPSQmO\/W9RPZEMLnsolc6IUTOc+m2nisImLCugONbJzIIYEidkJrc6NtzaYi9HP6j41zAZB4X5+dtfJ4ZARNWZkBRN4hoAmpJlxIWuqRHJJKib0lfbNJOpEI9t2BD+omL89w2rG+GgAlrBoarFxH45eLV9Re1NCTD2mNiQyDrvVzfg1jmpOU9rfUYLu5hwloM1eEaasIzIXMFL9JCN8SVS++5nrnunP6f29E5NvTYB3tac\/tq4zIDAiasDCAOqEJZAu\/b5QyPZaG+0QHSyql7rkuEIRKZ38tbv9PGYx\/KtPQK0N1d17IgYMLKAuOwSn4rENn8Gx1ELAXMPFMpcnx2ssMvMq1\/ww4ShY\/cCJiwciM6hj6WNUSiTIt6LiHLUiZS6tksZW\/YyuX3Uj0vRUMkCh+5ETBh5UZ0LH2lJjyZCEjxbFbJLKuU\/\/huqYBAXcKqELBN3kRAZKIs6GaHjQ1EJsqGNqp5rpv833P\/6jknfKEMAiasMrj2rFXvDpaOoRQhkrWV9t36KyFgwqoEfMNmtURTplLKVTIsBHtILjtvTIr23nCfzLooiYAJqyS6\/enWJjtEktn7q+pyLwsxtncM2LQURsCEVRjgTtU\/2slvLQvfzWhP2ZoJKyOoragyYbUyEm34oeWUMq3SXkEqLN1eCUMimqj6MAKXETBhXcblqFdFGhDJXhhAWLls1fA\/l+8j6SkWiwmrGLTdKa412bUszLGPxesxAL\/XkhZblh0RMGHtCHbjpkRYub6dYWm4yuZkf2k\/tzsgAiasAw56gyE\/mXxKJS0tL1VOal2MgoAJq72RrOWRHhhVxrOnH59MxnIsCydVLkZEwIQ14qhui0nZTQ3Ckk35sC0C9xoeARPW8EO8KMCHU6uaS6mn4QMSxeajZpa42Wl3XI6ACWs5ViO35Dko4tt7wx2bEv4WEZ0fonSQ6xDwH8g6vEZvXTPDyoGtX3zOgWLDOkxYDQ\/Ojq5pKbWjSZsyAusRMGGtx2zkHtr87jXG3jPEXnHfze+uCWs3lMY3pE\/neies8Ufq4BGasA7+B+DwjUBPCJiwehot+2oEDo6ACevgfwDdhL\/MUX9KuAynbluZsLodOjtuBI6HgAnreGM+csT+lHDk0Y3YTFgBgo+TPh3Up4Un\/xiBegjcb9mEdT82R7qjV3OOFLNj7RABE1aHg1bAZRFWzn8GUcDNmyq96X4Tor4bmLD6Hr9c3mvv59dcCq3HCJRAwIRVAtWqOjcZ17c09L6HJeLdBII7tY+ACav9MbKH9RDoncDrIVfIsgmrELBWWwWBnJnilxHBTyEmrQChlcOE1cpI1PVDjzWM8jUzOTffWyasun81FaybsCqA3rDJFxr2bYlr+u87OYhXOkTmS+y7TWEETFiFAe5EvR5n0CTtxO3n3NSnnN58fw6aMS6YsMYYx9Qovg0FyiR6XgLljEE4SGdA5KM2AkcmrNrYt2b\/q8kh\/2\/ACQgX7SFgwmpvTGp5pEyCzAKp5UeqXS0He44hFYNh+5uwhh3aTYFpsj\/Y1LuNTp9NbjhTnIAYqTBhjTSa6bFosn+arqq6hv9lWBu8mWecG7q7SwkETFglUO1XJ5MUIQIenKTsTfBfmeLDBOf1LFfP2WZC+G12NWG1OS41vRph811PvH+cAKSyzTcSdLhrZgRMWJkBHUAdGQpCKHtkWalLN\/w8l+\/PLySc6xm1BBXumguBRYSVy5j1dIPAnlkW7+s9zYyMCDeFDKVD3xWW2UWr24KACWsLauP3YbJqHwhCKRkxttCfQi70P5ccenPoOPfL5wkImLASwBu8q\/ZwIBKkVLilsjntY32X4Lg23r0sTAAxZ1cTVk40R9B1FwPZRSkyubNyOmHnFD+QIhLVLIdehE5RJh16RzFFl\/tmQMCElQHEgVWw6Q6hQCTUS4Wq5WdO\/Xo\/kiwJ\/7foVmYFBlv6u09mBExYmQEdUN08y9o68WvD4qfea49AJvsmrExADqyG7EL7QaU34HPDKLIly1qrW+RcIvtb60uh9v2pNWH1N2Y1PGbyQlzY7om08BnCgbC2LmnpT9yWBhAwYTUwCJ248OHk55y8pktNF\/q0c+2ykDgJTNkldUtlBExYlQegM\/MiLb6ZVBO69RDIskQ6a56AV3xkZ63HeBj\/TFibh\/qQHZn82hdam7HUBEzLQb6FQkR0yx9ImTZrSI72loIImLAKgjuoaiY\/xMXEp8wRpp53yqHrkg781F7UN5canF0jNl2ir+ouKyNgwqo8AJ2aV5ZFFgKBpYaxx7LrrXCSB0B5tupW1vQg2nJoKUnd0gACJqwGBqFDF8g6RFosDVNJSy8Yo7ckHD9MylkaXrPFfZoq06JuaQABE1YDg9CpC5DUnLRuZS33hYke7l0jEO7nEJ5+n39wwLdEyL70\/zhVnF1NQLRUmLBaGo3+fGGyz7MWztdGoSzm0dqOG9tDjPzDWBESGSLE9Tj0\/RPyUQiH\/KJuaQQBE1YjA9GxG+z3pGRaL0+xb83Qpu6rCwgJv0Vcr4cGlqa\/RwmhReGjNQT2IKzWYrY\/+REgs2Lyo5n9H86pLxE2wWlH5kO5p+AnxAVBfR6Gkbej9NEoAiasRgemQ7eY\/Ex4XGeZteQVHvrQvgVhfwtpwRf7cA8CJqx7gPHlTQgw4bWpTebC3tA1UqINhrQPRt1iBO5FwIR1LzS+sQWB6MPSjiWW9obIti7tT3GN57iiy4l9sJN\/jMAtBExYtxDy\/a0IkD0pc2Jfi2yLBzeRP0Ip16I4ae+LusUIXEXAhHUVHt9MRIDMCULSqzfvhD5ET7ZDaNeWjNHchxG4Q8CEdYeFa2UQgJBeDdXsbUFQCJvzLBshtLjlo0sEKjhtwqoA+kFNsrcFQSFszh8UBoedgsB\/AAAA\/\/\/sWytKAAAABklEQVQDAKQMNNhOU7VJAAAAAElFTkSuQmCC",
+    "firma_respLim2": "",
+    "control_responsable": "Manuel armando jojoa",
+    "cargo_control": "Lider de mantenimiento mecanico",
+    "trabajo_realizar_control": "Mantenimiento preventivo ",
+    "fechacontrol": "2026-06-24",
+    "tool_cant": [
+        "1",
+        "1",
+        "1"
+    ],
+    "tool_desc": [
+        "Camara Fluke ",
+        "Pinza amperimetrica ",
+        "Grasera "
+    ],
+    "tool_salida": [
+        "1",
+        "1",
+        "1"
+    ],
+    "part_cant": [
+        ""
+    ],
+    "part_desc": [
+        ""
+    ],
+    "part_used": [
+        ""
+    ],
+    "part_unused": [
+        ""
+    ],
+    "part_removed": [
+        ""
+    ],
+    "part_verif": [
+        ""
+    ],
+    "mat_cant": [
+        "38"
+    ],
+    "mat_unidad": [
+        "Gramos "
+    ],
+    "mat_desc": [
+        "Grasa parafina 177 premium"
+    ],
+    "mat_used": [
+        "30"
+    ],
+    "mat_verif": [
+        "0"
+    ],
+    "vobo_ingreso_control": "Andres Ortega ",
+    "vobo_salida_control": "Andres Ortega "
+}

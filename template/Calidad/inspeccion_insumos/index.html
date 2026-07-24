@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPECCIÓN DE INSUMOS - MICROINGREDIENTES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1800px; margin: 0 auto; }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "V1 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title { color: var(--text-muted); font-size: 14px; }
+
+        .doc-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .doc-meta-item {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: var(--r-sm);
+        }
+
+        .doc-meta-item span { color: var(--accent); font-weight: 700; }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 10px auto;
+            padding-right: 32px;
+            cursor: pointer;
+        }
+
+        select.form-control option { background-color: var(--panel-bg); color: var(--text-main); }
+        select.form-control option.opt-custom { color: var(--warning); font-style: italic; }
+
+        input[type="date"].form-control,
+        input[type="time"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        .instrucciones-box {
+            background: rgba(255, 176, 0, 0.05);
+            border: 1px solid rgba(255, 176, 0, 0.2);
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--warning);
+            line-height: 1.6;
+        }
+        .instrucciones-box strong { font-weight: 700; }
+
+        /* ─── Tabla de insumos ─── */
+        .table-scroll { overflow-x: auto; }
+
+        .insumos-table {
+            width: 100%;
+            min-width: 1500px;
+            border-collapse: collapse;
+            margin-top: 4px;
+        }
+
+        .insumos-table thead th {
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 10px 6px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .insumos-table tbody tr:hover td { background: rgba(0, 240, 255, 0.025); }
+
+        .insumos-table tbody td {
+            padding: 5px 5px;
+            border: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .insumos-table tbody td .form-control {
+            padding: 8px 8px;
+            font-size: 12.5px;
+            min-width: 110px;
+        }
+
+        .ins-custom-input {
+            margin-top: 5px;
+            border-color: var(--warning) !important;
+            min-width: 140px !important;
+        }
+        .ins-custom-input:focus { box-shadow: 0 0 0 3px rgba(255, 176, 0, 0.15) !important; }
+
+        .pct-cell {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            text-align: center;
+            color: var(--accent);
+            min-width: 70px !important;
+        }
+
+        .btn-remove-row {
+            background: transparent;
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            color: var(--danger);
+            width: 30px;
+            height: 30px;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            transition: all 0.2s;
+        }
+        .btn-remove-row:hover {
+            background: rgba(255, 51, 102, 0.1);
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+
+        .btn-add-row {
+            margin-top: 14px;
+            background: transparent;
+            border: 1px dashed rgba(0, 240, 255, 0.35);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-add-row:hover {
+            background: rgba(0, 240, 255, 0.05);
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.1);
+        }
+
+        .results-box {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--accent);
+            border-radius: var(--r-md);
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .result-item { text-align: center; }
+        .result-value { font-family: 'Space Mono', monospace; font-size: 26px; font-weight: 700; color: var(--accent); }
+        .result-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70%  { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;">
+            <div>
+                <h1 class="main-title">Inspección de Insumos — Microingredientes</h1>
+                <div class="sub-title">PPR Almacenamiento — Recibo y Almacenamiento de Materiales</div>
+                <div class="doc-meta">
+                    <div class="doc-meta-item">Código: <span>PD-RA-AM-FO-004</span></div>
+                    <div class="doc-meta-item">Versión: <span>1</span></div>
+                    <div class="doc-meta-item">Fecha Doc: <span>4/10/2023</span></div>
+                </div>
+            </div>
+            <a href="/template/menu_adm_calidad.html" class="btn-back">← VOLVER</a>
+        </div>
+    </div>
+
+    <form id="insumosForm">
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Información General</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha Inspección</label>
+                    <input type="date" name="fecha_inspeccion" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Hora Inspección</label>
+                    <input type="time" name="hora_inspeccion" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Planta</label>
+                    <input type="text" name="planta" class="form-control" placeholder="Ej: Planta Microingredientes" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Inspeccionado por</label>
+                    <input type="text" name="inspeccionado_por" class="form-control" placeholder="Nombre del inspector" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Verificado Por</label>
+                    <input type="text" name="verificado_por" class="form-control" placeholder="Nombre de quien verifica" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLA DE INSUMOS -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Inspección de Materia Prima</div>
+
+            <div class="instrucciones-box">
+                <strong>INSTRUCCIONES:</strong> Diligencie las casillas con la información correspondiente de acuerdo al encabezado.
+                Tenga en cuenta para la sección de preguntas <strong>CUMPLE = 1</strong>; <strong>NO CUMPLE = 0</strong>.
+            </div>
+
+            <div class="table-scroll">
+                <table class="insumos-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width:170px;">Materia Prima</th>
+                            <th>Lote Interno</th>
+                            <th>Lote Proveedor</th>
+                            <th>Fecha Vencimiento</th>
+                            <th>Proveedor</th>
+                            <th>¿Producto vigente?</th>
+                            <th>¿Producto etiquetado?</th>
+                            <th>¿Producto libre de plagas?</th>
+                            <th>¿Envase y/o embalaje en buen estado?</th>
+                            <th>¿Lote interno corresponde al sistema (SAP)?</th>
+                            <th>% Cumplimiento</th>
+                            <th style="min-width:160px;">Observaciones</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="insumosTbody">
+                        <!-- filas generadas por JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <button type="button" id="btnAgregarInsumo" class="btn-add-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                AGREGAR MATERIA PRIMA
+            </button>
+
+            <div class="results-box">
+                <div class="result-item">
+                    <div class="result-value" id="resItems">0</div>
+                    <div class="result-label">Ítems Registrados</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="resPorcentaje">0%</div>
+                    <div class="result-label">% Cumplimiento Promedio</div>
+                </div>
+            </div>
+
+            <input type="hidden" name="promedio_cumplimiento" id="inputPromedio">
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            REGISTRAR INSPECCIÓN
+        </button>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO — AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    const MATERIAS_PRIMAS = [
+        'Acido Ascorbico',
+        'Dimodan',
+        'Alfamilasa A-1000',
+        'Xilanasa 7200',
+        'Propionato de calcio',
+        'Vitamina Dcto 1944',
+        'Vitamina NTE 616',
+        'Glicolipasa 4200',
+        'Surebake 900',
+        'Hydrosoft 500',
+        'Azodicarbonamida 50%',
+        'Powerfresh 9705',
+    ];
+
+    let rowCount = 0;
+
+    function buildSelectOptions() {
+        let opts = '<option value="">— Seleccionar —</option>';
+        MATERIAS_PRIMAS.forEach(m => { opts += `<option value="${m}">${m}</option>`; });
+        opts += '<option value="__custom__" class="opt-custom">✏ Personalizado...</option>';
+        return opts;
+    }
+
+    function buildEvalOptions() {
+        return `
+            <option value="">—</option>
+            <option value="1">CUMPLE (1)</option>
+            <option value="0">NO CUMPLE (0)</option>`;
+    }
+
+    function addRow(nombre = '') {
+        const idx = rowCount++;
+        const isCustom = nombre && !MATERIAS_PRIMAS.includes(nombre);
+        const tbody = document.getElementById('insumosTbody');
+
+        const tr = document.createElement('tr');
+        tr.className = 'ins-row';
+        tr.dataset.idx = idx;
+        tr.innerHTML = `
+            <td>
+                <select class="form-control ins-select">${buildSelectOptions()}</select>
+                <input type="text" class="form-control ins-custom-input" placeholder="Nombre del insumo..." style="display:none;" value="${isCustom ? nombre : ''}">
+            </td>
+            <td><input type="text" class="form-control ins-lote-interno" placeholder="Lote interno"></td>
+            <td><input type="text" class="form-control ins-lote-proveedor" placeholder="Lote proveedor"></td>
+            <td><input type="date" class="form-control ins-fecha-venc"></td>
+            <td><input type="text" class="form-control ins-proveedor" placeholder="Proveedor"></td>
+            <td><select class="form-control ins-eval" data-campo="eval_vigente">${buildEvalOptions()}</select></td>
+            <td><select class="form-control ins-eval" data-campo="eval_etiquetado">${buildEvalOptions()}</select></td>
+            <td><select class="form-control ins-eval" data-campo="eval_plagas">${buildEvalOptions()}</select></td>
+            <td><select class="form-control ins-eval" data-campo="eval_envase">${buildEvalOptions()}</select></td>
+            <td><select class="form-control ins-eval" data-campo="eval_sap">${buildEvalOptions()}</select></td>
+            <td class="pct-cell ins-pct">—</td>
+            <td><input type="text" class="form-control ins-observaciones" placeholder="Observaciones"></td>
+            <td>
+                <button type="button" class="btn-remove-row" title="Eliminar fila">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </td>`;
+
+        tbody.appendChild(tr);
+
+        const select = tr.querySelector('.ins-select');
+        const customInput = tr.querySelector('.ins-custom-input');
+
+        if (isCustom) {
+            select.value = '__custom__';
+            customInput.style.display = 'block';
+        } else if (nombre) {
+            select.value = nombre;
+        }
+
+        select.addEventListener('change', () => {
+            if (select.value === '__custom__') {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+                customInput.value = '';
+            }
+        });
+
+        tr.querySelectorAll('.ins-eval').forEach(sel => {
+            sel.addEventListener('change', () => { calcularFilaPct(tr); calcularResultados(); });
+        });
+
+        tr.querySelector('.btn-remove-row').addEventListener('click', () => {
+            tr.style.transition = 'opacity 0.2s';
+            tr.style.opacity = '0';
+            setTimeout(() => { tr.remove(); calcularResultados(); }, 200);
+        });
+    }
+
+    function calcularFilaPct(tr) {
+        const selects = tr.querySelectorAll('.ins-eval');
+        let suma = 0, evaluados = 0;
+        selects.forEach(s => {
+            if (s.value === '1' || s.value === '0') { evaluados++; suma += parseInt(s.value); }
+        });
+        const pctCell = tr.querySelector('.ins-pct');
+        if (evaluados === 0) { pctCell.textContent = '—'; tr.dataset.pct = ''; return; }
+        const pct = (suma / evaluados) * 100;
+        pctCell.textContent = pct.toFixed(0) + '%';
+        tr.dataset.pct = pct.toFixed(2);
+    }
+
+    function calcularResultados() {
+        const filas = document.querySelectorAll('#insumosTbody .ins-row');
+        let sumaPct = 0, conPct = 0;
+        filas.forEach(tr => {
+            if (tr.dataset.pct) { sumaPct += parseFloat(tr.dataset.pct); conPct++; }
+        });
+        const promedio = conPct > 0 ? sumaPct / conPct : 0;
+        document.getElementById('resItems').innerText = filas.length;
+        document.getElementById('resPorcentaje').innerText = promedio.toFixed(1) + '%';
+        document.getElementById('inputPromedio').value = promedio.toFixed(2);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const hoy = new Date().toISOString().split('T')[0];
+        document.querySelector('[name="fecha_inspeccion"]').value = hoy;
+        addRow();
+        calcularResultados();
+        document.getElementById('btnAgregarInsumo').addEventListener('click', () => addRow());
+    });
+
+    document.getElementById('insumosForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const insumos = [];
+        document.querySelectorAll('#insumosTbody .ins-row').forEach(tr => {
+            const select = tr.querySelector('.ins-select');
+            const custom = tr.querySelector('.ins-custom-input');
+            const materia_prima = select.value === '__custom__' ? custom.value.trim() : select.value;
+
+            const loteInterno    = tr.querySelector('.ins-lote-interno').value.trim();
+            const loteProveedor  = tr.querySelector('.ins-lote-proveedor').value.trim();
+            const fechaVenc      = tr.querySelector('.ins-fecha-venc').value;
+            const proveedor      = tr.querySelector('.ins-proveedor').value.trim();
+            const observaciones  = tr.querySelector('.ins-observaciones').value.trim();
+
+            if (!materia_prima || (!loteInterno && !loteProveedor && !proveedor)) return;
+
+            const item = {
+                materia_prima,
+                lote_interno: loteInterno,
+                lote_proveedor: loteProveedor,
+                fecha_vencimiento: fechaVenc,
+                proveedor,
+                observaciones,
+                porcentaje_cumplimiento: tr.dataset.pct || null
+            };
+
+            tr.querySelectorAll('.ins-eval').forEach(sel => { item[sel.dataset.campo] = sel.value; });
+
+            insumos.push(item);
+        });
+
+        if (insumos.length === 0) {
+            Swal.fire({ title: 'Sin insumos diligenciados', text: 'Registre al menos una materia prima con información antes de guardar.',
+                icon: 'warning', background: '#151A22', color: '#fff', confirmButtonColor: '#FFB000' });
+            return;
+        }
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((v, k) => { jsonData[k] = v; });
+        jsonData.insumos = insumos;
+
+        const btn = document.getElementById('btnGuardar');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({ title: '¡REGISTRADO!', text: 'Inspección de insumos guardada correctamente. ID: ' + data.id,
+                    icon: 'success', background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                }).then(() => window.location.reload());
+            } else {
+                Swal.fire({ title: 'Error del Sistema', text: data.message || 'Error al procesar el registro.',
+                    icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+                btn.innerHTML = originalHTML; btn.disabled = false; btn.style.opacity = '1';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            Swal.fire({ title: 'Error de Conexión', text: 'No se pudo conectar con el servidor.',
+                icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+            btn.innerHTML = originalHTML; btn.disabled = false; btn.style.opacity = '1';
+        });
+    });
+</script>
+
+</body>
+</html>

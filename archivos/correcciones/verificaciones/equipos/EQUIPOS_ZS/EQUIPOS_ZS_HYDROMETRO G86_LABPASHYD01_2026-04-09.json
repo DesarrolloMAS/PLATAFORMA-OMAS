@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "HYDROMETRO G86_LABPASHYD01",
+    "nombre_maquina": "EQUIPOS_ZS",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "verificacion_equipos_ZS",
+    "estado_general": "El equipo se encuentra en buen estado",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "N\/A",
+    "Pulsador": "Cumple",
+    "cargador": "N\/A",
+    "Display": "Cumple",
+    "Bateria": "Cumple",
+    "Recipiente": "No cumple",
+    "Limpieza_Filtro": "Cumple",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "Se requiere cambio se recipiente o cambio de equipo",
+    "usuario": "Manuel Armando Jojoa",
+    "archivo_pdf": "EQUIPOS_ZS_HYDROMETRO G86_LABPASHYD01_2026-04-09.pdf"
+}

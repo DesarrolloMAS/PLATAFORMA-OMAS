@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e8e38b90c06",
+        "timestamp": "2026-04-22 15:04:43",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-21",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Extrapan x10",
+            "lote_empaque": "MP-00398",
+            "producto_envasar": "EXTRAPAN X 10",
+            "lote_producto": "210426B",
+            "fecha_vencimiento": "21042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-21",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "201",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "201",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

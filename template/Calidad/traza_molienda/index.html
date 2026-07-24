@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAZABILIDAD DE MOLIENDA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* HEADER */
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-box::before {
+            content: "V1 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .main-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        .sub-title { color: var(--text-muted); font-size: 14px; }
+
+        /* SECTION CARDS */
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .section-card:hover { border-color: rgba(0,240,255,0.3); box-shadow: 0 5px 20px rgba(0,240,255,0.05); }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0,240,255,0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0,240,255,0.2);
+        }
+
+        /* FORM GENERAL */
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 12px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,240,255,0.1); }
+        input[type="date"].form-control { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); }
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 10px auto;
+            padding-right: 28px;
+            cursor: pointer;
+        }
+        select.form-control option { background-color: var(--panel-bg); color: var(--text-main); }
+
+        /* TABLA MULTIFILA (Acondicionamiento / Molienda) */
+        .table-scroll { overflow-x: auto; }
+        .traza-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 780px;
+        }
+        .traza-table th {
+            background: rgba(0,240,255,0.08);
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+        .traza-table td {
+            border: 1px solid var(--border-color);
+            padding: 6px 6px;
+            vertical-align: middle;
+        }
+        .traza-table .row-label {
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.02);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .traza-table input.form-control {
+            padding: 7px 8px;
+            font-size: 13px;
+            min-width: 0;
+        }
+        .cell-pair { display: flex; gap: 4px; align-items: center; }
+        .cell-pair input { flex: 1; min-width: 0; }
+        .cell-sep { color: var(--text-muted); font-family: 'Space Mono', monospace; font-size: 14px; }
+
+        /* TABLA CONTROL PRODUCTO */
+        .control-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 900px;
+        }
+        .control-table th {
+            background: rgba(0,240,255,0.08);
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            padding: 10px 6px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .control-table td {
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            vertical-align: middle;
+        }
+        .control-table input.form-control {
+            padding: 6px 7px;
+            font-size: 12px;
+            text-align: center;
+        }
+        .row-num {
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* MEZCLAS TRIGO */
+        .mezclas-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 16px;
+        }
+        .mezclas-table th {
+            background: rgba(0,240,255,0.06);
+            color: var(--text-muted);
+            font-size: 12px;
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .mezclas-table td { border: 1px solid var(--border-color); padding: 5px; }
+        .mezclas-table input.form-control { padding: 7px 8px; font-size: 13px; }
+
+        /* RUPTURAS TABLE */
+        .rupturas-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 700px;
+        }
+        .rupturas-table th {
+            background: rgba(0,240,255,0.08);
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            padding: 10px 6px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .rupturas-table td { border: 1px solid var(--border-color); padding: 5px; vertical-align: middle; }
+        .rupturas-table input.form-control { padding: 6px 7px; font-size: 12px; text-align: center; }
+        .banco-header { background: rgba(0,240,255,0.04) !important; }
+
+        /* BOTONES */
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .btn-back:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,240,255,0.05); }
+        .btn-add {
+            background: rgba(0,240,255,0.08);
+            border: 1px dashed rgba(0,240,255,0.4);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-add:hover { background: rgba(0,240,255,0.15); }
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-submit:hover { background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.6); transform: translateY(-2px); }
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+            100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+        }
+        .subsection-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 18px 0 10px;
+        }
+        .totales-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; margin-top: 20px; }
+        .firma-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; margin-top: 10px; }
+        .table-actions { display: flex; justify-content: flex-end; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header-box">
+        <div>
+            <h1 class="main-title">Trazabilidad de Molienda</h1>
+            <div class="sub-title">Control diario de acondicionamiento, molienda y producto en proceso</div>
+        </div>
+        <a href="/template/menu_adm_calidad.html" class="btn-back">← VOLVER</a>
+    </div>
+
+    <form id="frmTraza" autocomplete="off">
+
+        <!-- SECCIÓN 1: DATOS GENERALES -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Datos Generales</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha (DD/MM/AAAA)</label>
+                    <input type="date" id="fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Día</label>
+                    <input type="text" id="dia" class="form-control" placeholder="Ej: Lunes" readonly style="color:var(--accent);">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: ACONDICIONAMIENTO -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Acondicionamiento</div>
+            <div class="table-scroll">
+                <table class="traza-table" id="tablaAcond">
+                    <thead>
+                        <tr>
+                            <th style="width:160px;">Campo</th>
+                            <th>Lote 1</th>
+                            <th>Lote 2</th>
+                            <th>Lote 3</th>
+                            <th>Lote 4</th>
+                            <th>Lote 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">Ref. Harina</td>
+                            <td><input type="text" class="form-control acond-ref" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-ref" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-ref" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-ref" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-ref" placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Silo Acond.</td>
+                            <td><input type="text" class="form-control acond-silo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-silo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-silo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-silo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-silo" placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Fecha Mojo</td>
+                            <td><input type="date" class="form-control acond-fecha-mojo"></td>
+                            <td><input type="date" class="form-control acond-fecha-mojo"></td>
+                            <td><input type="date" class="form-control acond-fecha-mojo"></td>
+                            <td><input type="date" class="form-control acond-fecha-mojo"></td>
+                            <td><input type="date" class="form-control acond-fecha-mojo"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">HI Mojo (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hi-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hi-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hi-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hi-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hi-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hi-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hi-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hi-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hi-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hi-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">HF Mojo (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hf-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hf-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hf-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hf-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hf-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hf-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hf-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hf-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-hf-mojo-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control acond-hf-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Paradas HI-HF</td>
+                            <td><input type="text" class="form-control acond-paradas-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-hi-hf" placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Paradas Motivo</td>
+                            <td><input type="text" class="form-control acond-paradas-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control acond-paradas-motivo" placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Horas Mojo (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Totales y Mezclas -->
+            <div class="totales-grid">
+                <div class="form-group">
+                    <label class="form-label">Total Trigo (kg)</label>
+                    <input type="number" id="total_trigo" class="form-control" placeholder="0.00" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Trigo MYFC (kg)</label>
+                    <input type="number" id="total_trigo_myfc" class="form-control" placeholder="0.00" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Agua (L)</label>
+                    <input type="number" id="total_agua" class="form-control" placeholder="0.00" step="0.01">
+                </div>
+            </div>
+
+            <div class="subsection-label">Mezclas de Trigo</div>
+            <table class="mezclas-table">
+                <thead>
+                    <tr>
+                        <th style="width:40px;">#</th>
+                        <th>Trigo (variedad)</th>
+                        <th>Lote</th>
+                        <th>% Mezcla</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyMezclas">
+                    <tr><td class="row-num">1</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
+                    <tr><td class="row-num">2</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
+                    <tr><td class="row-num">3</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
+                    <tr><td class="row-num">4</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
+                </tbody>
+            </table>
+            <div class="table-actions">
+                <button type="button" class="btn-add" onclick="agregarMezcla()">+ Agregar fila</button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: MOLIENDA -->
+        <div class="section-card">
+            <div class="section-title"><span>03</span> Molienda</div>
+            <div class="table-scroll">
+                <table class="traza-table">
+                    <thead>
+                        <tr>
+                            <th style="width:160px;">Campo</th>
+                            <th>Turno 1</th>
+                            <th>Turno 2</th>
+                            <th>Turno 3</th>
+                            <th>Turno 4</th>
+                            <th>Turno 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">HI Molienda (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hi-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hi-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hi-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hi-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hi-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hi-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hi-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hi-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hi-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hi-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">HF Molienda (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hf-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hf-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hf-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hf-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hf-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hf-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hf-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hf-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-hf-h" placeholder="Hrs" min="0" max="23"><span class="cell-sep">/</span><input type="number" class="form-control mol-hf-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Paradas HI-HF</td>
+                            <td><input type="text" class="form-control mol-par-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-hi-hf" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-hi-hf" placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Paradas Motivo</td>
+                            <td><input type="text" class="form-control mol-par-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-motivo" placeholder="—"></td>
+                            <td><input type="text" class="form-control mol-par-motivo" placeholder="—"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Horas Molienda (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-horas-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-horas-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-horas-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-horas-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-horas-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-horas-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-horas-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-horas-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-horas-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-horas-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Horas Reposo (H/M)</td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-reposo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-reposo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-reposo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-reposo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-reposo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-reposo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-reposo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-reposo-m" placeholder="Min" min="0" max="59"></div></td>
+                            <td><div class="cell-pair"><input type="number" class="form-control mol-reposo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control mol-reposo-m" placeholder="Min" min="0" max="59"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: CONTROL PRODUCTO EN PROCESO -->
+        <div class="section-card">
+            <div class="section-title"><span>04</span> Control Producto en Proceso</div>
+            <div class="table-scroll">
+                <table class="control-table">
+                    <thead>
+                        <tr>
+                            <th style="width:32px;">#</th>
+                            <th>Hora</th>
+                            <th>Hum. Trigo (%)</th>
+                            <th>Hum. Harina (%)</th>
+                            <th>Granulometría</th>
+                            <th>Almidón Dañado</th>
+                            <th>Cenizas</th>
+                            <th>Ácido Ascórbico</th>
+                            <th>Verif. Bultos</th>
+                            <th>Peso Prom. (kg)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyControl">
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-actions">
+                <button type="button" class="btn-add" onclick="agregarControlFila()">+ Agregar fila</button>
+            </div>
+
+            <div class="firma-grid" style="margin-top:24px;">
+                <div class="form-group">
+                    <label class="form-label">Líder Turno Día</label>
+                    <input type="text" id="lider_dia" class="form-control" placeholder="Nombre y cédula">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Líder Turno Noche</label>
+                    <input type="text" id="lider_noche" class="form-control" placeholder="Nombre y cédula">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Analista de Calidad</label>
+                    <input type="text" id="analista_calidad" class="form-control" placeholder="Nombre y cédula">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 5: CONTROL DE RUPTURAS -->
+        <div class="section-card">
+            <div class="section-title"><span>05</span> Control de Rupturas</div>
+            <div class="table-scroll">
+                <table class="rupturas-table">
+                    <thead>
+                        <tr>
+                            <th style="width:32px;">#</th>
+                            <th class="banco-header" colspan="2">Banco T1</th>
+                            <th class="banco-header" colspan="2">Banco T2</th>
+                            <th class="banco-header" colspan="2">Banco T3</th>
+                            <th>Granulometría</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Derecha</th>
+                            <th>Izquierda</th>
+                            <th>Derecha</th>
+                            <th>Izquierda</th>
+                            <th>Derecha</th>
+                            <th>Izquierda</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyRupturas">
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-actions">
+                <button type="button" class="btn-add" onclick="agregarRupturaFila()">+ Agregar fila</button>
+            </div>
+        </div>
+
+        <!-- BOTÓN GUARDAR -->
+        <div class="section-card">
+            <button type="submit" class="btn-submit">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                GUARDAR TRAZABILIDAD
+            </button>
+        </div>
+
+    </form>
+
+    <div class="system-status">
+        <div class="status-dot"></div>
+        SISTEMA JSON INTERCONECTADO · TRAZABILIDAD DE MOLIENDA
+    </div>
+</div>
+
+<script>
+    const DIAS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+    // Auto-rellenar día
+    document.getElementById('fecha').addEventListener('change', function() {
+        const [y, m, d] = this.value.split('-').map(Number);
+        const fecha = new Date(y, m - 1, d);
+        document.getElementById('dia').value = DIAS[fecha.getDay()];
+    });
+
+    // Fecha por defecto = hoy
+    (function() {
+        const hoy = new Date();
+        const iso = hoy.toISOString().split('T')[0];
+        document.getElementById('fecha').value = iso;
+        document.getElementById('dia').value = DIAS[hoy.getDay()];
+    })();
+
+    // ------ TABLA MEZCLAS ------
+    let mezclasCount = 4;
+    function agregarMezcla() {
+        mezclasCount++;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="row-num">${mezclasCount}</td>
+            <td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td>
+            <td><input type="text" class="form-control mez-lote" placeholder="Lote"></td>
+            <td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td>`;
+        document.getElementById('tbodyMezclas').appendChild(tr);
+    }
+
+    // ------ TABLA CONTROL PRODUCTO ------
+    function crearControlFila(n) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="row-num">${n}</td>
+            <td><input type="time" class="form-control cp-hora" style="font-family:'Space Mono',monospace;font-size:12px;color:var(--accent);"></td>
+            <td><input type="number" class="form-control cp-hum-trigo" placeholder="%" step="0.01"></td>
+            <td><input type="number" class="form-control cp-hum-harina" placeholder="%" step="0.01"></td>
+            <td><input type="number" class="form-control cp-gran" placeholder="µm" step="0.01"></td>
+            <td><input type="number" class="form-control cp-almidon" placeholder="UCD" step="0.01"></td>
+            <td><input type="number" class="form-control cp-cenizas" placeholder="%" step="0.001"></td>
+            <td><select class="form-control cp-acido"><option value="">—</option><option value="Ausencia">Ausencia</option><option value="Presencia">Presencia</option></select></td>
+            <td><input type="number" class="form-control cp-bultos" placeholder="cant." min="0"></td>
+            <td><input type="number" class="form-control cp-peso-prom" placeholder="kg" step="0.01"></td>`;
+        return tr;
+    }
+    let controlCount = 0;
+    function agregarControlFila() {
+        controlCount++;
+        document.getElementById('tbodyControl').appendChild(crearControlFila(controlCount));
+    }
+    // Inicializar 8 filas
+    for (let i = 0; i < 8; i++) agregarControlFila();
+
+    // ------ TABLA RUPTURAS ------
+    function crearRupturaFila(n) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="row-num">${n}</td>
+            <td><input type="number" class="form-control rup-t1d" placeholder="%" step="0.1"></td>
+            <td><input type="number" class="form-control rup-t1i" placeholder="%" step="0.1"></td>
+            <td><input type="number" class="form-control rup-t2d" placeholder="%" step="0.1"></td>
+            <td><input type="number" class="form-control rup-t2i" placeholder="%" step="0.1"></td>
+            <td><input type="number" class="form-control rup-t3d" placeholder="%" step="0.1"></td>
+            <td><input type="number" class="form-control rup-t3i" placeholder="%" step="0.1"></td>
+            <td><input type="number" class="form-control rup-gran" placeholder="µm" step="0.01"></td>`;
+        return tr;
+    }
+    let rupturasCount = 0;
+    function agregarRupturaFila() {
+        rupturasCount++;
+        document.getElementById('tbodyRupturas').appendChild(crearRupturaFila(rupturasCount));
+    }
+    // Inicializar 6 filas
+    for (let i = 0; i < 6; i++) agregarRupturaFila();
+
+    // ------ HELPERS ------
+    function vals(cls) { return [...document.querySelectorAll('.' + cls)].map(el => el.value.trim()); }
+
+    function buildLotes(prefijos) {
+        // prefijos: array de arrays de class names por columna
+        // returns array of 5 objects
+        const lotes = [];
+        for (let i = 0; i < 5; i++) {
+            const obj = {};
+            prefijos.forEach(([key, cls]) => {
+                obj[key] = document.querySelectorAll('.' + cls)[i]?.value.trim() || '';
+            });
+            lotes.push(obj);
+        }
+        return lotes;
+    }
+
+    // ------ SUBMIT ------
+    document.getElementById('frmTraza').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Acondicionamiento - lotes
+        const acond_lotes = [];
+        for (let i = 0; i < 5; i++) {
+            acond_lotes.push({
+                referencia_harina: document.querySelectorAll('.acond-ref')[i]?.value.trim() || '',
+                silo: document.querySelectorAll('.acond-silo')[i]?.value.trim() || '',
+                fecha_mojo: document.querySelectorAll('.acond-fecha-mojo')[i]?.value || '',
+                hi_mojo_hrs: document.querySelectorAll('.acond-hi-mojo-h')[i]?.value || '',
+                hi_mojo_min: document.querySelectorAll('.acond-hi-mojo-m')[i]?.value || '',
+                hf_mojo_hrs: document.querySelectorAll('.acond-hf-mojo-h')[i]?.value || '',
+                hf_mojo_min: document.querySelectorAll('.acond-hf-mojo-m')[i]?.value || '',
+                paradas_hi_hf: document.querySelectorAll('.acond-paradas-hi-hf')[i]?.value.trim() || '',
+                paradas_motivo: document.querySelectorAll('.acond-paradas-motivo')[i]?.value.trim() || '',
+                horas_mojo_hrs: document.querySelectorAll('.acond-horas-mojo-h')[i]?.value || '',
+                horas_mojo_min: document.querySelectorAll('.acond-horas-mojo-m')[i]?.value || ''
+            });
+        }
+
+        // Mezclas
+        const mezclas = [];
+        const mez_trigo = document.querySelectorAll('.mez-trigo');
+        const mez_lote  = document.querySelectorAll('.mez-lote');
+        const mez_pct   = document.querySelectorAll('.mez-pct');
+        for (let i = 0; i < mez_trigo.length; i++) {
+            if (mez_trigo[i].value || mez_lote[i].value || mez_pct[i].value) {
+                mezclas.push({ trigo: mez_trigo[i].value.trim(), lote: mez_lote[i].value.trim(), porcentaje: mez_pct[i].value });
+            }
+        }
+
+        // Molienda - turnos
+        const mol_lotes = [];
+        for (let i = 0; i < 5; i++) {
+            mol_lotes.push({
+                hi_hrs: document.querySelectorAll('.mol-hi-h')[i]?.value || '',
+                hi_min: document.querySelectorAll('.mol-hi-m')[i]?.value || '',
+                hf_hrs: document.querySelectorAll('.mol-hf-h')[i]?.value || '',
+                hf_min: document.querySelectorAll('.mol-hf-m')[i]?.value || '',
+                paradas_hi_hf: document.querySelectorAll('.mol-par-hi-hf')[i]?.value.trim() || '',
+                paradas_motivo: document.querySelectorAll('.mol-par-motivo')[i]?.value.trim() || '',
+                horas_molienda_hrs: document.querySelectorAll('.mol-horas-h')[i]?.value || '',
+                horas_molienda_min: document.querySelectorAll('.mol-horas-m')[i]?.value || '',
+                horas_reposo_hrs: document.querySelectorAll('.mol-reposo-h')[i]?.value || '',
+                horas_reposo_min: document.querySelectorAll('.mol-reposo-m')[i]?.value || ''
+            });
+        }
+
+        // Control Producto
+        const control_producto = [];
+        const cpRows = document.querySelectorAll('#tbodyControl tr');
+        cpRows.forEach(tr => {
+            const flds = {
+                hora: tr.querySelector('.cp-hora')?.value || '',
+                humedad_trigo: tr.querySelector('.cp-hum-trigo')?.value || '',
+                humedad_harina: tr.querySelector('.cp-hum-harina')?.value || '',
+                granulometria: tr.querySelector('.cp-gran')?.value || '',
+                almidon_danado: tr.querySelector('.cp-almidon')?.value || '',
+                cenizas: tr.querySelector('.cp-cenizas')?.value || '',
+                acido_ascorbico: tr.querySelector('.cp-acido')?.value || '',
+                verificacion_bultos: tr.querySelector('.cp-bultos')?.value || '',
+                peso_promedio: tr.querySelector('.cp-peso-prom')?.value || ''
+            };
+            if (Object.values(flds).some(v => v !== '')) control_producto.push(flds);
+        });
+
+        // Control Rupturas
+        const control_rupturas = [];
+        const rupRows = document.querySelectorAll('#tbodyRupturas tr');
+        rupRows.forEach(tr => {
+            const flds = {
+                t1_derecha: tr.querySelector('.rup-t1d')?.value || '',
+                t1_izquierda: tr.querySelector('.rup-t1i')?.value || '',
+                t2_derecha: tr.querySelector('.rup-t2d')?.value || '',
+                t2_izquierda: tr.querySelector('.rup-t2i')?.value || '',
+                t3_derecha: tr.querySelector('.rup-t3d')?.value || '',
+                t3_izquierda: tr.querySelector('.rup-t3i')?.value || '',
+                granulometria: tr.querySelector('.rup-gran')?.value || ''
+            };
+            if (Object.values(flds).some(v => v !== '')) control_rupturas.push(flds);
+        });
+
+        const payload = {
+            fecha: document.getElementById('fecha').value,
+            dia: document.getElementById('dia').value,
+            acondicionamiento: {
+                lotes: acond_lotes,
+                total_trigo: document.getElementById('total_trigo').value,
+                total_trigo_myfc: document.getElementById('total_trigo_myfc').value,
+                total_agua: document.getElementById('total_agua').value,
+                mezclas_trigo: mezclas
+            },
+            molienda: { turnos: mol_lotes },
+            control_producto: control_producto,
+            lider_turno_dia: document.getElementById('lider_dia').value.trim(),
+            lider_turno_noche: document.getElementById('lider_noche').value.trim(),
+            analista_calidad: document.getElementById('analista_calidad').value.trim(),
+            control_rupturas: control_rupturas
+        };
+
+        try {
+            const r = await fetch('procesar.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await r.json();
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: '¡REGISTRADO!',
+                    text: 'Trazabilidad guardada correctamente.',
+                    icon: 'success',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#00F0FF',
+                    confirmButtonText: 'ACEPTAR'
+                }).then(() => window.location.reload());
+            } else {
+                Swal.fire({ title: 'Error', text: data.message || 'Error al guardar.', icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+            }
+        } catch (err) {
+            Swal.fire({ title: 'Error de red', text: err.message, icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+        }
+    });
+</script>
+</body>
+</html>

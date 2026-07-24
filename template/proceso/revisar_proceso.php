@@ -70,7 +70,7 @@ $mpdf->Output($pdfRuta, 'F'); // Guardar el PDF en el servidor
     </style>
 </head>
 <body>
-    <h1 class="titulo_principal">Vista Previa del Archivo Excel <a class="boton" href="../redireccion.php">Volver</a></h1>
+    <h1 class="titulo_principal">Vista Previa del Archivo Excel <a class="boton" href="galeria_proceso_molienda.php">Volver</a></h1>
     <br><br><br><br><br>
     <a class="boton" href="procesar2.1.php?archivo=<?php echo urlencode($archivo); ?>">Corregir</a>
     <?php echo $htmlContent; ?>

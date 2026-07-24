@@ -65,7 +65,7 @@ $usuarios = obtenerUsuariosPorCargos($pdoUsuarios, $cargosFiltrados);
             </div>
             <div>
                 <label for="cantidad">Cantidad</label>
-                <input type="number" name="cantidad" placeholder="Peso en KG">
+                <input type="number" step="any" name="cantidad" placeholder="Peso en KG">
             </div>
             <div>
                 <label for="motivo">Motivo</label>

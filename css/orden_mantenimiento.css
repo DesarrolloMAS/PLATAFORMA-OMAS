@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+    --primary: #00f2ff;
+    --secondary: #006aff;
+    --accent: #ff0055;
+    --bg-dark: #0a0a0f;
+    --card-bg: rgba(20, 20, 30, 0.8);
+    --text: #e0e0e0;
+    --border: rgba(0, 242, 255, 0.2);
+    --success: #00ff88;
+    --warning: #ffcc00;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 106, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 85, 0.05) 0%, transparent 40%);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 20px;
+    position: relative;
+}
+
+header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+.section-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.section-card:hover {
+    border-color: var(--primary);
+}
+
+.section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary);
+    padding-left: 15px;
+    text-transform: uppercase;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+input, select, textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 12px;
+    color: white;
+    border-radius: 4px;
+    font-family: 'Barlow', sans-serif;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(10, 10, 15, 0.5);
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+}
+
+tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(0, 242, 255, 0.05);
+}
+
+th {
+    font-family: 'Space Mono', monospace;
+    color: var(--bg-dark);
+    background: var(--primary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs inside tables - Make them clearly recognizable but neat */
+td input, td select {
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px dashed rgba(0, 242, 255, 0.3);
+    border-radius: 4px;
+    padding: 8px;
+    color: var(--text);
+    transition: all 0.3s ease;
+}
+
+td input:hover, td select:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 242, 255, 0.5);
+}
+
+td input:focus, td select:focus {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.25);
+}
+
+.btn-delete-row {
+    background: rgba(255, 0, 85, 0.1);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.btn-delete-row:hover {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 10px var(--accent);
+    transform: scale(1.1);
+}
+
+.signature-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px dashed var(--border);
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+canvas {
+    background: white;
+    max-width: 100%;
+    height: 150px;
+    border-radius: 4px;
+}
+
+.signature-btns {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn-clear {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 15px;
+    font-size: 0.7rem;
+}
+
+.btn-clear:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(0, 106, 255, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}

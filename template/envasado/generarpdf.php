@@ -10,7 +10,7 @@ if ($zona === 'ZC'){
     $pdfCarpeta = $carpeta . '/../envasado_pdf/';
 }
 else{
-    $carpeta = realpath(__DIR__ . '/../../archivos/generados/envasado_zs/');
+    $carpeta = realpath(__DIR__ . '/../../archivos/generados/envasadozs/');
     $pdfCarpeta = $carpeta . '/../envasado_pdfzs/';
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['archivo'])) {

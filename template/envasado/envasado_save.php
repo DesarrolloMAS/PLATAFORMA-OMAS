@@ -7,12 +7,17 @@ $sede = $_SESSION['sede'];
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 // Define la carpeta de destino según la sede
+if ($sede === 'ZS') {
+    $carpetaDestino = '/var/www/fmt/archivos/generados/envasadozs/';
+} else {
     $carpetaDestino = '/var/www/fmt/archivos/generados/envasado/';
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recoge los datos del formulario
     $harina = $_POST['harina'] ?? 'FALLIDO'; // Dato enviado desde galeria_productos.php
+    $empaque = $_POST['empaque'] ?? 'FALLIDO'; // Dato enviado desde galeria_productos.php
     $fecha = $_POST['fecha'] ?? '';
     $hora = $_POST['hora'] ?? '';
     $loteP = $_POST['loteP'] ?? '';
@@ -56,8 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fila++;
     }
 
-    // Asigna los valores a las celdas (personaliza aquí según tu plantilla)
-    $sheet->setCellValue('F5', $harina);         // Personaliza la celda para harina
+    //valores a las celdas 
+    $sheet->setCellValue('G5', $harina);
+    $sheet->setCellValue('J5', $empaque);     
+    $sheet->setCellValue('B5', $sede);     
     $sheet->setCellValue('A' . $fila, $fecha);          // Fecha
     $sheet->setCellValue('B' . $fila, $hora);           // Hora
     $sheet->setCellValue('C' . $fila, $loteP);          // Lote de producto

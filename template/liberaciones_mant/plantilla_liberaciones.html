@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPR de Mantenimiento - GM-MM-MQ-ME-FO-005</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #c8922a;
+    --light-gray: #f4f5f6;
+    --mid-gray: #d0d4d9;
+    --dark-gray: #444c55;
+    --text: #1e2329;
+    --white: #ffffff;
+    --ok-color: #1e6b3c;
+    --nok-color: #9b1c1c;
+    --row-alt: #f9fafb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #dde2e8;
+    color: var(--text);
+    font-size: 11px;
+    padding: 20px;
+  }
+
+  .page {
+    background: var(--white);
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 10mm 10mm 12mm 10mm;
+    position: relative;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    display: grid;
+    grid-template-columns: 38mm 1fr 55mm;
+    border: 1.5px solid var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .header-logo {
+    border-right: 1.5px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    background: var(--white);
+  }
+
+  .logo-svg {
+    width: 90px;
+    height: 40px;
+  }
+
+  .header-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    text-align: center;
+    border-right: 1.5px solid var(--primary);
+  }
+
+  .header-title .main-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .header-title .sub-title {
+    font-size: 10.5px;
+    color: var(--dark-gray);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  .header-meta {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    font-size: 9.5px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 22mm 1fr;
+    border-bottom: 1px solid var(--mid-gray);
+  }
+
+  .meta-row:last-child { border-bottom: none; }
+
+  .meta-label {
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    padding: 2.5px 5px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 8.5px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .meta-value {
+    padding: 2.5px 5px;
+    display: flex;
+    align-items: center;
+    color: var(--dark-gray);
+    font-size: 9.5px;
+  }
+
+  /* ─── FORM INFO BAR ─── */
+  .info-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--primary);
+    border-top: none;
+    margin-bottom: 8px;
+  }
+
+  .info-field {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 8px;
+    border-right: 1px solid var(--mid-gray);
+  }
+
+  .info-field:last-child { border-right: none; }
+
+  .info-field-label {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .info-field-value {
+    font-size: 10.5px;
+    color: var(--dark-gray);
+    border-bottom: 1px solid var(--mid-gray);
+    min-height: 14px;
+    padding-bottom: 1px;
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .section-header::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  /* ─── TABLE ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+    table-layout: fixed;
+  }
+
+  thead tr {
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  th {
+    padding: 4.5px 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 8px;
+    text-align: left;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+
+  th:last-child { border-right: none; }
+
+  th.center { text-align: center; }
+
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: #eaf0f8; }
+
+  td {
+    padding: 3.5px 5px;
+    border-bottom: 1px solid var(--mid-gray);
+    border-right: 1px solid #e4e7ea;
+    vertical-align: middle;
+    color: var(--dark-gray);
+  }
+
+  td:last-child { border-right: none; }
+
+  td.center { text-align: center; }
+
+  .col-codigo   { width: 28mm; }
+  .col-nombre   { width: auto; }
+  .col-ubic     { width: 30mm; }
+  .col-cumple   { width: 15mm; }
+  .col-nocumple { width: 15mm; }
+  .col-obs      { width: 35mm; }
+
+  /* Status indicators */
+  .status-check {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--mid-gray);
+    border-radius: 2px;
+    position: relative;
+    background: var(--white);
+  }
+
+  .status-check.ok {
+    background: #dcfce7;
+    border-color: var(--ok-color);
+  }
+
+  .status-check.ok::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    color: var(--ok-color);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .status-check.nok {
+    background: #fee2e2;
+    border-color: var(--nok-color);
+  }
+
+  .status-check.nok::after {
+    content: '✗';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -52%);
+    color: var(--nok-color);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .check-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Location badge */
+  .loc-badge {
+    display: inline-block;
+    background: #eef2f7;
+    border: 1px solid #c8d4e3;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-size: 7.5px;
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  /* ─── ZONE SEPARATOR ─── */
+  .zone-separator {
+    background: linear-gradient(90deg, #eef2f7 0%, #f9fafb 100%);
+    border-left: 3px solid var(--accent);
+    padding: 4px 8px;
+    font-size: 8.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    border-bottom: 1px solid var(--mid-gray);
+  }
+
+  /* ─── RELEASE SECTION ─── */
+  .release-section {
+    margin-top: 10px;
+    border: 1.5px solid var(--primary);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .release-header {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .release-header::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  .release-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+  }
+
+  .release-field {
+    padding: 8px 10px;
+    border-right: 1px solid var(--mid-gray);
+  }
+
+  .release-field:last-child { border-right: none; }
+
+  .release-field-label {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .release-field-line {
+    border-bottom: 1px solid var(--mid-gray);
+    min-height: 18px;
+    margin-top: 4px;
+  }
+
+  .approval-options {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .approval-option {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    color: var(--dark-gray);
+  }
+
+  .approval-box {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--mid-gray);
+    border-radius: 2px;
+    background: var(--white);
+  }
+
+  /* ─── FOOTER ─── */
+  .doc-footer {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--mid-gray);
+    padding-top: 5px;
+  }
+
+  .footer-code {
+    font-size: 7.5px;
+    color: #888;
+    font-family: 'Courier New', monospace;
+  }
+
+  .footer-page {
+    font-size: 7.5px;
+    color: #888;
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: white; padding: 0; margin: 0; }
+    .page {
+      box-shadow: none;
+      margin: 0;
+      padding: 8mm 10mm;
+      width: 100%;
+      min-height: 0 !important;
+      height: auto !important;
+    }
+    .page:not(:last-child) {
+      page-break-after: always;
+      break-after: page;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    .print-btn, .sign-btn, .correct-btn, #jsonFileInput, #fileName { display: none !important; }
+    tbody tr:hover { background: inherit; }
+  }
+
+  /* ─── BOTÓN CORRECCIÓN ─── */
+  .correct-btn {
+    position: fixed; bottom: 24px; right: 490px;
+    background: #111827; color: white; border: none; padding: 12px 22px;
+    font-size: 13px; font-weight: 600; border-radius: 4px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35); display: flex; align-items: center; gap: 8px; z-index: 1000;
+    transition: all 0.3s;
+  }
+  .correct-btn:hover { background: #000; transform: translateY(-2px); }
+
+  /* ─── MODAL CORRECCIÓN ─── */
+  #correct-modal {
+    display: none; position: fixed; top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.75); z-index: 3000;
+    align-items: center; justify-content: center;
+  }
+  .correct-modal-box {
+    background: #1a1a2e; border: 1px solid #334155;
+    border-left: 4px solid #c8922a;
+    padding: 30px; border-radius: 8px; width: 440px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .correct-modal-box h3 {
+    font-family: 'Courier New', monospace; font-size: 13px;
+    color: #c8922a; text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid #334155;
+  }
+  .correct-field { margin-bottom: 16px; }
+  .correct-field label {
+    display: block; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #94a3b8; margin-bottom: 6px;
+  }
+  .correct-field input, .correct-field select {
+    width: 100%; padding: 9px 12px;
+    background: #0f172a; border: 1px solid #334155;
+    border-radius: 4px; color: #e2e8f0; font-size: 13px;
+    font-family: 'Courier New', monospace;
+    transition: border-color 0.2s;
+  }
+  .correct-field input:focus, .correct-field select:focus {
+    outline: none; border-color: #c8922a;
+    box-shadow: 0 0 0 2px rgba(200,146,42,0.15);
+  }
+  .correct-field select option { background: #0f172a; }
+  .correct-actions { display: flex; gap: 10px; margin-top: 22px; }
+  .btn-correct-save {
+    flex: 1; padding: 10px; background: #c8922a; color: #000;
+    border: none; border-radius: 4px; font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-correct-save:hover { background: #d9a74b; }
+  .btn-correct-cancel {
+    padding: 10px 20px; background: transparent;
+    border: 1px solid #334155; color: #94a3b8;
+    border-radius: 4px; font-size: 12px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-correct-cancel:hover { border-color: #94a3b8; color: #e2e8f0; }
+
+  /* Estilos para el Modal de Firma */
+  #signature-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 440px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+  #signature-pad {
+    border: 2px dashed #ccc;
+    background: #fdfdfd;
+    cursor: crosshair;
+    margin-bottom: 15px;
+    touch-action: none;
+    border-radius: 4px;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .btn-modal {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .btn-save { background: var(--primary); color: white; }
+  .btn-clear { background: #eee; color: #666; }
+  .btn-cancel { background: #fff; border: 1px solid #ccc; color: #666; }
+
+  /* BOTONES FLOTANTES */
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--primary); color: white; border: none; padding: 12px 22px;
+    font-size: 13px; font-weight: 600; border-radius: 4px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 8px; z-index: 1000;
+  }
+  .sign-btn {
+    position: fixed; bottom: 24px; right: 260px;
+    background: var(--accent); color: white; border: none; padding: 12px 22px;
+    font-size: 13px; font-weight: 600; border-radius: 4px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 8px; z-index: 1000;
+  }
+  
+  .signature-container-img {
+    width: 100%; height: 60px; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .signature-img { max-height: 55px; max-width: 100%; margin-top: 2px; }
+
+  .code-badge { font-family: 'Courier New', monospace; font-size: 8px; color: #506070; background: #eef2f7; padding: 1px 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div style="margin-bottom:12px;" class="print-btn-no">
+  <input type="file" id="jsonFileInput" accept=".json">
+  <span id="fileName" style="font-size:10px;color:#888;margin-left:8px;"></span>
+</div>
+
+<div id="doc-container"></div>
+
+<button class="correct-btn" id="openCorrectBtn" onclick="abrirCorrector()">✏️ Corregir Registro</button>
+<button class="sign-btn" id="openSignatureBtn">🖋️ Firmar Reporte</button>
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Exportar PDF</button>
+
+<!-- MODAL CORRECCIÓN -->
+<div id="correct-modal">
+  <div class="correct-modal-box">
+    <h3>✏️ Corregir Registro</h3>
+    <div class="correct-field">
+      <label>Fecha del Registro</label>
+      <input type="date" id="corr-fecha">
+    </div>
+    <div class="correct-field">
+      <label>Hora Inicio</label>
+      <input type="time" id="corr-hora-inicio">
+    </div>
+    <div class="correct-field">
+      <label>Hora Final</label>
+      <input type="time" id="corr-hora-final">
+    </div>
+    <div class="correct-field">
+      <label>Estado de Liberación</label>
+      <select id="corr-aprobada">
+        <option value="si">✅ Aprobada</option>
+        <option value="no">❌ No Aprobada</option>
+        <option value="">— Sin definir —</option>
+      </select>
+    </div>
+    <div class="correct-actions">
+      <button class="btn-correct-cancel" onclick="cerrarCorrector()">Cancelar</button>
+      <button class="btn-correct-save" id="btn-guardar-corr" onclick="guardarCorreccion()">💾 Guardar Corrección</button>
+    </div>
+  </div>
+</div>
+
+<div id="signature-modal">
+    <div class="modal-content">
+        <h3 style="margin-bottom:15px; font-size:14px; color:var(--primary)">FIRMA DE LIBERACIÓN</h3>
+        <canvas id="signature-pad" width="400" height="200"></canvas>
+        <div class="modal-actions">
+            <button class="btn-modal btn-cancel" id="cancelSignature">Cancelar</button>
+            <button class="btn-modal btn-clear" id="clearSignature">Limpiar</button>
+            <button class="btn-modal btn-save" id="saveSignature">Confirmar Firma</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function groupByUbicacion(equipos) {
+  const order = ["Bodega 1","Bodega 1, 2","Zona Mezclas","Zona Remolido","Zona Empaque","Primer Piso","Segundo Piso","Tercer Piso","Cuarto Piso","Quinto Piso","Terraza"];
+  const groups = {};
+  equipos.forEach(e => {
+    if (!groups[e.ubicacion]) groups[e.ubicacion] = [];
+    groups[e.ubicacion].push(e);
+  });
+  const sorted = {};
+  order.forEach(loc => { if (groups[loc]) sorted[loc] = groups[loc]; });
+  Object.keys(groups).forEach(loc => { if (!sorted[loc]) sorted[loc] = groups[loc]; });
+  return sorted;
+}
+const ROWS_FIRST_PAGE = 26;
+const ROWS_PER_PAGE = 34;
+function renderCheckbox(status) {
+  if (status === true || status === 'cumple')  return '<div class="status-check ok"></div>';
+  if (status === false || status === 'no-cumple') return '<div class="status-check nok"></div>';
+  return '<div class="status-check"></div>';
+}
+function formatDate(d) {
+  if (!d) return '';
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+
+function buildPages(data) {
+  const grouped = groupByUbicacion(data.equipos);
+  const allRows = [];
+  Object.entries(grouped).forEach(([zona, items]) => {
+    allRows.push({ type: 'zone', zona });
+    items.forEach(e => allRows.push({ type: 'row', ...e }));
+  });
+  const pages = [];
+  let current = [];
+  let rowCount = 0;
+  const limit = () => pages.length === 0 ? ROWS_FIRST_PAGE : ROWS_PER_PAGE;
+  allRows.forEach(r => {
+    if (rowCount >= limit()) {
+      pages.push(current);
+      current = [];
+      rowCount = 0;
+    }
+    current.push(r);
+    rowCount++;
+  });
+  if (current.length) pages.push(current);
+  return pages;
+}
+
+function renderHeader(data, pageNum, totalPages) {
+  return `<div class="header">
+    <div class="header-logo">
+      <svg class="logo-svg" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="50" fill="#1a3a5c" rx="4"/>
+        <text x="60" y="30" text-anchor="middle" font-family="Arial Black,Arial" font-weight="900" font-size="22" fill="white" letter-spacing="4">MAS</text>
+        <text x="60" y="43" text-anchor="middle" font-family="Arial" font-size="6" fill="#c8922a" letter-spacing="1">MOLINO · ALIMENTOS</text>
+      </svg>
+    </div>
+    <div class="header-title">
+      <div class="main-title">PPR de Mantenimiento de Equipos</div>
+      <div class="sub-title">"Liberación de Equipos de Proceso — ${data.zona || ''}"</div>
+    </div>
+    <div class="header-meta">
+      <div class="meta-row"><div class="meta-label">Código</div><div class="meta-value">${data.formulario || ''}</div></div>
+      <div class="meta-row"><div class="meta-label">Versión</div><div class="meta-value">1</div></div>
+      <div class="meta-row"><div class="meta-label">Fecha</div><div class="meta-value">02/12/2020</div></div>
+      <div class="meta-row"><div class="meta-label">Página</div><div class="meta-value">${pageNum} / ${totalPages}</div></div>
+    </div>
+  </div>`;
+}
+
+function renderInfoBar(data) {
+  return `<div class="info-bar">
+    <div class="info-field"><div class="info-field-label">Fecha</div><div class="info-field-value">${formatDate(data.fecha)}</div></div>
+    <div class="info-field"><div class="info-field-label">Hora Inicio</div><div class="info-field-value">${data.hora_inicio || ''}</div></div>
+    <div class="info-field"><div class="info-field-label">Hora Final</div><div class="info-field-value">${data.hora_final || ''}</div></div>
+    <div class="info-field"><div class="info-field-label">Responsable</div><div class="info-field-value">${data.inspector || ''}</div></div>
+  </div>`;
+}
+
+function renderReleaseSection(data) {
+  const aprobada = data.liberacion && (data.liberacion.aprobada === true || data.liberacion.aprobada === 'si');
+  return `<div class="release-section">
+    <div class="release-header">Liberación y Aprobación</div>
+    <div class="release-body">
+      <div class="release-field">
+        <div class="release-field-label">Estado de Liberación</div>
+        <div class="approval-options">
+          <div class="approval-option"><div class="approval-box" style="${aprobada ? 'background:#dcfce7;border-color:#1e6b3c' : ''}"></div><span>Aprobada</span></div>
+          <div class="approval-option"><div class="approval-box" style="${aprobada === false ? 'background:#fee2e2;border-color:#9b1c1c' : ''}"></div><span>No Aprobada</span></div>
+        </div>
+      </div>
+      <div class="release-field">
+        <div class="release-field-label">Responsable</div>
+        <div id="signature-target" class="signature-container-img"></div>
+        <div class="release-field-line" style="margin-top:0;">${data.liberacion && data.liberacion.responsable ? data.liberacion.responsable : ''}</div>
+        <div style="margin-top:6px;border-top:1px solid #ccc;padding-top:2px;font-size:7.5px;color:#999;text-align:center;">Firma / Nombre</div>
+      </div>
+      <div class="release-field">
+        <div class="release-field-label">Condiciones / Comentarios</div>
+        <div class="release-field-line" style="min-height:30px;">${data.liberacion && data.liberacion.condiciones ? data.liberacion.condiciones : ''}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderLiberacion(data) {
+  const pages = buildPages(data);
+  const totalPages = pages.length;
+  const container = document.getElementById('doc-container');
+  container.innerHTML = '';
+  pages.forEach((pageRows, idx) => {
+    const pageNum = idx + 1;
+    let html = `<div class="page">`;
+    html += renderHeader(data, pageNum, totalPages);
+    if (idx === 0) html += renderInfoBar(data);
+    html += `<div class="section-header">Listado de Equipos — Verificación de Estado</div>
+    <table><colgroup><col class="col-codigo"><col class="col-nombre"><col class="col-ubic"><col class="col-cumple"><col class="col-nocumple"><col class="col-obs"></colgroup>
+    <thead><tr><th>Código</th><th>Nombre del Equipo</th><th>Ubicación</th><th class="center">Cumple</th><th class="center">No Cumple</th><th>Observaciones</th></tr></thead><tbody>`;
+    html += pageRows.map(r => {
+      if (r.type === 'zone') return `<tr><td colspan="6" class="zone-separator">📍 ${r.zona}</td></tr>`;
+      return `<tr><td><span class="code-badge">${r.codigo}</span></td><td>${r.nombre}</td><td><span class="loc-badge">${r.ubicacion}</span></td>
+      <td class="center"><div class="check-cell">${r.status === true || r.status === 'cumple' ? renderCheckbox(true) : renderCheckbox(null)}</div></td>
+      <td class="center"><div class="check-cell">${r.status === false || r.status === 'no-cumple' ? renderCheckbox(false) : renderCheckbox(null)}</div></td>
+      <td>${r.obs || r.observacion || ''}</td></tr>`;
+    }).join('');
+    html += `</tbody></table>`;
+    if (idx === totalPages - 1) html += renderReleaseSection(data);
+    html += `<div class="doc-footer"><div class="footer-code">${data.formulario || ''} · ${data.zona || ''} · ${formatDate(data.fecha)}</div><div class="footer-page">Página ${pageNum} de ${totalPages}</div></div></div>`;
+    container.innerHTML += html;
+  });
+}
+
+document.getElementById('jsonFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  document.getElementById('fileName').textContent = file.name;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    try {
+      const data = JSON.parse(evt.target.result);
+      currentData = data; // Guardar referencia para el corrector
+      renderLiberacion(data);
+    } catch (err) { alert('Error al leer el archivo JSON: ' + err.message); }
+  };
+  reader.readAsText(file, 'utf-8');
+});
+
+// CANVAS LOGIC
+const canvas = document.getElementById('signature-pad');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+function startPosition(e) { drawing = true; draw(e); }
+function finishedPosition() { drawing = false; ctx.beginPath(); }
+function draw(e) {
+    if (!drawing) return;
+    ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#1a3a5c';
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+    const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+    ctx.lineTo(x, y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x, y);
+}
+canvas.addEventListener('mousedown', startPosition);
+canvas.addEventListener('mousemove', draw);
+window.addEventListener('mouseup', finishedPosition);
+canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startPosition(e); });
+canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+canvas.addEventListener('touchend', finishedPosition);
+
+const modal = document.getElementById('signature-modal');
+document.getElementById('openSignatureBtn').addEventListener('click', () => { modal.style.display = 'flex'; ctx.clearRect(0, 0, canvas.width, canvas.height); });
+document.getElementById('cancelSignature').addEventListener('click', () => modal.style.display = 'none');
+document.getElementById('clearSignature').addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
+document.getElementById('saveSignature').addEventListener('click', () => {
+    const dataURL = canvas.toDataURL('image/png');
+    const target = document.getElementById('signature-target');
+    if (target) { target.innerHTML = `<img src="${dataURL}" class="signature-img">`; modal.style.display = 'none'; }
+    else { alert("Cargue un reporte JSON primero."); modal.style.display = 'none'; }
+});
+
+const urlParams = new URLSearchParams(window.location.search);
+const jsonUrl = urlParams.get('json');
+let currentData = null; // Referencia al JSON actualmente cargado
+
+if (jsonUrl) {
+  fetch(jsonUrl).then(r => r.json()).then(data => { currentData = data; renderLiberacion(data); }).catch(err => console.error(err));
+}
+
+// Actualizar currentData al cargar desde input de archivo
+document.getElementById('jsonFileInput').removeEventListener('change', null);
+
+// LÓGICA DE CORRECCIÓN
+function abrirCorrector() {
+  if (!currentData) { alert('Primero cargue un documento JSON para corregir.'); return; }
+  document.getElementById('corr-fecha').value = currentData.fecha || '';
+  document.getElementById('corr-hora-inicio').value = currentData.hora_inicio || '';
+  document.getElementById('corr-hora-final').value = currentData.hora_final || '';
+  const aprobada = currentData.liberacion && currentData.liberacion.aprobada;
+  const aprobadaVal = (aprobada === true || aprobada === 'si') ? 'si' : (aprobada === false || aprobada === 'no') ? 'no' : '';
+  document.getElementById('corr-aprobada').value = aprobadaVal;
+  document.getElementById('correct-modal').style.display = 'flex';
+}
+
+function cerrarCorrector() {
+  document.getElementById('correct-modal').style.display = 'none';
+}
+
+function guardarCorreccion() {
+  if (!jsonUrl) { alert('Solo se puede corregir un registro cargado desde URL (galería).'); return; }
+  
+  const nombreArchivo = jsonUrl.split('/').pop();
+  const payload = {
+    archivo: nombreArchivo,
+    fecha: document.getElementById('corr-fecha').value,
+    hora_inicio: document.getElementById('corr-hora-inicio').value,
+    hora_final: document.getElementById('corr-hora-final').value,
+    aprobada: document.getElementById('corr-aprobada').value
+  };
+
+  const btn = document.getElementById('btn-guardar-corr');
+  const textoOrig = btn.innerText;
+  btn.innerText = 'GUARDANDO...';
+  btn.disabled = true;
+
+  fetch('corregir_liberacion.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.success) {
+      cerrarCorrector();
+      // Refrescar el documento
+      fetch(jsonUrl).then(r => r.json()).then(data => { currentData = data; renderLiberacion(data); });
+      btn.innerText = '¡GUARDADO!';
+      setTimeout(() => { btn.innerText = textoOrig; btn.disabled = false; }, 2000);
+    } else {
+      alert('Error al guardar: ' + (res.error || 'Error desconocido'));
+      btn.innerText = textoOrig;
+      btn.disabled = false;
+    }
+  })
+  .catch(() => {
+    alert('Error de red al conectar con el servidor.');
+    btn.innerText = textoOrig;
+    btn.disabled = false;
+  });
+}
+</script>
+</body>
+</html>

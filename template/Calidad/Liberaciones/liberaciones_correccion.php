@@ -66,6 +66,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($rutaArchivo);
 
+        // 🔧 BORRAR EL PDF EXISTENTE PARA FORZAR REGENERACIÓN
+        $pdfCarpeta = ($sede === 'ZS') ? 
+            '/var/www/fmt/archivos/generados/Calidad/pdfs_liberaciones_zs/' : 
+            '/var/www/fmt/archivos/generados/Calidad/pdfs_liberaciones/';
+        
+        $nombreBase = pathinfo($archivo, PATHINFO_FILENAME);
+        $pdfNombre = 'Liberacion_' . $nombreBase . '.pdf';
+        $pdfRuta = $pdfCarpeta . $pdfNombre;
+
+        if (file_exists($pdfRuta)) {
+            unlink($pdfRuta);
+        }
+
         // 🔧 REDIRIGIR CON LA SEDE CORRECTA
         header("Location: liberaciones_visualizacion.php?archivo=" . urlencode($archivo) . "&sede=" . urlencode($sede));
         exit();

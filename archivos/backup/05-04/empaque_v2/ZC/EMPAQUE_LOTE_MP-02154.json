@@ -1,0 +1,74 @@
+[
+    {
+        "id_registro": "EMPV2_69e60ff5a6b01",
+        "timestamp": "2026-04-20 11:37:25",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-08",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Extrapan x25",
+            "lote_empaque": "MP-02154",
+            "producto_envasar": "EXTRAPAN X 25 ",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-08",
+            "entregado_a": "BALMER",
+            "cantidad_solicitada": "557",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "558",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e611e64cb84",
+        "timestamp": "2026-04-20 11:45:42",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-09",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Extrapan x25",
+            "lote_empaque": "MP-02154",
+            "producto_envasar": "EXTRAPAN X 25 ",
+            "lote_producto": "080426B",
+            "fecha_vencimiento": "08042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-09",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "438",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "438",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e8e249020d6",
+        "timestamp": "2026-04-22 14:59:21",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-21",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Extrapan x25",
+            "lote_empaque": "MP-02154",
+            "producto_envasar": "EXTRAPAN X 25 ",
+            "lote_producto": "210426B",
+            "fecha_vencimiento": "21042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-21",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "1076",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "1076",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

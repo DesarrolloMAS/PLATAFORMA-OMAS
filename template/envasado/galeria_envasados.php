@@ -11,7 +11,23 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 if ($sede === 'ZC') {
     $carpeta = '/var/www/fmt/archivos/generados/envasado/';
 } else {
-    $carpeta = '/var/www/fmt/archivos/generados/envasado_zs/';
+    $carpeta = '/var/www/fmt/archivos/generados/envasadozs/';
+}
+if (!is_dir($carpeta)) {
+    die(header("Location: /template/error2.html"));
+}
+
+$archivos = scandir($carpeta);
+if (!is_array($archivos)) {
+    $archivos = [];
+}
+
+$archivos = array_filter($archivos, function($archivo) use ($carpeta) {
+    return is_file("$carpeta/$archivo") && preg_match('/\.(xlsx|xls)$/i', $archivo);
+});
+
+if (empty($archivos)) {
+    die(header("Location: /template/error2.html"));
 }
 $archivos = array_filter(scandir($carpeta), function($archivo) use ($carpeta) {
     return is_file("$carpeta/$archivo") && preg_match('/\.(xlsx|xls)$/i', $archivo);
@@ -32,7 +48,7 @@ if (empty($archivos)) {
     <link rel="stylesheet" href="/css/revision_prev.css"><!-- Asegúrate de tener estilos -->
 </head>
 <body class="body">
-    <h1 class="titulo_principal">Lista de Archivos Excel<a href="../revisiones_almacen.html">Volver</a></h1>
+    <h1 class="titulo_principal">Lista de Archivos Excel<a href="../revisiones_producccion.html">Volver</a></h1>
     <div class="menu">
         <?php foreach ($archivos as $archivo): ?>
             <div class="file-card" >

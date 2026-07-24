@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e6382d07714",
+        "timestamp": "2026-04-20 14:29:01",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-13",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "FUERTE X 25",
+            "lote_producto": "140426B",
+            "fecha_vencimiento": "14102026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-13",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "524",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "524",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

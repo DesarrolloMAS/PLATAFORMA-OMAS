@@ -51,6 +51,9 @@ if (!$datos) {
             <div>
                 <label><?php echo ucfirst($key); ?>:</label>
                 <input type="text" value="<?php echo htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); ?>" readonly>
+                <?php if ($key === 'cantidad'): ?>
+                    <span style="color: #00ffcc; font-weight: bold; margin-left: 10px;">Pendiente: <?php echo $value; ?> KG</span>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
 
@@ -74,7 +77,7 @@ if (!$datos) {
         </div>
         <div>
             <label for="cantidad">Cantidad:</label>
-            <input type="number" name="cantidad" id="cantidad" placeholder="Ingrese Peso en KG" required>
+            <input type="number" step="any" name="cantidad" id="cantidad" placeholder="Ingrese Peso en KG" max="<?php echo $datos['cantidad']; ?>" required>
         </div>
         <div>
             <label for="responsable">Responsable de Ejecucion:</label>

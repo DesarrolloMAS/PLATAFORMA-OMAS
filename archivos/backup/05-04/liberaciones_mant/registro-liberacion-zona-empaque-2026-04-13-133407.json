@@ -1,0 +1,271 @@
+{
+    "formulario": "GM-MM-MQ-ME-FO-005",
+    "zona": "Zona Empaque",
+    "fecha": "2026-04-13",
+    "inspector": "Carlos carlosama",
+    "hora_inicio": "07:30",
+    "hora_final": "08:33",
+    "equipos": [
+        {
+            "codigo": "EMPPASBAL01",
+            "nombre": "Balanza CAS",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAL02",
+            "nombre": "Balanza FE-45 C",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAL03",
+            "nombre": "Balanza SUPER-SS",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAS01",
+            "nombre": "Bascula Vector VI405",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAS02",
+            "nombre": "Bascula Subproducto",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAS03",
+            "nombre": "Bascula FE-66C",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAS04",
+            "nombre": "Bascula Vector VI110",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAS05",
+            "nombre": "Bascula LP7510A",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAT01",
+            "nombre": "Banda Transportadora Despachos",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAT02",
+            "nombre": "Banda Transportadora Arrume",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAT03",
+            "nombre": "Banda Transportadora Horizontal 5 mts",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASBAT04",
+            "nombre": "Banda Transportadora Horizontal 7 mts",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOD01",
+            "nombre": "Codificador Codimarket",
+            "ubicacion": "Bodega Materiales",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOD02",
+            "nombre": "Codificador Nalinsumos",
+            "ubicacion": "Bodega Materiales",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS01",
+            "nombre": "Cosedora Fischbein 1610002 F",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS02",
+            "nombre": "Cosedora Fischbein 404115 F",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS03",
+            "nombre": "Cosedora Fischbein 109277 F",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS05",
+            "nombre": "Cosedora Fischbein 54682",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS06",
+            "nombre": "Cosedora Yao Han F300A",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS07",
+            "nombre": "Cosedora Yao Han 343972",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS08",
+            "nombre": "Cosedora Yao Han F300A",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASCOS09",
+            "nombre": "Cosedora Yao Han F300A",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEMP01",
+            "nombre": "Empacadora de Harina Bulto",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEMP02",
+            "nombre": "Empacadora de Tornillo Cuarto",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEMP03",
+            "nombre": "Empacadora de Tornillo Kilo",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEMP04",
+            "nombre": "Empacadora de Tornillo Libra",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEMP05",
+            "nombre": "Empacadora de Tornillo kilo\/Libra",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST03",
+            "nombre": "Estibador Hidraulico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST04",
+            "nombre": "Estibador Hidraulico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST05",
+            "nombre": "Estibador Hidraulico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST06",
+            "nombre": "Estibador Hidraulico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST08",
+            "nombre": "Estibador Hidraulico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST09",
+            "nombre": "Estibador Hidraulico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASEST07",
+            "nombre": "Estibador Hidraulico - Electrico",
+            "ubicacion": "Bodega PT",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASSEL01",
+            "nombre": "Selladora Libra",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "EMPPASSEL02",
+            "nombre": "Selladora Libra",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        }
+    ],
+    "liberacion": {
+        "aprobada": "si",
+        "responsable": "",
+        "condiciones": ""
+    },
+    "_ultima_correccion": {
+        "usuario": "Andres Ortega",
+        "timestamp": "2026-04-14 21:38:40"
+    }
+}

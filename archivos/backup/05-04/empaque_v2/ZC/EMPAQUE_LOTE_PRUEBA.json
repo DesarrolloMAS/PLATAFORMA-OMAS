@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69d8f1a171b76",
+        "timestamp": "2026-04-10 12:48:33",
+        "usuario_sys": "Miguel Mora",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "1000",
+            "fecha_alistamiento": "2026-04-10",
+            "responsable_alistamiento": "PRUEBA",
+            "nombre_empaque": "Mogolla",
+            "lote_empaque": "PRUEBA",
+            "producto_envasar": "PRUEBA",
+            "lote_producto": "PRUEBA",
+            "fecha_vencimiento": "PRUEBA",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-10",
+            "entregado_a": "PRUEBA",
+            "cantidad_solicitada": "10",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "10",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

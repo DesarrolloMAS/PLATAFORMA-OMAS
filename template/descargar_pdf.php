@@ -73,18 +73,20 @@ try {
     }
     
     $codigoorden = $hoja->getCell($celdaCodigo)->getValue();
-    if (!$codigoorden) {
-        $codigoorden = pathinfo($archivo, PATHINFO_FILENAME);
-    }
-    $pdfNombre = $prefijoPdf . $codigoorden . '.pdf';
+    // Usar el nombre del archivo original para evitar colisiones
+    $nombreBase = pathinfo($archivo, PATHINFO_FILENAME);
+    $pdfNombre = $prefijoPdf . $nombreBase . '.pdf';
     $pdfRuta = $pdfCarpeta . $pdfNombre;
     
     if (!is_dir($pdfCarpeta)) {
         mkdir($pdfCarpeta, 0777, true);
     }
     
-    // Si el PDF no existe, generarlo
-    if (!file_exists($pdfRuta)) {
+    // Limpiar caché de estado de archivos para asegurar que filemtime sea preciso
+    clearstatcache();
+
+    // Si el PDF no existe o el Excel es más reciente, generarlo
+    if (!file_exists($pdfRuta) || filemtime($rutaArchivo) > filemtime($pdfRuta)) {
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Html($spreadsheet);
         ob_start();
         $writer->save('php://output');

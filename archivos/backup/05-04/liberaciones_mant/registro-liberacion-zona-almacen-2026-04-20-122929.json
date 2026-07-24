@@ -1,0 +1,124 @@
+{
+    "formulario": "GM-MM-MQ-ME-FO-005",
+    "zona": "Zona Almacen",
+    "fecha": "2026-04-20",
+    "hora_inicio": "07:00",
+    "hora_final": "07:25",
+    "inspector": "Javier Acosta",
+    "equipos": [
+        {
+            "codigo": "RALPASBAZ01",
+            "nombre": "Bazuca Trigo",
+            "ubicacion": "Bodega 1",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASBAZ02",
+            "nombre": "Bazuca Trigo",
+            "ubicacion": "Bodega 1",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASBAZ03",
+            "nombre": "Bazuca Trigo",
+            "ubicacion": "Bodega 2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASBAZ04",
+            "nombre": "Bazuca Trigo",
+            "ubicacion": "Bodega 2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASBAZ05",
+            "nombre": "Bazuca Barredor Silo 1",
+            "ubicacion": "Silo Metalico 1",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASBAZ06",
+            "nombre": "Bazuca Barredor Silo 2",
+            "ubicacion": "Silo Metalico 2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASBAZ07",
+            "nombre": "Bazuca Barredor Silo 9",
+            "ubicacion": "Bodega 2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASELE01",
+            "nombre": "Elevador Descargue Trigo",
+            "ubicacion": "Patio de Maniobras",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASGUI01",
+            "nombre": "Guinche Descargue",
+            "ubicacion": "Patio de Maniobras",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASROT01",
+            "nombre": "Rosca Transportadora Alimentacion Silo M1",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASROT02",
+            "nombre": "Rosca Transportadora Alimentacion Silo M2-B2",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASROT04",
+            "nombre": "Rosca Transportadora Alimentacion B2",
+            "ubicacion": "Bodega 2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASROT05",
+            "nombre": "Rosca Transportadora Alimentacion B1-B2",
+            "ubicacion": "Bodega 1-2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASTAE01",
+            "nombre": "Tablero Electrico Descargue",
+            "ubicacion": "Patio de Maniobras",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "RALPASTUR01",
+            "nombre": "Turbina Descargue Trigo",
+            "ubicacion": "Bodega 1",
+            "status": "cumple",
+            "observacion": ""
+        }
+    ],
+    "liberacion": {
+        "aprobada": "si",
+        "responsable": "Andres  ortega ",
+        "condiciones": ""
+    },
+    "_ultima_correccion": {
+        "usuario": "Andres Ortega",
+        "timestamp": "2026-04-27 14:01:53"
+    }
+}

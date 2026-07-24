@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPECCIÓN DE BODEGA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --success: #10B981;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-box::before {
+            content: "V2 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .sub-title { color: var(--text-muted); font-size: 14px; }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-back:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 240, 255, 0.05); }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .section-card:hover { border-color: rgba(0, 240, 255, 0.3); box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05); }
+
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 16px; font-weight: 600; color: var(--accent);
+            margin-bottom: 20px; padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .section-title span {
+            font-family: 'Space Mono', monospace; font-size: 12px;
+            background: rgba(0, 240, 255, 0.1); color: var(--accent);
+            padding: 4px 8px; border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-label { font-size: 13px; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+
+        .form-control {
+            background: var(--input-bg); border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 12px 14px;
+            border-radius: var(--r-sm); font-family: 'Barlow', sans-serif;
+            font-size: 14px; transition: all 0.3s ease; width: 100%;
+        }
+        .form-control:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1); background: rgba(0, 240, 255, 0.02); }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px top 50%;
+            background-size: 10px auto;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+        select.form-control option { background-color: var(--panel-bg); color: var(--text-main); }
+        input[type="date"].form-control { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); }
+        input[readonly].form-control { background-color: rgba(255,255,255,0.02); color: var(--accent); border-color: var(--border-color); }
+
+        /* ── ACCIONES RÁPIDAS ── */
+        .quick-actions {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 18px; padding-bottom: 18px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .btn-quick {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .btn-quick.qk-si:hover  { border-color: var(--success); color: var(--success); background: rgba(16,185,129,0.06); }
+        .btn-quick.qk-no:hover  { border-color: var(--danger);  color: var(--danger);  background: rgba(255,51,102,0.06); }
+        .btn-quick.qk-na:hover  { border-color: var(--warning); color: var(--warning); background: rgba(255,176,0,0.06); }
+        .btn-quick.qk-clear:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,240,255,0.06); }
+
+        .preguntas-list { display: flex; flex-direction: column; gap: 10px; }
+        .pregunta-row {
+            display: grid; grid-template-columns: 1fr auto;
+            align-items: center; gap: 16px;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            transition: border-color 0.2s;
+        }
+        .pregunta-row.respondida { border-color: rgba(255,255,255,0.08); }
+        .pregunta-num {
+            font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent);
+            margin-right: 8px;
+        }
+        .pregunta-texto { font-size: 14px; color: var(--text-main); }
+
+        /* ── TOGGLE GROUP (1-click SI/NO/N-A) ── */
+        .toggle-group { display: flex; gap: 6px; flex-wrap: nowrap; }
+        .toggle-option { position: relative; }
+        .toggle-option input[type="radio"] {
+            position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer;
+        }
+        .toggle-btn {
+            display: block;
+            padding: 9px 14px;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px; font-weight: 700;
+            text-align: center; white-space: nowrap;
+            cursor: pointer; user-select: none;
+            transition: all 0.15s ease;
+        }
+        .toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+        input:checked + .toggle-si {
+            background: rgba(16,185,129,0.15); border-color: var(--success); color: var(--success);
+            box-shadow: 0 0 10px rgba(16,185,129,0.25);
+        }
+        input:checked + .toggle-no {
+            background: rgba(255,51,102,0.15); border-color: var(--danger); color: var(--danger);
+            box-shadow: 0 0 10px var(--danger-glow);
+        }
+        input:checked + .toggle-na {
+            background: rgba(255,176,0,0.15); border-color: var(--warning); color: var(--warning);
+            box-shadow: 0 0 10px rgba(255,176,0,0.25);
+        }
+        input:focus-visible + .toggle-btn { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .btn-submit {
+            background: var(--accent); color: var(--bg-color); border: none;
+            padding: 16px 30px; font-size: 15px; font-weight: 700;
+            font-family: 'Space Mono', monospace; border-radius: var(--r-sm);
+            cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease; margin-top: 10px; box-shadow: 0 0 15px var(--accent-glow);
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .btn-submit:hover { background: #fff; color: var(--bg-color); box-shadow: 0 0 25px rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
+        .btn-submit:active { transform: translateY(0); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .system-status {
+            font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text-muted);
+            text-align: center; margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .status-dot { width: 8px; height: 8px; background: #10B981; border-radius: 50%; box-shadow: 0 0 8px #10B981; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <div>
+            <h1 class="main-title" id="tituloBodega">Inspección de Bodega</h1>
+            <div class="sub-title">Verificación de Condiciones y Registro de Hallazgos (V2 JSON Persistente)</div>
+        </div>
+        <a href="menu_bodegas_v2.php" class="btn-back">← VOLVER</a>
+    </div>
+
+    <form id="inspeccionForm">
+        <input type="hidden" name="bodega_key" id="bodega_key">
+        <input type="hidden" name="bodega_nombre" id="bodega_nombre">
+
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Información General</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Bodega</label>
+                    <input type="text" id="bodega_nombre_display" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Inspección</label>
+                    <input type="date" name="fecha" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- VERIFICACIÓN DE CONDICIONES -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Verificación de Condiciones</div>
+            <div class="quick-actions">
+                <button type="button" class="btn-quick qk-si" data-marcar="SI">✓ Marcar todas SÍ CUMPLE</button>
+                <button type="button" class="btn-quick qk-no" data-marcar="NO">✕ Marcar todas NO CUMPLE</button>
+                <button type="button" class="btn-quick qk-na" data-marcar="N/A">— Marcar todas N/A</button>
+                <button type="button" class="btn-quick qk-clear" data-marcar="">↺ Limpiar selección</button>
+            </div>
+            <div class="preguntas-list" id="preguntasList"></div>
+        </div>
+
+        <!-- HALLAZGOS -->
+        <div class="section-card">
+            <div class="section-title"><span>03</span> Hallazgos</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Día del Hallazgo</label>
+                    <input type="date" name="fecha_hallazgo" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Acción</label>
+                    <input type="date" name="fecha_accion" class="form-control">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label">Hallazgo</label>
+                    <input type="text" name="hallazgo" class="form-control" placeholder="Describa el hallazgo (si aplica)">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label">Plan de Acción</label>
+                    <input type="text" name="plan_accion" class="form-control" placeholder="Plan de acción a ejecutar">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label">Resultado Esperado</label>
+                    <input type="text" name="resultado_esperado" class="form-control" placeholder="Resultado esperado tras la acción">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            GUARDAR INSPECCIÓN
+        </button>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO - AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    const PREGUNTAS = [
+        'Registro de temperatura y humedad del lugar',
+        'Pisos y paredes limpios, libres de derrames',
+        'Bodega libre de insectos, roedores y palomas',
+        'Vías de tránsito en bodega libres de obstáculos',
+        'Productos almacenados debidamente ordenados',
+        'Estibas y estantes limpios y en buen estado',
+        'Materiales almacenados a mínimo 15cm del suelo',
+        'Ventilación adecuada',
+        'Iluminación adecuada',
+        'Elementos almacenados protegidos de la luz solar',
+        'Ausencia de productos no conformes',
+        'Productos no conformes aislados',
+        'Insumos alérgenos aislados',
+        'Pisos y superficies libres de residuos',
+    ];
+
+    function getQueryParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const bodegaKey    = getQueryParam('bodega') || '';
+        const bodegaNombre = getQueryParam('nombre') || bodegaKey;
+
+        if (!bodegaKey) {
+            Swal.fire({
+                title: 'Bodega no especificada',
+                text: 'Debe seleccionar una bodega desde el menú.',
+                icon: 'warning',
+                background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+            }).then(() => { window.location.href = 'menu_bodegas_v2.php'; });
+            return;
+        }
+
+        document.getElementById('bodega_key').value = bodegaKey;
+        document.getElementById('bodega_nombre').value = bodegaNombre;
+        document.getElementById('bodega_nombre_display').value = bodegaNombre;
+        document.getElementById('tituloBodega').textContent = 'Inspección - ' + bodegaNombre;
+        document.title = 'INSPECCIÓN - ' + bodegaNombre;
+
+        const hoy = new Date().toISOString().split('T')[0];
+        document.querySelector('[name="fecha"]').value = hoy;
+
+        const lista = document.getElementById('preguntasList');
+        PREGUNTAS.forEach((texto, idx) => {
+            const n = idx + 1;
+            const row = document.createElement('div');
+            row.className = 'pregunta-row';
+            row.innerHTML = `
+                <div class="pregunta-texto"><span class="pregunta-num">${String(n).padStart(2,'0')}</span>${texto}</div>
+                <div class="toggle-group">
+                    <div class="toggle-option">
+                        <input type="radio" name="opcion${n}" id="opcion${n}_SI" value="SI" required>
+                        <label for="opcion${n}_SI" class="toggle-btn toggle-si">SÍ</label>
+                    </div>
+                    <div class="toggle-option">
+                        <input type="radio" name="opcion${n}" id="opcion${n}_NO" value="NO">
+                        <label for="opcion${n}_NO" class="toggle-btn toggle-no">NO</label>
+                    </div>
+                    <div class="toggle-option">
+                        <input type="radio" name="opcion${n}" id="opcion${n}_NA" value="N/A">
+                        <label for="opcion${n}_NA" class="toggle-btn toggle-na">N/A</label>
+                    </div>
+                </div>
+            `;
+            lista.appendChild(row);
+        });
+
+        // Marcar fila como respondida al seleccionar (feedback visual)
+        lista.addEventListener('change', (e) => {
+            if (e.target.matches('input[type="radio"]')) {
+                e.target.closest('.pregunta-row').classList.add('respondida');
+            }
+        });
+
+        // Acciones rápidas: 1 click aplica el valor a las 14 preguntas
+        document.querySelectorAll('.btn-quick').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const valor = btn.dataset.marcar;
+                for (let n = 1; n <= PREGUNTAS.length; n++) {
+                    if (valor === '') {
+                        const checked = document.querySelector(`input[name="opcion${n}"]:checked`);
+                        if (checked) checked.checked = false;
+                    } else {
+                        const radio = document.getElementById(`opcion${n}_${valor === 'N/A' ? 'NA' : valor}`);
+                        if (radio) {
+                            radio.checked = true;
+                            radio.closest('.pregunta-row').classList.add('respondida');
+                        }
+                    }
+                }
+                if (valor === '') {
+                    document.querySelectorAll('.pregunta-row.respondida').forEach(r => r.classList.remove('respondida'));
+                }
+            });
+        });
+    });
+
+    document.getElementById('inspeccionForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('btnGuardar');
+        const overlayText = btn.innerHTML;
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((value, key) => { jsonData[key] = value; });
+
+        fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: '¡REGISTRADO!',
+                    text: 'Inspección de bodega guardada estructuralmente vía JSON.',
+                    icon: 'success',
+                    background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                }).then(() => { window.location.href = 'menu_bodegas_v2.php'; });
+            } else {
+                Swal.fire({
+                    title: 'Error del Sistema',
+                    text: data.message || 'Error al procesar la inspección.',
+                    icon: 'error',
+                    background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366'
+                });
+                btn.innerHTML = overlayText;
+                btn.disabled = false;
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            Swal.fire({
+                title: 'Error de Conexión',
+                text: 'No se pudo comunicar con el servidor.',
+                icon: 'error',
+                background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366'
+            });
+            btn.innerHTML = overlayText;
+            btn.disabled = false;
+        });
+    });
+</script>
+
+</body>
+</html>

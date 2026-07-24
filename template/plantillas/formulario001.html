@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Mantenimiento</title>
+    <link rel="stylesheet" href="formulario001.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <!-- Logo Section -->
+            <div class="header-logo">
+                <div>
+                    <div class="logo-text">mas</div>
+                    <div class="logo-subtext">somos más que harina</div>
+                </div>
+            </div>
+
+            <!-- Center Section -->
+            <div class="header-center">
+                <div class="header-center-title">Manual de Gestión del Mantenimiento</div>
+                <div class="header-center-subtitle">PPR Mantenimiento de Equipamientos</div>
+                <div class="header-center-main">"Solicitud y Reparacion de Mantenimiento"</div>
+            </div>
+
+            <!-- Right Section with metadata -->
+            <div class="header-right">
+                <div class="header-meta-row">
+                    <div class="meta-label-cell">Codigo:</div>
+                    <div class="meta-value-cell">OPE-ME-FO-002</div>
+                </div>
+                <div class="header-meta-row">
+                    <div class="meta-label-cell">Fecha:</div>
+                    <div class="meta-value-cell">3/17/2025</div>
+                </div>
+                <div class="header-meta-row">
+                    <div class="meta-label-cell">Version:</div>
+                    <div class="meta-value-cell">4</div>
+                </div>
+                <div class="header-meta-row">
+                    <div class="meta-label-cell">Pagina:</div>
+                    <div class="meta-value-cell">1 de 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Información del Solicitante -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">👤</div>
+                    <h2>Información del Solicitante</h2>
+                </div>
+
+                <div class="form-grid three-col">
+                    <div class="form-group">
+                        <label class="form-label">Fecha Inicial</label>
+                        <div class="form-value">{{fechainicial}} {{horainicial}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"># Orden de Trabajo</label>
+                        <div class="form-value">
+                            <span class="order-badge">{{ordendetrabajo}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cargo</label>
+                        <div class="form-value">{{cargo_solicitante}}</div>
+                    </div>
+                </div>
+
+                <div class="form-grid full">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Solicitante</label>
+                        <div class="form-value">{{nombre_solicitante}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">✓</div>
+                    <h2>Responsables</h2>
+                </div>
+
+                <div class="signature-grid">
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <div class="signature-name">{{firma_solicitante}}</div>
+                        <div class="signature-role">Firma del Solicitante</div>
+                    </div>
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <div class="signature-name">{{firma_autorizado}}</div>
+                        <div class="signature-role">Firma del Autorizado</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Información de Zona, Equipo o Máquina -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">⚙️</div>
+                    <h2>Información de Zona, Equipo o Máquina</h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Zona</label>
+                        <div class="form-value">{{objeto_dañado}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Código</label>
+                        <div class="form-value">{{cod}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Máquina y/o Equipo</label>
+                        <div class="form-value">{{objeto_dañado}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Marca</label>
+                        <div class="form-value">{{marca}}</div>
+                    </div>
+                </div>
+
+                <div class="form-grid full">
+                    <div class="form-group">
+                        <label class="form-label">Ubicación</label>
+                        <div class="form-value">{{ubi}}</div>
+                    </div>
+                </div>
+
+                <div class="form-grid full">
+                    <div class="form-group">
+                        <label class="form-label">Describa Detalladamente el Estado y las Fallas que Presenta</label>
+                        <div class="form-value large">{{descripcion_daños}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tipo de Mantenimiento -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🔧</div>
+                    <h2>Tipo de Mantenimiento a Realizar</h2>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-value">
+                        <span class="maintenance-badge">{{tipomantenimiento}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Descripción del Trabajo Realizado -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">📝</div>
+                    <h2>Descripción General del Trabajo Realizado</h2>
+                </div>
+
+                <div class="form-grid full">
+                    <div class="form-group">
+                        <div class="form-value large">{{descripcion_trabajo}}</div>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Fecha y Hora de Cierre del Mantenimiento</label>
+                        <div class="form-value">{{fecha_cierre}} {{hora_cierre}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responsables -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">✓</div>
+                    <h2>Responsables</h2>
+                </div>
+
+                <div class="signature-grid">
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <div class="signature-name">{{responsable-Miembro_De_La_Compañia_0}}</div>
+                        <div class="signature-role">Responsable del Mantenimiento</div>
+                    </div>
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <div class="signature-name">{{VoBo}}</div>
+                        <div class="signature-role">VoBo de Mantenimiento</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revisión de Inocuidad -->
+            <div class="section">
+                <div class="safety-section">
+                    <div class="section-header">
+                        <div class="section-icon">🛡️</div>
+                        <h2>Revisión de Inocuidad</h2>
+                    </div>
+
+                    <p style="font-size: 11px; color: #92400e; margin-bottom: 15px; line-height: 1.5;">
+                        En esta revisión se busca garantizar que las labores realizadas no impliquen ningún tipo de
+                        riesgo a la inocuidad de las materias primas y productos de grado alimenticio, ya sea durante o
+                        después de la ejecución. Es deber de la persona responsable de las actividades de mantenimiento
+                        asegurar que su labor no va a poner en riesgo la inocuidad del producto.
+                    </p>
+
+                    <div class="safety-question">
+                        <span class="safety-question-label">¿En la labor ejecutada se utilizó algún tipo de insumo que
+                            represente riesgo químico, físico o biológico? Indique cuáles:</span>
+                        <div class="safety-answer">{{descripcion_inocuidad}}</div>
+                    </div>
+
+                    <div class="safety-question">
+                        <span class="safety-question-label">¿Fueron retiradas de la zona?</span>
+                        <div class="safety-answer">{{retiro_inocuidad}}</div>
+                    </div>
+
+                    <div class="safety-question">
+                        <span class="safety-question-label">¿Las personas del mantenimiento reportan alguna novedad
+                            ocurrida que pueda implicar riesgos de la inocuidad?</span>
+                        <div class="safety-answer">{{descripcion_novedad}}</div>
+                    </div>
+
+                    <div class="safety-question">
+                        <span class="safety-question-label">¿El lugar del mantenimiento y zonas adyacentes es entregado
+                            en condiciones que no generan riesgo a la inocuidad?</span>
+                        <div class="safety-answer">{{riesgo_inocuidad}}</div>
+                    </div>
+
+                    <div class="safety-question">
+                        <span class="safety-question-label">¿Qué implementos fueron utilizados para la limpieza y
+                            desinfección de la zona de mantenimiento?</span>
+                        <div class="safety-answer">{{implementos}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revisión de Limpieza -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">🧹</div>
+                    <h2>Revisión de Limpieza</h2>
+                </div>
+
+                <div class="form-grid three-col">
+                    <div class="form-group">
+                        <label class="form-label">Fecha</label>
+                        <div class="form-value">{{fecha_revisionl}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hora</label>
+                        <div class="form-value">{{hora_revisionl}}</div>
+                    </div>
+                </div>
+
+                <div class="signature-grid">
+                    <div class="form-group">
+                        <label class="form-label">Responsable de la Limpieza</label>
+                        <div class="form-value">{{firma_respLim}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Responsable de Revisar Limpieza</label>
+                        <div class="form-value">{{firma_respLim2}}</div>
+                    </div>
+                </div>
+
+                <div class="form-grid full">
+                    <div class="form-group">
+                        <label class="form-label">Proveedor de Mantenimiento (según aplique)</label>
+                        <div class="form-value">{{nprov}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control de Partes Sueltas -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">📦</div>
+                    <h2>Control de Partes Sueltas</h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Fecha de Solicitud</label>
+                        <div class="form-value">{{fechacontrol}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Responsable</label>
+                        <div class="form-value">{{control_responsable}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cargo</label>
+                        <div class="form-value">{{cargo_control}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Trabajo a Realizar</label>
+                        <div class="form-value">{{trabajo_realizar}}</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 13px; font-weight: 600; color: #1e40af; margin: 25px 0 15px;">Herramientas</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cant. Ingreso</th>
+                                <th>Descripción Herramienta</th>
+                                <th>Cant. Salida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="{{row_tool_1_style}}">
+                                <td>{{herramientas_cantidad1}}</td>
+                                <td>{{descripcion_herramientas1}}</td>
+                                <td>{{herramientas_salida1}}</td>
+                            </tr>
+                            <tr style="{{row_tool_2_style}}">
+                                <td>{{herramientas_cantidad2}}</td>
+                                <td>{{descripcion_herramientas2}}</td>
+                                <td>{{herramientas_salida2}}</td>
+                            </tr>
+                            <tr style="{{row_tool_3_style}}">
+                                <td>{{herramientas_cantidad3}}</td>
+                                <td>{{descripcion_herramientas3}}</td>
+                                <td>{{herramientas_salida3}}</td>
+                            </tr>
+                            <tr style="{{row_tool_4_style}}">
+                                <td>{{herramientas_cantidad4}}</td>
+                                <td>{{descripcion_herramientas4}}</td>
+                                <td>{{herramientas_salida4}}</td>
+                            </tr>
+                            <tr style="{{row_tool_5_style}}">
+                                <td>{{herramientas_cantidad5}}</td>
+                                <td>{{descripcion_herramientas5}}</td>
+                                <td>{{herramientas_salida5}}</td>
+                            </tr>
+                            <tr style="{{row_tool_6_style}}">
+                                <td>{{herramientas_cantidad6}}</td>
+                                <td>{{descripcion_herramientas6}}</td>
+                                <td>{{herramientas_salida6}}</td>
+                            </tr>
+                            <tr style="{{row_tool_7_style}}">
+                                <td>{{herramientas_cantidad7}}</td>
+                                <td>{{descripcion_herramientas7}}</td>
+                                <td>{{herramientas_salida7}}</td>
+                            </tr>
+                            <tr style="{{row_tool_8_style}}">
+                                <td>{{herramientas_cantidad8}}</td>
+                                <td>{{descripcion_herramientas8}}</td>
+                                <td>{{herramientas_salida8}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="font-size: 13px; font-weight: 600; color: #1e40af; margin: 25px 0 15px;">Materiales e Insumos
+                </h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cantidad</th>
+                                <th>Unidad de Medida</th>
+                                <th>Descripción</th>
+                                <th>Registro Ingreso</th>
+                                <th>Utilizado</th>
+                                <th>Verificación Salida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="{{row_mat_1_style}}">
+                                <td>{{materiales_cantidad1}}</td>
+                                <td>{{medida_materiales1}}</td>
+                                <td>{{descripcion_materiales1}}</td>
+                                <td>{{materiales_utilizados1}}</td>
+                                <td>{{materiales_utilizados1}}</td>
+                                <td>{{verificacion_material1}}</td>
+                            </tr>
+                            <tr style="{{row_mat_2_style}}">
+                                <td>{{materiales_cantidad2}}</td>
+                                <td>{{medida_materiales2}}</td>
+                                <td>{{descripcion_materiales2}}</td>
+                                <td>{{materiales_utilizados2}}</td>
+                                <td>{{materiales_utilizados2}}</td>
+                                <td>{{verificacion_material2}}</td>
+                            </tr>
+                            <tr style="{{row_mat_3_style}}">
+                                <td>{{materiales_cantidad3}}</td>
+                                <td>{{medida_materiales3}}</td>
+                                <td>{{descripcion_materiales3}}</td>
+                                <td>{{materiales_utilizados3}}</td>
+                                <td>{{materiales_utilizados3}}</td>
+                                <td>{{verificacion_material3}}</td>
+                            </tr>
+                            <tr style="{{row_mat_4_style}}">
+                                <td>{{materiales_cantidad4}}</td>
+                                <td>{{medida_materiales4}}</td>
+                                <td>{{descripcion_materiales4}}</td>
+                                <td>{{materiales_utilizados4}}</td>
+                                <td>{{materiales_utilizados4}}</td>
+                                <td>{{verificacion_material4}}</td>
+                            </tr>
+                            <tr style="{{row_mat_5_style}}">
+                                <td>{{materiales_cantidad5}}</td>
+                                <td>{{medida_materiales5}}</td>
+                                <td>{{descripcion_materiales5}}</td>
+                                <td>{{materiales_utilizados5}}</td>
+                                <td>{{materiales_utilizados5}}</td>
+                                <td>{{verificacion_material5}}</td>
+                            </tr>
+                            <tr style="{{row_mat_6_style}}">
+                                <td>{{materiales_cantidad6}}</td>
+                                <td>{{medida_materiales6}}</td>
+                                <td>{{descripcion_materiales6}}</td>
+                                <td>{{materiales_utilizados6}}</td>
+                                <td>{{materiales_utilizados6}}</td>
+                                <td>{{verificacion_material6}}</td>
+                            </tr>
+                            <tr style="{{row_mat_7_style}}">
+                                <td>{{materiales_cantidad7}}</td>
+                                <td>{{medida_materiales7}}</td>
+                                <td>{{descripcion_materiales7}}</td>
+                                <td>{{materiales_utilizados7}}</td>
+                                <td>{{materiales_utilizados7}}</td>
+                                <td>{{verificacion_material7}}</td>
+                            </tr>
+                            <tr style="{{row_mat_8_style}}">
+                                <td>{{materiales_cantidad8}}</td>
+                                <td>{{medida_materiales8}}</td>
+                                <td>{{descripcion_materiales8}}</td>
+                                <td>{{materiales_utilizados8}}</td>
+                                <td>{{materiales_utilizados8}}</td>
+                                <td>{{verificacion_material8}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="signature-grid" style="margin-top: 25px;">
+                    <div class="form-group">
+                        <label class="form-label">VoBo Verificación Ingreso</label>
+                        <div class="form-value">{{Vobo_ingreso}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">VoBo Verificación Salida</label>
+                        <div class="form-value">{{Vobo_salida}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registro Mediciones Mantenimiento Predictivo -->
+            <div class="section" style="{{mediciones_style}}">
+                <div class="section-header">
+                    <div class="section-icon">📊</div>
+                    <h2>Registro Mediciones Mantenimiento Predictivo</h2>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Máquina/Equipo</th>
+                                <th rowspan="2">Parte del Equipo</th>
+                                <th rowspan="2">Termografía</th>
+                                <th rowspan="2">Vibraciones</th>
+                                <th colspan="2" style="text-align: center; color: #1d8cf8;">Multímetro</th>
+                                <th rowspan="2">Observaciones</th>
+                            </tr>
+                            <tr>
+                                <th>Rango</th>
+                                <th>Amperaje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="{{row_med_1_style}}">
+                                <td>{{equipo_name1}}</td>
+                                <td>{{parte1}}</td>
+                                <td>{{termografia1}}</td>
+                                <td>{{vibraciones1}}</td>
+                                <td>{{rango1}}</td>
+                                <td>{{amperaje1}}</td>
+                                <td>{{observaciones1}}</td>
+                            </tr>
+                            <tr style="{{row_med_2_style}}">
+                                <td>{{equipo_name2}}</td>
+                                <td>{{parte2}}</td>
+                                <td>{{termografia2}}</td>
+                                <td>{{vibraciones2}}</td>
+                                <td>{{rango2}}</td>
+                                <td>{{amperaje2}}</td>
+                                <td>{{observaciones2}}</td>
+                            </tr>
+                            <tr style="{{row_med_3_style}}">
+                                <td>{{equipo_name3}}</td>
+                                <td>{{parte3}}</td>
+                                <td>{{termografia3}}</td>
+                                <td>{{vibraciones3}}</td>
+                                <td>{{rango3}}</td>
+                                <td>{{amperaje3}}</td>
+                                <td>{{observaciones3}}</td>
+                            </tr>
+                            <tr style="{{row_med_4_style}}">
+                                <td>{{equipo_name4}}</td>
+                                <td>{{parte4}}</td>
+                                <td>{{termografia4}}</td>
+                                <td>{{vibraciones4}}</td>
+                                <td>{{rango4}}</td>
+                                <td>{{amperaje4}}</td>
+                                <td>{{observaciones4}}</td>
+                            </tr>
+                            <tr style="{{row_med_5_style}}">
+                                <td>{{equipo_name5}}</td>
+                                <td>{{parte5}}</td>
+                                <td>{{termografia5}}</td>
+                                <td>{{vibraciones5}}</td>
+                                <td>{{rango5}}</td>
+                                <td>{{amperaje5}}</td>
+                                <td>{{observaciones5}}</td>
+                            </tr>
+                            <tr style="{{row_med_6_style}}">
+                                <td>{{equipo_name6}}</td>
+                                <td>{{parte6}}</td>
+                                <td>{{termografia6}}</td>
+                                <td>{{vibraciones6}}</td>
+                                <td>{{rango6}}</td>
+                                <td>{{amperaje6}}</td>
+                                <td>{{observaciones6}}</td>
+                            </tr>
+                            <tr style="{{row_med_7_style}}">
+                                <td>{{equipo_name7}}</td>
+                                <td>{{parte7}}</td>
+                                <td>{{termografia7}}</td>
+                                <td>{{vibraciones7}}</td>
+                                <td>{{rango7}}</td>
+                                <td>{{amperaje7}}</td>
+                                <td>{{observaciones7}}</td>
+                            </tr>
+                            <tr style="{{row_med_8_style}}">
+                                <td>{{equipo_name8}}</td>
+                                <td>{{parte8}}</td>
+                                <td>{{termografia8}}</td>
+                                <td>{{vibraciones8}}</td>
+                                <td>{{rango8}}</td>
+                                <td>{{amperaje8}}</td>
+                                <td>{{observaciones8}}</td>
+                            </tr>
+                            <tr style="{{row_med_9_style}}">
+                                <td>{{equipo_name9}}</td>
+                                <td>{{parte9}}</td>
+                                <td>{{termografia9}}</td>
+                                <td>{{vibraciones9}}</td>
+                                <td>{{rango9}}</td>
+                                <td>{{amperaje9}}</td>
+                                <td>{{observaciones9}}</td>
+                            </tr>
+                            <tr style="{{row_med_10_style}}">
+                                <td>{{equipo_name10}}</td>
+                                <td>{{parte10}}</td>
+                                <td>{{termografia10}}</td>
+                                <td>{{vibraciones10}}</td>
+                                <td>{{rango10}}</td>
+                                <td>{{amperaje10}}</td>
+                                <td>{{observaciones10}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Evidencia Fotográfica -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">📷</div>
+                    <h2>Evidencia Fotográfica</h2>
+                </div>
+
+                <div class="photo-grid">
+                    <div class="photo-box">
+                        <div class="photo-label">ANTES</div>
+                        <div class="photo-placeholder">{{evidencia_antes_1}}</div>
+                    </div>
+                    <div class="photo-box">
+                        <div class="photo-label">DESPUÉS</div>
+                        <div class="photo-placeholder">{{evidencia_despues_1}}</div>
+                    </div>
+                    <div class="photo-box" style="{{evidencia_antes_2_style}}">
+                        <div class="photo-label">ANTES (2)</div>
+                        <div class="photo-placeholder">{{evidencia_antes_2}}</div>
+                    </div>
+                    <div class="photo-box" style="{{evidencia_despues_2_style}}">
+                        <div class="photo-label">DESPUÉS (2)</div>
+                        <div class="photo-placeholder">{{evidencia_despues_2}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Manual de Gestión del Mantenimiento</strong> | PPR Mantenimiento de Equipamientos</p>
+            <p style="margin-top: 5px;">OPE-ME-FO-002 | Versión 4 | 3/17/2025</p>
+        </div>
+    </div>
+</body>
+
+</html>

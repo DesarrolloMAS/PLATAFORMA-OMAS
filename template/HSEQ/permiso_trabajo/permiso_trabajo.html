@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERMISO DE TRABAJO</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .form-grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px top 50%;
+            background-size: 10px auto;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        .dynamic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+        }
+
+        .dynamic-table.resp-table {
+            min-width: 640px;
+        }
+
+        .dynamic-table.resp-table td:first-child {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .dynamic-table th {
+            text-align: left;
+            padding: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+        }
+
+        .dynamic-table td {
+            padding: 8px 10px;
+        }
+
+        .btn-add {
+            background: var(--input-bg);
+            border: 1px dashed var(--accent);
+            color: var(--accent);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .btn-remove {
+            background: rgba(255, 51, 102, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .nota-normativa {
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 15px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            line-height: 1.6;
+            margin-top: 30px;
+        }
+
+        .firma-canvas-wrap {
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+            height: 46px;
+        }
+
+        .firma-canvas-wrap canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .btn-clear-firma {
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            line-height: 1;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1 class="main-title">PERMISO DE TRABAJO</h1>
+                    <div class="sub-title">Seguridad y Salud en el Trabajo (HSEQ)</div>
+                </div>
+                <a href="../permiso_completo/index.html" class="btn-back">← VOLVER</a>
+            </div>
+            <p style="color:var(--text-muted); font-size:13px; margin-top:15px;">
+                Este permiso garantiza la identificación de peligros, valoración de riesgos e implementación de
+                controles preventivos.
+            </p>
+        </div>
+
+        <form id="permisoForm">
+
+            <!-- 01 GENERALIDADES -->
+            <div class="section-card">
+                <div class="section-title"><span>01</span> Generalidades</div>
+                <input type="hidden" name="frecuencia">
+                <input type="hidden" name="tipo_trabajo">
+                <input type="hidden" name="fecha_inicio">
+                <input type="hidden" name="fecha_fin">
+                <input type="hidden" name="hora_inicio">
+                <input type="hidden" name="hora_fin">
+                <input type="hidden" name="sede">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Área donde se realiza</label>
+                        <input type="text" name="area_realiza" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Altura Aproximada (m)</label>
+                        <input type="text" name="altura_aprox" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ciudad</label>
+                        <select name="ciudad" id="" class="form-control">
+                            <option value="Bogotá">Bogotá</option>
+                            <option value="Pasto">Pasto</option>
+                            <option value="Buga">Buga</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label class="form-label">Descripción de la Actividad a Realizar</label>
+                    <textarea name="descripcion_actividad" class="form-control" required></textarea>
+                </div>
+            </div>
+
+            <!-- 02 TRABAJADORES AUTORIZADOS -->
+            <div class="section-card">
+                <div class="section-title"><span>02</span> Trabajadores Autorizados</div>
+                <table class="dynamic-table" id="tablaTrabajadores">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nombres y Apellidos</th>
+                            <th>Tipo Doc</th>
+                            <th>N° Documento</th>
+                            <th>Fecha Curso / Reentrenamiento</th>
+                            <th>Día de la Semana</th>
+                            <th>Firma / Aprobación</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas dinámicas -->
+                    </tbody>
+                </table>
+                <button type="button" class="btn-add" onclick="agregarTrabajador()">+ Añadir Trabajador</button>
+
+                <hr style="border: 1px dashed var(--border-color); margin: 25px 0;">
+
+                <div class="form-group">
+                    <label class="form-label" style="color:var(--accent);">AYUDANTE O VIGÍA DESIGNADO</label>
+                    <div class="form-grid form-grid-4">
+                        <input type="text" name="vigia_nombre" class="form-control" placeholder="Nombres y Apellidos">
+                        <select name="vigia_tipo_doc" class="form-control">
+                            <option value="">Tipo Doc</option>
+                            <option value="CC">CC</option>
+                            <option value="CE">CE</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Permiso de Proteccion Personal">Permiso de Proteccion Personal</option>
+                            <option value="Salvo conducto de permanencia">Salvo conducto de permanencia</option>
+                        </select>
+                        <input type="text" name="vigia_doc" class="form-control" placeholder="N° Documento">
+                        <input type="text" name="vigia_dia" class="form-control" placeholder="Día (ej. Lunes)">
+                        <div class="firma-canvas-wrap" id="wrapVigiaFirma">
+                            <canvas id="canvasVigiaFirma" width="200" height="46"></canvas>
+                            <button type="button" class="btn-clear-firma"
+                                onclick="limpiarCanvasFijo('canvasVigiaFirma')">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 1px dashed var(--border-color); margin: 25px 0;">
+
+                <div class="form-group">
+                    <label class="form-label" style="color:var(--accent);">RESPONSABLE DE ACTIVAR EL PLAN DE
+                        EMERGENCIA</label>
+                    <div class="form-grid form-grid-4">
+                        <input type="text" name="emergencia_nombre" class="form-control"
+                            placeholder="Nombres y Apellidos">
+                        <select name="emergencia_tipo_doc" class="form-control">
+                            <option value="CC">CC</option>
+                            <option value="CE">CE</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Permiso de Proteccion Personal">Permiso de Proteccion Personal</option>
+                            <option value="Salvo conducto de permanencia">Salvo conducto de permanencia</option>
+                        </select>
+                        <input type="text" name="emergencia_doc" class="form-control" placeholder="N° Documento">
+                        <input type="text" name="emergencia_dia" class="form-control" placeholder="Día (ej. Lunes)">
+                        <div class="firma-canvas-wrap" id="wrapEmergenciaFirma">
+                            <canvas id="canvasEmergenciaFirma" width="200" height="46"></canvas>
+                            <button type="button" class="btn-clear-firma"
+                                onclick="limpiarCanvasFijo('canvasEmergenciaFirma')">✕</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03 EQUIPOS REQUERIDOS -->
+            <div class="section-card">
+                <div class="section-title"><span>03</span> Equipos Requeridos y Sistemas</div>
+                <div class="form-grid form-grid-3">
+                    <script>
+                        const equipos = [
+                            ['eq_arnes', 'Arnés'], ['eq_lv_vertical', 'Línea de Vida Vertical'],
+                            ['eq_eslinga_pos', 'Eslinga de Posicionamiento'], ['eq_lv_horizontal', 'Línea de Vida Horizontal'],
+                            ['eq_eslinga_abs', 'Eslinga con Absorbedor'], ['eq_anclaje_fijo', 'Punto de Anclaje Fijo'],
+                            ['eq_freno', 'Freno'], ['eq_anclaje_movil', 'Punto de Anclaje Móvil'],
+                            ['eq_red_seg', 'Red de Seguridad'], ['eq_malla', 'Malla o Línea de Restricción']
+                        ];
+                        equipos.forEach(eq => {
+                            document.write(`
+                            <div class="form-group">
+                                <label class="form-label">${eq[1]}</label>
+                                <select name="${eq[0]}" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                    <option value="N/A">N/A</option>
+                                </select>
+                            </div>
+                        `);
+                        });
+                    </script>
+                    <div class="form-group">
+                        <label class="form-label">Equipo Adicional 1</label>
+                        <input type="text" name="eq_otro_nombre_1" class="form-control"
+                            placeholder="Especifique el equipo requerido" style="margin-bottom:8px;">
+                        <select name="eq_otro_valor_1" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Equipo Adicional 2</label>
+                        <input type="text" name="eq_otro_nombre_2" class="form-control"
+                            placeholder="Especifique el equipo requerido" style="margin-bottom:8px;">
+                        <select name="eq_otro_valor_2" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                    </div>
+                </div>
+                <hr style="border: 1px dashed var(--border-color); margin: 25px 0;">
+                <label class="form-label" style="color:var(--accent);">TIPO DE SISTEMA A IMPLEMENTAR</label>
+                <div id="sistemasContainer"></div>
+                <button type="button" class="btn-add" id="btnAgregarSistema" onclick="agregarSistema()">+ Añadir
+                    Sistema</button>
+            </div>
+
+            <!-- 04 MEDIDAS Y EPP -->
+            <div class="section-card">
+                <div class="section-title"><span>04</span> Medidas Preventivas y Colectivas</div>
+
+                <label class="form-label" style="color:var(--accent); margin-bottom:10px; display:block;">Medidas de
+                    Prevención</label>
+                <div class="form-grid form-grid-4">
+                    <script>
+                        const prev = [['prev_peligros', 'Análisis otros peligros'], ['prev_cap', 'Capacitación SST'], ['prev_ing', 'Sistemas ingeniería'], ['prev_proc', 'Procedimientos'], ['prev_susp', 'Trabajos en suspensión']];
+                        prev.forEach(p => document.write(`<div class="form-group"><label class="form-label">${p[1]}</label><select name="${p[0]}" class="form-control"><option value="">Seleccione</option><option value="Aplica">Aplica</option><option value="No aplica">No aplica</option></select></div>`));
+                    </script>
+                </div>
+
+                <hr style="border: 1px dashed var(--border-color); margin: 25px 0;">
+                <label class="form-label" style="color:var(--accent); margin-bottom:10px; display:block;">Medidas
+                    Colectivas</label>
+                <div class="form-grid form-grid-4">
+                    <script>
+                        const col = [['col_delim', 'Delimitación área'], ['col_acceso', 'Control de acceso'], ['col_adv', 'Línea advertencia'], ['col_desniv', 'Manejo desniveles'], ['col_senal', 'Señalización'], ['col_sup', 'Control superficies'], ['col_bandas', 'Bandas'], ['col_vigia', 'Ayudante o vigía']];
+                        col.forEach(c => document.write(`<div class="form-group"><label class="form-label">${c[1]}</label><select name="${c[0]}" class="form-control"><option value="">Seleccione</option><option value="Aplica">Aplica</option><option value="No aplica">No aplica</option></select></div>`));
+                    </script>
+                </div>
+
+
+            </div>
+
+            <!-- 05 CONDICIONES VERIFICACION -->
+            <div class="section-card">
+                <div class="section-title"><span>05</span> Condiciones de Seguridad & Verificación Diaria</div>
+                <table class="dynamic-table">
+                    <thead>
+                        <tr>
+                            <th>Pregunta</th>
+                            <th width="150">Día</th>
+                            <th width="150">Verificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <script>
+                            const preguntas = [
+                                "¿se verificó que no se realicen actividades simultáneas?",
+                                "¿se cuenta con listas pre operacionales diarias?",
+                                "¿se realizó el ats y se firmó?",
+                                "¿se garantiza distancias de seguridad?",
+                                "¿el sistema de acceso es estable y seguro?",
+                                "¿se verifica el porte adecuado de los arneses y epp?",
+                                "¿los puntos de anclaje son seguros?",
+                                "¿se validó el punto de anclaje por cada trabajador?",
+                                "¿se cuenta con línea de vida vertical por trabajador?",
+                                "¿herramientas aseguradas para evitar caídas?",
+                                "¿se han consultado otros permisos?",
+                                "¿condiciones climáticas adecuadas?",
+                                "¿ausencia de molestias físicas o mentales?",
+                                "¿se verifica que trabajen mínimo dos personas?",
+                                "¿se realiza la charla pre-operativa?",
+                                "¿el personal conoce cómo actuar en emergencias?"
+                            ];
+                            preguntas.forEach((p, i) => {
+                                document.write(`<tr>
+                                <td><input type="hidden" name="preg_t_${i}" value="${p}">${p}</td>
+                                <td><select name="preg_d_${i}" class="form-control"><option value="">Seleccione...</option><option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miercoles">Miércoles</option><option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sabado">Sábado</option></select></td>
+                                <td><select name="preg_v_${i}" class="form-control"><option value="">Sel...</option><option value="Si">Sí</option><option value="No">No</option><option value="NA">N/A</option></select></td>
+                            </tr>`);
+                            });
+                        </script>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- RESPONSABLES DE VERIFICACIÓN Y AUTORIZACIÓN -->
+            <div class="section-card">
+                <div class="table-scroll">
+                    <table class="dynamic-table resp-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">RESPONSABLES DE VERIFICACION Y AUTORIZACION</th>
+                                <th width="200" style="text-align: center;">DIA DE LA SEMANA</th>
+                                <th width="200" style="text-align: center;">FIRMA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td
+                                    style="background-color: rgba(0, 240, 255, 0.08); color: var(--accent); font-weight: bold; text-align: center; font-size: 11px; padding: 10px;">
+                                    FIRMA DE VERIFICACION DE QUIEN AUTORIZA EL TRABAJO</td>
+                                <td><select name="resp_dia_1" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miercoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sabado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select></td>
+                                <td>
+                                    <div class="firma-canvas-wrap" id="wrapRespFirma1"><canvas id="canvasRespFirma1"
+                                            width="200" height="46"></canvas><button type="button"
+                                            class="btn-clear-firma"
+                                            onclick="limpiarCanvasFijo('canvasRespFirma1')">✕</button></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="background-color: rgba(0, 240, 255, 0.08); color: var(--accent); font-weight: bold; text-align: center; font-size: 11px; padding: 10px;">
+                                    FIRMA DE VERIFICACION DE COORDINADOR</td>
+                                <td><select name="resp_dia_2" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miercoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sabado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select></td>
+                                <td>
+                                    <div class="firma-canvas-wrap" id="wrapRespFirma2"><canvas id="canvasRespFirma2"
+                                            width="200" height="46"></canvas><button type="button"
+                                            class="btn-clear-firma"
+                                            onclick="limpiarCanvasFijo('canvasRespFirma2')">✕</button></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="background-color: rgba(0, 240, 255, 0.08); color: var(--accent); font-weight: bold; text-align: center; font-size: 11px; padding: 10px;">
+                                    FIRMA DE VERIFICACION DE QUIEN AUTORIZA EL TRABAJO SUPLENTE</td>
+                                <td><select name="resp_dia_3" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miercoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sabado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select></td>
+                                <td>
+                                    <div class="firma-canvas-wrap" id="wrapRespFirma3"><canvas id="canvasRespFirma3"
+                                            width="200" height="46"></canvas><button type="button"
+                                            class="btn-clear-firma"
+                                            onclick="limpiarCanvasFijo('canvasRespFirma3')">✕</button></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="background-color: rgba(0, 240, 255, 0.08); color: var(--accent); font-weight: bold; text-align: center; font-size: 11px; padding: 10px;">
+                                    FIRMA DE VERIFICACION DE COORDINADOR SUPLENTE</td>
+                                <td><select name="resp_dia_4" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miercoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sabado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select></td>
+                                <td>
+                                    <div class="firma-canvas-wrap" id="wrapRespFirma4"><canvas id="canvasRespFirma4"
+                                            width="200" height="46"></canvas><button type="button"
+                                            class="btn-clear-firma"
+                                            onclick="limpiarCanvasFijo('canvasRespFirma4')">✕</button></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 06 HERRAMIENTAS Y OBSERVACIONES -->
+            <div class="section-card">
+                <div class="section-title"><span>06</span> Herramientas a Utilizar y Observaciones</div>
+                <div class="form-grid">
+                    <script>
+                        const herr = ['Manuales', 'Eléctricas', 'Neumáticas', 'Hidráulicas', 'Mecánicas', 'Otra'];
+                        herr.forEach((h, i) => {
+                            document.write(`<div class="form-group"><label class="form-label">${h}</label><input type="text" name="herr_${i}" class="form-control" placeholder="Descripción"></div>`);
+                        });
+                    </script>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label class="form-label">Observaciones</label>
+                    <textarea name="observaciones" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <!-- 07 AUTORIZACIÓN Y FIRMAS -->
+            <div class="section-card">
+                <div class="section-title"><span>07</span> Autorización del Permiso</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">¿Aprueba el permiso?</label>
+                        <select name="aprueba" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">Motivo de la negación (si aplica)</label>
+                        <input type="text" name="motivo_negacion" class="form-control">
+                    </div>
+                </div>
+
+                <hr style="border: 1px dashed var(--border-color); margin: 25px 0;">
+                <label class="form-label" style="color:var(--accent); margin-bottom:10px; display:block;">Firmas de
+                    Autorización</label>
+                <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px; font-style:italic;">
+                    NOTA: Verificado el cumplimiento por parte de los trabajadores a los procedimientos de los trabajos
+                    seguros involucrados, se avala la efectividad en campo y se firma el actual permiso para actividades
+                    de tareas.
+                </p>
+                <div class="form-grid">
+                    <script>
+                        const firmas = ['Jefe Encargado', 'Jefe Encargado Suplente', 'Coordinador Trabajo Seguro', 'Coordinador Suplente'];
+                        firmas.forEach((f, i) => {
+                            document.write(`
+                            <div class="form-group" style="border:1px solid var(--border-color); padding:15px; border-radius:4px;">
+                                <label class="form-label" style="color:#fff; margin-bottom:10px;">${f}</label>
+                                <input type="text" name="firma_n_${i}" class="form-control" placeholder="Nombre" style="margin-bottom:8px;">
+                                <input type="text" name="firma_id_${i}" class="form-control" placeholder="Identificación" style="margin-bottom:8px;">
+                                <div class="firma-canvas-wrap">
+                                    <canvas id="canvasAutoFirma_${i}" width="200" height="46"></canvas>
+                                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasAutoFirma_${i}')">✕</button>
+                                </div>
+                            </div>
+                        `);
+                        });
+                    </script>
+                </div>
+
+                <hr style="border: 1px dashed var(--border-color); margin: 25px 0;">
+                <label class="form-label" style="color:var(--warning); margin-bottom:10px; display:block;">Suspensión de
+                    Permiso (Solo en caso requerido)</label>
+
+                <label class="form-label" style="color:#fff; margin-bottom:10px; display:block;">Coordinador y Quien
+                    Autoriza la Actividad</label>
+                <div class="form-grid">
+                    <div class="form-group"><label class="form-label">Nombre del Coordinador</label><input type="text"
+                            name="susp_nombre" class="form-control" placeholder="Nombre completo"></div>
+                    <div class="form-group"><label class="form-label">Tipo de Documento</label>
+                        <select name="susp_tipo_doc" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="CC">Cédula de Ciudadanía</option>
+                            <option value="CE">Cédula de Extranjería</option>
+                            <option value="TI">Tarjeta de Identidad</option>
+                            <option value="PA">Pasaporte</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label class="form-label">N° de Documento</label><input type="text"
+                            name="susp_num_doc" class="form-control" placeholder="Número de documento"></div>
+                    <div class="form-group"><label class="form-label">Día de la Semana</label>
+                        <select name="susp_dia" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miercoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sabado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Firma</label>
+                        <div class="firma-canvas-wrap" id="wrapSuspFirma">
+                            <canvas id="canvasSuspFirma" width="200" height="46"></canvas>
+                            <button type="button" class="btn-clear-firma"
+                                onclick="limpiarCanvasFijo('canvasSuspFirma')">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 1px dashed var(--border-color); margin: 20px 0;">
+                <div class="form-grid">
+                    <div class="form-group"><label class="form-label">Motivo de la Suspensión</label><select
+                            name="susp_motivo" class="form-control">
+                            <option value="">Seleccione</option>
+                            <option value="Clima">Clima</option>
+                            <option value="Peligro">Peligro Inminente</option>
+                            <option value="Otro">Otro</option>
+                        </select></div>
+                    <div class="form-group"><label class="form-label">Causa/Descripción</label><input type="text"
+                            name="susp_causa" class="form-control"></div>
+                    <div class="form-group">
+                        <label class="form-label">Firma del Coordinador</label>
+                        <div class="firma-canvas-wrap" id="wrapSuspCoordFirma">
+                            <canvas id="canvasSuspCoordFirma" width="200" height="46"></canvas>
+                            <button type="button" class="btn-clear-firma"
+                                onclick="limpiarCanvasFijo('canvasSuspCoordFirma')">✕</button>
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Fecha</label><input type="date" name="susp_fecha"
+                            class="form-control"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnGuardar">REGISTRAR PERMISO DE TRABAJO</button>
+
+            <div class="nota-normativa">
+                <strong>NOTA NORMATIVA:</strong> El presente Permiso de Trabajo se emite y ejecuta en cumplimiento de la
+                normatividad vigente en Seguridad y Salud en el Trabajo en Colombia, especialmente lo establecido en la
+                Resolución 4272 de 2021, por la cual se establecen los requisitos mínimos de seguridad para el
+                desarrollo de trabajo en alturas; la Resolución 0491 de 2020, mediante la cual se establecen los
+                requisitos mínimos de seguridad para el desarrollo de trabajos en espacios confinados; y el RETIE,
+                aplicable a las actividades que involucren riesgo eléctrico o intervención de instalaciones energizadas.
+                Así mismo, este permiso se articula con el Decreto 1072 de 2015 y el Sistema de Gestión de Seguridad y
+                Salud en el Trabajo (SG-SST), garantizando la identificación de peligros, valoración de riesgos,
+                implementación de controles y cumplimiento de medidas preventivas antes, durante y después de la
+                ejecución de la tarea.
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let trajCount = 0;
+
+        function initCanvasFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#003366';
+            ctx.lineWidth = 1.5;
+            ctx.lineCap = 'round';
+            let drawing = false;
+            const getPos = (e) => {
+                const r = canvas.getBoundingClientRect();
+                const sx = canvas.width / r.width;
+                const sy = canvas.height / r.height;
+                const src = e.touches ? e.touches[0] : e;
+                return { x: (src.clientX - r.left) * sx, y: (src.clientY - r.top) * sy };
+            };
+            canvas.addEventListener('mousedown', (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+            canvas.addEventListener('mousemove', (e) => { if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+            canvas.addEventListener('mouseup', () => { drawing = false; });
+            canvas.addEventListener('mouseleave', () => { drawing = false; });
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+            canvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); }, { passive: false });
+            canvas.addEventListener('touchend', () => { drawing = false; });
+        }
+
+        function limpiarCanvasFijo(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function obtenerFirmaImg(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return null;
+            const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+            return Array.from(imgData).some((v, idx) => idx % 4 === 3 && v > 0) ? canvas.toDataURL('image/png') : null;
+        }
+
+        function agregarTrabajador() {
+            const tbody = document.querySelector('#tablaTrabajadores tbody');
+            const tr = document.createElement('tr');
+            trajCount++;
+            tr.innerHTML = `
+            <td style="color:var(--accent); font-weight:700;">${trajCount}</td>
+            <td><input type="text" name="t_nombre[]" class="form-control" required></td>
+            <td><select name="t_tipo[]" class="form-control"><option value="CC">CC</option><option value="CE">CE</option><option value="PPT">PPT</option></select></td>
+            <td><input type="text" name="t_doc[]" class="form-control" required></td>
+            <td><input type="date" name="t_fecha_curso[]" class="form-control"></td>
+            <td><select name="t_dia[]" class="form-control"><option value="">Sel...</option><option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miercoles">Miercoles</option><option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sabado">Sábado</option><option value="Domingo">Domingo</option></select></td>
+            <td>
+                <div class="firma-canvas-wrap" style="min-width:120px;">
+                    <canvas id="canvasTrabFirma_${trajCount}" width="200" height="46"></canvas>
+                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasTrabFirma_${trajCount}')">✕</button>
+                </div>
+            </td>
+            <td><button type="button" class="btn-remove" onclick="this.closest('tr').remove()">X</button></td>
+        `;
+            tbody.appendChild(tr);
+            initCanvasFirma('canvasTrabFirma_' + trajCount);
+        }
+
+        const MAX_SISTEMAS = 4;
+        function agregarSistema() {
+            const container = document.getElementById('sistemasContainer');
+            if (container.children.length >= MAX_SISTEMAS) return;
+
+            const row = document.createElement('div');
+            row.className = 'form-grid sistema-row';
+            row.style.marginBottom = '15px';
+            row.innerHTML = `
+            <div class="form-group">
+                <label class="form-label">Sistema</label>
+                <select name="sistema_tipo[]" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="Posicionamiento">Posicionamiento</option>
+                    <option value="Restriccion">Restriccion</option>
+                    <option value="Detencion de Caidas">Detencion de Caidas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Sistema de Acceso</label>
+                <select name="sistema_acceso[]" class="form-control">
+                    <option value="">Seleccione...</option>
+                    <option value="Linea de Vida Portatil">Linea de Vida Portatil</option>
+                    <option value="Linea de Vida Horizontal">Linea de Vida Horizontal</option>
+                    <option value="Andamio Tobular">Andamio Tubular</option>
+                    <option value="Andamio Colgante">Andamio Colgante</option>
+                    <option value="Plataforma Elevadora">Plataforma Elevadora</option>
+                    <option value="Escalera de Tijera">Escalera de Tijera</option>
+                    <option value="Escalera Extencion">Escalera Extencion</option>
+                    <option value="Escalera Tipo Avion">Escalera Tipo Avion</option>
+                    <option value="Pretales">Pretales</option>
+                    <option value="Cuerdas">Cuerdas</option>
+                    <option value="Camion Canasta">Camion Canasta</option>
+                    <option value="Elevadores Mecanicos">Elevadores Mecanicos</option>
+                </select>
+            </div>
+            <div class="form-group" style="justify-content:flex-end;">
+                <button type="button" class="btn-remove" onclick="eliminarSistema(this)">✕ Quitar Sistema</button>
+            </div>
+        `;
+            container.appendChild(row);
+            actualizarBotonAgregarSistema();
+        }
+
+        function eliminarSistema(btn) {
+            btn.closest('.sistema-row').remove();
+            actualizarBotonAgregarSistema();
+        }
+
+        function actualizarBotonAgregarSistema() {
+            const container = document.getElementById('sistemasContainer');
+            const btn = document.getElementById('btnAgregarSistema');
+            btn.style.display = container.children.length >= MAX_SISTEMAS ? 'none' : 'inline-block';
+        }
+
+        // Inicializar con un trabajador y un sistema por defecto
+        document.addEventListener('DOMContentLoaded', () => {
+            agregarTrabajador();
+            agregarSistema();
+
+            // ── Frecuencia, tipo de trabajo, fechas y horas tomadas del Análisis de Trabajo Seguro; sede tomada de la Inspección de Trabajo ──
+            const flujoIdPermiso = new URLSearchParams(window.location.search).get('flujo');
+            if (flujoIdPermiso) {
+                fetch('../permiso_completo/obtener_registro_paso.php?id_flujo=' + encodeURIComponent(flujoIdPermiso) + '&paso=analisis')
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.status === 'success' && res.registro && res.registro.datos) {
+                            const d = res.registro.datos;
+                            ['frecuencia', 'tipo_trabajo', 'fecha_inicio', 'fecha_fin', 'hora_inicio', 'hora_fin'].forEach(campo => {
+                                if (d[campo]) document.querySelector('[name="' + campo + '"]').value = d[campo];
+                            });
+                        }
+                    })
+                    .catch(() => { });
+
+                fetch('../permiso_completo/obtener_registro_paso.php?id_flujo=' + encodeURIComponent(flujoIdPermiso) + '&paso=inspeccion')
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.status === 'success' && res.registro && res.registro.datos && res.registro.datos.sede) {
+                            document.querySelector('[name="sede"]').value = res.registro.datos.sede;
+                        }
+                    })
+                    .catch(() => { });
+            }
+
+            // Inicializar canvas fijos
+            ['canvasVigiaFirma', 'canvasEmergenciaFirma',
+                'canvasRespFirma1', 'canvasRespFirma2', 'canvasRespFirma3', 'canvasRespFirma4',
+                'canvasAutoFirma_0', 'canvasAutoFirma_1', 'canvasAutoFirma_2', 'canvasAutoFirma_3',
+                'canvasSuspFirma', 'canvasSuspCoordFirma'
+            ].forEach(id => initCanvasFirma(id));
+        });
+
+        document.getElementById('permisoForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('btnGuardar');
+            const overlayText = btn.innerHTML;
+
+            btn.innerHTML = 'PROCESANDO JSON...';
+            btn.disabled = true;
+
+            const formData = new FormData(this);
+            const jsonData = {};
+
+            // Manejar arrays manualmente (t_nombre, t_doc, etc) — t_firma se obtiene de canvas
+            const arrays = ['t_nombre', 't_tipo', 't_doc', 't_fecha_curso', 't_dia', 'sistema_tipo', 'sistema_acceso'];
+            arrays.forEach(k => jsonData[k] = []);
+
+            for (let [key, value] of formData.entries()) {
+                if (key.endsWith('[]')) {
+                    const k = key.replace('[]', '');
+                    if (jsonData[k]) jsonData[k].push(value);
+                } else {
+                    jsonData[key] = value;
+                }
+            }
+
+            // Recoger firmas de trabajadores desde canvas
+            const tFirmas = [];
+            document.querySelectorAll('#tablaTrabajadores tbody tr').forEach((tr) => {
+                const canvas = tr.querySelector('canvas');
+                const imgData = canvas ? canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data : null;
+                const tieneTrazo = imgData && Array.from(imgData).some((v, i) => i % 4 === 3 && v > 0);
+                tFirmas.push(tieneTrazo ? canvas.toDataURL('image/png') : null);
+            });
+            jsonData['t_firma'] = tFirmas;
+
+            // Recoger firmas fijas desde canvas
+            jsonData.vigia_firma = obtenerFirmaImg('canvasVigiaFirma');
+            jsonData.emergencia_firma = obtenerFirmaImg('canvasEmergenciaFirma');
+            jsonData.resp_firma_1 = obtenerFirmaImg('canvasRespFirma1');
+            jsonData.resp_firma_2 = obtenerFirmaImg('canvasRespFirma2');
+            jsonData.resp_firma_3 = obtenerFirmaImg('canvasRespFirma3');
+            jsonData.resp_firma_4 = obtenerFirmaImg('canvasRespFirma4');
+            [0, 1, 2, 3].forEach(i => { jsonData['firma_f_' + i] = obtenerFirmaImg('canvasAutoFirma_' + i); });
+            jsonData.susp_firma = obtenerFirmaImg('canvasSuspFirma');
+            jsonData.susp_coord_firma = obtenerFirmaImg('canvasSuspCoordFirma');
+            jsonData.id_flujo = new URLSearchParams(window.location.search).get('flujo');
+
+            fetch('procesar.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const flujoId = new URLSearchParams(window.location.search).get('flujo');
+                        if (flujoId) {
+                            fetch('../permiso_completo/actualizar_paso.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id_flujo: flujoId, paso: 'permiso', id_registro: data.id })
+                            })
+                                .finally(() => {
+                                    Swal.fire({
+                                        title: '¡REGISTRADO!',
+                                        text: 'Permiso guardado. Volviendo al menú de permisos.',
+                                        icon: 'success',
+                                        background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                                    }).then(() => window.location.href = '../permiso_completo/index.html');
+                                });
+                        } else {
+                            Swal.fire({
+                                title: '¡REGISTRADO!',
+                                text: 'Permiso guardado en estructura JSON.',
+                                icon: 'success',
+                                background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                            }).then(() => window.location.reload());
+                        }
+                    } else {
+                        Swal.fire({ title: 'Error', text: data.message || 'Error guardando JSON', icon: 'error', background: '#151A22', color: '#fff' });
+                        btn.innerHTML = overlayText; btn.disabled = false;
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    Swal.fire({ title: 'Error de Red', text: 'No se pudo conectar con procesar.php', icon: 'error', background: '#151A22', color: '#fff' });
+                    btn.innerHTML = overlayText; btn.disabled = false;
+                });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,887 @@
+{
+    "formulario": "GM-MM-MQ-ME-FO-005",
+    "zona": "Zona Molienda",
+    "fecha": "2026-04-06",
+    "inspector": "Jeisson  zambano ",
+    "hora_inicio": "05:30",
+    "hora_final": "06:00",
+    "equipos": [
+        {
+            "codigo": "PLIPASELE01",
+            "nombre": "Elevador Trigo Sucio",
+            "ubicacion": "Bodega 1",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASTAE01",
+            "nombre": "Tablero Eléctrico Control Limpia",
+            "ubicacion": "Bodega 1",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASROT12",
+            "nombre": "Rosca Transportadora Descargue M1, M2, B1, B2",
+            "ubicacion": "Bodega 1, 2",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASROT02",
+            "nombre": "Rosca Transportadora Descargue Silos A, B, C, D",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV01",
+            "nombre": "Dosificador Volumétrico Trigo Silo 1-2",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV02",
+            "nombre": "Dosificador Volumétrico Trigo Silo 3-4",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV03",
+            "nombre": "Dosificador Volumétrico Trigo Silo 5-6",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV04",
+            "nombre": "Dosificador Volumétrico Trigo Silo 7-8",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV05",
+            "nombre": "Dosificador Volumétrico Trigo Silo 9",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV06",
+            "nombre": "Dosificador Volumétrico Trigo Silo 9",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV07",
+            "nombre": "Dosificador Volumétrico Trigo Silo 9",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDOV08",
+            "nombre": "Dosificador Volumétrico Trigo Silo 9",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASROT02",
+            "nombre": "Rosca Transportadora Descargue Silo 9",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASROT03",
+            "nombre": "Rosca Transportadora Descargue Silo 9",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASROT04",
+            "nombre": "Rosca Transportadora Descargue Silos 1 al 8",
+            "ubicacion": "Zona Mezclas",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASMEZ01",
+            "nombre": "Mezcladora Subproducto",
+            "ubicacion": "Zona Remolido",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASMOM01",
+            "nombre": "Molino Martillo",
+            "ubicacion": "Zona Remolido",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCOM01",
+            "nombre": "Compresor Principal Neumático",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS01",
+            "nombre": "Disgregador C1A",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS02",
+            "nombre": "Disgregador C1B",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS03",
+            "nombre": "Disgregador C2",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS04",
+            "nombre": "Disgregador C3",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS05",
+            "nombre": "Disgregador C4",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS06",
+            "nombre": "Disgregador C5",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS07",
+            "nombre": "Disgregador C7",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS08",
+            "nombre": "Disgregador C8",
+            "ubicacion": "Zona Empaque",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFLO01",
+            "nombre": "Flowbalancer MZAL-12 Silo A",
+            "ubicacion": "Primer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFLO02",
+            "nombre": "Flowbalancer MZAL-12 Silo B",
+            "ubicacion": "Primer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFLO03",
+            "nombre": "Flowbalancer MZAL-12 Silo C",
+            "ubicacion": "Primer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFLO04",
+            "nombre": "Flowbalancer MZAL-12 Silo D",
+            "ubicacion": "Primer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASTAE03",
+            "nombre": "Tablero Eléctrico Control Turbina",
+            "ubicacion": "Primer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN01",
+            "nombre": "Banco de Molienda T1",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN02",
+            "nombre": "Banco de Molienda T2",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN03",
+            "nombre": "Banco de Molienda T3",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN04",
+            "nombre": "Banco de Molienda T4G",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN05",
+            "nombre": "Banco de Molienda T4F",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN06",
+            "nombre": "Banco de Molienda T5F",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN07",
+            "nombre": "Banco de Molienda C1A",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN08",
+            "nombre": "Banco de Molienda C1B",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN09",
+            "nombre": "Banco de Molienda C2",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN10",
+            "nombre": "Banco de Molienda C3",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN11",
+            "nombre": "Banco de Molienda C4A",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN12",
+            "nombre": "Banco de Molienda C4B",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN13",
+            "nombre": "Banco de Molienda C5",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN14",
+            "nombre": "Banco de Molienda C6",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN15",
+            "nombre": "Banco de Molienda C7",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAN16",
+            "nombre": "Banco de Molienda C8",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDOV01",
+            "nombre": "Dosificador Volumétrico Repaso T3",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDOV02",
+            "nombre": "Dosificador Volumétrico Repaso Filtro",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MICPASDOG01",
+            "nombre": "Dosificador Gravimétrico MSDC-20\/1",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MICPASDOV01",
+            "nombre": "Dosificador Volumétrico Acrison 97137-03",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MICPASDOV02",
+            "nombre": "Dosificador Volumétrico Acrison 97137-02",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MICPASDOV03",
+            "nombre": "Dosificador Volumétrico Acrison 97031-03",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MICPASROT01",
+            "nombre": "Rosca Transportadora Mejorantes",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASTAE01",
+            "nombre": "Tablero Eléctrico Principal",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASTAE02",
+            "nombre": "Tablero Eléctrico Condensadores",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASREH01",
+            "nombre": "Regulador de Humedad MYFE-10",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASREH02",
+            "nombre": "Regulador de Humedad MOZH-1000-C",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASTAE01",
+            "nombre": "Tablero Eléctrico Variadores",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAS01",
+            "nombre": "Báscula Electrónica MSDM-40 Trigo",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASBAS02",
+            "nombre": "Báscula Electrónica MSDM-80 Harina",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCEP01",
+            "nombre": "Cepilladora Cep.1",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCEP03",
+            "nombre": "Cepilladora Cep.3",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCEP04",
+            "nombre": "Cepilladora Cep.4",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCEP05",
+            "nombre": "Cepilladora Cep.5",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDIS09",
+            "nombre": "Disgregador Dv1",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASELE03",
+            "nombre": "Elevador Remolido",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFIL03",
+            "nombre": "Filtro Remolido",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASIMA01",
+            "nombre": "Imán T1 Báscula",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASIMA02",
+            "nombre": "Imán T1",
+            "ubicacion": "Segundo Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASIMA03",
+            "nombre": "Imán Elevador Harina",
+            "ubicacion": "Primer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASROT01",
+            "nombre": "Rosca Transportadora Alimentación Harina",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASSAS01",
+            "nombre": "Sasor 1",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASSAS02",
+            "nombre": "Sasor 2",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASCOM02",
+            "nombre": "Compresor Limpia",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASDCH01",
+            "nombre": "Deschinadora",
+            "ubicacion": "Tercer Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCEP02",
+            "nombre": "Cepilladora Cep.2",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCER01",
+            "nombre": "Cernedor MPAO 426",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASCER02",
+            "nombre": "Cernedor MPAO 626",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASTUR02",
+            "nombre": "Turbina Sasor",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASTUR01",
+            "nombre": "Turbina Deschinadora",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASCOM01",
+            "nombre": "Compresor Acondicionamiento",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASSEP01",
+            "nombre": "Separadora Segunda Limpieza",
+            "ubicacion": "Cuarto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASDES01",
+            "nombre": "Desatador C6",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASELE01",
+            "nombre": "Elevador Molienda",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASELE02",
+            "nombre": "Elevador Harina",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC01",
+            "nombre": "Esclusa T1",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC02",
+            "nombre": "Esclusa T2",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC03",
+            "nombre": "Esclusa T3",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC04",
+            "nombre": "Esclusa T4",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC05",
+            "nombre": "Esclusa T4G",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC06",
+            "nombre": "Esclusa T5",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC07",
+            "nombre": "Esclusa C1A",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC08",
+            "nombre": "Esclusa C1B",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC09",
+            "nombre": "Esclusa C2",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC10",
+            "nombre": "Esclusa C3",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC11",
+            "nombre": "Esclusa C4",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC12",
+            "nombre": "Esclusa C5",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC13",
+            "nombre": "Esclusa C6",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC14",
+            "nombre": "Esclusa C7",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC15",
+            "nombre": "Esclusa C8",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC16",
+            "nombre": "Esclusa DB1",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC17",
+            "nombre": "Esclusa DV1",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC18",
+            "nombre": "Esclusa S1",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC19",
+            "nombre": "Esclusa S2",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC20",
+            "nombre": "Esclusa Segunda",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC21",
+            "nombre": "Esclusa Mogolla",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASESC22",
+            "nombre": "Esclusa Salvado",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFIL01",
+            "nombre": "Filtro Sistema Neumático",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASFIL02",
+            "nombre": "Filtro Sasores",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASPUL01",
+            "nombre": "Pulidor T1",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "MOLPASTUR01",
+            "nombre": "Turbina Sistema Neumático",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASELE02",
+            "nombre": "Elevador Prelimpia",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASFIL01",
+            "nombre": "Filtro Primera Limpieza",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASTUR01",
+            "nombre": "Turbina Filtro Limpia",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASELE01",
+            "nombre": "Elevador Limpia",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASIMA01",
+            "nombre": "Imán Limpia",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASMOJ01",
+            "nombre": "Mojadora",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASROT05",
+            "nombre": "Rosca Transportadora Alimentación Silos A, B, C, D",
+            "ubicacion": "Quinto Piso",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASROT01",
+            "nombre": "Rosca Transportadora Alimentación Granza",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "PLIPASSEP01",
+            "nombre": "Separadora Primera Limpieza",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASMOT01",
+            "nombre": "Motobomba",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASTAN01",
+            "nombre": "Tanque Acondicionamiento 1000 Lts",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        },
+        {
+            "codigo": "SLAPASTAN02",
+            "nombre": "Tanque Acondicionamiento 1000 Lts",
+            "ubicacion": "Terraza",
+            "status": "cumple",
+            "observacion": ""
+        }
+    ],
+    "liberacion": {
+        "aprobada": "si",
+        "responsable": "",
+        "condiciones": ""
+    },
+    "_ultima_correccion": {
+        "usuario": "Miguel Mora",
+        "timestamp": "2026-04-10 17:14:18"
+    }
+}

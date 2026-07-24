@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREPARACIÓN DE MEJORANTE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "V1 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title { color: var(--text-muted); font-size: 14px; }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        input[type="date"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 10px auto;
+            padding-right: 32px;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background-color: var(--panel-bg);
+            color: var(--text-main);
+        }
+
+        select.form-control option.opt-custom {
+            color: var(--warning);
+            font-style: italic;
+        }
+
+        /* ─── Tabla de mejorantes ─── */
+        .mejorante-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 4px;
+        }
+
+        .mejorante-table thead th {
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 11px 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .mejorante-table thead th:first-child { text-align: left; padding-left: 12px; }
+
+        .mejorante-table tbody tr { transition: background 0.2s; }
+
+        .mejorante-table tbody tr:hover td {
+            background: rgba(0, 240, 255, 0.025);
+        }
+
+        .mejorante-table tbody td {
+            padding: 5px 6px;
+            border: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .mejorante-table tbody td .form-control {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .mej-custom-input {
+            margin-top: 5px;
+            border-color: var(--warning) !important;
+        }
+
+        .mej-custom-input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 176, 0, 0.15) !important;
+        }
+
+        /* Botón eliminar fila */
+        .btn-remove-row {
+            background: transparent;
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            color: var(--danger);
+            width: 30px;
+            height: 30px;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            transition: all 0.2s;
+        }
+
+        .btn-remove-row:hover {
+            background: rgba(255, 51, 102, 0.1);
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+
+        /* Botón agregar fila */
+        .btn-add-row {
+            margin-top: 14px;
+            background: transparent;
+            border: 1px dashed rgba(0, 240, 255, 0.35);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-add-row:hover {
+            background: rgba(0, 240, 255, 0.05);
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.1);
+        }
+
+        /* Filas de resumen (gris) */
+        .summary-table { margin-top: 18px; }
+
+        .summary-table td {
+            padding: 5px 6px;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            vertical-align: middle;
+            background: rgba(148, 163, 184, 0.05);
+        }
+
+        .summary-table td.label-cell {
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-left: 12px;
+            width: 33%;
+        }
+
+        .summary-table td .form-control {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 90px;
+            font-family: 'Barlow', sans-serif;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active { transform: translateY(0); }
+
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70%  { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+                <h1 class="main-title">Preparación de Mejorante</h1>
+                <div class="sub-title">Control de dosificación e insumos de mejorante (V1 JSON Persistente)</div>
+            </div>
+            <a href="../menu_almacen.html" class="btn-back">← VOLVER</a>
+        </div>
+    </div>
+
+    <form id="mejowanteForm">
+
+        <!-- SECCIÓN 1: INFORMACIÓN GENERAL -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Información General</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha</label>
+                    <input type="date" name="fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Referencia</label>
+                    <input type="text" name="referencia" class="form-control" placeholder="Ref. del producto" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Lote</label>
+                    <input type="text" name="lote" class="form-control" placeholder="Ej: L-2024-001" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Vence</label>
+                    <input type="date" name="vence" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tiempo Mezcla (Min)</label>
+                    <input type="number" name="tiempo_mezcla_min" class="form-control" placeholder="Ej: 15" min="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: TABLA DE MEJORANTES -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Dosificación de Mejorantes</div>
+
+            <table class="mejorante-table">
+                <thead>
+                    <tr>
+                        <th style="width:36%;">Mejorante</th>
+                        <th style="width:17%;">Lote</th>
+                        <th style="width:22%;">Fecha Vencimiento</th>
+                        <th style="width:17%;">Cantidad</th>
+                        <th style="width:8%;"></th>
+                    </tr>
+                </thead>
+                <tbody id="mejTbody">
+                    <!-- filas generadas por JS -->
+                </tbody>
+            </table>
+
+            <button type="button" id="btnAgregarMej" class="btn-add-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                AGREGAR MEJORANTE
+            </button>
+
+            <!-- Resumen -->
+            <table class="mejorante-table summary-table">
+                <tbody>
+                    <tr>
+                        <td class="label-cell">Total</td>
+                        <td><input type="text" name="total" class="form-control" placeholder="Total preparado"></td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">Devolución</td>
+                        <td><input type="text" name="devolucion" class="form-control" placeholder="Cantidad devuelta"></td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">Realizá</td>
+                        <td><input type="text" name="realiza" class="form-control" placeholder="Nombre de quien realiza" required></td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">Verifica</td>
+                        <td><input type="text" name="verifica" class="form-control" placeholder="Nombre de quien verifica" required></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECCIÓN 3: OBSERVACIONES -->
+        <div class="section-card">
+            <div class="section-title"><span>03</span> Observaciones</div>
+            <div class="form-group">
+                <label class="form-label">Observaciones generales</label>
+                <textarea name="observaciones" class="form-control" placeholder="Anote aquí cualquier novedad o comentario relevante..."></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            REGISTRAR PREPARACIÓN
+        </button>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO - AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    const MEJORANTES = [
+        'Grindamyl A1000',
+        'Powerbake 7200',
+        'ADA 50%',
+        'Ácido Ascórbico',
+        'Surebake 900',
+        'Powerbake 4200',
+        'Granozyme OXD',
+    ];
+
+    let rowCount = 0;
+
+    function buildSelectOptions() {
+        let opts = '<option value="">— Seleccionar mejorante —</option>';
+        MEJORANTES.forEach(m => {
+            opts += `<option value="${m}">${m}</option>`;
+        });
+        opts += '<option value="__custom__" class="opt-custom">✏ Personalizado...</option>';
+        return opts;
+    }
+
+    function addRow(nombre = '') {
+        const idx = rowCount++;
+        const isCustom = nombre && !MEJORANTES.includes(nombre);
+        const tbody = document.getElementById('mejTbody');
+
+        const tr = document.createElement('tr');
+        tr.className = 'mej-row';
+        tr.dataset.idx = idx;
+        tr.innerHTML = `
+            <td>
+                <select class="form-control mej-select" data-idx="${idx}">
+                    ${buildSelectOptions()}
+                </select>
+                <input type="text"
+                       class="form-control mej-custom-input"
+                       placeholder="Nombre del mejorante..."
+                       style="display:none;"
+                       value="${isCustom ? nombre : ''}">
+            </td>
+            <td><input type="text" class="form-control mej-lote" placeholder="Lote"></td>
+            <td><input type="date" class="form-control mej-fecha"></td>
+            <td><input type="text" class="form-control mej-cantidad" placeholder="Kg / g"></td>
+            <td>
+                <button type="button" class="btn-remove-row" title="Eliminar fila">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </td>`;
+
+        tbody.appendChild(tr);
+
+        const select = tr.querySelector('.mej-select');
+        const customInput = tr.querySelector('.mej-custom-input');
+
+        if (isCustom) {
+            select.value = '__custom__';
+            customInput.style.display = 'block';
+        } else if (nombre) {
+            select.value = nombre;
+        }
+
+        select.addEventListener('change', () => {
+            if (select.value === '__custom__') {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+                customInput.value = '';
+            }
+        });
+
+        tr.querySelector('.btn-remove-row').addEventListener('click', () => {
+            tr.style.transition = 'opacity 0.2s';
+            tr.style.opacity = '0';
+            setTimeout(() => tr.remove(), 200);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('[name="fecha"]').value = new Date().toISOString().split('T')[0];
+        addRow();
+        document.getElementById('btnAgregarMej').addEventListener('click', () => addRow());
+    });
+
+    document.getElementById('mejowanteForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const mejorantes = [];
+        document.querySelectorAll('#mejTbody .mej-row').forEach(tr => {
+            const select = tr.querySelector('.mej-select');
+            const custom = tr.querySelector('.mej-custom-input');
+            const nombre = select.value === '__custom__'
+                ? custom.value.trim()
+                : select.value;
+            if (!nombre) return;
+            mejorantes.push({
+                nombre,
+                lote:       tr.querySelector('.mej-lote').value.trim(),
+                fecha_venc: tr.querySelector('.mej-fecha').value,
+                cantidad:   tr.querySelector('.mej-cantidad').value.trim(),
+            });
+        });
+
+        if (mejorantes.length === 0) {
+            Swal.fire({ title: 'Sin mejorantes', text: 'Agrega al menos un mejorante antes de guardar.',
+                icon: 'warning', background: '#151A22', color: '#fff', confirmButtonColor: '#FFB000' });
+            return;
+        }
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((v, k) => { jsonData[k] = v; });
+        jsonData.mejorantes = mejorantes;
+
+        const btn = document.getElementById('btnGuardar');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({ title: '¡REGISTRADO!', text: 'Preparación de mejorante guardada.',
+                    icon: 'success', background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                }).then(() => window.location.reload());
+            } else {
+                Swal.fire({ title: 'Error del Sistema', text: data.message || 'Error en el túnel JSON.',
+                    icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+                btn.innerHTML = originalHTML; btn.disabled = false; btn.style.opacity = '1';
+            }
+        })
+        .catch(() => {
+            Swal.fire({ title: 'Sin Backend Aún', text: 'El formulario está listo. Falta crear procesar.php.',
+                icon: 'info', background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF' });
+            btn.innerHTML = originalHTML; btn.disabled = false; btn.style.opacity = '1';
+        });
+    });
+</script>
+</body>
+</html>

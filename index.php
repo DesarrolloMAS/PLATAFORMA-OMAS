@@ -212,7 +212,7 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
             </div>
 
             <div class="formularioa">
-                <button type="submit" class="boton">Iniciar Sesion</button>   
+                <button type="submit" class="boton">Iniciar Sesion</button>
             </div>
             <br>
             <a href="./template/registroUsuarios.php" class="botonprime">Registrarse</a>

@@ -1,0 +1,12 @@
+{
+    "codigo_maquina": "COSEDORA YAO HAN 312898_EMPBOGCOS03",
+    "nombre_maquina": "PUNTADA_BOG",
+    "tipo_maquina": "puntada",
+    "estado_general": "Se encuentra con puntada de 7MM de puntada",
+    "Puntada": "Cumple",
+    "Lubricacion": "Cumple",
+    "Observaciones": "NA",
+    "formato": "verificacion_iman_ZC",
+    "usuario": "anonimo",
+    "archivo_pdf": "PUNTADA_BOG_COSEDORA YAO HAN 312898_EMPBOGCOS03_2026-02-06.pdf"
+}

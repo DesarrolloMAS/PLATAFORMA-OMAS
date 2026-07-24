@@ -1,0 +1,21 @@
+{
+    "codigo_maquina": "IMAN LIMPIA_SLAPASIMA01",
+    "nombre_maquina": "IMAN_PAST",
+    "tipo_maquina": "iman",
+    "estado_general": "El equipo se encuentra en buen estado",
+    "Acopie": "Cumple",
+    "Soporte": "Cumple",
+    "Manija": "Cumple",
+    "Estructura": "Cumple",
+    "Tornilleria_Completa_y_Ajustada": "Cumple",
+    "Observaciones": "",
+    "formato": "IMAN LIMPIA_SLAPASIMA01-IMAN_PAST",
+    "usuario": "Julian Lopez",
+    "tecnico_correccion": "Andres Ortega",
+    "codigo_orden": "15512",
+    "json_path": "\/var\/www\/fmt\/archivos\/generados\/verificaciones\/Iman\/IMAN LIMPIA_SLAPASIMA01-IMAN_PAST\/IMAN_PAST_IMAN LIMPIA_SLAPASIMA01_2025-09-01.json",
+    "zona": "Iman",
+    "maquina": "IMAN LIMPIA_SLAPASIMA01-IMAN_PAST",
+    "archivo_pdf": "IMAN LIMPIA_SLAPASIMA01-IMAN_PAST_2025-09-01.pdf",
+    "fecha": "2025-09-01"
+}

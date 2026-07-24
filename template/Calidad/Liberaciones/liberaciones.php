@@ -27,21 +27,11 @@
                     locale: "es" // Cambia el idioma a español
                     });
                     });
-                    document.addEventListener('DOMContentLoaded', function () {
-                    $('#planta').select2({
-                    placeholder: "Selecciona una opción", // Texto de marcador de posición
-                    allowClear: true // Permite limpiar la selección
-    });
-});
             </script>
             <a href="../../redireccion.php">VOLVER</a>
             <label for="fecha">Fecha De Produccion</label>
             <input type="date" id="fecha" name="fecha">
-            <label for="planta">Planta</label>
-            <select name="planta" id="planta">
-                <option value="Zona Centro">Zona Centro</option>
-                <option value="Zona Sur">Zona Sur</option>
-            </select>
+            <input type="hidden" name="planta" value="Zona Centro">
         </div>
         <input type="checkbox" id="toggle_harinas">
         <label for="toggle_harinas" class="titulo_principal_contenedor">LIBERACIONES</label>

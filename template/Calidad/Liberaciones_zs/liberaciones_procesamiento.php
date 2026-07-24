@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once '/var/www/html/fmt/vendor/autoload.php';
+require_once '/var/www/fmt/vendor/autoload.php';
 require_once '../../sesion.php';
 require '../../conection.php';
 
@@ -12,7 +12,7 @@ verificarAutenticacion(); // Verifica que el usuario esté autenticado
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ruta de la plantilla base
-    $baseExcelPath = "/var/www/html/fmt/archivos/formularios/calidad/formulario_liberaciones_zs.xlsx";
+    $baseExcelPath = "/var/www/fmt/archivos/formularios/calidad/formulario_liberaciones_zs.xlsx";
 
     if (!file_exists($baseExcelPath)) {
         die("Error: No se encontró la plantilla base.");
@@ -257,15 +257,15 @@ if (isset($_POST['harina_extra']) && is_array($_POST['harina_extra'])) {
         $contadorFila++; // Incrementar el contador de filas
     }
 }
-$nombreArchivoBase = 'liberaciones_' . date('Y-m-d');
+$nombreArchivoBase = 'liberaciones_' . ($_POST['fecha'] ?? 'Fecha no especificada');
 $nombreArchivo = $nombreArchivoBase . '.xlsx';
-$rutaArchivo = "/var/www/html/fmt/archivos/generados/Calidad/liberaciones_zs/$nombreArchivo";
+$rutaArchivo = "/var/www/fmt/archivos/generados/Calidad/liberaciones_zs/$nombreArchivo";
 
 // Verificar si el archivo ya existe y agregar sufijo si es necesario
 $contador = 1;
 while (file_exists($rutaArchivo)) {
     $nombreArchivo = $nombreArchivoBase . '_' . $contador . '.xlsx';
-    $rutaArchivo = "/var/www/html/fmt/archivos/generados/Calidad/liberaciones_zs/$nombreArchivo";
+    $rutaArchivo = "/var/www/fmt/archivos/generados/Calidad/liberaciones_zs/$nombreArchivo";
     $contador++;
 }
 

@@ -1,0 +1,63 @@
+<?php
+include '../../sesion.php';
+header('Content-Type: application/json; charset=utf-8');
+
+if (!isset($_SESSION['nombre']) || empty($_SESSION['sede'])) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Sin sesión activa o sede asignada. Recarga la página.']);
+    exit;
+}
+
+$sede = $_SESSION['sede'];
+
+$input_json  = file_get_contents("php://input");
+$input_array = json_decode($input_json, true);
+
+if (!$input_array || empty($input_array['fecha_inspeccion'])) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Faltan datos requeridos (fecha de inspección).']);
+    exit;
+}
+
+if (empty($input_array['insumos']) || !is_array($input_array['insumos'])) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Debe registrar al menos una materia prima inspeccionada.']);
+    exit;
+}
+
+$mes_actual = date('Y-m');
+
+$nuevo_registro = [
+    'id_registro' => uniqid('INSUMOS_'),
+    'timestamp'   => date('Y-m-d H:i:s'),
+    'usuario_sys' => $_SESSION['nombre'],
+    'sede_sys'    => $sede,
+    'datos'       => $input_array
+];
+
+$base_dir     = "../../../archivos/generados/inspeccion_insumos/";
+$sede_dir     = $base_dir . preg_replace('/[^A-Za-z0-9_-]/', '', $sede) . "/";
+$archivo_json = $sede_dir . "INSUMOS_" . $mes_actual . ".json";
+
+if (!file_exists($base_dir)) { mkdir($base_dir, 0777, true); }
+if (!file_exists($sede_dir)) { mkdir($sede_dir, 0777, true); }
+
+$datos_existentes = [];
+if (file_exists($archivo_json)) {
+    $datos_existentes = json_decode(file_get_contents($archivo_json), true) ?: [];
+}
+
+$datos_existentes[] = $nuevo_registro;
+
+if (@file_put_contents($archivo_json, json_encode($datos_existentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    echo json_encode([
+        'status'  => 'success',
+        'message' => 'Inspección de insumos registrada correctamente.',
+        'id'      => $nuevo_registro['id_registro']
+    ]);
+} else {
+    $err = error_get_last();
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Error I/O: ' . ($err['message'] ?? 'Permisos insuficientes.')]);
+}
+?>

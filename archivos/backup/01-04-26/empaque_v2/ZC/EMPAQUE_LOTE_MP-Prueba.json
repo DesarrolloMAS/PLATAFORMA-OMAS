@@ -1,0 +1,46 @@
+[
+    {
+        "id_registro": "EMPV2_69cadd2eee07e",
+        "timestamp": "2026-03-30 20:29:34",
+        "usuario_sys": "Francisco Rodriguez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "3200",
+            "fecha_alistamiento": "2026-03-30",
+            "responsable_alistamiento": "FR",
+            "producto_envasar": "Empaque Galeras Azul x 50",
+            "lote_producto": "MP-Prueba",
+            "fecha_vencimiento": "26\/03\/2027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-03-26",
+            "entregado_a": "Alex Chala",
+            "cantidad_solicitada": "260",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "260",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69cadd5c1f2ed",
+        "timestamp": "2026-03-30 20:30:20",
+        "usuario_sys": "Francisco Rodriguez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "4600",
+            "fecha_alistamiento": "2026-03-30",
+            "responsable_alistamiento": "FR",
+            "producto_envasar": "Empaque Galeras Azul x 50",
+            "lote_producto": "MP-Prueba",
+            "fecha_vencimiento": "26\/03\/2027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-03-26",
+            "entregado_a": "Alex Chala",
+            "cantidad_solicitada": "10",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "10",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

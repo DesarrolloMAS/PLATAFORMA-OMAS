@@ -1,0 +1,26 @@
+[
+    {
+        "id_registro": "EMPV2_69e6833d4a20d",
+        "timestamp": "2026-04-20 19:49:17",
+        "usuario_sys": "miguel mora",
+        "sede_sys": "ZS",
+        "datos": {
+            "cantidad_galeria": "1000",
+            "fecha_alistamiento": "2026-04-20",
+            "responsable_alistamiento": "PRUEBA",
+            "nombre_empaque": "Empaque x10",
+            "lote_empaque": "PRUEBA",
+            "producto_envasar": "PRUEBA",
+            "lote_producto": "PRUEBA",
+            "fecha_vencimiento": "PRUEBA",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-20",
+            "entregado_a": "PRUEBA",
+            "cantidad_solicitada": "1",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "1",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

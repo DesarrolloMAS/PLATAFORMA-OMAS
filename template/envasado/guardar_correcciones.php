@@ -12,7 +12,7 @@ $sede = $_SESSION['sede'];
 if($sede === 'ZC'){
     $carpeta = '/var/www/fmt/archivos/generados/envasado/';
 }else{
-    $carpeta = '/var/www/fmt/archivos/generados/envasado_zs/';
+    $carpeta = '/var/www/fmt/archivos/generados/envasadozs/';
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_POST['data'])) {
     $archivo = $_POST['archivo'];

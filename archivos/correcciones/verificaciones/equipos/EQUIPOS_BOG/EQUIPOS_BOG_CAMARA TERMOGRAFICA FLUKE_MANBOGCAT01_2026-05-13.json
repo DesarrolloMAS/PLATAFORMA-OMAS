@@ -1,0 +1,20 @@
+{
+    "codigo_maquina": "CAMARA TERMOGRAFICA FLUKE_MANBOGCAT01",
+    "nombre_maquina": "EQUIPOS_BOG",
+    "zona": "equipos",
+    "tipo_maquina": "equipos",
+    "formato": "equipos_bog",
+    "estado_general": "Bueno ",
+    "Estado_de_limpieza": "Cumple",
+    "Conexion_USB": "Cumple",
+    "Pulsador": "Cumple",
+    "cargador": "Cumple",
+    "Display": "Cumple",
+    "Bateria": "Cumple",
+    "Recipiente": "N\/A",
+    "Limpieza_Filtro": "N\/A",
+    "Verificacion_De_Estado": "Si",
+    "Observaciones": "",
+    "usuario": "Harold Taramuel",
+    "archivo_pdf": "EQUIPOS_BOG_CAMARA TERMOGRAFICA FLUKE_MANBOGCAT01_2026-05-13.pdf"
+}

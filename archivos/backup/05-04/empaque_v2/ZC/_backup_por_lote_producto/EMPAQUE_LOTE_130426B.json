@@ -1,0 +1,122 @@
+[
+    {
+        "id_registro": "EMPV2_69de8a40e8372",
+        "timestamp": "2026-04-14 18:41:04",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-14",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Multi Beige X25",
+            "lote_empaque": "MP-02224",
+            "producto_envasar": "TRIGO ENTERO X 25",
+            "lote_producto": "130426B",
+            "fecha_vencimiento": "1302028",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-13",
+            "entregado_a": "OLFER VARGAS",
+            "cantidad_solicitada": "400",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "397",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e63745a613b",
+        "timestamp": "2026-04-20 14:25:09",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-13",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Mogolla",
+            "lote_empaque": "MP-02335",
+            "producto_envasar": "MOGOLLA",
+            "lote_producto": "130426B",
+            "fecha_vencimiento": "13102026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-13",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "293",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "293",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e63a6800c2b",
+        "timestamp": "2026-04-20 14:38:32",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-14",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Mogolla",
+            "lote_empaque": "MP-02335",
+            "producto_envasar": "MOGOLLA",
+            "lote_producto": "130426B",
+            "fecha_vencimiento": "13102026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-14",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "366",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "366",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e63aac960e8",
+        "timestamp": "2026-04-20 14:39:40",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-14",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Salvado",
+            "lote_empaque": "MP-02152",
+            "producto_envasar": "SALVADO",
+            "lote_producto": "130426B",
+            "fecha_vencimiento": "13102026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-14",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "180",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "180",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e63b45d4f4b",
+        "timestamp": "2026-04-20 14:42:13",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-14",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Segunda",
+            "lote_empaque": "MP-02153",
+            "producto_envasar": "SEGUNDA",
+            "lote_producto": "130426B",
+            "fecha_vencimiento": "131026B",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-14",
+            "entregado_a": "JUVENAL",
+            "cantidad_solicitada": "53",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "52",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

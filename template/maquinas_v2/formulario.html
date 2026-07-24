@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/maquinas_v2.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<title>Verificación de Máquina · Mantenimiento</title>
+</head>
+<body>
+<div class="container">
+    <div class="header-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+                <h1 class="main-title" id="titulo-formato">⚙️ Verificación de Máquina</h1>
+                <p class="sub-title" id="subtitulo-formato">Cargando configuración…</p>
+                <div class="badge-mantenimiento">🔧 Área de Mantenimiento · Mecánicos</div>
+            </div>
+            <a class="btn-back" href="maquinas_menu.php">← Volver al menú</a>
+        </div>
+    </div>
+
+    <div class="section-card" id="info-maquina">
+        <div class="form-grid">
+            <div class="form-group">
+                <span class="form-label">Código de máquina</span>
+                <strong id="info-codigo">—</strong>
+            </div>
+            <div class="form-group">
+                <span class="form-label">Grupo / Modelo</span>
+                <strong id="info-maquina-nombre">—</strong>
+            </div>
+            <div class="form-group">
+                <span class="form-label">Técnico</span>
+                <strong id="info-tecnico">Se registra al guardar</strong>
+            </div>
+        </div>
+    </div>
+
+    <form id="form-verificacion">
+        <div id="secciones-dinamicas"><p class="sub-title">Cargando formulario…</p></div>
+
+        <div class="section-card" id="card-orden-trabajo" style="display:none;">
+            <div class="section-title"><span>✏️</span> Corrección de Verificación</div>
+            <div class="form-grid">
+                <div class="form-group full">
+                    <label class="form-label">Código de Orden de Trabajo (obligatorio para corregir)</label>
+                    <input class="form-control" type="text" id="codigo_orden" name="codigo_orden">
+                </div>
+            </div>
+        </div>
+
+        <div class="acciones-form">
+            <button type="button" class="btn-secundario" id="btn-guardar">💾 Guardar Borrador</button>
+            <button type="submit" class="btn-submit" id="btn-registrar">✅ Generar Verificación</button>
+        </div>
+    </form>
+
+    <div class="system-status">
+        <div class="status-dot"></div>
+        SISTEMA JSON INTERCONECTADO — V2 MANTENIMIENTO
+    </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const TIPO = params.get('tipo') || '';
+const CODIGO = params.get('codigo') || '';
+const MAQUINA = params.get('maquina') || '';
+const CORRIGE_ID = params.get('corrige_id') || '';
+
+let CONFIG = null;
+
+document.getElementById('info-codigo').textContent = CODIGO || '—';
+document.getElementById('info-maquina-nombre').textContent = MAQUINA || '—';
+
+function crearId(prefijo, sufijo) {
+    return `${prefijo}_${sufijo}`;
+}
+
+function renderCampo(campo, full = false) {
+    const clase = full ? 'form-group full' : 'form-group';
+    let control = '';
+    if (campo.type === 'select') {
+        const opciones = (campo.options || []).map(o => `<option value="${o}">${o}</option>`).join('');
+        control = `<select class="form-control" name="${campo.name}" id="${campo.name}">${opciones}</select>`;
+    } else if (campo.type === 'textarea') {
+        control = `<textarea class="form-control" name="${campo.name}" id="${campo.name}" placeholder="${campo.placeholder || ''}"></textarea>`;
+    } else {
+        const tipo = campo.type === 'number' ? 'number' : 'text';
+        const step = campo.type === 'number' ? 'step="any"' : '';
+        control = `<input class="form-control" type="${tipo}" ${step} name="${campo.name}" id="${campo.name}" placeholder="${campo.placeholder || ''}">`;
+    }
+    return `<div class="${clase}"><label class="form-label" for="${campo.name}">${campo.label}</label>${control}</div>`;
+}
+
+function renderSeccionEstado(cfg, numero) {
+    const campos = cfg.campos_estado.map(c => renderCampo(c, c.type === 'text' || c.type === 'textarea')).join('');
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>${numero}</span> Verificación de Estado y Funcionamiento</div>
+            <div class="form-grid">${campos}</div>
+        </div>`;
+}
+
+function renderBloqueCalibracion(bloque, indiceBloque, numero) {
+    const nombreBase = bloque.campo_base.name;
+    const filas = bloque.puntos.map((etiquetaPunto, i) => {
+        const celdas = bloque.campos_por_punto.map(cp => {
+            const name = `${bloque.prefijo_punto}${i + 1}_${cp.sufijo}`;
+            return `<td><input class="form-control" type="number" step="any" name="${name}" id="${name}" data-calculado="${!!cp.calculado}" data-base="${nombreBase}"></td>`;
+        }).join('');
+        return `<tr><td>${etiquetaPunto}</td>${celdas}</tr>`;
+    }).join('');
+
+    const encabezados = bloque.campos_por_punto.map(cp => `<th>${cp.label}</th>`).join('');
+
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>${numero}</span> ${bloque.titulo}</div>
+            ${bloque.nota ? `<p class="section-nota">${bloque.nota}</p>` : ''}
+            <div class="form-grid" style="margin-bottom:16px;">
+                <div class="form-group">
+                    <label class="form-label" for="${nombreBase}">${bloque.campo_base.label}</label>
+                    <input class="form-control campo-base-calibracion" type="number" step="any" name="${nombreBase}" id="${nombreBase}" data-bloque="${indiceBloque}" placeholder="${bloque.campo_base.placeholder || ''}">
+                </div>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="tabla-calibracion">
+                    <tr><th>Punto</th>${encabezados}</tr>
+                    ${filas}
+                </table>
+            </div>
+            <div class="form-grid" style="margin-top:16px;">
+                <div class="form-group">
+                    <label class="form-label" for="${bloque.campo_resultado.name}">${bloque.campo_resultado.label}</label>
+                    <select class="form-control" name="${bloque.campo_resultado.name}" id="${bloque.campo_resultado.name}">
+                        ${bloque.campo_resultado.options.map(o => `<option value="${o}">${o}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+        </div>`;
+}
+
+function renderCamposExtra(extra, numero) {
+    const campos = extra.campos.map(c => renderCampo(c)).join('');
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>${numero}</span> ${extra.titulo}</div>
+            <div class="form-grid">${campos}</div>
+        </div>`;
+}
+
+function renderEscalaLectura(cfg) {
+    const escala = cfg.escalas_lectura ? cfg.escalas_lectura[CODIGO] : null;
+    if (!escala) return '';
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>ℹ️</span> Escala de Lectura de esta Máquina</div>
+            <p class="sub-title" style="font-size:15px; color:var(--text-main);">${escala}</p>
+        </div>`;
+}
+
+function renderRangosEmp(cfg) {
+    const rango = cfg.rangos_emp ? cfg.rangos_emp[CODIGO] : null;
+    if (!rango) return '';
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>📏</span> Rangos EMP de esta Máquina (NTC 2031)</div>
+            <p class="sub-title" style="font-size:15px; color:var(--text-main); white-space:pre-line;">${rango}</p>
+            <p class="section-nota">Información de referencia según NTC 2031. Uso exclusivamente informativo.</p>
+        </div>`;
+}
+
+function renderObservaciones(numero) {
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>${numero}</span> Observaciones</div>
+            <div class="form-grid">
+                <div class="form-group full">
+                    <textarea class="form-control" name="observaciones" id="observaciones" placeholder="Observaciones adicionales"></textarea>
+                </div>
+            </div>
+        </div>`;
+}
+
+function activarCalculoAutomatico() {
+    document.querySelectorAll('input[data-calculado]').forEach(inputCalculado => {
+        const fila = inputCalculado.closest('tr');
+        const nombreBase = inputCalculado.dataset.base;
+        const inputBase = document.getElementById(nombreBase);
+        const esCalculado = inputCalculado.dataset.calculado === 'true';
+        if (esCalculado) return; // el listener se ata desde el campo NO calculado
+        // este es el campo "peso indicador / indicador" (fuente del cálculo)
+        const inputResultado = fila.querySelector('input[data-calculado="true"]');
+        if (!inputResultado || !inputBase) return;
+
+        const recalcular = () => {
+            const base = parseFloat(inputBase.value);
+            const valor = parseFloat(inputCalculado.value);
+            if (!isNaN(base) && !isNaN(valor)) {
+                inputResultado.value = (base - valor).toFixed(2);
+            }
+        };
+        inputCalculado.addEventListener('input', recalcular);
+        inputBase.addEventListener('input', recalcular);
+    });
+}
+
+async function cargarFormulario() {
+    const respuesta = await fetch('config_formularios.json');
+    const data = await respuesta.json();
+    CONFIG = data[TIPO];
+
+    if (!CONFIG) {
+        document.getElementById('secciones-dinamicas').innerHTML =
+            `<p style="color:var(--danger)">❌ No existe configuración para el tipo de máquina "${TIPO}".</p>`;
+        return;
+    }
+
+    document.getElementById('titulo-formato').textContent = `⚙️ ${CONFIG.titulo}`;
+    document.getElementById('subtitulo-formato').textContent =
+        CORRIGE_ID ? 'Modo corrección — el registro se guardará como nuevo historial' : 'Registro de verificación periódica';
+    document.title = CONFIG.titulo + ' · Mantenimiento';
+
+    let html = '';
+    let n = 1;
+    html += renderSeccionEstado(CONFIG, String(n++).padStart(2, '0'));
+    (CONFIG.bloques_calibracion || []).forEach((bloque, i) => {
+        html += renderBloqueCalibracion(bloque, i, String(n++).padStart(2, '0'));
+    });
+    if (CONFIG.campos_extra) {
+        html += renderCamposExtra(CONFIG.campos_extra, String(n++).padStart(2, '0'));
+    }
+    html += renderEscalaLectura(CONFIG);
+    html += renderRangosEmp(CONFIG);
+    if (CONFIG.observaciones) {
+        html += renderObservaciones(String(n++).padStart(2, '0'));
+    }
+
+    document.getElementById('secciones-dinamicas').innerHTML = html;
+
+    if (CONFIG.imagen_generica) {
+        document.getElementById('info-maquina').insertAdjacentHTML('beforeend', `
+            <p class="sub-title" style="margin-top:10px;">(Imagen genérica, no representa la máquina puntual verificada)</p>
+            <img src="${CONFIG.imagen_generica}" alt="${CONFIG.titulo}" style="max-width:260px; border-radius:var(--r-md); border:1px solid var(--border-color);">
+        `);
+    }
+
+    activarCalculoAutomatico();
+    aplicarPrecarga();
+}
+
+function aplicarPrecarga() {
+    if (!CORRIGE_ID) return;
+    document.getElementById('card-orden-trabajo').style.display = 'block';
+
+    const crudo = sessionStorage.getItem('maquinas_v2_precarga');
+    if (!crudo) return;
+    let precarga;
+    try { precarga = JSON.parse(crudo); } catch (e) { return; }
+    if (precarga.corrige_id !== CORRIGE_ID) return;
+
+    for (const [campo, valor] of Object.entries(precarga.datos || {})) {
+        const input = document.querySelector(`[name="${CSS.escape(campo)}"]`);
+        if (!input) continue;
+        input.value = valor;
+    }
+    sessionStorage.removeItem('maquinas_v2_precarga');
+}
+
+function recolectarDatos() {
+    const datos = {};
+    document.querySelectorAll('#form-verificacion [name]').forEach(el => {
+        if (el.name === 'codigo_orden') return;
+        datos[el.name] = el.value;
+    });
+    return datos;
+}
+
+async function enviar(accion) {
+    if (CORRIGE_ID && !document.getElementById('codigo_orden').value.trim()) {
+        Swal.fire({ title: 'Falta el Código de Orden', icon: 'warning', background: '#151A22', color: '#fff', confirmButtonColor: '#FF8A00' });
+        return;
+    }
+
+    const payload = {
+        tipo_maquina: TIPO,
+        codigo_maquina: CODIGO,
+        nombre_maquina: MAQUINA,
+        accion: accion,
+        corrige_id: CORRIGE_ID || null,
+        codigo_orden: document.getElementById('codigo_orden') ? document.getElementById('codigo_orden').value : '',
+        datos: recolectarDatos()
+    };
+
+    try {
+        const respuesta = await fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await respuesta.json();
+        if (data.status === 'success') {
+            Swal.fire({
+                title: accion === 'guardar' ? '¡BORRADOR GUARDADO!' : '¡VERIFICACIÓN REGISTRADA!',
+                icon: 'success', background: '#151A22', color: '#fff', confirmButtonColor: '#FF8A00'
+            }).then(() => { window.location.href = 'maquinas_menu.php'; });
+        } else {
+            Swal.fire({ title: 'Error', text: data.message || 'No se pudo guardar.', icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF8A00' });
+        }
+    } catch (err) {
+        Swal.fire({ title: 'Error de red', text: err.message, icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF8A00' });
+    }
+}
+
+document.getElementById('btn-guardar').addEventListener('click', () => enviar('guardar'));
+document.getElementById('form-verificacion').addEventListener('submit', (e) => {
+    e.preventDefault();
+    enviar('registrar');
+});
+
+cargarFormulario();
+</script>
+</body>
+</html>

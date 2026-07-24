@@ -34,8 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['archivo'])) {
 
         // Guardar el PDF en una ubicación específica
         $pdfCarpeta = $carpetapdf;
-        $pdfNombre = 'Proceso_Molienda' . $mes . '.pdf';
+        $pdfBaseNombre = 'Proceso_Molienda' . $mes;
+        $pdfNombre = $pdfBaseNombre . '.pdf';
         $pdfRuta = $pdfCarpeta . $pdfNombre;
+
+        $contador = 1;
+        while (file_exists($pdfRuta)) {
+        $pdfNombre = $pdfBaseNombre . "_$contador.pdf";
+        $pdfRuta = $pdfCarpeta . $pdfNombre;
+        $contador++;
+        }
 
         if (!is_dir($pdfCarpeta)) {
             mkdir($pdfCarpeta, 0777, true);

@@ -1,0 +1,122 @@
+[
+    {
+        "id_registro": "EMPV2_69d969238dc1d",
+        "timestamp": "2026-04-10 21:18:27",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-06",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "HARINA MANITOBA X 25",
+            "lote_producto": "060426B",
+            "fecha_vencimiento": "06042027",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-06",
+            "entregado_a": "OLFER VARGAS",
+            "cantidad_solicitada": "60",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "60",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69da506c4d1ef",
+        "timestamp": "2026-04-11 13:45:16",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-10",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "HARINA MANITOBA X 25",
+            "lote_producto": "100426B",
+            "fecha_vencimiento": "10042027",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-10",
+            "entregado_a": "OLFER VARGAS",
+            "cantidad_solicitada": "90",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "90",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e6382d07714",
+        "timestamp": "2026-04-20 14:29:01",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-13",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "FUERTE X 25",
+            "lote_producto": "140426B",
+            "fecha_vencimiento": "14102026",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-13",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "524",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "524",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e68d29a989c",
+        "timestamp": "2026-04-20 20:31:37",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-17",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "ESPECIAL X 25 ",
+            "lote_producto": "170426BA",
+            "fecha_vencimiento": "17042027",
+            "etiquetas_adhesivas": "NO",
+            "fecha_entrega_salida": "2026-04-17",
+            "entregado_a": "ALEX CHALA",
+            "cantidad_solicitada": "200",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "200",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    },
+    {
+        "id_registro": "EMPV2_69e68e586ac42",
+        "timestamp": "2026-04-20 20:36:40",
+        "usuario_sys": "Gleimer Paez",
+        "sede_sys": "ZC",
+        "datos": {
+            "cantidad_galeria": "",
+            "fecha_alistamiento": "2026-04-20",
+            "responsable_alistamiento": "GLEIMER",
+            "nombre_empaque": "Empaque Galeras Naranja X25",
+            "lote_empaque": "MP-02303",
+            "producto_envasar": "HARINA MANITOBA X 25",
+            "lote_producto": "170426B",
+            "fecha_vencimiento": "17042027",
+            "etiquetas_adhesivas": "SI",
+            "fecha_entrega_salida": "2026-04-20",
+            "entregado_a": "OLFER VARGAS",
+            "cantidad_solicitada": "60",
+            "cantidad_devueltas": "0",
+            "cantidad_total_entregadas": "60",
+            "cantidad_no_conformes_fabrica": "0",
+            "cantidad_no_conformes_planta": "0"
+        }
+    }
+]

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPECCIÓN PROGRAMA GESTIÓN DE LA PRODUCCIÓN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        .btn-back {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .btn-back:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "V1 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title { color: var(--text-muted); font-size: 14px; }
+
+        .doc-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .doc-meta-item {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: var(--r-sm);
+        }
+
+        .doc-meta-item span { color: var(--accent); font-weight: 700; }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300F0FF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px top 50%;
+            background-size: 10px auto;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        select.form-control option { background-color: var(--panel-bg); color: var(--text-main); }
+
+        input[type="date"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        .instrucciones-box {
+            background: rgba(255, 176, 0, 0.05);
+            border: 1px solid rgba(255, 176, 0, 0.2);
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--warning);
+            line-height: 1.6;
+        }
+
+        .instrucciones-box strong { font-weight: 700; }
+
+        .items-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .item-row {
+            display: grid;
+            grid-template-columns: 1fr 160px;
+            gap: 16px;
+            align-items: center;
+            padding: 14px 16px;
+            background: rgba(0, 240, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            transition: all 0.2s;
+        }
+
+        .item-row:hover { border-color: rgba(0, 240, 255, 0.2); background: rgba(0, 240, 255, 0.04); }
+
+        .item-desc {
+            font-size: 13.5px;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .item-desc .item-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .item-desc .item-sub {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            padding-left: 32px;
+        }
+
+        .results-box {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--accent);
+            border-radius: var(--r-md);
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .result-item { text-align: center; }
+
+        .result-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .result-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active { transform: translateY(0); }
+
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70%  { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        @media (max-width: 600px) {
+            .item-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;">
+            <div>
+                <h1 class="main-title">Inspección Programa Gestión de la Producción</h1>
+                <div class="sub-title">PPR Gestión de la Producción — Inspección Programa Gestión de la Producción</div>
+                <div class="doc-meta">
+                    <div class="doc-meta-item">Código: <span>GP-PD-FP-GP-FO-016</span></div>
+                    <div class="doc-meta-item">Versión: <span>1</span></div>
+                    <div class="doc-meta-item">Fecha Doc: <span>27/07/2021</span></div>
+                </div>
+            </div>
+            <a href="../menu_seccion_sur.html" class="btn-back">← VOLVER</a>
+        </div>
+    </div>
+
+    <form id="gestionProdForm">
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Información General</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha de Inspección</label>
+                    <input type="date" name="fecha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Responsable de Inspección</label>
+                    <input type="text" name="responsable_nombre" class="form-control" placeholder="Nombre del responsable" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÍTEMS A EVALUAR -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Ítems a Evaluar</div>
+
+            <div class="instrucciones-box">
+                <strong>INSTRUCCIONES:</strong> Por cada ítem escriba <strong>1</strong> si cumple, <strong>0</strong> si no cumple,
+                o <strong>NA</strong> si no aplica (los ítems NA no se incluyen en el total de evaluados).
+            </div>
+
+            <div class="items-grid">
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">01</span>
+                        <strong>Selección y Diseño de Productos</strong>
+                        <span class="item-sub">Las medidas y pasos a seguir para la selección y diseño de productos se encuentran debidamente documentados</span>
+                    </div>
+                    <select name="eval_seleccion_diseno" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">02</span>
+                        <strong>Soportes de Mejoras a Maquinaria</strong>
+                        <span class="item-sub">Se cuentan con soportes o registros de las mejoras realizadas a la maquinaria y equipos de producción en el mes presente</span>
+                    </div>
+                    <select name="eval_mejoras_maquinaria" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">03</span>
+                        <strong>Planificación de Capacidad de Producción</strong>
+                        <span class="item-sub">Se planifica la capacidad de producción a corto y largo plazo, con herramientas y métodos adecuados para realizar esta actividad</span>
+                    </div>
+                    <select name="eval_planificacion_cap" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">04</span>
+                        <strong>Planificación de Actividades de Producción</strong>
+                        <span class="item-sub">Se planifican las actividades de producción con herramientas y métodos adecuados para realizar esta actividad</span>
+                    </div>
+                    <select name="eval_planificacion_act" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">05</span>
+                        <strong>Controles de Producción según Planes</strong>
+                        <span class="item-sub">Existen controles suficientes para garantizar que la producción se hace según los planes, preservando calidad e inocuidad en los productos</span>
+                    </div>
+                    <select name="eval_controles_prod" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">06</span>
+                        <strong>Reducción de Costos sin Afectar Calidad</strong>
+                        <span class="item-sub">Existen medidas para garantizar que la reducción en los costos de producción no afecte la calidad e inocuidad de los productos</span>
+                    </div>
+                    <select name="eval_reduccion_costos" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">07</span>
+                        <strong>Control de Inventario de Materias Primas</strong>
+                        <span class="item-sub">Se hace control del inventario de materias primas y productos con las frecuencias establecidas (diaria y mensualmente)</span>
+                    </div>
+                    <select name="eval_control_inventario" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">08</span>
+                        <strong>Mantenimiento y Sustitución de Equipos</strong>
+                        <span class="item-sub">Las medidas y pasos a seguir para el mantenimiento y sustitución de equipos se encuentran debidamente documentados</span>
+                    </div>
+                    <select name="eval_mantenimiento_equipos" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+                <div class="item-row">
+                    <div class="item-desc">
+                        <span class="item-num">09</span>
+                        <strong>Cobertura y Documentación de Gestión de la Producción</strong>
+                        <span class="item-sub">Se tienen identificados los elementos que dan cobertura la producción y existe documentación que soporta la gestión de cada elemento</span>
+                    </div>
+                    <select name="eval_cobertura_produccion" class="form-control eval-item" required>
+                        <option value="">Seleccione...</option>
+                        <option value="1">CUMPLE (1)</option>
+                        <option value="0">NO CUMPLE (0)</option>
+                        <option value="NA">NO APLICA (NA)</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Resultados calculados -->
+            <div class="results-box">
+                <div class="result-item">
+                    <div class="result-value" id="resTotal">0</div>
+                    <div class="result-label">Total (Suma)</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="resEvaluados">0</div>
+                    <div class="result-label"># Ítems Evaluados</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="resPorcentaje">0%</div>
+                    <div class="result-label">% Cumplimiento</div>
+                </div>
+            </div>
+
+            <input type="hidden" name="total_suma" id="inputTotal">
+            <input type="hidden" name="items_evaluados" id="inputEvaluados">
+            <input type="hidden" name="porcentaje_cumplimiento" id="inputPorcentaje">
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnGuardar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            REGISTRAR INSPECCIÓN
+        </button>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO — AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hoy = new Date().toISOString().split('T')[0];
+        document.querySelector('[name="fecha"]').value = hoy;
+
+        document.querySelectorAll('.eval-item').forEach(s => {
+            s.addEventListener('change', calcularResultados);
+        });
+    });
+
+    function calcularResultados() {
+        const selects = document.querySelectorAll('.eval-item');
+        let suma = 0, evaluados = 0;
+
+        selects.forEach(s => {
+            const v = s.value;
+            if (v === '1' || v === '0') {
+                evaluados++;
+                suma += parseInt(v);
+            }
+        });
+
+        const pct = evaluados > 0 ? (suma / evaluados) * 100 : 0;
+
+        document.getElementById('resTotal').innerText = suma;
+        document.getElementById('resEvaluados').innerText = evaluados;
+        document.getElementById('resPorcentaje').innerText = pct.toFixed(1) + '%';
+
+        document.getElementById('inputTotal').value = suma;
+        document.getElementById('inputEvaluados').value = evaluados;
+        document.getElementById('inputPorcentaje').value = pct.toFixed(2);
+    }
+
+    document.getElementById('gestionProdForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const evaluados = parseInt(document.getElementById('inputEvaluados').value || '0');
+        if (evaluados === 0) {
+            Swal.fire({
+                title: 'Sin ítems evaluados',
+                text: 'Debe evaluar al menos un ítem antes de registrar.',
+                icon: 'warning',
+                background: '#151A22',
+                color: '#fff',
+                confirmButtonColor: '#FFB000'
+            });
+            return;
+        }
+
+        const btn = document.getElementById('btnGuardar');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((v, k) => { jsonData[k] = v; });
+
+        fetch('procesar.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: '¡REGISTRADO!',
+                    text: 'Inspección guardada correctamente. ID: ' + data.id,
+                    icon: 'success',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#00F0FF'
+                }).then(() => window.location.reload());
+            } else {
+                Swal.fire({
+                    title: 'Error del Sistema',
+                    text: data.message || 'Error al procesar el registro.',
+                    icon: 'error',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#FF3366'
+                });
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            Swal.fire({
+                title: 'Error de Conexión',
+                text: 'No se pudo conectar con el servidor.',
+                icon: 'error',
+                background: '#151A22',
+                color: '#fff',
+                confirmButtonColor: '#FF3366'
+            });
+            btn.innerHTML = originalHTML;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        });
+    });
+</script>
+
+</body>
+</html>

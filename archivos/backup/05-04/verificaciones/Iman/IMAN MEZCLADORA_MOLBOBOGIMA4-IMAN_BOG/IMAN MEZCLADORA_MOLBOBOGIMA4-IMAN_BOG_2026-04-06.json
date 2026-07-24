@@ -1,0 +1,21 @@
+{
+    "codigo_maquina": "IMAN MEZCLADORA_MOLBOBOGIMA4",
+    "nombre_maquina": "IMAN_BOG",
+    "tipo_maquina": "iman",
+    "estado_general": "Bueno ",
+    "Acople": "Cumple",
+    "Soporte": "Cumple",
+    "Manija": "Cumple",
+    "Estructura": "Cumple",
+    "Tornilleria_Completa_y_Ajustada": "Cumple",
+    "Observaciones": "",
+    "formato": "IMAN MEZCLADORA_MOLBOBOGIMA4-IMAN_BOG",
+    "usuario": "Harold Taramuel",
+    "tecnico_correccion": "John Giraldo",
+    "codigo_orden": "17338",
+    "json_path": "\/var\/www\/fmt\/archivos\/generados\/verificaciones\/Iman\/IMAN MEZCLADORA_MOLBOBOGIMA4-IMAN_BOG\/IMAN_BOG_IMAN MEZCLADORA_MOLBOBOGIMA4_2026-04-06.json",
+    "zona": "Iman",
+    "maquina": "IMAN MEZCLADORA_MOLBOBOGIMA4-IMAN_BOG",
+    "archivo_pdf": "IMAN MEZCLADORA_MOLBOBOGIMA4-IMAN_BOG_2026-04-06.pdf",
+    "fecha": "2026-04-06"
+}

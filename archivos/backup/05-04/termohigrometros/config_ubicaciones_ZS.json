@@ -1,0 +1,26 @@
+[
+    {
+        "id": "bodega_laboratorio",
+        "nombre": "BODEGA LABORATORIO"
+    },
+    {
+        "id": "bodega_materjales",
+        "nombre": "BODEGA MATERJALES"
+    },
+    {
+        "id": "bodega_pt_familiar",
+        "nombre": "BODEGA PT FAMILIAR"
+    },
+    {
+        "id": "bodega_pt_industrial",
+        "nombre": "BODEGA PT INDUSTRIAL"
+    },
+    {
+        "id": "bodega_p_especiales",
+        "nombre": "BODEGA P ESPECIALES"
+    },
+    {
+        "id": "bodega_microhingredintes",
+        "nombre": "BODEGA MICROHINGREDINTES"
+    }
+]

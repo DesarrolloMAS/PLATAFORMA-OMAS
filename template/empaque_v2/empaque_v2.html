@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTROL DE ALISTAMIENTO DE MATERIALES DE EMPAQUE (V2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --bg-color: #0B0E14;
+            --panel-bg: #151A22;
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --accent-hover: #00D1DF;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: #1E293B;
+            --input-bg: #0F172A;
+            --danger: #FF3366;
+            --warning: #FFB000;
+            --danger-glow: rgba(255, 51, 102, 0.4);
+            --r-lg: 12px;
+            --r-md: 8px;
+            --r-sm: 4px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--r-md);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box::before {
+            content: "V2 JSON";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: var(--bg-color);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-title {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .section-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.02);
+        }
+
+        input[type="date"].form-control, 
+        input[type="time"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        input[type="number"].form-control {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+        }
+
+        /* Danger inputs for NO CONFORMES */
+        .danger-input .form-control:focus {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.1);
+        }
+        .danger-input .form-control {
+            color: var(--danger);
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 16px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            border-radius: var(--r-sm);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #fff;
+            color: var(--bg-color);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Automagic location fetcher */
+        .system-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-box">
+        <h1 class="main-title">Control de Alistamiento de Materiales</h1>
+        <div class="sub-title">Módulo de Empaque en Almacén (V2 JSON Persistente)</div>
+    </div>
+
+    <form id="empaqueForm">
+        <input type="hidden" name="cantidad_galeria" id="cantidadGaleriaInput">
+        
+        <!-- DATOS PRINCIPALES -->
+        <div class="section-card">
+            <div class="section-title"><span>01</span> Información General</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Fecha de Alistamiento</label>
+                    <input type="date" name="fecha_alistamiento" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Responsable del Alistamiento</label>
+                    <input type="text" name="responsable_alistamiento" class="form-control" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Material de Empaque</label>
+                    <input type="text" name="nombre_empaque" id="nombreEmpaqueInput" class="form-control" readonly style="border-color: var(--accent); color: var(--accent); background: rgba(0,240,255,0.05);" placeholder="Desde galería">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Lote del Empaque</label>
+                    <input type="text" name="lote_empaque" id="loteEmpaqueInput" class="form-control" readonly style="border-color: var(--accent); color: var(--accent); background: rgba(0,240,255,0.05);" placeholder="Desde galería">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label">Producto a Envasar</label>
+                    <input type="text" name="producto_envasar" class="form-control" placeholder="Descripción del producto a envasar" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMBRADO -->
+        <div class="section-card">
+            <div class="section-title"><span>02</span> Datos de Timbrado</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Lote del Producto</label>
+                    <input type="text" name="lote_producto" class="form-control" placeholder="Ej: L-202X" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Vencimiento</label>
+                    <!-- Permitiendo texto libre como en el original, o mes/año -->
+                    <input type="text" name="fecha_vencimiento" class="form-control" placeholder="MM/AAAA o DD/MM/AAAA" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Etiquetas Adhesivas</label>
+                    <select name="etiquetas_adhesivas" class="form-control" required>
+                        <option value="">Seleccione...</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Entrega/Salida</label>
+                    <input type="date" name="fecha_entrega_salida" class="form-control" required>
+                </div>
+                <div class="form-group full">
+                    <label class="form-label">Entregado A</label>
+                    <input type="text" name="entregado_a" class="form-control" placeholder="Receptor del producto" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- NUMERO EMPAQUES -->
+        <div class="section-card">
+            <div class="section-title"><span>03</span> Balance de Empaques</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Cantidad Solicitada</label>
+                    <input type="number" name="cantidad_solicitada" class="form-control" placeholder="0" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cantidad Devueltas</label>
+                    <input type="number" name="cantidad_devueltas" class="form-control" placeholder="0" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Entregadas</label>
+                    <input type="number" name="cantidad_total_entregadas" class="form-control" placeholder="0" min="0" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- NO CONFORMES -->
+        <div class="section-card" style="border-color: var(--danger-glow);">
+            <div class="section-title" style="color: var(--danger); border-bottom-color: var(--danger-glow);">
+                <span style="color: var(--danger); background: var(--danger-glow); border-color: var(--danger);">04</span> 
+                Material No Conforme
+            </div>
+            <div class="form-grid">
+                <div class="form-group danger-input">
+                    <label class="form-label" style="color: var(--danger);">No Conformes (De Fábrica)</label>
+                    <input type="number" name="cantidad_no_conformes_fabrica" class="form-control" placeholder="0" min="0" required>
+                </div>
+                <div class="form-group danger-input">
+                    <label class="form-label" style="color: var(--danger);">No Conformes (En Planta)</label>
+                    <input type="number" name="cantidad_no_conformes_planta" class="form-control" placeholder="0" min="0" required>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-top: 10px;">
+            <button type="button" class="btn-submit" id="btnGuardarRapido" style="background: var(--warning); box-shadow: 0 0 15px rgba(255, 176, 0, 0.4); color: var(--bg-color);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                REGISTRO RÁPIDO (SOLO LOTE/CANTIDAD)
+            </button>
+            <button type="submit" class="btn-submit" id="btnGuardar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                REGISTRAR EMPAQUE MÁSTER
+            </button>
+        </div>
+
+        <div class="system-status">
+            <div class="status-dot"></div>
+            SISTEMA JSON INTERCONECTADO - AUTO-DETECCIÓN DE SEDE ACTIVA
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Rellenar fecha de hoy automáticamente
+        const hoy = new Date().toISOString().split('T')[0];
+        document.querySelector('[name="fecha_alistamiento"]').value = hoy;
+
+        // Auto-capturar datos mágicos desde la galería (si aplica)
+        const params = new URLSearchParams(window.location.search);
+        const producto = params.get('producto');
+        const lote = params.get('lote');
+        const cantidad = params.get('cantidad_empaques');
+
+        if (producto) {
+            const inp = document.getElementById('nombreEmpaqueInput');
+            if(inp) inp.value = producto; 
+        }
+        if (lote) {
+            const inp = document.getElementById('loteEmpaqueInput');
+            if(inp) inp.value = lote; 
+        }
+        if (cantidad) {
+            // Se envía silenciosamente al JSON sin afectar al de 'Cantidad Solicitada'
+            document.getElementById('cantidadGaleriaInput').value = cantidad;
+        }
+    });
+
+    function enviarDatos(jsonData, btn, overlayText) {
+        fetch('procesar_empaque_v2.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jsonData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: '¡REGISTRADO!',
+                    text: 'Empaque guardado estructuralmente vía JSON.',
+                    icon: 'success',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#00F0FF'
+                }).then(() => {
+                    window.location.href = 'galeria_empaques_v2.php';
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error del Sistema',
+                    text: data.message || 'Error en el túnel JSON.',
+                    icon: 'error',
+                    background: '#151A22',
+                    color: '#fff',
+                    confirmButtonColor: '#FF3366'
+                });
+                btn.innerHTML = overlayText;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            Swal.fire({
+                title: 'Desconexión',
+                text: 'Falla en la red al subir.',
+                icon: 'error',
+                background: '#151A22',
+                color: '#fff',
+            });
+            btn.innerHTML = overlayText;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        });
+    }
+
+    document.getElementById('empaqueForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = document.getElementById('btnGuardar');
+        const overlayText = btn.innerHTML;
+        
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        const formData = new FormData(this);
+        const jsonData = {};
+        formData.forEach((value, key) => { jsonData[key] = value; });
+
+        enviarDatos(jsonData, btn, overlayText);
+    });
+
+    document.getElementById('btnGuardarRapido').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const btn = this;
+        const overlayText = btn.innerHTML;
+        
+        btn.innerHTML = 'PROCESANDO JSON...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        const form = document.getElementById('empaqueForm');
+        const formData = new FormData(form);
+        const jsonData = {};
+        
+        // Enviar únicamente los datos provenientes de la galería para que el JSON quede "vacío" 
+        // de datos operativos (sin fechas automáticas ni valores en 0)
+        jsonData['nombre_empaque'] = formData.get('nombre_empaque') || '';
+        jsonData['lote_empaque'] = formData.get('lote_empaque') || '';
+        jsonData['cantidad_galeria'] = formData.get('cantidad_galeria') || '';
+        jsonData['tipo_registro'] = 'rapido';
+
+        enviarDatos(jsonData, btn, overlayText);
+    });
+</script>
+
+</body>
+</html>

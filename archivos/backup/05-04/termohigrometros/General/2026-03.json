@@ -1,0 +1,38 @@
+[
+    {
+        "fecha": "2026-03-20",
+        "hora": "16:22",
+        "temperatura": "0",
+        "humedad": "0",
+        "humedad_max": "0",
+        "temp_max": "0",
+        "humedad_min": "0",
+        "temp_min": "0",
+        "verificacion": "PRUEBA",
+        "timestamp_recepcion": "2026-03-20 21:19:23"
+    },
+    {
+        "fecha": "2026-03-24",
+        "hora": "06:44",
+        "temperatura": "0",
+        "humedad": "0",
+        "humedad_max": "0",
+        "temp_max": "0",
+        "humedad_min": "0",
+        "temp_min": "0",
+        "verificacion": "PRUEBA",
+        "timestamp_recepcion": "2026-03-24 11:40:41"
+    },
+    {
+        "fecha": "2026-03-24",
+        "hora": "13:38",
+        "temperatura": "0",
+        "humedad": "0",
+        "humedad_max": "0",
+        "temp_max": "0",
+        "humedad_min": "0",
+        "temp_min": "0",
+        "verificacion": "PRUEBA",
+        "timestamp_recepcion": "2026-03-24 18:35:31"
+    }
+]

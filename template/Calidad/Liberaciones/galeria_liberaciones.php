@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '/var/www/fmt/vendor/autoload.php';
 require_once '../../sesion.php';
+verificarAutenticacion();
 require '../../conection.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 $sede = $_GET['sede'] ?? $_SESSION['sede'];
