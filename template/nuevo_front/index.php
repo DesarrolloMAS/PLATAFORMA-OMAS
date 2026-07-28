@@ -145,7 +145,7 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
     <div class="page">
         <div class="brand">
             <span class="brand-logo-frame">
-                <img src="./img/logo_omas.png" alt="Organización MAS" class="brand-logo">
+                <img src="./img/logo_omas_azul.png" alt="Organización MAS" class="brand-logo">
                 <span class="brand-shine" aria-hidden="true"></span>
             </span>
         </div>
@@ -199,7 +199,7 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
                 </div>
 
                 <div class="auth-foot">
-                    ¿No tienes cuenta? <a href="/template/registroUsuarios.php">Regístrate</a>
+                    ¿No tienes cuenta? <a href="./registro.php">Regístrate</a>
                 </div>
             </form>
         </div>
@@ -219,9 +219,25 @@ $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
                     icon: 'error',
                     title: 'Credenciales incorrectas',
                     text: 'Por favor, verifica los datos.',
-                    background: '#141519',
-                    color: '#f2f2f3',
-                    confirmButtonColor: '#ff7a1a'
+                    background: '#ffffff',
+                    color: '#0b1b33',
+                    confirmButtonColor: '#2563eb'
+                });
+            }
+        });
+    </script>
+    <?php endif; ?>
+    <?php if (isset($_GET['registro']) && $_GET['registro'] === 'exito'): ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            if (window.Swal) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    text: 'Ya puedes iniciar sesión con tus datos.',
+                    background: '#ffffff',
+                    color: '#0b1b33',
+                    confirmButtonColor: '#2563eb'
                 });
             }
         });

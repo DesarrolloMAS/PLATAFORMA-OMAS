@@ -4,8 +4,9 @@ import * as THREE from "three";
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
 /* ---------------------------------------------------------------------------
- * Fondo 3D — campo de partículas flotantes con parallax de mouse.
- * Sustituye el fondo estático (img/fondo16.png) del index legacy.
+ * Fondo 3D — malla cibernética: nodos que flotan y se conectan por líneas
+ * cuando quedan cerca entre sí (estilo red neuronal / grid tipo Antigravity),
+ * en tonos azules sobre el fondo claro. Sustituye el campo de partículas.
  * ------------------------------------------------------------------------- */
 function initBackground(): void {
     const canvas = document.getElementById("bg-canvas") as HTMLCanvasElement | null;
@@ -19,42 +20,140 @@ function initBackground(): void {
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.z = 22;
 
-    const PARTICLE_COUNT = 420;
-    const positions = new Float32Array(PARTICLE_COUNT * 3);
-    const speeds = new Float32Array(PARTICLE_COUNT);
+    const NODE_COUNT = 150;
+    const BOUNDS = { x: 30, y: 18, z: 15 };
+    const LINK_DISTANCE = 7.4;
+    const MAX_LINKS = NODE_COUNT * 6;
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 60;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 36;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 30;
-        speeds[i] = 0.02 + Math.random() * 0.05;
+    const positions = new Float32Array(NODE_COUNT * 3);
+    const velocities = new Float32Array(NODE_COUNT * 3);
+
+    for (let i = 0; i < NODE_COUNT; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * BOUNDS.x * 2;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * BOUNDS.y * 2;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * BOUNDS.z * 2;
+        velocities[i * 3] = (Math.random() - 0.5) * 0.02;
+        velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.02;
+        velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.012;
     }
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    const nodeGeometry = new THREE.BufferGeometry();
+    nodeGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-    const material = new THREE.PointsMaterial({
-        color: 0xff8a3d,
-        size: 0.11,
+    const nodeMaterial = new THREE.PointsMaterial({
+        color: 0x2f7bff,
+        size: 0.36,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.9,
         sizeAttenuation: true,
     });
+    const nodes = new THREE.Points(nodeGeometry, nodeMaterial);
+    scene.add(nodes);
 
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
+    // Líneas que conectan nodos cercanos — se recalculan periódicamente
+    // a medida que los nodos se mueven, dando el efecto de "malla viva".
+    const linePositions = new Float32Array(MAX_LINKS * 2 * 3);
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    lineGeometry.setDrawRange(0, 0);
 
-    // Un segundo campo, más tenue y gris, para dar profundidad.
-    const dimGeometry = geometry.clone();
-    const dimMaterial = new THREE.PointsMaterial({
-        color: 0x8a8d97,
-        size: 0.06,
+    const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0x5fb3ff,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.5,
     });
-    const dimPoints = new THREE.Points(dimGeometry, dimMaterial);
-    dimPoints.position.z = -12;
-    scene.add(dimPoints);
+    const links = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(links);
+
+    let currentLinkCount = 0;
+    function rebuildLinks(): void {
+        let linkCount = 0;
+        for (let i = 0; i < NODE_COUNT && linkCount < MAX_LINKS; i++) {
+            const ax = positions[i * 3], ay = positions[i * 3 + 1], az = positions[i * 3 + 2];
+            for (let j = i + 1; j < NODE_COUNT && linkCount < MAX_LINKS; j++) {
+                const bx = positions[j * 3], by = positions[j * 3 + 1], bz = positions[j * 3 + 2];
+                const dx = ax - bx, dy = ay - by, dz = az - bz;
+                if (dx * dx + dy * dy + dz * dz < LINK_DISTANCE * LINK_DISTANCE) {
+                    const o = linkCount * 6;
+                    linePositions[o] = ax; linePositions[o + 1] = ay; linePositions[o + 2] = az;
+                    linePositions[o + 3] = bx; linePositions[o + 4] = by; linePositions[o + 5] = bz;
+                    linkCount++;
+                }
+            }
+        }
+        (lineGeometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
+        lineGeometry.setDrawRange(0, linkCount * 2);
+        currentLinkCount = linkCount;
+    }
+    rebuildLinks();
+
+    // Segunda capa de nodos, más tenue y lejana, solo para dar profundidad.
+    const farGeometry = nodeGeometry.clone();
+    const farMaterial = new THREE.PointsMaterial({
+        color: 0xbfe0ff,
+        size: 0.2,
+        transparent: true,
+        opacity: 0.45,
+    });
+    const farNodes = new THREE.Points(farGeometry, farMaterial);
+    farNodes.position.z = -14;
+    scene.add(farNodes);
+
+    // Chispas — pequeños destellos que viajan sobre un enlace (línea) elegido
+    // al azar, de un extremo al otro, y luego saltan a otro enlace tras una
+    // pausa. Se disparan por tiempo, sin depender del mouse; son el elemento
+    // principal de "actividad" de la malla.
+    const SPARK_COUNT = 6;
+    const SPARK_TRAVEL_MIN = 0.6;
+    const SPARK_TRAVEL_MAX = 1.3;
+    const SPARK_WAIT_MIN = 0.3;
+    const SPARK_WAIT_MAX = 2.6;
+
+    interface Spark {
+        mesh: THREE.Mesh;
+        material: THREE.MeshBasicMaterial;
+        start: THREE.Vector3;
+        end: THREE.Vector3;
+        progress: number;
+        duration: number;
+        wait: number;
+        traveling: boolean;
+    }
+
+    const sparkGeometry = new THREE.CircleGeometry(0.4, 16);
+    const sparks: Spark[] = [];
+    for (let i = 0; i < SPARK_COUNT; i++) {
+        const material = new THREE.MeshBasicMaterial({
+            color: 0xeaf6ff,
+            transparent: true,
+            opacity: 0,
+            side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+        });
+        const mesh = new THREE.Mesh(sparkGeometry, material);
+        scene.add(mesh);
+        sparks.push({
+            mesh,
+            material,
+            start: new THREE.Vector3(),
+            end: new THREE.Vector3(),
+            progress: 0,
+            duration: 1,
+            wait: Math.random() * SPARK_WAIT_MAX,
+            traveling: false,
+        });
+    }
+
+    function launchSpark(spark: Spark): void {
+        const idx = Math.floor(Math.random() * currentLinkCount);
+        const o = idx * 6;
+        spark.start.set(linePositions[o], linePositions[o + 1], linePositions[o + 2]);
+        spark.end.set(linePositions[o + 3], linePositions[o + 4], linePositions[o + 5]);
+        spark.progress = 0;
+        spark.duration = SPARK_TRAVEL_MIN + Math.random() * (SPARK_TRAVEL_MAX - SPARK_TRAVEL_MIN);
+        spark.traveling = true;
+    }
 
     let mouseX = 0;
     let mouseY = 0;
@@ -72,21 +171,52 @@ function initBackground(): void {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     let frameId: number;
+    let frameCount = 0;
     const clock = new THREE.Clock();
     function tick() {
         frameId = requestAnimationFrame(tick);
-        const t = clock.getElapsedTime();
+        frameCount++;
+        const dt = clock.getDelta();
 
-        const posAttr = points.geometry.getAttribute("position") as THREE.BufferAttribute;
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            const y = posAttr.getY(i);
-            const newY = y + speeds[i] * 0.05;
-            posAttr.setY(i, newY > 18 ? -18 : newY);
+        for (let i = 0; i < NODE_COUNT; i++) {
+            const ix = i * 3, iy = i * 3 + 1, iz = i * 3 + 2;
+            let x = positions[ix] + velocities[ix];
+            let y = positions[iy] + velocities[iy];
+            let z = positions[iz] + velocities[iz];
+            if (x > BOUNDS.x || x < -BOUNDS.x) velocities[ix] *= -1;
+            if (y > BOUNDS.y || y < -BOUNDS.y) velocities[iy] *= -1;
+            if (z > BOUNDS.z || z < -BOUNDS.z) velocities[iz] *= -1;
+            positions[ix] = x; positions[iy] = y; positions[iz] = z;
         }
-        posAttr.needsUpdate = true;
+        (nodeGeometry.attributes.position as THREE.BufferAttribute).needsUpdate = true;
 
-        points.rotation.y = t * 0.02;
-        dimPoints.rotation.y = -t * 0.015;
+        // Recalcular la malla cada pocos cuadros — recomputar cada frame sería
+        // O(n^2) constante e innecesario ya que los nodos se mueven despacio.
+        if (frameCount % 12 === 0) rebuildLinks();
+
+        farNodes.rotation.y += 0.0015;
+
+        for (const spark of sparks) {
+            if (!spark.traveling) {
+                spark.wait -= dt;
+                if (spark.wait <= 0 && currentLinkCount > 0) launchSpark(spark);
+                continue;
+            }
+            spark.progress += dt / spark.duration;
+            if (spark.progress >= 1) {
+                spark.traveling = false;
+                spark.wait = SPARK_WAIT_MIN + Math.random() * (SPARK_WAIT_MAX - SPARK_WAIT_MIN);
+                spark.material.opacity = 0;
+                continue;
+            }
+            spark.mesh.position.lerpVectors(spark.start, spark.end, spark.progress);
+            spark.mesh.lookAt(camera.position);
+            const fadeIn = Math.min(1, spark.progress * 6);
+            const fadeOut = Math.min(1, (1 - spark.progress) * 6);
+            const glow = fadeIn * fadeOut;
+            spark.material.opacity = glow * 0.95;
+            spark.mesh.scale.setScalar(0.7 + glow * 0.7);
+        }
 
         camera.position.x += (mouseX * 2 - camera.position.x) * 0.03;
         camera.position.y += (-mouseY * 1.2 - camera.position.y) * 0.03;
@@ -125,7 +255,7 @@ function initEntranceAnimations(): void {
     );
 
     animate(
-        ".field, .submit-row, .auth-foot",
+        ".field, .submit-row, .auth-foot, .form-section-title",
         { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0px)"] },
         { duration: 0.5, delay: stagger(0.08, { startDelay: 0.35 }), ease: EASE_OUT_EXPO }
     );
@@ -383,29 +513,44 @@ class CustomSelect {
 }
 
 function initCustomSelects(): CustomSelect[] {
-    const selects = document.querySelectorAll<HTMLSelectElement>("#cargo, #campo_sede");
+    const selects = document.querySelectorAll<HTMLSelectElement>("#cargo, #campo_sede, #campo_rol, #campo_Area");
     return Array.from(selects).map((select) => new CustomSelect(select));
 }
 
 /* ---------------------------------------------------------------------------
  * Envío del formulario — valida los selects premium (ya que perdieron el
- * "required" nativo al ocultarse) y da feedback visual mientras el POST
- * viaja al server. El submit real lo sigue manejando index.php.
+ * "required" nativo al ocultarse), y en formularios con confirmación de
+ * cédula (registro) valida que ambos campos coincidan. Da feedback visual
+ * mientras el POST viaja al server; el submit real lo sigue manejando el PHP.
  * ------------------------------------------------------------------------- */
 function initFormSubmit(customSelects: CustomSelect[]): void {
     const form = document.querySelector<HTMLFormElement>(".auth-form");
     const button = document.querySelector<HTMLButtonElement>(".btn-primary");
     if (!form || !button) return;
 
+    const cedula = document.querySelector<HTMLInputElement>("#campo_cedula");
+    const cedula2 = document.querySelector<HTMLInputElement>("#campo_cedula2");
+    cedula2?.addEventListener("input", () => cedula2.classList.remove("field-input--error"));
+
     form.addEventListener("submit", (e) => {
-        const invalid = customSelects.filter((cs) => !cs.hasValue);
-        if (invalid.length > 0) {
+        const invalidSelects = customSelects.filter((cs) => !cs.hasValue);
+        const cedulaMismatch = !!cedula && !!cedula2 && cedula.value.trim() !== cedula2.value.trim();
+
+        if (invalidSelects.length > 0 || cedulaMismatch) {
             e.preventDefault();
-            invalid.forEach((cs) => cs.showError());
+            invalidSelects.forEach((cs) => cs.showError());
+            if (cedulaMismatch && cedula2) {
+                cedula2.classList.add("field-input--error");
+                animate(
+                    cedula2,
+                    { transform: ["translateX(0px)", "translateX(-6px)", "translateX(6px)", "translateX(-4px)", "translateX(4px)", "translateX(0px)"] },
+                    { duration: 0.4, ease: "easeOut" }
+                );
+            }
             return;
         }
         button.disabled = true;
-        button.textContent = "Verificando…";
+        button.textContent = button.dataset.loadingText ?? "Verificando…";
     });
 }
 
@@ -425,9 +570,9 @@ function initSessionExpiredNotice(): void {
         icon: "warning",
         title: "Sesión expirada",
         text: "Por favor, inicia sesión nuevamente.",
-        background: "#141519",
-        color: "#f2f2f3",
-        confirmButtonColor: "#ff7a1a",
+        background: "#ffffff",
+        color: "#0b1b33",
+        confirmButtonColor: "#2563eb",
     });
 }
 

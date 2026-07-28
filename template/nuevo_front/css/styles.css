@@ -1,29 +1,29 @@
 /* ==========================================================================
    PLATAFORMA-OMAS — Nuevo Front (prototipo)
-   Tema: Dark Futurist — SaaS minimalista, negros/grises, acentos naranja glow
+   Tema: Cyber Blue — SaaS minimalista, base blanco-azulada, acentos azules
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --bg-0: #08090b;
-    --bg-1: #0e0f12;
-    --panel: rgba(20, 21, 25, 0.72);
-    --panel-solid: #141519;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(255, 138, 61, 0.45);
-    --text-main: #f2f2f3;
-    --text-muted: #8b8d97;
-    --text-faint: #55575f;
-    --accent: #ff7a1a;
-    --accent-2: #ffb454;
-    --accent-glow: rgba(255, 122, 26, 0.35);
+    --bg-0: #f4f8fd;
+    --bg-1: #e8f0fb;
+    --panel: rgba(255, 255, 255, 0.68);
+    --panel-solid: #ffffff;
+    --border: rgba(15, 55, 120, 0.14);
+    --border-hover: rgba(37, 99, 235, 0.55);
+    --text-main: #0b1b33;
+    --text-muted: #4b6a90;
+    --text-faint: #8aa4c4;
+    --accent: #2563eb;
+    --accent-2: #38bdf8;
+    --accent-glow: rgba(37, 99, 235, 0.30);
     --danger: #ff5470;
-    --success: #3ddc97;
+    --success: #16a672;
 
-    --select-bg: #0c0d10;
-    --select-bg-active: #131519;
-    --select-panel-bg: #0e0f12;
+    --select-bg: #eef4fc;
+    --select-bg-active: #e1ecfb;
+    --select-panel-bg: #ffffff;
 
     --r-lg: 20px;
     --r-md: 14px;
@@ -61,9 +61,9 @@ html, body {
     z-index: 1;
     pointer-events: none;
     background:
-        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(255, 122, 26, 0.10), transparent 60%),
-        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(0,0,0,0.55), transparent 60%),
-        linear-gradient(180deg, rgba(8,9,11,0.35) 0%, rgba(8,9,11,0.75) 100%);
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(37, 99, 235, 0.08), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(210, 227, 250, 0.32), transparent 60%),
+        linear-gradient(180deg, rgba(244,248,253,0.10) 0%, rgba(244,248,253,0.38) 100%);
 }
 
 .page {
@@ -115,15 +115,15 @@ html, body {
     height: auto;
     display: block;
     filter:
-        drop-shadow(0 0 10px rgba(255, 122, 26, 0.18))
-        drop-shadow(0 0 3px rgba(255, 255, 255, 0.08));
+        drop-shadow(0 0 10px rgba(37, 99, 235, 0.22))
+        drop-shadow(0 0 3px rgba(11, 27, 51, 0.10));
     transition: filter 0.4s ease;
 }
 
 .brand-logo-frame:hover .brand-logo {
     filter:
         drop-shadow(0 0 22px var(--accent-glow))
-        drop-shadow(0 0 8px rgba(255, 255, 255, 0.12));
+        drop-shadow(0 0 8px rgba(11, 27, 51, 0.14));
     animation: brandFloat 2.6s ease-in-out infinite;
 }
 
@@ -133,14 +133,14 @@ html, body {
     background: linear-gradient(
         115deg,
         transparent 35%,
-        rgba(255, 255, 255, 0.55) 48%,
-        rgba(255, 178, 84, 0.65) 52%,
+        rgba(255, 255, 255, 0.7) 48%,
+        rgba(56, 189, 248, 0.55) 52%,
         transparent 65%
     );
     background-size: 250% 100%;
     background-position: 150% 0;
-    -webkit-mask-image: url('../img/logo_omas.png');
-    mask-image: url('../img/logo_omas.png');
+    -webkit-mask-image: url('../img/logo_omas_azul.png');
+    mask-image: url('../img/logo_omas_azul.png');
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -195,8 +195,8 @@ html, body {
     border-radius: var(--r-lg);
     padding: 36px 32px 30px;
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.55),
-        0 0 0 1px rgba(255,255,255,0.02) inset;
+        0 20px 60px rgba(30, 64, 175, 0.18),
+        0 0 0 1px rgba(37, 99, 235, 0.06) inset;
     opacity: 0;
 }
 
@@ -205,6 +205,8 @@ html, body {
     transition: border-color 0.4s var(--ease);
 }
 
+.auth-card--wide { max-width: 440px; }
+
 .auth-head { margin-bottom: 28px; }
 
 .auth-title {
@@ -212,7 +214,7 @@ html, body {
     font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0 0 6px;
-    background: linear-gradient(180deg, #ffffff, #b9bac0);
+    background: linear-gradient(180deg, #0b1b33, #33517d);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -251,7 +253,7 @@ html, body {
 .field select {
     width: 100%;
     padding: 12px 14px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(37, 99, 235, 0.04);
     border: 1px solid var(--border);
     border-radius: var(--r-sm);
     color: var(--text-main);
@@ -267,9 +269,26 @@ html, body {
 
 .field input:focus {
     border-color: var(--accent);
-    background: rgba(255, 122, 26, 0.05);
+    background: rgba(37, 99, 235, 0.07);
     box-shadow: 0 0 0 3px var(--accent-glow);
 }
+
+.field input.field-input--error {
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 0 3px rgba(255, 84, 112, 0.28) !important;
+}
+
+/* Subtítulo de sección dentro de formularios largos (ej. registro) */
+.form-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 4px 0 14px;
+    opacity: 0;
+}
+.form-section-title:not(:first-child) { margin-top: 24px; }
 
 /* Select nativo — se mantiene en el DOM como fuente de verdad del formulario,
    oculto visualmente (patrón "visually-hidden", no display:none) */
@@ -315,7 +334,7 @@ html, body {
 
 .select-trigger-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.select-trigger:hover { border-color: rgba(255, 255, 255, 0.16); }
+.select-trigger:hover { border-color: rgba(15, 55, 120, 0.22); }
 
 .select-trigger:focus-visible,
 .select-trigger[aria-expanded="true"] {
@@ -351,7 +370,7 @@ html, body {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border-hover);
     border-radius: var(--r-md);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    box-shadow: 0 24px 48px rgba(30, 64, 175, 0.16), 0 0 0 1px rgba(37, 99, 235, 0.06) inset;
     padding: 6px;
 }
 .select-panel--open { display: block; }
@@ -362,7 +381,7 @@ html, body {
     overflow-y: auto;
 }
 .select-list::-webkit-scrollbar { width: 6px; }
-.select-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
+.select-list::-webkit-scrollbar-thumb { background: rgba(15, 55, 120, 0.18); border-radius: 4px; }
 .select-list::-webkit-scrollbar-track { background: transparent; }
 
 .select-highlight {
@@ -372,8 +391,8 @@ html, body {
     top: 0;
     height: 0;
     opacity: 0;
-    background: linear-gradient(135deg, rgba(255, 122, 26, 0.16), rgba(255, 180, 84, 0.08));
-    border: 1px solid rgba(255, 122, 26, 0.25);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(56, 189, 248, 0.08));
+    border: 1px solid rgba(37, 99, 235, 0.28);
     border-radius: var(--r-sm);
     pointer-events: none;
     z-index: 0;
@@ -418,7 +437,7 @@ html, body {
     border: none;
     border-radius: var(--r-sm);
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: #14100a;
+    color: #ffffff;
     font-family: inherit;
     font-weight: 700;
     font-size: 14.5px;
@@ -443,7 +462,7 @@ html, body {
 }
 
 .auth-foot a {
-    color: var(--accent-2);
+    color: var(--accent);
     text-decoration: none;
     font-weight: 600;
 }
