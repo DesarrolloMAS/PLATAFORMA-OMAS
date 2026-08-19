@@ -55,7 +55,7 @@ $nuevo = [
 
 $datos[] = $nuevo;
 
-if (@file_put_contents($archivo_json, json_encode($datos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+if (@file_put_contents($archivo_json, json_encode($datos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX)) {
     echo json_encode(['status' => 'success', 'id_flujo' => $nuevo['id_flujo'], 'folio' => $folio]);
 } else {
     http_response_code(500);

@@ -1015,15 +1015,75 @@
             initCanvasFirma('canvasTrabFirma_' + contTrab);
         }
 
+        // Marca si el formulario se cargó con los datos de una inspección ya existente
+        // del mismo flujo (botón "Generar Inspección" desde las notas del panel principal).
+        // En ese caso, al guardar NO se sobreescribe el paso "inspeccion" del flujo — se
+        // conserva la inspección original y se registra la nueva como una nota aparte.
+        let inspeccionPreexistenteCargada = false;
+
+        function dibujarFirmaEnCanvas(canvas, dataUrl) {
+            if (!canvas || !dataUrl) return;
+            const img = new Image();
+            img.onload = () => canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            img.src = dataUrl;
+        }
+
+        function poblarFormularioConInspeccionExistente(datos) {
+            const excluir = new Set(['id_flujo', 't_nombre', 't_tipo_doc', 't_documento', 't_cargo', 't_dia', 't_firma',
+                'firma_inspector_firma', 'firma_supervisor_firma', 'firma_resp_sst_firma', 'firma_resp_actividad_firma']);
+
+            Object.keys(datos).forEach(key => {
+                if (excluir.has(key) || Array.isArray(datos[key])) return;
+                const el = document.querySelector('#inspeccionForm [name="' + key + '"]');
+                if (el) el.value = datos[key] ?? '';
+            });
+
+            const tbody = document.querySelector('#tablaTrabajadores tbody');
+            const nombres = datos.t_nombre || [];
+            if (nombres.length) {
+                tbody.innerHTML = '';
+                contTrab = 0;
+                nombres.forEach((_, i) => {
+                    agregarTrabajador();
+                    const tr = tbody.children[i];
+                    tr.querySelector('[name="t_nombre[]"]').value = datos.t_nombre?.[i] || '';
+                    tr.querySelector('[name="t_tipo_doc[]"]').value = datos.t_tipo_doc?.[i] || '';
+                    tr.querySelector('[name="t_documento[]"]').value = datos.t_documento?.[i] || '';
+                    tr.querySelector('[name="t_cargo[]"]').value = datos.t_cargo?.[i] || '';
+                    tr.querySelector('[name="t_dia[]"]').value = datos.t_dia?.[i] || '';
+                    dibujarFirmaEnCanvas(tr.querySelector('canvas'), datos.t_firma?.[i]);
+                });
+            }
+
+            dibujarFirmaEnCanvas(document.getElementById('canvasInspectorFirma'), datos.firma_inspector_firma);
+            dibujarFirmaEnCanvas(document.getElementById('canvasSupervisorFirma'), datos.firma_supervisor_firma);
+            dibujarFirmaEnCanvas(document.getElementById('canvasRespSstFirma'), datos.firma_resp_sst_firma);
+            dibujarFirmaEnCanvas(document.getElementById('canvasRespActividadFirma'), datos.firma_resp_actividad_firma);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const now = new Date();
             document.querySelector('[name="hora"]').value = now.toTimeString().slice(0, 5);
             agregarTrabajador();
             ['canvasInspectorFirma', 'canvasSupervisorFirma', 'canvasRespSstFirma', 'canvasRespActividadFirma'].forEach(id => initCanvasFirma(id));
 
-            // ── Fecha tomada del Análisis de Trabajo Seguro del mismo flujo ──
-            const flujoIdInsp = new URLSearchParams(window.location.search).get('flujo');
-            if (flujoIdInsp) {
+            const params = new URLSearchParams(window.location.search);
+            const flujoIdInsp = params.get('flujo');
+            const modoDuplicar = params.get('duplicar') === '1';
+
+            if (flujoIdInsp && modoDuplicar) {
+                // ── Traer los datos de la inspección ya registrada para este permiso ──
+                fetch('../permiso_completo/obtener_registro_paso.php?id_flujo=' + encodeURIComponent(flujoIdInsp) + '&paso=inspeccion')
+                    .then(r => r.json())
+                    .then(res => {
+                        if (res.status === 'success' && res.registro && res.registro.datos) {
+                            poblarFormularioConInspeccionExistente(res.registro.datos);
+                            inspeccionPreexistenteCargada = true;
+                        }
+                    })
+                    .catch(() => { });
+            } else if (flujoIdInsp) {
+                // ── Fecha tomada del Análisis de Trabajo Seguro del mismo flujo ──
                 fetch('../permiso_completo/obtener_registro_paso.php?id_flujo=' + encodeURIComponent(flujoIdInsp) + '&paso=analisis')
                     .then(r => r.json())
                     .then(res => {
@@ -1082,7 +1142,24 @@
                 .then(data => {
                     if (data.status === 'success') {
                         const flujoId = new URLSearchParams(window.location.search).get('flujo');
-                        if (flujoId) {
+                        if (flujoId && inspeccionPreexistenteCargada) {
+                            // Modo "Generar Inspección": se conserva la inspección original vinculada
+                            // al flujo y esta se guarda como un segundo registro aparte, dejando
+                            // constancia en las notas del permiso.
+                            fetch('../permiso_completo/agregar_nota.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id_flujo: flujoId, texto: 'Inspección generada' })
+                            })
+                                .finally(() => {
+                                    Swal.fire({
+                                        title: '¡REGISTRADO!',
+                                        text: 'Nueva inspección guardada junto a la original. Volviendo al menú de permisos.',
+                                        icon: 'success',
+                                        background: '#151A22', color: '#fff', confirmButtonColor: '#00F0FF'
+                                    }).then(() => window.location.href = '../permiso_completo/index.html');
+                                });
+                        } else if (flujoId) {
                             fetch('../permiso_completo/actualizar_paso.php', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },

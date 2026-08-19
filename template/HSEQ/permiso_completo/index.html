@@ -1746,7 +1746,12 @@
             <div class="notas-panel" style="display:none">
                 <div class="notas-list">${notasListHtml}</div>
                 <textarea class="nota-input" rows="2" placeholder="Escribe una nota..."></textarea>
-                <button class="btn-mark" data-action="agregar-nota">+ Guardar Nota</button>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn-mark" style="flex:1;" data-action="agregar-nota">+ Guardar Nota</button>
+                    <button class="btn-mark" style="flex:1;" data-action="generar-inspeccion"
+                        data-url="${STEP_URLS.inspeccion}?flujo=${f.id_flujo}&duplicar=1"
+                        title="Abre Inspección de Trabajo con los datos de la inspección existente para generar una nueva a partir de ella">🔍 Generar Inspección</button>
+                </div>
             </div>
         </div>`;
 
@@ -1839,6 +1844,11 @@
                     btn.disabled = false;
                     btn.textContent = '+ Guardar Nota';
                 }
+
+            } else if (action === 'generar-inspeccion') {
+                setActivo(flujo);
+                actualizarBanner();
+                window.location.href = btn.dataset.url;
 
             } else if (action === 'abrir-apoyo') {
                 setActivo(flujo);
