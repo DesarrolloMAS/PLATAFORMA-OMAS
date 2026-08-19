@@ -8,7 +8,7 @@ if (!isset($_SESSION['nombre']) || empty($_SESSION['sede'])) {
 
 $sede        = $_SESSION['sede'];
 $target_file = $_GET['file'] ?? '';
-$id_registro = $_GET['id']   ?? '';
+$from        = $_GET['from'] ?? 'calidad';
 
 if (empty($target_file)) {
     die("Archivo no especificado. Vuelva a la Galería.");
@@ -22,27 +22,19 @@ if (!file_exists($ruta_json)) {
     die("El archivo no existe o fue eliminado.");
 }
 
-$todos = json_decode(file_get_contents($ruta_json), true) ?: [];
+$contenido = json_decode(file_get_contents($ruta_json), true);
 
-if (empty($todos)) {
-    die("El archivo está vacío.");
+if (empty($contenido)) {
+    die("El archivo está vacío o dañado.");
 }
 
-if ($id_registro) {
-    $registros = array_values(array_filter($todos, fn($r) => ($r['id_registro'] ?? '') === $id_registro));
-    if (empty($registros)) $registros = $todos;
-} else {
-    $registros = $todos;
-}
+// Cada archivo contiene exactamente una inspección. Se mantiene compatibilidad
+// de lectura por si quedara algún archivo del formato antiguo (array con
+// varios registros mezclados).
+$registros = array_is_list($contenido) ? $contenido : [$contenido];
 
-usort($registros, function ($a, $b) {
-    $fA = $a['datos']['fecha'] ?? '';
-    $fB = $b['datos']['fecha'] ?? '';
-    if ($fA !== $fB) return strtotime($fA) <=> strtotime($fB);
-    return strtotime($a['timestamp'] ?? '') <=> strtotime($b['timestamp'] ?? '');
-});
-
-$periodo = str_replace(['DOSIFICADORES_', '.json'], '', basename($target_file));
+$doc = $registros[0]['datos'] ?? [];
+$titulo_visor = trim(($doc['dosificador'] ?? 'Dosificador') . ' — ' . ($doc['fecha'] ?? ''));
 
 function ie($v) { return $v !== null && $v !== '' ? htmlspecialchars($v) : '—'; }
 
@@ -52,14 +44,33 @@ function cumpleBadge($val) {
     if ($val === 'N/A')       return '<span style="color:#92400E;font-weight:700;">N/A</span>';
     return '<span style="color:#9CA3AF;">—</span>';
 }
+
+// Solo el primer registro es editable (formato estándar: un archivo = una inspección).
+// Nota: en celdas editables NO se usa el placeholder "—" de ie() — el modo corrección
+// reenvía el texto de todas las celdas al guardar, y el guion largo se guardaría
+// como valor literal en campos que en realidad están vacíos (rompiendo, por ejemplo,
+// el parseo de fecha en el backend).
+function editableTd($idx, $field, $value, $class, $colspan = null) {
+    $cls = $class;
+    $attrs = $colspan ? ' colspan="' . (int)$colspan . '"' : '';
+    if ($idx === 0) {
+        $cls .= ' editable-field';
+        $attrs .= ' id="field-' . htmlspecialchars($field) . '" data-field="' . htmlspecialchars($field) . '"';
+        $texto = $value !== null && $value !== '' ? htmlspecialchars($value) : '';
+    } else {
+        $texto = ie($value);
+    }
+    return '<td class="' . $cls . '"' . $attrs . '>' . $texto . '</td>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor - Inspección de Dosificadores | <?= htmlspecialchars($periodo) ?></title>
+    <title>Visor - Inspección de Dosificadores | <?= htmlspecialchars($titulo_visor) ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --navy:   #0F172A;
@@ -182,19 +193,34 @@ function cumpleBadge($val) {
             .registro-block { box-shadow: none; padding: 10px; margin-bottom: 12px; }
             @page { size: A4; margin: 8mm; }
         }
+
+        /* MODO CORRECCIÓN */
+        .btn-correct { background: #1E293B; color: #fff; border: none; padding: 9px 18px; border-radius: 4px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s; }
+        .btn-correct:hover { background: #334155; }
+        .btn-correct.active { background: #E11D48; }
+        .btn-save { background: #10B981; color: #fff; border: none; padding: 9px 18px; border-radius: 4px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; display: none; transition: background 0.2s; }
+        .btn-save:hover { background: #059669; }
+
+        .editable-field { transition: all 0.2s; border: 1px solid transparent; }
+        .edit-mode .editable-field { background: #FEF08A; border: 1px dashed #CA8A04; cursor: text; }
+        .edit-mode .editable-field:focus { background: #fff; outline: 2px solid #CA8A04; }
     </style>
 </head>
 <body>
 
 <div class="action-bar">
     <div class="left">
-        <a href="rev_inspeccion_dosificadores.php" class="btn-back">← Volver al Listado</a>
-        <span class="doc-label">Período: <?= htmlspecialchars($periodo) ?> | <?= count($registros) ?> registro<?= count($registros) !== 1 ? 's' : '' ?></span>
+        <a href="rev_inspeccion_dosificadores.php?from=<?= urlencode($from) ?>" class="btn-back">← Volver al Listado</a>
+        <span class="doc-label"><?= htmlspecialchars($titulo_visor) ?></span>
     </div>
-    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / PDF</button>
+    <div style="display:flex; gap:10px;">
+        <button id="btn-correct" class="btn-correct" onclick="toggleEditMode()">✎ CORRECCIÓN</button>
+        <button id="btn-save" class="btn-save" onclick="guardarCambios()">GUARDAR CAMBIOS</button>
+        <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / PDF</button>
+    </div>
 </div>
 
-<div class="page-wrap">
+<div class="page-wrap" id="document_content">
 <?php foreach ($registros as $idx => $reg):
     $d = $reg['datos'];
     $fecha_fmt = !empty($d['fecha']) ? date('d/m/Y', strtotime($d['fecha'])) : '—';
@@ -233,33 +259,33 @@ function cumpleBadge($val) {
     <table style="margin-top:10px;">
         <tr><td class="sec-title" colspan="6">1. Especificaciones</td></tr>
         <tr>
-            <td class="spec-label">Fecha:</td><td class="spec-val"><?= ie($fecha_fmt) ?></td>
-            <td class="spec-label">Dosificador:</td><td class="spec-val"><?= ie($d['dosificador'] ?? null) ?></td>
-            <td class="spec-label">Microingrediente:</td><td class="spec-val"><?= ie($d['microingrediente'] ?? null) ?></td>
+            <td class="spec-label">Fecha:</td><?= editableTd($idx, 'fecha', $fecha_fmt, 'spec-val') ?>
+            <td class="spec-label">Dosificador:</td><?= editableTd($idx, 'dosificador', $d['dosificador'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Microingrediente:</td><?= editableTd($idx, 'microingrediente', $d['microingrediente'] ?? null, 'spec-val') ?>
         </tr>
         <tr>
-            <td class="spec-label">Cantidad Bulto 50kg:</td><td class="spec-val"><?= ie($d['cantidad_bulto_50kg'] ?? null) ?></td>
-            <td class="spec-label">Carga Trigo:</td><td class="spec-val"><?= ie($d['carga_trigo'] ?? null) ?></td>
-            <td class="spec-label">Extracción (%):</td><td class="spec-val"><?= ie($d['extraccion_pct'] ?? null) ?></td>
+            <td class="spec-label">Cantidad Bulto 50kg:</td><?= editableTd($idx, 'cantidad_bulto_50kg', $d['cantidad_bulto_50kg'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Carga Trigo:</td><?= editableTd($idx, 'carga_trigo', $d['carga_trigo'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Extracción (%):</td><?= editableTd($idx, 'extraccion_pct', $d['extraccion_pct'] ?? null, 'spec-val') ?>
         </tr>
         <tr>
-            <td class="spec-label">Bultos por hora:</td><td class="spec-val"><?= ie($d['bultos_por_hora'] ?? null) ?></td>
-            <td class="spec-label">Microingrediente por minuto:</td><td class="spec-val"><?= ie($d['micro_por_minuto'] ?? null) ?></td>
-            <td class="spec-label">Microingrediente por hora:</td><td class="spec-val"><?= ie($d['micro_por_hora'] ?? null) ?></td>
+            <td class="spec-label">Bultos por hora:</td><?= editableTd($idx, 'bultos_por_hora', $d['bultos_por_hora'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Microingrediente por minuto:</td><?= editableTd($idx, 'micro_por_minuto', $d['micro_por_minuto'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Microingrediente por hora:</td><?= editableTd($idx, 'micro_por_hora', $d['micro_por_hora'] ?? null, 'spec-val') ?>
         </tr>
         <tr>
-            <td class="spec-label">Micro. por min. límite inferior:</td><td class="spec-val"><?= ie($d['micro_min_limite_inferior'] ?? null) ?></td>
-            <td class="spec-label">Micro. por min. límite superior:</td><td class="spec-val"><?= ie($d['micro_min_limite_superior'] ?? null) ?></td>
-            <td class="spec-label">Micro. por hora límite inferior:</td><td class="spec-val"><?= ie($d['micro_hora_limite_inferior'] ?? null) ?></td>
+            <td class="spec-label">Micro. por min. límite inferior:</td><?= editableTd($idx, 'micro_min_limite_inferior', $d['micro_min_limite_inferior'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Micro. por min. límite superior:</td><?= editableTd($idx, 'micro_min_limite_superior', $d['micro_min_limite_superior'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Micro. por hora límite inferior:</td><?= editableTd($idx, 'micro_hora_limite_inferior', $d['micro_hora_limite_inferior'] ?? null, 'spec-val') ?>
         </tr>
         <tr>
-            <td class="spec-label">Porcentaje dosificador:</td><td class="spec-val"><?= ie($d['porcentaje_dosificador'] ?? null) ?></td>
-            <td class="spec-label">Frecuencia dosificador:</td><td class="spec-val"><?= ie($d['frecuencia_dosificador'] ?? null) ?></td>
-            <td class="spec-label">Micro. por hora límite superior:</td><td class="spec-val"><?= ie($d['micro_hora_limite_superior'] ?? null) ?></td>
+            <td class="spec-label">Porcentaje dosificador:</td><?= editableTd($idx, 'porcentaje_dosificador', $d['porcentaje_dosificador'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Frecuencia dosificador:</td><?= editableTd($idx, 'frecuencia_dosificador', $d['frecuencia_dosificador'] ?? null, 'spec-val') ?>
+            <td class="spec-label">Micro. por hora límite superior:</td><?= editableTd($idx, 'micro_hora_limite_superior', $d['micro_hora_limite_superior'] ?? null, 'spec-val') ?>
         </tr>
         <tr>
-            <td class="spec-label">Inspeccionado por:</td><td class="spec-val" colspan="3"><?= ie($d['inspeccionado_por'] ?? null) ?></td>
-            <td class="spec-label">Verificado por:</td><td class="spec-val"><?= ie($d['verificado_por'] ?? null) ?></td>
+            <td class="spec-label">Inspeccionado por:</td><?= editableTd($idx, 'inspeccionado_por', $d['inspeccionado_por'] ?? null, 'spec-val', 3) ?>
+            <td class="spec-label">Verificado por:</td><?= editableTd($idx, 'verificado_por', $d['verificado_por'] ?? null, 'spec-val') ?>
         </tr>
     </table>
 
@@ -275,16 +301,18 @@ function cumpleBadge($val) {
         </tr>
         <?php for ($i = 1; $i <= 5; $i++): $j = $i + 5; ?>
         <tr>
-            <td class="pruebas-num"><?= $i ?></td><td class="pruebas-val"><?= ie($d['gramos_prueba_' . $i] ?? null) ?></td>
-            <td class="pruebas-num"><?= $j ?></td><td class="pruebas-val"><?= ie($d['gramos_prueba_' . $j] ?? null) ?></td>
+            <td class="pruebas-num"><?= $i ?></td><?= editableTd($idx, 'gramos_prueba_' . $i, $d['gramos_prueba_' . $i] ?? null, 'pruebas-val') ?>
+            <td class="pruebas-num"><?= $j ?></td><?= editableTd($idx, 'gramos_prueba_' . $j, $d['gramos_prueba_' . $j] ?? null, 'pruebas-val') ?>
         </tr>
         <?php endfor; ?>
         <tr>
-            <td class="resumen-label">Promedio Min:</td><td class="resumen-val"><?= ie($d['promedio_min'] ?? null) ?></td>
-            <td class="resumen-label">Gramos hora:</td><td class="resumen-val"><?= ie($d['gramos_hora'] ?? null) ?></td>
+            <td class="resumen-label">Promedio Min:</td><?= editableTd($idx, 'promedio_min', $d['promedio_min'] ?? null, 'resumen-val') ?>
+            <td class="resumen-label">Gramos hora:</td><?= editableTd($idx, 'gramos_hora', $d['gramos_hora'] ?? null, 'resumen-val') ?>
         </tr>
         <tr>
-            <td class="resumen-label">¿Cumple?</td><td class="resumen-val" colspan="3"><?= cumpleBadge($d['cumple'] ?? null) ?></td>
+            <td class="resumen-label">¿Cumple?</td>
+            <td class="resumen-val<?= $idx === 0 ? ' editable-cumple' : '' ?>" colspan="3"
+                <?= $idx === 0 ? 'id="field-cumple" data-field="cumple" data-current="' . htmlspecialchars($d['cumple'] ?? '') . '"' : '' ?>><?= cumpleBadge($d['cumple'] ?? null) ?></td>
         </tr>
     </table>
 
@@ -313,7 +341,12 @@ function cumpleBadge($val) {
         </tr>
         <tr class="obs-row">
             <td style="width:22%; font-weight:700; background:#D9E1F2;">Observaciones:</td>
-            <td><?= nl2br(ie($d['observaciones'] ?? null)) ?></td>
+            <td<?= $idx === 0 ? ' class="editable-field" id="field-observaciones" data-field="observaciones"' : '' ?>><?php
+                $obs = $d['observaciones'] ?? null;
+                echo $idx === 0
+                    ? nl2br($obs !== null && $obs !== '' ? htmlspecialchars($obs) : '')
+                    : nl2br(ie($obs));
+            ?></td>
         </tr>
     </table>
 
@@ -325,6 +358,69 @@ function cumpleBadge($val) {
 
 <?php endforeach; ?>
 </div>
+
+<script>
+    let isEditMode = false;
+
+    function toggleEditMode() {
+        isEditMode = !isEditMode;
+        const btn = document.getElementById('btn-correct');
+        const btnSave = document.getElementById('btn-save');
+        const documentContent = document.getElementById('document_content');
+        const cumpleCell = document.getElementById('field-cumple');
+
+        if (isEditMode) {
+            btn.classList.add('active');
+            btn.innerText = '✕ CANCELAR';
+            btnSave.style.display = 'inline-block';
+            documentContent.classList.add('edit-mode');
+
+            document.querySelectorAll('.editable-field').forEach(el => { el.contentEditable = true; });
+
+            if (cumpleCell) {
+                const current = cumpleCell.dataset.current || '';
+                const opciones = ['', 'CUMPLE', 'NO CUMPLE', 'N/A'];
+                cumpleCell.innerHTML = '<select id="select-cumple" style="font-size:9pt; padding:4px; border:1px dashed #CA8A04; background:#FEF08A;">'
+                    + opciones.map(op => `<option value="${op}" ${op === current ? 'selected' : ''}>${op === '' ? '—' : op}</option>`).join('')
+                    + '</select>';
+            }
+        } else {
+            btn.classList.remove('active');
+            btn.innerText = '✎ CORRECCIÓN';
+            btnSave.style.display = 'none';
+            documentContent.classList.remove('edit-mode');
+            location.reload();
+        }
+    }
+
+    async function guardarCambios() {
+        const updates = {};
+        document.querySelectorAll('.editable-field[data-field]').forEach(el => {
+            updates[el.dataset.field] = el.innerText.trim();
+        });
+
+        const cumpleSelect = document.getElementById('select-cumple');
+        if (cumpleSelect) updates['cumple'] = cumpleSelect.value;
+
+        try {
+            const resp = await fetch('corregir_inspeccion_dosificadores.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file: <?= json_encode(basename($target_file)) ?>, updates })
+            });
+            const result = await resp.json();
+
+            if (result.status === 'success') {
+                Swal.fire({ title: '¡Guardado!', text: 'Los cambios se han aplicado correctamente.', icon: 'success', timer: 1500, showConfirmButton: false })
+                    .then(() => location.reload());
+            } else {
+                Swal.fire('Error', result.message || 'No se pudieron guardar los cambios.', 'error');
+            }
+        } catch (e) {
+            Swal.fire('Error', 'Hubo un problema de conexión al guardar.', 'error');
+        }
+    }
+</script>
 
 </body>
 </html>

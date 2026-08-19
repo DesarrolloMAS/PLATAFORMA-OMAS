@@ -244,6 +244,33 @@
         .result-value { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); }
         .result-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
 
+        .result-input {
+            font-family: 'Space Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            background: transparent;
+            border: 1px dashed rgba(0, 240, 255, 0.25);
+            border-radius: var(--r-sm);
+            text-align: center;
+            width: 130px;
+            padding: 4px 8px;
+            transition: all 0.2s;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+        .result-input::-webkit-outer-spin-button,
+        .result-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .result-input:hover { border-color: rgba(0, 240, 255, 0.5); }
+        .result-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1);
+        }
+        .result-label-edit { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 6px; }
+        .result-label-edit .edit-hint { color: rgba(0, 240, 255, 0.5); font-size: 10px; }
+
         /* ── CRITERIOS DE ACEPTACIÓN (referencia estática) ── */
         .criterios-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
 
@@ -441,12 +468,12 @@
 
             <div class="results-box">
                 <div class="result-item">
-                    <div class="result-value" id="resPromedioMin">0.00</div>
-                    <div class="result-label">Promedio Min. (g/min)</div>
+                    <input type="number" step="any" name="promedio_min" id="resPromedioMin" class="result-input" value="0.00" placeholder="0.00">
+                    <div class="result-label-edit">Promedio Min. (g/min) <span class="edit-hint">✎ editable</span></div>
                 </div>
                 <div class="result-item">
-                    <div class="result-value" id="resGramosHora">0.00</div>
-                    <div class="result-label">Gramos Hora</div>
+                    <input type="number" step="any" name="gramos_hora" id="resGramosHora" class="result-input" value="0.00" placeholder="0.00">
+                    <div class="result-label-edit">Gramos Hora <span class="edit-hint">✎ editable</span></div>
                 </div>
                 <div class="result-item" style="min-width: 160px;">
                     <select name="cumple" id="selCumple" class="form-control" required style="text-align:center; font-family:'Space Mono',monospace; font-weight:700;">
@@ -457,9 +484,6 @@
                     </select>
                 </div>
             </div>
-
-            <input type="hidden" name="promedio_min" id="inputPromedioMin">
-            <input type="hidden" name="gramos_hora" id="inputGramosHora">
 
             <div class="section-title" style="font-size: 13px; margin-top: 10px;"><span>i</span> Criterios de Aceptación</div>
             <div class="criterios-list">
@@ -558,16 +582,13 @@
         const promedioMin = cantidad > 0 ? (suma / cantidad) : 0;
         const gramosHora = promedioMin * 60;
 
-        document.getElementById('resPromedioMin').textContent = promedioMin.toFixed(2);
-        document.getElementById('resGramosHora').textContent = gramosHora.toFixed(2);
-        document.getElementById('inputPromedioMin').value = promedioMin.toFixed(2);
-        document.getElementById('inputGramosHora').value = gramosHora.toFixed(2);
+        document.getElementById('resPromedioMin').value = promedioMin.toFixed(2);
+        document.getElementById('resGramosHora').value = gramosHora.toFixed(2);
     }
 
     document.getElementById('dosificadoresForm').addEventListener('submit', function(e) {
         e.preventDefault();
-
-        calcularResultados();
+        // No recalculamos aquí para respetar ediciones manuales del usuario.
 
         const btn = document.getElementById('btnGuardar');
         const overlayText = btn.innerHTML;

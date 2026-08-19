@@ -20,35 +20,38 @@ if (!$input_array || empty($input_array['dosificador']) || empty($input_array['m
 }
 
 $timestamp_actual = date('Y-m-d H:i:s');
-$mes_actual = date('Y-m');
+$id_registro = uniqid('DOSIF_');
 
 $nuevo_registro = [
-    'id_registro'  => uniqid('DOSIF_'),
+    'id_registro'  => $id_registro,
     'timestamp'    => $timestamp_actual,
     'usuario_sys'  => $_SESSION['nombre'],
     'sede_sys'     => $sede,
     'datos'        => $input_array
 ];
 
-// Ruta: archivos/generados/inspeccion_dosificadores/[sede]/[YYYY-MM].json
+// Cada inspección se guarda en su propio archivo — nunca se fusiona con otras
+// inspecciones, ni por fecha (mes) ni por dosificador.
+// Ruta: archivos/generados/inspeccion_dosificadores/[sede]/INSPECCION_[dosificador]_[fecha-hora]_[sufijo].json
 $base_dir = "../../archivos/generados/inspeccion_dosificadores/";
 $sede_dir = $base_dir . preg_replace('/[^A-Za-z0-9_-]/', '', $sede) . "/";
-$archivo_json = $sede_dir . "DOSIFICADORES_" . $mes_actual . ".json";
 
 if (!file_exists($base_dir)) { mkdir($base_dir, 0777, true); }
 if (!file_exists($sede_dir)) { mkdir($sede_dir, 0777, true); }
 
-$datos_existentes = file_exists($archivo_json)
-    ? (json_decode(file_get_contents($archivo_json), true) ?: [])
-    : [];
+$dosificador_slug = preg_replace('/[^A-Za-z0-9]+/', '_', trim($input_array['dosificador']));
+$dosificador_slug = trim($dosificador_slug, '_');
+if ($dosificador_slug === '') { $dosificador_slug = 'SIN_NOMBRE'; }
 
-$datos_existentes[] = $nuevo_registro;
+$sufijo = substr($id_registro, -8);
+$nombre_archivo = "INSPECCION_{$dosificador_slug}_" . date('Ymd_His') . "_{$sufijo}.json";
+$archivo_json = $sede_dir . $nombre_archivo;
 
-if (@file_put_contents($archivo_json, json_encode($datos_existentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-    echo json_encode(['status' => 'success', 'message' => 'Inspección de dosificador procesada en JSON correctamente.', 'id' => $nuevo_registro['id_registro']]);
+if (@file_put_contents($archivo_json, json_encode($nuevo_registro, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+    echo json_encode(['status' => 'success', 'message' => 'Inspección de dosificador procesada en JSON correctamente.', 'id' => $id_registro]);
 } else {
     $err = error_get_last();
-    $errMsg = $err ? $err['message'] : 'No se pudo escribir en el archivo JSON maestro (probablemente permisos).';
+    $errMsg = $err ? $err['message'] : 'No se pudo escribir en el archivo JSON (probablemente permisos).';
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Error I/O: ' . $errMsg]);
 }
