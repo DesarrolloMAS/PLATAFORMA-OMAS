@@ -33,9 +33,17 @@ if (file_exists($target_dir)) {
 
         $productos_unicos = array_unique(array_column(array_column($content, 'datos'), 'harina'));
 
+        $harina_file = '';
+        $periodo     = str_replace(['ENV_', '.json'], '', $file);
+        if (preg_match('/^ENV_(.+)_(\d{4}-\d{2})\.json$/i', $file, $m)) {
+            $harina_file = str_replace('_', ' ', $m[1]);
+            $periodo     = $m[2];
+        }
+
         $archivos[] = [
             'filename'       => $file,
-            'periodo'        => str_replace(['ENV_', '.json'], '', $file),
+            'harina'         => $harina_file,
+            'periodo'        => $periodo,
             'registros'      => $total_registros,
             'primera_fecha'  => $first_fecha,
             'ultima_fecha'   => $last_fecha,

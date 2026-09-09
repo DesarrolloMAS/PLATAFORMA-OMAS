@@ -34,7 +34,7 @@ foreach (glob($sede_dir . "*.json") as $archivo) {
     }
     unset($flujo);
     if ($actualizado) {
-        file_put_contents($archivo, json_encode($datos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        file_put_contents($archivo, json_encode($datos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
         break;
     }
 }

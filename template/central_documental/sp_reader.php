@@ -29,9 +29,20 @@ $fecha  = $_GET['fecha']  ?? '';
 $SP_BASE            = 'Documentos compartidos/Codificación Documentos OMAS';
 $SP_FOLDER_MOLIENDA = 'Molienda V2';
 $SP_FOLDER_EMPAQUE  = 'Control de Empaque V2';
+$SP_FOLDER_ENVASADO = 'Linea de Envasado V2';
+$SP_FOLDER_PREMEZCLAS = 'Premezclas y Harinas Especiales V2';
 $SP_FOLDER_BULTO    = 'Control de Cantidad Producto en Bulto';
 $SP_FOLDER_MAQUINAS = 'Verificación de Máquinas V2';
 $SP_FOLDER_BODEGAS  = 'Inspección de Bodegas V2';
+$SP_FOLDER_REPROCESOS = 'Control de Reprocesos V2';
+$SP_FOLDER_MEJORANTE = 'Preparación de Mejorante';
+$SP_FOLDER_PROCESO_MOLIENDA = 'Proceso de Molienda V2';
+$SP_FOLDER_ORDEN_MANTENIMIENTO = 'Orden de Mantenimiento';
+// Tara Seca no vive en su propia carpeta de nivel superior: uploader_selective.js
+// mapea 'Calidad' -> 'Calidad' tal cual, así que la subcarpeta 'tara_seca' local
+// se conserva literal dentro de eso en SharePoint. Tampoco es por sede: todas
+// las sedes comparten una sola carpeta local (sin sesión ni {SEDE} en el path).
+$SP_FOLDER_TARA_SECA = 'Calidad/tara_seca';
 $LOCAL_BASE         = '/var/www/fmt/archivos/generados/';
 $MAQUINAS_GALERIA   = __DIR__ . '/../maquinas_v2/maquinas_galeria.json';
 
@@ -129,6 +140,57 @@ function localEmpaqueByLote(string $lote, string $sede, string $base): array {
     return $byFile;
 }
 
+/**
+ * Escanea los JSON de envasado (particionados por harina + mes) filtrando
+ * registros individuales por fecha. A diferencia de empaque/bulto, no se
+ * agrupa por archivo: cada comprobación es su propio ítem en el resultado.
+ */
+function localEnvasadoByFecha(string $fecha, string $sede, string $base): array {
+    $dir = $base . "envasado_v2/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'ENV_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/**
+ * Escanea los JSON mensuales de premezclas filtrando registros individuales
+ * por fecha. Solo por fecha (no por lote): cada registro trae varios lotes
+ * distintos repartidos entre harinas_especiales[] e insumos[], sin un único
+ * campo de lote que identifique el registro completo.
+ */
+function localPremezclasByFecha(string $fecha, string $sede, string $base): array {
+    $dir = $base . "premezclas_v2/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'PREMEZCLA_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/** Escanea todos los JSON de envasado (todas las harinas y meses) buscando el lote de producto (loteP). */
+function localEnvasadoByLote(string $lote, string $sede, string $base): array {
+    $dir = $base . "envasado_v2/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'ENV_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if (strtoupper(trim((($r['datos'] ?? $r)['loteP'] ?? ''))) === $lote) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
 /** Escanea los JSON de producto en bulto filtrando registros por fecha. */
 function localBultoByFecha(string $fecha, string $sede, string $base): array {
     $dir = $base . "cantidad_bulto/{$sede}/";
@@ -173,6 +235,132 @@ function localBultoByLote(string $lote, string $sede, string $base): array {
         }
     }
     return $byFile;
+}
+
+/** Escanea todos los JSON mensuales de preparación de mejorante buscando registros de una fecha. */
+function localMejoranteByFecha(string $fecha, string $sede, string $base): array {
+    $dir = $base . "preparacion_mejorante/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'PMEJ_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/** Escanea todos los JSON mensuales de preparación de mejorante buscando el lote (campo de nivel superior, no el lote de cada mejorante individual dentro del registro). */
+function localMejoranteByLote(string $lote, string $sede, string $base): array {
+    $dir = $base . "preparacion_mejorante/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'PMEJ_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if (strtoupper(trim((($r['datos'] ?? $r)['lote'] ?? ''))) === $lote) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/** Escanea todos los JSON mensuales de proceso de molienda buscando registros de una fecha. */
+function localProcesoMoliendaByFecha(string $fecha, string $sede, string $base): array {
+    $dir = $base . "proceso_v2/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'PROCESO_MOLIENDA_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/** Escanea todos los JSON mensuales de proceso de molienda buscando el lote de harina. */
+function localProcesoMoliendaByLote(string $lote, string $sede, string $base): array {
+    $dir = $base . "proceso_v2/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'PROCESO_MOLIENDA_*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if (strtoupper(trim((($r['datos'] ?? $r)['lote_harina'] ?? ''))) === $lote) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/** Escanea todos los JSON mensuales de orden de mantenimiento buscando registros de una fecha (por fecha_solicitud). */
+function localOrdenMantenimientoByFecha(string $fecha, string $sede, string $base): array {
+    $dir = $base . "orden_mantenimiento/{$sede}/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . '*.json') as $f) {
+        $data = json_decode(file_get_contents($f), true) ?? [];
+        foreach ($data as $r) {
+            if ((($r['datos'] ?? [])['fecha_solicitud'] ?? '') === $fecha) $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/**
+ * Escanea la carpeta (única, compartida por todas las sedes) de Tara Seca.
+ * A diferencia de todos los demás módulos, aquí cada archivo YA ES un solo
+ * registro plano (sin envoltorio 'datos'/'id_registro'), uno por pesaje.
+ */
+function localTaraSecaByFecha(string $fecha, string $base): array {
+    $dir = $base . "Calidad/tara_seca/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'tara_*.json') as $f) {
+        $r = json_decode(file_get_contents($f), true);
+        if (is_array($r) && ($r['fecha'] ?? '') === $fecha) {
+            // El nombre del archivo es la única clave estable para fusionar
+            // local+SharePoint (no hay id_registro): reusa mergeMaquinaRegistros
+            // pasándolo como si fuera ese campo.
+            $r['id_registro'] = basename($f);
+            $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+function localTaraSecaByLote(string $lote, string $base): array {
+    $dir = $base . "Calidad/tara_seca/";
+    if (!is_dir($dir)) return [];
+    $found = [];
+    foreach (glob($dir . 'tara_*.json') as $f) {
+        $r = json_decode(file_get_contents($f), true);
+        if (is_array($r) && strtoupper(trim($r['lote'] ?? '')) === $lote) {
+            $r['id_registro'] = basename($f);
+            $found[] = $r;
+        }
+    }
+    return $found;
+}
+
+/** Lee el archivo consolidado (único por sede, sin rotación mensual) de reprocesos y filtra por fecha_alistamiento. */
+function localReprocesosByFecha(string $fecha, string $sede, string $base): array {
+    $file = $base . "reprocesos_v2/REPROCESOS_{$sede}.json";
+    if (!file_exists($file)) return [];
+    $data = json_decode(file_get_contents($file), true) ?? [];
+    return array_values(array_filter($data, fn($r) =>
+        (($r['datos'] ?? [])['fecha_alistamiento'] ?? '') === $fecha
+    ));
+}
+
+/** Lee el archivo consolidado de reprocesos y filtra por lote de la harina. */
+function localReprocesosByLote(string $lote, string $sede, string $base): array {
+    $file = $base . "reprocesos_v2/REPROCESOS_{$sede}.json";
+    if (!file_exists($file)) return [];
+    $data = json_decode(file_get_contents($file), true) ?? [];
+    return array_values(array_filter($data, fn($r) =>
+        strtoupper(trim(($r['datos'] ?? [])['lote'] ?? '')) === $lote
+    ));
 }
 
 /** Normaliza un código de máquina igual que sanear_ruta() en maquinas_v2/procesar.php. */
@@ -605,6 +793,566 @@ if ($action === 'search_empaque_by_lote_producto') {
 }
 
 // ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Envasado por fecha  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_envasado_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localEnvasadoByFecha($fecha, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint ───────────────────────────────────
+    $monthsToTry = [$ym];
+    for ($i = 1; $i <= 3; $i++) {
+        $monthsToTry[] = date('Y-m', strtotime("{$ym}-01 -{$i} months"));
+    }
+    $monthsToTry[] = date('Y-m');
+    $monthsToTry   = array_unique($monthsToTry);
+
+    $spRegistros = [];
+    $seen = [];
+    foreach ($monthsToTry as $m) {
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_ENVASADO}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_ENVASADO}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin registros de envasado para {$fecha} (Sede: {$sede}) en local ni en SharePoint."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Envasado por lote de producto  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_envasado_by_lote') {
+    $lote = strtoupper(trim($_GET['lote'] ?? ''));
+    if (empty($lote)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "lote" requerido.']);
+        exit;
+    }
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localEnvasadoByLote($lote, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint (últimos 6 meses) ─────────────────
+    $spRegistros = [];
+    $seen = [];
+    for ($i = 0; $i < 6; $i++) {
+        $m = date('Y-m', strtotime("-{$i} months"));
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_ENVASADO}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_ENVASADO}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if (strtoupper(trim((($r['datos'] ?? $r)['loteP'] ?? ''))) === $lote) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Lote {$lote} no encontrado en envasado (Sede: {$sede})."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'lote'       => $lote,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Preparación de Mejorante por fecha  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_mejorante_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localMejoranteByFecha($fecha, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint ───────────────────────────────────
+    $monthsToTry = [$ym];
+    for ($i = 1; $i <= 3; $i++) {
+        $monthsToTry[] = date('Y-m', strtotime("{$ym}-01 -{$i} months"));
+    }
+    $monthsToTry[] = date('Y-m');
+    $monthsToTry   = array_unique($monthsToTry);
+
+    $spRegistros = [];
+    $seen = [];
+    foreach ($monthsToTry as $m) {
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_MEJORANTE}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_MEJORANTE}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que envasado/máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin registros de preparación de mejorante para {$fecha} (Sede: {$sede}) en local ni en SharePoint."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Preparación de Mejorante por lote  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_mejorante_by_lote') {
+    $lote = strtoupper(trim($_GET['lote'] ?? ''));
+    if (empty($lote)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "lote" requerido.']);
+        exit;
+    }
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localMejoranteByLote($lote, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint (últimos 6 meses) ─────────────────
+    $spRegistros = [];
+    $seen = [];
+    for ($i = 0; $i < 6; $i++) {
+        $m = date('Y-m', strtotime("-{$i} months"));
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_MEJORANTE}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_MEJORANTE}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if (strtoupper(trim((($r['datos'] ?? $r)['lote'] ?? ''))) === $lote) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que envasado/máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Lote {$lote} no encontrado en preparación de mejorante (Sede: {$sede})."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'lote'       => $lote,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Proceso de Molienda V2 por fecha  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_proceso_molienda_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localProcesoMoliendaByFecha($fecha, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint ───────────────────────────────────
+    $monthsToTry = [$ym];
+    for ($i = 1; $i <= 3; $i++) {
+        $monthsToTry[] = date('Y-m', strtotime("{$ym}-01 -{$i} months"));
+    }
+    $monthsToTry[] = date('Y-m');
+    $monthsToTry   = array_unique($monthsToTry);
+
+    $spRegistros = [];
+    $seen = [];
+    foreach ($monthsToTry as $m) {
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_PROCESO_MOLIENDA}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_PROCESO_MOLIENDA}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que envasado/máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin registros de proceso de molienda para {$fecha} (Sede: {$sede}) en local ni en SharePoint."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Proceso de Molienda V2 por lote de harina  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_proceso_molienda_by_lote') {
+    $lote = strtoupper(trim($_GET['lote'] ?? ''));
+    if (empty($lote)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "lote" requerido.']);
+        exit;
+    }
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localProcesoMoliendaByLote($lote, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint (últimos 6 meses) ─────────────────
+    $spRegistros = [];
+    $seen = [];
+    for ($i = 0; $i < 6; $i++) {
+        $m = date('Y-m', strtotime("-{$i} months"));
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_PROCESO_MOLIENDA}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_PROCESO_MOLIENDA}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if (strtoupper(trim((($r['datos'] ?? $r)['lote_harina'] ?? ''))) === $lote) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que envasado/máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Lote {$lote} no encontrado en proceso de molienda (Sede: {$sede})."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'lote'       => $lote,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Orden de Mantenimiento por fecha  (Local + SP) — solo por fecha,
+//  sin lote (no hay lote de producto: lo más parecido, el código de equipo,
+//  se muestra en la tarjeta pero no se usa aún como criterio de búsqueda).
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_orden_mantenimiento_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localOrdenMantenimientoByFecha($fecha, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint ───────────────────────────────────
+    // A diferencia de los demás módulos, aquí SharePoint guarda un archivo
+    // atómico POR ORDEN (no el mensual completo), así que cada archivo del
+    // listado ya es un solo registro, no un array.
+    $monthsToTry = [$ym];
+    for ($i = 1; $i <= 3; $i++) {
+        $monthsToTry[] = date('Y-m', strtotime("{$ym}-01 -{$i} months"));
+    }
+    $monthsToTry[] = date('Y-m');
+    $monthsToTry   = array_unique($monthsToTry);
+
+    $spRegistros = [];
+    $seen = [];
+    foreach ($monthsToTry as $m) {
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_ORDEN_MANTENIMIENTO}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_ORDEN_MANTENIMIENTO}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) && !isset($fr['data']['datos']) ? $fr['data'] : [$fr['data']] as $r) {
+                if ((($r['datos'] ?? [])['fecha_solicitud'] ?? '') === $fecha) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro si existe, si no por hash del registro) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin órdenes de mantenimiento para {$fecha} (Sede: {$sede}) en local ni en SharePoint."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Tara Seca por fecha  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_tara_seca_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local (una sola carpeta, sin sede) ────────────
+    $localRegistros = localTaraSecaByFecha($fecha, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint — cada archivo listado ya es un solo
+    //      registro (igual que local), no un array ni un mensual.
+    $monthsToTry = [$ym];
+    for ($i = 1; $i <= 3; $i++) {
+        $monthsToTry[] = date('Y-m', strtotime("{$ym}-01 -{$i} months"));
+    }
+    $monthsToTry[] = date('Y-m');
+    $monthsToTry   = array_unique($monthsToTry);
+
+    $spRegistros = [];
+    $seen = [];
+    foreach ($monthsToTry as $m) {
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_TARA_SECA}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_TARA_SECA}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data']) || !is_array($fr['data'])) continue;
+            if (($fr['data']['fecha'] ?? '') === $fecha) {
+                $r = $fr['data'];
+                $r['id_registro'] = $fi['name'];
+                $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por nombre de archivo, ver localTaraSecaByFecha) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin registros de tara seca para {$fecha}."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Tara Seca por lote  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_tara_seca_by_lote') {
+    $lote = strtoupper(trim($_GET['lote'] ?? ''));
+    if (empty($lote)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "lote" requerido.']);
+        exit;
+    }
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localTaraSecaByLote($lote, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint (últimos 6 meses) ─────────────────
+    $spRegistros = [];
+    $seen = [];
+    for ($i = 0; $i < 6; $i++) {
+        $m = date('Y-m', strtotime("-{$i} months"));
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_TARA_SECA}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_TARA_SECA}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data']) || !is_array($fr['data'])) continue;
+            if (strtoupper(trim($fr['data']['lote'] ?? '')) === $lote) {
+                $r = $fr['data'];
+                $r['id_registro'] = $fi['name'];
+                $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar ─────────────────────────────────────────────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Lote {$lote} no encontrado en tara seca."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'lote'       => $lote,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Premezclas por fecha  (Local + SP) — solo por fecha, sin lote
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_premezclas_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegistros = localPremezclasByFecha($fecha, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint ───────────────────────────────────
+    $monthsToTry = [$ym];
+    for ($i = 1; $i <= 3; $i++) {
+        $monthsToTry[] = date('Y-m', strtotime("{$ym}-01 -{$i} months"));
+    }
+    $monthsToTry[] = date('Y-m');
+    $monthsToTry   = array_unique($monthsToTry);
+
+    $spRegistros = [];
+    $seen = [];
+    foreach ($monthsToTry as $m) {
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_PREMEZCLAS}/{$sede}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_PREMEZCLAS}/{$sede}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            foreach (is_array($fr['data']) ? $fr['data'] : [$fr['data']] as $r) {
+                if ((($r['datos'] ?? $r)['fecha'] ?? '') === $fecha) $spRegistros[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro, igual que máquinas V2) ─────
+    $merged = mergeMaquinaRegistros($localRegistros, $spRegistros);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin registros de premezclas para {$fecha} (Sede: {$sede}) en local ni en SharePoint."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
 //  ACCIÓN: Cantidad en Bulto por fecha  (Local + SP)
 // ═══════════════════════════════════════════════════════════════════
 if ($action === 'search_bulto_by_fecha') {
@@ -893,6 +1641,115 @@ if ($action === 'search_bodegas_by_bodega') {
         'sede'    => $sede,
         'meses'   => $merged,
         'total'   => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Reprocesos por fecha de envío  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_reprocesos_by_fecha') {
+    if (empty($fecha) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "fecha" requerido (YYYY-MM-DD).']);
+        exit;
+    }
+
+    $ym = substr($fecha, 0, 7);
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegs = localReprocesosByFecha($fecha, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint — la carpeta de Reprocesos V2 es PLANA
+    //      (sin subcarpeta por sede, porque el atómico local tampoco la
+    //      tiene), así que la sede se verifica leyendo 'sede_sys' del
+    //      contenido en vez de filtrar por ruta. El nombre embebe la
+    //      fecha (Reproceso_{LOTE}_{FECHA}.json), así que el mes ya es
+    //      exacto: no hace falta probar varios meses.
+    $spRegs = [];
+    $lr = runSpReader('list', "{$SP_BASE}/{$ym}/{$SP_FOLDER_REPROCESOS}");
+    if ($lr['success'] ?? false) {
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (!str_contains($fi['name'], $fecha)) continue;
+            $fr = runSpReader('read', "{$SP_BASE}/{$ym}/{$SP_FOLDER_REPROCESOS}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            $r = $fr['data'];
+            if (($r['sede_sys'] ?? '') === $sede) $spRegs[] = $r;
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro) ─────────────────────────────
+    $merged = mergeMaquinaRegistros($localRegs, $spRegs);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Sin reprocesos enviados el {$fecha} (Sede: {$sede}) en local ni en SharePoint."]);
+        exit;
+    }
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'fecha'      => $fecha,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
+    ]);
+    exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ACCIÓN: Reprocesos por lote de la harina  (Local + SP)
+// ═══════════════════════════════════════════════════════════════════
+if ($action === 'search_reprocesos_by_lote') {
+    $lote = strtoupper(trim($_GET['lote'] ?? ''));
+    if (empty($lote)) {
+        echo json_encode(['success' => false, 'error' => 'Parámetro "lote" requerido.']);
+        exit;
+    }
+
+    // ── 1. Búsqueda local ────────────────────────────────────────
+    $localRegs = localReprocesosByLote($lote, $sede, $LOCAL_BASE);
+
+    // ── 2. Búsqueda SharePoint (últimos 6 meses; carpeta plana, sin
+    //      sede en la ruta) — se filtra primero por nombre (el lote
+    //      saneado va en el nombre del atómico) antes de leer, y la
+    //      sede se confirma con 'sede_sys' ya leído.
+    $spRegs = [];
+    $seen   = [];
+    for ($i = 0; $i < 6; $i++) {
+        $m = date('Y-m', strtotime("-{$i} months"));
+        $lr = runSpReader('list', "{$SP_BASE}/{$m}/{$SP_FOLDER_REPROCESOS}");
+        if (!($lr['success'] ?? false)) continue;
+        foreach (array_filter($lr['items'] ?? [], fn($f) => !($f['isFolder'] ?? false) && str_ends_with($f['name'], '.json')) as $fi) {
+            if (isset($seen[$fi['name']])) continue;
+            $seen[$fi['name']] = true;
+            if (!str_contains(strtoupper($fi['name']), $lote)) continue;
+            $fr = runSpReader('read', "{$SP_BASE}/{$m}/{$SP_FOLDER_REPROCESOS}/{$fi['name']}");
+            if (!($fr['success'] ?? false) || empty($fr['data'])) continue;
+            $r = $fr['data'];
+            if (($r['sede_sys'] ?? '') === $sede && strtoupper(trim(($r['datos']['lote'] ?? ''))) === $lote) {
+                $spRegs[] = $r;
+            }
+        }
+    }
+
+    // ── 3. Fusionar (por id_registro) ─────────────────────────────
+    $merged = mergeMaquinaRegistros($localRegs, $spRegs);
+    if (empty($merged)) {
+        echo json_encode(['success' => false, 'error' => "Lote {$lote} no encontrado en reprocesos (Sede: {$sede})."]);
+        exit;
+    }
+    usort($merged, fn($a, $b) => strcmp($b['datos']['fecha_alistamiento'] ?? '', $a['datos']['fecha_alistamiento'] ?? ''));
+
+    $srcCounts = array_count_values(array_column($merged, 'source'));
+    echo json_encode([
+        'success'    => true,
+        'source'     => 'merged',
+        'src_counts' => $srcCounts,
+        'lote'       => $lote,
+        'sede'       => $sede,
+        'registros'  => $merged,
+        'total'      => count($merged),
     ]);
     exit;
 }

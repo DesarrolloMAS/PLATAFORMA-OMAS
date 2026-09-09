@@ -19,32 +19,25 @@ $archivos = [];
 if (file_exists($target_dir)) {
     $files = scandir($target_dir);
     foreach ($files as $file) {
-        if ($file === '.' || $file === '..') continue;
-        if (strtolower(pathinfo($file, PATHINFO_EXTENSION)) !== 'json') continue;
+        // Cada inspección vive en su propio archivo "INSPECCION_...json" —
+        // se excluye explícitamente el catálogo de dosificadores y cualquier
+        // otro json que no sea una inspección individual.
+        if (!preg_match('/^INSPECCION_.*\.json$/i', $file)) continue;
 
         $filepath = $target_dir . $file;
-        $content  = json_decode(file_get_contents($filepath), true) ?: [];
+        $reg = json_decode(file_get_contents($filepath), true);
+        if (!is_array($reg) || empty($reg['datos'])) continue;
 
-        $total_registros = count($content);
-        $ultimo          = !empty($content) ? end($content) : null;
-
-        $last_fecha       = $ultimo['datos']['fecha']            ?? '—';
-        $last_dosificador = $ultimo['datos']['dosificador']       ?? 'Sin dosificador';
-        $last_micro       = $ultimo['datos']['microingrediente'] ?? '—';
-        $last_cumple      = $ultimo['datos']['cumple']            ?? null;
-        $last_usuario     = $ultimo['usuario_sys']                ?? '—';
-
-        $periodo = str_replace(['DOSIFICADORES_', '.json'], '', $file);
+        $d = $reg['datos'];
 
         $archivos[] = [
             'filename'       => $file,
-            'periodo'        => $periodo,
-            'registros'      => $total_registros,
-            'ultima_fecha'   => $last_fecha,
-            'dosificador'    => $last_dosificador,
-            'microingrediente' => $last_micro,
-            'cumple'         => $last_cumple,
-            'ultimo_usuario' => $last_usuario,
+            'id_registro'    => $reg['id_registro'] ?? '',
+            'ultima_fecha'   => $d['fecha']            ?? '—',
+            'dosificador'    => $d['dosificador']       ?? 'Sin dosificador',
+            'microingrediente' => $d['microingrediente'] ?? '—',
+            'cumple'         => $d['cumple']            ?? null,
+            'ultimo_usuario' => $reg['usuario_sys']     ?? '—',
             'mod_time'       => filemtime($filepath),
             'fecha_mod'      => date('d M Y - H:i', filemtime($filepath)),
         ];
@@ -53,8 +46,7 @@ if (file_exists($target_dir)) {
     usort($archivos, fn($a, $b) => $b['mod_time'] <=> $a['mod_time']);
 }
 
-$total_registros_global = array_sum(array_column($archivos, 'registros'));
-$total_archivos         = count($archivos);
+$total_archivos = count($archivos);
 
 // Conteo de cumplimiento del último registro de cada archivo
 $cumples = array_column($archivos, 'cumple');
@@ -68,6 +60,7 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revisiones - Inspección de Dosificadores</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --bg-color: #0B0E14;
@@ -270,6 +263,19 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
         }
 
         .file-card.hidden-by-search { display: none; }
+
+        .card-wrap { position: relative; }
+        .card-wrap.hidden-by-search { display: none; }
+
+        .btn-delete-card {
+            position: absolute; top: -10px; right: -10px; z-index: 5;
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--panel-bg); border: 1px solid var(--danger);
+            color: var(--danger); font-size: 13px; font-weight: 700;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; line-height: 1;
+        }
+        .btn-delete-card:hover { background: var(--danger); color: #fff; box-shadow: 0 0 12px var(--danger-glow); }
     </style>
 </head>
 <body>
@@ -279,7 +285,7 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
     <div class="header-box">
         <div>
             <h1 class="main-title">Inspecciones de Dosificadores</h1>
-            <div class="sub-title">Sede Operativa: [ <?= htmlspecialchars($sede) ?> ] &nbsp;|&nbsp; Registros por mes</div>
+            <div class="sub-title">Sede Operativa: [ <?= htmlspecialchars($sede) ?> ] &nbsp;|&nbsp; Un archivo por inspección</div>
         </div>
         <a href="<?= htmlspecialchars($backUrl) ?>" class="btn-back"><?= htmlspecialchars($backLabel) ?></a>
     </div>
@@ -287,25 +293,21 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
     <div class="stats-banner">
         <div class="stat-card">
             <div class="stat-val"><?= $total_archivos ?></div>
-            <div class="stat-label">Archivos Mensuales</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-val"><?= $total_registros_global ?></div>
             <div class="stat-label">Inspecciones Totales</div>
         </div>
         <div class="stat-card">
             <div class="stat-val good"><?= $total_cumple ?></div>
-            <div class="stat-label">Cumplen (último registro)</div>
+            <div class="stat-label">Cumplen</div>
         </div>
         <div class="stat-card">
             <div class="stat-val danger"><?= $total_no_cumple ?></div>
-            <div class="stat-label">No Cumplen (último registro)</div>
+            <div class="stat-label">No Cumplen</div>
         </div>
     </div>
 
     <div class="search-bar">
         <input type="text" class="search-input" id="searchInput"
-               placeholder="Buscar por período, dosificador o microingrediente..."
+               placeholder="Buscar por dosificador, microingrediente o fecha..."
                oninput="filtrarTarjetas(this.value)">
         <a href="menu_dosificadores.php?from=<?= urlencode($from) ?>" class="btn-new">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -328,12 +330,17 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
                 elseif ($c === 'NO CUMPLE') $badge_cls = 'danger';
                 $badge_text = $c ?: 'N/D';
             ?>
-                <a href="visor_inspeccion_dosificadores.php?file=<?= urlencode($doc['filename']) ?>"
-                   class="file-card"
-                   data-search="<?= htmlspecialchars(strtolower($doc['periodo'] . ' ' . $doc['dosificador'] . ' ' . $doc['microingrediente'])) ?>">
+                <div class="card-wrap"
+                     data-search="<?= htmlspecialchars(strtolower($doc['ultima_fecha'] . ' ' . $doc['dosificador'] . ' ' . $doc['microingrediente'])) ?>">
+                <button type="button" class="btn-delete-card" title="Eliminar registro"
+                        data-filename="<?= htmlspecialchars($doc['filename']) ?>"
+                        data-label="<?= htmlspecialchars($doc['dosificador'] . ' — ' . $doc['ultima_fecha']) ?>"
+                        onclick="eliminarInspeccion(this)">✕</button>
+                <a href="visor_inspeccion_dosificadores.php?file=<?= urlencode($doc['filename']) ?>&from=<?= urlencode($from) ?>"
+                   class="file-card">
 
                     <div class="card-header">
-                        <span class="periodo-badge">📅 <?= htmlspecialchars($doc['periodo']) ?></span>
+                        <span class="periodo-badge">📅 <?= htmlspecialchars($doc['ultima_fecha']) ?></span>
                         <span class="cumple-badge <?= $badge_cls ?>"><?= htmlspecialchars($badge_text) ?></span>
                     </div>
 
@@ -344,25 +351,18 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
 
                     <div class="file-meta">
                         <div class="meta-line">
-                            <span>Inspecciones guardadas</span>
-                            <span class="meta-val"><?= $doc['registros'] ?> registro(s)</span>
-                        </div>
-                        <div class="meta-line">
-                            <span>Última inspección</span>
-                            <span class="meta-val"><?= htmlspecialchars($doc['ultima_fecha']) ?></span>
-                        </div>
-                        <div class="meta-line">
                             <span>Registrado por</span>
                             <span class="meta-val"><?= htmlspecialchars($doc['ultimo_usuario']) ?></span>
                         </div>
                         <div class="meta-line">
-                            <span>Modificado</span>
+                            <span>Guardado</span>
                             <span class="meta-val"><?= $doc['fecha_mod'] ?></span>
                         </div>
                     </div>
 
-                    <div class="btn-view">VER INSPECCIONES →</div>
+                    <div class="btn-view">VER INSPECCIÓN →</div>
                 </a>
+                </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
@@ -372,10 +372,47 @@ $total_no_cumple = count(array_filter($cumples, fn($c) => $c === 'NO CUMPLE'));
 <script>
     function filtrarTarjetas(query) {
         const q = query.toLowerCase().trim();
-        document.querySelectorAll('.file-card').forEach(card => {
+        document.querySelectorAll('.card-wrap').forEach(card => {
             const searchData = card.dataset.search || '';
             card.classList.toggle('hidden-by-search', q !== '' && !searchData.includes(q));
         });
+    }
+
+    async function eliminarInspeccion(btn) {
+        const filename = btn.dataset.filename;
+        const label = btn.dataset.label;
+
+        const confirmacion = await Swal.fire({
+            title: '¿Eliminar registro?',
+            text: `Se eliminará permanentemente la inspección "${label}". Esta acción no se puede deshacer.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366', cancelButtonColor: '#3a3f4b'
+        });
+
+        if (!confirmacion.isConfirmed) return;
+
+        try {
+            const resp = await fetch('eliminar_inspeccion.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file: filename })
+            });
+            const data = await resp.json();
+
+            if (data.status === 'success') {
+                Swal.fire({
+                    title: 'Eliminado', icon: 'success', timer: 1200, showConfirmButton: false,
+                    background: '#151A22', color: '#fff'
+                }).then(() => location.reload());
+            } else {
+                Swal.fire({ title: 'Error', text: data.message || 'No se pudo eliminar.', icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+            }
+        } catch (e) {
+            Swal.fire({ title: 'Error de conexión', icon: 'error', background: '#151A22', color: '#fff', confirmButtonColor: '#FF3366' });
+        }
     }
 </script>
 

@@ -33,7 +33,12 @@ usort($registros, function($a, $b) {
     return strcmp($fA, $fB);
 });
 
-$periodo = str_replace(['ENV_', '.json'], '', basename($target_file));
+$harina_file = '';
+$periodo     = str_replace(['ENV_', '.json'], '', basename($target_file));
+if (preg_match('/^ENV_(.+)_(\d{4}-\d{2})\.json$/i', basename($target_file), $m)) {
+    $harina_file = str_replace('_', ' ', $m[1]);
+    $periodo     = $m[2];
+}
 
 function badge($val) {
     if ($val === 'SI')  return '<span style="color:#10B981;font-weight:700;">SI</span>';
@@ -47,7 +52,7 @@ function badge($val) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Envasado V2 — <?= htmlspecialchars($periodo) ?></title>
+    <title>Envasado V2 — <?= htmlspecialchars($harina_file ?: $periodo) ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -182,7 +187,7 @@ function badge($val) {
 <div class="action-bar">
     <div class="left">
         <a href="rev_envasado_v2.php" class="btn-back">← Volver al Listado</a>
-        <span class="periodo-label">Período: <?= htmlspecialchars($periodo) ?> | <?= count($registros) ?> registro<?= count($registros) !== 1 ? 's' : '' ?></span>
+        <span class="periodo-label"><?= $harina_file ? htmlspecialchars($harina_file) . ' | ' : '' ?>Período: <?= htmlspecialchars($periodo) ?> | <?= count($registros) ?> registro<?= count($registros) !== 1 ? 's' : '' ?></span>
     </div>
     <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / PDF</button>
 </div>
@@ -197,7 +202,7 @@ function badge($val) {
             </td>
             <td style="width:60%; text-align:center; padding:10px;">
                 <div class="header-title-main">PPR Gestión de la Producción</div>
-                <div class="header-title-main" style="margin-bottom:4px;">Comprobaciones en Línea de Envasado</div>
+                <div class="header-title-main" style="margin-bottom:4px;">Comprobaciones en Línea de Envasado<?= $harina_file ? ' — ' . htmlspecialchars($harina_file) : '' ?></div>
                 <div class="header-title-doc">Período: <?= htmlspecialchars($periodo) ?> &nbsp;|&nbsp; Sede: <?= htmlspecialchars($sede) ?></div>
             </td>
             <td style="width:22%; padding:0; vertical-align:top;">

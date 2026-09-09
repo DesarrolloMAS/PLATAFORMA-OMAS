@@ -150,7 +150,7 @@ h1 span{color:var(--mint);}
 </head>
 <body>
 
-<a href="../revisiones_almacen.html" class="btn-volver">VOLVER</a>
+<a href="../menu_revisiones_almacen.html" class="btn-volver">VOLVER</a>
 
 <header>
   <h1>VISOR DE <span>TERMOHIGRÓMETROS</span></h1>

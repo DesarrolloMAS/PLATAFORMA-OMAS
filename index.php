@@ -2,6 +2,33 @@
 session_start(); // Iniciar sesión
 require './template/conection.php'; // Conexión a la base de datos
 
+// El login se envía vía fetch() (ver dist/app.js) para poder reproducir una
+// animación de salida antes de navegar al menú; se detecta por este header
+// para responder JSON en vez de con un header('Location: ...') clásico.
+function esPeticionFetch(): bool {
+    return ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'fetch';
+}
+
+function responderRedireccion(string $url): void {
+    if (esPeticionFetch()) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['status' => 'success', 'redirect' => $url]);
+    } else {
+        header('Location: ' . $url);
+    }
+    exit();
+}
+
+function responderErrorLogin(string $mensaje): void {
+    if (esPeticionFetch()) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['status' => 'error', 'message' => $mensaje]);
+        exit();
+    }
+    header('Location: index.php?error=1');
+    exit();
+}
+
 // Función para validar usuario
 function validarUsuario($pdoUsuarios, $nombre, $cedula, $cargo, $sede) {
     try {
@@ -29,106 +56,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cargo = htmlspecialchars(trim($_POST['cargo']));
     $sede = htmlspecialchars(trim($_POST['sede1']));
 
-    // Validar el usuario
     $usuario = validarUsuario($pdoUsuarios, $nombre, $cedula, $cargo, $sede);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nombre = htmlspecialchars(trim($_POST['nombre']));
-        $cedula = htmlspecialchars(trim($_POST['cedula']));
-        $cargo = htmlspecialchars(trim($_POST['cargo']));
-        $sede = htmlspecialchars(trim($_POST['sede1']));
-    
-        // Validar el usuario
-        $usuario = validarUsuario($pdoUsuarios, $nombre, $cedula, $cargo, $sede);
-    
-        if ($usuario) {
-            // Guardar datos en la sesión
-            $_SESSION['id_usuario'] = $usuario['id_usuario'];
-            $_SESSION['nombre'] = $usuario['nombre_u'];
-            $_SESSION['area'] = $usuario['Area'];
-            $_SESSION['rol'] = $usuario['rol'];
-            $_SESSION['cargo'] = $usuario['Cargo'];
-            $_SESSION['sede'] = $usuario['sede'];
-            $_SESSION['cedula'] = $usuario['cedula'];
-    
-            // Lógica preferencial para la cédula específica
-            if ($cedula === '1085253029') {
-                switch ($usuario['rol']) {
-                    case '1': // Rol alto
-                        header('Location: ./template/menu_ino_calidad.html');
-                        exit();
-                    default:
-                        header('Location: ./template/problemas.html');
-                        exit();
-                }
-            }
-    
-            // Lógica general para otros usuarios
-            switch ($usuario['Area']) {
-                case 'Operaciones':
-                    switch ($usuario['rol']) {
-                        case 'adm':
-                        case '1': // Rol alto
-                            header('Location: ./template/menu_adm.html');
-                            exit();
-                        case '2': // Rol Intermedio
-                            header('Location: ./template/menu_adm.html');
-                            exit();
-                        case '3': // Rol bajo
-                            header('Location: ./template/menu.html');
-                            exit();
-                        default:
-                            header('Location: ./template/problemas.html');
-                            exit();
-                    }
-                    break;
-    
-                case 'Calidad':
-                    switch ($usuario['rol']) {
-                        case 'adm':
-                        case '1': // Rol alto
-                            header('Location: ./template/menu_adm_calidad.html');
-                            exit();
-                        case '3': // Rol bajo
-                            header('Location: ./template/menu_calidad.html');
-                            exit();
-                        default:
-                            header('Location: ./template/problemas.html');
-                            exit();
-                    }
-                    break;
-                case 'HSEQ':
-                    switch ($usuario['rol']) {
-                        case 'adm':
-                        case '1': // Rol alto
-                            header('Location: ./template/menu_hseq_adm.html');
-                            exit();
-                        case '3': // Rol bajo
-                            header('Location: ./template/menu_hseq_adm.html');
-                            exit();
-                        default:
-                            header('Location: ./template/problemas.html');
-                            exit();
-                    }
-                    break;
-    
+    if ($usuario) {
+        // Guardar datos en la sesión
+        $_SESSION['id_usuario'] = $usuario['id_usuario'];
+        $_SESSION['nombre'] = $usuario['nombre_u'];
+        $_SESSION['area'] = $usuario['Area'];
+        $_SESSION['rol'] = $usuario['rol'];
+        $_SESSION['cargo'] = $usuario['Cargo'];
+        $_SESSION['sede'] = $usuario['sede'];
+        $_SESSION['cedula'] = $usuario['cedula'];
+
+        // Lógica preferencial para la cédula específica
+        if ($cedula === '1085253029') {
+            switch ($usuario['rol']) {
+                case '1': // Rol alto
+                    responderRedireccion('./template/menu_ino_calidad.html');
                 default:
-                    // Área no reconocida
-                    header('Location: ./template/default_dashboard.php');
-                    exit();
+                    responderRedireccion('./template/problemas.html');
             }
-        } else {
-            // Usuario no válido
-            echo "<script>
-                alert('Credenciales incorrectas. Por favor, verifica los datos.');
-                window.location.href = 'index.php';
-            </script>";
-            exit();
         }
+
+        // Lógica general para otros usuarios
+        switch ($usuario['Area']) {
+            case 'Operaciones':
+                switch ($usuario['rol']) {
+                    case 'adm':
+                    case '1': // Rol alto
+                        responderRedireccion('./template/menu_adm.html');
+                    case '2': // Rol Intermedio
+                        responderRedireccion('./template/menu_adm.html');
+                    default:
+                        responderRedireccion('./template/problemas.html');
+                }
+                break;
+
+            case 'Calidad':
+                switch ($usuario['rol']) {
+                    case 'adm': // Único rol admin en Calidad (ver redireccion.php)
+                        responderRedireccion('./template/menu_administracion_calidad.html');
+                    case '1': // Rol operativo normal en Calidad, no admin
+                        responderRedireccion('./template/menu_adm_calidad.html');
+                    default:
+                        responderRedireccion('./template/problemas.html');
+                }
+                break;
+
+            case 'HSEQ':
+                switch ($usuario['rol']) {
+                    case 'adm': // Único rol admin en HSEQ (ver redireccion.php)
+                        responderRedireccion('./template/menu_administracion_hseq.html');
+                    case '1': // Rol bajo
+                        responderRedireccion('./template/menu_hseq_adm.html');
+                    case '3': // Rol bajo
+                        responderRedireccion('./template/menu_hseq_adm.html');
+                    default:
+                        responderRedireccion('./template/problemas.html');
+                }
+                break;
+
+            default:
+                // Área no reconocida
+                responderRedireccion('./template/default_dashboard.php');
+        }
+    } else {
+        // Usuario no válido
+        responderErrorLogin('Credenciales incorrectas. Por favor, verifica los datos.');
     }
 }
 
-// Obtener los cargos y usuarios antes de mostrar la página
+// Obtener los cargos desde SQL antes de mostrar la página
 function obtenerCargosDesdeSQL($pdoUsuarios) {
     try {
         $stmt = $pdoUsuarios->query("SELECT DISTINCT Cargo FROM usuarios");
@@ -141,150 +139,119 @@ function obtenerCargosDesdeSQL($pdoUsuarios) {
 
 $cargos = obtenerCargosDesdeSQL($pdoUsuarios);
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&family=Roboto:wght@100;300&display=swap"  rel="stylesheet">
-    <link rel="stylesheet" href="./css/index.css">
-    <title>Ingreso Organizacion MAS</title>
+    <link rel="stylesheet" href="./css/index.css?v=<?php echo filemtime(__DIR__ . '/css/index.css'); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Ingreso · Organización MAS</title>
 </head>
-<body class="body">
-    <!-- Barra superior -->
-    <div class="barra-superior"></div>
-    
-    <div class="encabezado">
-    
-    </div>
-    <div class="formularic">
-        <form class="formulario" method="post">
-             <div class="header-section">
-                <span class="icon" aria-hidden="true">
-                    <!-- Engranaje/producción SVG --><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                </span>
-                <div class="titulo">
-                    <h1>M</h1>  
-                    <h1>A</h1>  
-                    <h1>S</h1>               
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="bg-veil"></div>
+
+    <div class="page">
+        <div class="brand">
+            <span class="brand-logo-frame">
+                <img src="./img/logo_omas_azul.png" alt="Organización MAS" class="brand-logo">
+                <span class="brand-shine" aria-hidden="true"></span>
+            </span>
+        </div>
+
+        <div class="auth-card">
+            <div class="auth-head">
+                <h1 class="auth-title">Bienvenido de nuevo</h1>
+                <p class="auth-sub">Ingresa tus credenciales para continuar</p>
+            </div>
+
+            <form class="auth-form" method="post">
+                <div class="field">
+                    <label for="campo_nombre">Nombre</label>
+                    <input type="text" id="campo_nombre" name="nombre" placeholder="Ingresa tu nombre" required>
                 </div>
-             </div>
-        
-            <div class="formulariog">
-                <input type="text" id="campo_nombre" name="nombre" placeholder="Ingrese su nombre" required>
-            </div>
 
-            <div class="formulariog">
-                <select name="cargo" id="cargo" required>
-                    <option value="" disabled selected>cargo</option>
-                    <option value="">No hay cargos disponibles</option>   
-                       <?php if (!empty($cargos)): ?>
-                        <?php foreach ($cargos as $cargo): ?>
-                            <option value="<?php echo htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8'); ?>">
-                                <?php echo htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8'); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <option value="">No hay cargos disponibles</option>
-                    <?php endif; ?>                   
-                    <option value="NULL">Ninguno</option>
-                </select>
-            </div>
+                <div class="field">
+                    <label for="cargo">Cargo</label>
+                    <select name="cargo" id="cargo" required>
+                        <option value="" disabled selected>Selecciona tu cargo</option>
+                        <?php if (!empty($cargos)): ?>
+                            <?php foreach ($cargos as $cargo): ?>
+                                <option value="<?php echo htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($cargo, ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="">No hay cargos disponibles</option>
+                        <?php endif; ?>
+                        <option value="NULL">Ninguno</option>
+                    </select>
+                </div>
 
-            <div class="formulariog">
-                
-                <input type="text" id="campo_cedula" name="cedula" placeholder="Ingrese su cédula" required>
-            </div>
+                <div class="field">
+                    <label for="campo_cedula">Cédula</label>
+                    <input type="text" id="campo_cedula" name="cedula" placeholder="Ingresa tu cédula" required>
+                </div>
 
-            <div class="formulariog">        
-                <select id="campo_sede" name="sede1" required>
-                    <option value="" disabled selected>Seleccione su sede</option>
-                    <option value="ZS">Zona Sur</option>
-                    <option value="ZC">Zona Centro</option>
-                    <option value="ZB">Buga</option>
-                </select>
-            </div>
+                <div class="field">
+                    <label for="campo_sede">Sede</label>
+                    <select id="campo_sede" name="sede1" required>
+                        <option value="" disabled selected>Selecciona tu sede</option>
+                        <option value="ZS">Zona Sur</option>
+                        <option value="ZC">Zona Centro</option>
+                        <option value="ZB">Buga</option>
+                    </select>
+                </div>
 
-            <div class="formularioa">
-                <button type="submit" class="boton">Iniciar Sesion</button>
-            </div>
-            <br>
-            <a href="./template/registroUsuarios.php" class="botonprime">Registrarse</a>
-        </form>
-            </div>
-</div>
+                <div class="submit-row">
+                    <button type="submit" class="btn-primary">Iniciar sesión</button>
+                </div>
 
-    <!-- Barra inferior -->
-    <div class="barra-inferior"></div>
-    <div id="sesion-expirada-popup" class="popup-sesion" style="display:none;">
-    <div class="animacion-sesion">
-        <span class="loader"></span>
-        <p>Tu sesión ha expirado. Por favor, inicia sesión nuevamente.</p>
+                <div class="auth-foot">
+                    ¿No tienes cuenta? <a href="./registro.php">Regístrate</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="status-line">
+            <span class="status-dot" aria-hidden="true"></span>
+            SISTEMA JSON INTERCONECTADO
+        </div>
     </div>
-</div>
-</body>
-<!-- FUNCION SESION FINALIZADA -->
-<script>
-window.addEventListener('DOMContentLoaded', function() {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('motivo') === 'sesion') {
-    const popup = document.getElementById('sesion-expirada-popup');
-    popup.style.display = 'flex';
-    setTimeout(() => {
-      popup.classList.add('fadeout');
-    }, 500); // Muestra 2 segundos
-    setTimeout(() => {
-      popup.style.display = 'none';
-    }, 3000); // Desaparece después de 3 segundos
-  }
-});
-</script>
 
-<style>
-.popup-sesion {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  background: rgba(0,0,0,0.2);
-  transition: opacity 1s;
-  opacity: 1;
-}
-.popup-sesion.fadeout {
-  opacity: 0;
-  transition: opacity 1s;
-}
-.animacion-sesion {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  border-radius: 8px;
-  padding: 18px 28px;
-  font-size: 1.1em;
-  box-shadow: 0 4px 24px #0002;
-}
-.loader {
-  width: 28px;
-  height: 28px;
-  border: 4px solid #ffeeba;
-  border-top: 4px solid #ffc107;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-</style>
+    <script src="./dist/app.js?v=<?php echo filemtime(__DIR__ . '/dist/app.js'); ?>"></script>
+    <?php if (isset($_GET['error'])): ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            if (window.Swal) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Credenciales incorrectas',
+                    text: 'Por favor, verifica los datos.',
+                    background: '#ffffff',
+                    color: '#0b1b33',
+                    confirmButtonColor: '#2563eb'
+                });
+            }
+        });
+    </script>
+    <?php endif; ?>
+    <?php if (isset($_GET['registro']) && $_GET['registro'] === 'exito'): ?>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            if (window.Swal) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    text: 'Ya puedes iniciar sesión con tus datos.',
+                    background: '#ffffff',
+                    color: '#0b1b33',
+                    confirmButtonColor: '#2563eb'
+                });
+            }
+        });
+    </script>
+    <?php endif; ?>
+</body>
 </html>

@@ -1,0 +1,726 @@
+/* ==========================================================================
+   Menú Principal — Hub radial, Tema "Cyber Blue" (mismo sistema de
+   css/index.css: variables, canvas de fondo, tipografía Inter).
+   Plantilla inicial — layout e iconografía sujetos a ajuste.
+   ========================================================================== */
+
+.menu-exit {
+    position: fixed;
+    top: 22px;
+    right: 26px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.menu-exit:hover { color: var(--danger); border-color: var(--danger); }
+.menu-exit--back { left: 26px; right: auto; }
+/* display:flex de arriba empataría en especificidad con el [hidden] del
+   user-agent y ganaría por venir de la hoja del sitio — hace falta esta
+   regla explícita para que un menu-exit con el atributo "hidden" (ej. el
+   botón "Volver al menú" en menu_adm_calidad.html para cuentas no-admin de
+   Calidad) sí desaparezca. */
+.menu-exit[hidden] { display: none; }
+
+/* Giro de confirmación para el ícono de un hub-node cuya acción no navega
+   (ej. el botón "Sede Activa" de menu_administracion.html) — genérico,
+   cualquier hub-node puede pedirlo agregando/quitando esta clase en su
+   propio <svg> tras el clic. */
+@keyframes hubNodeIconSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.hub-node svg.is-spinning {
+    animation: hubNodeIconSpin 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Un hub-node que ejecuta una acción en la misma página (no navega) usa
+   <button> en vez de <a> — semánticamente correcto y accesible por
+   teclado. Normaliza los estilos nativos de botón que .hub-node no cubre
+   (fuente, cursor, foco) sin tocar nada de lo que ya define para el <a>. */
+button.hub-node {
+    font: inherit;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+button.hub-node:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Segundo botón de utilidad en el mismo lado que "Cerrar sesión" (ej.
+   acceso a Analítica en menu_adm.html) — se acomoda a la izquierda del
+   logout, no reemplaza su posición por defecto. */
+.menu-exit--secondary { right: 190px; }
+.menu-exit svg { width: 15px; height: 15px; }
+
+/* En fondo oscuro, "volver al menú" usa el acento de la página (naranja en
+   mantenimiento/revisiones, morado en producción, azul acerado en almacén,
+   azul por defecto en administración — vía var(--accent)/var(--border-hover),
+   ya temáticos por página) en vez del gris genérico, para que combine con
+   esa paleta y se lea con más contraste sobre el fondo casi negro. "Cerrar
+   sesión" queda como estaba (gris → rojo en hover): es una acción de
+   salida, no parte de la identidad visual del sub-hub. */
+body.theme-invert .menu-exit--back {
+    color: var(--accent);
+    border-color: var(--border-hover);
+}
+body.theme-invert .menu-exit--back:hover {
+    color: var(--accent-2);
+    border-color: var(--accent);
+}
+
+.menu-header {
+    text-align: center;
+    margin-bottom: clamp(28px, 5vw, 52px);
+}
+
+.menu-title {
+    font-size: clamp(22px, 3.2vw, 32px);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin: 0;
+    opacity: 0;
+    animation: menuFadeUp 0.6s var(--ease) forwards;
+}
+.menu-title strong { color: var(--accent); font-weight: 700; }
+
+.menu-title-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+    opacity: 0;
+    animation: menuFadeUp 0.6s var(--ease) forwards;
+    animation-delay: 0.08s;
+}
+.menu-title-rule::before,
+.menu-title-rule::after {
+    content: '';
+    width: 46px;
+    height: 1px;
+    background: var(--border-hover);
+}
+.menu-title-rule i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.hub {
+    position: relative;
+    width: min(680px, 92vw);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto clamp(30px, 5vw, 48px);
+}
+/* Hub "denso" — para 9-12 destinos (--dod-N): a esa cantidad de nodos, el
+   tamaño de tarjeta normal (hasta 132px) se encima entre sí incluso con el
+   radio del octógono, así que este modificador agranda el hub y encoge la
+   tarjeta/ícono/label para que los 12 respiren. Ver menu_almacen.html. */
+.hub--dense { width: min(820px, 94vw); }
+.hub--dense .hub-node { width: clamp(56px, 8vw, 92px); }
+.hub--dense .hub-node svg { width: clamp(16px, 2.4vw, 24px); height: clamp(16px, 2.4vw, 24px); }
+.hub--dense .hub-node .node-label { font-size: clamp(8px, 0.95vw, 10px); }
+
+.hub-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    opacity: 0;
+    animation: menuFadeIn 0.8s var(--ease) forwards;
+    animation-delay: 0.1s;
+}
+.hub-lines .ring {
+    fill: none;
+    stroke: var(--border-hover);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 8;
+}
+.hub-lines .spoke {
+    stroke: var(--border-hover);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 8;
+}
+.hub-lines .marker {
+    fill: var(--bg-0);
+    stroke: var(--accent);
+    stroke-width: 2.5;
+}
+
+.hub-center-anchor {
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.hub-center {
+    width: clamp(150px, 20vw, 230px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: #0B0E14;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow:
+        0 24px 55px rgba(11, 14, 20, 0.35),
+        0 0 30px rgba(56, 189, 248, 0.18),
+        0 0 0 1px rgba(56, 189, 248, 0.08) inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    animation: menuFadeUp 0.6s var(--ease) forwards;
+    animation-delay: 0.16s;
+}
+.hub-center-gear-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hub-center svg.gear-live {
+    width: 72%;
+    height: 72%;
+    overflow: visible;
+}
+.gear-rotator,
+.gear-dot-orbit,
+.gear-teeth {
+    /* 704,688 = centro real del recorte trazado, escalado 4x (ver comentario
+       en menu_adm.html), no 100,100: el transform que mapea al viewBox de
+       200x200 vive en el <g> padre, así que esto rota/escala en el
+       espacio de coordenadas original del trazado. gear-dot-orbit sigue
+       usando este mismo centro aunque ya no esté anidado en gear-rotator,
+       para que el nodo orbite alrededor del centro del engranaje en hover. */
+    transform-origin: 704px 688px;
+}
+#progress-node {
+    transform-origin: 1106.6px 684.9px;
+}
+.gear-chart-hill {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+.gear-chart-bar {
+    transform-box: fill-box;
+    transform-origin: bottom;
+}
+.gear-ring {
+    transition: filter 0.4s ease;
+    animation: gearRingBreathe 4.5s ease-in-out infinite;
+}
+.gear-ring.is-hovering {
+    filter: brightness(1.4) saturate(1.15);
+}
+.gear-ring.is-pulsing {
+    animation: gearRingWave 0.9s ease-out;
+}
+@keyframes gearRingBreathe {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.08); }
+}
+@keyframes gearRingWave {
+    0% { filter: brightness(1) drop-shadow(0 0 0 rgba(13, 149, 254, 0)); }
+    40% { filter: brightness(1.9) drop-shadow(0 0 16px rgba(13, 149, 254, 0.9)); }
+    100% { filter: brightness(1) drop-shadow(0 0 0 rgba(13, 149, 254, 0)); }
+}
+
+.hub-node-anchor {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+/* Posiciones genéricas del hub — 6 cupos fijos, reutilizables por cualquier
+   menú hub (no atados al contenido de una página en particular):
+     --pos-1..5 → las 5 puntas del pentágono que decora .hub-lines (con
+                  spoke + marker propios, ver arriba).
+     --pos-6    → arriba-centro, sin spoke — cae justo en el punto superior
+                  del .ring, por eso no necesita una línea que lo señale.
+                  Es el cupo natural para el nodo "protagonista" cuando un
+                  hub tiene 6 destinos, o el único nodo de un hub-single. */
+.hub-node-anchor--pos-1 { top: 23.5%; left: 31.5%; }
+.hub-node-anchor--pos-2 { top: 23.5%; left: 68.5%; }
+.hub-node-anchor--pos-3 { top: 51%;   left: 18.3%; }
+.hub-node-anchor--pos-4 { top: 51%;   left: 81.7%; }
+.hub-node-anchor--pos-5 { top: 78.5%; left: 31.5%; }
+.hub-node-anchor--pos-6 { top: 23.5%; left: 50%; }
+
+/* Cuadrado simétrico en diagonal ("X") — para hubs con exactamente 4
+   destinos de igual peso (90° entre cada uno, en punta a las 1:30/4:30/
+   7:30/10:30 en vez de 12/3/6/9 — se ve mejor en diagonal que en cruz).
+   Radio mayor que --hex-N/--pos-N (mismo que las puntas diagonales de
+   --oct-N) para que, con solo 4 nodos, no queden pegados al engranaje
+   central. Ver menu_adm.html. */
+.hub-node-anchor--quad-1 { top: 29.1%; left: 71.9%; }  /*  1:30 */
+.hub-node-anchor--quad-2 { top: 72.9%; left: 71.9%; }  /*  4:30 */
+.hub-node-anchor--quad-3 { top: 72.9%; left: 28.1%; }  /*  7:30 */
+.hub-node-anchor--quad-4 { top: 29.1%; left: 28.1%; }  /* 10:30 */
+
+/* Hexágono simétrico — para hubs con exactamente 6 destinos de igual peso
+   (ningún "protagonista"), ej. menu_mantenimiento.html: 6 puntas a 60° una
+   de otra sobre el mismo radio (reusa el ángulo superior de --pos-6 e
+   inferior de --pos-5 como referencia, así que el hub se ve del mismo
+   tamaño que el de --pos-N). A diferencia de --pos-N, las 6 puntas llevan
+   spoke + marker propios en .hub-lines — no hay cupo "gratis" sin línea. */
+.hub-node-anchor--hex-1 { top: 23.5%; left: 50%;   }   /* 12 en punto */
+.hub-node-anchor--hex-2 { top: 37.3%; left: 73.8%; }   /*  2 en punto */
+.hub-node-anchor--hex-3 { top: 64.8%; left: 73.8%; }   /*  4 en punto */
+.hub-node-anchor--hex-4 { top: 78.5%; left: 50%;   }   /*  6 en punto */
+.hub-node-anchor--hex-5 { top: 64.8%; left: 26.2%; }   /*  8 en punto */
+.hub-node-anchor--hex-6 { top: 37.3%; left: 26.2%; }   /* 10 en punto */
+
+/* Octógono simétrico — para hubs con 7 u 8 destinos de igual peso (mismo
+   espíritu que --hex-N, pero a 45° en vez de 60°; radio un poco mayor para
+   que 8 nodos no queden pegados entre sí). Ver menu_produccion.html. */
+.hub-node-anchor--oct-1 { top: 20%;   left: 50%;   }   /* 12 en punto */
+.hub-node-anchor--oct-2 { top: 29.1%; left: 71.9%; }   /*  1:30 */
+.hub-node-anchor--oct-3 { top: 51%;   left: 81%;   }   /*  3 en punto */
+.hub-node-anchor--oct-4 { top: 72.9%; left: 71.9%; }   /*  4:30 */
+.hub-node-anchor--oct-5 { top: 82%;   left: 50%;   }   /*  6 en punto */
+.hub-node-anchor--oct-6 { top: 72.9%; left: 28.1%; }   /*  7:30 */
+.hub-node-anchor--oct-7 { top: 51%;   left: 19%;   }   /*  9 en punto */
+.hub-node-anchor--oct-8 { top: 29.1%; left: 28.1%; }   /* 10:30 */
+
+/* Heptágono simétrico — para hubs con EXACTAMENTE 7 destinos de igual peso
+   donde la simetría real importa más que reutilizar --oct-N con un cupo
+   vacío (360°/7 ≈ 51.43° entre cada uno, mismo radio que --oct-N). Si el
+   conteo puede volver a 8 en el futuro, prefiere --oct-N con un cupo sin
+   usar en su lugar — este esquema es para cuando 7 es el conteo definitivo.
+   Ver menu_produccion.html. */
+.hub-node-anchor--hept-1 { top: 20%;    left: 50%;   }  /* 12 en punto */
+.hub-node-anchor--hept-2 { top: 31.67%; left: 74.24%; }
+.hub-node-anchor--hept-3 { top: 57.9%;  left: 80.22%; }
+.hub-node-anchor--hept-4 { top: 78.93%; left: 63.45%; }
+.hub-node-anchor--hept-5 { top: 78.93%; left: 36.55%; }
+.hub-node-anchor--hept-6 { top: 57.9%;  left: 19.78%; }
+.hub-node-anchor--hept-7 { top: 31.67%; left: 25.76%; }
+
+/* Dodecágono simétrico — para hubs con 9 a 12 destinos de igual peso (30°
+   entre cada uno). Requiere el modificador .hub--dense en el contenedor
+   (tarjetas más chicas, ver arriba) — a este radio, 12 tarjetas de tamaño
+   normal se encimarían. Ver menu_almacen.html. */
+.hub-node-anchor--dod-1  { top: 19.8%; left: 50%;   }  /* 12 en punto */
+.hub-node-anchor--dod-2  { top: 23.9%; left: 65.6%; }  /*  1 en punto */
+.hub-node-anchor--dod-3  { top: 35.4%; left: 77.1%; }  /*  2 en punto */
+.hub-node-anchor--dod-4  { top: 51%;   left: 81.3%; }  /*  3 en punto */
+.hub-node-anchor--dod-5  { top: 66.6%; left: 77.1%; }  /*  4 en punto */
+.hub-node-anchor--dod-6  { top: 78.1%; left: 65.6%; }  /*  5 en punto */
+.hub-node-anchor--dod-7  { top: 82.3%; left: 50%;   }  /*  6 en punto */
+.hub-node-anchor--dod-8  { top: 78.1%; left: 34.4%; }  /*  7 en punto */
+.hub-node-anchor--dod-9  { top: 66.6%; left: 22.9%; }  /*  8 en punto */
+.hub-node-anchor--dod-10 { top: 51%;   left: 18.8%; }  /*  9 en punto */
+.hub-node-anchor--dod-11 { top: 35.4%; left: 22.9%; }  /* 10 en punto */
+.hub-node-anchor--dod-12 { top: 23.9%; left: 34.4%; }  /* 11 en punto */
+
+/* Hendecágono simétrico — para hubs con EXACTAMENTE 11 destinos de igual
+   peso donde la simetría real importa más que reutilizar --dod-N con un
+   cupo vacío (360°/11 ≈ 32.73° entre cada uno, mismo radio que --dod-N,
+   también requiere .hub--dense). Si el conteo puede volver a 12, prefiere
+   --dod-N con un cupo sin usar. Ver menu_almacen.html. */
+.hub-node-anchor--undec-1  { top: 19.8%;  left: 50%;   }  /* 12 en punto */
+.hub-node-anchor--undec-2  { top: 24.75%; left: 66.87%; }
+.hub-node-anchor--undec-3  { top: 38.04%; left: 78.37%; }
+.hub-node-anchor--undec-4  { top: 55.43%; left: 80.89%; }
+.hub-node-anchor--undec-5  { top: 71.41%; left: 73.58%; }
+.hub-node-anchor--undec-6  { top: 80.92%; left: 58.80%; }
+.hub-node-anchor--undec-7  { top: 80.92%; left: 41.20%; }
+.hub-node-anchor--undec-8  { top: 71.41%; left: 26.42%; }
+.hub-node-anchor--undec-9  { top: 55.43%; left: 19.11%; }
+.hub-node-anchor--undec-10 { top: 38.04%; left: 21.63%; }
+.hub-node-anchor--undec-11 { top: 24.75%; left: 33.13%; }
+
+.hub-node {
+    width: clamp(80px, 11.5vw, 132px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: var(--panel-solid);
+    border: 1px solid var(--border);
+    box-shadow: 0 14px 34px rgba(30, 64, 175, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(6px, 1vw, 10px);
+    text-decoration: none;
+    color: var(--text-main);
+    opacity: 0;
+    animation: menuFadeIn 0.55s var(--ease) forwards;
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.hub-node-anchor--pos-1 .hub-node { animation-delay: 0.24s; }
+.hub-node-anchor--pos-2 .hub-node { animation-delay: 0.32s; }
+.hub-node-anchor--pos-3 .hub-node { animation-delay: 0.40s; }
+.hub-node-anchor--pos-4 .hub-node { animation-delay: 0.48s; }
+.hub-node-anchor--pos-5 .hub-node { animation-delay: 0.56s; }
+.hub-node-anchor--pos-6 .hub-node { animation-delay: 0.24s; }
+.hub-node-anchor--quad-1 .hub-node { animation-delay: 0.24s; }
+.hub-node-anchor--quad-2 .hub-node { animation-delay: 0.32s; }
+.hub-node-anchor--quad-3 .hub-node { animation-delay: 0.40s; }
+.hub-node-anchor--quad-4 .hub-node { animation-delay: 0.48s; }
+.hub-node-anchor--hex-1 .hub-node { animation-delay: 0.24s; }
+.hub-node-anchor--hex-2 .hub-node { animation-delay: 0.32s; }
+.hub-node-anchor--hex-3 .hub-node { animation-delay: 0.40s; }
+.hub-node-anchor--hex-4 .hub-node { animation-delay: 0.48s; }
+.hub-node-anchor--hex-5 .hub-node { animation-delay: 0.56s; }
+.hub-node-anchor--hex-6 .hub-node { animation-delay: 0.64s; }
+.hub-node-anchor--oct-1 .hub-node { animation-delay: 0.24s; }
+.hub-node-anchor--oct-2 .hub-node { animation-delay: 0.30s; }
+.hub-node-anchor--oct-3 .hub-node { animation-delay: 0.36s; }
+.hub-node-anchor--oct-4 .hub-node { animation-delay: 0.42s; }
+.hub-node-anchor--oct-5 .hub-node { animation-delay: 0.48s; }
+.hub-node-anchor--oct-6 .hub-node { animation-delay: 0.54s; }
+.hub-node-anchor--oct-7 .hub-node { animation-delay: 0.60s; }
+.hub-node-anchor--oct-8 .hub-node { animation-delay: 0.66s; }
+.hub-node-anchor--hept-1 .hub-node { animation-delay: 0.24s; }
+.hub-node-anchor--hept-2 .hub-node { animation-delay: 0.30s; }
+.hub-node-anchor--hept-3 .hub-node { animation-delay: 0.36s; }
+.hub-node-anchor--hept-4 .hub-node { animation-delay: 0.42s; }
+.hub-node-anchor--hept-5 .hub-node { animation-delay: 0.48s; }
+.hub-node-anchor--hept-6 .hub-node { animation-delay: 0.54s; }
+.hub-node-anchor--hept-7 .hub-node { animation-delay: 0.60s; }
+.hub-node-anchor--dod-1  .hub-node { animation-delay: 0.20s; }
+.hub-node-anchor--dod-2  .hub-node { animation-delay: 0.25s; }
+.hub-node-anchor--dod-3  .hub-node { animation-delay: 0.30s; }
+.hub-node-anchor--dod-4  .hub-node { animation-delay: 0.35s; }
+.hub-node-anchor--dod-5  .hub-node { animation-delay: 0.40s; }
+.hub-node-anchor--dod-6  .hub-node { animation-delay: 0.45s; }
+.hub-node-anchor--dod-7  .hub-node { animation-delay: 0.50s; }
+.hub-node-anchor--dod-8  .hub-node { animation-delay: 0.55s; }
+.hub-node-anchor--dod-9  .hub-node { animation-delay: 0.60s; }
+.hub-node-anchor--dod-10 .hub-node { animation-delay: 0.65s; }
+.hub-node-anchor--dod-11 .hub-node { animation-delay: 0.70s; }
+.hub-node-anchor--dod-12 .hub-node { animation-delay: 0.75s; }
+.hub-node-anchor--undec-1  .hub-node { animation-delay: 0.20s; }
+.hub-node-anchor--undec-2  .hub-node { animation-delay: 0.25s; }
+.hub-node-anchor--undec-3  .hub-node { animation-delay: 0.30s; }
+.hub-node-anchor--undec-4  .hub-node { animation-delay: 0.35s; }
+.hub-node-anchor--undec-5  .hub-node { animation-delay: 0.40s; }
+.hub-node-anchor--undec-6  .hub-node { animation-delay: 0.45s; }
+.hub-node-anchor--undec-7  .hub-node { animation-delay: 0.50s; }
+.hub-node-anchor--undec-8  .hub-node { animation-delay: 0.55s; }
+.hub-node-anchor--undec-9  .hub-node { animation-delay: 0.60s; }
+.hub-node-anchor--undec-10 .hub-node { animation-delay: 0.65s; }
+.hub-node-anchor--undec-11 .hub-node { animation-delay: 0.70s; }
+
+.hub-node svg {
+    width: clamp(22px, 3.2vw, 32px);
+    height: clamp(22px, 3.2vw, 32px);
+    color: var(--accent);
+}
+.hub-node .node-label {
+    font-size: clamp(9.5px, 1.15vw, 12px);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.25;
+    padding: 0 10px;
+}
+.hub-node .node-dots {
+    display: flex;
+    gap: 4px;
+}
+.hub-node .node-dots span {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-faint);
+}
+
+.hub-node:hover,
+.hub-node:focus-visible {
+    /* El transform (x/y/scale) ya no vive aquí: lo controla el efecto
+       magnético de initHubGearAndMagnets() en src/app.ts, para que no
+       compita con el desplazamiento hacia el mouse. */
+    border-color: var(--border-hover);
+    box-shadow: 0 22px 44px rgba(37, 99, 235, 0.22);
+    outline: none;
+}
+
+.menu-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: menuFadeUp 0.6s var(--ease) forwards;
+    animation-delay: 0.85s;
+}
+.menu-footer img {
+    width: min(210px, 52vw);
+    height: auto;
+}
+.menu-footer .tagline {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.menu-footer .tagline .sep { color: var(--accent); }
+
+@keyframes menuFadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes menuFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+    .hub { width: min(420px, 94vw); margin-bottom: 30px; }
+    .menu-exit span.exit-label { display: none; }
+}
+
+/* Tema invertido — submenú de administración (menu_administracion.html):
+   el azul oscuro casi negro pasa a ser el blanco que hoy tiene el fondo de
+   pantalla, y los detalles claros (texto, engranaje) pasan a negro. El azul
+   de acento (#2563eb / #0D95FE) no se toca. */
+body.theme-invert {
+    --bg-0: #05070b;
+    --panel: rgba(18, 22, 31, 0.68);
+    --panel-solid: #12161f;
+    --text-main: #f4f8fd;
+    --text-muted: #aab8cc;
+    --text-faint: #5c6b82;
+    --border: rgba(244, 248, 253, 0.14);
+    --border-hover: rgba(96, 165, 250, 0.55);
+}
+body.theme-invert .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(37, 99, 235, 0.12), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert .hub-center {
+    background: #f4f8fd;
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(37, 99, 235, 0.18),
+        0 0 0 1px rgba(37, 99, 235, 0.10) inset;
+}
+body.theme-invert .gear-teeth,
+body.theme-invert .gear-chart-hill,
+body.theme-invert .gear-chart-bar {
+    fill: #000000 !important;
+}
+
+/* Tema industrial — variante de acento para sub-hubs de temática "mecánica"
+   (ej. mantenimiento, menu_mantenimiento.html). Normalmente se combina con
+   theme-invert (fondo oscuro), pero también puede usarse solo (ej.
+   menu_revisiones_mant.html: fondo claro del menú principal + acento
+   naranja) — por eso el bg-veil y el box-shadow oscuro de .hub-center, que
+   solo tienen sentido sobre fondo oscuro, están en un bloque
+   theme-invert.theme-industrial aparte en vez de ir sueltos en
+   .theme-industrial (el aro/progreso del engranaje en sí son fills inline
+   en el SVG de cada página — se cambian ahí, no aquí). */
+body.theme-industrial {
+    --accent: #f97316;
+    --accent-2: #fdba74;
+    --accent-glow: rgba(249, 115, 22, 0.30);
+    --border-hover: rgba(253, 186, 116, 0.55);
+}
+body.theme-invert.theme-industrial .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(249, 115, 22, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert.theme-industrial .hub-center {
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(249, 115, 22, 0.18),
+        0 0 0 1px rgba(249, 115, 22, 0.10) inset;
+}
+body.theme-industrial .hub-node:hover,
+body.theme-industrial .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(249, 115, 22, 0.22);
+}
+
+/* Tema producción — misma idea que theme-industrial (variante de acento
+   sobre theme-invert), pero morado: la identidad histórica del módulo de
+   producción ya usaba lavanda (#c682ff) en sus iconos legacy, reutilizado
+   aquí como --accent-2. Ver menu_produccion.html. */
+body.theme-production {
+    --accent: #8b5cf6;
+    --accent-2: #c682ff;
+    --accent-glow: rgba(139, 92, 246, 0.30);
+    --border-hover: rgba(198, 130, 255, 0.55);
+}
+body.theme-invert.theme-production .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(139, 92, 246, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert.theme-production .hub-center {
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(139, 92, 246, 0.18),
+        0 0 0 1px rgba(139, 92, 246, 0.10) inset;
+}
+body.theme-production .hub-node:hover,
+body.theme-production .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(139, 92, 246, 0.22);
+}
+
+/* Tema Sección Sur — misma idea que theme-industrial/theme-production, pero
+   rojo brillante: identidad propia para la zona (ZS), deliberadamente
+   distinta del morado de Producción (ZC) para diferenciar las sedes de un
+   vistazo. Ver menu_seccion_sur.html / menu_revisiones_seccion_sur.html. */
+body.theme-sur {
+    --accent: #ef4444;
+    --accent-2: #f87171;
+    --accent-glow: rgba(239, 68, 68, 0.30);
+    --border-hover: rgba(248, 113, 113, 0.55);
+}
+body.theme-invert.theme-sur .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(239, 68, 68, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert.theme-sur .hub-center {
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(239, 68, 68, 0.18),
+        0 0 0 1px rgba(239, 68, 68, 0.10) inset;
+}
+body.theme-sur .hub-node:hover,
+body.theme-sur .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(239, 68, 68, 0.22);
+}
+
+/* Tema almacén — misma idea que theme-industrial/theme-production, pero
+   azul oscuro "metálico" (más desaturado/acerado que el azul de acento
+   base #2563eb, a propósito: es lo que lo hace leer como metal y no como
+   el azul por defecto del resto del sitio). Ver menu_almacen.html. */
+body.theme-warehouse {
+    --accent: #4a6fa5;
+    --accent-2: #8fa8c9;
+    --accent-glow: rgba(74, 111, 165, 0.30);
+    --border-hover: rgba(143, 168, 201, 0.55);
+}
+body.theme-invert.theme-warehouse .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(74, 111, 165, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert.theme-warehouse .hub-center {
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(74, 111, 165, 0.18),
+        0 0 0 1px rgba(74, 111, 165, 0.10) inset;
+}
+body.theme-warehouse .hub-node:hover,
+body.theme-warehouse .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(74, 111, 165, 0.22);
+}
+
+/* Tema calidad — misma idea que theme-industrial/theme-production/theme-warehouse,
+   pero beige/café: identidad propia para el área de Calidad (menu_adm_calidad.html,
+   menu_revisiones_calidad.html), deliberadamente distinta del resto (naranja
+   mantenimiento, morado producción, rojo sección sur, azul acerado almacén) —
+   tono cálido/tierra, evoca el trigo/harina del producto antes que un color
+   "de sistema". */
+body.theme-quality {
+    --accent: #66404b;
+    --accent-2: #a38c93;
+    --accent-glow: rgba(102, 64, 75, 0.30);
+    --border-hover: rgba(163, 140, 147, 0.55);
+}
+body.theme-invert.theme-quality .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(102, 64, 75, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert.theme-quality .hub-center {
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(102, 64, 75, 0.18),
+        0 0 0 1px rgba(102, 64, 75, 0.10) inset;
+}
+body.theme-quality .hub-node:hover,
+body.theme-quality .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(102, 64, 75, 0.22);
+}
+
+/* Tema HSEQ — misma idea que las demás variantes de paleta, pero verde
+   bosque: identidad propia para el área de HSEQ (menu_hseq_adm.html,
+   menu_revisiones_hseq.html, menu_administracion_hseq.html). */
+body.theme-hseq {
+    --accent: #1c663a;
+    --accent-2: #77a389;
+    --accent-glow: rgba(28, 102, 58, 0.30);
+    --border-hover: rgba(119, 163, 137, 0.55);
+}
+body.theme-invert.theme-hseq .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(28, 102, 58, 0.14), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(5, 7, 11, 0.5), transparent 60%),
+        linear-gradient(180deg, rgba(5, 7, 11, 0.10) 0%, rgba(5, 7, 11, 0.55) 100%);
+}
+body.theme-invert.theme-hseq .hub-center {
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(28, 102, 58, 0.18),
+        0 0 0 1px rgba(28, 102, 58, 0.10) inset;
+}
+body.theme-hseq .hub-node:hover,
+body.theme-hseq .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(28, 102, 58, 0.22);
+}
+
+/* Onda del engranaje: disco que nace en el centro del hub y crece/se repliega
+   cubriendo la pantalla al navegar entre menu_adm.html y
+   menu_administracion.html (ver playGearWaveExit/initGearWaveEntrance en
+   app.ts, que controlan su clip-path directo por frame). El resplandor sigue
+   la silueta del disco mientras viaja hacia afuera. */
+.gear-wave {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    clip-path: circle(0px at 50% 50%);
+    filter: drop-shadow(0 0 34px rgba(13, 149, 254, 0.65));
+}
+
+/* Recogida/desenrollado del hub: para navegar entre dos hubs del mismo tono
+   (ver initHubUnrollEntrance/playHubRetractExit en app.ts) sin la onda de
+   color — los .hub-node viajan hacia/desde el centro del engranaje en vez
+   de solo desvanecerse en su lugar. [data-unroll-entrance] apaga la
+   animación de entrada normal (menuFadeIn) para que no compita con la que
+   controla el JS cuadro a cuadro, y arranca en opacity:0 para no mostrar
+   un flash en la posición final antes de que el JS los recoja al centro. */
+.hub[data-unroll-entrance] .hub-node {
+    animation: none;
+    opacity: 0;
+}

@@ -1,9 +1,9 @@
 <?php
-require '../sesion.php';
+require '../../sesion.php';
 require_once __DIR__ . '/../flujo_helpers.php';
 
 if (!isset($_SESSION['nombre']) || empty($_SESSION['sede'])) {
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
     exit;
 }
 
@@ -13,7 +13,7 @@ $sede_saneada = preg_replace('/[^A-Za-z0-9_-]/', '', $sede);
 $filename = isset($_GET['file']) ? basename($_GET['file']) : '';
 $id_registro = isset($_GET['id']) ? $_GET['id'] : '';
 
-$filepath = "../../archivos/generados/inspeccion_trabajo/" . $sede_saneada . "/" . $filename;
+$filepath = "../../../archivos/generados/inspeccion_trabajo/" . $sede_saneada . "/" . $filename;
 
 $registros = [];
 if ($filename && file_exists($filepath)) {

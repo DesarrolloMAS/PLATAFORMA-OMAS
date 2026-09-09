@@ -32,9 +32,17 @@ if (file_exists($target_dir)) {
         $harinas_raw = array_column(array_column($content, 'datos'), 'harina');
         $productos   = array_values(array_unique(array_filter($harinas_raw)));
 
+        $harina_file = '';
+        $periodo     = str_replace(['ENV_', '.json'], '', $file);
+        if (preg_match('/^ENV_(.+)_(\d{4}-\d{2})\.json$/i', $file, $m)) {
+            $harina_file = str_replace('_', ' ', $m[1]);
+            $periodo     = $m[2];
+        }
+
         $archivos[] = [
             'filename'       => $file,
-            'periodo'        => str_replace(['ENV_', '.json'], '', $file),
+            'harina'         => $harina_file,
+            'periodo'        => $periodo,
             'registros'      => $total_registros,
             'primera_fecha'  => $first_fecha,
             'ultima_fecha'   => $last_fecha,
@@ -215,20 +223,11 @@ $total_registros = array_sum(array_column($archivos, 'registros'));
             font-size: 11px; font-weight: 700;
         }
 
-        .productos-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .prod-chip {
-            background: rgba(255, 176, 0, 0.08);
-            border: 1px solid rgba(255, 176, 0, 0.2);
-            color: var(--warning);
-            padding: 3px 8px;
-            border-radius: var(--r-sm);
-            font-size: 11px;
-            font-family: 'Space Mono', monospace;
+        .harina-title {
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
         .file-meta {
@@ -291,7 +290,7 @@ $total_registros = array_sum(array_column($archivos, 'registros'));
 
     <div class="search-bar">
         <input type="text" class="search-input" id="searchInput"
-               placeholder="Buscar por período (ej: 2026-06)..."
+               placeholder="Buscar por harina o período (ej: Mogolla, 2026-06)..."
                oninput="filtrarTarjetas(this.value)">
         <a href="geleria_productos.php" class="btn-new">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -310,22 +309,15 @@ $total_registros = array_sum(array_column($archivos, 'registros'));
             <?php foreach ($archivos as $doc): ?>
                 <a href="visor_envasado_v2.php?file=<?= urlencode($doc['filename']) ?>"
                    class="file-card"
-                   data-search="<?= htmlspecialchars(strtolower($doc['periodo'])) ?>">
+                   data-search="<?= htmlspecialchars(strtolower($doc['harina'] . ' ' . $doc['periodo'])) ?>">
 
                     <div class="card-header">
                         <span class="periodo-badge"><?= htmlspecialchars($doc['periodo']) ?></span>
                         <span class="count-badge"><?= $doc['registros'] ?> registro<?= $doc['registros'] !== 1 ? 's' : '' ?></span>
                     </div>
 
-                    <?php if (!empty($doc['productos'])): ?>
-                    <div class="productos-list">
-                        <?php foreach (array_slice($doc['productos'], 0, 5) as $prod): ?>
-                            <span class="prod-chip"><?= htmlspecialchars($prod) ?></span>
-                        <?php endforeach; ?>
-                        <?php if (count($doc['productos']) > 5): ?>
-                            <span class="prod-chip">+<?= count($doc['productos']) - 5 ?> más</span>
-                        <?php endif; ?>
-                    </div>
+                    <?php if (!empty($doc['harina'])): ?>
+                        <div class="harina-title"><?= htmlspecialchars($doc['harina']) ?></div>
                     <?php endif; ?>
 
                     <div class="file-meta">

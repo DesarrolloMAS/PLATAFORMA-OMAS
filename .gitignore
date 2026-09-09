@@ -6,6 +6,8 @@ Thumbs.db
 #Archivs de configuracion local
 *.log
 .env
+# Llave real de la integración mIA -> NOVA (ver template/gobierno_datos/integracion_mia/)
+template/gobierno_datos/integracion_mia/config_mia.local.php
 # Dependencias reinstalables
 /node_modules/
 /vendor/

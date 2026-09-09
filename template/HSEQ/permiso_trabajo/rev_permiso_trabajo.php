@@ -1,14 +1,14 @@
 <?php
-require '../sesion.php';
+require '../../sesion.php';
 
 if (!isset($_SESSION['nombre']) || empty($_SESSION['sede'])) {
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
     exit;
 }
 
 $sede = $_SESSION['sede'];
 $sede_saneada = preg_replace('/[^A-Za-z0-9_-]/', '', $sede);
-$target_dir = "../../archivos/generados/permiso_trabajo/" . $sede_saneada . "/";
+$target_dir = "../../../archivos/generados/permiso_trabajo/" . $sede_saneada . "/";
 
 $archivos = [];
 $total_registros_global = 0;
@@ -148,10 +148,16 @@ $total_archivos = count($archivos);
         .meta-val { color: #fff; font-family: 'Space Mono', monospace; font-size: 11px; text-align: right; max-width: 55%; word-break: break-word; }
 
         .btn-view {
-            background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 10px; border-radius: var(--r-sm); text-align: center;
-            font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s;
+            display: block; background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: 10px; border-radius: var(--r-sm); text-align: center;
+            font-family: 'Space Mono', monospace; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;
         }
         .file-card:hover .btn-view { background: var(--accent); color: var(--bg-color); box-shadow: 0 0 15px var(--accent-glow); }
+
+        .btn-view-flujo {
+            display: block; background: transparent; color: var(--warning); border: 1px dashed var(--warning); padding: 8px; border-radius: var(--r-sm); text-align: center;
+            font-family: 'Space Mono', monospace; font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;
+        }
+        .btn-view-flujo:hover { background: var(--warning); color: var(--bg-color); box-shadow: 0 0 15px rgba(255,176,0,0.4); border-style: solid; }
 
         .empty-state {
             grid-column: 1 / -1; background: var(--panel-bg); border: 1px dashed var(--border-color); padding: 70px 20px;
@@ -170,7 +176,7 @@ $total_archivos = count($archivos);
             <h1 class="main-title">Permisos de Trabajo</h1>
             <div class="sub-title">Sede Operativa: [ <?= htmlspecialchars($sede) ?> ] | Archivos mensuales</div>
         </div>
-        <a href="../menu_hseq_adm.html" class="btn-back">← Menú HSEQ</a>
+        <a href="../../menu_hseq_adm.html" class="btn-back">← Menú HSEQ</a>
     </div>
 
     <div class="stats-banner">
@@ -192,8 +198,7 @@ $total_archivos = count($archivos);
             </div>
         <?php else: ?>
             <?php foreach ($archivos as $doc): ?>
-                <a href="visor_permiso_trabajo.php?file=<?= urlencode($doc['filename']) ?>"
-                   class="file-card"
+                <div class="file-card"
                    data-search="<?= htmlspecialchars(strtolower($doc['periodo'] . ' ' . $doc['area'] . ' ' . $doc['tipo'])) ?>">
                     <div class="card-header"><span class="periodo-badge">📅 <?= htmlspecialchars($doc['periodo']) ?></span></div>
                     <div><div class="card-title"><?= htmlspecialchars($doc['area']) ?></div><div class="card-sub">Tipo: <?= htmlspecialchars($doc['tipo']) ?></div></div>
@@ -203,8 +208,9 @@ $total_archivos = count($archivos);
                         <div class="meta-line"><span>Registrado por</span><span class="meta-val"><?= htmlspecialchars($doc['ultimo_usuario']) ?></span></div>
                         <div class="meta-line"><span>Modificado</span><span class="meta-val"><?= $doc['fecha_mod'] ?></span></div>
                     </div>
-                    <div class="btn-view">VER PERMISOS →</div>
-                </a>
+                    <a href="visor_permiso_trabajo.php?file=<?= urlencode($doc['filename']) ?>" class="btn-view">VER PERMISOS →</a>
+                    <a href="../permiso_completo/rev_flujos.php" class="btn-view-flujo">📄 Ver Expediente Completo (Flujo) →</a>
+                </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>

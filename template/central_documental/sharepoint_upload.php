@@ -120,6 +120,31 @@ foreach ($archivos as $i => $item) {
             $landscape = true;
             $pdfPath = dirname($ruta) . "/Empaque_{$filenameNoExt}.pdf";
             break;
+        case 'envasado_v2':
+            $urlToRender = "http://{$host}/template/envasado_v2/visor_envasado_v2.php?file={$filename}";
+            $landscape = true;
+            $pdfPath = dirname($ruta) . "/Envasado_{$filenameNoExt}.pdf";
+            break;
+        case 'premezclas_v2':
+            $urlToRender = "http://{$host}/template/premezclas_v2/visor_premezclas_v2.php?file={$filename}";
+            $landscape = true;
+            $pdfPath = dirname($ruta) . "/Premezclas_{$filenameNoExt}.pdf";
+            break;
+        case 'purga_v2':
+            $urlToRender = "http://{$host}/template/purga_v2/visor_purga_v2.php?file={$filename}";
+            $landscape = true;
+            $pdfPath = dirname($ruta) . "/Purga_{$filenameNoExt}.pdf";
+            break;
+        case 'preparacion_mejorante':
+            $urlToRender = "http://{$host}/template/preparacion_mejorante/visor_preparacion_mejorante.php?file={$filename}";
+            $landscape = true;
+            $pdfPath = dirname($ruta) . "/PrepMejorante_{$filenameNoExt}.pdf";
+            break;
+        case 'proceso_v2':
+            $urlToRender = "http://{$host}/template/proceso_v2/visor_proceso_v2.php?file={$filename}";
+            $landscape = true;
+            $pdfPath = dirname($ruta) . "/ProcesoMolienda_{$filenameNoExt}.pdf";
+            break;
         case 'termohigrometros':
             $urlToRender = "http://{$host}/template/termohigrometros/visor_termo.php?file={$filename}&zona={$sede}";
             $landscape = true;
@@ -165,6 +190,72 @@ foreach ($archivos as $i => $item) {
                     sp_debug("JSON atómico de verificación creado: $jsonAtomicoPath");
                 }
             }
+            break;
+        case 'reprocesos_v2':
+            // $ruta apunta al JSON acumulado por sede (histórico completo);
+            // hay que aislar el registro puntual seleccionado (por lote) para
+            // renderizar el visor y para el JSON atómico bilateral.
+            $idReg = is_array($item) ? ($item['id_registro'] ?? '') : '';
+            $lote  = is_array($item) ? ($item['lote'] ?? '') : '';
+
+            if ($idReg) {
+                $registrosReproceso = json_decode(file_get_contents($ruta), true) ?: [];
+                $registroSel = null;
+                foreach ($registrosReproceso as $r) {
+                    if (($r['id_registro'] ?? '') === $idReg) { $registroSel = $r; break; }
+                }
+
+                if ($registroSel) {
+                    $fechaReg  = $registroSel['datos']['fecha_alistamiento'] ?? date('Y-m-d');
+                    $loteSaneo = preg_replace('/[^A-Za-z0-9_-]/', '', $lote ?: 'SL');
+
+                    $urlToRender = "http://{$host}/template/reprocesos_v2/visor_reprocesos_v2.php?id=" . rawurlencode($idReg);
+                    $landscape = false;
+                    $pdfPath = dirname($ruta) . "/Reproceso_{$loteSaneo}_{$fechaReg}.pdf";
+
+                    $jsonAtomicoPath = dirname($ruta) . "/Reproceso_{$loteSaneo}_{$fechaReg}.json";
+                    file_put_contents($jsonAtomicoPath, json_encode($registroSel, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                    sp_debug("JSON atómico de reproceso creado: $jsonAtomicoPath");
+                }
+            }
+            break;
+        case 'orden_mantenimiento':
+            // $ruta apunta al JSON mensual por sede (varias órdenes distintas,
+            // de equipos distintos); hay que aislar el registro puntual
+            // seleccionado, igual que reprocesos_v2/maquinas_v2 — el visor de
+            // este módulo solo sabe imprimir UNA orden a la vez.
+            $idReg = is_array($item) ? ($item['id_registro'] ?? '') : '';
+
+            if ($idReg) {
+                $registrosOrden = json_decode(file_get_contents($ruta), true) ?: [];
+                $registroSel = null;
+                foreach ($registrosOrden as $r) {
+                    if (($r['id'] ?? '') === $idReg) { $registroSel = $r; break; }
+                }
+
+                if ($registroSel) {
+                    $fechaReg = $registroSel['datos']['fecha_solicitud'] ?? date('Y-m-d');
+                    $idCorto  = substr(preg_replace('/[^A-Za-z0-9]/', '', $idReg), -8);
+
+                    $urlToRender = "http://{$host}/template/orden_mantenimiento/visor.php?file={$filenameNoExt}&id=" . rawurlencode($idReg) . "&print=1";
+                    $landscape = false;
+                    $pdfPath = dirname($ruta) . "/OrdenMant_{$fechaReg}_{$idCorto}.pdf";
+
+                    $jsonAtomicoPath = dirname($ruta) . "/OrdenMant_{$fechaReg}_{$idCorto}.json";
+                    file_put_contents($jsonAtomicoPath, json_encode($registroSel, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+                    sp_debug("JSON atómico de orden de mantenimiento creado: $jsonAtomicoPath");
+                }
+            }
+            break;
+        case 'tara_seca':
+            // Cada archivo YA es un solo registro (uno por pesaje) — no hay
+            // que aislar nada, a diferencia de orden_mantenimiento/reprocesos.
+            // ver_tara.php ya es un visor estándar (window.print() + @media
+            // print), igual que el resto del sistema — no usa Dompdf ni
+            // ninguna librería de PDF en el servidor.
+            $urlToRender = "http://{$host}/template/tara_seca/ver_tara.php?file={$filename}";
+            $landscape = false;
+            $pdfPath = dirname($ruta) . "/Tara_{$filenameNoExt}.pdf";
             break;
         case 'bodegas_v2':
             // Documento = archivo mensual completo de la bodega (todas sus
@@ -256,7 +347,7 @@ foreach ($fileContext as $i => $ctx) {
             $rutasValidas[] = $ctx['pdfPath'];
             // Flujo bilateral: JSON atómico del día (solo los turnos de $date), o del
             // registro puntual de verificación en el caso de maquinas_v2.
-            if (in_array($modulo, ['molienda_v2', 'maquinas_v2']) && $ctx['jsonAtomicoPath'] && file_exists($ctx['jsonAtomicoPath'])) {
+            if (in_array($modulo, ['molienda_v2', 'maquinas_v2', 'reprocesos_v2', 'orden_mantenimiento']) && $ctx['jsonAtomicoPath'] && file_exists($ctx['jsonAtomicoPath'])) {
                 $rutasValidas[]      = $ctx['jsonAtomicoPath'];
                 $tempJsonsToDelete[] = $ctx['jsonAtomicoPath'];
                 sp_debug("JSON atómico añadido a subida: {$ctx['jsonAtomicoPath']}");
@@ -265,6 +356,37 @@ foreach ($fileContext as $i => $ctx) {
             if ($modulo === 'empaque_v2' && file_exists($ruta)) {
                 $rutasValidas[] = $ruta;
                 sp_debug("JSON de lote empaque añadido a subida: $ruta");
+            }
+            // Flujo bilateral envasado: subir también el JSON mensual junto al PDF
+            if ($modulo === 'envasado_v2' && file_exists($ruta)) {
+                $rutasValidas[] = $ruta;
+                sp_debug("JSON mensual de envasado añadido a subida: $ruta");
+            }
+            // Flujo bilateral premezclas: subir también el JSON mensual junto al PDF
+            if ($modulo === 'premezclas_v2' && file_exists($ruta)) {
+                $rutasValidas[] = $ruta;
+                sp_debug("JSON mensual de premezclas añadido a subida: $ruta");
+            }
+            // Flujo bilateral purga: subir también el JSON mensual junto al PDF
+            if ($modulo === 'purga_v2' && file_exists($ruta)) {
+                $rutasValidas[] = $ruta;
+                sp_debug("JSON mensual de purga añadido a subida: $ruta");
+            }
+            // Flujo bilateral preparación de mejorante: subir también el JSON mensual junto al PDF
+            if ($modulo === 'preparacion_mejorante' && file_exists($ruta)) {
+                $rutasValidas[] = $ruta;
+                sp_debug("JSON mensual de preparación de mejorante añadido a subida: $ruta");
+            }
+            // Flujo bilateral proceso de molienda: subir también el JSON mensual junto al PDF
+            if ($modulo === 'proceso_v2' && file_exists($ruta)) {
+                $rutasValidas[] = $ruta;
+                sp_debug("JSON mensual de proceso de molienda añadido a subida: $ruta");
+            }
+            // Flujo bilateral tara seca: subir también el JSON del registro junto al PDF
+            // (aquí el archivo completo ya es un solo registro, no un mensual)
+            if ($modulo === 'tara_seca' && file_exists($ruta)) {
+                $rutasValidas[] = $ruta;
+                sp_debug("JSON de tara seca añadido a subida: $ruta");
             }
             // Flujo bilateral bulto: subir JSON del producto junto al PDF
             if ($modulo === 'cantidad_bulto' && file_exists($ruta)) {

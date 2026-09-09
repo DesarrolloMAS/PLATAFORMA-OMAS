@@ -372,11 +372,11 @@
                     <thead>
                         <tr>
                             <th style="width:160px;">Campo</th>
-                            <th>Lote 1</th>
-                            <th>Lote 2</th>
-                            <th>Lote 3</th>
-                            <th>Lote 4</th>
-                            <th>Lote 5</th>
+                            <th>Silo 1</th>
+                            <th>Silo 2</th>
+                            <th>Silo 3</th>
+                            <th>Silo 4</th>
+                            <th>Silo 5</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -444,42 +444,46 @@
                             <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
                             <td><div class="cell-pair"><input type="number" class="form-control acond-horas-mojo-h" placeholder="Hrs" min="0"><span class="cell-sep">/</span><input type="number" class="form-control acond-horas-mojo-m" placeholder="Min" min="0" max="59"></div></td>
                         </tr>
+                        <tr>
+                            <td class="row-label">Total Trigo (kg)</td>
+                            <td><input type="number" class="form-control acond-total-trigo" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo" placeholder="0.00" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Total Trigo MYFC (kg)</td>
+                            <td><input type="number" class="form-control acond-total-trigo-myfc" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo-myfc" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo-myfc" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo-myfc" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-trigo-myfc" placeholder="0.00" step="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">Total Agua (L)</td>
+                            <td><input type="number" class="form-control acond-total-agua" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-agua" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-agua" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-agua" placeholder="0.00" step="0.01"></td>
+                            <td><input type="number" class="form-control acond-total-agua" placeholder="0.00" step="0.01"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Totales y Mezclas -->
-            <div class="totales-grid">
-                <div class="form-group">
-                    <label class="form-label">Total Trigo (kg)</label>
-                    <input type="number" id="total_trigo" class="form-control" placeholder="0.00" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Total Trigo MYFC (kg)</label>
-                    <input type="number" id="total_trigo_myfc" class="form-control" placeholder="0.00" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Total Agua (L)</label>
-                    <input type="number" id="total_agua" class="form-control" placeholder="0.00" step="0.01">
-                </div>
-            </div>
-
-            <div class="subsection-label">Mezclas de Trigo</div>
+            <div class="subsection-label">Mezclas de Trigo por Silo</div>
             <table class="mezclas-table">
                 <thead>
                     <tr>
                         <th style="width:40px;">#</th>
+                        <th style="width:100px;">Silo</th>
                         <th>Trigo (variedad)</th>
                         <th>Lote</th>
-                        <th>% Mezcla</th>
+                        <th style="width:110px;">% Mezcla</th>
                     </tr>
                 </thead>
-                <tbody id="tbodyMezclas">
-                    <tr><td class="row-num">1</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
-                    <tr><td class="row-num">2</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
-                    <tr><td class="row-num">3</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
-                    <tr><td class="row-num">4</td><td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td><td><input type="text" class="form-control mez-lote" placeholder="Lote"></td><td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td></tr>
-                </tbody>
+                <tbody id="tbodyMezclas"></tbody>
             </table>
             <div class="table-actions">
                 <button type="button" class="btn-add" onclick="agregarMezcla()">+ Agregar fila</button>
@@ -572,6 +576,7 @@
                             <th>Ácido Ascórbico</th>
                             <th>Verif. Bultos</th>
                             <th>Peso Prom. (kg)</th>
+                            <th>Líder</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyControl">
@@ -584,16 +589,8 @@
 
             <div class="firma-grid" style="margin-top:24px;">
                 <div class="form-group">
-                    <label class="form-label">Líder Turno Día</label>
-                    <input type="text" id="lider_dia" class="form-control" placeholder="Nombre y cédula">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Líder Turno Noche</label>
-                    <input type="text" id="lider_noche" class="form-control" placeholder="Nombre y cédula">
-                </div>
-                <div class="form-group">
                     <label class="form-label">Analista de Calidad</label>
-                    <input type="text" id="analista_calidad" class="form-control" placeholder="Nombre y cédula">
+                    <input type="text" id="analista_calidad" class="form-control">
                 </div>
             </div>
         </div>
@@ -665,17 +662,51 @@
         document.getElementById('dia').value = DIAS[hoy.getDay()];
     })();
 
-    // ------ TABLA MEZCLAS ------
-    let mezclasCount = 4;
-    function agregarMezcla() {
-        mezclasCount++;
+    // ------ CÁLCULO AUTOMÁTICO HORAS MOLIENDA (HF - HI por turno) ------
+    // El resultado se escribe en los inputs de "Horas Molienda"; quedan editables
+    // para que el usuario pueda rectificar el valor manualmente si lo requiere.
+    function calcularHorasMolienda(i) {
+        const hiH = document.querySelectorAll('.mol-hi-h')[i];
+        const hiM = document.querySelectorAll('.mol-hi-m')[i];
+        const hfH = document.querySelectorAll('.mol-hf-h')[i];
+        const hfM = document.querySelectorAll('.mol-hf-m')[i];
+        const horasH = document.querySelectorAll('.mol-horas-h')[i];
+        const horasM = document.querySelectorAll('.mol-horas-m')[i];
+        if (hiH.value === '' || hiM.value === '' || hfH.value === '' || hfM.value === '') return;
+
+        let inicio = parseInt(hiH.value, 10) * 60 + parseInt(hiM.value, 10);
+        let fin    = parseInt(hfH.value, 10) * 60 + parseInt(hfM.value, 10);
+        let diff   = fin - inicio;
+        if (diff < 0) diff += 24 * 60; // turno que cruza medianoche
+
+        horasH.value = Math.floor(diff / 60);
+        horasM.value = diff % 60;
+    }
+    ['mol-hi-h', 'mol-hi-m', 'mol-hf-h', 'mol-hf-m'].forEach(cls => {
+        document.querySelectorAll('.' + cls).forEach((el, i) => {
+            el.addEventListener('change', () => calcularHorasMolienda(i));
+        });
+    });
+
+    // ------ TABLA MEZCLAS (compacta, con selector de silo por fila) ------
+    let mezclasCount = 0;
+    function crearMezclaFila(n, siloDefault) {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td class="row-num">${mezclasCount}</td>
+        let opts = '';
+        for (let s = 1; s <= 5; s++) opts += `<option value="${s}" ${s === siloDefault ? 'selected' : ''}>Silo ${s}</option>`;
+        tr.innerHTML = `<td class="row-num">${n}</td>
+            <td><select class="form-control mez-silo">${opts}</select></td>
             <td><input type="text" class="form-control mez-trigo" placeholder="Variedad"></td>
             <td><input type="text" class="form-control mez-lote" placeholder="Lote"></td>
             <td><input type="number" class="form-control mez-pct" placeholder="%" step="0.1"></td>`;
-        document.getElementById('tbodyMezclas').appendChild(tr);
+        return tr;
     }
+    function agregarMezcla(siloDefault) {
+        mezclasCount++;
+        document.getElementById('tbodyMezclas').appendChild(crearMezclaFila(mezclasCount, siloDefault || 1));
+    }
+    // Fila inicial por cada silo
+    for (let s = 1; s <= 5; s++) agregarMezcla(s);
 
     // ------ TABLA CONTROL PRODUCTO ------
     function crearControlFila(n) {
@@ -689,7 +720,8 @@
             <td><input type="number" class="form-control cp-cenizas" placeholder="%" step="0.001"></td>
             <td><select class="form-control cp-acido"><option value="">—</option><option value="Ausencia">Ausencia</option><option value="Presencia">Presencia</option></select></td>
             <td><input type="number" class="form-control cp-bultos" placeholder="cant." min="0"></td>
-            <td><input type="number" class="form-control cp-peso-prom" placeholder="kg" step="0.01"></td>`;
+            <td><input type="number" class="form-control cp-peso-prom" placeholder="kg" step="0.01"></td>
+            <td><input type="text" class="form-control cp-lider"></td>`;
         return tr;
     }
     let controlCount = 0;
@@ -742,10 +774,20 @@
     document.getElementById('frmTraza').addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Acondicionamiento - lotes
-        const acond_lotes = [];
+        // Mezclas de trigo: se leen de la tabla única y se agrupan por silo seleccionado
+        const mezclasPorSilo = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+        document.querySelectorAll('#tbodyMezclas tr').forEach(tr => {
+            const silo  = parseInt(tr.querySelector('.mez-silo')?.value || '1', 10);
+            const trigo = tr.querySelector('.mez-trigo')?.value.trim() || '';
+            const lote  = tr.querySelector('.mez-lote')?.value.trim() || '';
+            const pct   = tr.querySelector('.mez-pct')?.value || '';
+            if (trigo || lote || pct) mezclasPorSilo[silo].push({ trigo, lote, porcentaje: pct });
+        });
+
+        // Acondicionamiento - silos
+        const acond_silos = [];
         for (let i = 0; i < 5; i++) {
-            acond_lotes.push({
+            acond_silos.push({
                 referencia_harina: document.querySelectorAll('.acond-ref')[i]?.value.trim() || '',
                 silo: document.querySelectorAll('.acond-silo')[i]?.value.trim() || '',
                 fecha_mojo: document.querySelectorAll('.acond-fecha-mojo')[i]?.value || '',
@@ -756,19 +798,12 @@
                 paradas_hi_hf: document.querySelectorAll('.acond-paradas-hi-hf')[i]?.value.trim() || '',
                 paradas_motivo: document.querySelectorAll('.acond-paradas-motivo')[i]?.value.trim() || '',
                 horas_mojo_hrs: document.querySelectorAll('.acond-horas-mojo-h')[i]?.value || '',
-                horas_mojo_min: document.querySelectorAll('.acond-horas-mojo-m')[i]?.value || ''
+                horas_mojo_min: document.querySelectorAll('.acond-horas-mojo-m')[i]?.value || '',
+                total_trigo: document.querySelectorAll('.acond-total-trigo')[i]?.value || '',
+                total_trigo_myfc: document.querySelectorAll('.acond-total-trigo-myfc')[i]?.value || '',
+                total_agua: document.querySelectorAll('.acond-total-agua')[i]?.value || '',
+                mezclas_trigo: mezclasPorSilo[i + 1]
             });
-        }
-
-        // Mezclas
-        const mezclas = [];
-        const mez_trigo = document.querySelectorAll('.mez-trigo');
-        const mez_lote  = document.querySelectorAll('.mez-lote');
-        const mez_pct   = document.querySelectorAll('.mez-pct');
-        for (let i = 0; i < mez_trigo.length; i++) {
-            if (mez_trigo[i].value || mez_lote[i].value || mez_pct[i].value) {
-                mezclas.push({ trigo: mez_trigo[i].value.trim(), lote: mez_lote[i].value.trim(), porcentaje: mez_pct[i].value });
-            }
         }
 
         // Molienda - turnos
@@ -801,7 +836,8 @@
                 cenizas: tr.querySelector('.cp-cenizas')?.value || '',
                 acido_ascorbico: tr.querySelector('.cp-acido')?.value || '',
                 verificacion_bultos: tr.querySelector('.cp-bultos')?.value || '',
-                peso_promedio: tr.querySelector('.cp-peso-prom')?.value || ''
+                peso_promedio: tr.querySelector('.cp-peso-prom')?.value || '',
+                lider: tr.querySelector('.cp-lider')?.value.trim() || ''
             };
             if (Object.values(flds).some(v => v !== '')) control_producto.push(flds);
         });
@@ -826,16 +862,10 @@
             fecha: document.getElementById('fecha').value,
             dia: document.getElementById('dia').value,
             acondicionamiento: {
-                lotes: acond_lotes,
-                total_trigo: document.getElementById('total_trigo').value,
-                total_trigo_myfc: document.getElementById('total_trigo_myfc').value,
-                total_agua: document.getElementById('total_agua').value,
-                mezclas_trigo: mezclas
+                silos: acond_silos
             },
             molienda: { turnos: mol_lotes },
             control_producto: control_producto,
-            lider_turno_dia: document.getElementById('lider_dia').value.trim(),
-            lider_turno_noche: document.getElementById('lider_noche').value.trim(),
             analista_calidad: document.getElementById('analista_calidad').value.trim(),
             control_rupturas: control_rupturas
         };

@@ -24,16 +24,17 @@ $multiSede = count($sedesSeleccionadas) > 1;
 $modulosMap = [
     // PRODUCCION
     'molienda_v2' => ['nombre' => 'Molienda V2', 'ruta' => '../../archivos/generados/molienda/{SEDE}/', 'tipo' => 'json_daily', 'sede_scoped' => true],
-    'envasado' => ['nombre' => 'Envasado', 'ruta' => ($sede === 'ZS' ? '../../archivos/generados/envasado_zs/' : '../../archivos/generados/envasado/'), 'tipo' => 'excel'],
+    'envasado_v2' => ['nombre' => 'Envasado V2', 'ruta' => '../../archivos/generados/envasado_v2/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
     'empaque_v2' => ['nombre' => 'Empaque V2', 'ruta' => '../../archivos/generados/empaque_v2/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
 
     // ALMACÉN
     'bodegas_v2' => ['nombre' => 'Inspección de Bodegas V2', 'ruta' => '../../archivos/generados/bodegas_v2/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
-    'premezclas' => ['nombre' => 'Premezclas', 'ruta' => '../../archivos/generados/premezclas/', 'tipo' => 'excel'],
-    'reprocesos_zc' => ['nombre' => 'Reprocesos ZC', 'ruta' => '../../archivos/generados/reprocesos_zc/', 'tipo' => 'excel'],
-    'reprocesos_zs' => ['nombre' => 'Reprocesos ZS', 'ruta' => '../../archivos/generados/reprocesos_zs/', 'tipo' => 'excel'],
+    'premezclas_v2' => ['nombre' => 'Premezclas V2', 'ruta' => '../../archivos/generados/premezclas_v2/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
+    'reprocesos_v2' => ['nombre' => 'Control de Reprocesos V2', 'ruta' => '../../archivos/generados/reprocesos_v2/', 'tipo' => 'reprocesos_v2', 'sede_scoped' => true],
     'purga' => ['nombre' => 'Purga de Proceso', 'ruta' => '../../archivos/generados/Purga De proceso/', 'tipo' => 'excel'],
-    'control_familiar' => ['nombre' => 'Control Familiar', 'ruta' => '../../archivos/generados/control_familiar/', 'tipo' => 'excel'],
+    'purga_v2' => ['nombre' => 'Purga de Proceso V2', 'ruta' => '../../archivos/generados/purga_v2/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
+    'preparacion_mejorante' => ['nombre' => 'Preparación de Mejorante', 'ruta' => '../../archivos/generados/preparacion_mejorante/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
+    'proceso_v2' => ['nombre' => 'Proceso de Molienda V2', 'ruta' => '../../archivos/generados/proceso_v2/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
     'control_cantidad' => ['nombre' => 'Control Cantidad ZC', 'ruta' => '../../archivos/generados/control_cantidad/', 'tipo' => 'excel'],
     'control_cantidad_zs' => ['nombre' => 'Control Cantidad ZS', 'ruta' => '../../archivos/generados/control_cantidad_zs/', 'tipo' => 'excel'],
     'cantidad_bulto' => ['nombre' => 'Cantidad en Bulto V2', 'ruta' => '../../archivos/generados/cantidad_bulto/{SEDE}/', 'tipo' => 'json', 'sede_scoped' => true],
@@ -44,7 +45,7 @@ $modulosMap = [
     'muestras' => ['nombre' => 'Muestras ZC', 'ruta' => '../../archivos/generados/Calidad/muestras/', 'tipo' => 'excel'],
     'muestras_zs' => ['nombre' => 'Muestras ZS', 'ruta' => '../../archivos/generados/Calidad/muestras_zs/', 'tipo' => 'excel'],
     'pnc' => ['nombre' => 'PNC', 'ruta' => '../../archivos/generados/PNC/', 'tipo' => 'json'],
-    'tara_seca' => ['nombre' => 'Tara Seca', 'ruta' => '../../archivos/generados/Calidad/tara_seca/', 'tipo' => 'excel'],
+    'tara_seca' => ['nombre' => 'Tara Seca', 'ruta' => '../../archivos/generados/Calidad/tara_seca/', 'tipo' => 'json'],
 
     // MANTENIMIENTO
     'mantenimiento_zc' => ['nombre' => 'O.T ZC', 'ruta' => '../../archivos/generados/excelS_M/', 'tipo' => 'excel'],
@@ -52,15 +53,7 @@ $modulosMap = [
     'mant_calidad_zc' => ['nombre' => 'Mant Calidad ZC', 'ruta' => '../../archivos/generados/excelC_M/', 'tipo' => 'excel'],
     'mant_calidad_zs' => ['nombre' => 'Mant Calidad ZS', 'ruta' => '../../archivos/generados/excelC_MZS/', 'tipo' => 'excel'],
     'lib_mantenimiento' => ['nombre' => 'Lib. Mant', 'ruta' => '../../archivos/generados/liberaciones_mant/', 'tipo' => 'json'],
-
-    // VERIFICACIONES
-    'ver_balanzas' => ['nombre' => 'Balanzas', 'ruta' => '../../archivos/generados/verificaciones/Balanzas/', 'tipo' => 'excel'],
-    'ver_bascula' => ['nombre' => 'Báscula', 'ruta' => '../../archivos/generados/verificaciones/Bascula/', 'tipo' => 'excel'],
-    'ver_camionera' => ['nombre' => 'Camionera', 'ruta' => '../../archivos/generados/verificaciones/camionera/', 'tipo' => 'excel'],
-    'ver_equipos' => ['nombre' => 'Equipos', 'ruta' => '../../archivos/generados/verificaciones/equipos/', 'tipo' => 'excel'],
-    'ver_flow' => ['nombre' => 'Flowbalancer', 'ruta' => '../../archivos/generados/verificaciones/Flowbalancer/', 'tipo' => 'excel'],
-    'ver_iman' => ['nombre' => 'Imanes', 'ruta' => '../../archivos/generados/verificaciones/Iman/', 'tipo' => 'excel'],
-    'ver_puntada' => ['nombre' => 'Puntada', 'ruta' => '../../archivos/generados/verificaciones/puntada/', 'tipo' => 'excel'],
+    'orden_mantenimiento' => ['nombre' => 'Orden de Mantenimiento', 'ruta' => '../../archivos/generados/orden_mantenimiento/{SEDE}/', 'tipo' => 'orden_mantenimiento', 'sede_scoped' => true],
 
     // MANTENIMIENTO (V2 - JSON consolidado)
     'maquinas_v2' => ['nombre' => 'Verificación de Máquinas V2', 'ruta' => '../../archivos/generados/maquinas_v2/', 'tipo' => 'maquinas_nested'],
@@ -68,7 +61,6 @@ $modulosMap = [
     // HSEQ & OTROS
     'hseq' => ['nombre' => 'HSEQ', 'ruta' => '../../archivos/generados/HSEQ/investigacionesjson/', 'tipo' => 'json'],
     'termohigrometros' => ['nombre' => 'Termohigrómetros', 'ruta' => '../../archivos/generados/termohigrometros/{SEDE}/', 'tipo' => 'json_daily', 'sede_scoped' => true],
-    'ins_hist' => ['nombre' => 'Insumos Histórico', 'ruta' => '../../archivos/generados/excel_INS/historico/', 'tipo' => 'excel'],
     'logs' => ['nombre' => 'Logs', 'ruta' => '../../archivos/generados/LOGS/', 'tipo' => 'text'],
 ];
 
@@ -144,6 +136,53 @@ foreach ($sedesAEscanear as $sedeItem) {
                         ];
                     }
                 }
+            }
+        }
+    } elseif ($mod['tipo'] === 'reprocesos_v2') {
+        // Un solo archivo corriente por sede (sede en el NOMBRE, no en subcarpeta,
+        // porque un pendiente puede quedar abierto de un mes a otro). Se lista
+        // un ítem por registro (lote), no por archivo.
+        $archivoSede = $dirItem . 'REPROCESOS_' . preg_replace('/[^A-Za-z0-9_-]/', '', $sedeItem) . '.json';
+        if (file_exists($archivoSede)) {
+            $registros = json_decode(file_get_contents($archivoSede), true) ?: [];
+            foreach ($registros as $reg) {
+                $d = $reg['datos'] ?? [];
+                $estado = $d['estado'] ?? 'pendiente';
+                if ($estado !== 'completado') continue; // La galería solo muestra reprocesos ya cerrados; los pendientes se gestionan en rev_reprocesos_v2.php
+                $items[$sedeItem . '|' . ($reg['id_registro'] ?? uniqid())] = [
+                    'label' => 'Lote: ' . ($d['lote'] ?? '—'),
+                    'info' => ($d['producto'] ?? 'Sin producto') . ' · ' . strtoupper($estado)
+                        . ' · ' . number_format(floatval($d['cantidad'] ?? 0), 1) . ' KG',
+                    'file' => basename($archivoSede),
+                    'date' => $d['fecha_alistamiento'] ?? '',
+                    'dir'  => $dirItem,
+                    'sede' => $sedeItem,
+                    'id_registro' => $reg['id_registro'] ?? '',
+                    'lote' => $d['lote'] ?? '',
+                    'estado_reproceso' => $estado,
+                ];
+            }
+        }
+    } elseif ($mod['tipo'] === 'orden_mantenimiento') {
+        // Varios archivos mensuales por sede (a diferencia de reprocesos_v2,
+        // que es uno solo corriente); cada mes trae varias órdenes distintas
+        // (equipos distintos), así que se lista un ítem por orden, no por
+        // archivo — el visor de este módulo solo sabe imprimir UNA orden
+        // a la vez, no una tabla del mes completo.
+        foreach (glob($dirItem . '*.json') as $f) {
+            $registros = json_decode(file_get_contents($f), true) ?: [];
+            foreach ($registros as $reg) {
+                $d = $reg['datos'] ?? [];
+                $items[$sedeItem . '|' . ($reg['id'] ?? uniqid())] = [
+                    'label' => 'Orden: ' . ($d['objeto_dañado'] ?? 'Sin equipo'),
+                    'info' => ($d['clasificacion'] ?? 'N/D') . ' · ' . ($d['ubicacion'] ?? 'Sin ubicación'),
+                    'file' => basename($f),
+                    'date' => $d['fecha_solicitud'] ?? substr($reg['timestamp'] ?? '', 0, 10),
+                    'dir'  => $dirItem,
+                    'sede' => $sedeItem,
+                    'id_registro' => $reg['id'] ?? '',
+                    'es_orden_mant' => true,
+                ];
             }
         }
     } else {
@@ -478,10 +517,19 @@ $dir = $items[0]['dir'] ?? ($sedeScoped ? str_replace('{SEDE}', $sedesAEscanear[
                  <?= $multiSede ? 'style="--sede-color: ' . $itColor . ';"' : '' ?>>
                 <div class="cb-container">
                     <input type="checkbox" class="rec-check" data-file="<?= $it['file'] ?>" data-date="<?= $it['date'] ?>" data-sede="<?= htmlspecialchars($itSede) ?>"
-                        <?php if (isset($it['id_registro'])): ?>
+                        <?php if (isset($it['tipo_maquina'])): ?>
                         data-tipo-maquina="<?= htmlspecialchars($it['tipo_maquina']) ?>"
                         data-grupo-maquina="<?= htmlspecialchars($it['grupo_maquina']) ?>"
                         data-codigo-maquina="<?= htmlspecialchars($it['codigo_maquina']) ?>"
+                        data-id-registro="<?= htmlspecialchars($it['id_registro']) ?>"
+                        <?php endif; ?>
+                        <?php if (isset($it['lote'])): ?>
+                        data-lote="<?= htmlspecialchars($it['lote']) ?>"
+                        data-estado-reproceso="<?= htmlspecialchars($it['estado_reproceso']) ?>"
+                        data-id-registro="<?= htmlspecialchars($it['id_registro']) ?>"
+                        <?php endif; ?>
+                        <?php if (!empty($it['es_orden_mant'])): ?>
+                        data-orden-mant="1"
                         data-id-registro="<?= htmlspecialchars($it['id_registro']) ?>"
                         <?php endif; ?>
                         onchange="updateUI()">
@@ -556,10 +604,19 @@ $dir = $items[0]['dir'] ?? ($sedeScoped ? str_replace('{SEDE}', $sedesAEscanear[
 
             const info = { path: filepath, date: date, sede: sede };
             const idRegistro = cb.getAttribute('data-id-registro');
-            if (idRegistro) {
+            if (idRegistro && cb.getAttribute('data-tipo-maquina')) {
                 info.tipo_maquina = cb.getAttribute('data-tipo-maquina');
                 info.grupo_maquina = cb.getAttribute('data-grupo-maquina');
                 info.codigo_maquina = cb.getAttribute('data-codigo-maquina');
+                info.id_registro = idRegistro;
+            }
+            const lote = cb.getAttribute('data-lote');
+            if (lote) {
+                info.lote = lote;
+                info.estado_reproceso = cb.getAttribute('data-estado-reproceso');
+                info.id_registro = idRegistro;
+            }
+            if (cb.getAttribute('data-orden-mant') && idRegistro) {
                 info.id_registro = idRegistro;
             }
             files.push(info);

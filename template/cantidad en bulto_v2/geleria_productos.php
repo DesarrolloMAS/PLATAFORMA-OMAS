@@ -4,17 +4,41 @@ verificarAutenticacion();
 $sede = $_SESSION['sede'];
 if (!in_array($sede, ['ZC', 'ZS'])) $sede = 'ZC';
 
-$config_file = "../../archivos/generados/molienda/config_{$sede}.json";
+// Zona Sur no tiene su propio catálogo de bulto en molienda: en vez de eso,
+// reutiliza este mismo formulario/almacenamiento con el catálogo fijo de
+// "Control Familiar" (antes template/control familiar/, legacy Excel).
+// Esta galería es ahora el único punto de entrada para ese formato en ZS.
+$es_familiar = ($sede === 'ZS');
 $harinas = [];
 $subproductos = [];
+$productos_familiares = [];
 
-if (file_exists($config_file)) {
-    $config = json_decode(file_get_contents($config_file), true);
-    foreach (($config['harinas'] ?? []) as $item) {
-        $harinas[] = ['nombre' => $item['name'], 'peso' => $item['weight']];
+if ($es_familiar) {
+    // Catálogo editable desde gestion_productos_familiar.php — ver ese
+    // archivo (y api_productos_familiar.php) para los valores por defecto
+    // si el config aún no existe.
+    $config_familiar = "../../archivos/generados/cantidad_bulto/config_familiar.json";
+    if (file_exists($config_familiar)) {
+        $productos_familiares = json_decode(file_get_contents($config_familiar), true) ?: [];
+    } else {
+        $productos_familiares = [
+            'Harina de Trigo Nariño x10kg',
+            'Harina de Trigo Nariño x10kg (5 Und)',
+            'Harina de Trigo Nariño 2500g',
+            'Harina de Trigo Nariño 1000g',
+            'Harina de Trigo Nariño 500g',
+        ];
     }
-    foreach (($config['subproductos'] ?? []) as $item) {
-        $subproductos[] = ['nombre' => $item['name'], 'peso' => $item['weight']];
+} else {
+    $config_file = "../../archivos/generados/molienda/config_{$sede}.json";
+    if (file_exists($config_file)) {
+        $config = json_decode(file_get_contents($config_file), true);
+        foreach (($config['harinas'] ?? []) as $item) {
+            $harinas[] = ['nombre' => $item['name'], 'peso' => $item['weight']];
+        }
+        foreach (($config['subproductos'] ?? []) as $item) {
+            $subproductos[] = ['nombre' => $item['name'], 'peso' => $item['weight']];
+        }
     }
 }
 ?>
@@ -23,7 +47,7 @@ if (file_exists($config_file)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Productos — Control Cantidad en Bulto</title>
+    <title>Galería de Productos — <?= $es_familiar ? 'Control Familiar' : 'Control Cantidad en Bulto' ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -211,9 +235,12 @@ if (file_exists($config_file)) {
     <div class="header-box">
         <div>
             <div class="main-title">Galería de Productos</div>
-            <div class="sub-title">Control Cantidad en Bulto &nbsp;|&nbsp; Sede: <?= htmlspecialchars($sede) ?></div>
+            <div class="sub-title"><?= $es_familiar ? 'Control Familiar' : 'Control Cantidad en Bulto' ?> &nbsp;|&nbsp; Sede: <?= htmlspecialchars($sede) ?></div>
         </div>
         <div class="header-actions">
+            <?php if ($es_familiar): ?>
+                <a href="gestion_productos_familiar.php" class="btn-secondary">⚙️ Gestionar Productos</a>
+            <?php endif; ?>
             <a href="rev_cantidad_bulto.php" class="btn-rev">📋 Ver Revisiones</a>
             <a href="../menu_produccion.html" class="btn-secondary">← Volver</a>
         </div>
@@ -229,37 +256,54 @@ if (file_exists($config_file)) {
     <!-- GRID DE PRODUCTOS -->
     <div class="grid" id="gridProductos">
 
-        <?php foreach ($harinas as $producto): ?>
-            <div class="producto-card" data-section="harinas"
-                 data-nombre="<?= htmlspecialchars(strtolower($producto['nombre'])) ?>">
-                <div class="producto-nombre"><?= htmlspecialchars($producto['nombre']) ?></div>
-                <div class="producto-peso"><?= $producto['peso'] ?> kg / bulto</div>
-                <button class="btn-seleccionar"
-                    onclick="window.location.href='cantidad_bulto.php?harina=<?= urlencode($producto['nombre']) ?>&peso=<?= $producto['peso'] ?>'">
-                    SELECCIONAR
-                </button>
-            </div>
-        <?php endforeach; ?>
+        <?php if ($es_familiar): ?>
 
-        <?php if (!empty($subproductos)): ?>
-        <div class="section-divider" id="dividerSubproductos">
-            <div class="section-divider-line"></div>
-            <span class="section-divider-label">Subproductos</span>
-            <div class="section-divider-line"></div>
-        </div>
+            <?php foreach ($productos_familiares as $producto): ?>
+                <div class="producto-card"
+                     data-nombre="<?= htmlspecialchars(strtolower($producto)) ?>">
+                    <div class="producto-nombre"><?= htmlspecialchars($producto) ?></div>
+                    <button class="btn-seleccionar"
+                        onclick="window.location.href='cantidad_bulto.php?harina=<?= urlencode($producto) ?>'">
+                        SELECCIONAR
+                    </button>
+                </div>
+            <?php endforeach; ?>
+
+        <?php else: ?>
+
+            <?php foreach ($harinas as $producto): ?>
+                <div class="producto-card" data-section="harinas"
+                     data-nombre="<?= htmlspecialchars(strtolower($producto['nombre'])) ?>">
+                    <div class="producto-nombre"><?= htmlspecialchars($producto['nombre']) ?></div>
+                    <div class="producto-peso"><?= $producto['peso'] ?> kg / bulto</div>
+                    <button class="btn-seleccionar"
+                        onclick="window.location.href='cantidad_bulto.php?harina=<?= urlencode($producto['nombre']) ?>&peso=<?= $producto['peso'] ?>'">
+                        SELECCIONAR
+                    </button>
+                </div>
+            <?php endforeach; ?>
+
+            <?php if (!empty($subproductos)): ?>
+            <div class="section-divider" id="dividerSubproductos">
+                <div class="section-divider-line"></div>
+                <span class="section-divider-label">Subproductos</span>
+                <div class="section-divider-line"></div>
+            </div>
+            <?php endif; ?>
+
+            <?php foreach ($subproductos as $producto): ?>
+                <div class="producto-card" data-section="subproductos"
+                     data-nombre="<?= htmlspecialchars(strtolower($producto['nombre'])) ?>">
+                    <div class="producto-nombre"><?= htmlspecialchars($producto['nombre']) ?></div>
+                    <div class="producto-peso"><?= $producto['peso'] ?> kg / bulto</div>
+                    <button class="btn-seleccionar"
+                        onclick="window.location.href='cantidad_bulto.php?harina=<?= urlencode($producto['nombre']) ?>&peso=<?= $producto['peso'] ?>'">
+                        SELECCIONAR
+                    </button>
+                </div>
+            <?php endforeach; ?>
+
         <?php endif; ?>
-
-        <?php foreach ($subproductos as $producto): ?>
-            <div class="producto-card" data-section="subproductos"
-                 data-nombre="<?= htmlspecialchars(strtolower($producto['nombre'])) ?>">
-                <div class="producto-nombre"><?= htmlspecialchars($producto['nombre']) ?></div>
-                <div class="producto-peso"><?= $producto['peso'] ?> kg / bulto</div>
-                <button class="btn-seleccionar"
-                    onclick="window.location.href='cantidad_bulto.php?harina=<?= urlencode($producto['nombre']) ?>&peso=<?= $producto['peso'] ?>'">
-                    SELECCIONAR
-                </button>
-            </div>
-        <?php endforeach; ?>
 
     </div>
 

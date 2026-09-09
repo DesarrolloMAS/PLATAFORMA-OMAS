@@ -29,6 +29,35 @@ function obtenerDiasMolienda($sede) {
 
 $diasZC = obtenerDiasMolienda('ZC');
 $diasZS = obtenerDiasMolienda('ZS');
+
+// Registros Extra: JSON paralelo, desligado de control_molienda. Se listan
+// juntos (ZC + ZS) indicando la sede en cada tarjeta.
+function obtenerDiasExtra() {
+    $items = [];
+    foreach (['ZC', 'ZS'] as $sede) {
+        $directorio = "../../archivos/generados/molienda/$sede/extra/";
+        if (!is_dir($directorio)) continue;
+
+        $archivos = glob($directorio . "*.json");
+        $vistos = [];
+        foreach ($archivos as $archivo) {
+            $registros = json_decode(file_get_contents($archivo), true);
+            if ($registros && is_array($registros)) {
+                foreach ($registros as $r) {
+                    if (isset($r['fecha']) && !isset($vistos[$r['fecha']])) {
+                        $vistos[$r['fecha']] = true;
+                        $items[] = ['fecha' => $r['fecha'], 'sede' => $sede];
+                    }
+                }
+            }
+        }
+    }
+    // Orden cronológico descendente (más nuevo arriba)
+    usort($items, function($a, $b) { return strcmp($b['fecha'], $a['fecha']); });
+    return $items;
+}
+
+$diasExtra = obtenerDiasExtra();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,6 +73,7 @@ $diasZS = obtenerDiasMolienda('ZS');
             --surface2: #1c1f2e;
             --border: #2d324a;
             --accent: #00f2ff;
+            --accent2: #7000ff;
             --text: #e0e6ed;
             --text-muted: #7a8599;
             --success: #00ff88;
@@ -195,6 +225,40 @@ $diasZS = obtenerDiasMolienda('ZS');
             border: 1px dashed var(--border);
             border-radius: 4px;
         }
+
+        .zona-column.extra {
+            grid-column: 1 / -1;
+        }
+
+        .zona-column.extra::before {
+            background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+        }
+
+        .zona-column.extra .zona-title {
+            color: #b794ff;
+        }
+
+        .day-card.extra:hover {
+            border-color: var(--accent2);
+            background: rgba(112, 0, 255, 0.08);
+            box-shadow: 0 5px 15px rgba(112, 0, 255, 0.2);
+        }
+
+        .day-card.extra .day-icon {
+            color: var(--accent2);
+        }
+
+        .day-sede-tag {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #b794ff;
+            background: rgba(112, 0, 255, 0.12);
+            border: 1px solid var(--accent2);
+            border-radius: 10px;
+            padding: 2px 8px;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -237,6 +301,26 @@ $diasZS = obtenerDiasMolienda('ZS');
                         <svg class="day-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         <span class="day-text"><?= $dia ?></span>
                         <span class="day-subtext">Ver Consolidado</span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <!-- COLUMNA REGISTROS EXTRA -->
+    <div class="zona-column extra">
+        <div class="zona-title">REGISTROS EXTRAS</div>
+        <?php if (empty($diasExtra)): ?>
+            <div class="empty-state">No hay registros extra generados aún.</div>
+        <?php else: ?>
+            <div class="grid-cards">
+                <?php foreach ($diasExtra as $item): ?>
+                    <a href="plantilla_diaria.php?fecha=<?= $item['fecha'] ?>&sede=<?= $item['sede'] ?>&extra=1" class="day-card extra" target="_blank">
+                        <!-- File Icon -->
+                        <svg class="day-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span class="day-text"><?= $item['fecha'] ?></span>
+                        <span class="day-subtext">Ver Consolidado</span>
+                        <span class="day-sede-tag"><?= $item['sede'] ?></span>
                     </a>
                 <?php endforeach; ?>
             </div>

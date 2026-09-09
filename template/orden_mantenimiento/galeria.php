@@ -28,7 +28,7 @@ $es_admin = in_array($_SESSION['rol'] ?? '', ['adm', '1']);
             <p>Sede: <?php echo $sede; ?></p>
             <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                 <a href="index.php" style="color: var(--primary); text-decoration: none; border: 1px solid var(--primary); padding: 5px 15px; border-radius: 4px;">+ Nueva Orden</a>
-                <a href="../menu_mantenimiento_adm.php" style="color: var(--text-muted, #7a8599); text-decoration: none; border: 1px solid var(--border, #2d324a); padding: 5px 15px; border-radius: 4px; font-size: 0.85rem; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">← Menú</a>
+                <a href="../menu_revisiones_mant.html" style="color: var(--text-muted, #7a8599); text-decoration: none; border: 1px solid var(--border, #2d324a); padding: 5px 15px; border-radius: 4px; font-size: 0.85rem; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">← Menú</a>
             </div>
         </header>
 

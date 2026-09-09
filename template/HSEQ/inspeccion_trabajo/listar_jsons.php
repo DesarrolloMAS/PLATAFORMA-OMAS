@@ -1,5 +1,5 @@
 <?php
-require '../sesion.php';
+require '../../sesion.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -11,7 +11,7 @@ if (!isset($_SESSION['nombre']) || empty($_SESSION['sede'])) {
 
 $sede = $_SESSION['sede'];
 $sede_saneada = preg_replace('/[^A-Za-z0-9_-]/', '', $sede);
-$target_dir = "../../archivos/generados/inspeccion_trabajo/" . $sede_saneada . "/";
+$target_dir = "../../../archivos/generados/inspeccion_trabajo/" . $sede_saneada . "/";
 
 $archivos = [];
 

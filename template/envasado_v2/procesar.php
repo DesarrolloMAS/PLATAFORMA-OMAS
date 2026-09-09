@@ -27,9 +27,21 @@ $nuevo_registro = [
     'datos'       => $input_array
 ];
 
+$harina_saneada = strtoupper(trim($input_array['harina']));
+$harina_saneada = preg_replace('/[^A-Za-z0-9]+/', '_', $harina_saneada);
+$harina_saneada = trim($harina_saneada, '_');
+if ($harina_saneada === '') { $harina_saneada = 'SIN_HARINA'; }
+
+// El mes del archivo se calcula a partir de la fecha del registro (no de la
+// fecha del servidor), para que un registro tardío de un mes anterior caiga
+// en el archivo de ese mes y no se mezcle con el mes en curso.
+$fecha_registro = $input_array['fecha'] ?? date('Y-m-d');
+$ts_fecha = strtotime($fecha_registro);
+$mes = $ts_fecha !== false ? date('Y-m', $ts_fecha) : date('Y-m');
+
 $base_dir   = "../../archivos/generados/envasado_v2/";
 $sede_dir   = $base_dir . preg_replace('/[^A-Za-z0-9_-]/', '', $sede) . "/";
-$archivo_json = $sede_dir . "ENV_" . date('Y-m') . ".json";
+$archivo_json = $sede_dir . "ENV_" . $harina_saneada . "_" . $mes . ".json";
 
 if (!file_exists($base_dir)) { mkdir($base_dir, 0777, true); }
 if (!file_exists($sede_dir)) { mkdir($sede_dir, 0777, true); }

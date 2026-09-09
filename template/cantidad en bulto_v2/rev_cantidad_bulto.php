@@ -263,7 +263,7 @@ $total_registros_global = array_sum(array_column($archivos, 'registros'));
             <h1 class="main-title">Control de Cantidad en Bulto</h1>
             <div class="sub-title">Sede: [ <?= htmlspecialchars($sede) ?> ] &nbsp;|&nbsp; Un archivo por producto</div>
         </div>
-        <a href="../revisiones_producccion.html" style="text-decoration: none;" class="btn-back">← Volver</a>
+        <a href="../menu_revisiones_produccion.html" style="text-decoration: none;" class="btn-back">← Volver</a>
     </div>
 
     <div class="stats-banner">

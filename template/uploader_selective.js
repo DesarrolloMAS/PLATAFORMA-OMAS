@@ -18,6 +18,12 @@ const { ClientSecretCredential } = require('@azure/identity');
 const LOCAL_FOLDER = '/var/www/fmt/archivos/generados/';
 const LOG_FILE = '/var/www/fmt/archivos/generados/LOGS/uploader.log';
 
+// Carpeta espejo oculta (los usuarios no la ven): misma jerarquía de
+// mes/módulo/sede/archivo que la carpeta pública de PDFs, pero dedicada a
+// que la plataforma (sp_reader.js / búsqueda unificada) la lea de vuelta.
+// El JSON de cada registro se sube aquí, nunca a la carpeta pública.
+const SHAREPOINT_CODIFICACION_PATH = 'Documentos compartidos/Codificación Documentos OMAS';
+
 function logMessage(message) {
     const now = new Date().toISOString();
     fs.appendFileSync(LOG_FILE, `[${now}] ${message}\n`);
@@ -50,33 +56,26 @@ const folderMap = {
     'control_cantidad': 'Control de Cantidad Producto en Bulto',
     'control_cantidad_zs': 'Control de Cantidad ZS',
     'control_cantidad_zs_pdf': 'Control de Cantidad ZS',
-    'control_familiar': 'Control Familiar',
-    'control_familiar_pdf': 'Control Familiar',
     'empaque_v2': 'Control de Empaque V2',
+    'envasado_v2': 'Linea de Envasado V2',
     'empaque_pdf': 'Control de Empaque',
-    'envasado': 'Linea de Envasado',
-    'envasado_pdf': 'Linea de Envasado',
-    'envasadozs': 'Linea de Envasado ZS',
     'excelC_M': 'Control de Molienda',
     'excelC_MZS': 'Control de Molienda ZS',
     'excelS_M': 'Solicitudes de Mantenimiento',
     'excelS_MZS': 'Solicitudes de Mantenimiento ZS',
     'pdfsC_M': 'Control de Molienda',
-    'pdfsINS': 'Inspecciones de Bodega',
     'pdfsS_M': 'Solicitudes de Mantenimiento',
     'pdfsS_MZS': 'Solicitudes de Mantenimiento ZS',
-    'premezclas': 'Premezclas y Harinas Especiales',
-    'premezclas_pdfs': 'Premezclas y Harinas Especiales',
-    'proceso_molienda': 'Proceso de Molienda',
-    'proces_molienda_pdf': 'Proceso de Molienda',
+    'premezclas_v2': 'Premezclas y Harinas Especiales V2',
     'Purga De proceso': 'Purga del Proceso',
     'Purga del proceso_pdf': 'Purga del Proceso',
-    'reprocesos_zc': 'Control de Reprocesos ZC',
-    'reprocesos_zc_pdf': 'Control de Reprocesos ZC',
-    'reprocesos_zs': 'Control de Reprocesos ZS',
+    'purga_v2': 'Purga del Proceso V2',
+    'preparacion_mejorante': 'Preparación de Mejorante',
+    'proceso_v2': 'Proceso de Molienda V2',
+    'reprocesos_v2': 'Control de Reprocesos V2',
     'molienda': 'Molienda V2',
     'liberaciones_mant': 'Liberaciones Mantenimiento',
-    'verificaciones': 'Verificaciones de Maquinas',
+    'orden_mantenimiento': 'Orden de Mantenimiento',
     'maquinas_v2': 'Verificación de Máquinas V2',
     'bodegas_v2': 'Inspección de Bodegas V2',
     'Calidad': 'Calidad',
@@ -90,10 +89,13 @@ const folderMap = {
 
 async function uploadFile(client, driveId, filePath, monthFolder) {
     const ext = path.extname(filePath).toLowerCase();
-    // PDFs van a la galería pública, JSONs y otros datos van al almacén privado
-    const sharepointFolder = (ext === '.pdf')
-        ? (process.env.SHAREPOINT_PDF_PATH || process.env.SHAREPOINT_UPLOAD_PATH)
-        : process.env.SHAREPOINT_UPLOAD_PATH;
+    // JSON => carpeta espejo oculta "Codificación" (la lee la plataforma).
+    // PDF/Excel/otros => carpeta pública (la ven los usuarios).
+    // .trim() defiende contra espacios accidentales al final del valor en .env,
+    // que de otro modo crean una carpeta de destino distinta a la esperada.
+    const sharepointFolder = (ext === '.json')
+        ? SHAREPOINT_CODIFICACION_PATH
+        : (process.env.SHAREPOINT_PDF_PATH || process.env.SHAREPOINT_UPLOAD_PATH).trim();
     let relativePath = path.relative(LOCAL_FOLDER, filePath).replace(/\\/g, '/');
 
     // Reemplazar el primer segmento de carpeta con el nombre legible
@@ -193,9 +195,16 @@ async function main() {
                 }
 
                 // Determinar la carpeta de mes correcta basándose en la fecha del archivo.
-                // Buscar patrón YYYY-MM-DD en el nombre del archivo (ej: Molienda_ZC_2026-04-08.json)
+                // 1) Patrón YYYY-MM-DD (ej: Molienda_ZC_2026-04-08.json) → usa ese día.
+                // 2) Si no hay día, patrón YYYY-MM suelto (ej: ENV_MOGOLLA_2026-08.json,
+                //    EMPAQUE_LOTE_X_2026-08.json) → usa ese mes. Sin este fallback, los
+                //    acumuladores mensuales (envasado_v2, empaque_v2, bodegas_v2, bulto)
+                //    subidos después de que cambia el mes caían en la carpeta del mes de
+                //    subida en vez del mes real del archivo, rompiendo el rastreo por fecha.
+                // 3) Si el nombre no trae ninguna fecha, cae al mes actual (comportamiento previo).
                 const dateMatch = fileName.match(/(\d{4}-\d{2})-\d{2}/);
-                const monthFolder = dateMatch ? dateMatch[1] : defaultMonthFolder;
+                const monthOnlyMatch = !dateMatch ? fileName.match(/(\d{4}-\d{2})/) : null;
+                const monthFolder = dateMatch ? dateMatch[1] : (monthOnlyMatch ? monthOnlyMatch[1] : defaultMonthFolder);
 
                 try {
                     const uploadResult = await uploadFile(client, driveId, filePath, monthFolder);

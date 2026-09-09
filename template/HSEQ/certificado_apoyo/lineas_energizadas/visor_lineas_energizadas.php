@@ -101,9 +101,6 @@ $CONTROLES_LABELS = [
         .ctrl-hdr th { background:#003366; color:#fff; font-size:7pt; padding:5px 4px; text-transform:uppercase; }
         .ctrl-row td { font-size:8pt; padding:4px 6px; }
         .ctrl-row:nth-child(even) td { background:#FFF5F5; }
-        .firmas-hdr th { background:#003366; color:#fff; font-size:7pt; padding:5px 4px; text-transform:uppercase; text-align:center; }
-        .firma-td { font-size:8pt; padding:4px 6px; text-align:center; }
-        .firma-img { max-height:40px; max-width:120px; }
         .separator { height:12px; }
         @media print {
             body { background:#fff; padding:0; }
@@ -128,7 +125,6 @@ $CONTROLES_LABELS = [
     $d = $reg['datos'];
     $fecha_fmt = !empty($d['fecha']) ? date('d/m/Y', strtotime($d['fecha'])) : '—';
     $controles = $d['controles'] ?? [];
-    $firmas    = $d['firmas']    ?? [];
 ?>
 <div class="registro-block">
 
@@ -204,31 +200,6 @@ $CONTROLES_LABELS = [
         <?php endforeach; ?>
     </table>
 
-    <?php if (!empty($firmas)): ?>
-    <table style="margin-top:0;">
-        <tr class="sec-title"><td colspan="5">FIRMAS, EMISIÓN Y REVALIDACIONES</td></tr>
-        <tr class="firmas-hdr">
-            <th style="width:12%;">Fecha</th>
-            <th style="width:25%;">Nombres y Apellidos</th>
-            <th style="width:14%;">Cédula</th>
-            <th style="width:18%;">Cargo</th>
-            <th>Firma</th>
-        </tr>
-        <?php foreach ($firmas as $firma): if (empty($firma['nombre']) && empty($firma['cedula'])) continue; ?>
-        <tr>
-            <td class="firma-td"><?= htmlspecialchars($firma['fecha'] ?? '') ?></td>
-            <td class="firma-td"><?= htmlspecialchars($firma['nombre'] ?? '') ?></td>
-            <td class="firma-td"><?= htmlspecialchars($firma['cedula'] ?? '') ?></td>
-            <td class="firma-td"><?= htmlspecialchars($firma['cargo'] ?? '') ?></td>
-            <td class="firma-td">
-                <?php if (!empty($firma['firma_img'])): ?>
-                    <img src="<?= htmlspecialchars($firma['firma_img']) ?>" class="firma-img" alt="Firma">
-                <?php else: ?>&nbsp;<?php endif; ?>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-    <?php endif; ?>
 
 </div>
 <?php if ($idx < count($registros) - 1): ?><div class="separator"></div><?php endif; ?>

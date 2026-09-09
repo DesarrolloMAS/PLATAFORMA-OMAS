@@ -18,35 +18,27 @@ $archivos = [];
 if (file_exists($target_dir)) {
     $files = scandir($target_dir);
     foreach ($files as $file) {
-        if ($file === '.' || $file === '..') continue;
-        if (strtolower(pathinfo($file, PATHINFO_EXTENSION)) !== 'json') continue;
+        // Cada inspección vive en su propio archivo "INSPECCION_...json" —
+        // se excluye el catálogo de dosificadores y cualquier otro json que
+        // no sea una inspección individual.
+        if (!preg_match('/^INSPECCION_.*\.json$/i', $file)) continue;
 
         $filepath = $target_dir . $file;
-        $content  = json_decode(file_get_contents($filepath), true) ?: [];
+        $reg = json_decode(file_get_contents($filepath), true);
+        if (!is_array($reg) || empty($reg['datos'])) continue;
 
-        $total_registros  = count($content);
-        $ultimo_registro  = !empty($content) ? end($content) : null;
-
-        $last_fecha         = $ultimo_registro['datos']['fecha']            ?? '—';
-        $last_dosificador   = $ultimo_registro['datos']['dosificador']       ?? '—';
-        $last_micro         = $ultimo_registro['datos']['microingrediente'] ?? '—';
-        $last_cumple        = $ultimo_registro['datos']['cumple']           ?? null;
-        $last_usuario       = $ultimo_registro['usuario_sys']               ?? '—';
-
-        // Extraer periodo del nombre de archivo: DOSIFICADORES_YYYY-MM.json
-        $periodo = str_replace(['DOSIFICADORES_', '.json'], '', $file);
+        $d = $reg['datos'];
 
         $archivos[] = [
-            'filename'       => $file,
-            'periodo'        => $periodo,
-            'registros'      => $total_registros,
-            'ultima_fecha'   => $last_fecha,
-            'dosificador'    => $last_dosificador,
-            'microingrediente' => $last_micro,
-            'cumple'         => $last_cumple,
-            'ultimo_usuario' => $last_usuario,
-            'mod_time'       => filemtime($filepath),
-            'fecha_mod'      => date('d M Y - H:i', filemtime($filepath)),
+            'filename'         => $file,
+            'id_registro'      => $reg['id_registro'] ?? '',
+            'ultima_fecha'     => $d['fecha']            ?? '—',
+            'dosificador'      => $d['dosificador']       ?? '—',
+            'microingrediente' => $d['microingrediente'] ?? '—',
+            'cumple'           => $d['cumple']           ?? null,
+            'ultimo_usuario'   => $reg['usuario_sys']    ?? '—',
+            'mod_time'         => filemtime($filepath),
+            'fecha_mod'        => date('d M Y - H:i', filemtime($filepath)),
         ];
     }
 

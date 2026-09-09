@@ -64,7 +64,7 @@ $datos_existentes = file_exists($archivo_json)
 
 $datos_existentes[] = $nuevo_registro;
 
-if (@file_put_contents($archivo_json, json_encode($datos_existentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+if (@file_put_contents($archivo_json, json_encode($datos_existentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX)) {
     echo json_encode([
         'status'  => 'success',
         'message' => 'Registro guardado correctamente.',

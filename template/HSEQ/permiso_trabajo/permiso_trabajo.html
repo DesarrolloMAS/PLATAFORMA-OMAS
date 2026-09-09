@@ -305,6 +305,131 @@
             line-height: 1;
             z-index: 2;
         }
+
+        /* ── FIRMA AMPLIADA (accesibilidad táctil) ── */
+        .firma-canvas-wrap.firma-clickable {
+            cursor: pointer;
+        }
+
+        .firma-canvas-wrap.firma-clickable canvas {
+            pointer-events: none;
+        }
+
+        .firma-canvas-wrap.firma-clickable.firma-vacia::before {
+            content: "✎ Firmar";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            background: #fff;
+            z-index: 1;
+        }
+
+        .firma-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .firma-modal-overlay.abierto {
+            display: flex;
+        }
+
+        .firma-modal-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 20px;
+            width: 100%;
+            max-width: 640px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .firma-modal-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        .firma-modal-canvas-wrap {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 600 / 280;
+        }
+
+        .firma-modal-canvas-wrap canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
+            touch-action: none;
+        }
+
+        .firma-modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-modal-firma {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-modal-firma:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-modal-firma.btn-modal-guardar {
+            background: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+
+        .btn-modal-firma.btn-modal-guardar:hover {
+            background: #fff;
+        }
+
+        .btn-modal-firma.btn-modal-limpiar {
+            color: var(--warning);
+        }
+
+        @media (max-width: 480px) {
+            .firma-modal-actions {
+                flex-wrap: wrap;
+            }
+
+            .btn-modal-firma {
+                flex: 1;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -399,10 +524,13 @@
                         </select>
                         <input type="text" name="vigia_doc" class="form-control" placeholder="N° Documento">
                         <input type="text" name="vigia_dia" class="form-control" placeholder="Día (ej. Lunes)">
-                        <div class="firma-canvas-wrap" id="wrapVigiaFirma">
+                        <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapVigiaFirma"
+                            role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                            onclick="abrirFirmaModal('canvasVigiaFirma')"
+                            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasVigiaFirma')}">
                             <canvas id="canvasVigiaFirma" width="200" height="46"></canvas>
                             <button type="button" class="btn-clear-firma"
-                                onclick="limpiarCanvasFijo('canvasVigiaFirma')">✕</button>
+                                onclick="event.stopPropagation(); limpiarCanvasFijo('canvasVigiaFirma')">✕</button>
                         </div>
                     </div>
                 </div>
@@ -424,10 +552,13 @@
                         </select>
                         <input type="text" name="emergencia_doc" class="form-control" placeholder="N° Documento">
                         <input type="text" name="emergencia_dia" class="form-control" placeholder="Día (ej. Lunes)">
-                        <div class="firma-canvas-wrap" id="wrapEmergenciaFirma">
+                        <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapEmergenciaFirma"
+                            role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                            onclick="abrirFirmaModal('canvasEmergenciaFirma')"
+                            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasEmergenciaFirma')}">
                             <canvas id="canvasEmergenciaFirma" width="200" height="46"></canvas>
                             <button type="button" class="btn-clear-firma"
-                                onclick="limpiarCanvasFijo('canvasEmergenciaFirma')">✕</button>
+                                onclick="event.stopPropagation(); limpiarCanvasFijo('canvasEmergenciaFirma')">✕</button>
                         </div>
                     </div>
                 </div>
@@ -585,10 +716,14 @@
                                         <option value="Domingo">Domingo</option>
                                     </select></td>
                                 <td>
-                                    <div class="firma-canvas-wrap" id="wrapRespFirma1"><canvas id="canvasRespFirma1"
-                                            width="200" height="46"></canvas><button type="button"
-                                            class="btn-clear-firma"
-                                            onclick="limpiarCanvasFijo('canvasRespFirma1')">✕</button></div>
+                                    <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapRespFirma1"
+                                        role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                        onclick="abrirFirmaModal('canvasRespFirma1')"
+                                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasRespFirma1')}"><canvas
+                                            id="canvasRespFirma1" width="200" height="46"></canvas><button
+                                            type="button" class="btn-clear-firma"
+                                            onclick="event.stopPropagation(); limpiarCanvasFijo('canvasRespFirma1')">✕</button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -606,10 +741,14 @@
                                         <option value="Domingo">Domingo</option>
                                     </select></td>
                                 <td>
-                                    <div class="firma-canvas-wrap" id="wrapRespFirma2"><canvas id="canvasRespFirma2"
-                                            width="200" height="46"></canvas><button type="button"
-                                            class="btn-clear-firma"
-                                            onclick="limpiarCanvasFijo('canvasRespFirma2')">✕</button></div>
+                                    <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapRespFirma2"
+                                        role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                        onclick="abrirFirmaModal('canvasRespFirma2')"
+                                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasRespFirma2')}"><canvas
+                                            id="canvasRespFirma2" width="200" height="46"></canvas><button
+                                            type="button" class="btn-clear-firma"
+                                            onclick="event.stopPropagation(); limpiarCanvasFijo('canvasRespFirma2')">✕</button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -627,10 +766,14 @@
                                         <option value="Domingo">Domingo</option>
                                     </select></td>
                                 <td>
-                                    <div class="firma-canvas-wrap" id="wrapRespFirma3"><canvas id="canvasRespFirma3"
-                                            width="200" height="46"></canvas><button type="button"
-                                            class="btn-clear-firma"
-                                            onclick="limpiarCanvasFijo('canvasRespFirma3')">✕</button></div>
+                                    <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapRespFirma3"
+                                        role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                        onclick="abrirFirmaModal('canvasRespFirma3')"
+                                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasRespFirma3')}"><canvas
+                                            id="canvasRespFirma3" width="200" height="46"></canvas><button
+                                            type="button" class="btn-clear-firma"
+                                            onclick="event.stopPropagation(); limpiarCanvasFijo('canvasRespFirma3')">✕</button>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -648,10 +791,14 @@
                                         <option value="Domingo">Domingo</option>
                                     </select></td>
                                 <td>
-                                    <div class="firma-canvas-wrap" id="wrapRespFirma4"><canvas id="canvasRespFirma4"
-                                            width="200" height="46"></canvas><button type="button"
-                                            class="btn-clear-firma"
-                                            onclick="limpiarCanvasFijo('canvasRespFirma4')">✕</button></div>
+                                    <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapRespFirma4"
+                                        role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                        onclick="abrirFirmaModal('canvasRespFirma4')"
+                                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasRespFirma4')}"><canvas
+                                            id="canvasRespFirma4" width="200" height="46"></canvas><button
+                                            type="button" class="btn-clear-firma"
+                                            onclick="event.stopPropagation(); limpiarCanvasFijo('canvasRespFirma4')">✕</button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -711,9 +858,12 @@
                                 <label class="form-label" style="color:#fff; margin-bottom:10px;">${f}</label>
                                 <input type="text" name="firma_n_${i}" class="form-control" placeholder="Nombre" style="margin-bottom:8px;">
                                 <input type="text" name="firma_id_${i}" class="form-control" placeholder="Identificación" style="margin-bottom:8px;">
-                                <div class="firma-canvas-wrap">
+                                <div class="firma-canvas-wrap firma-clickable firma-vacia"
+                                    role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                    onclick="abrirFirmaModal('canvasAutoFirma_${i}')"
+                                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasAutoFirma_${i}')}">
                                     <canvas id="canvasAutoFirma_${i}" width="200" height="46"></canvas>
-                                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasAutoFirma_${i}')">✕</button>
+                                    <button type="button" class="btn-clear-firma" onclick="event.stopPropagation(); limpiarCanvasFijo('canvasAutoFirma_${i}')">✕</button>
                                 </div>
                             </div>
                         `);
@@ -755,10 +905,13 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Firma</label>
-                        <div class="firma-canvas-wrap" id="wrapSuspFirma">
+                        <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapSuspFirma"
+                            role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                            onclick="abrirFirmaModal('canvasSuspFirma')"
+                            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasSuspFirma')}">
                             <canvas id="canvasSuspFirma" width="200" height="46"></canvas>
                             <button type="button" class="btn-clear-firma"
-                                onclick="limpiarCanvasFijo('canvasSuspFirma')">✕</button>
+                                onclick="event.stopPropagation(); limpiarCanvasFijo('canvasSuspFirma')">✕</button>
                         </div>
                     </div>
                 </div>
@@ -776,10 +929,13 @@
                             name="susp_causa" class="form-control"></div>
                     <div class="form-group">
                         <label class="form-label">Firma del Coordinador</label>
-                        <div class="firma-canvas-wrap" id="wrapSuspCoordFirma">
+                        <div class="firma-canvas-wrap firma-clickable firma-vacia" id="wrapSuspCoordFirma"
+                            role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                            onclick="abrirFirmaModal('canvasSuspCoordFirma')"
+                            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasSuspCoordFirma')}">
                             <canvas id="canvasSuspCoordFirma" width="200" height="46"></canvas>
                             <button type="button" class="btn-clear-firma"
-                                onclick="limpiarCanvasFijo('canvasSuspCoordFirma')">✕</button>
+                                onclick="event.stopPropagation(); limpiarCanvasFijo('canvasSuspCoordFirma')">✕</button>
                         </div>
                     </div>
                     <div class="form-group"><label class="form-label">Fecha</label><input type="date" name="susp_fecha"
@@ -804,12 +960,25 @@
         </form>
     </div>
 
+    <!-- MODAL DE FIRMA AMPLIADA (accesibilidad táctil) -->
+    <div id="firmaModalOverlay" class="firma-modal-overlay" role="dialog" aria-modal="true" aria-label="Firma ampliada">
+        <div class="firma-modal-box">
+            <div class="firma-modal-title">Firme en el recuadro</div>
+            <div class="firma-modal-canvas-wrap">
+                <canvas id="firmaModalCanvas" width="600" height="280"></canvas>
+            </div>
+            <div class="firma-modal-actions">
+                <button type="button" class="btn-modal-firma btn-modal-cancelar" id="firmaModalCancelar">Cancelar</button>
+                <button type="button" class="btn-modal-firma btn-modal-limpiar" id="firmaModalLimpiar">Limpiar</button>
+                <button type="button" class="btn-modal-firma btn-modal-guardar" id="firmaModalGuardar">Guardar Firma</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let trajCount = 0;
 
-        function initCanvasFirma(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
+        function attachDrawEvents(canvas) {
             const ctx = canvas.getContext('2d');
             ctx.strokeStyle = '#003366';
             ctx.lineWidth = 1.5;
@@ -831,9 +1000,16 @@
             canvas.addEventListener('touchend', () => { drawing = false; });
         }
 
+        function initCanvasFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            attachDrawEvents(canvas);
+        }
+
         function limpiarCanvasFijo(canvasId) {
             const canvas = document.getElementById(canvasId);
             if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+            actualizarEstadoFirma(canvasId);
         }
 
         function obtenerFirmaImg(canvasId) {
@@ -842,6 +1018,52 @@
             const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
             return Array.from(imgData).some((v, idx) => idx % 4 === 3 && v > 0) ? canvas.toDataURL('image/png') : null;
         }
+
+        function actualizarEstadoFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const wrap = canvas && canvas.closest('.firma-canvas-wrap');
+            if (wrap) wrap.classList.toggle('firma-vacia', !obtenerFirmaImg(canvasId));
+        }
+
+        /* ── FIRMA AMPLIADA ── */
+        const firmaModalOverlay = document.getElementById('firmaModalOverlay');
+        const firmaModalCanvas = document.getElementById('firmaModalCanvas');
+        attachDrawEvents(firmaModalCanvas);
+        let firmaModalTargetId = null;
+
+        function abrirFirmaModal(canvasId) {
+            firmaModalTargetId = canvasId;
+            firmaModalCanvas.getContext('2d').clearRect(0, 0, firmaModalCanvas.width, firmaModalCanvas.height);
+            const target = document.getElementById(canvasId);
+            const firmaActual = target && obtenerFirmaImg(canvasId);
+            if (firmaActual) {
+                const img = new Image();
+                img.onload = () => firmaModalCanvas.getContext('2d').drawImage(img, 0, 0, firmaModalCanvas.width, firmaModalCanvas.height);
+                img.src = firmaActual;
+            }
+            firmaModalOverlay.classList.add('abierto');
+        }
+
+        function cerrarFirmaModal() {
+            firmaModalOverlay.classList.remove('abierto');
+            firmaModalTargetId = null;
+        }
+
+        document.getElementById('firmaModalCancelar').addEventListener('click', cerrarFirmaModal);
+        document.getElementById('firmaModalLimpiar').addEventListener('click', () => {
+            firmaModalCanvas.getContext('2d').clearRect(0, 0, firmaModalCanvas.width, firmaModalCanvas.height);
+        });
+        document.getElementById('firmaModalGuardar').addEventListener('click', () => {
+            if (!firmaModalTargetId) return;
+            const target = document.getElementById(firmaModalTargetId);
+            if (target) {
+                const tctx = target.getContext('2d');
+                tctx.clearRect(0, 0, target.width, target.height);
+                tctx.drawImage(firmaModalCanvas, 0, 0, target.width, target.height);
+                actualizarEstadoFirma(firmaModalTargetId);
+            }
+            cerrarFirmaModal();
+        });
 
         function agregarTrabajador() {
             const tbody = document.querySelector('#tablaTrabajadores tbody');
@@ -855,15 +1077,18 @@
             <td><input type="date" name="t_fecha_curso[]" class="form-control"></td>
             <td><select name="t_dia[]" class="form-control"><option value="">Sel...</option><option value="Lunes">Lunes</option><option value="Martes">Martes</option><option value="Miercoles">Miercoles</option><option value="Jueves">Jueves</option><option value="Viernes">Viernes</option><option value="Sabado">Sábado</option><option value="Domingo">Domingo</option></select></td>
             <td>
-                <div class="firma-canvas-wrap" style="min-width:120px;">
+                <div class="firma-canvas-wrap firma-clickable firma-vacia" style="min-width:120px;"
+                    role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                    onclick="abrirFirmaModal('canvasTrabFirma_${trajCount}')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasTrabFirma_${trajCount}')}">
                     <canvas id="canvasTrabFirma_${trajCount}" width="200" height="46"></canvas>
-                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasTrabFirma_${trajCount}')">✕</button>
+                    <button type="button" class="btn-clear-firma"
+                        onclick="event.stopPropagation(); limpiarCanvasFijo('canvasTrabFirma_${trajCount}')">✕</button>
                 </div>
             </td>
             <td><button type="button" class="btn-remove" onclick="this.closest('tr').remove()">X</button></td>
         `;
             tbody.appendChild(tr);
-            initCanvasFirma('canvasTrabFirma_' + trajCount);
         }
 
         const MAX_SISTEMAS = 4;
@@ -950,13 +1175,6 @@
                     })
                     .catch(() => { });
             }
-
-            // Inicializar canvas fijos
-            ['canvasVigiaFirma', 'canvasEmergenciaFirma',
-                'canvasRespFirma1', 'canvasRespFirma2', 'canvasRespFirma3', 'canvasRespFirma4',
-                'canvasAutoFirma_0', 'canvasAutoFirma_1', 'canvasAutoFirma_2', 'canvasAutoFirma_3',
-                'canvasSuspFirma', 'canvasSuspCoordFirma'
-            ].forEach(id => initCanvasFirma(id));
         });
 
         document.getElementById('permisoForm').addEventListener('submit', function (e) {

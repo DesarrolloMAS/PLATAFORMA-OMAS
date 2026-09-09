@@ -235,7 +235,7 @@ if (file_exists($target_dir)) {
             <h1 class="main-title">Consolidado de Empaques</h1>
             <div class="sub-title">Sede Operativa: [ <?= htmlspecialchars($sede) ?> ]</div>
         </div>
-        <a href="../revisiones_almacen.html" class="btn-back">← Menú de Revisiones</a>
+        <a href="../menu_revisiones_almacen.html" class="btn-back">← Menú de Revisiones</a>
     </div>
 
     <div class="stats-banner">

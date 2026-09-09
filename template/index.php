@@ -53,9 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     case '1': // Rol alto en Operaciones
                         header('Location: ./template/menu_adm.html');
                         exit();
-                    case '3': // Rol bajo en Operaciones
-                        header('Location: ./template/menu.html');
-                        exit();
                     default:
                         header('Location: ./template/problemas.html');
                         exit();
@@ -70,9 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         exit();
                     case '1': // Rol alto en Calidad
                         header('Location: ./template/menu_adm_calidad.html');
-                        exit();
-                    case '3': // Rol bajo en Calidad
-                        header('Location: ./template/menu_calidad.html');
                         exit();
                     default:
                         header('Location: ./template/problemas.html');

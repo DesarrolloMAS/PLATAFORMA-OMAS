@@ -9,6 +9,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 $sede = $data['sede'] ?? '';
 $fecha = $data['fecha'] ?? '';
+$esExtra = !empty($data['extra']);
 $sapData = $data['sap'] ?? [];
 
 if (!$sede || !$fecha) {
@@ -17,7 +18,7 @@ if (!$sede || !$fecha) {
 }
 
 $mesFile = substr($fecha, 0, 7) . '.json';
-$file_path = "../../archivos/generados/molienda/" . $sede . "/" . $mesFile;
+$file_path = "../../archivos/generados/molienda/" . $sede . ($esExtra ? "/extra/" : "/") . $mesFile;
 
 if (!file_exists($file_path)) {
     echo json_encode(['success' => false, 'error' => 'No existen registros para este mes']);

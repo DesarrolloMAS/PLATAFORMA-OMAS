@@ -23,8 +23,8 @@ if (!$registro) {
 
 $d         = $registro['datos'] ?? [];
 $acond     = $d['acondicionamiento'] ?? [];
-$lotes_a   = $acond['lotes'] ?? array_fill(0, 5, []);
-$mezclas   = $acond['mezclas_trigo'] ?? [];
+// 'silos' es el formato vigente; 'lotes' se conserva como fallback de registros antiguos
+$silos_a   = $acond['silos'] ?? $acond['lotes'] ?? array_fill(0, 5, []);
 $mol       = $d['molienda']['turnos'] ?? array_fill(0, 5, []);
 $ctrl_prod = $d['control_producto'] ?? [];
 $rupturas  = $d['control_rupturas'] ?? [];
@@ -309,7 +309,7 @@ function fmtFecha($iso) {
                     <tr>
                         <th style="width:160px;text-align:left;">Campo</th>
                         <?php for($i=1;$i<=5;$i++): ?>
-                        <th>Lote <?= $i ?></th>
+                        <th>Silo <?= $i ?></th>
                         <?php endfor; ?>
                     </tr>
                 </thead>
@@ -324,13 +324,17 @@ function fmtFecha($iso) {
                     ['Paradas HI-HF',     fn($l) => v($l,'paradas_hi_hf')],
                     ['Paradas Motivo',    fn($l) => v($l,'paradas_motivo')],
                     ['Horas Mojo',        fn($l) => hm($l,'horas_mojo_hrs','horas_mojo_min')],
+                    // Fallback: en registros antiguos estos totales eran únicos por día (no por silo)
+                    ['Total Trigo (kg)',       fn($l, $i) => v($l,'total_trigo')       !== '—' ? v($l,'total_trigo')       : ($i === 0 ? v($acond,'total_trigo')       : '—')],
+                    ['Total Trigo MYFC (kg)',  fn($l, $i) => v($l,'total_trigo_myfc')  !== '—' ? v($l,'total_trigo_myfc')  : ($i === 0 ? v($acond,'total_trigo_myfc')  : '—')],
+                    ['Total Agua (L)',         fn($l, $i) => v($l,'total_agua')        !== '—' ? v($l,'total_agua')        : ($i === 0 ? v($acond,'total_agua')        : '—')],
                 ];
                 foreach($acond_rows as [$label, $fn]):
                 ?>
                     <tr>
                         <td class="row-label"><?= $label ?></td>
-                        <?php foreach($lotes_a as $lote): ?>
-                        <td><?= $fn($lote) ?></td>
+                        <?php foreach($silos_a as $i => $silo): ?>
+                        <td><?= $fn($silo, $i) ?></td>
                         <?php endforeach; ?>
                     </tr>
                 <?php endforeach; ?>
@@ -338,45 +342,62 @@ function fmtFecha($iso) {
             </table>
         </div>
 
-        <div class="totales-grid">
-            <div class="dato-item">
-                <span class="dato-label">Total Trigo (kg)</span>
-                <span class="dato-val"><?= v($acond,'total_trigo') ?></span>
+        <?php
+        $huboMezclas = false;
+        foreach ($silos_a as $silo) { if (!empty($silo['mezclas_trigo'])) { $huboMezclas = true; break; } }
+        $mezclasLegacy = $acond['mezclas_trigo'] ?? [];
+        ?>
+        <?php if ($huboMezclas): ?>
+            <?php foreach ($silos_a as $i => $silo): ?>
+                <?php $mezSilo = $silo['mezclas_trigo'] ?? []; if (empty($mezSilo)) continue; ?>
+                <div class="subsection-label">Mezclas de Trigo — Silo <?= $i + 1 ?></div>
+                <div class="table-scroll">
+                    <table class="v-table">
+                        <thead>
+                            <tr>
+                                <th style="width:36px;">#</th>
+                                <th style="text-align:left;">Trigo (variedad)</th>
+                                <th style="text-align:left;">Lote</th>
+                                <th>% Mezcla</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($mezSilo as $j => $mez): ?>
+                            <tr>
+                                <td style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);"><?= $j+1 ?></td>
+                                <td style="text-align:left;"><?= v($mez,'trigo') ?></td>
+                                <td style="text-align:left;"><?= v($mez,'lote') ?></td>
+                                <td><?= v($mez,'porcentaje') ?><?= ($mez['porcentaje'] ?? '') !== '' ? ' %' : '' ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endforeach; ?>
+        <?php elseif (!empty($mezclasLegacy)): ?>
+            <div class="subsection-label">Mezclas de Trigo (registro histórico)</div>
+            <div class="table-scroll">
+                <table class="v-table">
+                    <thead>
+                        <tr>
+                            <th style="width:36px;">#</th>
+                            <th style="text-align:left;">Trigo (variedad)</th>
+                            <th style="text-align:left;">Lote</th>
+                            <th>% Mezcla</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($mezclasLegacy as $i => $mez): ?>
+                        <tr>
+                            <td style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);"><?= $i+1 ?></td>
+                            <td style="text-align:left;"><?= v($mez,'trigo') ?></td>
+                            <td style="text-align:left;"><?= v($mez,'lote') ?></td>
+                            <td><?= v($mez,'porcentaje') ?><?= ($mez['porcentaje'] ?? '') !== '' ? ' %' : '' ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
-            <div class="dato-item">
-                <span class="dato-label">Total Trigo MYFC (kg)</span>
-                <span class="dato-val"><?= v($acond,'total_trigo_myfc') ?></span>
-            </div>
-            <div class="dato-item">
-                <span class="dato-label">Total Agua (L)</span>
-                <span class="dato-val"><?= v($acond,'total_agua') ?></span>
-            </div>
-        </div>
-
-        <?php if(!empty($mezclas)): ?>
-        <div class="subsection-label">Mezclas de Trigo</div>
-        <div class="table-scroll">
-            <table class="v-table">
-                <thead>
-                    <tr>
-                        <th style="width:36px;">#</th>
-                        <th style="text-align:left;">Trigo (variedad)</th>
-                        <th style="text-align:left;">Lote</th>
-                        <th>% Mezcla</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php foreach($mezclas as $i => $mez): ?>
-                    <tr>
-                        <td style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);"><?= $i+1 ?></td>
-                        <td style="text-align:left;"><?= v($mez,'trigo') ?></td>
-                        <td style="text-align:left;"><?= v($mez,'lote') ?></td>
-                        <td><?= v($mez,'porcentaje') ?><?= ($mez['porcentaje'] ?? '') !== '' ? ' %' : '' ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
         <?php endif; ?>
     </div>
 
@@ -436,6 +457,7 @@ function fmtFecha($iso) {
                         <th>Ác. Ascórbico</th>
                         <th>Verif. Bultos</th>
                         <th>Peso Prom. (kg)</th>
+                        <th>Líder</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -451,6 +473,7 @@ function fmtFecha($iso) {
                         <td><?= v($cp,'acido_ascorbico') ?></td>
                         <td><?= v($cp,'verificacion_bultos') ?></td>
                         <td><?= v($cp,'peso_promedio') ?></td>
+                        <td style="text-align:left;"><?= v($cp,'lider') ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
@@ -460,15 +483,24 @@ function fmtFecha($iso) {
             <p style="color:var(--muted);font-size:13px;font-family:'Space Mono',monospace;">Sin filas registradas.</p>
         <?php endif; ?>
 
+        <?php
+        // 'lider' por fila es el formato vigente; lider_turno_dia/noche se muestran solo si vienen de un registro antiguo
+        $liderDiaLegacy   = v($d,'lider_turno_dia', '');
+        $liderNocheLegacy = v($d,'lider_turno_noche', '');
+        ?>
         <div class="firmas-grid">
+            <?php if ($liderDiaLegacy !== ''): ?>
             <div class="dato-item">
-                <span class="dato-label">Líder Turno Día</span>
-                <span class="dato-val plain"><?= v($d,'lider_turno_dia') ?></span>
+                <span class="dato-label">Líder Turno Día (histórico)</span>
+                <span class="dato-val plain"><?= $liderDiaLegacy ?></span>
             </div>
+            <?php endif; ?>
+            <?php if ($liderNocheLegacy !== ''): ?>
             <div class="dato-item">
-                <span class="dato-label">Líder Turno Noche</span>
-                <span class="dato-val plain"><?= v($d,'lider_turno_noche') ?></span>
+                <span class="dato-label">Líder Turno Noche (histórico)</span>
+                <span class="dato-val plain"><?= $liderNocheLegacy ?></span>
             </div>
+            <?php endif; ?>
             <div class="dato-item">
                 <span class="dato-label">Analista de Calidad</span>
                 <span class="dato-val plain"><?= v($d,'analista_calidad') ?></span>

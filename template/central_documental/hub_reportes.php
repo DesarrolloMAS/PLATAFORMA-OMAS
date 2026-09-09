@@ -7,17 +7,25 @@ $categorias = [
         ['id' => 'molienda_v2', 'nombre' => 'Control de Molienda', 'icon' => '🏭', 'color' => '#00f2ff', 'ruta' => '../../archivos/generados/molienda/', 'tipo' => 'json_daily'],
         ['id' => 'empaque_v2', 'nombre' => 'Control de Empaque', 'icon' => '📦', 'color' => '#f59e0b', 'ruta' => '../../archivos/generados/empaque_v2/', 'tipo' => 'json'],
         ['id' => 'bodegas_v2', 'nombre' => 'Inspección de Bodegas V2', 'icon' => '🏬', 'color' => '#10B981', 'ruta' => '../../archivos/generados/bodegas_v2/', 'tipo' => 'json'],
+        ['id' => 'premezclas_v2', 'nombre' => 'Premezclas y Harinas Especiales V2', 'icon' => '🌾', 'color' => '#FFB000', 'ruta' => '../../archivos/generados/premezclas_v2/', 'tipo' => 'json'],
+        ['id' => 'preparacion_mejorante', 'nombre' => 'Preparación de Mejorante', 'icon' => '🧪', 'color' => '#34d399', 'ruta' => '../../archivos/generados/preparacion_mejorante/', 'tipo' => 'json'],
+        ['id' => 'tara_seca', 'nombre' => 'Tara Seca', 'icon' => '⚖️', 'color' => '#749ABB', 'ruta' => '../../archivos/generados/Calidad/tara_seca/', 'tipo' => 'json'],
     ],
     'PRODUCCIÓN' => [
+        ['id' => 'proceso_v2', 'nombre' => 'Proceso de Molienda V2', 'icon' => '🔄', 'color' => '#0EA5E9', 'ruta' => '../../archivos/generados/proceso_v2/', 'tipo' => 'json'],
         ['id' => 'cantidad_bulto', 'nombre' => 'Control Cantidad en Bulto', 'icon' => '⚖️', 'color' => '#a855f7', 'ruta' => '../../archivos/generados/cantidad_bulto/', 'tipo' => 'json'],
+        ['id' => 'reprocesos_v2', 'nombre' => 'Control de Reprocesos V2', 'icon' => '♻️', 'color' => '#22C55E', 'ruta' => '../../archivos/generados/reprocesos_v2/', 'tipo' => 'reprocesos_v2'],
+        ['id' => 'envasado_v2', 'nombre' => 'Línea de Envasado V2', 'icon' => '🧴', 'color' => '#00F0FF', 'ruta' => '../../archivos/generados/envasado_v2/', 'tipo' => 'json'],
+        ['id' => 'purga_v2', 'nombre' => 'Purga de Proceso V2', 'icon' => '🌀', 'color' => '#EF4444', 'ruta' => '../../archivos/generados/purga_v2/', 'tipo' => 'json'],
     ],
     'MANTENIMIENTO' => [
         ['id' => 'maquinas_v2', 'nombre' => 'Verificación de Máquinas V2', 'icon' => '⚙️', 'color' => '#FF8A00', 'ruta' => '../../archivos/generados/maquinas_v2/', 'tipo' => 'maquinas_nested'],
+        ['id' => 'orden_mantenimiento', 'nombre' => 'Orden de Mantenimiento', 'icon' => '🛠️', 'color' => '#F97316', 'ruta' => '../../archivos/generados/orden_mantenimiento/', 'tipo' => 'json'],
     ],
 ];
 
 // Módulos cuyas carpetas están organizadas por sede (ZC / ZS) dentro de archivos/generados/
-$SEDE_SCOPED_MODULES = ['molienda_v2', 'empaque_v2', 'cantidad_bulto', 'bodegas_v2'];
+$SEDE_SCOPED_MODULES = ['molienda_v2', 'empaque_v2', 'cantidad_bulto', 'bodegas_v2', 'reprocesos_v2', 'envasado_v2', 'premezclas_v2', 'purga_v2', 'preparacion_mejorante', 'proceso_v2', 'orden_mantenimiento'];
 
 // Catálogo de bodegas para el filtro de búsqueda "Bodega" (mismo catálogo
 // que template/bodegas_v2/menu_bodegas_v2.php: ZS usa un listado distinto).
@@ -518,6 +526,22 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
             border-radius: 8px;
             font-size: 0.82rem;
         }
+
+        /* Aviso neutral: "esta búsqueda no aplica a este formato" — a
+           propósito NO usa .sp-error (rojo, reservado para fallas reales de
+           conexión o de la API). Tono del propio módulo, no de alarma. */
+        .sp-info-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+        }
+        .sp-info-card .sp-info-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .sp-info-card strong { color: var(--text-main); }
     </style>
 </head>
 <body>
@@ -664,6 +688,26 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
         </div>
         <div class="sp-results-grid" id="spEmpResultsGrid"></div>
 
+        <!-- Resultados Envasado V2 -->
+        <div class="sp-module-header" id="envHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #00F0FF; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">🧴 LÍNEA DE ENVASADO V2</span>
+        </div>
+        <div class="sp-status-line" id="spEnvStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spEnvStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spEnvResultsGrid"></div>
+
+        <!-- Resultados Premezclas V2 -->
+        <div class="sp-module-header" id="premHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #FFB000; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">🌾 PREMEZCLAS Y HARINAS ESPECIALES V2</span>
+        </div>
+        <div class="sp-status-line" id="spPremStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spPremStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spPremResultsGrid"></div>
+
         <!-- Resultados Cantidad en Bulto -->
         <div class="sp-module-header" id="bultoHeader" style="display:none; margin-top: 30px;">
             <span style="color: #a855f7; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">⚖️ CONTROL CANTIDAD EN BULTO</span>
@@ -673,6 +717,56 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
             <span id="spBultoStatusText"></span>
         </div>
         <div class="sp-results-grid" id="spBultoResultsGrid"></div>
+
+        <!-- Resultados Control de Reprocesos V2 -->
+        <div class="sp-module-header" id="reproHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #22C55E; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">♻️ CONTROL DE REPROCESOS V2</span>
+        </div>
+        <div class="sp-status-line" id="spReproStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spReproStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spReproResultsGrid"></div>
+
+        <!-- Resultados Preparación de Mejorante -->
+        <div class="sp-module-header" id="mejHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #34d399; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">🧪 PREPARACIÓN DE MEJORANTE</span>
+        </div>
+        <div class="sp-status-line" id="spMejStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spMejStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spMejResultsGrid"></div>
+
+        <!-- Resultados Proceso de Molienda V2 -->
+        <div class="sp-module-header" id="procHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #0EA5E9; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">🔄 PROCESO DE MOLIENDA V2</span>
+        </div>
+        <div class="sp-status-line" id="spProcStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spProcStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spProcResultsGrid"></div>
+
+        <!-- Resultados Orden de Mantenimiento -->
+        <div class="sp-module-header" id="ordenHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #F97316; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">🛠️ ORDEN DE MANTENIMIENTO</span>
+        </div>
+        <div class="sp-status-line" id="spOrdenStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spOrdenStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spOrdenResultsGrid"></div>
+
+        <!-- Resultados Tara Seca -->
+        <div class="sp-module-header" id="taraHeader" style="display:none; margin-top: 30px;">
+            <span style="color: #749ABB; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 2px;">⚖️ TARA SECA</span>
+        </div>
+        <div class="sp-status-line" id="spTaraStatusLine" style="display:none;">
+            <div class="spinner"></div>
+            <span id="spTaraStatusText"></span>
+        </div>
+        <div class="sp-results-grid" id="spTaraResultsGrid"></div>
 
         <!-- Resultados Máquinas V2 -->
         <div class="sp-module-header" id="maqHeader" style="display:none; margin-top: 30px;">
@@ -774,6 +868,21 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
     };
     const TURNO_HORA = { 1: '🕑 Tarde (14:00)', 2: '🌙 Noche (22:00)', 3: '🌅 Mañana (06:00)' };
 
+    // Tarjeta neutral para cuando el criterio de búsqueda activo (lote, por
+    // ahora) no aplica a un formato — en el tono del propio módulo, no en
+    // rojo de error, porque no es una falla: el formato simplemente no
+    // maneja ese dato.
+    function renderNoAplicaCard(nombreModulo, icon, color, criterio) {
+        return `
+        <div class="sp-info-card" style="border-color: ${color}55; background: ${color}0d;">
+            <div class="sp-info-icon" style="color: ${color};">${icon}</div>
+            <div>
+                <strong>${nombreModulo}</strong> no maneja ${criterio} — este formato no tiene ese dato.<br>
+                Búscalo por fecha en su lugar.
+            </div>
+        </div>`;
+    }
+
     function unifiedSearch() {
         const fecha = document.getElementById('sp_fecha').value;
         const sede  = document.getElementById('sp_sede').value;
@@ -786,18 +895,39 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
         // Mostrar secciones de resultados
         document.getElementById('molHeader').style.display = 'flex';
         document.getElementById('empHeader').style.display = 'flex';
+        document.getElementById('envHeader').style.display = 'flex';
+        document.getElementById('premHeader').style.display = 'flex';
         document.getElementById('bultoHeader').style.display = 'flex';
         document.getElementById('maqHeader').style.display = 'flex';
+        document.getElementById('reproHeader').style.display = 'flex';
+        document.getElementById('mejHeader').style.display = 'flex';
+        document.getElementById('procHeader').style.display = 'flex';
+        document.getElementById('ordenHeader').style.display = 'flex';
+        document.getElementById('taraHeader').style.display = 'flex';
         document.getElementById('spEmpStatusLine').style.display = 'flex';
+        document.getElementById('spEnvStatusLine').style.display = 'flex';
+        document.getElementById('spPremStatusLine').style.display = 'flex';
         document.getElementById('spBultoStatusLine').style.display = 'flex';
         document.getElementById('spMaqStatusLine').style.display = 'flex';
+        document.getElementById('spReproStatusLine').style.display = 'flex';
+        document.getElementById('spMejStatusLine').style.display = 'flex';
+        document.getElementById('spProcStatusLine').style.display = 'flex';
+        document.getElementById('spOrdenStatusLine').style.display = 'flex';
+        document.getElementById('spTaraStatusLine').style.display = 'flex';
 
-        // Lanzar las cuatro búsquedas en paralelo
+        // Lanzar las once búsquedas en paralelo
         Promise.all([
             fetchMolienda(fecha, sede),
             fetchEmpaque(fecha, sede),
+            fetchEnvasado(fecha, sede),
+            fetchPremezclas(fecha, sede),
             fetchBultoByFecha(fecha, sede),
             fetchMaquinaByFecha(fecha),
+            fetchReprocesosByFecha(fecha, sede),
+            fetchMejorante(fecha, sede),
+            fetchProcesoMolienda(fecha, sede),
+            fetchOrdenMantenimiento(fecha, sede),
+            fetchTaraSeca(fecha),
         ]).finally(() => {
             btn.disabled = false;
         });
@@ -874,6 +1004,465 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
                 text.textContent = 'Error de conexión (empaque).';
                 grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
             });
+    }
+
+    function fetchEnvasado(fecha, sede) {
+        const status = document.getElementById('spEnvStatusLine');
+        const text   = document.getElementById('spEnvStatusText');
+        const grid   = document.getElementById('spEnvResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando envasado para ${fecha} (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_envasado_by_fecha&fecha=${fecha}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+
+                if (!data.success) {
+                    text.textContent = `Sin resultados de envasado para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">🧴 ${data.error || 'No se encontraron datos de envasado.'}</div>`;
+                    return;
+                }
+
+                const registros = data.registros || [];
+                text.textContent = `Envasado: ${registros.length} comprobación(es) el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderEnvCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (envasado).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderEnvCard(reg, sede) {
+        const d = reg.datos || {};
+        const checks = [
+            ['Purgada', d.purgada], ['Ref. empaque', d.Penvasado], ['Timbrado', d.timbrado],
+            ['Etiqueta', d.etiqueta], ['Aprobación', d.aprobacion],
+        ];
+        const checkColor = v => v === 'NO' ? '#FF3366' : (v === 'SI' ? '#10B981' : '#94A3B8');
+        const checkChips = checks.map(([label, v]) =>
+            `<span class="sp-turno-chip" style="background:rgba(0,240,255,0.06);color:${checkColor(v)};border-color:rgba(0,240,255,0.2);">${label}: ${v || '—'}</span>`
+        ).join('');
+
+        // El visor no aísla un registro puntual: abre el archivo de la harina+mes
+        // correspondiente, reconstruyendo el nombre con la misma sanitización que procesar.php.
+        const harinaSaneada = (d.harina || '').toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_+|_+$/g, '') || 'SIN_HARINA';
+        const ym = (d.fecha || '').slice(0, 7);
+        const filename = `ENV_${harinaSaneada}_${ym}.json`;
+        const viewerUrl = `/template/envasado_v2/visor_envasado_v2.php?file=${encodeURIComponent(filename)}`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid #00F0FF;">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">🧴 ${d.harina || 'N/D'} &nbsp;|&nbsp; 📍 ${sede}</div>
+                <div class="sp-turn-badge" style="background: rgba(0,240,255,0.15); color: #00F0FF; border-color: rgba(0,240,255,0.3);">
+                    ${srcBadge(reg.source)}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                🏷️ Lote: <strong>${d.loteP || 'N/D'}</strong> &nbsp;|&nbsp; 📅 ${d.fecha || 'N/D'} ${d.hora || ''}<br>
+                👤 Responsable: ${d.responsable || 'N/D'}
+            </div>
+            <div class="sp-turno-chips">${checkChips}</div>
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background: linear-gradient(135deg, #00F0FF 0%, #00A8B5 100%); border-color: transparent;">📄 VER DOCUMENTO DE ENVASADO</a>
+            </div>
+        </div>`;
+    }
+
+    function fetchMejorante(fecha, sede) {
+        const status = document.getElementById('spMejStatusLine');
+        const text   = document.getElementById('spMejStatusText');
+        const grid   = document.getElementById('spMejResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando preparación de mejorante para ${fecha} (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_mejorante_by_fecha&fecha=${fecha}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+
+                if (!data.success) {
+                    text.textContent = `Sin resultados de preparación de mejorante para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">🧪 ${data.error || 'No se encontraron datos de preparación de mejorante.'}</div>`;
+                    return;
+                }
+
+                const registros = data.registros || [];
+                text.textContent = `Preparación de Mejorante: ${registros.length} preparación(es) el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderMejCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (preparación de mejorante).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function fetchMejoranteByLote(lote, sede) {
+        const status = document.getElementById('spMejStatusLine');
+        const text   = document.getElementById('spMejStatusText');
+        const grid   = document.getElementById('spMejResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando lote ${lote} en preparación de mejorante (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_mejorante_by_lote&lote=${encodeURIComponent(lote)}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+                if (!data.success) {
+                    text.textContent = `Sin resultados de preparación de mejorante para lote ${lote}.`;
+                    grid.innerHTML = `<div class="sp-error">🧪 ${data.error}</div>`;
+                    return;
+                }
+                const registros = data.registros || [];
+                text.textContent = `Preparación de Mejorante: lote ${lote} encontrado en ${registros.length} preparación(es) · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderMejCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (preparación de mejorante).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderMejCard(reg, sede) {
+        const d = reg.datos || {};
+        const numMej = Array.isArray(d.mejorantes) ? d.mejorantes.length : 0;
+        const chips = (d.mejorantes || []).slice(0, 4).map(m =>
+            `<span class="sp-turno-chip" style="background:rgba(52,211,153,0.06);color:#34d399;border-color:rgba(52,211,153,0.2);">${m.nombre || 'N/D'}${m.cantidad ? ' · ' + m.cantidad : ''}</span>`
+        ).join('');
+        const extra = numMej > 4 ? `<span class="sp-turno-chip" style="background:rgba(52,211,153,0.06);color:#34d399;border-color:rgba(52,211,153,0.2);">+${numMej - 4} más</span>` : '';
+
+        // El visor no aísla un registro puntual: abre el archivo mensual
+        // correspondiente, reconstruyendo el nombre igual que procesar.php.
+        const ym = (d.fecha || '').slice(0, 7);
+        const filename = `PMEJ_${ym}.json`;
+        const viewerUrl = `/template/preparacion_mejorante/visor_preparacion_mejorante.php?file=${encodeURIComponent(filename)}`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid #34d399;">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">🧪 ${d.referencia || 'N/D'} &nbsp;|&nbsp; 📍 ${sede}</div>
+                <div class="sp-turn-badge" style="background: rgba(52,211,153,0.15); color: #34d399; border-color: rgba(52,211,153,0.3);">
+                    ${srcBadge(reg.source)}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                🏷️ Lote: <strong>${d.lote || 'N/D'}</strong> &nbsp;|&nbsp; 📅 ${d.fecha || 'N/D'} &nbsp;|&nbsp; ⏱️ ${d.tiempo_mezcla_min ? d.tiempo_mezcla_min + ' min' : 'N/D'}<br>
+                👤 Realiza: ${d.realiza || 'N/D'} &nbsp;|&nbsp; ✅ Verifica: ${d.verifica || 'N/D'}
+            </div>
+            <div class="sp-turno-chips">${chips}${extra}</div>
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background: linear-gradient(135deg, #34d399 0%, #059669 100%); border-color: transparent;">📄 VER DOCUMENTO DE MEJORANTE</a>
+            </div>
+        </div>`;
+    }
+
+    function fetchProcesoMolienda(fecha, sede) {
+        const status = document.getElementById('spProcStatusLine');
+        const text   = document.getElementById('spProcStatusText');
+        const grid   = document.getElementById('spProcResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando proceso de molienda para ${fecha} (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_proceso_molienda_by_fecha&fecha=${fecha}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+
+                if (!data.success) {
+                    text.textContent = `Sin resultados de proceso de molienda para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">🔄 ${data.error || 'No se encontraron datos de proceso de molienda.'}</div>`;
+                    return;
+                }
+
+                const registros = data.registros || [];
+                text.textContent = `Proceso de Molienda: ${registros.length} turno(s) el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderProcCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (proceso de molienda).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function fetchProcesoMoliendaByLote(lote, sede) {
+        const status = document.getElementById('spProcStatusLine');
+        const text   = document.getElementById('spProcStatusText');
+        const grid   = document.getElementById('spProcResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando lote ${lote} en proceso de molienda (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_proceso_molienda_by_lote&lote=${encodeURIComponent(lote)}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+                if (!data.success) {
+                    text.textContent = `Sin resultados de proceso de molienda para lote ${lote}.`;
+                    grid.innerHTML = `<div class="sp-error">🔄 ${data.error}</div>`;
+                    return;
+                }
+                const registros = data.registros || [];
+                text.textContent = `Proceso de Molienda: lote ${lote} encontrado en ${registros.length} turno(s) · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderProcCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (proceso de molienda).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderProcCard(reg, sede) {
+        const d = reg.datos || {};
+
+        // El visor no aísla un registro puntual: abre el archivo mensual
+        // correspondiente, reconstruyendo el nombre igual que procesar.php.
+        const ym = (d.fecha || '').slice(0, 7);
+        const filename = `PROCESO_MOLIENDA_${ym}.json`;
+        const viewerUrl = `/template/proceso_v2/visor_proceso_v2.php?file=${encodeURIComponent(filename)}`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid #0EA5E9;">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">🔄 ${d.referencia_producto || 'N/D'} &nbsp;|&nbsp; 📍 ${sede}</div>
+                <div class="sp-turn-badge" style="background: rgba(14,165,233,0.15); color: #0EA5E9; border-color: rgba(14,165,233,0.3);">
+                    ${srcBadge(reg.source)}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                🏷️ Lote de Harina: <strong>${d.lote_harina || 'N/D'}</strong> &nbsp;|&nbsp; 📅 ${d.fecha || 'N/D'}<br>
+                👤 Líder de Turno: ${d.lider_turno || 'N/D'} &nbsp;|&nbsp; 🕐 ${d.hora_inicio || '—'} a ${d.hora_final || '—'}
+            </div>
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background: linear-gradient(135deg, #0EA5E9 0%, #0369A1 100%); border-color: transparent;">📄 VER DOCUMENTO DE PROCESO</a>
+            </div>
+        </div>`;
+    }
+
+    function fetchOrdenMantenimiento(fecha, sede) {
+        const status = document.getElementById('spOrdenStatusLine');
+        const text   = document.getElementById('spOrdenStatusText');
+        const grid   = document.getElementById('spOrdenResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando órdenes de mantenimiento para ${fecha} (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_orden_mantenimiento_by_fecha&fecha=${fecha}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+
+                if (!data.success) {
+                    text.textContent = `Sin resultados de orden de mantenimiento para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">🛠️ ${data.error || 'No se encontraron órdenes de mantenimiento.'}</div>`;
+                    return;
+                }
+
+                const registros = data.registros || [];
+                text.textContent = `Orden de Mantenimiento: ${registros.length} orden(es) el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderOrdenCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (orden de mantenimiento).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderOrdenCard(reg, sede) {
+        const d = reg.datos || {};
+
+        // El visor imprime UNA orden a la vez (no una tabla del mes): hay que
+        // pasarle el mes (file) y el id puntual de esta orden.
+        const ym = (d.fecha_solicitud || '').slice(0, 7);
+        const idOrden = reg.id || reg.id_registro || '';
+        const viewerUrl = `/template/orden_mantenimiento/visor.php?file=${encodeURIComponent(ym)}&id=${encodeURIComponent(idOrden)}&print=1`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid #F97316;">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">🛠️ ${d.objeto_dañado || 'Sin equipo'} &nbsp;|&nbsp; 📍 ${sede}</div>
+                <div class="sp-turn-badge" style="background: rgba(249,115,22,0.15); color: #F97316; border-color: rgba(249,115,22,0.3);">
+                    ${srcBadge(reg.source)}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                📌 Zona / Equipo: <strong>${d.objeto_dañado || 'N/D'}</strong> &nbsp;|&nbsp; 🧭 Ubicación: <strong>${d.ubicacion || 'N/D'}</strong><br>
+                📅 ${d.fecha_solicitud || 'N/D'} &nbsp;|&nbsp; 🔧 ${d.clasificacion || 'N/D'} &nbsp;|&nbsp; 👤 ${d.nombre_solicitante || 'N/D'}
+            </div>
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background: linear-gradient(135deg, #F97316 0%, #C2410C 100%); border-color: transparent;">📄 VER ORDEN DE MANTENIMIENTO</a>
+            </div>
+        </div>`;
+    }
+
+    function fetchTaraSeca(fecha) {
+        const status = document.getElementById('spTaraStatusLine');
+        const text   = document.getElementById('spTaraStatusText');
+        const grid   = document.getElementById('spTaraResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando tara seca para ${fecha}...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_tara_seca_by_fecha&fecha=${fecha}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+
+                if (!data.success) {
+                    text.textContent = `Sin resultados de tara seca para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">⚖️ ${data.error || 'No se encontraron registros de tara seca.'}</div>`;
+                    return;
+                }
+
+                const registros = data.registros || [];
+                text.textContent = `Tara Seca: ${registros.length} registro(s) el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderTaraCard(r)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (tara seca).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function fetchTaraSecaByLote(lote) {
+        const status = document.getElementById('spTaraStatusLine');
+        const text   = document.getElementById('spTaraStatusText');
+        const grid   = document.getElementById('spTaraResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando lote ${lote} en tara seca...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_tara_seca_by_lote&lote=${encodeURIComponent(lote)}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+                if (!data.success) {
+                    text.textContent = `Sin resultados de tara seca para lote ${lote}.`;
+                    grid.innerHTML = `<div class="sp-error">⚖️ ${data.error}</div>`;
+                    return;
+                }
+                const registros = data.registros || [];
+                text.textContent = `Tara Seca: lote ${lote} encontrado en ${registros.length} registro(s) · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderTaraCard(r)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (tara seca).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderTaraCard(reg) {
+        // Tara Seca no tiene envoltorio 'datos' ni campo de sede en el JSON:
+        // es un formato exclusivo de ZC, así que se etiqueta fijo (no viene
+        // del registro ni del selector de sede del buscador).
+        const viewerUrl = `/template/tara_seca/ver_tara.php?file=${encodeURIComponent(reg.id_registro || '')}`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid #749ABB;">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">⚖️ Lote: ${reg.lote || 'N/D'} &nbsp;|&nbsp; 📍 ZC</div>
+                <div class="sp-turn-badge" style="background: rgba(116,154,187,0.15); color: #749ABB; border-color: rgba(116,154,187,0.3);">
+                    ${srcBadge(reg.source)}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                📅 ${reg.fecha || 'N/D'} &nbsp;|&nbsp; ⚖️ Peso Promedio: <strong>${reg.pesoPromedio || 'N/D'} g</strong><br>
+                👤 ${reg.nombre || 'N/D'} &nbsp;|&nbsp; ${reg.cargo || 'N/D'}
+            </div>
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background: linear-gradient(135deg, #749ABB 0%, #4a6fa5 100%); border-color: transparent;">📄 VER REGISTRO DE TARA SECA</a>
+            </div>
+        </div>`;
+    }
+
+    function fetchPremezclas(fecha, sede) {
+        const status = document.getElementById('spPremStatusLine');
+        const text   = document.getElementById('spPremStatusText');
+        const grid   = document.getElementById('spPremResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando premezclas para ${fecha} (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_premezclas_by_fecha&fecha=${fecha}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+
+                if (!data.success) {
+                    text.textContent = `Sin resultados de premezclas para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">🌾 ${data.error || 'No se encontraron datos de premezclas.'}</div>`;
+                    return;
+                }
+
+                const registros = data.registros || [];
+                text.textContent = `Premezclas: ${registros.length} registro(s) el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderPremCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (premezclas).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderPremCard(reg, sede) {
+        const d = reg.datos || {};
+        const harinas = d.harinas_especiales || [];
+        const insumos = d.insumos || [];
+
+        const harinaChips = harinas.slice(0, 5).map(h =>
+            `<span class="sp-turno-chip" style="background:rgba(255,176,0,0.06);color:#FFB000;border-color:rgba(255,176,0,0.2);">${h.producto || 'N/D'}</span>`
+        ).join('');
+        const extraHarinas = harinas.length > 5 ? `<span class="sp-turno-chip" style="background:rgba(255,176,0,0.06);color:#FFB000;border-color:rgba(255,176,0,0.2);">+${harinas.length - 5}</span>` : '';
+
+        const firmaResp = d.firma ? '✅ Firmado' : '⏳ Sin firma';
+        const firmaJefe = d.firma_jefe_produccion ? '✅ Autorizado' : '⏳ Pendiente autorización';
+
+        // El visor no aísla un registro puntual: abre el archivo mensual completo.
+        const ym = (d.fecha || '').slice(0, 7);
+        const filename = `PREMEZCLA_${ym}.json`;
+        const viewerUrl = `/template/premezclas_v2/visor_premezclas_v2.php?file=${encodeURIComponent(filename)}`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid #FFB000;">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">🌾 Premezclas &nbsp;|&nbsp; 📍 ${sede}</div>
+                <div class="sp-turn-badge" style="background: rgba(255,176,0,0.15); color: #FFB000; border-color: rgba(255,176,0,0.3);">
+                    ${srcBadge(reg.source)}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                📅 ${d.fecha || 'N/D'} &nbsp;|&nbsp; ${harinas.length} harina(s) · ${insumos.length} insumo(s)<br>
+                👤 Registrado por: ${reg.usuario_sys || 'N/D'}<br>
+                RESPONSABLE: ${firmaResp} &nbsp;|&nbsp; JEFE DE PRODUCCIÓN: ${firmaJefe}
+            </div>
+            ${harinaChips ? `<div class="sp-turn-products">${harinaChips}${extraHarinas}</div>` : ''}
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background: linear-gradient(135deg, #FFB000 0%, #C98700 100%); border-color: transparent;">📄 VER DOCUMENTO DE PREMEZCLAS</a>
+            </div>
+        </div>`;
     }
 
     function renderDayCard(turnos, fecha, sede) {
@@ -977,18 +1566,27 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
     function clearResults() {
         document.getElementById('spResultsGrid').innerHTML = '';
         document.getElementById('spEmpResultsGrid').innerHTML = '';
+        document.getElementById('spEnvResultsGrid').innerHTML = '';
+        document.getElementById('spPremResultsGrid').innerHTML = '';
         document.getElementById('spBultoResultsGrid').innerHTML = '';
         document.getElementById('spMaqResultsGrid').innerHTML = '';
         document.getElementById('spBodResultsGrid').innerHTML = '';
+        document.getElementById('spReproResultsGrid').innerHTML = '';
         document.getElementById('molHeader').style.display = 'none';
         document.getElementById('empHeader').style.display = 'none';
+        document.getElementById('envHeader').style.display = 'none';
+        document.getElementById('premHeader').style.display = 'none';
         document.getElementById('bultoHeader').style.display = 'none';
         document.getElementById('maqHeader').style.display = 'none';
         document.getElementById('bodHeader').style.display = 'none';
+        document.getElementById('reproHeader').style.display = 'none';
         document.getElementById('spEmpStatusLine').style.display = 'none';
+        document.getElementById('spEnvStatusLine').style.display = 'none';
+        document.getElementById('spPremStatusLine').style.display = 'none';
         document.getElementById('spBultoStatusLine').style.display = 'none';
         document.getElementById('spMaqStatusLine').style.display = 'none';
         document.getElementById('spBodStatusLine').style.display = 'none';
+        document.getElementById('spReproStatusLine').style.display = 'none';
         document.getElementById('spStatusText').textContent = 'Selecciona un modo de búsqueda e ingresa los datos.';
         document.getElementById('spStatusLine').classList.remove('loading');
     }
@@ -1004,14 +1602,41 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
         btn.disabled = true;
         document.getElementById('molHeader').style.display = 'flex';
         document.getElementById('empHeader').style.display = 'flex';
+        document.getElementById('envHeader').style.display = 'flex';
         document.getElementById('bultoHeader').style.display = 'flex';
+        document.getElementById('reproHeader').style.display = 'flex';
+        document.getElementById('mejHeader').style.display = 'flex';
+        document.getElementById('procHeader').style.display = 'flex';
         document.getElementById('spEmpStatusLine').style.display = 'flex';
+        document.getElementById('spEnvStatusLine').style.display = 'flex';
         document.getElementById('spBultoStatusLine').style.display = 'flex';
+        document.getElementById('spReproStatusLine').style.display = 'flex';
+        document.getElementById('spMejStatusLine').style.display = 'flex';
+        document.getElementById('spProcStatusLine').style.display = 'flex';
+
+        // Premezclas V2 y Orden de Mantenimiento no tienen un campo de lote
+        // (premezclas reparte varios lotes distintos por registro; una orden
+        // de mantenimiento no tiene lote de producto, solo equipo) — se
+        // muestran igual, con un aviso neutral en vez de desaparecer sin
+        // explicación o mostrar un error de conexión que no ocurrió.
+        document.getElementById('premHeader').style.display = 'flex';
+        document.getElementById('spPremResultsGrid').innerHTML =
+            renderNoAplicaCard('Premezclas y Harinas Especiales V2', '🌾', '#FFB000', 'búsqueda por lote');
+        document.getElementById('ordenHeader').style.display = 'flex';
+        document.getElementById('spOrdenResultsGrid').innerHTML =
+            renderNoAplicaCard('Orden de Mantenimiento', '🛠️', '#F97316', 'búsqueda por lote');
+        document.getElementById('taraHeader').style.display = 'flex';
+        document.getElementById('spTaraStatusLine').style.display = 'flex';
 
         Promise.all([
             fetchMoliendaByLote(lote, sede),
             fetchEmpaqueByLote(lote, sede),
+            fetchEnvasadoByLote(lote, sede),
             fetchBultoByLote(lote, sede),
+            fetchReprocesosByLote(lote, sede),
+            fetchMejoranteByLote(lote, sede),
+            fetchProcesoMoliendaByLote(lote, sede),
+            fetchTaraSecaByLote(lote),
         ]).finally(() => { btn.disabled = false; });
     }
 
@@ -1078,6 +1703,35 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
             .catch(err => {
                 status.classList.remove('loading');
                 text.textContent = 'Error de conexión (empaque).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function fetchEnvasadoByLote(lote, sede) {
+        const status = document.getElementById('spEnvStatusLine');
+        const text   = document.getElementById('spEnvStatusText');
+        const grid   = document.getElementById('spEnvResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando lote ${lote} en envasado (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_envasado_by_lote&lote=${encodeURIComponent(lote)}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+                if (!data.success) {
+                    text.textContent = `Sin resultados de envasado para lote ${lote}.`;
+                    grid.innerHTML = `<div class="sp-error">🧴 ${data.error}</div>`;
+                    return;
+                }
+                const registros = data.registros || [];
+                text.textContent = `Envasado: lote ${lote} encontrado en ${registros.length} comprobación(es) · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderEnvCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (envasado).';
                 grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
             });
     }
@@ -1174,6 +1828,97 @@ $otraSede = $miSede === 'ZC' ? 'ZS' : 'ZC';
             ${loteChips ? `<div class="sp-turn-products">${loteChips}</div>` : ''}
             <div class="sp-turn-actions">
                 <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background:linear-gradient(135deg,#a855f7 0%,#7c3aed 100%);border-color:transparent;">📄 VER CONTROL EN BULTO</a>
+            </div>
+        </div>`;
+    }
+
+    // ─── CONTROL DE REPROCESOS V2 ────────────────────────────────────────────
+    function fetchReprocesosByFecha(fecha, sede) {
+        const status = document.getElementById('spReproStatusLine');
+        const text   = document.getElementById('spReproStatusText');
+        const grid   = document.getElementById('spReproResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando reprocesos enviados el ${fecha} (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_reprocesos_by_fecha&fecha=${fecha}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+                if (!data.success) {
+                    text.textContent = `Sin resultados de reprocesos para ${fecha}.`;
+                    grid.innerHTML = `<div class="sp-error">♻️ ${data.error || 'No se encontraron reprocesos.'}</div>`;
+                    return;
+                }
+                const registros = data.registros || [];
+                text.textContent = `Reprocesos: ${registros.length} lote(s) enviado(s) a reprocesar el ${fecha} · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderReprocesoCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (reprocesos).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function fetchReprocesosByLote(lote, sede) {
+        const status = document.getElementById('spReproStatusLine');
+        const text   = document.getElementById('spReproStatusText');
+        const grid   = document.getElementById('spReproResultsGrid');
+
+        status.classList.add('loading');
+        text.textContent = `Buscando lote ${lote} en reprocesos (${sede})...`;
+        grid.innerHTML = '';
+
+        return fetch(`sp_reader.php?action=search_reprocesos_by_lote&lote=${encodeURIComponent(lote)}&sede=${sede}`)
+            .then(r => r.json())
+            .then(data => {
+                status.classList.remove('loading');
+                if (!data.success) {
+                    text.textContent = `Sin resultados de reprocesos para lote ${lote}.`;
+                    grid.innerHTML = `<div class="sp-error">♻️ ${data.error}</div>`;
+                    return;
+                }
+                const registros = data.registros || [];
+                text.textContent = `Reprocesos: lote ${lote} encontrado en ${registros.length} registro(s) · ${srcBadgeFromList(registros)}`;
+                grid.innerHTML = registros.map(r => renderReprocesoCard(r, sede)).join('');
+            })
+            .catch(err => {
+                status.classList.remove('loading');
+                text.textContent = 'Error de conexión (reprocesos).';
+                grid.innerHTML = `<div class="sp-error">❌ ${err.message}</div>`;
+            });
+    }
+
+    function renderReprocesoCard(reg, sede) {
+        const d = reg.datos || {};
+        const estado = d.estado || 'pendiente';
+        const esCompletado = estado === 'completado';
+        const color = esCompletado ? '#22C55E' : '#FFB000';
+        const ej = d.ejecucion || null;
+
+        const viewerUrl = `/template/reprocesos_v2/visor_reprocesos_v2.php?id=${encodeURIComponent(reg.id_registro || '')}`;
+
+        return `
+        <div class="sp-turn-card sp-day-card" style="border-left: 3px solid ${color};">
+            <div class="sp-day-card-header">
+                <div class="sp-turn-meta">🏷️ Lote: ${d.lote || 'N/D'} &nbsp;|&nbsp; 📍 ${sede}</div>
+                <div class="sp-turn-badge" style="background:${esCompletado ? 'rgba(34,197,94,0.15)' : 'rgba(255,176,0,0.15)'};color:${color};border-color:${esCompletado ? 'rgba(34,197,94,0.3)' : 'rgba(255,176,0,0.3)'};">
+                    ${srcBadge(reg.source)} · ${estado.toUpperCase()}
+                </div>
+            </div>
+            <div class="sp-turn-sub">
+                📋 Producto: <strong>${d.producto || 'N/D'}</strong><br>
+                📅 Enviado a reproceso: ${d.fecha_alistamiento || 'N/D'}<br>
+                👤 Alistado por: ${d.responsable_alistamiento || 'N/D'}
+                ${ej ? `<br>⚙️ Ejecutado por: ${ej.responsable_ejecucion || 'N/D'} (${ej.cantidad_procesada || 0} KG el ${ej.fecha || 'N/D'})` : ''}
+            </div>
+            <div class="sp-turno-chips">
+                <span class="sp-turno-chip" style="background:rgba(34,197,94,0.06);color:${color};border-color:rgba(34,197,94,0.2);">Cantidad: ${d.cantidad || 0} KG</span>
+            </div>
+            <div class="sp-turn-actions">
+                <a href="${viewerUrl}" target="_blank" class="btn-sp-view btn-sp-view-primary" style="background:linear-gradient(135deg,#22C55E 0%,#16A34A 100%);border-color:transparent;">📄 VER DOCUMENTO DE REPROCESO</a>
             </div>
         </div>`;
     }

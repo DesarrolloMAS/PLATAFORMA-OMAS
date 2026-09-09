@@ -170,8 +170,9 @@ $row = 4;
 foreach ($registros as $reg) {
     $datos   = $reg['datos'] ?? [];
     $acond   = $datos['acondicionamiento'] ?? [];
-    $lotes   = $acond['lotes']          ?? array_fill(0, 5, []);
-    $mezclas = $acond['mezclas_trigo']  ?? [];
+    // 'silos' es el formato vigente; 'lotes' se conserva como fallback de registros antiguos
+    $lotes   = $acond['silos'] ?? $acond['lotes'] ?? array_fill(0, 5, []);
+    $mezclasLegacy = $acond['mezclas_trigo'] ?? [];
     $turnos  = $datos['molienda']['turnos'] ?? array_fill(0, 5, []);
     $ctrl    = array_values(array_filter($datos['control_producto']  ?? [], 'hasData'));
     $rupt    = array_values(array_filter($datos['control_rupturas']  ?? [], 'hasData'));
@@ -179,18 +180,20 @@ foreach ($registros as $reg) {
     $loteCount = max(1, count(array_filter($lotes, 'hasData')));
     $nRows     = max($loteCount, count($ctrl), count($rupt));
 
-    $mezLabel = function($i) use ($mezclas) {
-        if (!isset($mezclas[$i])) return '';
-        $t = sv($mezclas[$i], 'trigo');
-        $p = sv($mezclas[$i], 'porcentaje');
-        return $t . ($p !== '' ? ' (' . $p . '%)' : '');
-    };
-
     for ($i = 0; $i < $nRows; $i++) {
         $lote  = $lotes[$i]  ?? [];
         $turno = $turnos[$i] ?? [];
         $cp    = $ctrl[$i]   ?? [];
         $rp    = $rupt[$i]   ?? [];
+
+        // Mezclas propias del silo; si no existen (registro antiguo) se usa la lista global solo en la fila 0
+        $mezclasFila = $lote['mezclas_trigo'] ?? ($i === 0 ? $mezclasLegacy : []);
+        $mezLabel = function($idx) use ($mezclasFila) {
+            if (!isset($mezclasFila[$idx])) return '';
+            $t = sv($mezclasFila[$idx], 'trigo');
+            $p = sv($mezclasFila[$idx], 'porcentaje');
+            return $t . ($p !== '' ? ' (' . $p . '%)' : '');
+        };
 
         [$acParI, $acParF]   = splitParada(sv($lote,  'paradas_hi_hf'));
         [$molParI, $molParF] = splitParada(sv($turno, 'paradas_hi_hf'));
@@ -207,12 +210,12 @@ foreach ($registros as $reg) {
             $acParF,
             sv($lote, 'paradas_motivo'),
             fmtHM(sv($lote, 'horas_mojo_hrs'), sv($lote, 'horas_mojo_min')),
-            $i === 0 ? sv($acond, 'total_trigo')      : '',
-            $i === 0 ? sv($acond, 'total_trigo_myfc') : '',
-            $i === 0 ? sv($acond, 'total_agua')       : '',
-            $i === 0 ? $mezLabel(0) : '',
-            $i === 0 ? $mezLabel(1) : '',
-            $i === 0 ? $mezLabel(2) : '',
+            sv($lote, 'total_trigo')      !== '' ? sv($lote, 'total_trigo')      : ($i === 0 ? sv($acond, 'total_trigo')      : ''),
+            sv($lote, 'total_trigo_myfc') !== '' ? sv($lote, 'total_trigo_myfc') : ($i === 0 ? sv($acond, 'total_trigo_myfc') : ''),
+            sv($lote, 'total_agua')       !== '' ? sv($lote, 'total_agua')       : ($i === 0 ? sv($acond, 'total_agua')       : ''),
+            $mezLabel(0),
+            $mezLabel(1),
+            $mezLabel(2),
             fmtF($datos['fecha'] ?? ''),
             fmtHM(sv($turno, 'hi_hrs'), sv($turno, 'hi_min')),
             fmtF($datos['fecha'] ?? ''),

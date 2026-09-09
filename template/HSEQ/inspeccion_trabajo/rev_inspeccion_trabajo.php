@@ -1,14 +1,14 @@
 <?php
-require '../sesion.php';
+require '../../sesion.php';
 
 if (!isset($_SESSION['nombre']) || empty($_SESSION['sede'])) {
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
     exit;
 }
 
 $sede = $_SESSION['sede'];
 $sede_saneada = preg_replace('/[^A-Za-z0-9_-]/', '', $sede);
-$target_dir = "../../archivos/generados/inspeccion_trabajo/" . $sede_saneada . "/";
+$target_dir = "../../../archivos/generados/inspeccion_trabajo/" . $sede_saneada . "/";
 
 $archivos = [];
 $total_registros_global = 0;
