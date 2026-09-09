@@ -501,6 +501,131 @@
             line-height: 1;
             z-index: 2;
         }
+
+        /* ── FIRMA AMPLIADA (accesibilidad táctil) ── */
+        .firma-canvas-wrap.firma-clickable {
+            cursor: pointer;
+        }
+
+        .firma-canvas-wrap.firma-clickable canvas {
+            pointer-events: none;
+        }
+
+        .firma-canvas-wrap.firma-clickable.firma-vacia::before {
+            content: "✎ Firmar";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            background: #fff;
+            z-index: 1;
+        }
+
+        .firma-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .firma-modal-overlay.abierto {
+            display: flex;
+        }
+
+        .firma-modal-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-md);
+            padding: 20px;
+            width: 100%;
+            max-width: 640px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .firma-modal-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        .firma-modal-canvas-wrap {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-sm);
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 600 / 280;
+        }
+
+        .firma-modal-canvas-wrap canvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
+            touch-action: none;
+        }
+
+        .firma-modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-modal-firma {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: var(--r-sm);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-modal-firma:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-modal-firma.btn-modal-guardar {
+            background: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+
+        .btn-modal-firma.btn-modal-guardar:hover {
+            background: #fff;
+        }
+
+        .btn-modal-firma.btn-modal-limpiar {
+            color: var(--warning);
+        }
+
+        @media (max-width: 480px) {
+            .firma-modal-actions {
+                flex-wrap: wrap;
+            }
+
+            .btn-modal-firma {
+                flex: 1;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -865,10 +990,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Firma</label>
-                            <div class="firma-canvas-wrap">
+                            <div class="firma-canvas-wrap firma-clickable firma-vacia"
+                                role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                onclick="abrirFirmaModal('canvasInspectorFirma')"
+                                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasInspectorFirma')}">
                                 <canvas id="canvasInspectorFirma" width="200" height="46"></canvas>
                                 <button type="button" class="btn-clear-firma"
-                                    onclick="limpiarCanvasFijo('canvasInspectorFirma')">✕</button>
+                                    onclick="event.stopPropagation(); limpiarCanvasFijo('canvasInspectorFirma')">✕</button>
                             </div>
                         </div>
                     </div>
@@ -881,10 +1009,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Firma</label>
-                            <div class="firma-canvas-wrap">
+                            <div class="firma-canvas-wrap firma-clickable firma-vacia"
+                                role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                onclick="abrirFirmaModal('canvasSupervisorFirma')"
+                                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasSupervisorFirma')}">
                                 <canvas id="canvasSupervisorFirma" width="200" height="46"></canvas>
                                 <button type="button" class="btn-clear-firma"
-                                    onclick="limpiarCanvasFijo('canvasSupervisorFirma')">✕</button>
+                                    onclick="event.stopPropagation(); limpiarCanvasFijo('canvasSupervisorFirma')">✕</button>
                             </div>
                         </div>
                     </div>
@@ -897,10 +1028,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Firma</label>
-                            <div class="firma-canvas-wrap">
+                            <div class="firma-canvas-wrap firma-clickable firma-vacia"
+                                role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                onclick="abrirFirmaModal('canvasRespSstFirma')"
+                                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasRespSstFirma')}">
                                 <canvas id="canvasRespSstFirma" width="200" height="46"></canvas>
                                 <button type="button" class="btn-clear-firma"
-                                    onclick="limpiarCanvasFijo('canvasRespSstFirma')">✕</button>
+                                    onclick="event.stopPropagation(); limpiarCanvasFijo('canvasRespSstFirma')">✕</button>
                             </div>
                         </div>
                     </div>
@@ -913,10 +1047,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Firma</label>
-                            <div class="firma-canvas-wrap">
+                            <div class="firma-canvas-wrap firma-clickable firma-vacia"
+                                role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                                onclick="abrirFirmaModal('canvasRespActividadFirma')"
+                                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasRespActividadFirma')}">
                                 <canvas id="canvasRespActividadFirma" width="200" height="46"></canvas>
                                 <button type="button" class="btn-clear-firma"
-                                    onclick="limpiarCanvasFijo('canvasRespActividadFirma')">✕</button>
+                                    onclick="event.stopPropagation(); limpiarCanvasFijo('canvasRespActividadFirma')">✕</button>
                             </div>
                         </div>
                     </div>
@@ -940,10 +1077,23 @@
         </form>
     </div>
 
+    <!-- MODAL DE FIRMA AMPLIADA (accesibilidad táctil) -->
+    <div id="firmaModalOverlay" class="firma-modal-overlay" role="dialog" aria-modal="true" aria-label="Firma ampliada">
+        <div class="firma-modal-box">
+            <div class="firma-modal-title">Firme en el recuadro</div>
+            <div class="firma-modal-canvas-wrap">
+                <canvas id="firmaModalCanvas" width="600" height="280"></canvas>
+            </div>
+            <div class="firma-modal-actions">
+                <button type="button" class="btn-modal-firma btn-modal-cancelar" id="firmaModalCancelar">Cancelar</button>
+                <button type="button" class="btn-modal-firma btn-modal-limpiar" id="firmaModalLimpiar">Limpiar</button>
+                <button type="button" class="btn-modal-firma btn-modal-guardar" id="firmaModalGuardar">Guardar Firma</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function initCanvasFirma(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) return;
+        function attachDrawEvents(canvas) {
             const ctx = canvas.getContext('2d');
             ctx.strokeStyle = '#003366';
             ctx.lineWidth = 1.5;
@@ -964,9 +1114,15 @@
             canvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); }, { passive: false });
             canvas.addEventListener('touchend', () => { drawing = false; });
         }
+        function initCanvasFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            attachDrawEvents(canvas);
+        }
         function limpiarCanvasFijo(canvasId) {
             const canvas = document.getElementById(canvasId);
             if (canvas) canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+            actualizarEstadoFirma(canvasId);
         }
         function obtenerFirmaImg(canvasId) {
             const canvas = document.getElementById(canvasId);
@@ -974,6 +1130,51 @@
             const imgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
             return Array.from(imgData).some((v, idx) => idx % 4 === 3 && v > 0) ? canvas.toDataURL('image/png') : null;
         }
+        function actualizarEstadoFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const wrap = canvas && canvas.closest('.firma-canvas-wrap');
+            if (wrap) wrap.classList.toggle('firma-vacia', !obtenerFirmaImg(canvasId));
+        }
+
+        /* ── FIRMA AMPLIADA ── */
+        const firmaModalOverlay = document.getElementById('firmaModalOverlay');
+        const firmaModalCanvas = document.getElementById('firmaModalCanvas');
+        attachDrawEvents(firmaModalCanvas);
+        let firmaModalTargetId = null;
+
+        function abrirFirmaModal(canvasId) {
+            firmaModalTargetId = canvasId;
+            firmaModalCanvas.getContext('2d').clearRect(0, 0, firmaModalCanvas.width, firmaModalCanvas.height);
+            const target = document.getElementById(canvasId);
+            const firmaActual = target && obtenerFirmaImg(canvasId);
+            if (firmaActual) {
+                const img = new Image();
+                img.onload = () => firmaModalCanvas.getContext('2d').drawImage(img, 0, 0, firmaModalCanvas.width, firmaModalCanvas.height);
+                img.src = firmaActual;
+            }
+            firmaModalOverlay.classList.add('abierto');
+        }
+
+        function cerrarFirmaModal() {
+            firmaModalOverlay.classList.remove('abierto');
+            firmaModalTargetId = null;
+        }
+
+        document.getElementById('firmaModalCancelar').addEventListener('click', cerrarFirmaModal);
+        document.getElementById('firmaModalLimpiar').addEventListener('click', () => {
+            firmaModalCanvas.getContext('2d').clearRect(0, 0, firmaModalCanvas.width, firmaModalCanvas.height);
+        });
+        document.getElementById('firmaModalGuardar').addEventListener('click', () => {
+            if (!firmaModalTargetId) return;
+            const target = document.getElementById(firmaModalTargetId);
+            if (target) {
+                const tctx = target.getContext('2d');
+                tctx.clearRect(0, 0, target.width, target.height);
+                tctx.drawImage(firmaModalCanvas, 0, 0, target.width, target.height);
+                actualizarEstadoFirma(firmaModalTargetId);
+            }
+            cerrarFirmaModal();
+        });
 
         let contTrab = 0;
         const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -1004,15 +1205,18 @@
                 </select>
             </td>
             <td>
-                <div class="firma-canvas-wrap" style="min-width:100px;">
+                <div class="firma-canvas-wrap firma-clickable firma-vacia" style="min-width:100px;"
+                    role="button" tabindex="0" aria-label="Abrir firma ampliada"
+                    onclick="abrirFirmaModal('canvasTrabFirma_${contTrab}')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirFirmaModal('canvasTrabFirma_${contTrab}')}">
                     <canvas id="canvasTrabFirma_${contTrab}" width="200" height="46"></canvas>
-                    <button type="button" class="btn-clear-firma" onclick="limpiarCanvasFijo('canvasTrabFirma_${contTrab}')">✕</button>
+                    <button type="button" class="btn-clear-firma"
+                        onclick="event.stopPropagation(); limpiarCanvasFijo('canvasTrabFirma_${contTrab}')">✕</button>
                 </div>
             </td>
             <td><button type="button" class="btn-remove" onclick="this.closest('tr').remove()">✕</button></td>
         `;
             tbody.appendChild(tr);
-            initCanvasFirma('canvasTrabFirma_' + contTrab);
         }
 
         // Marca si el formulario se cargó con los datos de una inspección ya existente
@@ -1024,7 +1228,10 @@
         function dibujarFirmaEnCanvas(canvas, dataUrl) {
             if (!canvas || !dataUrl) return;
             const img = new Image();
-            img.onload = () => canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+            img.onload = () => {
+                canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                if (canvas.id) actualizarEstadoFirma(canvas.id);
+            };
             img.src = dataUrl;
         }
 
@@ -1065,7 +1272,6 @@
             const now = new Date();
             document.querySelector('[name="hora"]').value = now.toTimeString().slice(0, 5);
             agregarTrabajador();
-            ['canvasInspectorFirma', 'canvasSupervisorFirma', 'canvasRespSstFirma', 'canvasRespActividadFirma'].forEach(id => initCanvasFirma(id));
 
             const params = new URLSearchParams(window.location.search);
             const flujoIdInsp = params.get('flujo');
