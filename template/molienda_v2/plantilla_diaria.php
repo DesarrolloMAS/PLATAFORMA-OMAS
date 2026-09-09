@@ -5,9 +5,10 @@ verificarAutenticacion();
 
 $sede = $_GET['sede'] ?? $_SESSION['sede'];
 $fecha = $_GET['fecha'] ?? date('Y-m-d');
+$esExtra = isset($_GET['extra']) && $_GET['extra'] == '1';
 $mesFile = substr($fecha, 0, 7) . '.json';
 
-$file_path = "../../archivos/generados/molienda/" . $sede . "/" . $mesFile;
+$file_path = "../../archivos/generados/molienda/" . $sede . ($esExtra ? "/extra/" : "/") . $mesFile;
 $recordsDia = [];
 
 if (file_exists($file_path)) {
@@ -17,6 +18,8 @@ if (file_exists($file_path)) {
             $recordsDia[] = $r;
         }
     }
+} elseif ($esExtra) {
+    // Los registros extra son 100% locales (JSON), no tienen respaldo en SharePoint.
 } else {
     // Fallback: Consultar en tiempo real a SharePoint en memoria (sin guardar archivo en disco)
     // Ruta privada de JSONs del sistema (separada de la galería pública de PDFs)
@@ -244,7 +247,7 @@ foreach ($todosParaValores as $pid) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Plantilla Molienda Diario - <?= $fecha ?></title>
+    <title>Plantilla Molienda Diario<?= $esExtra ? ' EXTRA' : '' ?> - <?= $fecha ?></title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@700&display=swap');
         
@@ -685,8 +688,8 @@ foreach ($todosParaValores as $pid) {
         <td colspan="2" rowspan="5">
             <img src="/archivos/formularios/logomas.png" class="logo-img" alt="mas somos más que harina">
         </td>
-        <td colspan="6" rowspan="3" class="title-block">
-            CONTROL DE MOLIENDA ZONA <?= $sede === 'ZC' ? 'CENTRO' : 'SUR' ?>
+        <td colspan="6" rowspan="3" class="title-block"<?= $esExtra ? ' style="background:#3b0764;"' : '' ?>>
+            CONTROL DE MOLIENDA ZONA <?= $sede === 'ZC' ? 'CENTRO' : 'SUR' ?><?= $esExtra ? ' — REGISTRO EXTRA' : '' ?>
         </td>
         <td colspan="5" class="bg-gray" style="font-weight: bold; font-size:12px;">MOLIENDA DE TRIGO N°</td>
     </tr>
@@ -934,7 +937,7 @@ foreach ($todosParaValores as $pid) {
         <td colspan="1">TOTAL TURNO 3</td>
         <td colspan="1"><?= $totHarinasT3 ?></td>
         <td colspan="1">TOTAL</td>
-        <td colspan="4"><?= $totHarinasGral ?></td>
+        <td colspan="7"><?= $totHarinasGral ?></td>
     </tr>
 
     <!-- BLOQUE INFERIOR (EXTRACCION, ENCARGADOS Y FIRMAS) -->
@@ -1059,7 +1062,7 @@ function saveSAP() {
     fetch('guardar_sap.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ sede: '<?= $sede ?>', fecha: '<?= $fecha ?>', sap: sapData })
+        body: JSON.stringify({ sede: '<?= $sede ?>', fecha: '<?= $fecha ?>', extra: <?= $esExtra ? 'true' : 'false' ?>, sap: sapData })
     })
     .then(r => r.json())
     .then(res => {

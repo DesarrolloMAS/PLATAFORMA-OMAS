@@ -50,6 +50,39 @@ if ($todosLlenos) {
 $turn1Activo = ($turnos['turn1'] == 0);
 $turn2Activo = ($turnos['turn2'] == 0);
 $turn3Activo = ($turnos['turn3'] == 0);
+
+// ── REGISTRO EXTRA ─────────────────────────────────────────────────────────
+// Estado calculado en modo lectura, EXCLUSIVAMENTE a partir del JSON de
+// .../[sede]/extra/, sin tocar control_molienda. Determina el mismo día y
+// turno que asignará procesar_extra.php (lógica lineal replicada).
+function estadoRegistroExtra($sede) {
+    $max_turnos = ($sede === 'ZS') ? 2 : 3;
+    $mes = date('Y-m');
+    $json_file = "../../archivos/generados/molienda/" . $sede . "/extra/" . $mes . ".json";
+
+    $turnos_por_dia = [];
+    if (file_exists($json_file)) {
+        $registros = json_decode(file_get_contents($json_file), true) ?: [];
+        foreach ($registros as $r) {
+            $f = $r['fecha'] ?? null;
+            if ($f) $turnos_por_dia[$f] = ($turnos_por_dia[$f] ?? 0) + 1;
+        }
+    }
+
+    $fecha_pendiente = date('Y-m-d');
+    ksort($turnos_por_dia);
+    foreach ($turnos_por_dia as $dia => $cantidad) {
+        if ($cantidad < $max_turnos) {
+            $fecha_pendiente = $dia;
+            break;
+        }
+    }
+
+    $siguiente = ($turnos_por_dia[$fecha_pendiente] ?? 0) + 1;
+    return ['fecha' => $fecha_pendiente, 'siguiente' => $siguiente, 'max' => $max_turnos];
+}
+
+$extra = estadoRegistroExtra($zonaSeleccionada);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -65,6 +98,7 @@ $turn3Activo = ($turnos['turn3'] == 0);
             --surface2: #1c1f2e;
             --border: #2d324a;
             --accent: #00f2ff; /* Cyan Cyberpunk */
+            --accent2: #7000ff; /* Purple - Registro Extra */
             --text: #e0e6ed;
             --text-muted: #7a8599;
             --danger: #ff0055;
@@ -238,6 +272,29 @@ $turn3Activo = ($turnos['turn3'] == 0);
             border: 1px solid var(--danger);
         }
 
+        .turno-card.extra {
+            border-color: var(--accent2);
+            border-style: solid;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(112, 0, 255, 0.15);
+        }
+
+        .turno-card.extra:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(112, 0, 255, 0.35);
+            background: linear-gradient(180deg, var(--surface) 0%, rgba(112, 0, 255, 0.08) 100%);
+        }
+
+        .turno-card.extra .turno-title {
+            color: var(--accent2);
+        }
+
+        .status-extra {
+            background: rgba(112, 0, 255, 0.12);
+            color: #b794ff;
+            border: 1px solid var(--accent2);
+        }
+
         .links-extra {
             margin-top: 60px;
             padding-top: 30px;
@@ -332,6 +389,12 @@ $turn3Activo = ($turnos['turn3'] == 0);
                 </div>
             <?php endif; ?>
         <?php endif; ?>
+
+        <!-- REGISTRO EXTRA -->
+        <a href="molienda_extra.php" class="turno-card extra">
+            <div class="turno-title">REGISTRO EXTRA</div>
+            <div class="turno-status status-extra">Registrar Turno <?= $extra['siguiente'] ?></div>
+        </a>
     </div>
 
     <div class="links-extra">
