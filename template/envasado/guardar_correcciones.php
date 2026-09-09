@@ -14,7 +14,7 @@ if($sede === 'ZC'){
 }else{
     $carpeta = '/var/www/fmt/archivos/generados/envasadozs/';
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_POST['data'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && (isset($_POST['data_json']) || isset($_POST['data']))) {
     $archivo = $_POST['archivo'];
     $rutaArchivo = $carpeta . '/' . $archivo;
 
@@ -36,7 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['archivo']) && isset($_
                 }
             }
             // 🔥 Recorrer todas las celdas enviadas desde el formulario
-            foreach ($_POST['data'] as $filaIndex => $fila) {
+            // Las celdas llegan empaquetadas en 'data_json' (un solo campo POST) para
+            // evitar el límite de max_input_vars cuando el Excel tiene muchas filas.
+            $datosEnviados = isset($_POST['data_json']) ? json_decode($_POST['data_json'], true) : $_POST['data'];
+            foreach ($datosEnviados as $filaIndex => $fila) {
                 foreach ($fila as $colIndex => $valorCelda) {
                     $letraCol = Coordinate::stringFromColumnIndex($colIndex + 1);
                     $celdaRef = $letraCol . ($filaIndex + 1);

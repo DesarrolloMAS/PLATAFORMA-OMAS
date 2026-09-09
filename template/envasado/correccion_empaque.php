@@ -87,9 +87,10 @@ if (isset($_GET['archivo'])) {
 
 <h2>📄 Editar Datos del Excel</h2>
 
-<form action="guardar_correcciones.php" method="post">
+<form action="guardar_correcciones.php" method="post" id="formCorreccion">
     <input type="hidden" name="archivo" value="<?php echo htmlspecialchars($archivo, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="carpeta" value="<?php echo htmlspecialchars($carpeta, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="data_json" id="data_json">
     <table>
         <?php foreach ($filas as $filaIndex => $fila) : ?>
             <tr style="height: <?php echo isset($filasHeight[$filaIndex+1]) ? $filasHeight[$filaIndex+1].'px' : 'auto'; ?>">
@@ -110,7 +111,7 @@ if (isset($_GET['archivo'])) {
                                background-color: <?php echo $colorFondoCSS; ?>;
                                text-align: <?php echo $alineacion; ?>;">
                         <?php echo $imagenHTML; ?>
-                        <input type="text" name="data[<?php echo $filaIndex; ?>][<?php echo $colIndex; ?>]" 
+                        <input type="text" class="celda-dato" data-fila="<?php echo $filaIndex; ?>" data-col="<?php echo $colIndex; ?>"
                                value="<?php echo htmlspecialchars($celda ?? '',  ENT_QUOTES, 'UTF-8'); ?>">
                     </td>
                 <?php endforeach; ?>
@@ -227,5 +228,22 @@ if (isset($_GET['archivo'])) {
 
 
     // Inicializar ambos canvas con sus botones y campos ocultos
-    inicializarCanvas('canvasfirma1', 'limpiarFirma1', 'guardarFirma1', 'firma_turn1');
+    if (document.getElementById('canvasfirma1')) {
+        inicializarCanvas('canvasfirma1', 'limpiarFirma1', 'guardarFirma1', 'firma_turn1');
+    }
+
+    // El Excel tiene demasiadas celdas para enviarlas como campos individuales
+    // (PHP descarta silenciosamente los campos que exceden max_input_vars,
+    // lo que dejaba sin guardar las últimas filas). Se empaquetan todas
+    // las celdas en un único campo JSON para evitar ese límite.
+    document.getElementById('formCorreccion').addEventListener('submit', function () {
+        const datos = {};
+        document.querySelectorAll('.celda-dato').forEach(function (input) {
+            const fila = input.dataset.fila;
+            const col = input.dataset.col;
+            if (!datos[fila]) datos[fila] = {};
+            datos[fila][col] = input.value;
+        });
+        document.getElementById('data_json').value = JSON.stringify(datos);
+    });
 </script>
