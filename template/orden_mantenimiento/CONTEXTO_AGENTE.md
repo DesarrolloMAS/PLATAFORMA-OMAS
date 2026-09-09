@@ -55,7 +55,7 @@ El sistema local de "S.O.M. V2" actúa como un sistema de origen. `galeria.php` 
 ## 4. Convenciones de Estilo y Visualización
 - Se usan utilidades CSS custom y variables de tema (e.g. `var(--primary)`, `var(--accent2)`, `var(--border)`).
 - **Tema Visual:** `orden_mantenimiento_v2.css`
-- **Renderizado PDF/Impresión:** `visor.php` utiliza el esquema de plantillas antiguas (`formulario001.html`). Usa la técnica de inyección de cadenas (`str_replace`) para renderizar un documento oficial (apto para `window.print()`). Las iteraciones para tablas dinámicas están capadas por un límite duro en PHP (max 8 herramientas, max 8 materiales, max 10 mediciones).
+- **Renderizado PDF/Impresión:** `visor.php` utiliza el esquema de plantillas antiguas (`formulario001.html`). Usa la técnica de inyección de cadenas (`str_replace`) para renderizar un documento oficial (apto para `window.print()`). Las iteraciones para tablas dinámicas están capadas por un límite duro en PHP (max 8 herramientas, max 8 piezas/repuestos, max 8 materiales, max 10 mediciones).
 
 ## 5. Directrices para el Agente (Claude Code)
 1. **Modificar Formularios:** Si agregas un campo nuevo a `index.php`, asegúrate de que el visor de impresión (`../plantillas/formulario001.html` y `visor.php`) esté preparado para recibir y mostrar ese dato a través de un tag `{{nuevo_campo}}`.

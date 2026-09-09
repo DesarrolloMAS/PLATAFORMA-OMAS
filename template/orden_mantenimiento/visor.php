@@ -109,6 +109,20 @@ for ($i = 0; $i < 8; $i++) {
     $replacements['{{herramientas_salida' . ($i + 1) . '}}'] = $d['tool_salida'][$i] ?? '';
 }
 
+// Procesar Piezas y Repuestos (Max 8) — sección "2. PIEZAS Y REPUESTOS"
+// del formulario (part_cant/part_desc/part_used/part_unused/part_removed/part_verif).
+for ($i = 0; $i < 8; $i++) {
+    $hasData = !empty($d['part_cant'][$i]) || !empty($d['part_desc'][$i]);
+    $replacements['{{row_part_' . ($i + 1) . '_style}}'] = $hasData ? '' : 'display: none;';
+
+    $replacements['{{repuestos_cantidad' . ($i + 1) . '}}'] = $d['part_cant'][$i] ?? '';
+    $replacements['{{descripcion_repuestos' . ($i + 1) . '}}'] = $d['part_desc'][$i] ?? '';
+    $replacements['{{repuestos_utilizado' . ($i + 1) . '}}'] = $d['part_used'][$i] ?? '';
+    $replacements['{{repuestos_sin_utilizar' . ($i + 1) . '}}'] = $d['part_unused'][$i] ?? '';
+    $replacements['{{repuestos_desinstalado' . ($i + 1) . '}}'] = $d['part_removed'][$i] ?? '';
+    $replacements['{{repuestos_verificacion' . ($i + 1) . '}}'] = $d['part_verif'][$i] ?? '';
+}
+
 // Procesar Materiales (Max 8)
 for ($i = 0; $i < 8; $i++) {
     $hasData = !empty($d['mat_cant'][$i]) || !empty($d['mat_desc'][$i]);
