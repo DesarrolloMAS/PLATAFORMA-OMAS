@@ -5,7 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Inspección de Etiquetado — MAS</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
+/* ══ BARRA DE ACCIÓN (Volver / Corrección / Guardar / Imprimir) ══ */
+.action-bar{
+  max-width:1200px;margin:0 auto 16px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  background:#1e293b;padding:12px 20px;border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.action-bar .left{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.btn-back{
+  background:transparent;border:1px solid #64748b;color:#cbd5e1;text-decoration:none;
+  padding:8px 16px;border-radius:5px;font-family:'DM Mono',monospace;font-size:11px;
+  font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:all .2s;
+}
+.btn-back:hover{border-color:#94a3b8;color:#fff;background:rgba(255,255,255,.05);}
+.doc-label{color:#e2e8f0;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;padding-left:10px;border-left:2px solid #475569;}
+.action-bar .right{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-correct,.btn-save,.btn-print{
+  border:none;padding:8px 16px;border-radius:5px;font-family:'DM Mono',monospace;
+  font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s;
+}
+.btn-correct{background:#334155;color:#fff;}
+.btn-correct:hover{background:#475569;}
+.btn-correct.active{background:var(--fail);}
+.btn-correct:disabled{opacity:.4;cursor:not-allowed;}
+.btn-save{background:var(--ok);color:#fff;display:none;}
+.btn-save:hover{background:#15803d;}
+.btn-print{background:#475569;color:#fff;}
+.btn-print:hover{background:#64748b;}
+
+/* ══ MODO CORRECCIÓN ══ */
+#doc.edit-mode [data-edit="text"]{
+  background:#fef9c3;border:1px dashed #ca8a04;cursor:text;border-radius:2px;
+}
+#doc.edit-mode [data-edit="text"]:focus{background:#fff;outline:2px solid #ca8a04;}
+.edit-select{
+  font-family:'DM Mono',monospace;font-size:9px;font-weight:600;padding:2px 4px;
+  border:1px dashed #ca8a04;background:#fef9c3;border-radius:3px;color:var(--text);
+}
+
 :root{
   --ok:#16a34a;--ok-bg:#f0fdf4;--ok-bd:#bbf7d0;
   --fail:#dc2626;--fail-bg:#fef2f2;--fail-bd:#fecaca;
@@ -272,6 +313,17 @@ body{
 </style>
 </head>
 <body>
+<div class="action-bar disable-print">
+  <div class="left">
+    <a href="rev_etiquetado.php" class="btn-back">← Volver al Listado</a>
+    <span class="doc-label" id="docLabel">Cargando…</span>
+  </div>
+  <div class="right">
+    <button id="btn-correct" class="btn-correct" onclick="toggleEditMode()" disabled>✎ CORRECCIÓN</button>
+    <button id="btn-save" class="btn-save" onclick="guardarCambios()">GUARDAR CAMBIOS</button>
+    <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR / PDF</button>
+  </div>
+</div>
 <div class="doc" id="doc"></div>
 <script>
 /* ══════════════════════════════════════
@@ -384,6 +436,7 @@ function fmtDate(s){
   return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:s;
 }
 function isDateKey(k){return /fecha|venc/i.test(k);}
+function escAttr(s){return String(s??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
 function bcell(v){
   if(!v||v==="")return`<span class="bc bc-em">—</span>`;
@@ -475,11 +528,11 @@ function renderMatriz(tipoDef, tipoData){
         ${iCols.map(c=>{
           const v = fields[c]||"";
           const display = isDateKey(c) ? fmtDate(v) : (v||"—");
-          return`<td class="dc" title="${display}">${display}</td>`;
+          return`<td class="dc" data-edit="text" data-tipo="${escAttr(tipo)}" data-sub="${escAttr(sub)}" data-field="${escAttr(c)}" data-raw="${escAttr(v)}" title="${display}">${display}</td>`;
         }).join("")}
-        ${cCols.map(c=>`<td class="dc-c">${bcell(fields[c])}</td>`).join("")}
-        ${eCols.map(c=>`<td class="dc">${fields[c]||"—"}</td>`).join("")}
-        <td class="pct-c" style="color:${n?pc:"var(--text3)"};">${pctVal?pctVal+"%":"—"}</td>
+        ${cCols.map(c=>`<td class="dc-c" data-edit="badge" data-tipo="${escAttr(tipo)}" data-sub="${escAttr(sub)}" data-field="${escAttr(c)}" data-current="${escAttr(fields[c]||"")}">${bcell(fields[c])}</td>`).join("")}
+        ${eCols.map(c=>`<td class="dc" data-edit="text" data-tipo="${escAttr(tipo)}" data-sub="${escAttr(sub)}" data-field="${escAttr(c)}" data-raw="${escAttr(fields[c]||"")}">${fields[c]||"—"}</td>`).join("")}
+        <td class="pct-c" data-edit="text" data-tipo="${escAttr(tipo)}" data-sub="${escAttr(sub)}" data-field="${escAttr(PCT_KEY)}" data-raw="${escAttr(pctVal)}" style="color:${n?pc:"var(--text3)"};">${pctVal?pctVal+"%":"—"}</td>
       </tr>`;
     });
 
@@ -516,7 +569,7 @@ function renderBottomSections(data, globalPct, stats){
   Object.entries(S2_GRUPOS).forEach(([grp, items])=>{
     h+=`<div style="padding:4px 10px 2px;font-family:'DM Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2);">${grp}</div>`;
     items.forEach(([k,lbl])=>{
-      h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span>${fullBadge(s2[k])}</div>`;
+      h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span><span data-edit="badge" data-section="seccion2" data-field="${escAttr(k)}" data-current="${escAttr(s2[k]||"")}">${fullBadge(s2[k])}</span></div>`;
     });
   });
   h+=`</div>`;
@@ -525,7 +578,7 @@ function renderBottomSections(data, globalPct, stats){
   h+=`<div class="small-col">
     <div class="small-col-head">Sección 3 — Insumos en líneas de producción</div>`;
   S3_ITEMS.forEach(([k,lbl])=>{
-    h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span>${fullBadge(s3[k])}</div>`;
+    h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span><span data-edit="badge" data-section="seccion3" data-field="${escAttr(k)}" data-current="${escAttr(s3[k]||"")}">${fullBadge(s3[k])}</span></div>`;
   });
   h+=`</div>`;
 
@@ -533,7 +586,7 @@ function renderBottomSections(data, globalPct, stats){
   h+=`<div class="small-col">
     <div class="small-col-head">Sección 4 — Etiquetas / empaques defectuosos</div>`;
   S4_ITEMS.forEach(([k,lbl])=>{
-    h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span>${fullBadge(s4[k])}</div>`;
+    h+=`<div class="small-kv"><span class="small-lbl">${lbl}</span><span data-edit="badge" data-section="seccion4" data-field="${escAttr(k)}" data-current="${escAttr(s4[k]||"")}">${fullBadge(s4[k])}</span></div>`;
   });
   h+=`</div>`;
 
@@ -586,8 +639,8 @@ function render(d){
         <div class="header-title">"Inspección de Etiquetado"</div>
       </div>
       <div class="header-fields">
-        <div class="hf"><span class="hf-lbl">Fecha de Inspección</span><span class="hf-val">${fmtDate(d.fecha_inspeccion)}</span></div>
-        <div class="hf"><span class="hf-lbl">Hora de Inspección</span><span class="hf-val">${d.hora_inspeccion||"—"}</span></div>
+        <div class="hf"><span class="hf-lbl">Fecha de Inspección</span><span class="hf-val" data-edit="text" data-root="fecha_inspeccion">${fmtDate(d.fecha_inspeccion)}</span></div>
+        <div class="hf"><span class="hf-lbl">Hora de Inspección</span><span class="hf-val" data-edit="text" data-root="hora_inspeccion" data-raw="${escAttr(d.hora_inspeccion||"")}">${d.hora_inspeccion||"—"}</span></div>
       </div>
     </div>
     <div class="header-codes">
@@ -638,7 +691,7 @@ function render(d){
 
   h+=`<div class="firma-row">
     <div class="firma-cell">
-        <div class="firma-name">${d.responsable || ''}</div>
+        <div class="firma-name" data-edit="text" data-root="responsable">${d.responsable || ''}</div>
         <div class="firma-lbl">Inspector responsable</div>
         <div class="firma-line"></div>
     </div>
@@ -651,6 +704,90 @@ function render(d){
   </div>`;
 
   document.getElementById("doc").innerHTML=h;
+}
+
+/* ══ MODO CORRECCIÓN ══ */
+let editMode = false;
+
+function toggleEditMode(){
+  editMode = !editMode;
+  const btn = document.getElementById('btn-correct');
+  const btnSave = document.getElementById('btn-save');
+  const doc = document.getElementById('doc');
+
+  if(editMode){
+    btn.classList.add('active');
+    btn.innerText = '✕ CANCELAR';
+    btnSave.style.display = 'inline-block';
+    doc.classList.add('edit-mode');
+
+    doc.querySelectorAll('[data-edit="text"]').forEach(el=>{
+      if(el.dataset.raw !== undefined) el.textContent = el.dataset.raw;
+      el.contentEditable = true;
+    });
+
+    doc.querySelectorAll('[data-edit="badge"]').forEach(el=>{
+      const current = el.dataset.current || '';
+      const opciones = ['', 'Cumple', 'No Cumple', 'No Aplica'];
+      el.innerHTML = '<select class="edit-select">'
+        + opciones.map(o => `<option value="${o}" ${o === current ? 'selected' : ''}>${o === '' ? '—' : o}</option>`).join('')
+        + '</select>';
+    });
+  } else {
+    // Cancelar: se descarta todo lo tecleado y se recarga el registro tal cual está guardado.
+    location.reload();
+  }
+}
+
+async function guardarCambios(){
+  const updates = {};
+
+  document.querySelectorAll('#doc [data-root]').forEach(el=>{
+    updates[el.dataset.root] = el.innerText.trim();
+  });
+
+  document.querySelectorAll('#doc [data-section][data-field]').forEach(el=>{
+    const sec = el.dataset.section, field = el.dataset.field;
+    updates[sec] = updates[sec] || {};
+    const sel = el.querySelector('select.edit-select');
+    updates[sec][field] = sel ? sel.value : el.innerText.trim();
+  });
+
+  document.querySelectorAll('#doc [data-tipo][data-sub][data-field]').forEach(el=>{
+    const tipo = el.dataset.tipo, sub = el.dataset.sub, field = el.dataset.field;
+    updates.dinamicas = updates.dinamicas || {};
+    updates.dinamicas[tipo] = updates.dinamicas[tipo] || {};
+    updates.dinamicas[tipo][sub] = updates.dinamicas[tipo][sub] || {};
+    const sel = el.querySelector('select.edit-select');
+    updates.dinamicas[tipo][sub][field] = sel ? sel.value : el.innerText.trim();
+  });
+
+  const btnSave = document.getElementById('btn-save');
+  const oldText = btnSave.innerText;
+  btnSave.disabled = true;
+  btnSave.innerText = 'GUARDANDO...';
+
+  try {
+    const resp = await fetch('corregir_etiquetado.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ zona: zonaParam, file: fileName, updates })
+    });
+    const data = await resp.json();
+
+    if (data.status === 'success') {
+      await Swal.fire({ title: '¡Guardado!', text: 'Los cambios se han aplicado correctamente.', icon: 'success', timer: 1500, showConfirmButton: false });
+      location.reload();
+    } else {
+      Swal.fire('Error', data.message || 'No se pudieron guardar los cambios.', 'error');
+      btnSave.disabled = false;
+      btnSave.innerText = oldText;
+    }
+  } catch (e) {
+    Swal.fire('Error', 'Hubo un problema de conexión al guardar.', 'error');
+    btnSave.disabled = false;
+    btnSave.innerText = oldText;
+  }
 }
 
 /* ══ API FIRMA ══ */
@@ -678,17 +815,24 @@ function getParam(key){
 }
 const fileName = getParam("file");
 const zonaParam = getParam("zona") || "";
+const docLabelEl = document.getElementById('docLabel');
 if(fileName){
+  docLabelEl.textContent = fileName;
   fetch("leer_json.php?zona="+encodeURIComponent(zonaParam)+"&file="+encodeURIComponent(fileName))
     .then(r=>r.json())
     .then(data=>{
-      if(data&&!data.error) render(data);
-      else document.getElementById("doc").innerHTML=`<div style="padding:40px;text-align:center;color:var(--fail);font-family:monospace;">No se pudo cargar el archivo.</div>`;
+      if(data&&!data.error){
+        render(data);
+        document.getElementById('btn-correct').disabled = false;
+      } else {
+        document.getElementById("doc").innerHTML=`<div style="padding:40px;text-align:center;color:var(--fail);font-family:monospace;">No se pudo cargar el archivo.</div>`;
+      }
     })
     .catch(()=>{
       document.getElementById("doc").innerHTML=`<div style="padding:40px;text-align:center;color:var(--fail);font-family:monospace;">Error al cargar el archivo.</div>`;
     });
 } else {
+  docLabelEl.textContent = 'MODO DEMO — sin archivo';
   /* ══ DEMO DATA (cuando no hay parámetro ?file=) ══ */
   render({
     "fecha_inspeccion":"2026-02-16","hora_inspeccion":"08:04",

@@ -46,6 +46,11 @@ $MEJORANTES_FIJOS = [
     'Granozyme OXD',
 ];
 $FILAS_EXTRA = 3;
+
+function campoEditable($field, $value, $class = '') {
+    $texto = $value !== null && $value !== '' ? htmlspecialchars($value) : '';
+    return '<span class="editable-field ' . $class . '" data-field="' . htmlspecialchars($field) . '">' . $texto . '</span>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,6 +59,7 @@ $FILAS_EXTRA = 3;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visor - Preparación de Mejorante | <?= htmlspecialchars($periodo) ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --navy:   #0F172A;
@@ -264,10 +270,42 @@ $FILAS_EXTRA = 3;
         /* ── Separador vacío entre docs ── */
         .page-break-hint { page-break-after: always; }
 
+        /* ── Barra de corrección por registro ── */
+        .record-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .btn-correct {
+            background: #1E293B; color: #fff; border: none;
+            padding: 7px 14px; border-radius: 4px;
+            font-weight: 700; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s;
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn-correct:hover { background: #334155; }
+        .btn-correct.active { background: #E11D48; }
+        .btn-save {
+            background: #10B981; color: #fff; border: none;
+            padding: 7px 14px; border-radius: 4px;
+            font-weight: 700; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.5px; cursor: pointer; display: none; transition: background 0.2s;
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn-save:hover { background: #059669; }
+
+        .editable-field { transition: all 0.2s; border: 1px solid transparent; }
+        .page-wrap.edit-mode .editable-field {
+            background: #FEF08A; border: 1px dashed #CA8A04; cursor: text;
+        }
+        .page-wrap.edit-mode .editable-field:focus { background: #fff; outline: 2px solid #CA8A04; }
+
         @media print {
             body        { background: #fff; padding: 0; }
             .action-bar  { display: none !important; }
             .registro-sep { display: none !important; }
+            .record-toolbar { display: none !important; }
             .page-wrap   { box-shadow: none; padding: 10px; max-width: 100%; margin-bottom: 0; }
             .page-break-hint { page-break-after: always; }
             @page { size: portrait; margin: 8mm; }
@@ -317,7 +355,13 @@ $FILAS_EXTRA = 3;
 <div class="registro-sep">Preparación <?= $idx + 1 ?> de <?= count($registros) ?></div>
 <?php endif; ?>
 
-<div class="page-wrap <?= ($idx < count($registros) - 1) ? 'page-break-hint' : '' ?>">
+<div class="page-wrap <?= ($idx < count($registros) - 1) ? 'page-break-hint' : '' ?>"
+     data-id-registro="<?= htmlspecialchars($reg['id_registro'] ?? '') ?>">
+
+    <div class="record-toolbar">
+        <button class="btn-correct" onclick="toggleEditMode(this)">✎ CORREGIR ESTE REGISTRO</button>
+        <button class="btn-save" onclick="guardarCambios(this)">GUARDAR CAMBIOS</button>
+    </div>
 
     <!-- ENCABEZADO INSTITUCIONAL -->
     <table class="header-table" style="margin-bottom:0;">
@@ -346,23 +390,23 @@ $FILAS_EXTRA = 3;
     <table class="form-fields">
         <tr>
             <td class="field-label">Fecha</td>
-            <td class="field-value"><?= htmlspecialchars($fecha_fmt) ?></td>
+            <td class="field-value"><?= campoEditable('fecha', $fecha_fmt) ?></td>
         </tr>
         <tr>
             <td class="field-label">Referencia</td>
-            <td class="field-value"><?= htmlspecialchars($referencia) ?></td>
+            <td class="field-value"><?= campoEditable('referencia', $referencia) ?></td>
         </tr>
         <tr>
             <td class="field-label">Lote</td>
-            <td class="field-value"><?= htmlspecialchars($lote) ?></td>
+            <td class="field-value"><?= campoEditable('lote', $lote) ?></td>
         </tr>
         <tr>
             <td class="field-label">Vence</td>
-            <td class="field-value"><?= htmlspecialchars($vence_fmt) ?></td>
+            <td class="field-value"><?= campoEditable('vence', $vence_fmt) ?></td>
         </tr>
         <tr>
             <td class="field-label">Tiempo Mezcla (Min)</td>
-            <td class="field-value"><?= htmlspecialchars($tiempo_mezcla) ?></td>
+            <td class="field-value"><?= campoEditable('tiempo_mezcla_min', $tiempo_mezcla) ?></td>
         </tr>
     </table>
 
@@ -384,11 +428,11 @@ $FILAS_EXTRA = 3;
                 $m_cantidad = $entry ? ($entry['cantidad']   ?? '') : '';
                 $m_venc_fmt = $m_venc_raw ? date('d/m/Y', strtotime($m_venc_raw)) : '';
             ?>
-            <tr>
+            <tr data-mej-nombre="<?= htmlspecialchars($nombre_fijo) ?>">
                 <td class="td-nombre"><?= htmlspecialchars($nombre_fijo) ?></td>
-                <td class="td-center"><?= htmlspecialchars($m_lote) ?></td>
-                <td class="td-center"><?= htmlspecialchars($m_venc_fmt) ?></td>
-                <td class="td-center"><?= htmlspecialchars($m_cantidad) ?></td>
+                <td class="td-center"><?= campoEditable('lote', $m_lote) ?></td>
+                <td class="td-center"><?= campoEditable('fecha_venc', $m_venc_fmt) ?></td>
+                <td class="td-center"><?= campoEditable('cantidad', $m_cantidad) ?></td>
             </tr>
             <?php endforeach; ?>
 
@@ -399,11 +443,11 @@ $FILAS_EXTRA = 3;
             foreach ($extras as $ex):
                 $ex_venc = isset($ex['fecha_venc']) && $ex['fecha_venc'] ? date('d/m/Y', strtotime($ex['fecha_venc'])) : '';
             ?>
-            <tr>
+            <tr data-mej-nombre="<?= htmlspecialchars($ex['nombre'] ?? '') ?>">
                 <td class="td-nombre"><?= htmlspecialchars($ex['nombre'] ?? '') ?></td>
-                <td class="td-center"><?= htmlspecialchars($ex['lote'] ?? '') ?></td>
-                <td class="td-center"><?= htmlspecialchars($ex_venc) ?></td>
-                <td class="td-center"><?= htmlspecialchars($ex['cantidad'] ?? '') ?></td>
+                <td class="td-center"><?= campoEditable('lote', $ex['lote'] ?? '') ?></td>
+                <td class="td-center"><?= campoEditable('fecha_venc', $ex_venc) ?></td>
+                <td class="td-center"><?= campoEditable('cantidad', $ex['cantidad'] ?? '') ?></td>
             </tr>
             <?php endforeach; ?>
 
@@ -430,26 +474,26 @@ $FILAS_EXTRA = 3;
     <table class="tabla-resumen">
         <tr>
             <td class="res-label">TOTAL</td>
-            <td class="res-value"><?= htmlspecialchars($total) ?></td>
+            <td class="res-value"><?= campoEditable('total', $total) ?></td>
         </tr>
         <tr>
             <td class="res-label">DEVOLUCIÓN</td>
-            <td class="res-value"><?= htmlspecialchars($devolucion) ?></td>
+            <td class="res-value"><?= campoEditable('devolucion', $devolucion) ?></td>
         </tr>
         <tr>
             <td class="res-label">REALIZÁ</td>
-            <td class="res-value"><?= htmlspecialchars($realiza) ?></td>
+            <td class="res-value"><?= campoEditable('realiza', $realiza) ?></td>
         </tr>
         <tr>
             <td class="res-label">VERIFICA</td>
-            <td class="res-value"><?= htmlspecialchars($verifica) ?></td>
+            <td class="res-value"><?= campoEditable('verifica', $verifica) ?></td>
         </tr>
     </table>
 
     <!-- OBSERVACIONES -->
     <div class="obs-block">
         <div class="obs-label">OBSERVACIONES:</div>
-        <?= nl2br(htmlspecialchars($observaciones)) ?>
+        <div class="editable-field" data-field="observaciones"><?= nl2br(htmlspecialchars($observaciones)) ?></div>
     </div>
 
     <!-- META DEL SISTEMA -->
@@ -462,6 +506,66 @@ $FILAS_EXTRA = 3;
 </div><!-- /.page-wrap -->
 
 <?php endforeach; ?>
+
+<script>
+    const NOMBRE_ARCHIVO = <?= json_encode(basename($target_file)) ?>;
+
+    function toggleEditMode(btn) {
+        const wrap = btn.closest('.page-wrap');
+        const saveBtn = wrap.querySelector('.btn-save');
+        const isEdit = wrap.classList.toggle('edit-mode');
+
+        wrap.querySelectorAll('.editable-field').forEach(el => { el.contentEditable = isEdit; });
+
+        if (isEdit) {
+            btn.classList.add('active');
+            btn.innerText = '✕ CANCELAR';
+            saveBtn.style.display = 'inline-block';
+        } else {
+            btn.classList.remove('active');
+            btn.innerText = '✎ CORREGIR ESTE REGISTRO';
+            saveBtn.style.display = 'none';
+            location.reload();
+        }
+    }
+
+    async function guardarCambios(btn) {
+        const wrap = btn.closest('.page-wrap');
+        const idRegistro = wrap.dataset.idRegistro;
+
+        const updates = {};
+        wrap.querySelectorAll(':scope > table.form-fields .editable-field, :scope > table.tabla-resumen .editable-field, :scope > .obs-block .editable-field')
+            .forEach(el => { updates[el.dataset.field] = el.innerText.trim(); });
+
+        const mejorantes = [];
+        wrap.querySelectorAll('tr[data-mej-nombre]').forEach(tr => {
+            mejorantes.push({
+                nombre:     tr.dataset.mejNombre,
+                lote:       tr.querySelector('[data-field="lote"]').innerText.trim(),
+                fecha_venc: tr.querySelector('[data-field="fecha_venc"]').innerText.trim(),
+                cantidad:   tr.querySelector('[data-field="cantidad"]').innerText.trim(),
+            });
+        });
+
+        try {
+            const resp = await fetch('corregir_preparacion_mejorante.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file: NOMBRE_ARCHIVO, id_registro: idRegistro, updates, mejorantes })
+            });
+            const result = await resp.json();
+
+            if (result.status === 'success') {
+                Swal.fire({ title: '¡Guardado!', text: 'Los cambios se han aplicado correctamente.', icon: 'success', timer: 1500, showConfirmButton: false })
+                    .then(() => location.reload());
+            } else {
+                Swal.fire('Error', result.message || 'No se pudieron guardar los cambios.', 'error');
+            }
+        } catch (e) {
+            Swal.fire('Error', 'Hubo un problema de conexión al guardar.', 'error');
+        }
+    }
+</script>
 
 </body>
 </html>
