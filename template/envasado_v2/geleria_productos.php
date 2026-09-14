@@ -4,48 +4,69 @@ verificarAutenticacion();
 $sede = $_SESSION['sede'];
 if (!in_array($sede, ['ZC', 'ZS', 'ZB'])) $sede = 'ZC';
 
-$productos_zc = [
-    'Mogolla'                => 'Empaque Galeras Mogolla',
-    'Salvado'                => 'Empaque Galeras Salvado',
-    'Fuerte x25'             => 'Empaque Galeras Letra Naranja X25',
-    'Natural x50'            => 'Empaque Galeras Letra Verde X50',
-    'Harina de Centeno'      => 'Empaque Galeras Multi Beige X25',
-    'Exclusiva x50'          => 'Empaque Galeras Letra Cafe X50',
-    'Artesanal x50'          => 'Empaque Galeras Letra Roja X50',
-    'Artesanal x25'          => 'Empaque Galeras Papel Kraft X25',
-    'Extrapan x50'           => 'Empaque Extrapan X50',
-    'Extrapan x25'           => 'Empaque Extrapan x25',
-    'Extrapan x10'           => 'Empaque Extrapan Laminado x10',
-    'Extrapan x11.4'         => 'Empaque Extrapan x11.4',
-    'Segunda'                => 'Empaque Galeras Segunda',
-    'Fuerte de Exportación'  => 'Empaque Harina Fuerte de Exportación',
-    'Especial x50'           => 'Empaque Galeras Letra Azul X50',
-    'Especial x25'           => 'Empaque Galeras Letra Naranja X25',
-    'Harina T1 x50'          => 'Empaque Galeras Letra Verde X50',
-    'Harina Integral'        => 'Empaque Galeras Multi Beige X25',
-    'Grano entero fino'      => 'Empaque Galeras Multi Beige X25',
-    'Trigo entero'           => 'Empaque Galeras Multi Beige X25',
-    'Manitoba'               => 'Empaque Galeras Letra Naranja X25',
-    'Centeno Pepa'           => 'Empaque Galeras Multi Beige X25'
-];
+// Catálogo de productos (producto -> empaque) por sede. Antes vivía
+// hardcodeado en dos arrays PHP en este mismo archivo; ahora se persiste en
+// JSON para que admin_catalogo_productos.php pueda editarlo sin tocar
+// código. La primera vez que corre, se siembra con los datos que había
+// hardcodeados (mismas referencias, mismo contenido).
+$catalogo_file = "../../archivos/generados/envasado_v2/catalogo_productos.json";
 
-$productos_zs = [
-    'Mogolla'               => 'Empaque Galeras Mogolla',
-    'Salvado'               => 'Empaque Galeras Salvado',
-    'Extrapan x50'          => 'Empaque Extrapan x50',
-    'Extrapan x25'          => 'Empaque Extrapan x25',
-    'Extrapan x10'          => 'Empaque Extrapan x10',
-    'Artesanal x50'         => 'Empaque Galeras Rojo x50',
-    'Natural x50'           => 'Empaque Galeras Verde x50',
-    'Exclusiva x50'         => 'Empaque Galeras Cafe x50',
-    'Especial x50'          => 'Empaque Galeras Azul x50',
-    'Harina Fuerte x50'     => 'Empaque Galeras Naranja x50',
-    'Artesanal Kraft x50'   => 'Empaque Galeras Kraft x50',
-    'Harina Integral'       => 'Empaque Galeras Biege x50',
-    'Segunda'               => 'Empaque Galeras Segunda'
-];
+if (!file_exists(dirname($catalogo_file))) {
+    mkdir(dirname($catalogo_file), 0777, true);
+}
 
-$productos = ($sede === 'ZS') ? $productos_zs : $productos_zc;
+if (!file_exists($catalogo_file)) {
+    $catalogo_default = [
+        'ZC' => [
+            ['producto' => 'Mogolla',               'empaque' => 'Empaque Galeras Mogolla'],
+            ['producto' => 'Salvado',                'empaque' => 'Empaque Galeras Salvado'],
+            ['producto' => 'Fuerte x25',             'empaque' => 'Empaque Galeras Letra Naranja X25'],
+            ['producto' => 'Natural x50',            'empaque' => 'Empaque Galeras Letra Verde X50'],
+            ['producto' => 'Harina de Centeno',      'empaque' => 'Empaque Galeras Multi Beige X25'],
+            ['producto' => 'Exclusiva x50',          'empaque' => 'Empaque Galeras Letra Cafe X50'],
+            ['producto' => 'Artesanal x50',          'empaque' => 'Empaque Galeras Letra Roja X50'],
+            ['producto' => 'Artesanal x25',          'empaque' => 'Empaque Galeras Papel Kraft X25'],
+            ['producto' => 'Extrapan x50',           'empaque' => 'Empaque Extrapan X50'],
+            ['producto' => 'Extrapan x25',           'empaque' => 'Empaque Extrapan x25'],
+            ['producto' => 'Extrapan x10',           'empaque' => 'Empaque Extrapan Laminado x10'],
+            ['producto' => 'Extrapan x11.4',         'empaque' => 'Empaque Extrapan x11.4'],
+            ['producto' => 'Segunda',                'empaque' => 'Empaque Galeras Segunda'],
+            ['producto' => 'Fuerte de Exportación',  'empaque' => 'Empaque Harina Fuerte de Exportación'],
+            ['producto' => 'Especial x50',           'empaque' => 'Empaque Galeras Letra Azul X50'],
+            ['producto' => 'Especial x25',           'empaque' => 'Empaque Galeras Letra Naranja X25'],
+            ['producto' => 'Harina T1 x50',          'empaque' => 'Empaque Galeras Letra Verde X50'],
+            ['producto' => 'Harina Integral',        'empaque' => 'Empaque Galeras Multi Beige X25'],
+            ['producto' => 'Grano entero fino',      'empaque' => 'Empaque Galeras Multi Beige X25'],
+            ['producto' => 'Trigo entero',           'empaque' => 'Empaque Galeras Multi Beige X25'],
+            ['producto' => 'Manitoba',               'empaque' => 'Empaque Galeras Letra Naranja X25'],
+            ['producto' => 'Centeno Pepa',           'empaque' => 'Empaque Galeras Multi Beige X25'],
+        ],
+        'ZS' => [
+            ['producto' => 'Mogolla',              'empaque' => 'Empaque Galeras Mogolla'],
+            ['producto' => 'Salvado',               'empaque' => 'Empaque Galeras Salvado'],
+            ['producto' => 'Extrapan x50',          'empaque' => 'Empaque Extrapan x50'],
+            ['producto' => 'Extrapan x25',          'empaque' => 'Empaque Extrapan x25'],
+            ['producto' => 'Extrapan x10',          'empaque' => 'Empaque Extrapan x10'],
+            ['producto' => 'Artesanal x50',         'empaque' => 'Empaque Galeras Rojo x50'],
+            ['producto' => 'Natural x50',           'empaque' => 'Empaque Galeras Verde x50'],
+            ['producto' => 'Exclusiva x50',         'empaque' => 'Empaque Galeras Cafe x50'],
+            ['producto' => 'Especial x50',          'empaque' => 'Empaque Galeras Azul x50'],
+            ['producto' => 'Harina Fuerte x50',     'empaque' => 'Empaque Galeras Naranja x50'],
+            ['producto' => 'Artesanal Kraft x50',   'empaque' => 'Empaque Galeras Kraft x50'],
+            ['producto' => 'Harina Integral',       'empaque' => 'Empaque Galeras Biege x50'],
+            ['producto' => 'Segunda',               'empaque' => 'Empaque Galeras Segunda'],
+        ],
+    ];
+    file_put_contents($catalogo_file, json_encode($catalogo_default, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
+$catalogo_data = json_decode(file_get_contents($catalogo_file), true) ?: [];
+
+$zona_catalogo = ($sede === 'ZS') ? 'ZS' : 'ZC';
+$productos = [];
+foreach ($catalogo_data[$zona_catalogo] ?? [] as $item) {
+    $productos[$item['producto']] = $item['empaque'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -224,6 +245,9 @@ $productos = ($sede === 'ZS') ? $productos_zs : $productos_zc;
         </div>
         <div class="header-actions">
             <a href="rev_envasado_v2.php" class="btn-rev">📋 Ver Revisiones</a>
+            <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] === '1' || $_SESSION['rol'] === 'adm')): ?>
+            <a href="admin_catalogo_productos.php" class="btn-secondary">🛠️ Editar Productos</a>
+            <?php endif; ?>
             <a href="../menu_produccion.html" class="btn-secondary">← Volver</a>
         </div>
     </div>

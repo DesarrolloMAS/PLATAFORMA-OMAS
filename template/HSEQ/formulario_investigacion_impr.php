@@ -1,11 +1,15 @@
 <?php
+require '../sesion.php';
+verificarAutenticacion();
+
 // ── Cargar datos ──
 $id = $_GET['id'] ?? '';
 if (!$id || !preg_match('/^investigacion_\d{8}_\d{6}$/', $id)) {
     die('ID de investigación no válido.');
 }
 
-$json_file = '/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/' . $id . '.json';
+$sede = preg_replace('/[^A-Za-z0-9_-]/', '', $_SESSION['sede'] ?? '');
+$json_file = "/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/{$sede}/" . $id . '.json';
 if (!file_exists($json_file)) {
     die('Investigación no encontrada.');
 }

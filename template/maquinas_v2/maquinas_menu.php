@@ -2,6 +2,11 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+// Solo para poder mostrar/ocultar el botón de administración según rol; el
+// resto del módulo sigue siendo público (sin verificarAutenticacion()).
+require '../sesion.php';
+$esAdminMaquinas = isset($_SESSION['rol']) && ($_SESSION['rol'] === '1' || $_SESSION['rol'] === 'adm');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,6 +28,9 @@ error_reporting(E_ALL);
                 </div>
                 <div style="display:flex; gap:10px; flex-wrap:wrap;">
                     <a class="btn-back" href="revision_maquinas.php">📁 Revisión</a>
+                    <?php if ($esAdminMaquinas): ?>
+                    <a class="btn-back" href="admin_catalogo_maquinas.php">🛠️ Editar Máquinas</a>
+                    <?php endif; ?>
                     <a class="btn-back" href="../redireccion.php">← Volver</a>
                 </div>
             </div>

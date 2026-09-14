@@ -1,9 +1,19 @@
 <?php
+require '../sesion.php';
+verificarAutenticacion();
+
 // Evitar acceso directo sin POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     die('Método no permitido.');
 }
+
+if (empty($_SESSION['sede'])) {
+    die('Sesión sin sede asignada. No se puede registrar la investigación.');
+}
+// Misma sanitización de sede que usa el resto de HSEQ (analisis_trabajo,
+// inspeccion_trabajo, permiso_trabajo).
+$sede = preg_replace('/[^A-Za-z0-9_-]/', '', $_SESSION['sede']);
 
 // ── 1. PROCESAR TODOS LOS CAMPOS POST ──
 function limpiar_post($arr) {
@@ -61,7 +71,8 @@ $data = [
 ];
 
 // ── 4. GUARDAR COMO JSON ──
-$json_dir = '/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/';
+// Separado por sede para poder filtrar la galería de revisión por zona.
+$json_dir = "/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/{$sede}/";
 if (!is_dir($json_dir)) mkdir($json_dir, 0755, true);
 $json_file = $json_dir . 'investigacion_' . date('Ymd_His') . '.json';
 file_put_contents($json_file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));

@@ -2,7 +2,8 @@
 require '../sesion.php';
 verificarAutenticacion();
 
-$carpeta = '/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/';
+$sede = preg_replace('/[^A-Za-z0-9_-]/', '', $_SESSION['sede'] ?? '');
+$carpeta = "/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/{$sede}/";
 $respuestas = [];
 
 if (!empty($_POST['archivos'])) {
