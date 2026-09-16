@@ -2,8 +2,13 @@
 require '../sesion.php';
 verificarAutenticacion();
 
-// ====== ESCANEO DE INVESTIGACIONES JSON ======
-$carpeta = '/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/';
+// ====== ESCANEO DE INVESTIGACIONES JSON (filtrado por sede activa) ======
+// Un admin puede cambiar su sede activa desde "Sede Activa" en
+// menu_administracion.html (toggle_sede.php) para revisar la otra zona;
+// como esta página lee $_SESSION['sede'] en cada carga, el cambio se
+// refleja solo con recargar/volver a entrar aquí.
+$sede = preg_replace('/[^A-Za-z0-9_-]/', '', $_SESSION['sede'] ?? '');
+$carpeta = "/var/www/fmt/archivos/generados/HSEQ/investigacionesjson/{$sede}/";
 $archivos = [];
 
 if (is_dir($carpeta)) {
@@ -49,6 +54,7 @@ if (is_dir($carpeta)) {
         <h1>
             <div class="header-icon">�</div>
             Investigaciones de Accidentes e Incidentes
+            <span style="font-size:0.5em; font-weight:600; color:#6b8ab0; margin-left:10px;">· Sede: <?= htmlspecialchars($sede ?: 'sin asignar') ?></span>
         </h1>
         <a class="volver" href="/template/menu_hseq_adm.html">
             <span>←</span> Volver
