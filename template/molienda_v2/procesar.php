@@ -194,16 +194,6 @@ try {
         $stmtUpdate->execute([$json_file, $id_proceso]);
     }
 
-    // === SINCRONIZACIÓN AUTOMÁTICA (Postgres y Excel) ===
-    try {
-        require_once __DIR__ . '/../gobierno_datos/bitacora_produccion/sincronizador.php';
-        $sync = new ProduccionSincronizador();
-        $sync->sincronizar($fecha, $sede);
-    } catch (Exception $e) {
-        error_log("Fallo sincronización automatica: " . $e->getMessage());
-    }
-    // ====================================================
-
 } catch (PDOException $e) {
     error_log("Error SQL en Molienda V2: " . $e->getMessage());
     // No detenemos el proceso si falla el SQL, pero informamos

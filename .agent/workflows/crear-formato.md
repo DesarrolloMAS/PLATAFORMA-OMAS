@@ -86,6 +86,17 @@ echo json_encode(['status' => 'success', 'id' => $nuevo_registro['id_registro']]
 
 **IMPORTANTE**: El formulario envía datos como `application/json` con `fetch()`, NO como `FormData`.
 
+**IMPORTANTE — no agregar integraciones externas aquí**: `procesar.php` no debe llamar
+sincronizadores externos (Postgres, Excel, APIs de terceros) de forma síncrona dentro del
+guardado. Motivo real ya visto en producción: `molienda_v2/procesar.php` llamaba a
+`gobierno_datos/bitacora_produccion/sincronizador.php`, que nunca tuvo Composer instalado
+en el servidor — cada guardado tiraba un `Error` fatal (no atrapable con `catch (Exception)`,
+hay que usar `catch (Throwable)` si alguna vez es inevitable) **después** de que el registro
+ya se había guardado, dejando al usuario con "respuesta inválida" aunque el dato sí quedó
+persistido. Se eliminó esa integración en 2026-09. Si un formato nuevo necesita alimentar un
+sistema externo, ese proceso va aparte (cron o endpoint dedicado, como
+`gobierno_datos/integracion_mia/`), nunca bloqueando la respuesta de `procesar.php`.
+
 ## 4. Comunicación Frontend → Backend (fetch estándar)
 
 ```javascript

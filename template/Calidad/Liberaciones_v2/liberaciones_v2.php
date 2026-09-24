@@ -85,6 +85,8 @@ verificarAutenticacion();
 
         .sub-title { color: var(--text-muted); font-size: 13px; font-family: 'Space Mono', monospace; }
 
+        .header-actions { display: flex; gap: 10px; flex-shrink: 0; }
+
         .btn-back {
             background: var(--input-bg);
             border: 1px solid var(--border-color);
@@ -127,15 +129,167 @@ verificarAutenticacion();
         .harina-toggle {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
             cursor: pointer;
             text-transform: none;
             letter-spacing: normal;
+            width: 100%;
         }
+        .harina-toggle-left { display: flex; align-items: center; gap: 10px; }
         .harina-toggle input[type="checkbox"] {
             width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;
         }
         .harina-toggle span { font-size: 13px; }
+        .harina-chevron {
+            color: var(--text-muted);
+            transition: transform 0.3s ease, color 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        /* Estado activo: replica la señal visual del formato anterior,
+           donde la barra de la harina seleccionada quedaba resaltada. */
+        .section-card.harina-activa {
+            border-color: rgba(0, 240, 255, 0.35);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 1px rgba(0, 240, 255, 0.15) inset;
+        }
+        .section-card.harina-activa .section-title {
+            color: #fff;
+            border-bottom-color: rgba(0, 240, 255, 0.3);
+        }
+        .section-card.harina-activa .harina-chevron {
+            color: var(--accent);
+            transform: rotate(180deg);
+        }
+
+        /* ── BARRA DE DESPLIEGUE ──
+           Reinvención de la barra lateral fija "LIBERACIONES" del formato
+           original: aquí es una barra horizontal, ubicada justo después de
+           la fecha, que despliega/colapsa todo el registro con una
+           animación fluida basada en grid-template-rows (0fr → 1fr). */
+        .despliegue-bar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            border-radius: var(--r-md);
+            padding: 20px 26px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-family: 'Barlow', sans-serif;
+            color: var(--text-main);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            animation: despliegue-pulse 2.6s ease-in-out infinite;
+        }
+        .despliegue-bar:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 25px var(--accent-glow);
+            transform: translateY(-1px);
+        }
+        .despliegue-bar.abierto {
+            animation: none;
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 1px rgba(0, 240, 255, 0.15) inset;
+        }
+
+        @keyframes despliegue-pulse {
+            0%, 100% { border-left-color: var(--accent); }
+            50% { border-left-color: var(--accent-hover); }
+        }
+
+        .despliegue-bar-left { display: flex; align-items: center; gap: 12px; }
+        .despliegue-bar-right { display: flex; align-items: center; gap: 12px; }
+
+        .despliegue-dot {
+            width: 9px; height: 9px; border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+            animation: despliegue-dot-blink 1.8s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes despliegue-dot-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+
+        .despliegue-titulo {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .despliegue-contador {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .despliegue-hint {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: none;
+        }
+        @media (min-width: 640px) {
+            .despliegue-hint { display: inline; }
+        }
+
+        .despliegue-chevron {
+            color: var(--accent);
+            transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            flex-shrink: 0;
+        }
+        .despliegue-bar.abierto .despliegue-chevron { transform: rotate(180deg); }
+
+        .despliegue-wrap {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease 0.05s;
+            pointer-events: none;
+        }
+        .despliegue-wrap.abierto {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .despliegue-inner { overflow: hidden; min-height: 0; }
+        .despliegue-inner > * {
+            transform: translateY(-14px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s, opacity 0.4s ease 0.15s;
+        }
+        .despliegue-wrap.abierto .despliegue-inner > * {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cumplimiento-heading {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Space Mono', monospace;
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--border-color);
+        }
 
         .form-grid {
             display: grid;
@@ -250,7 +404,10 @@ verificarAutenticacion();
             <div class="main-title">Registro de Liberaciones</div>
             <div class="sub-title">Sede: <?= htmlspecialchars($_SESSION['sede'] ?? '') ?></div>
         </div>
-        <a href="rev_liberaciones_v2.php" class="btn-back">← Galería</a>
+        <div class="header-actions">
+            <a href="../../menu_adm_calidad.html" class="btn-back">← Volver</a>
+            <a href="rev_liberaciones_v2.php" class="btn-back">← Galería</a>
+        </div>
     </div>
 
     <form id="formLiberaciones">
@@ -265,18 +422,35 @@ verificarAutenticacion();
             </div>
         </div>
 
-        <div class="section-card">
-            <div class="section-title">// Harinas para Liberar</div>
-            <div id="harinasWrap"></div>
-        </div>
+        <button type="button" class="despliegue-bar" id="btnDespliegue" aria-expanded="false" aria-controls="despliegueWrap">
+            <span class="despliegue-bar-left">
+                <span class="despliegue-dot"></span>
+                <span class="despliegue-titulo">Liberaciones</span>
+                <span class="despliegue-contador" id="despliegueContador">0 harinas activas</span>
+            </span>
+            <span class="despliegue-bar-right">
+                <span class="despliegue-hint">Toca para desplegar el registro</span>
+                <svg class="despliegue-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+        </button>
 
-        <div class="section-card">
-            <div class="section-title">// Harinas Extra (no listadas arriba)</div>
-            <div id="extraHarinasContainer"></div>
-            <button type="button" class="btn-add visible" id="btnAddExtra">➕ Agregar Harina Extra</button>
-        </div>
+        <div class="despliegue-wrap" id="despliegueWrap">
+            <div class="despliegue-inner">
 
-        <button type="submit" class="btn-submit" id="btnGuardar">GUARDAR REGISTRO</button>
+                <div class="section-card">
+                    <div class="section-title">// Harinas para Liberar</div>
+                    <div id="harinasWrap"></div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">// Harinas Extra (no listadas arriba)</div>
+                    <div id="extraHarinasContainer"></div>
+                    <button type="button" class="btn-add visible" id="btnAddExtra">➕ Agregar Harina Extra</button>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnGuardar">GUARDAR REGISTRO</button>
+            </div>
+        </div>
     </form>
 
 </div>
@@ -311,6 +485,26 @@ verificarAutenticacion();
     ];
 
     document.getElementById('fecha_produccion').value = new Date().toISOString().split('T')[0];
+
+    // Barra de despliegue: reemplaza el checkbox #toggle_harinas del formato
+    // original. Un click expande/colapsa con animación fluida (grid-rows).
+    const btnDespliegue = document.getElementById('btnDespliegue');
+    const despliegueWrap = document.getElementById('despliegueWrap');
+    btnDespliegue.addEventListener('click', () => {
+        const abierto = !despliegueWrap.classList.contains('abierto');
+        despliegueWrap.classList.toggle('abierto', abierto);
+        btnDespliegue.classList.toggle('abierto', abierto);
+        btnDespliegue.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        if (abierto) {
+            setTimeout(() => despliegueWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
+        }
+    });
+
+    function actualizarContadorHarinas() {
+        const activas = document.querySelectorAll('.chk-harina:checked').length;
+        document.getElementById('despliegueContador').textContent =
+            `${activas} harina${activas === 1 ? '' : 's'} activa${activas === 1 ? '' : 's'}`;
+    }
 
     function cumplimientoHtml() {
         return CAMPOS_CUMPLIMIENTO.map(c => `
@@ -350,6 +544,7 @@ verificarAutenticacion();
                     <input type="text" class="form-control campo-cantidad">
                 </div>
             </div>
+            <div class="cumplimiento-heading">// Área de Cumplimiento</div>
             <div class="form-grid cumplimiento-grid">${cumplimientoHtml()}</div>
         `;
         div.querySelector('.btn-remove-block').addEventListener('click', () => div.remove());
@@ -398,8 +593,11 @@ verificarAutenticacion();
         card.innerHTML = `
             <div class="section-title">
                 <label class="harina-toggle">
-                    <input type="checkbox" class="chk-harina" id="chk_${h.id}">
-                    <span>${h.nombre}</span>
+                    <span class="harina-toggle-left">
+                        <input type="checkbox" class="chk-harina" id="chk_${h.id}">
+                        <span>${h.nombre}</span>
+                    </span>
+                    <svg class="harina-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                 </label>
             </div>
             <div class="lotes-container" id="lotes_${h.id}"></div>
@@ -415,6 +613,8 @@ verificarAutenticacion();
             const activo = chk.checked;
             lotesContainer.style.display = activo ? 'flex' : 'none';
             btnAdd.classList.toggle('visible', activo);
+            card.classList.toggle('harina-activa', activo);
+            actualizarContadorHarinas();
             if (activo && lotesContainer.children.length === 0) {
                 lotesContainer.appendChild(crearBloqueLote());
             }

@@ -194,6 +194,24 @@ textarea.form-control { min-height: 90px; resize: vertical; }
 }
 .tabla-calibracion input.form-control { text-align: center; padding: 6px; }
 
+.form-control[readonly] {
+    background: rgba(255, 138, 0, 0.05);
+    color: var(--text-muted);
+    cursor: default;
+}
+
+.btn-borrar-fila-fuerza {
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    border-radius: var(--r-sm);
+    padding: 5px 9px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+.btn-borrar-fila-fuerza:hover { background: var(--danger); color: #fff; }
+
 /* ---------- Botones ---------- */
 .btn-submit {
     background: var(--accent);

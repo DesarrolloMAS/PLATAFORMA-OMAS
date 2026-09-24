@@ -7,22 +7,23 @@ verificarAutenticacion();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analítica · Bitácora de Mantenimiento</title>
+    <title>Analítica · Tickets mIA</title>
     <link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../css/menu_principal.css">
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <style>
-        /* Paleta categórica de las gráficas — validada con el skill dataviz
-           (scripts/validate_palette.js) contra la superficie oscura real de
-           este tema (--panel-solid bajo theme-invert, #12161f): lightness
-           band, piso de croma, separación CVD y contraste, todo en PASS. No
-           se tocan los tokens de index.css, solo se agregan los slots de
-           serie que ese sistema no define. */
+        /* Paleta categórica de las gráficas — misma metodología que
+           dashboard_bitacora.php (skill dataviz, scripts/validate_palette.js),
+           validada contra la superficie oscura real de este tema
+           (--panel-solid bajo theme-invert, #12161f): lightness band, piso de
+           croma, separación CVD y contraste, todo en PASS. Orden fijo por
+           severidad (baja→crítica), nunca cíclico. */
         :root {
-            --series-preventivo: #0EA5B8;
-            --series-correctivo: #C97400;
-            --series-predictivo: #8C6CDD;
+            --series-baja: #16a672;
+            --series-normal: #4C8BF5;
+            --series-alta: #BD8016;
+            --series-critica: #D6455E;
             --status-warning: #f2b134;
         }
 
@@ -103,7 +104,7 @@ verificarAutenticacion();
             display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 26px;
         }
         .rango-selector, .sede-selector {
-            display: inline-flex; gap: 4px; padding: 4px;
+            display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px;
             background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
             opacity: 0;
         }
@@ -124,9 +125,9 @@ verificarAutenticacion();
         }
         .rango-btn:disabled, .sede-btn:disabled { opacity: 0.5; cursor: wait; }
 
-        /* ── Filtro de tipo, local a la tarjeta de Tiempo Promedio de Resolución ── */
+        /* ── Filtro de prioridad, local a la tarjeta de Tiempo Promedio de Resolución ── */
         .tipo-selector {
-            display: inline-flex; gap: 4px; padding: 3px;
+            display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px;
             background: rgba(0, 0, 0, 0.15); border: 1px solid var(--border); border-radius: 999px;
             margin: 4px 0 18px; opacity: 0;
         }
@@ -160,9 +161,10 @@ verificarAutenticacion();
             transform-box: fill-box;
             transform-origin: bottom center;
         }
-        #chartBarras rect.bar-preventivo:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(14,165,184,0.55)); }
-        #chartBarras rect.bar-correctivo:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(201,116,0,0.55)); }
-        #chartBarras rect.bar-predictivo:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(140,108,221,0.55)); }
+        #chartBarras rect.bar-baja:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(22,166,114,0.55)); }
+        #chartBarras rect.bar-normal:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(76,139,245,0.55)); }
+        #chartBarras rect.bar-alta:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(189,128,22,0.55)); }
+        #chartBarras rect.bar-critica:hover { transform: translateY(-4px); filter: brightness(1.25) drop-shadow(0 6px 14px rgba(214,69,94,0.55)); }
 
         #chartDonut path.donut-arc {
             transition: transform 0.3s var(--ease), filter 0.3s var(--ease);
@@ -175,10 +177,10 @@ verificarAutenticacion();
             filter: drop-shadow(0 0 14px var(--mark-glow));
         }
 
-        #chartLinea path.line-main { filter: drop-shadow(0 0 6px var(--series-preventivo)); }
-        #chartLinea circle.dot { transition: r 0.25s var(--ease), filter 0.25s var(--ease); filter: drop-shadow(0 0 4px var(--series-preventivo)); }
-        #chartLinea circle.dot:hover { filter: drop-shadow(0 0 10px var(--series-preventivo)); }
-        #chartLinea circle.crosshair-dot { filter: drop-shadow(0 0 8px var(--series-preventivo)); }
+        #chartLinea path.line-main { filter: drop-shadow(0 0 6px var(--series-baja)); }
+        #chartLinea circle.dot { transition: r 0.25s var(--ease), filter 0.25s var(--ease); filter: drop-shadow(0 0 4px var(--series-baja)); }
+        #chartLinea circle.dot:hover { filter: drop-shadow(0 0 10px var(--series-baja)); }
+        #chartLinea circle.crosshair-dot { filter: drop-shadow(0 0 8px var(--series-baja)); }
 
         /* ── Tooltip ── */
         .viz-tooltip {
@@ -242,9 +244,9 @@ verificarAutenticacion();
 
     <div class="analytics-page">
         <div class="page-head">
-            <div class="page-eyebrow"><span class="dot"></span>DATOS REALES · ORDEN DE MANTENIMIENTO</div>
-            <div class="page-title">Analítica · Bitácora de Mantenimiento</div>
-            <div class="page-sub" id="pageSub">D3.js + GSAP sobre los registros reales de Orden de Mantenimiento (S.O.M. V2) — mismo sistema visual y de movimiento que el resto de menús.</div>
+            <div class="page-eyebrow"><span class="dot"></span>DATOS REALES · MESA DE AYUDA (mIA)</div>
+            <div class="page-title">Analítica · Tickets mIA</div>
+            <div class="page-sub" id="pageSub">D3.js + GSAP sobre los tickets reales sincronizados desde mIA (mesa MANTENIMIENTO) — mismo sistema visual y de movimiento que el resto de menús.</div>
         </div>
 
         <div class="filtros-bar">
@@ -254,18 +256,20 @@ verificarAutenticacion();
                 <button class="rango-btn" data-rango="1s">Semana</button>
             </div>
             <div class="sede-selector" id="sedeSelector">
-                <button class="sede-btn" data-sede="ZC">Centro</button>
-                <button class="sede-btn" data-sede="ZS">Sur</button>
-                <button class="sede-btn" data-sede="todas">Ambas</button>
+                <button class="sede-btn" data-sede="todas">Todas</button>
+                <button class="sede-btn" data-sede="Molino Bogota">Bogotá</button>
+                <button class="sede-btn" data-sede="Molino Pasto">Pasto</button>
+                <button class="sede-btn" data-sede="Artesa Panaderia">Artesa</button>
+                <button class="sede-btn" data-sede="Molino Buga">Buga</button>
             </div>
             <a href="../gobierno_datos/integracion_mia/panel.php"
                style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background: var(--panel); border: 1px solid var(--accent-2); color: var(--accent-2); text-decoration:none; font-size: 13px;"
                title="Traer tickets nuevos desde mIA">
                 🔄 Sync mIA
             </a>
-            <a href="dashboard_mia.php"
+            <a href="dashboard_bitacora.php"
                style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:999px; background: var(--panel); border: 1px solid var(--border); color: var(--text-muted); text-decoration:none; font-size: 13px;">
-                📊 Tickets mIA
+                📊 Bitácora de Mantenimiento
             </a>
         </div>
 
@@ -274,8 +278,8 @@ verificarAutenticacion();
         <div class="glass-card chart-card" id="cardBarras">
             <div class="section-title-row">
                 <div>
-                    <div class="section-title" id="tituloBarras">Órdenes por Mes y Tipo</div>
-                    <div class="section-desc" id="descBarras">Últimos 6 meses · preventivo, correctivo y predictivo</div>
+                    <div class="section-title" id="tituloBarras">Tickets por Mes y Prioridad</div>
+                    <div class="section-desc" id="descBarras">Últimos 6 meses · baja, normal, alta y crítica</div>
                 </div>
                 <button class="btn-table-toggle" data-target="tableBarras">VER COMO TABLA</button>
             </div>
@@ -291,15 +295,16 @@ verificarAutenticacion();
             <div class="section-title-row">
                 <div>
                     <div class="section-title">Tiempo Promedio de Resolución</div>
-                    <div class="section-desc" id="descLinea">Horas promedio por orden, semanal</div>
+                    <div class="section-desc" id="descLinea">Horas promedio por ticket, semanal</div>
                 </div>
                 <button class="btn-table-toggle" data-target="tableLinea">VER COMO TABLA</button>
             </div>
-            <div class="tipo-selector" id="tipoSelector">
-                <button class="tipo-btn active" data-tipo="todos">Todos</button>
-                <button class="tipo-btn" data-tipo="preventivo" style="--tipo-color: var(--series-preventivo)">Preventivo</button>
-                <button class="tipo-btn" data-tipo="correctivo" style="--tipo-color: var(--series-correctivo)">Correctivo</button>
-                <button class="tipo-btn" data-tipo="predictivo" style="--tipo-color: var(--series-predictivo)">Predictivo</button>
+            <div class="tipo-selector" id="prioridadSelector">
+                <button class="tipo-btn active" data-tipo="todas">Todas</button>
+                <button class="tipo-btn" data-tipo="baja" style="--tipo-color: var(--series-baja)">Baja</button>
+                <button class="tipo-btn" data-tipo="normal" style="--tipo-color: var(--series-normal)">Normal</button>
+                <button class="tipo-btn" data-tipo="alta" style="--tipo-color: var(--series-alta)">Alta</button>
+                <button class="tipo-btn" data-tipo="critica" style="--tipo-color: var(--series-critica)">Crítica</button>
             </div>
             <div class="chart-wrap">
                 <svg class="chart-svg" id="chartLinea"></svg>
@@ -311,8 +316,8 @@ verificarAutenticacion();
         <div class="glass-card chart-card" id="cardDonut">
             <div class="section-title-row">
                 <div>
-                    <div class="section-title">Distribución por Técnico</div>
-                    <div class="section-desc">Participación en el total de órdenes del período</div>
+                    <div class="section-title">Distribución por Especialista</div>
+                    <div class="section-desc">Participación en el total de tickets del período</div>
                 </div>
                 <button class="btn-table-toggle" data-target="tableDonut">VER COMO TABLA</button>
             </div>
@@ -332,30 +337,25 @@ verificarAutenticacion();
     <script src="../../dist/app.js"></script>
     <script>
 // ═══════════════════════════════════════════════════════════════════
-// DATOS REALES — vienen de api_analitica_mantenimiento.php, que lee y
-// agrega en el servidor los JSON de archivos/generados/orden_mantenimiento.
+// DATOS REALES — vienen de api_analitica_mia.php, que lee y agrega en el
+// servidor los tickets de mia_datos.tickets_mia (ver template/integracion-mia.md).
 // ═══════════════════════════════════════════════════════════════════
-const TIPOS = [
-    { key: 'preventivo', label: 'Preventivo', color: 'var(--series-preventivo)', light: '#4DD9E8' },
-    { key: 'correctivo', label: 'Correctivo', color: 'var(--series-correctivo)', light: '#FFAA33' },
-    { key: 'predictivo', label: 'Predictivo', color: 'var(--series-predictivo)', light: '#C4AEF5' },
+const PRIORIDADES = [
+    { key: 'baja', label: 'Baja', color: 'var(--series-baja)', light: '#5EE7B8' },
+    { key: 'normal', label: 'Normal', color: 'var(--series-normal)', light: '#8FB8FF' },
+    { key: 'alta', label: 'Alta', color: 'var(--series-alta)', light: '#F0B255' },
+    { key: 'critica', label: 'Crítica', color: 'var(--series-critica)', light: '#FF8FA3' },
 ];
 
-// Curvas de movimiento — mismo espíritu que EASE_OUT_EXPO de src/app.ts
-// (cubic-bezier(0.16,1,0.3,1), usado en .auth-card/.brand-logo-frame):
-// GSAP core no trae CustomEase (bezier arbitrario) gratis, así que se usa
-// el ease nombrado más cercano en sensación — "expo.out" es la misma familia
-// de deceleración fuerte. "back.out" se reserva para los pops con overshoot.
 const EASE_SETTLE = 'expo.out';
 const EASE_POP = 'back.out(1.5)';
 const EASE_DRAW = 'expo.inOut';
 
 let datosMensuales = [];
 let datosSemanales = [];
-let datosTecnicos = [];
+let datosEspecialistas = [];
 let kpisData = [];
 
-// Resuelve var(--x) a su valor real en px/hex, para usar dentro de D3/SVG.
 function cssVar(name) {
     const m = /var\((--[\w-]+)\)/.exec(name);
     const key = m ? m[1] : name;
@@ -425,8 +425,6 @@ function renderKPIs() {
             onUpdate: () => { valueEl.textContent = counter.n.toFixed(t.decimals) + (t.suffix || ''); },
         });
 
-        // Sparkline de tendencia (spec del skill dataviz: tono de bajo énfasis,
-        // el período actual en el acento de la propia tarjeta).
         const sparkSvg = d3.select(tile.querySelector('.kpi-spark'));
         const sw = 180, sh = 30;
         sparkSvg.attr('viewBox', `0 0 ${sw} ${sh}`);
@@ -442,12 +440,6 @@ function renderKPIs() {
         sparkPath.attr('stroke-dasharray', sparkLen).attr('stroke-dashoffset', sparkLen);
         gsap.to(sparkPath.node(), { strokeDashoffset: 0, duration: 1.1, delay: 0.3, ease: EASE_DRAW });
 
-        // Inclinación 3D sutil hacia el cursor — mismo espíritu que el efecto
-        // magnético de los nodos del hub. Solo en los KPI (paneles estáticos):
-        // en las tarjetas de gráficos interfiere con la precisión del hover
-        // sobre los datos, así que ahí se queda solo el glow del borde. Se
-        // conecta aquí (no en un pase aparte tras el render) porque los tiles
-        // se recrean en cada cambio de rango.
         const rotX = gsap.quickTo(tile, 'rotationX', { duration: 0.5, ease: EASE_SETTLE });
         const rotY = gsap.quickTo(tile, 'rotationY', { duration: 0.5, ease: EASE_SETTLE });
         tile.style.transformPerspective = 800;
@@ -479,16 +471,14 @@ function renderBarras() {
     const innerH = height - margin.top - margin.bottom;
 
     const x0 = d3.scaleBand().domain(datosMensuales.map(d => d.mes)).range([0, innerW]).paddingInner(0.35);
-    const x1 = d3.scaleBand().domain(TIPOS.map(t => t.key)).range([0, x0.bandwidth()]).paddingInner(0.12);
-    const maxY = d3.max(datosMensuales, d => Math.max(d.preventivo, d.correctivo, d.predictivo));
+    const x1 = d3.scaleBand().domain(PRIORIDADES.map(t => t.key)).range([0, x0.bandwidth()]).paddingInner(0.12);
+    const maxY = d3.max(datosMensuales, d => Math.max(d.baja, d.normal, d.alta, d.critica));
     const y = d3.scaleLinear().domain([0, maxY * 1.15]).nice().range([innerH, 0]);
 
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Gradiente vertical por serie (base sólida abajo, tono claro con "glow"
-    // arriba) — reemplaza el relleno plano por algo con más profundidad.
     const defs = svg.append('defs');
-    TIPOS.forEach(tipo => {
+    PRIORIDADES.forEach(tipo => {
         const grad = defs.append('linearGradient')
             .attr('id', 'gradBar-' + tipo.key)
             .attr('x1', '0').attr('y1', '1').attr('x2', '0').attr('y2', '0');
@@ -504,8 +494,6 @@ function renderBarras() {
         .attr('x1', 0).attr('x2', innerW)
         .attr('y1', d => y(d)).attr('y2', d => y(d));
 
-    // En vista de 1 mes hay hasta 30 barras — mostrar una etiqueta por cada
-    // una las amontona ilegibles, así que se muestran ~10 repartidas parejo.
     const ejeX = d3.axisBottom(x0).tickSize(0);
     if (datosMensuales.length > 10) {
         const paso = Math.ceil(datosMensuales.length / 10);
@@ -522,12 +510,12 @@ function renderBarras() {
         .attr('class', 'month-group')
         .attr('transform', d => `translate(${x0(d.mes)},0)`);
 
-    const barWidth = Math.min(24, x1.bandwidth());
+    const barWidth = Math.min(20, x1.bandwidth());
     const barOffset = (x1.bandwidth() - barWidth) / 2;
 
     const tooltipEl = document.getElementById('ttBarras');
 
-    TIPOS.forEach(tipo => {
+    PRIORIDADES.forEach(tipo => {
         groups.append('rect')
             .attr('class', 'bar-' + tipo.key)
             .attr('x', () => x1(tipo.key) + barOffset)
@@ -541,21 +529,15 @@ function renderBarras() {
                 const [mx, my] = d3.pointer(event, wrap);
                 showTooltip(tooltipEl, wrap, (el, title) => {
                     title.textContent = d.mes;
-                    addTooltipRow(el, tipo.label, d[tipo.key] + ' órdenes', cssVar(tipo.color));
+                    addTooltipRow(el, tipo.label, d[tipo.key] + ' tickets', cssVar(tipo.color));
                 }, mx, my);
             })
             .on('pointerleave', function () { hideTooltip(tooltipEl); });
     });
 
-    // Entrada con leve "overshoot" (back.out) — un pop más vivo que un
-    // crecimiento lineal, sin dejar de anclarse a la línea base.
-    // Se anima el nodo DOM real de cada grupo (no un selector nth-child):
-    // el <g> de gridlines y los dos <g class="axis"> son hermanos previos
-    // de .month-group dentro del mismo contenedor, así que nth-child(N)
-    // quedaba desfasado 3 posiciones y animaba el mes equivocado.
     let i = 0;
     const groupNodes = groups.nodes();
-    TIPOS.forEach(tipo => {
+    PRIORIDADES.forEach(tipo => {
         datosMensuales.forEach((d, idx) => {
             const finalH = innerH - y(d[tipo.key]);
             const finalY = y(d[tipo.key]);
@@ -572,7 +554,7 @@ function renderBarras() {
 
     const legend = document.getElementById('legendBarras');
     legend.innerHTML = '';
-    TIPOS.forEach(tipo => {
+    PRIORIDADES.forEach(tipo => {
         const item = document.createElement('div');
         item.className = 'legend-item';
         item.innerHTML = `<span class="legend-key" style="background:${cssVar(tipo.color)}"></span><span>${tipo.label}</span>`;
@@ -581,8 +563,8 @@ function renderBarras() {
 
     const table = document.getElementById('tableBarras');
     table.innerHTML = `
-        <thead><tr><th>Mes</th><th>Preventivo</th><th>Correctivo</th><th>Predictivo</th></tr></thead>
-        <tbody>${datosMensuales.map(d => `<tr><td>${d.mes}</td><td>${d.preventivo}</td><td>${d.correctivo}</td><td>${d.predictivo}</td></tr>`).join('')}</tbody>
+        <thead><tr><th>Mes</th><th>Baja</th><th>Normal</th><th>Alta</th><th>Crítica</th></tr></thead>
+        <tbody>${datosMensuales.map(d => `<tr><td>${d.mes}</td><td>${d.baja}</td><td>${d.normal}</td><td>${d.alta}</td><td>${d.critica}</td></tr>`).join('')}</tbody>
     `;
 }
 
@@ -602,12 +584,10 @@ function renderLinea() {
 
     const x = d3.scalePoint().domain(datosSemanales.map(d => d.semana)).range([0, innerW]);
     const y = d3.scaleLinear().domain([0, d3.max(datosSemanales, d => d.horas) * 1.2]).nice().range([innerH, 0]);
-    const color = cssVar('var(--series-preventivo)');
+    const color = cssVar('var(--series-baja)');
 
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Gradiente del área — de un lavado visible junto a la línea a
-    // transparente hacia la base, en vez de una opacidad plana uniforme.
     const defs = svg.append('defs');
     const areaGrad = defs.append('linearGradient')
         .attr('id', 'gradArea-linea')
@@ -661,8 +641,6 @@ function renderLinea() {
     gsap.to(dots.nodes(), {
         attr: { r: 4 }, duration: 0.6, delay: 1.4, stagger: 0.04, ease: EASE_POP,
         onComplete() {
-            // Respiración sutil y continua — la línea ya "descansó" tras
-            // dibujarse, esto la mantiene con vida sin distraer.
             gsap.to(dots.nodes(), {
                 attr: { r: 5 }, duration: 1.6, ease: 'sine.inOut',
                 stagger: { each: 0.15, repeat: -1, yoyo: true },
@@ -728,8 +706,6 @@ function renderDonut() {
 
     const colores = ['#0EA5B8', '#C97400', '#8C6CDD', '#2563eb', '#e879a8'];
 
-    // Gradiente radial por porción — mismo criterio que las barras: base
-    // sólida hacia el centro, un tono más claro hacia el borde exterior.
     const defs = svg.append('defs');
     colores.forEach((c, i) => {
         const grad = defs.append('radialGradient').attr('id', 'gradDonut-' + i);
@@ -737,9 +713,9 @@ function renderDonut() {
         grad.append('stop').attr('offset', '100%').attr('stop-color', c);
     });
 
-    const pie = d3.pie().value(d => d.ordenes).sort(null).padAngle(0.02);
-    const arcs = pie(datosTecnicos);
-    const total = d3.sum(datosTecnicos, d => d.ordenes);
+    const pie = d3.pie().value(d => d.tickets).sort(null).padAngle(0.02);
+    const arcs = pie(datosEspecialistas);
+    const total = d3.sum(datosEspecialistas, d => d.tickets);
 
     const arcGen = d3.arc().innerRadius(radius * 0.58).outerRadius(radius * 0.92).cornerRadius(4);
 
@@ -753,16 +729,14 @@ function renderDonut() {
         .style('cursor', 'pointer')
         .on('pointermove', function (event, d) {
             const [mx, my] = d3.pointer(event, wrap);
-            const pct = Math.round((d.data.ordenes / total) * 100);
+            const pct = Math.round((d.data.tickets / total) * 100);
             showTooltip(tooltipEl, wrap, (el, title) => {
                 title.textContent = d.data.nombre;
-                addTooltipRow(el, 'Órdenes', d.data.ordenes + ' (' + pct + '%)', colores[arcs.indexOf(d)]);
+                addTooltipRow(el, 'Tickets', d.data.tickets + ' (' + pct + '%)', colores[arcs.indexOf(d)]);
             }, mx, my);
         })
         .on('pointerleave', function () { hideTooltip(tooltipEl); });
 
-    // Entrada: cada porción "barre" desde su ángulo inicial con un leve
-    // overshoot (back.out suave) antes de asentarse en su tamaño real.
     paths.each(function (d, i) {
         const el = this;
         const interp = d3.interpolate(d.startAngle, d.endAngle);
@@ -772,8 +746,6 @@ function renderDonut() {
             delay: i * 0.09,
             ease: 'back.out(1.15)',
             onUpdate() {
-                // Sin clamp: back.out se pasa un poco del ángulo final antes
-                // de asentarse — ese overshoot leve ES el efecto buscado.
                 const partial = { ...d, endAngle: interp(this.targets()[0].t) };
                 el.setAttribute('d', arcGen(partial));
             },
@@ -792,7 +764,7 @@ function renderDonut() {
         .attr('dy', '1.6em')
         .attr('fill', cssVar('var(--text-muted)'))
         .attr('font-size', 11)
-        .text('ÓRDENES TOTALES');
+        .text('TICKETS TOTALES');
     gsap.to({ n: 0 }, {
         n: total, duration: 1.2, ease: EASE_SETTLE,
         onUpdate() { centerLabel.text(Math.round(this.targets()[0].n)); },
@@ -800,7 +772,7 @@ function renderDonut() {
 
     const legend = document.getElementById('legendDonut');
     legend.innerHTML = '';
-    datosTecnicos.forEach((t, i) => {
+    datosEspecialistas.forEach((t, i) => {
         const item = document.createElement('div');
         item.className = 'legend-item';
         item.innerHTML = `<span class="legend-key dot" style="background:${colores[i]}"></span><span>${t.nombre}</span>`;
@@ -809,8 +781,8 @@ function renderDonut() {
 
     const table = document.getElementById('tableDonut');
     table.innerHTML = `
-        <thead><tr><th>Técnico</th><th>Órdenes</th><th>% del total</th></tr></thead>
-        <tbody>${datosTecnicos.map(d => `<tr><td>${d.nombre}</td><td>${d.ordenes}</td><td>${Math.round((d.ordenes / total) * 100)}%</td></tr>`).join('')}</tbody>
+        <thead><tr><th>Especialista</th><th>Tickets</th><th>% del total</th></tr></thead>
+        <tbody>${datosEspecialistas.map(d => `<tr><td>${d.nombre}</td><td>${d.tickets}</td><td>${Math.round((d.tickets / total) * 100)}%</td></tr>`).join('')}</tbody>
     `;
 }
 
@@ -825,43 +797,47 @@ document.querySelectorAll('.btn-table-toggle').forEach(btn => {
     });
 });
 
-async function cargarDatosReales(rango, sede, tipo) {
-    let url = 'api_analitica_mantenimiento.php?rango=' + encodeURIComponent(rango);
-    // Sin `sede` explícito, el backend usa la sede de la sesión por defecto.
+async function cargarDatosReales(rango, sede, prioridad) {
+    let url = 'api_analitica_mia.php?rango=' + encodeURIComponent(rango);
     if (sede) url += '&sede=' + encodeURIComponent(sede);
-    if (tipo && tipo !== 'todos') url += '&tipo=' + encodeURIComponent(tipo);
+    if (prioridad && prioridad !== 'todas') url += '&prioridad=' + encodeURIComponent(prioridad);
     const res = await fetch(url);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     return res.json();
 }
 
 const ETIQUETAS_RANGO = {
-    '6m': { desc: 'Últimos 6 meses', tituloBarras: 'Órdenes por Mes y Tipo', granularidadLinea: 'semanal' },
-    '1m': { desc: 'Último mes', tituloBarras: 'Órdenes por Día y Tipo', granularidadLinea: 'diaria' },
-    '1s': { desc: 'Última semana', tituloBarras: 'Órdenes por Día y Tipo', granularidadLinea: 'diaria' },
+    '6m': { desc: 'Últimos 6 meses', tituloBarras: 'Tickets por Mes y Prioridad', granularidadLinea: 'semanal' },
+    '1m': { desc: 'Último mes', tituloBarras: 'Tickets por Día y Prioridad', granularidadLinea: 'diaria' },
+    '1s': { desc: 'Última semana', tituloBarras: 'Tickets por Día y Prioridad', granularidadLinea: 'diaria' },
 };
-const ETIQUETAS_SEDE = { ZC: 'Centro', ZS: 'Sur', todas: 'Centro + Sur' };
+const ETIQUETAS_SEDE = {
+    todas: 'Todas las sedes',
+    'Molino Bogota': 'Bogotá',
+    'Molino Pasto': 'Pasto',
+    'Artesa Panaderia': 'Artesa',
+    'Molino Buga': 'Buga',
+    'No Especificado': 'Sin sede registrada',
+};
 
 let rangoActual = '6m';
-// null hasta la primera respuesta: el backend decide el default según la
-// sesión (README: sede que tiene el perfil que accede), no se asume aquí.
-let sedeActual = null;
-let tipoActual = 'todos';
+let sedeActual = 'todas';
+let prioridadActual = 'todas';
 
 function marcarBotonActivo(grupo, valor) {
     document.querySelectorAll(`.${grupo}-btn`).forEach(b => b.classList.toggle('active', b.dataset[grupo] === valor));
 }
 
-async function cargarYRenderizar(rango, sede, tipo, { animarEntrada = false } = {}) {
+async function cargarYRenderizar(rango, sede, prioridad, { animarEntrada = false } = {}) {
     const footer = document.getElementById('footerStatus');
     const botones = document.querySelectorAll('.rango-btn, .sede-btn, .tipo-btn');
     botones.forEach(b => b.disabled = true);
 
     let payload;
     try {
-        payload = await cargarDatosReales(rango, sede, tipo);
+        payload = await cargarDatosReales(rango, sede, prioridad);
     } catch (err) {
-        console.error('Error cargando datos de analítica:', err);
+        console.error('Error cargando datos de analítica mIA:', err);
         footer.textContent = 'ERROR AL CARGAR DATOS REALES · revisa la sesión o intenta de nuevo';
         if (animarEntrada) gsap.to('#footerStatus', { opacity: 1, duration: 0.5 });
         botones.forEach(b => b.disabled = false);
@@ -870,26 +846,23 @@ async function cargarYRenderizar(rango, sede, tipo, { animarEntrada = false } = 
 
     datosMensuales = payload.datosMensuales;
     datosSemanales = payload.datosSemanales;
-    datosTecnicos = payload.datosTecnicos;
+    datosEspecialistas = payload.datosEspecialistas;
     kpisData = payload.kpis;
 
     const meta = payload.meta;
-    // La primera carga no manda `sede` — refleja lo que el backend decidió
-    // (sede de la sesión) para dejar el botón correcto marcado como activo.
     sedeActual = meta.sede_filtro;
     marcarBotonActivo('sede', sedeActual);
 
-    const sedesTexto = meta.sedes_activas.length > 0 ? meta.sedes_activas.join('/') : 'ninguna con datos';
-    footer.textContent = `CONECTADO · ${meta.registros_leidos} órdenes · sede: ${ETIQUETAS_SEDE[sedeActual]} (${sedesTexto}) · actualizado ${meta.generado_en}`;
+    footer.textContent = `CONECTADO · ${meta.registros_leidos} tickets · sede: ${ETIQUETAS_SEDE[sedeActual] || sedeActual} · actualizado ${meta.generado_en}`;
     if (meta.duraciones_excluidas_por_anomalia > 0) {
         footer.textContent += ` · ${meta.duraciones_excluidas_por_anomalia} registro(s) excluido(s) del promedio de horas por fecha inconsistente`;
     }
 
     const info = ETIQUETAS_RANGO[rango];
     document.getElementById('tituloBarras').textContent = info.tituloBarras;
-    document.getElementById('descBarras').textContent = `${info.desc} · ${ETIQUETAS_SEDE[sedeActual]} · preventivo, correctivo y predictivo`;
-    const etiquetaTipoDesc = tipo && tipo !== 'todos' ? ` · ${tipo[0].toUpperCase()}${tipo.slice(1)}` : '';
-    document.getElementById('descLinea').textContent = `Horas promedio por orden, ${info.granularidadLinea}${etiquetaTipoDesc}`;
+    document.getElementById('descBarras').textContent = `${info.desc} · ${ETIQUETAS_SEDE[sedeActual] || sedeActual} · baja, normal, alta y crítica`;
+    const etiquetaPrioridadDesc = prioridad && prioridad !== 'todas' ? ` · ${prioridad[0].toUpperCase()}${prioridad.slice(1)}` : '';
+    document.getElementById('descLinea').textContent = `Horas promedio por ticket, ${info.granularidadLinea}${etiquetaPrioridadDesc}`;
 
     ['chartBarras', 'chartLinea', 'chartDonut'].forEach(id => { document.getElementById(id).innerHTML = ''; });
 
@@ -907,7 +880,7 @@ async function cargarYRenderizar(rango, sede, tipo, { animarEntrada = false } = 
           .to('#sedeSelector', { opacity: 1, duration: 0.5, ease: EASE_SETTLE }, '-=0.3')
           .to('#cardBarras', { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: EASE_SETTLE }, '-=0.2')
           .to('#cardLinea', { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: EASE_SETTLE }, '-=0.55')
-          .to('#tipoSelector', { opacity: 1, duration: 0.4, ease: EASE_SETTLE }, '-=0.4')
+          .to('#prioridadSelector', { opacity: 1, duration: 0.4, ease: EASE_SETTLE }, '-=0.4')
           .to('#cardDonut', { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: EASE_SETTLE }, '-=0.55')
           .to('#footerStatus', { opacity: 1, duration: 0.5 }, '-=0.2');
     }
@@ -923,30 +896,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (btn.dataset.rango === rangoActual || btn.disabled) return;
             rangoActual = btn.dataset.rango;
             marcarBotonActivo('rango', rangoActual);
-            cargarYRenderizar(rangoActual, sedeActual, tipoActual);
+            cargarYRenderizar(rangoActual, sedeActual, prioridadActual);
         });
     });
 
     document.querySelectorAll('.sede-btn').forEach(btn => {
+        if (btn.dataset.sede === sedeActual) btn.classList.add('active');
         btn.addEventListener('click', () => {
             if (btn.dataset.sede === sedeActual || btn.disabled) return;
             sedeActual = btn.dataset.sede;
             marcarBotonActivo('sede', sedeActual);
-            cargarYRenderizar(rangoActual, sedeActual, tipoActual);
+            cargarYRenderizar(rangoActual, sedeActual, prioridadActual);
         });
     });
 
-    document.querySelectorAll('.tipo-btn').forEach(btn => {
+    document.querySelectorAll('#prioridadSelector .tipo-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            if (btn.dataset.tipo === tipoActual || btn.disabled) return;
-            tipoActual = btn.dataset.tipo;
-            marcarBotonActivo('tipo', tipoActual);
-            cargarYRenderizar(rangoActual, sedeActual, tipoActual);
+            if (btn.dataset.tipo === prioridadActual || btn.disabled) return;
+            prioridadActual = btn.dataset.tipo;
+            document.querySelectorAll('#prioridadSelector .tipo-btn').forEach(b => b.classList.toggle('active', b.dataset.tipo === prioridadActual));
+            cargarYRenderizar(rangoActual, sedeActual, prioridadActual);
         });
     });
 
-    // Primera carga sin `sede`: deja que el backend aplique el default de sesión.
-    await cargarYRenderizar(rangoActual, null, tipoActual, { animarEntrada: true });
+    await cargarYRenderizar(rangoActual, sedeActual, prioridadActual, { animarEntrada: true });
 });
 
 window.addEventListener('resize', () => {

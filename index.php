@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Lógica general para otros usuarios
         switch ($usuario['Area']) {
             case 'Operaciones':
+            case 'Desarrollo': // Misma configuración que Operaciones (ver notas del área en admin/menu_admin.php)
                 switch ($usuario['rol']) {
                     case 'adm':
                     case '1': // Rol alto

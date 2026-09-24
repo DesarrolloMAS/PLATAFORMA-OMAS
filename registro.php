@@ -3,6 +3,15 @@ require './template/conection.php'; // Conexión a la base de datos (misma lógi
 
 $claveRegistro = "fmt2025"; // Código de registro requerido, igual que en el formulario legacy
 
+// Lista de cargos disponibles en el select: se lee del mismo archivo que
+// gobierna el mapeo cargo -> rol (template/admin/menu_admin.php), para que
+// un cargo creado ahí aparezca aquí sin tocar este archivo.
+$cargoRolesPath = __DIR__ . '/archivos/generados/admin/cargo_roles.json';
+$cargoRolesTodos = file_exists($cargoRolesPath)
+    ? (json_decode(file_get_contents($cargoRolesPath), true) ?: [])
+    : [];
+ksort($cargoRolesTodos);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ''));
@@ -49,11 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // El rol ya no se selecciona manualmente: se deriva del cargo elegido,
         // según la asignación configurada en el panel de administración
         // (template/admin/menu_admin.php -> archivos/generados/admin/cargo_roles.json).
-        $cargoRolesPath = __DIR__ . '/archivos/generados/admin/cargo_roles.json';
-        $cargoRoles = file_exists($cargoRolesPath)
-            ? (json_decode(file_get_contents($cargoRolesPath), true) ?: [])
-            : [];
-        $rol = $cargoRoles[$cargo] ?? '3';
+        $rol = $cargoRolesTodos[$cargo] ?? '3';
 
         $stmt = $pdoUsuarios->prepare("
             INSERT INTO usuarios (nombre_u, Cargo, cedula_u, sede, rol, Area)
@@ -149,30 +154,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="cargo">Cargo</label>
                         <select id="cargo" name="cargo" required>
                             <option value="" disabled selected>Selecciona tu cargo</option>
-                            <option value="Gestion Calidad">Gestion Calidad</option>
-                            <option value="Aprendiz">Aprendiz</option>
-                            <option value="Coordinador de Operaciones">Coordinador Operaciones</option>
-                            <option value="Jefe Nacional Operaciones">Jefe Nacional De Operaciones</option>
-                            <option value="Jefe Operaciones Sur">Jefe Operaciones Sur</option>
-                            <option value="Analista de Operaciones">Analista de Operaciones</option>
-                            <option value="Maquinista">Maquinista</option>
-                            <option value="Asistente Recepcion de Trigo">Asistente Recepcion de Trigo</option>
-                            <option value="Auxiliar de almacen">Auxiliar de almacen</option>
-                            <option value="Almacenista">Almacenista</option>
-                            <option value="Auxiliar de mantenimiento">Auxiliar de mantenimiento</option>
-                            <option value="Auxiliar de Operaciones">Auxiliar de Operaciones</option>
-                            <option value="Empacador">Empacador</option>
-                            <option value="Lider de almacen">Lider de almacen</option>
-                            <option value="Lider de Turno">Lider de Turno</option>
-                            <option value="Lider de Mantenimiento">Lider de Mantenimiento</option>
-                            <option value="Lider de Mantenimiento Locativo">Lider de Mantenimiento Locativo</option>
-                            <option value="Lider de Mantenimiento Mecanico">Lider de Mantenimiento Mecanico</option>
-                            <option value="Operario de Carga">Operario de Carga</option>
-                            <option value="Tecnico Mecanico">Tecnico Mecanico</option>
-                            <option value="Revision Inocuidad">Revision Inocuidad</option>
-                            <option value="Jefe HSEQ">Jefe HSEQ</option>
-                            <option value="Analista HSEQ">Analista HSEQ</option>
-                            <option value="Auxiliar HSEQ">Auxiliar HSEQ</option>
+                            <?php foreach (array_keys($cargoRolesTodos) as $cargoOpcion): ?>
+                            <option value="<?= htmlspecialchars($cargoOpcion) ?>"><?= htmlspecialchars($cargoOpcion) ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -184,6 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="Calidad">Calidad</option>
                             <option value="Tecnología">Tecnología</option>
                             <option value="HSEQ">HSEQ</option>
+                            <option value="Desarrollo">Desarrollo</option>
                         </select>
                     </div>
 

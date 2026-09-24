@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $base_dir = "../../archivos/generados/orden_mantenimiento/" . $sede . "/";
     
-    if (!is_dir($base_dir)) {
-        mkdir($base_dir, 0777, true);
+    if (!is_dir($base_dir) && !@mkdir($base_dir, 0777, true)) {
+        echo "Error al guardar el registro: no se pudo crear la carpeta de la sede ($base_dir). Revise permisos.";
+        exit;
     }
     
     $target_file = $base_dir . $nombre_archivo;
@@ -23,7 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Procesar Imágenes (Base64 or File)
     $upload_img_dir = "../../archivos/generados/orden_mantenimiento/evidencias/";
-    if (!is_dir($upload_img_dir)) mkdir($upload_img_dir, 0777, true);
+    if (!is_dir($upload_img_dir)) @mkdir($upload_img_dir, 0777, true);
+    if (!is_writable($upload_img_dir)) {
+        echo "Error al guardar el registro: sin permisos de escritura en la carpeta de evidencias ($upload_img_dir).";
+        exit;
+    }
 
     $processImage = function($fileKey) use ($upload_img_dir) {
         if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === UPLOAD_ERR_OK) {
@@ -86,13 +91,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $registros[] = $nuevo_registro;
     
-    if (file_put_contents($target_file, json_encode($registros, JSON_PRETTY_PRINT))) {
+    $json = json_encode($registros, JSON_PRETTY_PRINT | JSON_INVALID_UTF8_SUBSTITUTE);
+    if ($json === false) {
+        echo "Error al guardar el registro: no se pudieron codificar los datos (" . json_last_error_msg() . ").";
+        exit;
+    }
+
+    if (file_put_contents($target_file, $json) !== false) {
         echo "<script>
             alert('Orden de Mantenimiento Guardada Exitosamente.');
             window.location.href = 'index.php';
         </script>";
     } else {
-        echo "Error al guardar el registro.";
+        echo "Error al guardar el registro: sin permisos de escritura en $target_file.";
     }
 }
 ?>

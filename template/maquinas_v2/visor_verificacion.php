@@ -147,6 +147,50 @@ $fecha_doc = substr($registro['timestamp'] ?? date('Y-m-d H:i:s'), 0, 10);
         <p><strong><?= htmlspecialchars($bloque['campo_resultado']['label']) ?>:</strong> <?= valor($datos, $bloque['campo_resultado']['name']) ?></p>
         <?php endforeach; ?>
 
+        <?php if (!empty($cfg['analisis_fuerza'])):
+            $af = $cfg['analisis_fuerza'];
+            $numPuntosFuerza = $af['num_puntos'] ?? 3;
+            $tipoElemento = $datos['tipo_elemento_fuerza'] ?? ($af['campo_tipo_elemento']['options'][0] ?? 'Punto');
+        ?>
+        <div class="visor-seccion-titulo"><?= htmlspecialchars($af['titulo']) ?></div>
+        <p><strong><?= htmlspecialchars($af['campo_tipo_elemento']['label']) ?>:</strong> <?= htmlspecialchars($tipoElemento) ?></p>
+        <?php
+            $elementoSingular = mb_strtolower($tipoElemento);
+            if (mb_substr($elementoSingular, -1) === 's') { $elementoSingular = mb_substr($elementoSingular, 0, -1); }
+        ?>
+        <?php if (!empty($af['nota_template'])): ?>
+        <p style="font-size:12px; color:#666;"><?= htmlspecialchars(str_replace(['{n}', '{elemento}'], [$numPuntosFuerza, $elementoSingular], $af['nota_template'])) ?></p>
+        <?php endif; ?>
+        <?php if (!empty($af['patron_referencia'])): ?>
+        <p style="font-size:12px; font-weight:600; color:#7a3e00;">📐 Patrón de referencia</p>
+        <table class="visor-tabla">
+            <tr><th colspan="<?= count($af['patron_referencia']['columnas']) ?>"><?= htmlspecialchars($af['patron_referencia']['titulo']) ?></th></tr>
+            <tr><?php foreach ($af['patron_referencia']['columnas'] as $col): ?><th><?= htmlspecialchars($col) ?></th><?php endforeach; ?></tr>
+            <tr><?php foreach ($af['patron_referencia']['valores'] as $val): ?><td><?= htmlspecialchars($val) ?></td><?php endforeach; ?></tr>
+        </table>
+        <?php endif; ?>
+        <table class="visor-tabla">
+            <tr>
+                <th><?= htmlspecialchars(mb_strtoupper($tipoElemento)) ?></th>
+                <th>Libras Fuerza (lbf)</th><th>Onzas Fuerza (ozf)</th><th>Kilogramos Fuerza (kgf)</th><th>Newton Fuerza (N)</th>
+            </tr>
+            <?php for ($i = 1; $i <= $numPuntosFuerza; $i++): ?>
+                <?php if (isset($datos["fuerza{$i}_lbf"]) && $datos["fuerza{$i}_lbf"] !== ''): ?>
+            <tr>
+                <td><?= htmlspecialchars($tipoElemento . ' ' . $i) ?></td>
+                <td><?= valor($datos, "fuerza{$i}_lbf") ?></td>
+                <td><?= valor($datos, "fuerza{$i}_ozf") ?></td>
+                <td><?= valor($datos, "fuerza{$i}_kgf") ?></td>
+                <td><?= valor($datos, "fuerza{$i}_n") ?></td>
+            </tr>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </table>
+        <p><strong>Promedio general:</strong> <?= valor($datos, 'promedio_general_lbf') ?> Lbf</p>
+        <p><strong><?= htmlspecialchars($af['campo_resultado']['label']) ?>:</strong> <?= valor($datos, $af['campo_resultado']['name']) ?></p>
+        <p><strong><?= htmlspecialchars($af['campo_analisis_estructural']['label']) ?>:</strong> <?= valor($datos, $af['campo_analisis_estructural']['name']) ?></p>
+        <?php endif; ?>
+
         <?php if (!empty($cfg['campos_extra'])): ?>
         <div class="visor-seccion-titulo"><?= htmlspecialchars($cfg['campos_extra']['titulo']) ?></div>
         <table class="visor-tabla">

@@ -143,6 +143,194 @@ function renderBloqueCalibracion(bloque, indiceBloque, numero) {
         </div>`;
 }
 
+let filasFuerzaEliminadas = [];
+
+function crearFilaFuerzaHTML(i) {
+    const opciones = CONFIG.analisis_fuerza.campo_tipo_elemento.options;
+    return `
+            <tr class="fila-fuerza" data-indice="${i}">
+                <td class="punto-fuerza-label" data-indice="${i}">${opciones[0]} ${i}</td>
+                <td><input class="form-control campo-fuerza-lbf" type="number" step="any" name="fuerza${i}_lbf" id="fuerza${i}_lbf" data-indice="${i}"></td>
+                <td><input class="form-control" type="text" name="fuerza${i}_ozf" id="fuerza${i}_ozf" readonly></td>
+                <td><input class="form-control" type="text" name="fuerza${i}_kgf" id="fuerza${i}_kgf" readonly></td>
+                <td><input class="form-control" type="text" name="fuerza${i}_n" id="fuerza${i}_n" readonly></td>
+                <td><button type="button" class="btn-borrar-fila-fuerza" title="Eliminar este punto">🗑️</button></td>
+            </tr>`;
+}
+
+function renderAnalisisFuerza(cfg, numero) {
+    const numPuntos = cfg.num_puntos || 3;
+    const opciones = cfg.campo_tipo_elemento.options;
+
+    const filas = [];
+    for (let i = 1; i <= numPuntos; i++) {
+        filas.push(crearFilaFuerzaHTML(i));
+    }
+
+    return `
+        <div class="section-card">
+            <div class="section-title"><span>${numero}</span> ${cfg.titulo}</div>
+            <div class="form-grid" style="margin-bottom:16px;">
+                <div class="form-group">
+                    <label class="form-label" for="${cfg.campo_tipo_elemento.name}">${cfg.campo_tipo_elemento.label}</label>
+                    <select class="form-control" name="${cfg.campo_tipo_elemento.name}" id="${cfg.campo_tipo_elemento.name}">
+                        ${opciones.map(o => `<option value="${o}">${o}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+            <p class="section-nota" id="nota-analisis-fuerza"></p>
+            ${cfg.patron_referencia ? `
+            <p class="form-label" style="margin-bottom:6px;">📐 Patrón de referencia</p>
+            <div style="overflow-x:auto; margin-bottom:20px;">
+                <table class="tabla-calibracion tabla-patron-referencia">
+                    <tr><th colspan="${cfg.patron_referencia.columnas.length}">${cfg.patron_referencia.titulo}</th></tr>
+                    <tr>${cfg.patron_referencia.columnas.map(c => `<th>${c}</th>`).join('')}</tr>
+                    <tr>${cfg.patron_referencia.valores.map(v => `<td>${v}</td>`).join('')}</tr>
+                </table>
+            </div>` : ''}
+            <div style="overflow-x:auto;">
+                <table class="tabla-calibracion" id="tabla-analisis-fuerza">
+                    <tr><th id="header-fuerza-elemento">${opciones[0].toUpperCase()}</th><th>Libras Fuerza (lbf)</th><th>Onzas Fuerza (ozf)</th><th>Kilogramos Fuerza (kgf)</th><th>Newton Fuerza (N)</th><th></th></tr>
+                    ${filas.join('')}
+                </table>
+            </div>
+            <div style="margin-top:10px;">
+                <button type="button" class="btn-secundario" id="btn-agregar-fila-fuerza" disabled>➕ Agregar punto</button>
+            </div>
+            <div class="form-grid" style="margin-top:16px;">
+                <div class="form-group">
+                    <label class="form-label" for="promedio_general_lbf">Promedio general</label>
+                    <input class="form-control" type="text" name="promedio_general_lbf" id="promedio_general_lbf" readonly placeholder="Lbf">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="${cfg.campo_resultado.name}">${cfg.campo_resultado.label}</label>
+                    <select class="form-control" name="${cfg.campo_resultado.name}" id="${cfg.campo_resultado.name}">
+                        ${cfg.campo_resultado.options.map(o => `<option value="${o}">${o}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="${cfg.campo_analisis_estructural.name}">${cfg.campo_analisis_estructural.label}</label>
+                    <select class="form-control" name="${cfg.campo_analisis_estructural.name}" id="${cfg.campo_analisis_estructural.name}">
+                        ${cfg.campo_analisis_estructural.options.map(o => `<option value="${o}">${o}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+        </div>`;
+}
+
+function singularizarElemento(palabra) {
+    const min = palabra.toLowerCase();
+    return min.endsWith('s') ? min.slice(0, -1) : min;
+}
+
+function actualizarEtiquetasFuerza() {
+    if (!CONFIG || !CONFIG.analisis_fuerza) return;
+    const select = document.getElementById(CONFIG.analisis_fuerza.campo_tipo_elemento.name);
+    if (!select) return;
+    const tipo = select.value;
+
+    document.querySelectorAll('.punto-fuerza-label').forEach(td => {
+        td.textContent = `${tipo} ${td.dataset.indice}`;
+    });
+
+    const encabezado = document.getElementById('header-fuerza-elemento');
+    if (encabezado) encabezado.textContent = tipo.toUpperCase();
+
+    const nota = document.getElementById('nota-analisis-fuerza');
+    if (nota && CONFIG.analisis_fuerza.nota_template) {
+        const n = CONFIG.analisis_fuerza.num_puntos || 3;
+        nota.textContent = CONFIG.analisis_fuerza.nota_template
+            .replace('{n}', n)
+            .replace('{elemento}', singularizarElemento(tipo));
+    }
+}
+
+function calcularPromedioFuerza() {
+    const valores = Array.from(document.querySelectorAll('.campo-fuerza-lbf'))
+        .map(c => parseFloat(c.value))
+        .filter(v => !isNaN(v));
+    const promedio = document.getElementById('promedio_general_lbf');
+    if (!promedio) return;
+    promedio.value = valores.length ? (valores.reduce((a, b) => a + b, 0) / valores.length).toFixed(2) : '';
+}
+
+function attachFilaFuerzaListeners(fila) {
+    const inputLbf = fila.querySelector('.campo-fuerza-lbf');
+    if (inputLbf) {
+        inputLbf.addEventListener('input', () => {
+            const i = inputLbf.dataset.indice;
+            const lbf = parseFloat(inputLbf.value);
+            const ozf = document.getElementById(`fuerza${i}_ozf`);
+            const kgf = document.getElementById(`fuerza${i}_kgf`);
+            const n = document.getElementById(`fuerza${i}_n`);
+            if (!isNaN(lbf)) {
+                ozf.value = (lbf * 16).toFixed(1);
+                kgf.value = (lbf * 0.453592).toFixed(1);
+                n.value = (lbf * 4.44822).toFixed(1);
+            } else {
+                ozf.value = '';
+                kgf.value = '';
+                n.value = '';
+            }
+            calcularPromedioFuerza();
+        });
+    }
+
+    const btnBorrar = fila.querySelector('.btn-borrar-fila-fuerza');
+    if (btnBorrar) {
+        btnBorrar.addEventListener('click', () => {
+            if (document.querySelectorAll('.fila-fuerza').length <= 1) {
+                Swal.fire({ title: 'No se puede eliminar', text: 'Debe quedar al menos 1 punto de medición.', icon: 'warning', background: '#151A22', color: '#fff', confirmButtonColor: '#FF8A00' });
+                return;
+            }
+            filasFuerzaEliminadas.push(parseInt(fila.dataset.indice, 10));
+            fila.remove();
+            calcularPromedioFuerza();
+            actualizarBotonAgregarFuerza();
+        });
+    }
+}
+
+function actualizarBotonAgregarFuerza() {
+    const boton = document.getElementById('btn-agregar-fila-fuerza');
+    if (boton) boton.disabled = filasFuerzaEliminadas.length === 0;
+}
+
+function agregarFilaFuerza() {
+    if (filasFuerzaEliminadas.length === 0) return;
+    const indice = filasFuerzaEliminadas.pop();
+
+    const contenedor = document.createElement('table');
+    contenedor.innerHTML = crearFilaFuerzaHTML(indice);
+    const nuevaFila = contenedor.querySelector('tr');
+
+    const tabla = document.getElementById('tabla-analisis-fuerza');
+    const filasExistentes = Array.from(tabla.querySelectorAll('.fila-fuerza'));
+    const filaSiguiente = filasExistentes.find(f => parseInt(f.dataset.indice, 10) > indice);
+    if (filaSiguiente) {
+        filaSiguiente.before(nuevaFila);
+    } else {
+        filasExistentes[filasExistentes.length - 1].after(nuevaFila);
+    }
+
+    attachFilaFuerzaListeners(nuevaFila);
+    actualizarEtiquetasFuerza();
+    calcularPromedioFuerza();
+    actualizarBotonAgregarFuerza();
+}
+
+function activarCalculoFuerza() {
+    document.querySelectorAll('.fila-fuerza').forEach(attachFilaFuerzaListeners);
+
+    const select = document.getElementById(CONFIG.analisis_fuerza.campo_tipo_elemento.name);
+    if (select) select.addEventListener('change', actualizarEtiquetasFuerza);
+    actualizarEtiquetasFuerza();
+
+    const btnAgregar = document.getElementById('btn-agregar-fila-fuerza');
+    if (btnAgregar) btnAgregar.addEventListener('click', agregarFilaFuerza);
+    actualizarBotonAgregarFuerza();
+}
+
 function renderCamposExtra(extra, numero) {
     const campos = extra.campos.map(c => renderCampo(c)).join('');
     return `
@@ -233,6 +421,9 @@ async function cargarFormulario() {
     if (CONFIG.campos_extra) {
         html += renderCamposExtra(CONFIG.campos_extra, String(n++).padStart(2, '0'));
     }
+    if (CONFIG.analisis_fuerza) {
+        html += renderAnalisisFuerza(CONFIG.analisis_fuerza, String(n++).padStart(2, '0'));
+    }
     html += renderEscalaLectura(CONFIG);
     html += renderRangosEmp(CONFIG);
     if (CONFIG.observaciones) {
@@ -249,6 +440,7 @@ async function cargarFormulario() {
     }
 
     activarCalculoAutomatico();
+    if (CONFIG.analisis_fuerza) activarCalculoFuerza();
     aplicarPrecarga();
 }
 
@@ -267,6 +459,7 @@ function aplicarPrecarga() {
         if (!input) continue;
         input.value = valor;
     }
+    if (CONFIG.analisis_fuerza) actualizarEtiquetasFuerza();
     sessionStorage.removeItem('maquinas_v2_precarga');
 }
 

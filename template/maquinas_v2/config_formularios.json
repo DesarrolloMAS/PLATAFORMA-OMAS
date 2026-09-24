@@ -170,6 +170,19 @@
       { "name": "estructura", "label": "Estructura", "type": "select", "options": ["Cumple", "No cumple"] },
       { "name": "tornilleria_completa_ajustada", "label": "Tornillería completa y ajustada", "type": "select", "options": ["Cumple", "No cumple"] }
     ],
+    "analisis_fuerza": {
+      "titulo": "Análisis de Fuerza Magnética",
+      "campo_tipo_elemento": { "name": "tipo_elemento_fuerza", "label": "Tipo de elemento analizado", "options": ["Barras", "Bala", "Placa"] },
+      "num_puntos": 4,
+      "patron_referencia": {
+        "titulo": "Potencia magnética efectiva que garantiza protección óptima al proceso.",
+        "columnas": ["Onzas-fuerza", "Libras-fuerza", "Kilogramos-fuerza", "Newton-fuerza", "KiloNewton-fuerza"],
+        "valores": [50, 3.125, 1.4175, 13.9007, 0.013901]
+      },
+      "nota_template": "Analizados {n} puntos efectivos en cada {elemento}, con esfera de ¼\" promedio.",
+      "campo_resultado": { "name": "resultado_fuerza", "label": "Resultado", "options": ["Presta protección alta al proceso", "Presta protección media al proceso", "Presta protección baja al proceso", "No presta protección al proceso"] },
+      "campo_analisis_estructural": { "name": "analisis_estructural", "label": "Análisis parte estructural", "options": ["Buen estado", "Estado regular", "Mal estado"] }
+    },
     "observaciones": true
   },
 

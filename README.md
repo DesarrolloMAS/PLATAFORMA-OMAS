@@ -63,8 +63,8 @@ Este documento proporciona un mapa técnico de alta densidad para optimizar la c
 
 ## 🔄 Estado de Migración (Legacy vs. Nuevo Estándar)
 El sistema se encuentra en transición desde tecnologías antiguas hacia un estándar más moderno y estético.
-- **Patrón Legacy (Evitar para código nuevo)**: Formularios de múltiples pasos, persistencia mixta (BD/Excel/JSON antiguo), exportación PDF desde backend usando **mPDF**.
-- **Nuevo Estándar (Referencia obligatoria)**: Formularios HTML limpios (diseño "Cyberpunk", colores neón/oscuros), comunicación vía `fetch` asíncrono, almacenamiento JSON consolidado por sede/mes, renderizado PDF en frontend con **jsPDF + html2canvas**. (Ejemplo de referencia: `inspeccion empaque/`).
+- **Patrón Legacy (Evitar para código nuevo)**: Formularios de múltiples pasos, persistencia mixta (BD/Excel/JSON antiguo), exportación PDF desde backend usando **mPDF**, sincronización externa a Postgres/Excel invocada directamente desde `procesar.php` (ej. el `gobierno_datos/bitacora_produccion/` que traía `molienda_v2`, eliminado en 2026-09 — nunca tuvo Composer instalado en producción y tumbaba el guardado con un error fatal no atrapado).
+- **Nuevo Estándar (Referencia obligatoria)**: Formularios HTML limpios (diseño "Cyberpunk", colores neón/oscuros), comunicación vía `fetch` asíncrono, almacenamiento JSON consolidado por sede/mes, renderizado PDF en frontend con **jsPDF + html2canvas**. (Ejemplo de referencia: `inspeccion empaque/`). `procesar.php` **no debe** llamar integraciones externas (Postgres, Excel, APIs de terceros) de forma síncrona y bloqueante — si se necesita una integración así, debe vivir en un proceso aparte (cron/endpoint dedicado, como `gobierno_datos/integracion_mia/`), nunca dentro del guardado del registro.
 
 ## 🔗 Integraciones
 - **PDF**: Generación vía mPDF (PHP, `vendor/`) o Puppeteer headless (`template/central_documental/generate_pdf_headless.js`, usa `chrome-linux64/`).

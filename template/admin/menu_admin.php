@@ -54,38 +54,123 @@ foreach (array_keys($cargo_roles) as $cargo) {
 
 $areas_validas = ['sin_asignar', 'administracion', 'almacen', 'mantenimiento', 'produccion'];
 
+// Mapeo cargo -> área grande (Operaciones/Calidad/HSEQ/Desarrollo, las que
+// deciden el menú de entrada al iniciar sesión — $_SESSION['area']). No debe
+// confundirse con $cargo_areas de arriba, que son las miniáreas internas de
+// Operaciones. Esta sección es exclusiva de administradores del área
+// "Desarrollo": ver el bloqueo al renderizar el formulario más abajo.
+$cargo_area_grande_file = "../../archivos/generados/admin/cargo_area_grande.json";
+
+$cargo_area_grande_raw = file_exists($cargo_area_grande_file)
+    ? (json_decode(file_get_contents($cargo_area_grande_file), true) ?: [])
+    : [];
+
+$cargo_area_grande = [];
+foreach (array_keys($cargo_roles) as $cargo) {
+    $cargo_area_grande[$cargo] = $cargo_area_grande_raw[$cargo] ?? 'sin_asignar';
+}
+
+$areas_grandes_validas = ['sin_asignar', 'Operaciones', 'Calidad', 'HSEQ', 'Desarrollo'];
+
+// Un admin normal (Operaciones/Calidad/HSEQ) solo debe ver y editar los
+// cargos de su propia área grande en "Cargos y Roles" y "Cargos y Áreas
+// Operativas" — Desarrollo sigue viendo y editando todo, como corresponde
+// a quien administra el mapeo cargo -> área grande.
+$miAreaGrande = $_SESSION['area'] ?? '';
+$esAdminDesarrollo = $miAreaGrande === 'Desarrollo';
+
+$cargosVisibles = $esAdminDesarrollo
+    ? array_keys($cargo_roles)
+    : array_keys(array_filter($cargo_area_grande, fn($area) => $area === $miAreaGrande));
+
 $mensaje = '';
+$mensajeEsError = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['areas'])) {
         foreach ($_POST['areas'] as $cargo => $area) {
-            if (array_key_exists($cargo, $cargo_areas) && in_array($area, $areas_validas, true)) {
+            if (array_key_exists($cargo, $cargo_areas) && in_array($cargo, $cargosVisibles, true) && in_array($area, $areas_validas, true)) {
                 $cargo_areas[$cargo] = $area;
             }
         }
         ksort($cargo_areas);
         file_put_contents($cargo_areas_file, json_encode($cargo_areas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         $mensaje = 'Áreas operativas actualizadas con éxito. Esto todavía no restringe el acceso de nadie — es solo la asignación base para cuando se active el control de acceso por área.';
-    } elseif (isset($_POST['otorgar_adm']) && array_key_exists($_POST['otorgar_adm'], $cargo_roles)) {
+    } elseif (isset($_POST['crear_cargo'])) {
+        $nuevoCargo = trim($_POST['nuevo_cargo'] ?? '');
+        $nuevoRol   = $_POST['nuevo_rol'] ?? '';
+
+        $yaExiste = false;
+        foreach (array_keys($cargo_roles) as $cargoExistente) {
+            if (mb_strtolower($cargoExistente) === mb_strtolower($nuevoCargo)) {
+                $yaExiste = true;
+                break;
+            }
+        }
+
+        if ($nuevoCargo === '') {
+            $mensaje = 'El nombre del cargo no puede estar vacío.';
+            $mensajeEsError = true;
+        } elseif ($yaExiste) {
+            $mensaje = 'Ya existe un cargo llamado "' . htmlspecialchars($nuevoCargo) . '". Usa la tabla de abajo para cambiarle el rol.';
+            $mensajeEsError = true;
+        } elseif (!in_array($nuevoRol, ['1', '2'], true)) {
+            $mensaje = 'Rol inválido para el nuevo cargo.';
+            $mensajeEsError = true;
+        } else {
+            $cargo_roles[$nuevoCargo] = $nuevoRol;
+            $cargo_areas[$nuevoCargo] = 'sin_asignar';
+            ksort($cargo_areas);
+            file_put_contents($cargo_areas_file, json_encode($cargo_areas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+            // El cargo nuevo queda asignado de una vez a la propia área
+            // grande de quien lo crea (si es Desarrollo, a Desarrollo), para
+            // que no desaparezca "sin_asignar" de la vista de su creador.
+            $cargo_area_grande[$nuevoCargo] = $miAreaGrande !== '' ? $miAreaGrande : 'sin_asignar';
+            ksort($cargo_area_grande);
+            file_put_contents($cargo_area_grande_file, json_encode($cargo_area_grande, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+            $rolLabelNuevo = $nuevoRol === '2' ? 'ROL 2 · INTERMEDIO' : 'ROL 1 · ALTO';
+            $mensaje = 'Cargo "' . htmlspecialchars($nuevoCargo) . '" creado con ' . $rolLabelNuevo . '. Ya está disponible en el formulario de registro.';
+        }
+    } elseif (isset($_POST['otorgar_adm']) && array_key_exists($_POST['otorgar_adm'], $cargo_roles) && in_array($_POST['otorgar_adm'], $cargosVisibles, true)) {
         $cargoObjetivo = $_POST['otorgar_adm'];
         $cargo_roles[$cargoObjetivo] = 'adm';
         $mensaje = 'Rol ADM otorgado al cargo "' . htmlspecialchars($cargoObjetivo) . '". Cualquier usuario que se registre con este cargo será superadministrador.';
-    } elseif (isset($_POST['revocar_adm']) && array_key_exists($_POST['revocar_adm'], $cargo_roles)) {
+    } elseif (isset($_POST['revocar_adm']) && array_key_exists($_POST['revocar_adm'], $cargo_roles) && in_array($_POST['revocar_adm'], $cargosVisibles, true)) {
         $cargoObjetivo = $_POST['revocar_adm'];
         $cargo_roles[$cargoObjetivo] = '1';
         $mensaje = 'Rol ADM revocado del cargo "' . htmlspecialchars($cargoObjetivo) . '". Se asignó ROL 1 por defecto.';
     } elseif (isset($_POST['roles'])) {
         foreach ($_POST['roles'] as $cargo => $rol) {
-            if (array_key_exists($cargo, $cargo_roles) && in_array($rol, ['1', '2'], true)) {
+            if (array_key_exists($cargo, $cargo_roles) && in_array($cargo, $cargosVisibles, true) && in_array($rol, ['1', '2'], true)) {
                 $cargo_roles[$cargo] = $rol;
             }
         }
         $mensaje = 'Roles actualizados con éxito. Los nuevos registros usarán esta asignación automáticamente.';
+    } elseif (isset($_POST['areas_grandes'])) {
+        // Doble candado: aunque el formulario solo se muestra a admins del
+        // área Desarrollo, se revalida aquí por si alguien arma el POST a
+        // mano — el bloqueo de verdad es este, no el que oculta el HTML.
+        if (($_SESSION['area'] ?? '') !== 'Desarrollo') {
+            $mensaje = 'Acceso denegado: esta configuración es exclusiva de administradores del área Desarrollo.';
+            $mensajeEsError = true;
+        } else {
+            foreach ($_POST['areas_grandes'] as $cargo => $areaGrande) {
+                if (array_key_exists($cargo, $cargo_area_grande) && in_array($areaGrande, $areas_grandes_validas, true)) {
+                    $cargo_area_grande[$cargo] = $areaGrande;
+                }
+            }
+            ksort($cargo_area_grande);
+            file_put_contents($cargo_area_grande_file, json_encode($cargo_area_grande, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            $mensaje = 'Áreas (Operaciones/Calidad/HSEQ/Desarrollo) actualizadas con éxito.';
+        }
     } elseif (isset($_POST['sincronizar_bd'])) {
         // Aplica el mapeo cargo->rol actual a los usuarios YA existentes en la BD.
         $totalActualizados = 0;
         $detalle = [];
         foreach ($cargo_roles as $cargo => $rolCargo) {
+            if (!in_array($cargo, $cargosVisibles, true)) continue;
             $stmtSync = $pdoUsuarios->prepare("UPDATE usuarios SET rol = :rolNuevo WHERE Cargo = :cargo AND rol != :rolActual");
             $stmtSync->bindValue(':rolNuevo', $rolCargo);
             $stmtSync->bindValue(':cargo', $cargo);
@@ -107,6 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ksort($cargo_roles);
 ksort($cargo_areas);
+ksort($cargo_area_grande);
 
 $rol_labels = [
     '1' => 'ROL 1 · ALTO',
@@ -119,6 +205,14 @@ $area_labels = [
     'almacen'        => 'ALMACÉN',
     'mantenimiento'  => 'MANTENIMIENTO',
     'produccion'     => 'PRODUCCIÓN',
+];
+
+$area_grande_labels = [
+    'sin_asignar' => 'SIN ASIGNAR',
+    'Operaciones' => 'OPERACIONES',
+    'Calidad'     => 'CALIDAD',
+    'HSEQ'        => 'HSEQ',
+    'Desarrollo'  => 'DESARROLLO',
 ];
 ?>
 <!DOCTYPE html>
@@ -200,6 +294,30 @@ $area_labels = [
             padding: 15px; border-radius: var(--r-md); margin-bottom: 25px; font-weight: bold;
             font-family: 'Space Mono', monospace; font-size: 13px; text-align: center;
         }
+        .sys-msg.sys-msg--error {
+            background: rgba(255, 51, 102, 0.1); border-color: var(--danger); color: var(--danger);
+        }
+
+        .form-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
+        .form-row .field { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 6px; }
+        .form-row label {
+            font-size: 11px; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.5px; font-family: 'Space Mono', monospace;
+        }
+        .form-row input[type="text"] {
+            background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 10px 12px; border-radius: var(--r-sm); font-family: 'Barlow', sans-serif; font-size: 14px;
+        }
+        .form-row input[type="text"]:focus {
+            outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.1);
+        }
+        .btn-crear-cargo {
+            background: var(--accent); color: #fff; border: none; padding: 11px 22px;
+            font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase;
+            border-radius: var(--r-sm); cursor: pointer; white-space: nowrap; transition: all 0.3s;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .btn-crear-cargo:hover { background: #fff; color: var(--bg-color); box-shadow: 0 0 25px rgba(255,255,255,0.6); }
 
         .section-card {
             background: var(--panel-bg);
@@ -262,6 +380,49 @@ $area_labels = [
             padding: 6px 10px;
             border-radius: var(--r-sm);
             letter-spacing: 0.5px;
+        }
+
+        .badge-scope {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 3px 9px;
+            border-radius: var(--r-sm);
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
+
+        .empty-row {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 25px 12px !important;
+            font-style: italic;
+        }
+
+        /* Sección exclusiva de admins del área Desarrollo */
+        .section-card--dev {
+            border-color: #7C3AED;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 0 1px rgba(124, 58, 237, 0.15) inset;
+        }
+        .section-card--dev .section-title { color: #A78BFA; }
+        .badge-dev {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: #A78BFA;
+            background: rgba(124, 58, 237, 0.12);
+            border: 1px solid #7C3AED;
+            padding: 4px 10px;
+            border-radius: var(--r-sm);
+            letter-spacing: 0.5px;
+            text-transform: none;
+            margin-left: auto;
         }
 
         .btn-action {
@@ -375,15 +536,48 @@ $area_labels = [
     </div>
 
     <?php if ($mensaje): ?>
-        <div class="sys-msg"><?= htmlspecialchars($mensaje) ?></div>
+        <div class="sys-msg<?= $mensajeEsError ? ' sys-msg--error' : '' ?>"><?= $mensaje ?></div>
     <?php endif; ?>
 
     <form method="post">
         <div class="section-card">
-            <div class="section-title">Cargos y Roles</div>
+            <div class="section-title">Crear Nuevo Cargo</div>
+            <div class="section-desc">
+                Crea un cargo que todavía no existe y asígnale su rol de una vez. Queda disponible de
+                inmediato en el <strong>select de Cargo</strong> del formulario de registro.
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="nuevo_cargo">Nombre del cargo</label>
+                    <input type="text" id="nuevo_cargo" name="nuevo_cargo" placeholder="Ej: Supervisor de Calidad" required maxlength="100">
+                </div>
+                <div class="field">
+                    <label for="nuevo_rol">Rol asignado</label>
+                    <select id="nuevo_rol" name="nuevo_rol" class="form-control">
+                        <?php foreach ($rol_labels as $valor => $etiqueta): ?>
+                        <option value="<?= $valor ?>"><?= $etiqueta ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button type="submit" name="crear_cargo" value="1" class="btn-crear-cargo">➕ Crear Cargo</button>
+            </div>
+        </div>
+    </form>
+
+    <form method="post">
+        <div class="section-card">
+            <div class="section-title">
+                Cargos y Roles
+                <?php if (!$esAdminDesarrollo): ?><span class="badge-scope"><?= htmlspecialchars($miAreaGrande ?: 'SIN ÁREA') ?></span><?php endif; ?>
+            </div>
             <div class="section-desc">
                 Cada cargo tiene asignado un rol. Cuando un usuario se registra y selecciona su cargo,
                 el sistema le asigna automáticamente el rol configurado aquí — ya no se elige manualmente en el registro.
+                <?php if (!$esAdminDesarrollo): ?>
+                    Solo ves los cargos asignados al área <strong><?= htmlspecialchars($miAreaGrande ?: 'sin definir') ?></strong>
+                    (esa asignación la controla Desarrollo).
+                <?php endif; ?>
             </div>
 
             <table>
@@ -395,7 +589,9 @@ $area_labels = [
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($cargo_roles as $cargo => $rol): ?>
+                    <?php foreach ($cargo_roles as $cargo => $rol):
+                        if (!in_array($cargo, $cargosVisibles, true)) continue;
+                    ?>
                     <tr>
                         <td><?= htmlspecialchars($cargo) ?></td>
                         <td>
@@ -424,6 +620,9 @@ $area_labels = [
                         </td>
                     </tr>
                     <?php endforeach; ?>
+                    <?php if (empty($cargosVisibles)): ?>
+                    <tr><td colspan="3" class="empty-row">Todavía no hay cargos asignados al área <?= htmlspecialchars($miAreaGrande ?: 'sin definir') ?>. Pídele a Desarrollo que los clasifique.</td></tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
 
@@ -431,11 +630,17 @@ $area_labels = [
         </div>
 
         <div class="section-card">
-            <div class="section-title">Sincronización con Base de Datos</div>
+            <div class="section-title">
+                Sincronización con Base de Datos
+                <?php if (!$esAdminDesarrollo): ?><span class="badge-scope"><?= htmlspecialchars($miAreaGrande ?: 'SIN ÁREA') ?></span><?php endif; ?>
+            </div>
             <div class="section-desc">
                 Esta acción recorre la tabla <strong>usuarios</strong> y actualiza el <strong>rol</strong> de todos los
                 usuarios ya registrados para que coincida con el mapeo cargo → rol configurado arriba.
                 Los usuarios cuyo rol ya coincide no se tocan.
+                <?php if (!$esAdminDesarrollo): ?>
+                    Solo afecta a usuarios cuyo cargo pertenece al área <strong><?= htmlspecialchars($miAreaGrande ?: 'sin definir') ?></strong>.
+                <?php endif; ?>
             </div>
             <button type="submit" name="sincronizar_bd" value="1" class="btn-submit btn-sync"
                 onclick="return confirm('¿Actualizar la base de datos ahora?\n\nSe sobreescribirá el rol de TODOS los usuarios existentes cuyo cargo tenga un rol distinto al configurado en esta pantalla. Esta acción no se puede deshacer automáticamente.');">
@@ -446,11 +651,17 @@ $area_labels = [
 
     <form method="post">
         <div class="section-card">
-            <div class="section-title">Cargos y Áreas Operativas</div>
+            <div class="section-title">
+                Cargos y Áreas Operativas
+                <?php if (!$esAdminDesarrollo): ?><span class="badge-scope"><?= htmlspecialchars($miAreaGrande ?: 'SIN ÁREA') ?></span><?php endif; ?>
+            </div>
             <div class="section-desc">
                 Asigna cada cargo a su área operativa (Mantenimiento, Producción, Almacén o Administración).
                 Por ahora esto <strong>no restringe el acceso de nadie</strong> — es solo la asignación base
                 que se va a usar más adelante para que cada área solo vea su propio menú.
+                <?php if (!$esAdminDesarrollo): ?>
+                    Solo ves los cargos asignados al área <strong><?= htmlspecialchars($miAreaGrande ?: 'sin definir') ?></strong>.
+                <?php endif; ?>
             </div>
 
             <table>
@@ -461,7 +672,9 @@ $area_labels = [
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($cargo_areas as $cargo => $area): ?>
+                    <?php foreach ($cargo_areas as $cargo => $area):
+                        if (!in_array($cargo, $cargosVisibles, true)) continue;
+                    ?>
                     <tr>
                         <td><?= htmlspecialchars($cargo) ?></td>
                         <td>
@@ -473,12 +686,57 @@ $area_labels = [
                         </td>
                     </tr>
                     <?php endforeach; ?>
+                    <?php if (empty($cargosVisibles)): ?>
+                    <tr><td colspan="2" class="empty-row">Todavía no hay cargos asignados al área <?= htmlspecialchars($miAreaGrande ?: 'sin definir') ?>. Pídele a Desarrollo que los clasifique.</td></tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
 
             <button type="submit" class="btn-submit">Guardar Cambios</button>
         </div>
     </form>
+
+    <?php if ($esAdminDesarrollo): ?>
+    <form method="post">
+        <div class="section-card section-card--dev">
+            <div class="section-title">
+                Cargos y Áreas del Sistema
+                <span class="badge-dev">🔒 SOLO DESARROLLO</span>
+            </div>
+            <div class="section-desc">
+                Asigna cada cargo a su área grande del sistema (<strong>Operaciones, Calidad, HSEQ o Desarrollo</strong>
+                — las mismas que deciden el menú de entrada al iniciar sesión). No confundir con "Cargos y Áreas
+                Operativas" de arriba, que son las miniáreas internas de Operaciones (Mantenimiento, Almacén, etc.).
+                Esta sección solo la ven administradores del área Desarrollo.
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cargo</th>
+                        <th>Área del sistema</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cargo_area_grande as $cargo => $areaGrande): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($cargo) ?></td>
+                        <td>
+                            <select name="areas_grandes[<?= htmlspecialchars($cargo) ?>]" class="form-control">
+                                <?php foreach ($area_grande_labels as $valor => $etiqueta): ?>
+                                <option value="<?= $valor ?>" <?= $areaGrande === $valor ? 'selected' : '' ?>><?= $etiqueta ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn-submit">Guardar Cambios</button>
+        </div>
+    </form>
+    <?php endif; ?>
 
     <div class="system-status">
         <div class="status-dot"></div>

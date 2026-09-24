@@ -10,6 +10,7 @@ if (!isset($_SESSION['id_usuario'])) {
 // Redirigir según el área y el rol
 switch ($_SESSION['area']) {
     case 'Operaciones':
+    case 'Desarrollo': // Misma configuración que Operaciones (ver notas del área en admin/menu_admin.php)
         // Redirigir según el rol en el área de Operaciones
         switch ($_SESSION['rol']) {
             case 'adm': // Rol alto en Operaciones

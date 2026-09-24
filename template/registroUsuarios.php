@@ -167,6 +167,7 @@ $stmt->execute(); // Ejecutar la consulta
                         <option value="Calidad">Calidad</option>
                         <option value="Tecnología">Tecnología</option>
                         <option value="HSEQ">HSEQ</option>
+                        <option value="Desarrollo">Desarrollo</option>
                     </select>
                 </div>
                 <div class="formulariog">

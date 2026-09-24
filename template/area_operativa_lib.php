@@ -24,6 +24,13 @@ function esAreaMantenimiento(): bool {
     return obtenerAreaOperativa() === 'mantenimiento';
 }
 
+// "Desarrollo" se configuró para comportarse idéntico a "Operaciones" en
+// todo el sistema (ver index.php y redireccion.php), así que también cuenta
+// aquí como Operaciones para efectos de este catálogo.
+function esAreaOperacionesODesarrollo(): bool {
+    return in_array($_SESSION['area'] ?? '', ['Operaciones', 'Desarrollo'], true);
+}
+
 // Quién puede crear/editar/dar de baja en el calendario de máquinas u
 // objetos de evento. Dos criterios distintos según el área organizacional
 // ($_SESSION['area']: Operaciones/Calidad/HSEQ, la que decide el menú de
@@ -37,7 +44,7 @@ function esAreaMantenimiento(): bool {
 //     el criterio es simplemente rol '1' — la generalidad de esa área.
 function puedeGestionarCalendario(): bool {
     if ((($_SESSION['rol'] ?? '') === 'adm')) return true;
-    if ((($_SESSION['area'] ?? '') === 'Operaciones')) return esAreaMantenimiento();
+    if (esAreaOperacionesODesarrollo()) return esAreaMantenimiento();
     return ($_SESSION['rol'] ?? '') === '1';
 }
 
@@ -45,14 +52,12 @@ function puedeGestionarCalendario(): bool {
 // cualquier cosa que esa área quiera programar en el calendario — el
 // usuario pidió explícitamente que ahí se llamen "objetos de evento".
 function terminoObjeto(bool $plural = false): string {
-    $esOperaciones = (($_SESSION['area'] ?? '') === 'Operaciones');
-    if ($esOperaciones) return $plural ? 'Máquinas' : 'Máquina';
+    if (esAreaOperacionesODesarrollo()) return $plural ? 'Máquinas' : 'Máquina';
     return $plural ? 'Objetos de Evento' : 'Objeto de Evento';
 }
 
 // "Máquina" es femenino, "Objeto de Evento" es masculino — para que los
 // mensajes de confirmación concuerden en género según el área.
 function terminoObjetoVerbo(string $sufijoFemenino, string $sufijoMasculino): string {
-    $esOperaciones = (($_SESSION['area'] ?? '') === 'Operaciones');
-    return $esOperaciones ? $sufijoFemenino : $sufijoMasculino;
+    return esAreaOperacionesODesarrollo() ? $sufijoFemenino : $sufijoMasculino;
 }
