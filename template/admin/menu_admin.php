@@ -23,6 +23,46 @@ switch ($_SESSION['area'] ?? '') {
 }
 
 require '../conection.php'; // $pdoUsuarios, para sincronizar la BD con el mapeo cargo->rol
+require_once '../usuario/bandeja_lib.php'; // notificaciones de cambio de rol
+require_once '../usuario/roles_lib.php';
+require_once __DIR__ . '/menu_operaciones_lib.php'; // visibilidad de botones de menu_adm.html
+require_once __DIR__ . '/avisos_operaciones_lib.php'; // destinatarios del aviso semanal de formatos
+
+// Escribe un JSON de configuración y registra si falló. Antes cada
+// file_put_contents se ignoraba: si el archivo no tenía permiso de escritura
+// para el servidor web (www-data), el panel igual mostraba "actualizado con
+// éxito" y el cambio se perdía en silencio. Los archivos que fallan se
+// acumulan en $fallosGuardado y se reportan como error al final del POST.
+$fallosGuardado = [];
+function guardarJsonAdmin(string $ruta, array $datos): bool {
+    global $fallosGuardado;
+    $ok = @file_put_contents($ruta, json_encode($datos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) !== false;
+    if (!$ok) {
+        $fallosGuardado[] = basename($ruta);
+        error_log('menu_admin: no se pudo escribir ' . $ruta . ' (revisar permisos para el usuario del servidor web)');
+    }
+    return $ok;
+}
+
+// Avisa en la bandeja de entrada a todos los usuarios de un cargo que el rol
+// de ese cargo cambió. Nunca debe tumbar el guardado del panel: si falla la
+// escritura de la bandeja, solo se registra en el log.
+function avisarCambioRolCargo(PDO $pdoUsuarios, string $cargo, string $rolAnterior, string $rolNuevo): void {
+    if ($rolAnterior === $rolNuevo) return;
+    try {
+        notificarCargo(
+            $pdoUsuarios,
+            $cargo,
+            'Cambio de rol en tu cargo',
+            'El rol del cargo "' . $cargo . '" cambió de ' . etiquetaRol($rolAnterior) . ' a ' . etiquetaRol($rolNuevo) . '. '
+                . 'Recibirás otro aviso cuando el cambio quede aplicado a tu cuenta.',
+            'aviso',
+            'Administración'
+        );
+    } catch (Throwable $e) {
+        error_log('avisarCambioRolCargo: ' . $e->getMessage());
+    }
+}
 
 $cargo_roles_file = "../../archivos/generados/admin/cargo_roles.json";
 
@@ -86,16 +126,52 @@ $cargosVisibles = $esAdminDesarrollo
 $mensaje = '';
 $mensajeEsError = false;
 
+// La visibilidad del menú de Operaciones solo la administran admins de
+// Operaciones (o Desarrollo, que se comporta igual en todo el sistema) — no
+// los de Calidad/HSEQ, que también entran a este panel.
+$puedeEditarMenuOps = in_array($miAreaGrande, ['Operaciones', 'Desarrollo'], true);
+// El menú de Operaciones y sus avisos solo involucran cargos cuya área del
+// sistema sea Operaciones ("Cargos y Áreas del Sistema"). Sin este filtro, un
+// admin de Desarrollo veía también los cargos de Calidad, HSEQ y Desarrollo.
+$cargosOperaciones = array_values(array_filter(
+    $cargosVisibles,
+    fn($c) => ($cargo_area_grande[$c] ?? '') === 'Operaciones'
+));
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['areas'])) {
+    if (isset($_POST['menu_operaciones'])) {
+        if (!$puedeEditarMenuOps) {
+            $mensaje = 'Acceso denegado: la visibilidad del menú de Operaciones solo la administran admins de Operaciones o Desarrollo.';
+            $mensajeEsError = true;
+        } else {
+            $nueva = [];
+            foreach (MENU_OPERACIONES_NODOS as $nodo => $info) {
+                $nueva[$nodo] = (array)($_POST['menu_ops'][$nodo] ?? []);
+            }
+            if (!menuOperacionesGuardar($nueva)) $fallosGuardado[] = basename(menuOperacionesRuta());
+
+            // Destinatarios del aviso semanal de formatos. Los cargos que este
+            // admin no ve (de otra área grande) se conservan tal como estaban.
+            $avisoActual = avisosOperacionesConfig();
+            $cargosPost = array_values(array_intersect((array)($_POST['aviso_cargos'] ?? []), $cargosOperaciones));
+            $cargosOcultos = array_values(array_diff($avisoActual['cargos'], $cargosOperaciones));
+            $avisoOk = avisosOperacionesGuardar([
+                'areas'  => (array)($_POST['aviso_areas'] ?? []),
+                'cargos' => array_merge($cargosOcultos, $cargosPost),
+            ]);
+            if (!$avisoOk) $fallosGuardado[] = basename(avisosOperacionesRuta());
+
+            $mensaje = 'Visibilidad del menú de Operaciones y destinatarios del aviso semanal actualizados. Los usuarios verán el menú actualizado al volver a abrirlo (los administradores siempre ven todo).';
+        }
+    } elseif (isset($_POST['areas'])) {
         foreach ($_POST['areas'] as $cargo => $area) {
             if (array_key_exists($cargo, $cargo_areas) && in_array($cargo, $cargosVisibles, true) && in_array($area, $areas_validas, true)) {
                 $cargo_areas[$cargo] = $area;
             }
         }
         ksort($cargo_areas);
-        file_put_contents($cargo_areas_file, json_encode($cargo_areas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        $mensaje = 'Áreas operativas actualizadas con éxito. Esto todavía no restringe el acceso de nadie — es solo la asignación base para cuando se active el control de acceso por área.';
+        guardarJsonAdmin($cargo_areas_file, $cargo_areas);
+        $mensaje = 'Áreas operativas actualizadas con éxito. Esto define qué botones ve cada cargo en el menú de Operaciones (ver "Visibilidad del Menú de Operaciones").';
     } elseif (isset($_POST['crear_cargo'])) {
         $nuevoCargo = trim($_POST['nuevo_cargo'] ?? '');
         $nuevoRol   = $_POST['nuevo_rol'] ?? '';
@@ -121,33 +197,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $cargo_roles[$nuevoCargo] = $nuevoRol;
             $cargo_areas[$nuevoCargo] = 'sin_asignar';
             ksort($cargo_areas);
-            file_put_contents($cargo_areas_file, json_encode($cargo_areas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            guardarJsonAdmin($cargo_areas_file, $cargo_areas);
 
             // El cargo nuevo queda asignado de una vez a la propia área
             // grande de quien lo crea (si es Desarrollo, a Desarrollo), para
             // que no desaparezca "sin_asignar" de la vista de su creador.
             $cargo_area_grande[$nuevoCargo] = $miAreaGrande !== '' ? $miAreaGrande : 'sin_asignar';
             ksort($cargo_area_grande);
-            file_put_contents($cargo_area_grande_file, json_encode($cargo_area_grande, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            guardarJsonAdmin($cargo_area_grande_file, $cargo_area_grande);
 
             $rolLabelNuevo = $nuevoRol === '2' ? 'ROL 2 · INTERMEDIO' : 'ROL 1 · ALTO';
             $mensaje = 'Cargo "' . htmlspecialchars($nuevoCargo) . '" creado con ' . $rolLabelNuevo . '. Ya está disponible en el formulario de registro.';
         }
     } elseif (isset($_POST['otorgar_adm']) && array_key_exists($_POST['otorgar_adm'], $cargo_roles) && in_array($_POST['otorgar_adm'], $cargosVisibles, true)) {
         $cargoObjetivo = $_POST['otorgar_adm'];
+        avisarCambioRolCargo($pdoUsuarios, $cargoObjetivo, $cargo_roles[$cargoObjetivo], 'adm');
         $cargo_roles[$cargoObjetivo] = 'adm';
         $mensaje = 'Rol ADM otorgado al cargo "' . htmlspecialchars($cargoObjetivo) . '". Cualquier usuario que se registre con este cargo será superadministrador.';
     } elseif (isset($_POST['revocar_adm']) && array_key_exists($_POST['revocar_adm'], $cargo_roles) && in_array($_POST['revocar_adm'], $cargosVisibles, true)) {
         $cargoObjetivo = $_POST['revocar_adm'];
+        avisarCambioRolCargo($pdoUsuarios, $cargoObjetivo, $cargo_roles[$cargoObjetivo], '1');
         $cargo_roles[$cargoObjetivo] = '1';
         $mensaje = 'Rol ADM revocado del cargo "' . htmlspecialchars($cargoObjetivo) . '". Se asignó ROL 1 por defecto.';
-    } elseif (isset($_POST['roles'])) {
-        foreach ($_POST['roles'] as $cargo => $rol) {
+    } elseif (isset($_POST['roles']) || isset($_POST['sincronizar_bd'])) {
+        // El botón "Actualizar Base de Datos" vive en el MISMO <form> que la
+        // tabla de roles, así que su POST también trae roles[...]. Antes esta
+        // rama se evaluaba primero y la de sincronizar_bd (un elseif más
+        // abajo) nunca se alcanzaba: se guardaba el mapeo pero la BD no se
+        // tocaba. Ahora se guardan los selectores y, si se pidió, se
+        // sincroniza con el mapeo ya actualizado.
+        foreach ($_POST['roles'] ?? [] as $cargo => $rol) {
             if (array_key_exists($cargo, $cargo_roles) && in_array($cargo, $cargosVisibles, true) && in_array($rol, ['1', '2'], true)) {
+                avisarCambioRolCargo($pdoUsuarios, $cargo, $cargo_roles[$cargo], $rol);
                 $cargo_roles[$cargo] = $rol;
             }
         }
         $mensaje = 'Roles actualizados con éxito. Los nuevos registros usarán esta asignación automáticamente.';
+
+        if (isset($_POST['sincronizar_bd'])) {
+            // Aplica el mapeo cargo->rol actual a los usuarios YA existentes en la BD.
+            $totalActualizados = 0;
+            $detalle = [];
+            foreach ($cargo_roles as $cargo => $rolCargo) {
+                if (!in_array($cargo, $cargosVisibles, true)) continue;
+                // Se leen antes quiénes van a cambiar (y con qué rol venían)
+                // para poder avisarle a cada uno en su bandeja de entrada.
+                $stmtAfectados = $pdoUsuarios->prepare("SELECT id_usuario, rol FROM usuarios WHERE Cargo = :cargo AND rol != :rolActual");
+                $stmtAfectados->execute([':cargo' => $cargo, ':rolActual' => $rolCargo]);
+                $afectadosLista = $stmtAfectados->fetchAll(PDO::FETCH_ASSOC);
+                if (!$afectadosLista) continue;
+
+                $stmtSync = $pdoUsuarios->prepare("UPDATE usuarios SET rol = :rolNuevo WHERE Cargo = :cargo AND rol != :rolActual");
+                $stmtSync->bindValue(':rolNuevo', $rolCargo);
+                $stmtSync->bindValue(':cargo', $cargo);
+                $stmtSync->bindValue(':rolActual', $rolCargo);
+                $stmtSync->execute();
+                $afectados = $stmtSync->rowCount();
+                if ($afectados > 0) {
+                    $totalActualizados += $afectados;
+                    $detalle[] = htmlspecialchars($cargo) . " ($afectados)";
+                }
+
+                foreach ($afectadosLista as $u) {
+                    try {
+                        crearNotificacion(
+                            $u['id_usuario'],
+                            'Tu rol fue actualizado',
+                            'Tu cuenta pasó de ' . etiquetaRol((string)$u['rol']) . ' a ' . etiquetaRol($rolCargo) . ' (cargo "' . $cargo . '"). '
+                                . 'Cierra sesión y vuelve a ingresar para que los nuevos permisos se apliquen.',
+                            'exito',
+                            'Administración',
+                            '/template/menu_usuario.html'
+                        );
+                    } catch (Throwable $e) {
+                        error_log('notificación de sincronización de rol: ' . $e->getMessage());
+                    }
+                }
+            }
+            $mensaje = $totalActualizados > 0
+                ? "Base de datos sincronizada: $totalActualizados usuario(s) actualizado(s). Detalle: " . implode(', ', $detalle) . '.'
+                : 'Base de datos sincronizada: ningún usuario existente tenía un rol distinto al configurado.';
+        }
     } elseif (isset($_POST['areas_grandes'])) {
         // Doble candado: aunque el formulario solo se muestra a admins del
         // área Desarrollo, se revalida aquí por si alguien arma el POST a
@@ -162,32 +292,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
             ksort($cargo_area_grande);
-            file_put_contents($cargo_area_grande_file, json_encode($cargo_area_grande, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            guardarJsonAdmin($cargo_area_grande_file, $cargo_area_grande);
             $mensaje = 'Áreas (Operaciones/Calidad/HSEQ/Desarrollo) actualizadas con éxito.';
         }
-    } elseif (isset($_POST['sincronizar_bd'])) {
-        // Aplica el mapeo cargo->rol actual a los usuarios YA existentes en la BD.
-        $totalActualizados = 0;
-        $detalle = [];
-        foreach ($cargo_roles as $cargo => $rolCargo) {
-            if (!in_array($cargo, $cargosVisibles, true)) continue;
-            $stmtSync = $pdoUsuarios->prepare("UPDATE usuarios SET rol = :rolNuevo WHERE Cargo = :cargo AND rol != :rolActual");
-            $stmtSync->bindValue(':rolNuevo', $rolCargo);
-            $stmtSync->bindValue(':cargo', $cargo);
-            $stmtSync->bindValue(':rolActual', $rolCargo);
-            $stmtSync->execute();
-            $afectados = $stmtSync->rowCount();
-            if ($afectados > 0) {
-                $totalActualizados += $afectados;
-                $detalle[] = htmlspecialchars($cargo) . " ($afectados)";
-            }
-        }
-        $mensaje = $totalActualizados > 0
-            ? "Base de datos sincronizada: $totalActualizados usuario(s) actualizado(s). Detalle: " . implode(', ', $detalle) . '.'
-            : 'Base de datos sincronizada: ningún usuario existente tenía un rol distinto al configurado.';
     }
     ksort($cargo_roles);
-    file_put_contents($cargo_roles_file, json_encode($cargo_roles, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    guardarJsonAdmin($cargo_roles_file, $cargo_roles);
+
+    if ($fallosGuardado) {
+        $mensaje = 'No se pudieron guardar los cambios: el servidor no tiene permiso de escritura sobre '
+            . htmlspecialchars(implode(', ', array_unique($fallosGuardado)))
+            . ' (en archivos/generados/admin/). Pide a sistemas que revise los permisos de ese archivo.';
+        $mensajeEsError = true;
+    }
 }
 
 ksort($cargo_roles);
@@ -405,6 +522,28 @@ $area_grande_labels = [
         }
 
         /* Sección exclusiva de admins del área Desarrollo */
+        .tabla-visibilidad .col-check { text-align: center; }
+        .aviso-bloque { margin-top: 26px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.12); }
+        .aviso-bloque-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        .aviso-cargos-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; margin: 18px 0 10px; }
+        .aviso-cargos { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 14px; }
+        .aviso-cargo { display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
+        .aviso-cargo small { display: block; font-size: 10px; opacity: 0.55; letter-spacing: 0.03em; }
+        .aviso-resumen { margin-top: 16px; padding: 10px 14px; border-radius: 6px; font-size: 12.5px; line-height: 1.5; border: 1px solid rgba(16,185,129,0.35); }
+        .aviso-resumen--vacio { border-color: rgba(242,177,52,0.5); color: #f2b134; }
+        .tabla-visibilidad th.col-check { white-space: nowrap; }
+        .tabla-visibilidad .col-count {
+            display: block; margin-top: 3px;
+            font-size: 10px; font-weight: 500; letter-spacing: 0.02em; opacity: 0.6; text-transform: none;
+        }
+        .check-visibilidad { width: 18px; height: 18px; cursor: pointer; accent-color: #2563eb; }
+        .check-visibilidad:disabled { cursor: not-allowed; opacity: 0.55; }
+        .badge-fijo {
+            display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+            font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em;
+            border: 1px solid currentColor; opacity: 0.6;
+        }
+
         .section-card--dev {
             border-color: #7C3AED;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 0 1px rgba(124, 58, 237, 0.15) inset;
@@ -657,8 +796,8 @@ $area_grande_labels = [
             </div>
             <div class="section-desc">
                 Asigna cada cargo a su área operativa (Mantenimiento, Producción, Almacén o Administración).
-                Por ahora esto <strong>no restringe el acceso de nadie</strong> — es solo la asignación base
-                que se va a usar más adelante para que cada área solo vea su propio menú.
+                Esta asignación <strong>decide qué botones ve cada cargo</strong> en el menú principal de Operaciones,
+                según la tabla "Visibilidad del Menú de Operaciones" de abajo. Los administradores siempre ven todo.
                 <?php if (!$esAdminDesarrollo): ?>
                     Solo ves los cargos asignados al área <strong><?= htmlspecialchars($miAreaGrande ?: 'sin definir') ?></strong>.
                 <?php endif; ?>
@@ -695,6 +834,121 @@ $area_grande_labels = [
             <button type="submit" class="btn-submit">Guardar Cambios</button>
         </div>
     </form>
+
+    <?php if ($puedeEditarMenuOps):
+        $menuOpsConfig = menuOperacionesConfig();
+        // Cargos (visibles para este admin) agrupados por área operativa, para
+        // mostrar debajo de cada columna a quién afecta.
+        $cargosPorArea = array_fill_keys(MENU_OPERACIONES_AREAS, []);
+        foreach ($cargo_areas as $cargoTmp => $areaTmp) {
+            if (in_array($cargoTmp, $cargosOperaciones, true) && isset($cargosPorArea[$areaTmp])) {
+                $cargosPorArea[$areaTmp][] = $cargoTmp;
+            }
+        }
+    ?>
+    <form method="post">
+        <input type="hidden" name="menu_operaciones" value="1">
+        <div class="section-card">
+            <div class="section-title">Visibilidad del Menú de Operaciones</div>
+            <div class="section-desc">
+                Marca qué áreas operativas ven cada botón del menú principal de Operaciones
+                (<strong>menu_adm.html</strong>). El área de cada usuario sale de su cargo, según la tabla
+                "Cargos y Áreas Operativas" de arriba. Los usuarios con rol <strong>ADM</strong> ven siempre todos los
+                botones. <strong>Usuario</strong> es fijo para todos porque es el acceso a la bandeja de entrada.
+            </div>
+
+            <table class="tabla-visibilidad">
+                <thead>
+                    <tr>
+                        <th>Botón</th>
+                        <?php foreach (MENU_OPERACIONES_AREAS as $areaCol): ?>
+                        <th class="col-check" title="<?= htmlspecialchars(implode(', ', $cargosPorArea[$areaCol]) ?: 'Ningún cargo') ?>">
+                            <?= $area_labels[$areaCol] ?>
+                            <span class="col-count"><?= count($cargosPorArea[$areaCol]) ?> cargo(s)</span>
+                        </th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach (MENU_OPERACIONES_NODOS as $nodo => $info): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($info['label']) ?><?= $info['fijo'] ? ' <span class="badge-fijo">FIJO</span>' : '' ?></td>
+                        <?php foreach (MENU_OPERACIONES_AREAS as $areaCol): ?>
+                        <td class="col-check">
+                            <input type="checkbox" class="check-visibilidad"
+                                name="menu_ops[<?= $nodo ?>][]" value="<?= $areaCol ?>"
+                                <?= in_array($areaCol, $menuOpsConfig[$nodo], true) ? 'checked' : '' ?>
+                                <?= $info['fijo'] ? 'disabled' : '' ?>>
+                        </td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <?php
+                $avisoCfg = avisosOperacionesConfig();
+                $avisoCargosDestino = avisosCargosDestino();
+            ?>
+            <div class="aviso-bloque">
+                <div class="aviso-bloque-title">🔔 Destinatarios del aviso semanal de formatos</div>
+                <div class="section-desc">
+                    Cada domingo el sistema revisa la semana anterior del <strong>Cronograma de Producción</strong> y avisa en la
+                    bandeja de entrada qué formatos de <strong>línea de envasado</strong> y <strong>control de empaque</strong> no se
+                    registraron. Elige quién lo recibe: por área operativa, por cargo, o ambos. Cada sede avisa solo a los usuarios
+                    de esa misma sede.
+                </div>
+
+                <table class="tabla-visibilidad">
+                    <thead>
+                        <tr>
+                            <th>Por área operativa</th>
+                            <?php foreach (MENU_OPERACIONES_AREAS as $areaCol): ?>
+                            <th class="col-check"><?= $area_labels[$areaCol] ?></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Recibe el aviso</td>
+                            <?php foreach (MENU_OPERACIONES_AREAS as $areaCol): ?>
+                            <td class="col-check">
+                                <input type="checkbox" class="check-visibilidad" name="aviso_areas[]" value="<?= $areaCol ?>"
+                                    <?= in_array($areaCol, $avisoCfg['areas'], true) ? 'checked' : '' ?>>
+                            </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="aviso-cargos-title">Por cargo (además de las áreas marcadas) — solo cargos del área Operaciones</div>
+                <?php if (!$cargosOperaciones): ?>
+                <div class="section-desc">No hay cargos asignados al área Operaciones en "Cargos y Áreas del Sistema".</div>
+                <?php endif; ?>
+                <div class="aviso-cargos">
+                    <?php foreach ($cargo_areas as $cargoTmp => $areaTmp):
+                        if (!in_array($cargoTmp, $cargosOperaciones, true)) continue; ?>
+                    <label class="aviso-cargo">
+                        <input type="checkbox" class="check-visibilidad" name="aviso_cargos[]" value="<?= htmlspecialchars($cargoTmp) ?>"
+                            <?= in_array($cargoTmp, $avisoCfg['cargos'], true) ? 'checked' : '' ?>>
+                        <span><?= htmlspecialchars($cargoTmp) ?> <small><?= $area_labels[$areaTmp] ?? '' ?><?= ($cargo_roles[$cargoTmp] ?? '') === 'adm' ? ' · ADM' : '' ?></small></span>
+                    </label>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="aviso-resumen<?= $avisoCargosDestino ? '' : ' aviso-resumen--vacio' ?>">
+                    <?php if ($avisoCargosDestino): ?>
+                        Hoy lo reciben los usuarios con cargo: <strong><?= htmlspecialchars(implode(', ', $avisoCargosDestino)) ?></strong>.
+                    <?php else: ?>
+                        ⚠ Nadie recibe el aviso todavía: marca al menos un área o un cargo.
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar Visibilidad y Destinatarios</button>
+        </div>
+    </form>
+    <?php endif; ?>
 
     <?php if ($esAdminDesarrollo): ?>
     <form method="post">
@@ -740,7 +994,7 @@ $area_grande_labels = [
 
     <div class="system-status">
         <div class="status-dot"></div>
-        SISTEMA JSON INTERCONECTADO - CARGO_ROLES.JSON + CARGO_AREAS.JSON
+        SISTEMA JSON INTERCONECTADO - CARGO_ROLES.JSON + CARGO_AREAS.JSON + MENU_OPERACIONES.JSON
     </div>
 </div>
 

@@ -43,7 +43,8 @@ function initBackgroundScene(canvas: HTMLCanvasElement): void {
     // a propósito distinto del morado de Producción para diferenciar ZC/ZS de
     // un vistazo. Tema calidad (menu_adm_calidad.html, theme-quality): pasa a
     // beige/café. Tema HSEQ (menu_hseq_adm.html, theme-hseq): pasa a
-    // verde bosque. Cada variante de paleta tiene su propia
+    // verde bosque. Tema Operaciones (menu_adm.html, theme-operaciones): pasa
+    // a carmesí #d50e50, el rojo del símbolo de área. Cada variante de paleta tiene su propia
     // rama porque no es solo un cambio de contraste, es un cambio de
     // paleta completo. theme-industrial, theme-production, theme-warehouse,
     // theme-sur, theme-quality y theme-hseq además pueden combinarse SIN
@@ -61,6 +62,7 @@ function initBackgroundScene(canvas: HTMLCanvasElement): void {
     const sur = document.body.classList.contains("theme-sur");
     const quality = document.body.classList.contains("theme-quality");
     const hseq = document.body.classList.contains("theme-hseq");
+    const operaciones = document.body.classList.contains("theme-operaciones");
 
     const NODE_COUNT = 150;
     const BOUNDS = { x: 30, y: 18, z: 15 };
@@ -83,7 +85,7 @@ function initBackgroundScene(canvas: HTMLCanvasElement): void {
     nodeGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
     const nodeMaterial = new THREE.PointsMaterial({
-        color: sur ? (inverted ? 0xff6b6b : 0xef4444) : industrial ? (inverted ? 0xff8a3d : 0xfb923c) : production ? (inverted ? 0xb388ff : 0xa855f7) : warehouse ? (inverted ? 0x6f95c4 : 0x5b84ac) : quality ? (inverted ? 0xa38c93 : 0x66404b) : hseq ? (inverted ? 0x77a389 : 0x1c663a) : inverted ? 0xf4f8fd : 0x2f7bff,
+        color: operaciones ? (inverted ? 0xff5c8a : 0xd50e50) : sur ? (inverted ? 0xff6b6b : 0xef4444) : industrial ? (inverted ? 0xff8a3d : 0xfb923c) : production ? (inverted ? 0xb388ff : 0xa855f7) : warehouse ? (inverted ? 0x6f95c4 : 0x5b84ac) : quality ? (inverted ? 0xa38c93 : 0x66404b) : hseq ? (inverted ? 0x77a389 : 0x1c663a) : inverted ? 0xf4f8fd : 0x2f7bff,
         size: 0.36,
         transparent: true,
         opacity: 0.9,
@@ -100,7 +102,7 @@ function initBackgroundScene(canvas: HTMLCanvasElement): void {
     lineGeometry.setDrawRange(0, 0);
 
     const lineMaterial = new THREE.LineBasicMaterial({
-        color: sur ? (inverted ? 0xffb3b3 : 0xf87171) : industrial ? (inverted ? 0xffc999 : 0xfdba74) : production ? (inverted ? 0xd9c2ff : 0xc084fc) : warehouse ? (inverted ? 0xb0c4de : 0x8fa8c9) : quality ? (inverted ? 0xbaa9ae : 0x85666f) : hseq ? (inverted ? 0x99baa7 : 0x498561) : inverted ? 0xdbe8fb : 0x5fb3ff,
+        color: operaciones ? (inverted ? 0xffb0c6 : 0xf0648e) : sur ? (inverted ? 0xffb3b3 : 0xf87171) : industrial ? (inverted ? 0xffc999 : 0xfdba74) : production ? (inverted ? 0xd9c2ff : 0xc084fc) : warehouse ? (inverted ? 0xb0c4de : 0x8fa8c9) : quality ? (inverted ? 0xbaa9ae : 0x85666f) : hseq ? (inverted ? 0x99baa7 : 0x498561) : inverted ? 0xdbe8fb : 0x5fb3ff,
         transparent: true,
         opacity: 0.5,
     });
@@ -132,7 +134,7 @@ function initBackgroundScene(canvas: HTMLCanvasElement): void {
     // Segunda capa de nodos, más tenue y lejana, solo para dar profundidad.
     const farGeometry = nodeGeometry.clone();
     const farMaterial = new THREE.PointsMaterial({
-        color: sur ? (inverted ? 0xffc2c2 : 0xfecaca) : industrial ? (inverted ? 0xffb066 : 0xfed7aa) : production ? (inverted ? 0xc9a3ff : 0xe0cbfa) : warehouse ? (inverted ? 0x8fa8c9 : 0xb8c8dc) : quality ? (inverted ? 0xd1c6c9 : 0xe0d9db) : hseq ? (inverted ? 0xbbd1c4 : 0xd2e0d8) : 0xbfe0ff,
+        color: operaciones ? (inverted ? 0xffc9d8 : 0xfbc9d8) : sur ? (inverted ? 0xffc2c2 : 0xfecaca) : industrial ? (inverted ? 0xffb066 : 0xfed7aa) : production ? (inverted ? 0xc9a3ff : 0xe0cbfa) : warehouse ? (inverted ? 0x8fa8c9 : 0xb8c8dc) : quality ? (inverted ? 0xd1c6c9 : 0xe0d9db) : hseq ? (inverted ? 0xbbd1c4 : 0xd2e0d8) : 0xbfe0ff,
         size: 0.2,
         transparent: true,
         opacity: 0.45,
@@ -166,7 +168,7 @@ function initBackgroundScene(canvas: HTMLCanvasElement): void {
     const sparks: Spark[] = [];
     for (let i = 0; i < SPARK_COUNT; i++) {
         const material = new THREE.MeshBasicMaterial({
-            color: sur ? (inverted ? 0xfee2e2 : 0xdc2626) : industrial ? (inverted ? 0xffedd5 : 0xea580c) : production ? (inverted ? 0xf3e8ff : 0x9333ea) : warehouse ? (inverted ? 0xe0e8f0 : 0x2c4a6e) : quality ? (inverted ? 0xf0eced : 0x472d35) : hseq ? (inverted ? 0xe8f0eb : 0x123d23) : 0xeaf6ff,
+            color: operaciones ? (inverted ? 0xffe0ea : 0xb80a43) : sur ? (inverted ? 0xfee2e2 : 0xdc2626) : industrial ? (inverted ? 0xffedd5 : 0xea580c) : production ? (inverted ? 0xf3e8ff : 0x9333ea) : warehouse ? (inverted ? 0xe0e8f0 : 0x2c4a6e) : quality ? (inverted ? 0xf0eced : 0x472d35) : hseq ? (inverted ? 0xe8f0eb : 0x123d23) : 0xeaf6ff,
             transparent: true,
             opacity: 0,
             side: THREE.DoubleSide,
@@ -998,6 +1000,210 @@ function initHubUnrollEntrance(): void {
 }
 
 /* ---------------------------------------------------------------------------
+ * Símbolo de Calidad (menu_adm_calidad.html) — "chequear" el menú.
+ * En reposo la espiga está agrandada y centrada en el hexágono
+ * (AREA_WHEAT_BIG, mismos valores que .area-symbol-wheat en
+ * menu_principal.css) y el check oculto tras #area-check-mask. Al hacer click
+ * en el centro: la espiga se encoge a su lugar original y, apenas empieza a
+ * hacerlo, el trazo de la máscara (.area-check-draw, pathLength=1) recorre el
+ * check como un lápiz — baja corto y sube largo, easeInOut — y al cerrar el
+ * check hace un pulso mínimo. La promesa resuelve después de una pausa
+ * breve para que la transición de salida no tape el check recién dibujado.
+ * ------------------------------------------------------------------------- */
+const AREA_WHEAT_BIG = { y: 60.5, scale: 1.9 };
+// Duración de la vuelta con la que el hexágono (Calidad) o el escudo interno
+// (HSEQ) vuelven a 0° al hacer click — ver initHubGearAndMagnets.
+const AREA_SETTLE_MS = 550;
+
+function playAreaCheck(hub: HTMLElement): Promise<void> {
+    const wheat = hub.querySelector<SVGPathElement>(".area-symbol-wheat");
+    const check = hub.querySelector<SVGPathElement>(".area-symbol-check");
+    const draw = hub.querySelector<SVGPathElement>(".area-check-draw");
+    if (!wheat || !check || !draw || hub.dataset.areaChecked === "1") return Promise.resolve();
+    hub.dataset.areaChecked = "1";
+
+    // El transform de la espiga se escribe directo por frame: motion anima
+    // estos <path> con animaciones transitorias que al terminar vuelven al
+    // valor del CSS (la espiga grande), así que no sirve para un estado final.
+    const SHRINK_DURATION = 450;
+    const shrink = new Promise<void>((resolve) => {
+        const start = performance.now();
+        function step(now: number): void {
+            const t = Math.min(1, (now - start) / SHRINK_DURATION);
+            const eased = 1 - Math.pow(1 - t, 4); // easeOutQuart
+            const y = AREA_WHEAT_BIG.y * (1 - eased);
+            const scale = AREA_WHEAT_BIG.scale + (1 - AREA_WHEAT_BIG.scale) * eased;
+            wheat!.style.transform = `translateY(${y}px) scale(${scale})`;
+            if (t < 1) {
+                requestAnimationFrame(step);
+            } else {
+                resolve();
+            }
+        }
+        requestAnimationFrame(step);
+    });
+
+    const DRAW_DELAY = 150;
+    const DRAW_DURATION = 480;
+    const stroke = new Promise<void>((resolve) => {
+        const start = performance.now() + DRAW_DELAY;
+        function step(now: number): void {
+            const t = Math.max(0, Math.min(1, (now - start) / DRAW_DURATION));
+            const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; // easeInOutCubic
+            draw!.setAttribute("stroke-dashoffset", String(1 - eased));
+            if (t < 1) {
+                requestAnimationFrame(step);
+            } else {
+                resolve();
+            }
+        }
+        requestAnimationFrame(step);
+    }).then(() => animate(check, { scale: [1, 1.06, 1] }, { duration: 0.28, ease: "easeOut" }));
+
+    return Promise.all([shrink, stroke]).then(() => new Promise<void>((r) => setTimeout(r, 180)));
+}
+
+function resetAreaCheck(hub: HTMLElement): void {
+    const wheat = hub.querySelector<SVGPathElement>(".area-symbol-wheat");
+    const draw = hub.querySelector<SVGPathElement>(".area-check-draw");
+    if (!wheat || !draw) return;
+    delete hub.dataset.areaChecked;
+    wheat.style.transform = "";
+    draw.setAttribute("stroke-dashoffset", "1");
+}
+
+/* ---------------------------------------------------------------------------
+ * Símbolo de HSEQ (menu_administracion_hseq.html) — el escudo se hace hoja.
+ * En reposo se ven tres escudos. Al hacer click en el centro, tras LEAD
+ * (350ms, mientras los escudos vuelven a quedar derechos):
+ *     0–200ms   el tercer escudo (.area-third-shield) pasa de sus dos
+ *               verdes a blanco;
+ *   100–270ms   se rellena: la forma blanca (.area-leaf-morph) aparece con
+ *               la silueta del escudo y el contorno se apaga;
+ *   250–750ms   la forma se transforma en la hoja (interpolación punto a
+ *               punto entre data-morph-from y data-morph-to, easeInOut);
+ *   650–1200ms  un resplandor blanco (.area-leaf-glow) acompaña el cierre;
+ *   750–1100ms  el blanco se disuelve y deja la hoja (.area-leaf) con su
+ *               color; la franja de separación de los escudos se abre;
+ *   950–1400ms  un destello (.area-leaf-shine) recorre la hoja en diagonal.
+ * Todo se escribe inline por frame: motion anima estos elementos con
+ * animaciones transitorias que al terminar vuelven al CSS (opacity 0).
+ * ------------------------------------------------------------------------- */
+const AREA_THIRD_COLORS: Array<[string, [number, number, number]]> = [
+    [".area-third-dark", [0x1c, 0x66, 0x3a]],
+    [".area-third-light", [0x3d, 0xae, 0x93]],
+];
+
+function parseMorphPoints(attr: string | undefined): number[][] {
+    return (attr ?? "").trim().split(/\s+/).map((p) => p.split(",").map(Number));
+}
+
+function playAreaLeaf(hub: HTMLElement): Promise<void> {
+    const leaf = hub.querySelector<SVGGElement>(".area-leaf");
+    const glow = hub.querySelector<SVGGElement>(".area-leaf-glow");
+    const shine = hub.querySelector<SVGRectElement>(".area-leaf-shine");
+    // Franja de separación hoja/escudos (máscara de .area-shields): se abre
+    // al mismo ritmo que aparece la hoja.
+    const knockout = hub.querySelector<SVGGElement>(".area-leaf-knockout");
+    const third = hub.querySelector<SVGGElement>(".area-third-shield");
+    const morph = hub.querySelector<SVGPathElement>(".area-leaf-morph");
+    if (!leaf || !glow || !shine || hub.dataset.areaLeafShown === "1") return Promise.resolve();
+    hub.dataset.areaLeafShown = "1";
+
+    const from = parseMorphPoints(morph?.dataset.morphFrom);
+    const to = parseMorphPoints(morph?.dataset.morphTo);
+    const canMorph = !!(third && morph && from.length > 2 && from.length === to.length);
+    const thirdPaths = AREA_THIRD_COLORS.map(([sel, rgb]) => ({ el: third?.querySelector<SVGPathElement>(sel), rgb }));
+
+    // Si el escudo interno gira (.area-settle-rotator), todo espera a que los
+    // escudos vuelvan casi derechos (easeOutCubic: ~95% del giro a los 350ms).
+    const LEAD = hub.querySelector(".area-settle-rotator") ? 350 : 0;
+    const TOTAL = 1400;
+    const easeOut = (t: number): number => 1 - Math.pow(1 - t, 3);
+    const easeInOut = (t: number): number => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const phase = (ms: number, a: number, b: number): number => Math.max(0, Math.min(1, (ms - a) / (b - a)));
+
+    return new Promise<void>((resolve) => {
+        const start = performance.now();
+        function step(now: number): void {
+            const ms = now - start - LEAD;
+
+            if (canMorph) {
+                // 1) el contorno del tercer escudo se vuelve blanco y se apaga
+                const whiten = easeOut(phase(ms, 0, 200));
+                thirdPaths.forEach(({ el, rgb }) => {
+                    if (!el) return;
+                    const [r, g, b] = rgb.map((c) => Math.round(c + (255 - c) * whiten));
+                    el.style.stroke = `rgb(${r}, ${g}, ${b})`;
+                });
+                third!.style.opacity = String(1 - phase(ms, 180, 270));
+
+                // 2) relleno blanco con la silueta del escudo → 3) se hace hoja
+                const fill = easeOut(phase(ms, 100, 270));
+                const shape = easeInOut(phase(ms, 250, 750));
+                const fade = easeInOut(phase(ms, 800, 1100));
+                morph!.style.opacity = String(fill * (1 - fade));
+                let d = "";
+                for (let i = 0; i < from.length; i++) {
+                    const x = from[i][0] + (to[i][0] - from[i][0]) * shape;
+                    const y = from[i][1] + (to[i][1] - from[i][1]) * shape;
+                    d += `${i ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`;
+                }
+                morph!.setAttribute("d", d + "Z");
+            }
+
+            // 4) resplandor que acompaña el cierre de la forma
+            const glowIn = easeOut(phase(ms, 650, 850));
+            const glowOut = easeInOut(phase(ms, 850, 1200));
+            glow!.style.opacity = String(glowIn * (1 - glowOut) * 0.85);
+            glow!.style.transform = `scale(${0.94 + 0.08 * glowIn})`;
+
+            // 5) el blanco se disuelve dejando la hoja con su color
+            const leafIn = easeOut(phase(ms, canMorph ? 750 : 120, canMorph ? 1100 : 720));
+            leaf!.style.opacity = String(leafIn);
+            if (knockout) knockout.style.opacity = String(leafIn);
+
+            // 6) destello diagonal
+            const sweep = phase(ms, 950, TOTAL);
+            shine!.setAttribute("x", String(1700 + 360 * easeInOut(sweep)));
+            shine!.style.opacity = sweep > 0 && sweep < 1 ? String(Math.sin(Math.PI * sweep)) : "0";
+
+            if (ms < TOTAL) {
+                requestAnimationFrame(step);
+            } else {
+                resolve();
+            }
+        }
+        requestAnimationFrame(step);
+    }).then(() => new Promise<void>((r) => setTimeout(r, 150)));
+}
+
+function resetAreaLeaf(hub: HTMLElement): void {
+    const leaf = hub.querySelector<SVGGElement>(".area-leaf");
+    const glow = hub.querySelector<SVGGElement>(".area-leaf-glow");
+    const shine = hub.querySelector<SVGRectElement>(".area-leaf-shine");
+    if (!leaf || !glow || !shine) return;
+    delete hub.dataset.areaLeafShown;
+    leaf.style.opacity = "";
+    glow.style.opacity = "";
+    glow.style.transform = "";
+    shine.style.opacity = "";
+    shine.setAttribute("x", "1700");
+    const knockout = hub.querySelector<SVGGElement>(".area-leaf-knockout");
+    if (knockout) knockout.style.opacity = "";
+    const third = hub.querySelector<SVGGElement>(".area-third-shield");
+    if (third) {
+        third.style.opacity = "";
+        AREA_THIRD_COLORS.forEach(([sel, rgb]) => {
+            const el = third.querySelector<SVGPathElement>(sel);
+            if (el) el.style.stroke = `rgb(${rgb.join(", ")})`;
+        });
+    }
+    const morph = hub.querySelector<SVGPathElement>(".area-leaf-morph");
+    if (morph) morph.style.opacity = "";
+}
+
+/* ---------------------------------------------------------------------------
  * Menú principal (hub radial) — engranaje interactivo + botones magnéticos.
  * El engranaje central tiene capas SVG independientes (ver menu_adm.html):
  *   .gear-rotator     → gira para "mirar" hacia el mouse en toda la página
@@ -1020,6 +1226,25 @@ function initHubGearAndMagnets(): void {
     const gearRotator = hub.querySelector<SVGGElement>(".gear-rotator");
     const gearRing = hub.querySelector<SVGGElement>(".gear-ring");
     const gearCenter = hub.querySelector<HTMLElement>(".hub-center");
+    // Variante con símbolo de área (ver menu_adm.html): casco fijo, y solo
+    // .area-gear-rotator gira igual que .gear-rotator (sigue al mouse +
+    // 360° en click), recortado bajo el ala del casco.
+    const areaSymbol = hub.querySelector<SVGGElement>(".area-symbol");
+    const areaGearRotator = hub.querySelector<SVGGElement>(".area-gear-rotator");
+    // Símbolo de Calidad (menu_adm_calidad.html): el hexágono gira igual que
+    // el engranaje mientras el menú no está "chequeado"; en el click da una
+    // vuelta completa que aterriza en un múltiplo de 360° (el hueco del
+    // hexágono vuelve a quedar donde entra el check) y se queda ahí fijo.
+    // Mismo comportamiento para el escudo interno de HSEQ (.area-settle-rotator,
+    // menu_administracion_hseq.html); de costado atraviesa al escudo
+    // exterior, a propósito (no se encoge).
+    const areaHexRotator = hub.querySelector<SVGGElement>(".area-hex-rotator, .area-settle-rotator");
+    // Escudos exterior y tercero de HSEQ: replican el giro del interno en
+    // sentido exactamente opuesto (−ángulo), incluida la vuelta de
+    // asentamiento del click, así todos terminan derechos a la vez.
+    const areaCounterRotators = Array.from(hub.querySelectorAll<SVGGElement>(".area-counter-rotator"));
+    let hexSettle: { start: number; from: number; to: number; duration: number } | null = null;
+    let hexLockedAt: number | null = null;
     const nodes = Array.from(hub.querySelectorAll<HTMLElement>(".hub-node"));
 
     // Respiración sutil del badge completo — vida propia, en un canal
@@ -1075,6 +1300,27 @@ function initHubGearAndMagnets(): void {
         if (gearRotator) {
             gearRotator.style.transform = `rotate(${currentAngle + clickAngle}deg)`;
         }
+        if (areaGearRotator) {
+            areaGearRotator.style.transform = `rotate(${currentAngle + clickAngle}deg)`;
+        }
+        if (areaHexRotator) {
+            let hexAngle = currentAngle + clickAngle;
+            if (hexSettle) {
+                const t = Math.min(1, (now - hexSettle.start) / hexSettle.duration);
+                const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+                hexAngle = hexSettle.from + (hexSettle.to - hexSettle.from) * eased;
+                if (t >= 1) {
+                    hexLockedAt = hexSettle.to;
+                    hexSettle = null;
+                }
+            } else if (hexLockedAt !== null) {
+                hexAngle = hexLockedAt;
+            }
+            areaHexRotator.style.transform = `rotate(${hexAngle}deg)`;
+            areaCounterRotators.forEach((el) => {
+                el.style.transform = `rotate(${-hexAngle}deg)`;
+            });
+        }
 
         requestAnimationFrame(tickRotation);
     }
@@ -1083,15 +1329,27 @@ function initHubGearAndMagnets(): void {
     if (gearCenter) {
         gearCenter.addEventListener("mouseenter", () => {
             gearRing?.classList.add("is-hovering");
+            areaSymbol?.classList.add("is-hovering");
         });
         gearCenter.addEventListener("mouseleave", () => {
             gearRing?.classList.remove("is-hovering");
+            areaSymbol?.classList.remove("is-hovering");
         });
         gearCenter.addEventListener("click", () => {
+            if (areaHexRotator && hexLockedAt === null && !hexSettle) {
+                const from = currentAngle + clickSpinBase;
+                const to = Math.ceil(from / 360) * 360 + 360;
+                hexSettle = { start: performance.now(), from, to, duration: AREA_SETTLE_MS };
+            }
             clickAnim = { start: performance.now(), from: clickSpinBase, to: clickSpinBase + 360, duration: 900 };
             gearRing?.classList.remove("is-pulsing");
             void gearRing?.getBoundingClientRect(); // fuerza reflow para poder re-disparar la animación
             gearRing?.classList.add("is-pulsing");
+            // Animación de acción del símbolo de área antes de navegar: el
+            // check de Calidad o la hoja de HSEQ (cada una es no-op en páginas
+            // sin ese símbolo). Arranca ya, en paralelo con la verificación
+            // de admin si la hubiera.
+            const areaCheckDone = Promise.all([playAreaCheck(hub), playAreaLeaf(hub)]);
 
             // El engranaje siempre gira al hacer click; sólo navega a un
             // submenú si data-gear-nav está presente. data-gear-check="admin"
@@ -1107,11 +1365,13 @@ function initHubGearAndMagnets(): void {
             if (!destino) return;
 
             const runTransition = (): void => {
-                if (gearCenter.dataset.gearTransition === "retract") {
-                    playHubRetractExit(hub, destino);
-                } else {
-                    playGearWaveExit(hub, destino);
-                }
+                void areaCheckDone.then(() => {
+                    if (gearCenter.dataset.gearTransition === "retract") {
+                        playHubRetractExit(hub, destino);
+                    } else {
+                        playGearWaveExit(hub, destino);
+                    }
+                });
             };
 
             if (gearCenter.dataset.gearCheck === "admin") {
@@ -1148,6 +1408,15 @@ function initHubGearAndMagnets(): void {
             }
         });
     }
+
+    // Al volver con "atrás" (bfcache) el hexágono vuelve a seguir al mouse
+    // (resetAreaCheck restaura espiga y check en el mismo evento).
+    window.addEventListener("pageshow", (e) => {
+        if (e.persisted) {
+            hexSettle = null;
+            hexLockedAt = null;
+        }
+    });
 
     window.addEventListener("pointermove", (e) => {
         mouseX = e.clientX;
@@ -1217,6 +1486,50 @@ function initHubGearMountAnimation(): void {
             { duration: 0.5, delay: stagger(0.09, { startDelay: 0.45 }), ease: EASE_OUT_EXPO }
         );
     }
+
+    // Variante con símbolo de área (ver menu_adm.html): casco y semicírculo
+    // quedan quietos (solo aparecen); el engranaje entra girando por debajo.
+    const areaHelmet = hub.querySelector<SVGPathElement>(".area-symbol-helmet");
+    const areaGear = hub.querySelector<SVGPathElement>(".area-symbol-gear");
+    const areaHub = hub.querySelector<SVGPathElement>(".area-symbol-hub");
+
+    if (areaHelmet || areaHub) {
+        animate(
+            [areaHelmet, areaHub].filter((el): el is SVGPathElement => el !== null),
+            { opacity: [0, 1] },
+            { duration: 0.5, ease: EASE_OUT_EXPO }
+        );
+    }
+
+    if (areaGear) {
+        animate(
+            areaGear,
+            { opacity: [0, 1], rotate: [-180, 0] },
+            { duration: 1.1, delay: 0.15, ease: EASE_OUT_EXPO }
+        );
+    }
+
+    // Símbolo de Calidad (menu_adm_calidad.html): el hexágono se arma y la
+    // espiga aparece ya agrandada en el centro (el check queda oculto hasta
+    // el click — ver playAreaCheck).
+    const areaHex = Array.from(hub.querySelectorAll<SVGPathElement>(".area-symbol-hex-light, .area-symbol-hex"));
+    const areaWheat = hub.querySelector<SVGPathElement>(".area-symbol-wheat");
+
+    if (areaHex.length) {
+        animate(
+            areaHex,
+            { opacity: [0, 1], scale: [0.85, 1] },
+            { duration: 0.6, delay: stagger(0.12), ease: EASE_OUT_EXPO }
+        );
+    }
+
+    if (areaWheat) {
+        animate(
+            areaWheat,
+            { opacity: [0, 1], y: [AREA_WHEAT_BIG.y, AREA_WHEAT_BIG.y], scale: [AREA_WHEAT_BIG.scale * 0.7, AREA_WHEAT_BIG.scale] },
+            { duration: 0.6, delay: 0.35, ease: EASE_OUT_BACK }
+        );
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1229,6 +1542,13 @@ document.addEventListener("DOMContentLoaded", () => {
     initScrollReveal();
     initHubGearAndMagnets();
     initHubGearMountAnimation();
+    window.addEventListener("pageshow", (e) => {
+        const hub = document.querySelector<HTMLElement>(".hub");
+        if (e.persisted && hub) {
+            resetAreaCheck(hub);
+            resetAreaLeaf(hub);
+        }
+    });
     initHubUnrollEntrance();
     // El fondo 3D (Three.js) se construye recién cuando el tween de entrada
     // de la onda termina: si corren a la vez, la construcción de la escena

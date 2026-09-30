@@ -64,8 +64,12 @@ $catalogo_data = json_decode(file_get_contents($catalogo_file), true) ?: [];
 
 $zona_catalogo = ($sede === 'ZS') ? 'ZS' : 'ZC';
 $productos = [];
+// producto_id = enlace con la lista maestra (ver admin_catalogo_productos.php);
+// viaja en la URL al formulario para que el registro quede enlazado.
+$productosId = [];
 foreach ($catalogo_data[$zona_catalogo] ?? [] as $item) {
     $productos[$item['producto']] = $item['empaque'];
+    $productosId[$item['producto']] = $item['producto_id'] ?? '';
 }
 ?>
 <!DOCTYPE html>
@@ -265,7 +269,7 @@ foreach ($catalogo_data[$zona_catalogo] ?? [] as $item) {
                 <div class="producto-nombre"><?= htmlspecialchars($producto) ?></div>
                 <div class="producto-empaque"><?= htmlspecialchars($empaque) ?></div>
                 <button class="btn-seleccionar"
-                    onclick="window.location.href='envasado_v2.php?harina=<?= urlencode($producto) ?>&empaque=<?= urlencode($empaque) ?>'">
+                    onclick="window.location.href='envasado_v2.php?harina=<?= urlencode($producto) ?>&empaque=<?= urlencode($empaque) ?>&producto_id=<?= urlencode($productosId[$producto]) ?>'">
                     SELECCIONAR
                 </button>
             </div>

@@ -1,6 +1,8 @@
 <?php
 require '../sesion.php';
 verificarAutenticacion();
+require_once '../admin/menu_operaciones_lib.php';
+exigirAccesoMenuOperaciones('datos', true); // botón "Datos" de menu_adm.html — ver admin/menu_admin.php
 
 // Conexión propia y aislada a mia_datos — NUNCA la de conection.php (ver
 // template/integracion-mia.md). Esta API solo LEE tickets_mia; nunca escribe.

@@ -1,6 +1,10 @@
 <?php
 require '../sesion.php';
 verificarAutenticacion();
+require_once '../area_operativa_lib.php';
+// Lista maestra de productos: la consulta cualquiera, la modifican solo
+// 'adm' o rol 1 de producción (ver puedeGestionarProductos()).
+$puedeEditar = puedeGestionarProductos();
 
 $sedeSeleccionada = $_GET['sede'] ?? $_SESSION['sede'];
 if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
@@ -107,6 +111,12 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
 
     </style>
 </head>
+<style>
+    .aviso-lectura { margin: 0 0 18px; padding: 12px 16px; border: 1px dashed #f2b134; border-radius: 6px; color: #f2b134; font-size: 13px; line-height: 1.5; }
+    .aviso-lectura--info { border-color: rgba(0, 229, 255, 0.35); color: #9fb3c8; }
+    .form-control[readonly] { opacity: 0.6; cursor: not-allowed; }
+    .btn-add[hidden] { display: none; }
+</style>
 <body>
 
 <div class="header">
@@ -119,6 +129,12 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
         <a href="?sede=ZC" class="<?= $sedeSeleccionada === 'ZC' ? 'active' : '' ?>">ZONA CENTRO (ZC)</a>
         <a href="?sede=ZS" class="<?= $sedeSeleccionada === 'ZS' ? 'active' : '' ?>">ZONA SUR (ZS)</a>
     </div>
+
+    <?php if (!$puedeEditar): ?>
+    <div class="aviso-lectura">👁 Modo consulta — solo administradores o rol 1 del área de producción pueden modificar esta lista.</div>
+    <?php else: ?>
+    <div class="aviso-lectura aviso-lectura--info">Esta es la lista maestra de productos: la usan molienda, el cronograma de producción y los formatos de envasado y control de empaque. El <strong>ID</strong> de un producto ya guardado no se puede cambiar, porque lo usan los registros; el nombre y el peso sí.</div>
+    <?php endif; ?>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('harinas', this)">Harinas</button>
@@ -136,7 +152,7 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
                 <div></div>
             </div>
             <div id="list-harinas"></div>
-            <button class="btn btn-add" onclick="addItem('harinas')">+ AGREGAR HARINA</button>
+            <button class="btn btn-add" <?= $puedeEditar ? '' : 'hidden' ?> onclick="addItem('harinas')">+ AGREGAR HARINA</button>
         </div>
     </div>
 
@@ -150,7 +166,7 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
                 <div></div>
             </div>
             <div id="list-subproductos"></div>
-            <button class="btn btn-add" onclick="addItem('subproductos')">+ AGREGAR SUBPRODUCTO</button>
+            <button class="btn btn-add" <?= $puedeEditar ? '' : 'hidden' ?> onclick="addItem('subproductos')">+ AGREGAR SUBPRODUCTO</button>
         </div>
     </div>
 
@@ -164,16 +180,23 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
                 <div></div>
             </div>
             <div id="list-materiales"></div>
-            <button class="btn btn-add" onclick="addItem('materiales')">+ AGREGAR MATERIAL</button>
+            <button class="btn btn-add" <?= $puedeEditar ? '' : 'hidden' ?> onclick="addItem('materiales')">+ AGREGAR MATERIAL</button>
         </div>
     </div>
 
+    <?php if ($puedeEditar): ?>
     <button class="btn btn-save" onclick="guardarConfig()">GUARDAR Y APLICAR CAMBIOS EN ZONA <?= $sedeSeleccionada ?></button>
+    <?php endif; ?>
 </div>
 
 <script>
     let configData = { harinas: [], subproductos: [], materiales: [] };
     const sedeActual = '<?= $sedeSeleccionada ?>';
+    const PUEDE_EDITAR = <?= json_encode($puedeEditar) ?>;
+    // IDs que ya estaban guardados al cargar: quedan de solo lectura, porque
+    // los registros (molienda, cronograma, envasado, empaque) los referencian.
+    let idsGuardados = new Set();
+    const esc = v => String(v ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
     async function loadConfig() {
         try {
@@ -181,6 +204,7 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
             const json = await resp.json();
             if (json.status === 'ok') {
                 configData = json.data;
+                idsGuardados = new Set(['harinas', 'subproductos', 'materiales'].flatMap(c => (configData[c] || []).map(i => c + ':' + i.id)));
                 renderList('harinas');
                 renderList('subproductos');
                 renderList('materiales');
@@ -196,11 +220,13 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
         configData[category].forEach((item, index) => {
             const row = document.createElement('div');
             row.className = 'item-row';
+            const idBloqueado = !PUEDE_EDITAR || idsGuardados.has(category + ':' + item.id);
+            const bloqueo = PUEDE_EDITAR ? '' : 'disabled';
             row.innerHTML = `
-                <input type="text" class="form-control" value="${item.id}" onchange="updateItem('${category}', ${index}, 'id', this.value)" placeholder="ejem_identificador">
-                <input type="text" class="form-control" value="${item.name}" onchange="updateItem('${category}', ${index}, 'name', this.value)" placeholder="NOMBRE A MOSTRAR">
-                <input type="number" step="0.01" class="form-control" value="${item.weight}" onchange="updateItem('${category}', ${index}, 'weight', parseFloat(this.value))">
-                <button class="btn btn-del" onclick="delItem('${category}', ${index})">✕ Eliminar</button>
+                <input type="text" class="form-control" value="${esc(item.id)}" onchange="updateItem('${category}', ${index}, 'id', this.value)" placeholder="ejem_identificador" ${idBloqueado ? 'readonly title="El ID de un producto guardado no se puede cambiar"' : ''} ${bloqueo}>
+                <input type="text" class="form-control" value="${esc(item.name)}" onchange="updateItem('${category}', ${index}, 'name', this.value)" placeholder="NOMBRE A MOSTRAR" ${bloqueo}>
+                <input type="number" step="0.01" class="form-control" value="${esc(item.weight)}" onchange="updateItem('${category}', ${index}, 'weight', parseFloat(this.value))" ${bloqueo}>
+                ${PUEDE_EDITAR ? `<button class="btn btn-del" onclick="delItem('${category}', ${index})">✕ Eliminar</button>` : '<div></div>'}
             `;
             container.appendChild(row);
         });
@@ -232,6 +258,9 @@ if (!in_array($sedeSeleccionada, ['ZC', 'ZS'])) {
             });
             const result = await resp.json();
             if (result.status === 'ok') {
+                configData = result.data;
+                idsGuardados = new Set(['harinas', 'subproductos', 'materiales'].flatMap(c => (configData[c] || []).map(i => c + ':' + i.id)));
+                ['harinas', 'subproductos', 'materiales'].forEach(renderList);
                 alert('La configuración se guardó y aplicó a los formularios de molienda.');
             } else {
                 alert('Error al guardar: ' + result.message);

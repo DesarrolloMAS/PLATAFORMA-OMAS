@@ -61,3 +61,40 @@ function terminoObjeto(bool $plural = false): string {
 function terminoObjetoVerbo(string $sufijoFemenino, string $sufijoMasculino): string {
     return esAreaOperacionesODesarrollo() ? $sufijoFemenino : $sufijoMasculino;
 }
+
+// ============================================================================
+// REGLA FIJA — Cronograma de Producción (cronograma_produccion/)
+// Hardcodeada a propósito: NO se administra desde admin/menu_admin.php ni
+// desde ningún JSON, y no debe volverse configurable.
+//   - Ven el cronograma de producción (en vez del de mantenimiento, al entrar
+//     a "Calendario"): áreas operativas 'produccion' y 'almacen'.
+//   - Editan (asignan qué se produce y en qué días): rol 'adm', o rol '1'
+//     cuyo área operativa sea exactamente 'produccion'. Almacén solo consulta.
+//   - Solo gobierna a Operaciones/Desarrollo (las áreas operativas son una
+//     subdivisión interna de Operaciones). Los admins ven y editan siempre.
+// ============================================================================
+const CRONOGRAMA_PRODUCCION_AREAS_LECTURA = ['produccion', 'almacen'];
+const CRONOGRAMA_PRODUCCION_AREA_EDICION  = 'produccion';
+
+function veCronogramaProduccion(): bool {
+    if (($_SESSION['rol'] ?? '') === 'adm') return true;
+    if (!esAreaOperacionesODesarrollo()) return false;
+    return in_array(obtenerAreaOperativa(), CRONOGRAMA_PRODUCCION_AREAS_LECTURA, true);
+}
+
+function puedeEditarCronogramaProduccion(): bool {
+    if (($_SESSION['rol'] ?? '') === 'adm') return true;
+    if (!esAreaOperacionesODesarrollo()) return false;
+    return ($_SESSION['rol'] ?? '') === '1'
+        && obtenerAreaOperativa() === CRONOGRAMA_PRODUCCION_AREA_EDICION;
+}
+
+// Quién puede modificar la lista maestra de productos
+// (molienda_v2/gestion_productos.php → archivos/generados/molienda/config_[sede].json).
+// Esa lista es la fuente de productos del cronograma de producción y de los
+// formatos de envasado y control de empaque, así que se protege con el mismo
+// criterio que la edición del cronograma: 'adm', o rol '1' de 'produccion'.
+// Los demás pueden consultarla, no modificarla.
+function puedeGestionarProductos(): bool {
+    return puedeEditarCronogramaProduccion();
+}

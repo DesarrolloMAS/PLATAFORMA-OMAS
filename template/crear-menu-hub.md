@@ -4,12 +4,32 @@ Este es el estándar de estilo para páginas de **menú** (no confundir con
 `.agent/workflows/crear-formato.md`, que es para formularios). Referencia
 viva — los ejemplos reales de este patrón:
 
-- `template/menu_adm.html` — hub de 4 nodos (`--quad-N`, cuadrado
-  simétrico — el antiguo nodo "Revisiones" se eliminó cuando cada sub-hub
-  empezó a tener su propia revisiones accesible por su propio engranaje, y
-  los 4 restantes se reacomodaron de la asimetría que dejó ese hueco a un
-  cuadrado real), tema claro, menú de nivel superior (el engranaje central
-  navega a `menu_administracion.html`).
+- `template/menu_adm.html` — hub de 6 nodos (`--hex-N`), tema claro, menú
+  de nivel superior (el engranaje central navega a
+  `menu_administracion.html`). Pasó de 5 nodos (`--pos-1..5`) a hexágono al
+  agregarse el nodo "Usuario" (`--hex-1`, 12 en punto). Ese nodo también
+  lleva `hub-node--pulse`: emite ondas si hay notificaciones sin leer en la
+  bandeja, para guiar al usuario hacia `menu_usuario.html` → bandeja.
+  **Botones filtrados por área operativa:** cada `hub-node-anchor` lleva
+  `data-nodo="..."` y `.hub` nace con `data-filtro="pendiente"` (nodos y
+  spokes ocultos). `filtrarMenu()` consulta
+  `admin/menu_operaciones_visibles.php`, quita los botones que la sesión no
+  puede ver y reasigna los cupos a una figura simétrica según cuántos
+  quedan (1-3 y 5-6 → `--hex-N`, 4 → `--quad-N`), reconstruyendo
+  spokes/markers. Qué área ve qué botón se configura en
+  `admin/menu_admin.php` → "Visibilidad del Menú de Operaciones"; los `adm`
+  ven todo.
+- `template/menu_usuario.html` — hub de 6 nodos (`--hex-N` + `hub--spread`,
+  mismas medidas que `menu_adm.html`), tema oscuro (`theme-invert`), sub-menú
+  del usuario en sesión. `--hex-1` es el único
+  nodo que navega ("Bandeja de entrada" → `usuario/bandeja.php`, que emite
+  ondas cuando hay no leídas: `hub-node--pulse` + `.is-pending` por JS); los otros 5 son
+  **fichas informativas** (`<div class="hub-node hub-node--info">`, no `<a>`)
+  con un `.node-value` que se llena por `fetch` desde
+  `usuario/validar_usuario.php` (usuario, cargo, rol, sede, área contra la
+  tabla `usuarios`), más una línea `.hub-status`
+  (`data-estado="ok|aviso|error"`) bajo el hub. La validación por ahora solo
+  integra el área Operaciones (y Desarrollo).
 - `template/menu_administracion.html` — hub de 1 nodo, tema oscuro
   (`theme-invert`), sub-menú al que se llega mediante la onda del engranaje.
 - `template/menu_mantenimiento.html` — hub de 6 nodos (`--hex-N`), tema
@@ -133,7 +153,7 @@ Reglas:
   (ver el SVG de esa página, es más simple que el de 5-6 nodos).
 - **4 nodos, todos con el mismo peso** → usar `--quad-1..4` (90° entre cada
   uno, mismo radio que `--hex-N`): perfectamente simétrico, sin cupo
-  "gratis" — los 4 llevan su propio `.spoke`+`.marker`. Ver `menu_adm.html`.
+  "gratis" — los 4 llevan su propio `.spoke`+`.marker`. Ver `menu_usuario.html`.
 - **2 a 5 nodos, con uno "protagonista"** → `--pos-1` en adelante para los
   secundarios, `--pos-6` para el destacado. Pensado para un hub donde un
   nodo pesa más que los demás — con 4 nodos de igual peso usar `--quad-N`
@@ -190,6 +210,24 @@ resuelve las dos puntas del problema a la vez:
 ```
 
 Se agrega junto a `.hub` (`class="hub hub--dense"`), no la reemplaza.
+
+### 3.2 `hub--spread` (variante del hexágono, solo con `--hex-N`)
+
+Nodos un 10% más chicos y un 20% más lejos del centro (radio ×1.20), para
+separarlos del engranaje central. Se agrega junto a `.hub`
+(`class="hub hub--spread"`) y los spokes del `.hub-lines` se alargan en la
+misma proporción (los markers se quedan sobre el `.ring`):
+
+```html
+<line class="spoke" x1="500" y1="510" x2="500" y2="180" />
+<line class="spoke" x1="500" y1="510" x2="786" y2="346" />
+<line class="spoke" x1="500" y1="510" x2="786" y2="674" />
+<line class="spoke" x1="500" y1="510" x2="500" y2="830" />
+<line class="spoke" x1="500" y1="510" x2="214" y2="674" />
+<line class="spoke" x1="500" y1="510" x2="214" y2="346" />
+```
+
+Ver `menu_adm.html`.
 
 ### Coordenadas del `.hub-lines` (viewBox `0 0 1000 1000`, ring en `cx=500 cy=510 r=230`)
 
@@ -366,6 +404,66 @@ se copia verbatim desde una página existente (ej. `menu_adm.html`, línea
 del comentario `<!-- Centro: trazado vectorial... -->` hasta el cierre de
 `.hub-center-gear-wrap`). Es idéntico byte a byte en las tres páginas de
 referencia.
+
+**Excepción — símbolos de área:** marketing definió un símbolo por área
+(`img/logos areas MAS.svg`, 9 símbolos; cada uno es un `<g>` de nivel
+superior, versión a color dentro del `viewBox` y versión monocromática
+blanca fuera de él, en Y negativa). Los hubs de Operaciones
+(`menu_adm.html`, `menu_mantenimiento.html`, `menu_produccion.html`,
+`menu_almacen.html`) ya usan el casco + engranaje en lugar del engranaje
+OMAS. El bloque es idéntico en las cuatro páginas; solo cambian los
+atributos `data-gear-*` de `.hub-center`. El color no va inline: sale de
+`var(--accent)` del tema de cada página (`.area-symbol path` en
+`menu_principal.css`), así que cada hub lo pinta con su color: carmesí
+`theme-operaciones`, naranja `theme-industrial`, morado `theme-production`
+y azul acero `theme-warehouse`. `menu_adm_calidad.html`,
+`menu_revisiones_calidad.html` y `menu_administracion_calidad.html` usan en
+cambio el símbolo de Calidad: hexágono, check y espiga. En revisiones y en
+administración el tema es claro y el disco del centro es oscuro, así que
+los tonos se invierten. `menu_administracion_hseq.html` usa el símbolo de
+HSEQ: escudo y hoja, con sus colores originales inline. En reposo solo se
+ven los escudos. Al hacer click, `playAreaLeaf` (`src/app.ts`) hace aparecer
+la hoja con un resplandor blanco y un destello diagonal antes de navegar.
+En el archivo original la hoja y el contorno exterior derecho del escudo son
+un único trazado; la hoja se separa con un polígono de recorte
+(`#area-leaf-cut`), sin editar el trazado. Los escudos se redibujaron como
+contornos completos (`.area-shields`), porque en el original están cortados
+alrededor de la hoja. La franja de separación del logo original aparece
+junto con la hoja gracias a la máscara `#area-leaf-knockout`. El escudo
+interno (`.area-settle-rotator`) sigue al mouse con la misma lógica que el
+hexágono de Calidad. El escudo exterior (`.area-counter-rotator`)
+replica ese giro en sentido exactamente opuesto (−ángulo). Ninguno se
+encoge: cuando están de costado se atraviesan, y eso es intencional. Un tercer escudo, más
+pequeño (`.area-third-shield`), gira como el exterior. Al hacer click los
+tres vuelven a 0° a la vez (`AREA_SETTLE_MS`). Luego el escudo pequeño se
+vuelve blanco y se transforma en la hoja: `.area-leaf-morph` interpola
+punto a punto entre `data-morph-from` y `data-morph-to`, 180 puntos
+precalculados de cada contorno. Después el blanco se disuelve y deja la hoja
+con su color. Todo empieza 350 ms después del click, para que primero los escudos queden derechos
+(`body.theme-quality:not(.theme-invert)` en `menu_principal.css`). Tiene 4 piezas
+(`.area-symbol-hex-light`, `-hex`, `-check`, `-wheat`) y toma sus dos
+tonos de `--accent-2` y `--accent` de `theme-quality`. El hexágono
+(`.area-hex-rotator`) gira como el engranaje y sigue al mouse. En el click
+da una vuelta que termina en un múltiplo de 360°, para que su hueco coincida
+con el check, y ahí queda fijo. En reposo la
+espiga está agrandada y centrada, y el check oculto tras una máscara. Al
+hacer click, `playAreaCheck` (`src/app.ts`) encoge la espiga, dibuja el
+check como un trazo de lápiz y solo después dispara la transición. Ojo:
+motion no deja estados finales de transform en estos `<path>` (sus
+animaciones vuelven al valor del CSS al terminar), así que un transform que
+deba quedarse se escribe por frame. Mismo `svg.gear-live`,
+pero con `.area-symbol` > `.area-symbol-helmet` / `.area-gear-rotator` >
+`.area-symbol-gear` / `.area-symbol-hub` en vez de `.gear-rotator` /
+`.gear-ring` / `.gear-chart`. `src/app.ts` detecta cualquiera de las dos
+estructuras. Casco y semicírculo quedan fijos; solo `.area-gear-rotator`
+gira, con la misma lógica que el engranaje OMAS: sigue al mouse y da 360°
+al hacer click. El engranaje del archivo de marketing es medio engranaje
+descentrado, así que se reconstruyó completo y concéntrico con el
+semicírculo, y un `clipPath` fijo solo muestra lo que queda bajo el ala
+del casco. Para otro símbolo: copia el bloque desde `menu_adm.html` y
+cambia los trazados y el `transform` del grupo, que centra el bbox en
+100,100. Si el símbolo tiene una pieza que deba girar, esa pieza tiene
+que ser completa y simétrica alrededor de su eje.
 
 Dos variantes de `.hub-center`:
 

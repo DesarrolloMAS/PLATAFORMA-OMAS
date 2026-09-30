@@ -406,6 +406,9 @@ $responsable = $_SESSION['nombre'] ?? '';
     const params  = new URLSearchParams(window.location.search);
     const harina  = params.get('harina')  || '<?= htmlspecialchars($harina, ENT_QUOTES) ?>';
     const empaque = params.get('empaque') || '<?= htmlspecialchars($empaque, ENT_QUOTES) ?>';
+    // Enlace con la lista maestra de productos (lo pasa geleria_productos.php);
+    // no se muestra, solo se guarda para el preconteo del cronograma de producción.
+    const productoId = (params.get('producto_id') || '').replace(/[^A-Za-z0-9_-]/g, '');
 
     document.getElementById('harinaBadge').textContent  = harina  || 'Producto no especificado';
     document.getElementById('empaqueBadge').textContent = empaque || '';
@@ -427,6 +430,7 @@ $responsable = $_SESSION['nombre'] ?? '';
         const jsonData = {
             harina:           harina,
             empaque:          empaque,
+            producto_id:      productoId,
             fecha:            document.getElementById('fecha').value,
             hora:             document.getElementById('hora').value,
             loteP:            document.getElementById('loteP').value.trim(),

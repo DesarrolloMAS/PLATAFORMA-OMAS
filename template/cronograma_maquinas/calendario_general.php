@@ -4,6 +4,15 @@ verificarAutenticacion();
 require '../conection.php';
 require '../area_operativa_lib.php';
 
+// Regla fija (area_operativa_lib.php): las áreas operativas 'produccion' y
+// 'almacen' ven en "Calendario" el cronograma de producción, no el de
+// mantenimiento. Los admins pueden ver los dos (enlace en la cabecera).
+if (veCronogramaProduccion() && ($_SESSION['rol'] ?? '') !== 'adm') {
+    header('Location: ../cronograma_produccion/calendario_produccion.php');
+    exit();
+}
+$verLinkProduccion = veCronogramaProduccion() && esAreaOperacionesODesarrollo();
+
 $puedeCrear = puedeGestionarCalendario();
 $area = $_SESSION['area'] ?? 'Operaciones';
 $termino = terminoObjeto();
@@ -502,6 +511,14 @@ ksort($maquinas);
             <p class="cal-sub"><?= $puedeCrear
                 ? 'Elige ' . mb_strtolower($termino, 'UTF-8') . ' a la izquierda para programar una tarea, o revisa el calendario completo'
                 : 'Mantenimiento previsto — ' . mb_strtolower($terminoPlural, 'UTF-8') ?></p>
+            <?php if ($verLinkProduccion): ?>
+            <p style="margin-top:14px;">
+                <a href="../cronograma_produccion/calendario_produccion.php"
+                   style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--panel);color:var(--text-muted);font-size:12px;font-weight:600;text-decoration:none;">
+                    Ver cronograma de producción →
+                </a>
+            </p>
+            <?php endif; ?>
         </div>
 
         <div class="cal-layout">

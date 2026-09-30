@@ -1,6 +1,8 @@
 <?php
 require '../sesion.php';
 verificarAutenticacion();
+require_once '../admin/menu_operaciones_lib.php';
+exigirAccesoMenuOperaciones('datos'); // botón "Datos" de menu_adm.html — ver admin/menu_admin.php
 ?>
 <!DOCTYPE html>
 <html lang="es">

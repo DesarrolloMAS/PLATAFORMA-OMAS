@@ -150,6 +150,7 @@
             gap: 6px;
         }
 
+        select.form-control option, select.form-control optgroup { background: #141620; color: #fff; }
         .form-control {
             background: var(--input-bg);
             border: 1px solid var(--border-color);
@@ -286,8 +287,15 @@
                     <input type="text" name="lote_empaque" id="loteEmpaqueInput" class="form-control" readonly style="border-color: var(--accent); color: var(--accent); background: rgba(0,240,255,0.05);" placeholder="Desde galería">
                 </div>
                 <div class="form-group full">
-                    <label class="form-label">Producto a Envasar</label>
-                    <input type="text" name="producto_envasar" class="form-control" placeholder="Descripción del producto a envasar" required>
+                    <label class="form-label" for="productoEnvasarSelect">Producto a Envasar</label>
+                    <!-- Lista maestra de productos (molienda_v2/gestion_productos.php) de la
+                         sede: se guarda el nombre en producto_envasar (igual que antes) y el
+                         id en producto_id, para el preconteo del cronograma de producción.
+                         Si la sede no tiene lista, queda el texto libre de siempre. -->
+                    <select id="productoEnvasarSelect" class="form-control" required>
+                        <option value="">Cargando productos…</option>
+                    </select>
+                    <input type="text" name="producto_envasar" id="productoEnvasarTexto" class="form-control" placeholder="Escribe el producto a envasar" style="display:none; margin-top:8px;">
                 </div>
             </div>
         </div>
@@ -453,6 +461,56 @@
         });
     }
 
+    // ---------- Producto a envasar: lista maestra de la sede ----------
+    const selProducto = document.getElementById('productoEnvasarSelect');
+    const txtProducto = document.getElementById('productoEnvasarTexto');
+
+    function usarTextoLibre(soloTexto) {
+        txtProducto.style.display = '';
+        txtProducto.required = true;
+        if (soloTexto) {           // sin lista: se vuelve al campo de siempre
+            selProducto.style.display = 'none';
+            selProducto.required = false;
+            txtProducto.style.marginTop = '0';
+        }
+    }
+
+    (async function cargarProductosMaestros() {
+        try {
+            const res = await fetch('../molienda_v2/api_productos.php', { cache: 'no-store' });
+            const data = await res.json();
+            const grupos = [['harinas', 'Harinas'], ['subproductos', 'Subproductos']]
+                .map(([k, label]) => [label, (data.data && data.data[k]) || []])
+                .filter(([, lista]) => lista.length);
+            if (data.status !== 'ok' || !grupos.length) throw new Error('Sin lista maestra');
+
+            const esc = v => String(v ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+            selProducto.innerHTML = '<option value="" disabled selected>Selecciona el producto</option>'
+                + grupos.map(([label, lista]) => `<optgroup label="${label}">${lista.map(p =>
+                    `<option value="${esc(p.id)}" data-nombre="${esc(p.name)}">${esc(p.name)}</option>`).join('')}</optgroup>`).join('')
+                + '<option value="__otro">Otro (escribir)</option>';
+        } catch (err) {
+            console.warn('Producto a envasar: sin lista maestra, se usa texto libre.', err);
+            usarTextoLibre(true);
+        }
+    })();
+
+    selProducto.addEventListener('change', () => {
+        const esOtro = selProducto.value === '__otro';
+        txtProducto.style.display = esOtro ? '' : 'none';
+        txtProducto.required = esOtro;
+        if (esOtro) txtProducto.focus();
+    });
+
+    // Antes de enviar: nombre en producto_envasar (compatibilidad con galería,
+    // visor y revisiones) e id en producto_id ("" si es "Otro" o texto libre).
+    function aplicarProductoEnvasar(jsonData) {
+        const opt = selProducto.selectedOptions[0];
+        const deLista = selProducto.style.display !== 'none' && opt && opt.value && opt.value !== '__otro';
+        jsonData.producto_envasar = deLista ? opt.dataset.nombre : txtProducto.value.trim();
+        jsonData.producto_id = deLista ? opt.value : '';
+    }
+
     document.getElementById('empaqueForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -466,6 +524,7 @@
         const formData = new FormData(this);
         const jsonData = {};
         formData.forEach((value, key) => { jsonData[key] = value; });
+        aplicarProductoEnvasar(jsonData);
 
         enviarDatos(jsonData, btn, overlayText);
     });

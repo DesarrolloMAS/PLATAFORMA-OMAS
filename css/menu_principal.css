@@ -227,6 +227,76 @@ body.theme-invert .menu-exit--back:hover {
     transform-box: fill-box;
     transform-origin: bottom;
 }
+/* Símbolo de área (reemplaza al engranaje OMAS en el centro — ver
+   menu_adm.html). Casco y semicírculo quedan fijos; solo gira el engranaje.
+   Como el engranaje es completo y simétrico, el centro de su bbox (fill-box)
+   es exactamente su eje — así no depende de las coordenadas del archivo de
+   marketing (el clipPath del padre no cambia la bbox). */
+.area-symbol {
+    transition: filter 0.4s ease;
+}
+/* El color sale del tema de cada hub (theme-operaciones, theme-industrial,
+   theme-production, theme-warehouse…), no de fills inline, para que el
+   mismo bloque SVG sirva en todas las páginas. */
+.area-symbol path {
+    fill: var(--accent);
+}
+/* Símbolo de Calidad (menu_adm_calidad.html): la mitad clara del hexágono
+   es el segundo tono del original, y cada pieza anima alrededor de su
+   propio centro. */
+.area-symbol .area-symbol-hex-light {
+    fill: var(--accent-2);
+}
+/* theme-quality SIN theme-invert (menu_revisiones_calidad.html): el
+   .hub-center es el disco casi negro del tema claro, donde el café
+   --accent casi no se ve. Se invierte la jerarquía de tonos: las piezas
+   principales van claras y la mitad secundaria del hexágono en el tono
+   medio del tema. */
+body.theme-quality:not(.theme-invert) .area-symbol path {
+    fill: #e6dadd;
+}
+body.theme-quality:not(.theme-invert) .area-symbol .area-symbol-hex-light {
+    fill: #8f7880;
+}
+/* Símbolo de HSEQ (menu_administracion_hseq.html): en reposo solo los
+   escudos; hoja, resplandor y destello arrancan ocultos y playAreaLeaf
+   (src/app.ts) los anima escribiendo opacity/transform inline por frame. */
+.area-leaf,
+.area-leaf-glow {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+.area-leaf-shine,
+.area-leaf-knockout,
+.area-leaf-morph {
+    opacity: 0;
+}
+.area-symbol-hex-light,
+.area-symbol-hex,
+.area-symbol-check,
+.area-symbol-wheat {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+/* Reposo: espiga agrandada y centrada en el hexágono (su centro original
+   está 60.5 unidades por encima del centro del hexágono). Mismos valores
+   que AREA_WHEAT_BIG en src/app.ts, que la devuelve a escala 1 al hacer
+   click (playAreaCheck). */
+.area-symbol-wheat {
+    transform: translateY(60.5px) scale(1.9);
+}
+.area-symbol.is-hovering {
+    filter: brightness(1.25) saturate(1.1);
+}
+.area-gear-rotator,
+.area-hex-rotator,
+.area-settle-rotator,
+.area-counter-rotator,
+.area-symbol-gear {
+    transform-box: fill-box;
+    transform-origin: center;
+}
 .gear-ring {
     transition: filter 0.4s ease;
     animation: gearRingBreathe 4.5s ease-in-out infinite;
@@ -290,6 +360,39 @@ body.theme-invert .menu-exit--back:hover {
 .hub-node-anchor--hex-4 { top: 78.5%; left: 50%;   }   /*  6 en punto */
 .hub-node-anchor--hex-5 { top: 64.8%; left: 26.2%; }   /*  8 en punto */
 .hub-node-anchor--hex-6 { top: 37.3%; left: 26.2%; }   /* 10 en punto */
+
+/* Hub filtrado por permisos (ver filtrarMenu() en menu_adm.html): mientras
+   el servidor no responde qué botones ve la sesión, no se muestra ningún
+   nodo ni spoke. Al quitar data-filtro los nodos aparecen y arranca su
+   animación de entrada normal (display:none → la animación empieza al
+   mostrarse). */
+.hub[data-filtro="pendiente"] .hub-node-anchor[data-nodo],
+.hub[data-filtro="pendiente"] .hub-lines .spoke,
+.hub[data-filtro="pendiente"] .hub-lines .marker { display: none; }
+/* Nodos (y sus spokes/markers) solo para administrador: ocultos hasta que
+   el script de la página confirma rol 'adm' y agrega .is-admin al .hub
+   (ver menu_administracion_calidad.html). Es solo presentación: cada
+   destino valida el rol por su cuenta en el servidor. */
+.hub:not(.is-admin) [data-solo-admin] { display: none; }
+/* Botón de esquina (.menu-exit) sujeto al mismo filtro: nace con [hidden] y
+   filtrarMenu() lo muestra o lo quita. Hace falta porque .menu-exit define
+   su propio display, que le gana al [hidden] nativo del navegador. */
+.menu-exit[data-nodo][hidden] { display: none; }
+
+/* Hub "abierto" — variante del hexágono con los nodos un 10% más chicos y
+   un 20% más lejos del centro (radio ×1.20 desde top 51% / left 50%), para
+   que respiren más respecto al engranaje central. Los spokes de .hub-lines
+   de esa página se alargan en la misma proporción (los markers siguen sobre
+   el .ring). Ver menu_adm.html. */
+.hub--spread .hub-node-anchor--hex-1 { top: 18%; left: 50%; }
+.hub--spread .hub-node-anchor--hex-2 { top: 34.56%; left: 78.56%; }
+.hub--spread .hub-node-anchor--hex-3 { top: 67.56%; left: 78.56%; }
+.hub--spread .hub-node-anchor--hex-4 { top: 84%; left: 50%; }
+.hub--spread .hub-node-anchor--hex-5 { top: 67.56%; left: 21.44%; }
+.hub--spread .hub-node-anchor--hex-6 { top: 34.56%; left: 21.44%; }
+.hub--spread .hub-node { width: clamp(72px, 10.35vw, 119px); }
+.hub--spread .hub-node svg { width: clamp(20px, 2.88vw, 29px); height: clamp(20px, 2.88vw, 29px); }
+.hub--spread .hub-node .node-label { font-size: clamp(8.5px, 1.04vw, 10.8px); }
 
 /* Octógono simétrico — para hubs con 7 u 8 destinos de igual peso (mismo
    espíritu que --hex-N, pero a 45° en vez de 60°; radio un poco mayor para
@@ -438,6 +541,74 @@ body.theme-invert .menu-exit--back:hover {
     line-height: 1.25;
     padding: 0 10px;
 }
+
+/* Ficha informativa (ver menu_usuario.html): el hub-node muestra un dato
+   en vez de navegar. .node-label queda como título y .node-value como el
+   valor; es un <div>, así que no lleva cursor de enlace. */
+.hub-node--info { cursor: default; }
+.hub-node .node-value {
+    font-size: clamp(8px, 0.95vw, 10.5px);
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.2;
+    padding: 0 12px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Aviso de pendiente sobre un hub-node (ej. bandeja de entrada con no
+   leídas): dos ondas del color de acento salen del borde del botón, una
+   detrás de la otra. Van con z-index -1 dentro del stacking context del
+   .hub-node-anchor, así que nacen por detrás de la tarjeta. */
+.hub-node--pulse { position: relative; }
+.hub-node--pulse.is-pending::before,
+.hub-node--pulse.is-pending::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 18px var(--accent-glow);
+    z-index: -1;
+    pointer-events: none;
+    animation: hubPendingWave 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+.hub-node--pulse.is-pending::after { animation-delay: 1.3s; }
+.hub-node--pulse.is-pending { border-color: var(--border-hover); }
+@keyframes hubPendingWave {
+    0%   { transform: scale(1);    opacity: 0.75; }
+    100% { transform: scale(1.65); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hub-node--pulse.is-pending::before { animation: none; transform: scale(1.12); opacity: 0.6; }
+    .hub-node--pulse.is-pending::after { display: none; }
+}
+
+/* Línea de estado bajo el hub (ej. resultado de una validación). */
+.hub-status {
+    margin: 0 auto 18px;
+    max-width: min(560px, 92vw);
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-align: center;
+    opacity: 0;
+    animation: menuFadeUp 0.6s var(--ease) forwards;
+    animation-delay: 0.7s;
+}
+.hub-status[data-estado="ok"]    { color: #22c55e; border-color: rgba(34, 197, 94, 0.45); }
+.hub-status[data-estado="aviso"] { color: #f59e0b; border-color: rgba(245, 158, 11, 0.45); }
+.hub-status[data-estado="error"] { color: #ef4444; border-color: rgba(239, 68, 68, 0.45); }
 .hub-node .node-dots {
     display: flex;
     gap: 4px;
@@ -697,6 +868,40 @@ body.theme-invert.theme-hseq .hub-center {
 body.theme-hseq .hub-node:hover,
 body.theme-hseq .hub-node:focus-visible {
     box-shadow: 0 22px 44px rgba(28, 102, 58, 0.22);
+}
+
+/* Tema Operaciones — carmesí #d50e50, el mismo rojo del símbolo de área
+   (casco + engranaje) de menu_adm.html. A diferencia de los otros temas de
+   área se usa sobre el fondo claro del menú principal (sin theme-invert),
+   así que también reemplaza el borde/resplandor cian de .hub-center y el
+   tinte azul del bg-veil, que en los demás temas solo se tocan en su
+   variante invertida. El resplandor de .gear-wave (salida hacia
+   menu_administracion.html) también pasa a carmesí. */
+body.theme-operaciones {
+    --accent: #d50e50;
+    --accent-2: #f0648e;
+    --accent-glow: rgba(213, 14, 80, 0.30);
+    --border-hover: rgba(213, 14, 80, 0.55);
+}
+body.theme-operaciones .bg-veil {
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(213, 14, 80, 0.07), transparent 60%),
+        radial-gradient(ellipse 80% 80% at 50% 100%, rgba(210, 227, 250, 0.32), transparent 60%),
+        linear-gradient(180deg, rgba(244,248,253,0.10) 0%, rgba(244,248,253,0.38) 100%);
+}
+body.theme-operaciones .hub-center {
+    border-color: rgba(213, 14, 80, 0.30);
+    box-shadow:
+        0 24px 55px rgba(11, 14, 20, 0.35),
+        0 0 30px rgba(213, 14, 80, 0.20),
+        0 0 0 1px rgba(213, 14, 80, 0.10) inset;
+}
+body.theme-operaciones .hub-node:hover,
+body.theme-operaciones .hub-node:focus-visible {
+    box-shadow: 0 22px 44px rgba(213, 14, 80, 0.22);
+}
+body.theme-operaciones .gear-wave {
+    filter: drop-shadow(0 0 34px rgba(213, 14, 80, 0.65));
 }
 
 /* Onda del engranaje: disco que nace en el centro del hub y crece/se repliega

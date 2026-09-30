@@ -1,6 +1,7 @@
 <?php
 require '../sesion.php';
 verificarAutenticacion();
+require_once '../area_operativa_lib.php';
 
 header('Content-Type: application/json');
 
@@ -98,17 +99,44 @@ $default_mat = [
 $default_config['materiales'] = $default_mat;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    if ($input) {
-        // Asegurarse de que el directorio existe
-        if (!is_dir("../../archivos/generados/molienda")) {
-            mkdir("../../archivos/generados/molienda", 0777, true);
-        }
-        file_put_contents($config_file, json_encode($input, JSON_PRETTY_PRINT));
-        echo json_encode(['status' => 'ok', 'message' => 'Configuración guardada correctamente.', 'data' => $input]);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Payload inválido']);
+    // Esta lista es la maestra de productos (molienda, cronograma de
+    // producción, envasado y control de empaque): antes cualquier sesión podía
+    // sobrescribirla con un POST. Ver puedeGestionarProductos().
+    if (!puedeGestionarProductos()) {
+        http_response_code(403);
+        echo json_encode(['status' => 'error', 'message' => 'Solo administradores o rol 1 del área de producción pueden modificar la lista de productos.']);
+        exit;
     }
+    $input = json_decode(file_get_contents('php://input'), true);
+    $limpio = [];
+    $error = '';
+    foreach (['harinas', 'subproductos', 'materiales'] as $categoria) {
+        $vistos = [];
+        foreach ((array)($input[$categoria] ?? []) as $item) {
+            $id = trim((string)($item['id'] ?? ''));
+            $nombre = trim((string)($item['name'] ?? ''));
+            if (!preg_match('/^[A-Za-z0-9_-]{1,60}$/', $id)) { $error = "ID inválido en $categoria: \"$id\" (solo letras, números, _ y -)."; break 2; }
+            if (isset($vistos[$id])) { $error = "ID repetido en $categoria: \"$id\"."; break 2; }
+            if ($nombre === '') { $error = "Falta el nombre del ítem \"$id\" en $categoria."; break 2; }
+            $vistos[$id] = true;
+            $limpio[$categoria][] = ['id' => $id, 'name' => $nombre, 'weight' => is_numeric($item['weight'] ?? null) ? (float)$item['weight'] : 1];
+        }
+        $limpio[$categoria] = $limpio[$categoria] ?? [];
+    }
+    if (!is_array($input) || $error !== '') {
+        http_response_code(400);
+        echo json_encode(['status' => 'error', 'message' => $error ?: 'Payload inválido']);
+        exit;
+    }
+    if (!is_dir("../../archivos/generados/molienda")) {
+        mkdir("../../archivos/generados/molienda", 0777, true);
+    }
+    if (@file_put_contents($config_file, json_encode($limpio, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) === false) {
+        http_response_code(500);
+        echo json_encode(['status' => 'error', 'message' => 'No se pudo escribir el archivo de configuración (revisar permisos).']);
+        exit;
+    }
+    echo json_encode(['status' => 'ok', 'message' => 'Configuración guardada correctamente.', 'data' => $limpio]);
 } else {
     // Es un GET
     if (!file_exists($config_file)) {
